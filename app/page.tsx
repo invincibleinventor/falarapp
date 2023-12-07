@@ -8,7 +8,7 @@ import SignUpUserSteps from '@/components/SignUpUserSteps'
   import { useState } from 'react'
 import Link from 'next/link'
 
-export default async function Index( { msg, }: { msg: { message: string } }) {
+export default async function Index() {
    let urgent;let very;let moderate; const cookieStore = cookies() ;
    let a; 
    function ask(param:String){ 
@@ -80,11 +80,7 @@ className="w-full rounded-md multiLineLabel"
         <h1>No Posts</h1>
       </div>
     )}
-  {msg?.message && (
-      <p className="p-4 mt-4 text-center bg-foreground/10 text-foreground">
-        {msg.message}
-      </p>
-    )}
+ 
 <div className="animate-in">
 {isSupabaseConnected ?  <div>{}</div>:<div>An Internal Server Error Occured</div>} 
 </div>
