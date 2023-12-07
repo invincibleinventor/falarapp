@@ -33,34 +33,14 @@ export default function Login({
 
 
   return (
-    <div className="flex flex-col justify-center flex-1 w-full gap-2 px-8 sm:max-w-md">
-      <Link
-        href="/"
-        className="absolute flex items-center px-4 py-2 text-sm no-underline rounded-md left-8 top-8 text-foreground bg-btn-background hover:bg-btn-background-hover group"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1"
-        >
-          <polyline points="15 18 9 12 15 6" />
-        </svg>{' '}
-        Back
-      </Link>
-
+    <div className="flex flex-col justify-center flex-1 w-full gap-2 px-8 mt-20 sm:max-w-4xl">
+      
       <form
         className="flex flex-col justify-center flex-1 w-full gap-2 animate-in text-foreground"
         action={signWithGoogle}
       >
         
-        <button className="px-4 py-2 mb-2 text-white bg-green-700 rounded-md text-foreground">
+        <button className="px-6 py-2 mb-2 text-white bg-green-700 rounded-md text-foreground">
           Sign In With Google
         </button>
        

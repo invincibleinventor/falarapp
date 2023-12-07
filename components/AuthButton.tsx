@@ -27,6 +27,12 @@ export default async function AuthButton() {
           Logout
         </button>
       </form>
+      <Link
+      href="/dashboard"
+      className="flex px-3 py-2 no-underline rounded-md bg-btn-background hover:bg-btn-background-hover"
+    >
+      Dashboard
+    </Link>
     </div>
   ) : (
     <Link
