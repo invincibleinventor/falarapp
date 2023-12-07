@@ -68,7 +68,7 @@ let d;let a;let isauthor=false;let isopen=true;let closed;let closedtext='Close'
     <div className="flex flex-col w-screen p-10 py-0 animate-in sm:max-w-4xl">
       <div className='flex content-center fex-col-reverse2'>
     <h1 className='text-xl font-bold'>{d.name}</h1>
-    {(isauthor && isopen) && <>
+    {<>
        <form
        className="flex flex-col gap-2 ml-auto w-max animate-in text-foreground"
        action={close}
