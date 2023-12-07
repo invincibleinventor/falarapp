@@ -3,11 +3,7 @@ import { cookies } from 'next/headers'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { useEffect } from 'react'
-export default async function Create({
-    msg,
-  }: {
-    msg: { message: string }
-  }) {
+export default async function Create() {
     
   const cookieStore = cookies()
   const supabase = createClient(cookieStore)
@@ -70,11 +66,7 @@ await creates()
         className="flex flex-col justify-center flex-1 w-full gap-2 my-auto animate-in text-foreground"
         action={create}
       >
-        {msg?.message && (
-          <p className="p-4 mt-4 text-center bg-foreground/10 text-foreground">
-            {msg.message}
-          </p>
-        )}
+        
         <label className="text-md" htmlFor="name">
           Title Of Concern
         </label>
