@@ -109,7 +109,7 @@ export default function Create() {
     }
   }
   }
-    const [imgsSrc, setImgsSrc] = useState([]);
+    const [imgsSrc, setImgsSrc] = useState<any[]>([]);
     const onChange = (e:any) => {
       for (const file of e.target.files) {
         const reader = new FileReader();
