@@ -26,14 +26,14 @@ export default async function Index() {
   const date1 = new Date();
   const isSupabaseConnected = canInitSupabaseClient();
   let empty = true;
-  let posts: [] = [];
+  let posts: any[] = [];
   let loading = true;
-  let l: [] = [];
+  let l: any[] = [];
   let myname = "";
   let myphoto = "";
   let myhandle = "";
-  let userliked :[] = [];
-  let userbookmarked:[] = [];
+  let userliked :any[] = [];
+  let userbookmarked:any[] = [];
   
   async function get() {
     const { data: user } = await supabase.auth.getUser();
@@ -64,7 +64,7 @@ export default async function Index() {
         let liked = false;
         let likedlist: string | any[] = ds[index].liked
         let bookmarked = false;
-        let bookmarkedlist: never[] = ds[index].bookmarked;
+        let bookmarkedlist: any[] = ds[index].bookmarked;
         if(likedlist.includes(myhandle)){
           liked = true
         }

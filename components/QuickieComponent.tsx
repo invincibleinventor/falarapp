@@ -7,7 +7,7 @@ import LikeComponent from "./QuickieLikeComponent";
 export default function Post(props:any) {
   let x = props.name;
   if (x.length >= 11) {
-    x = x.slice(0, 4);
+    x = x.slice(0, 7);
     x += "...";
   }
   const a = props.title;
