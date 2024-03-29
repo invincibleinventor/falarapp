@@ -23,6 +23,7 @@ export default function CommentsComponent(props:any) {
   async function post() {
     const { error } = await supabase.from("quickiecomments").insert({ content: text, id: props.slug, handle: props.myhandle });
     const {data:comments} = await supabase.from('quickies').select('comments').eq('id',props.slug)
+    if(comments){
     const {error:e} = await supabase.from('quickies').update({'comments':comments[0]['comments']+1}).eq('id',props.slug)
     
     if (error || e) {
@@ -37,6 +38,7 @@ export default function CommentsComponent(props:any) {
       inputRef.current!.value = "";
       setCommentChange(true);
     }
+  }
   }
   useEffect(() => {
     async function fetchcomments() {
