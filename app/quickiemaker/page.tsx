@@ -133,7 +133,7 @@ export default function Create() {
     {imgsSrc.map((link,index) => (
         <div key={index} className="relative flex items-center content-center w-24 mb-20 aspect-[16/10]">
           <button onClick={()=>(setarr(link))} className="absolute top-0 right-0 flex items-center content-center w-4 h-4 font-medium text-white bg-red-700 rounded-full shadow shadow-mdo"><h1 className="mx-auto">-</h1></button>
-        <img className="w-20 mx-auto aspect-[16/10]" key={index} src={link} />
+        <img className="w-20 mx-auto object-cover aspect-[16/10]" key={index} src={link} />
         </div>
       ))}
     </div>
