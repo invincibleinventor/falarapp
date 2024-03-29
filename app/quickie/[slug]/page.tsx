@@ -72,7 +72,9 @@ export default async function App({ params }: { params: { slug: string } }) {
         profile = u[0].image;
         content = data[0]["content"];
         image=data[0]["image"];
+        if(image){
         photocount=data[0]["image"].length;
+        }
         
       }
       const date2 = new Date(data[0].created_at);

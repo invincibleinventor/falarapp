@@ -18,7 +18,7 @@ photocount = props.image.length;
   return (
     <div className="w-full animate-in" >
       <div className="w-full px-5 py-[6px]">
-        <div  className="flex flex-col border border-gray-300 rounded-none bg-gray-50 md:gap-0">
+        <div  className="flex flex-col border border-gray-300 rounded-md bg-gray-50 md:gap-0">
           <div  className="flex items-center content-center bg-black rounded-md ">
             
           </div>
