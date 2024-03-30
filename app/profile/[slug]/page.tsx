@@ -173,7 +173,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 width={180}
                 height={180}
                 src={`${found ?(cover ? cover : "/bg.jpg") : "/bg.jpg"}`}
-                className="object-cover w-full h-48 border "
+                className="object-cover w-full h-48 border rounded-md "
                 alt="cover"
               />
             )}
@@ -181,14 +181,14 @@ export default function Page({ params }: { params: { slug: string } }) {
           <Image
             width={90}
             height={90}
-            className="absolute w-24 h-24 bottom-5 left-7 md:left-12"
+            className="absolute w-24 h-24 rounded-md bottom-5 left-7 md:left-12"
             src={`${(found ? image : "/usernotfound.png")}`}
             alt="userimage"
           />
           {found && loggedin && (
             <button
               onClick={() => onfollow()}
-              className={`absolute  bottom-10 right-7 px-8 py-3 text-xs font-semibold md:right-12  ${
+              className={`absolute rounded-md bottom-10 right-7 px-8 py-3 text-xs font-semibold md:right-12  ${
                 !(imfollowing || myself)
                   ? "border-[1px] border-black bg-black text-white"
                   : "border border-black bg-white text-black"
@@ -215,7 +215,7 @@ export default function Page({ params }: { params: { slug: string } }) {
         </div>
         {found && (
           <>
-            <div className="flex flex-row items-center content-center gap-6 p-4 mx-8 my-4 mb-1 border border-gray-700 md:mx-14">
+            <div className="flex flex-row items-center content-center gap-6 p-4 mx-8 my-4 mb-1 border border-gray-700 rounded-md md:mx-14">
               <div className="flex flex-row w-full md:mx-auto">
                 <div className="flex flex-col items-center content-center gap-1 mx-auto w-max">
                   <h1 className="text-xs font-semibold">Followers</h1>
