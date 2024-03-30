@@ -73,7 +73,7 @@ export default function Create() {
         </label>
         <input
           onChange={(e) => setName(e.target.value)}
-          className="px-4 py-2 mb-6 mr-4 border bg-white rounded-md text-sm"
+          className="px-4 py-2 mb-6 border bg-white rounded-md text-sm"
           name="name"
           placeholder="Please Type Out Your Display Name"
           required
@@ -85,7 +85,7 @@ export default function Create() {
         </label>
         <input
           onChange={(e) => setHandle(e.target.value.trim().replace(" ", "_"))}
-          className="px-4 py-2 mb-6 mr-4 border bg-white text-sm rounded-md"
+          className="px-4 py-2 mb-6  border bg-white text-sm rounded-md"
           name="handke"
           placeholder="Please Type Out Your Handle"
           required
@@ -97,7 +97,7 @@ export default function Create() {
         </label>
         <textarea
           onChange={(e) => setAbout(e.target.value)}
-          className="px-4 py-2 mb-6 mr-4 border bg-white rounded-md text-sm"
+          className="px-4 py-2 mb-6  border bg-white rounded-md text-sm"
           name="content"
           placeholder="Please Type About Yourself"
           required
