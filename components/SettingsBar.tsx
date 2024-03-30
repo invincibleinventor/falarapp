@@ -7,7 +7,7 @@ export default function SettingsBar() {
     <div className="mb-auto ">
       <div className={`absolute md:static left-0  flex w-max  flex-col items-start p-0 md:pr-0 ${loc.startsWith("/post/") ? "md:flex" : ""}`}>
        
-        <div className="flex flex-row md:flex-col space-x-0 md:space-x-0 py-4 pt-[14px] md:mt-[calc(17*4px)] md:space-y-[0px] md:bg-gray-100 md:px-4 md:pt-[4px]">
+        <div className="flex flex-row md:flex-col space-x-1 md:space-x-0 py-4 pt-[14px] md:mt-[calc(17*4px)] md:space-y-[0px] md:bg-gray-100 md:px-4 md:pt-[4px]">
         
           <Headeritem
             link="/more"

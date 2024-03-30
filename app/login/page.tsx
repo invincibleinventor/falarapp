@@ -71,7 +71,7 @@ export default function Login() {
               setEmail(e.target.value);
             }}
             type="email"
-            className="px-5 py-3 border outline-none w-max placeholder:text-gray-600 "
+            className="px-5 py-3 bg-white border rounded-md outline-none w-max placeholder:text-gray-600 "
             placeholder="Your Email Address"
           ></input>
           <h1 className="pl-[1px] mt-4 text-xs font-medium text-black">Password</h1>
@@ -80,7 +80,7 @@ export default function Login() {
               setPassword(e.target.value);
             }}
             type="password"
-            className="px-5 py-3 border outline-none w-max placeholder:text-gray-600 "
+            className="px-5 py-3 bg-white border rounded-md outline-none w-max placeholder:text-gray-600 "
             placeholder="Your Password"
           ></input>
           <button
@@ -91,12 +91,12 @@ export default function Login() {
           </button>
           <button
             onClick={(e) => (e.preventDefault(), console.log("register"), register())}
-            className="px-5 py-3 text-xs font-medium text-black bg-gray-100 border"
+            className="px-5 py-3 text-xs font-medium text-black border rounded-md bg-gray-50"
           >
             Register Your Account
           </button>
           <button
-            className="flex justify-center gap-4 px-5 py-3 text-xs font-medium text-black bg-white border "
+            className="flex justify-center gap-4 px-5 py-3 text-xs font-medium text-black bg-white border rounded-md "
             onClick={() => (console.log("google"), signWithGoogle())}
           >
             <svg width="16" height="16" viewBox="0 0 775 794" fill="none" xmlns="http://www.w3.org/2000/svg">

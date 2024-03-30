@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 "use client";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,6 +15,27 @@ export default function Post(props:any) {
 let photocount;
   if(props.image){
 photocount = props.image.length;
+  }
+  const formatText = (text:string) => {
+    console.log("text", text)
+    const content = text.split(/((?:#|@|https?:\/\/[^\s]+)[a-zA-Z]+)/);
+    let hashtag;
+    let username;
+    return content.map((word) => {
+        if (word.startsWith("#")) {
+            hashtag = word.replace('#', '')
+            return <Link legacyBehavior href={`/hashtag/${hashtag}`}><a
+                className="text-blue-500 hover:text-blue-600">{word}</a></Link>;
+        } else if (word.startsWith("@")) {
+            username = word.replace('@', '')
+            return <Link legacyBehavior href={`/profile/${username}`}><a
+                className="text-blue-500 hover:text-blue-600">{word}</a></Link>;
+        } else if (word.includes("http")) {
+            return <a target="_blank" href={word} className="text-blue-500 hover:text-blue-600">{word}</a>
+        } else {
+            return word;
+        }
+    });
   }
   return (
     <div className="w-full animate-in" >
@@ -60,7 +82,7 @@ photocount = props.image.length;
                 style={{ wordBreak: "break-word", whiteSpace: "normal" }}
                 className="text-sm font-normal text-gray-900 four-line-ellipsis md:text-base"
               >
-                {props.description}
+                {formatText(props.description)}
               </Link>
               {photocount>0  &&
               <div className={photocount==1?"w-full border rounded-md mt-4 aspect-video h-full":"mt-4 md:gap-2 gap-1 grid-cols-2 grid"}>

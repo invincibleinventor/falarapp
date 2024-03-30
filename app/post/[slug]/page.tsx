@@ -191,7 +191,7 @@ export default async function App({ params }: { params: { slug: string } }) {
             )}
             <div className="flex flex-row items-center content-center justify-between mt-6 text-lg">
               <Link href={"/profile/" + author} className="flex flex-row items-center content-center">
-                <Image width={24} height={24} alt="profile" className="w-6 h-6 mr-3" src={profile} />
+                <Image width={24} height={24} alt="profile" className="w-8 h-8 mr-3 rounded-md" src={profile} />
                 <h1 className="text-xs font-medium md:text-sm">{name}</h1>
               </Link>
 

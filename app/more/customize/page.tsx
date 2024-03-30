@@ -86,20 +86,20 @@ export default function Create() {
   }
   return (
     <div className={`relative mx-auto flex h-[calc(100vh-104px)] flex-1 flex-col items-center justify-center overflow-hidden`}>
-      <div className="absolute top-0 h-64 w-[calc(100%-20px)] max-w-full py-4 md:w-full md:px-4">
+      <div className="absolute top-0 h-64 w-[calc(100%-20px)] max-w-full py-0 md:w-full md:px-4">
         <div className="relative h-64 w-[calc(100%)]">
           <div className="absolute top-0 h-[calc(52*4px)]  w-[calc(100%)] ">
             <Image
               width={200}
               height={200}
               src={cover ? cover : ""}
-              className="h-[calc(52*4px)] w-[calc(100%)] border border-gray-500 object-cover "
+              className="rounded-md h-[calc(52*4px)] w-[calc(100%)] border border-gray-500 object-cover "
               alt="cover"
             />
           </div>
           <div
             onClick={handleClick}
-            className="absolute px-6 py-3 text-xs text-white cursor-pointer left-2 top-2 w-max bg-black/60 drop-shadow-lg backdrop-blur-lg"
+            className="absolute px-6 py-3 text-xs text-white rounded-md cursor-pointer left-2 top-2 w-max bg-black/60 drop-shadow-lg backdrop-blur-lg"
           >
             {" "}
             <input id="fupload" className="hidden" />
@@ -110,7 +110,7 @@ export default function Create() {
             width={110}
             height={110}
             src={image}
-            className="absolute inset-x-0 bottom-0 w-24 h-24 mx-auto"
+            className="absolute inset-x-0 bottom-0 w-24 h-24 mx-auto rounded-md"
             alt="image"
           />
 
@@ -128,7 +128,7 @@ export default function Create() {
       </div>
 
       <form
-        className="flex flex-col justify-center w-full max-w-lg gap-2 mx-auto mt-44 animate-in text-foreground md:mt-28 md:px-10"
+        className="flex flex-col justify-center w-full max-w-lg gap-2 mx-auto mt-44 animate-in text-foreground md:mt-44 md:px-10"
         action={create}
       >
         <label className="mx-6 text-base" htmlFor="name">
@@ -136,7 +136,7 @@ export default function Create() {
         </label>
         <input
           onChange={(e) => setName(e.target.value)}
-          className="px-4 py-2 mx-6 mb-4 text-sm bg-white border"
+          className="px-4 py-2 mx-6 mb-4 text-sm bg-white border rounded-md"
           name="name"
           defaultValue={name}
           placeholder="Please Type Out Your Display Name"
@@ -151,7 +151,7 @@ export default function Create() {
         <textarea
           defaultValue={about}
           onChange={(e) => setAbout(e.target.value)}
-          className="px-4 py-2 mx-6 mb-4 text-sm bg-white border"
+          className="px-4 py-2 mx-6 mb-4 text-sm bg-white border rounded-md"
           name="content"
           placeholder="Please Type About Yourself"
           required
@@ -159,7 +159,7 @@ export default function Create() {
           maxLength={100}
         />
 
-        <button className="px-8 py-4 mx-auto mb-2 text-xs text-white bg-black w-max">Save Your Changes</button>
+        <button className="px-8 py-4 mx-auto mb-2 text-xs text-white bg-black rounded-md w-max">Save Your Changes</button>
       </form>
     </div>
   );

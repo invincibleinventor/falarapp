@@ -89,7 +89,7 @@ const [workhistory,setWorkHistory] = useState('')
 
         defaultValue={firstname}
           onChange={(e) => setfirstname(e.target.value)}
-          className="px-4 py-2 text-sm mb-6 border bg-inherit"
+          className="px-4 py-2 mb-6 text-sm border rounded-md bg-inherit"
           name="name"
           placeholder="Please Type Out Your First Name"
           required
@@ -104,7 +104,7 @@ const [workhistory,setWorkHistory] = useState('')
 
         defaultValue={lastname}
           onChange={(e) => setlastname(e.target.value)}
-          className="px-4 py-2 mb-6 text-sm border bg-inherit"
+          className="px-4 py-2 mb-6 text-sm border rounded-md bg-inherit"
           name="name"
           placeholder="Please Type Out Your Last Name"
           required
@@ -119,7 +119,7 @@ const [workhistory,setWorkHistory] = useState('')
         disabled = {true}
 
           onChange={(e) => setage(e.target.value)}
-          className="px-4 text-sm py-2 mb-6 border bg-inherit"
+          className="px-4 py-2 mb-6 text-sm border rounded-md bg-inherit"
           name="name"
           placeholder="Please Type Out Your Age"
           required
@@ -132,7 +132,7 @@ const [workhistory,setWorkHistory] = useState('')
         </label>
        <div data-color-mode="light">
             <MDEditor
-              className="mx-[2px] mb-6 shrink rounded-none"
+              className="mx-[2px] mb-6 shrink rounded-md"
               style={{ borderRadius: "0px", height: "100px !important" }}
               value={education}
               onChange={(e) => setEducation(e!)}
@@ -147,7 +147,7 @@ const [workhistory,setWorkHistory] = useState('')
         </label>
        <div data-color-mode="light">
             <MDEditor
-              className="mx-[2px] mb-6 shrink rounded-none"
+              className="mx-[2px] mb-6 shrink rounded-md"
               style={{ borderRadius: "0px", height: "100px !important" }}
               value={certifications}
               onChange={(e) => setCertifications(e!)}
@@ -162,7 +162,7 @@ const [workhistory,setWorkHistory] = useState('')
         </label>
        <div data-color-mode="light">
             <MDEditor
-              className="mx-[2px] mb-6 shrink rounded-none"
+              className="mx-[2px] mb-6 shrink rounded-md"
               style={{ borderRadius: "0px", height: "100px !important" }}
               value={skills}
               onChange={(e) => setSkills(e!)}
@@ -177,7 +177,7 @@ const [workhistory,setWorkHistory] = useState('')
         </label>
        <div data-color-mode="light">
             <MDEditor
-              className="mx-[2px] mb-6 shrink rounded-none"
+              className="mx-[2px] mb-6 shrink rounded-md"
               style={{ borderRadius: "0px", height: "100px !important" }}
               value={professionalSummary}
               onChange={(e) => setProfessionalSummary(e!)}
@@ -192,7 +192,7 @@ const [workhistory,setWorkHistory] = useState('')
         </label>
        <div data-color-mode="light">
             <MDEditor
-              className="mx-[2px] mb-6 shrink rounded-none"
+              className="mx-[2px] mb-6 shrink rounded-md"
               style={{ borderRadius: "0px", height: "100px !important" }}
               value={workhistory}
               onChange={(e) => setWorkHistory(e!)}
@@ -206,7 +206,7 @@ const [workhistory,setWorkHistory] = useState('')
         </label>
        <div data-color-mode="light">
             <MDEditor
-              className="mx-[2px] mb-6 shrink rounded-none"
+              className="mx-[2px] mb-6 shrink rounded-md"
               style={{ borderRadius: "0px", height: "100px !important" }}
               value={contact}
               onChange={(e) => setContact(e!)}
@@ -215,7 +215,7 @@ const [workhistory,setWorkHistory] = useState('')
               }}
             />
       </div>
-        <button className="px-8 py-4 mb-2 text-sm text-white bg-black w-max">Save Your Changes
+        <button className="px-8 py-4 mb-2 text-sm text-white bg-black rounded-md w-max">Save Your Changes
         
       </button>
       </form>

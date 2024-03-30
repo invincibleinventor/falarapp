@@ -28,7 +28,7 @@ export default function Search(props:any) {
         minLength={4}
         maxLength={50}
         type="search"
-        className="font-poppins peer h-12 w-full border border-gray-300 bg-gray-50 focus:outline-none focus:bg-white pl-14 pr-8 text-[14px] placeholder:text-gray-600 focus:bg-white "
+        className="font-poppins rounded-md peer h-12 w-full border border-gray-300 bg-gray-50 focus:outline-none focus:bg-white pl-14 pr-8 text-[14px] placeholder:text-gray-600 focus:bg-white "
         placeholder={"Search " + props.text}
       ></input>
     </div>

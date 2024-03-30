@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import BookMarksComponent from "@/components/QuickieBookMarksComponent";
 import CommentsComponent from "@/components/QuickieComments";
 import LikeComponent from "@/components/QuickieLikeComponent";
@@ -126,7 +127,27 @@ export default async function App({ params }: { params: { slug: string } }) {
   }
   await fetchcomments();
 
- 
+  const formatText = (text:string) => {
+    console.log("text", text)
+    const content = text.split(/((?:#|@|https?:\/\/[^\s]+)[a-zA-Z]+)/);
+    let hashtag;
+    let username;
+    return content.map((word) => {
+        if (word.startsWith("#")) {
+            hashtag = word.replace('#', '')
+            return <Link legacyBehavior href={`/hashtag/${hashtag}`}><a
+                className="text-blue-500 hover:text-blue-600">{word}</a></Link>;
+        } else if (word.startsWith("@")) {
+            username = word.replace('@', '')
+            return <Link legacyBehavior href={`/profile/${username}`}><a
+                className="text-blue-500 hover:text-blue-600">{word}</a></Link>;
+        } else if (word.includes("http")) {
+            return <a target="_blank" href={word} className="text-blue-500 hover:text-blue-600">{word}</a>
+        } else {
+            return word;
+        }
+    });
+  }
   console.log("here");
   console.log(comments);
   console.log("above");
@@ -188,7 +209,7 @@ export default async function App({ params }: { params: { slug: string } }) {
                 style={{ wordBreak: "break-word", whiteSpace: "normal" }}
                 className="my-4 text-sm font-normal text-gray-900 four-line-ellipsis md:text-base"
               >
-                {content}
+                {formatText(content)}
               </h1>
               {photocount>0  &&
               <div className={photocount==1?"w-full border rounded-md mt-4 aspect-video h-full":"mt-4 md:gap-2 gap-1 grid-cols-2 grid"}>

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 "use client";
 
 import { createClient } from "@/utils/supabase/client";
@@ -49,13 +50,34 @@ export default function CommentComponent(props:any) {
     }
   }
 
+  const formatText = (text:string) => {
+    console.log("text", text)
+    const content = text.split(/((?:#|@|https?:\/\/[^\s]+)[a-zA-Z]+)/);
+    let hashtag;
+    let username;
+    return content.map((word) => {
+        if (word.startsWith("#")) {
+            hashtag = word.replace('#', '')
+            return <Link legacyBehavior href={`/hashtag/${hashtag}`}><a
+                className="text-blue-500 hover:text-blue-600">{word}</a></Link>;
+        } else if (word.startsWith("@")) {
+            username = word.replace('@', '')
+            return <Link legacyBehavior href={`/profile/${username}`}><a
+                className="text-blue-500 hover:text-blue-600">{word}</a></Link>;
+        } else if (word.includes("http")) {
+            return <a target="_blank" href={word} className="text-blue-500 hover:text-blue-600">{word}</a>
+        } else {
+            return word;
+        }
+    });
+  }
   return (
     <div className="flex flex-row w-full gap-4 my-2">
       <Link href={`/profile/${props.handle}`} className="w-10 h-10 shrink-0">
         <Image
           width={32}
           height={32}
-          className="w-8 h-8 m-auto border border-gray-200 shrink-0"
+          className="w-8 h-8 m-auto border border-gray-200 rounded-md shrink-0"
           src={props.profile!}
           alt="profile"
         />
@@ -67,7 +89,7 @@ export default function CommentComponent(props:any) {
           </Link>
           <h1 className="ml-auto text-sm font-normal">{props.time}</h1>
         </div>
-        <h1 className="text-sm font-normal text-gray-800">{props.content}</h1>
+        <h1 className="text-sm font-normal text-gray-800">{formatText(props.content)}</h1>
         <div className="my-1 mt-2 flex flex-row content-center items-center space-x-[8px]">
           {props.loggedin && (
             <svg

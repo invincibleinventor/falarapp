@@ -77,14 +77,14 @@ const [workhistory,setWorkHistory] = useState('')
       >
         <div className="pb-5 mx-0 mt-5 mb-10 rounded-lg bg-gradient-to-br from-black to-gray-700">
         <h1 className="mt-5 ml-5 mr-5 text-2xl font-semibold text-white md:text-3xl">Setup Resume</h1>
-        <h1 className="mt-2 ml-5 mr-5 text-xs leading-relaxed font-normal text-gray-300 md:mt-3">Your resume gives a brief professional overview about yourself. Make sure to be honest on all fields in this form. You can edit this later anytime</h1>
+        <h1 className="mt-2 ml-5 mr-5 text-xs font-normal leading-relaxed text-gray-300 md:mt-3">Your resume gives a brief professional overview about yourself. Make sure to be honest on all fields in this form. You can edit this later anytime</h1>
             </div>
         <label className="text-sm" htmlFor="name">
           First Name (Cannot Edit This Later)
         </label>
         <input
           onChange={(e) => setfirstname(e.target.value)}
-          className="px-4 py-2 mb-6  border bg-inherit"
+          className="px-4 py-2 mb-6 bg-white border rounded-md"
           name="name"
           placeholder="Please Type Out Your First Name"
           required
@@ -96,9 +96,9 @@ const [workhistory,setWorkHistory] = useState('')
         </label>
         <input
           onChange={(e) => setlastname(e.target.value)}
-          className="px-4 py-2 mb-6  border bg-inherit"
+          className="px-4 py-2 mb-6 bg-white border"
           name="name"
-          placeholder="Please Type Out Your Last Name"
+          placeholder="Please Type Out Your Last Name rounded-md"
           required
           minLength={4}
           maxLength={20}
@@ -108,7 +108,7 @@ const [workhistory,setWorkHistory] = useState('')
         </label>
         <input
           onChange={(e) => setage(e.target.value)}
-          className="px-4 py-2 mb-6  border bg-inherit"
+          className="px-4 py-2 mb-6 bg-white border rounded-md "
           name="name"
           placeholder="Please Type Out Your Age"
           required
@@ -121,7 +121,7 @@ const [workhistory,setWorkHistory] = useState('')
         </label>
        <div data-color-mode="light">
             <MDEditor
-              className="mx-[2px] mb-6 shrink rounded-none"
+              className="mx-[2px] mb-6 shrink rounded-md"
               style={{ borderRadius: "0px", height: "100px !important" }}
               value={education}
               onChange={(e) => setEducation(e!)}
@@ -136,7 +136,7 @@ const [workhistory,setWorkHistory] = useState('')
         </label>
        <div data-color-mode="light">
             <MDEditor
-              className="mx-[2px] mb-6 shrink rounded-none"
+              className="mx-[2px] mb-6 shrink rounded-md"
               style={{ borderRadius: "0px", height: "100px !important" }}
               value={certifications}
               onChange={(e) => setCertifications(e!)}
@@ -151,7 +151,7 @@ const [workhistory,setWorkHistory] = useState('')
         </label>
        <div data-color-mode="light">
             <MDEditor
-              className="mx-[2px] mb-6 shrink rounded-none"
+              className="mx-[2px] mb-6 shrink rounded-md"
               style={{ borderRadius: "0px", height: "100px !important" }}
               value={skills}
               onChange={(e) => setSkills(e!)}
@@ -166,7 +166,7 @@ const [workhistory,setWorkHistory] = useState('')
         </label>
        <div data-color-mode="light">
             <MDEditor
-              className="mx-[2px] mb-6 shrink rounded-none"
+              className="mx-[2px] mb-6 shrink rounded-md"
               style={{ borderRadius: "0px", height: "100px !important" }}
               value={professionalSummary}
               onChange={(e) => setProfessionalSummary(e!)}
@@ -181,7 +181,7 @@ const [workhistory,setWorkHistory] = useState('')
         </label>
        <div data-color-mode="light">
             <MDEditor
-              className="mx-[2px] mb-6 shrink rounded-none"
+              className="mx-[2px] mb-6 shrink rounded-md"
               style={{ borderRadius: "0px", height: "100px !important" }}
               value={workhistory}
               onChange={(e) => setWorkHistory(e!)}
@@ -195,7 +195,7 @@ const [workhistory,setWorkHistory] = useState('')
         </label>
        <div data-color-mode="light">
             <MDEditor
-              className="mx-[2px] mb-6 shrink rounded-none"
+              className="mx-[2px] mb-6 shrink rounded-md"
               style={{ borderRadius: "0px", height: "100px !important" }}
               value={contact}
               onChange={(e) => setContact(e!)}
@@ -204,7 +204,7 @@ const [workhistory,setWorkHistory] = useState('')
               }}
             />
       </div>
-        <button className="px-8 py-4 mb-2 text-sm text-white bg-black w-max">Save Your Changes</button>
+        <button className="px-8 py-4 mb-2 text-sm text-white bg-black rounded-md w-max">Save Your Changes</button>
       </form>
     </div>
     </>

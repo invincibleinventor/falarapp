@@ -131,14 +131,14 @@ export default function Page({ params }: { params: { slug: string } }) {
 
         <div className="h-full overflow-y-scroll hiddenscroll">
           <form
-            className="flex flex-col justify-center w-full gap-2 py-10 pr-5 my-auto overflow-x-hidden animate-in text-foreground"
+            className="flex flex-col justify-center w-full gap-2 py-10 my-auto overflow-x-hidden animate-in text-foreground"
             action={create}
           >
-          <div className="flex flex-row content-center justify-between">
-            <h1 className="mb-6 text-2xl font-bold text-black md:text-3xl">Edit <span className="md:inline-block hidden">The</span> Post</h1>
-      <div className="flex flex-row items-center content-center ">
-        <button  onClick={()=>toggledeleteDialog("")} disabled={deleteDialog!="hidden"?true:false} className="flex flex-row items-center content-center px-6 py-3 space-x-3 text-sm border border-black ">
-        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256"><path fill="currentColor" d="M216 48h-40v-8a24 24 0 0 0-24-24h-48a24 24 0 0 0-24 24v8H40a8 8 0 0 0 0 16h8v144a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16V64h8a8 8 0 0 0 0-16M96 40a8 8 0 0 1 8-8h48a8 8 0 0 1 8 8v8H96Zm96 168H64V64h128Zm-80-104v64a8 8 0 0 1-16 0v-64a8 8 0 0 1 16 0m48 0v64a8 8 0 0 1-16 0v-64a8 8 0 0 1 16 0"/></svg>        <h1>Delete <span className="md:inline-block hidden">Post</span></h1>
+          <div className="flex flex-row items-center content-center justify-between">
+            <h1 className="mb-6 text-2xl font-bold text-black md:text-3xl">Edit <span className="hidden md:inline-block">The</span> Post</h1>
+      <div className="flex flex-row items-center content-center pb-5 ">
+        <button  onClick={()=>toggledeleteDialog("")} disabled={deleteDialog!="hidden"?true:false} className="flex flex-row items-center content-center px-2 py-3 mx-0 space-x-3 text-sm ">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256"><path fill="currentColor" d="M216 48h-40v-8a24 24 0 0 0-24-24h-48a24 24 0 0 0-24 24v8H40a8 8 0 0 0 0 16h8v144a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16V64h8a8 8 0 0 0 0-16M96 40a8 8 0 0 1 8-8h48a8 8 0 0 1 8 8v8H96Zm96 168H64V64h128Zm-80-104v64a8 8 0 0 1-16 0v-64a8 8 0 0 1 16 0m48 0v64a8 8 0 0 1-16 0v-64a8 8 0 0 1 16 0"/></svg>        <h1>Delete <span className="hidden md:inline-block">Post</span></h1>
       </button>
       </div>
 </div>
@@ -148,7 +148,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             <input
             disabled={deleteDialog!="hidden"?true:false}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-4 py-2 mb-6 mr-4 text-sm bg-white border "
+              className="w-full px-4 py-2 mb-6 mr-4 text-sm bg-white border rounded-md "
               name="content"
               placeholder="Please Type Out Your Title"
               required
@@ -162,7 +162,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             <textarea
             disabled={deleteDialog!="hidden"?true:false}
               onChange={(e) => setExcerpt(e.target.value)}
-              className="w-full px-4 py-2 mb-6 mr-4 text-sm bg-white border "
+              className="w-full px-4 py-2 mb-6 mr-4 text-sm bg-white border rounded-md "
               name="content"
               placeholder="Please Type Out Your Excerpt"
               required
@@ -175,18 +175,18 @@ export default function Page({ params }: { params: { slug: string } }) {
                 setCover(URL.createObjectURL(e.target.files[0]));
                 setFile(e.target.files[0]);
               }}
-              className="inset-x-0 bottom-0 hidden mx-auto"
+              className="inset-x-0 bottom-0 hidden mx-auto rounded-md"
               type="file"
               ref={hiddenFileInput}
             />
             <label className="mb-1 text-base" htmlFor="content">
               Cover Image
             </label>
-            <div className="relative px-4 py-2 mb-6 border aspect-video shrink-0">
+            <div className="relative px-4 py-2 mb-6 border rounded-md aspect-video shrink-0">
             <img
               src={cover}
               
-              className="absolute inset-0 object-cover aspect-video shrink-0"
+              className="absolute inset-0 object-cover rounded-md aspect-video shrink-0"
               alt="cover"
             />
               <button
@@ -195,7 +195,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                   setChanged(true);
                   handleClick(e);
                 }}
-                className="absolute inset-0 px-6 py-3 m-auto text-xs text-white h-max w-max bg-black/60 backdrop-blur-sm"
+                className="absolute inset-0 px-6 py-3 m-auto text-xs text-white rounded-md h-max w-max bg-black/60 backdrop-blur-sm"
               >
                 Change Cover
               </button>
@@ -205,7 +205,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             </label>
             <div data-color-mode="light">
               <MDEditor
-                className="mx-[2px] mb-6 shrink rounded-none"
+                className="mx-[2px] mb-6 shrink rounded-md"
                 style={{ borderRadius: "0px", height: "100px !important" }}
                 value={content}
                 onChange={(e) => setContent(e!)}
@@ -215,7 +215,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               />
             </div>
 
-            <button disabled={deleteDialog!="hidden"?true:false} className="px-8 py-4 mb-2 text-xs font-medium text-white bg-black w-max">Publish This Post</button>
+            <button disabled={deleteDialog!="hidden"?true:false} className="px-8 py-4 mb-2 text-xs font-medium text-white bg-black rounded-md w-max">Publish This Post</button>
           </form>
         </div>
       </div>
