@@ -68,36 +68,36 @@ export default function Create() {
         className="flex flex-col justify-center w-full gap-2 pr-10 my-auto ml-auto animate-in text-foreground"
         action={create}
       >
-        <label className="text-base" htmlFor="name">
+        <label className="text-sm" htmlFor="name">
           Name
         </label>
         <input
           onChange={(e) => setName(e.target.value)}
-          className="px-4 py-2 mb-6 mr-4 border bg-inherit"
+          className="px-4 py-2 mb-6 mr-4 border bg-white rounded-md text-sm"
           name="name"
           placeholder="Please Type Out Your Display Name"
           required
           minLength={4}
           maxLength={20}
         />
-        <label className="text-base" htmlFor="name">
+        <label className="text-sm" htmlFor="name">
           Handle - You cannot change this later
         </label>
         <input
           onChange={(e) => setHandle(e.target.value.trim().replace(" ", "_"))}
-          className="px-4 py-2 mb-6 mr-4 border bg-inherit"
+          className="px-4 py-2 mb-6 mr-4 border bg-white text-sm rounded-md"
           name="handke"
           placeholder="Please Type Out Your Handle"
           required
           minLength={4}
           maxLength={12}
         />
-        <label className="text-base" htmlFor="content">
+        <label className="text-sm" htmlFor="content">
           About
         </label>
         <textarea
           onChange={(e) => setAbout(e.target.value)}
-          className="px-4 py-2 mb-6 mr-4 border bg-inherit"
+          className="px-4 py-2 mb-6 mr-4 border bg-white rounded-md text-sm"
           name="content"
           placeholder="Please Type About Yourself"
           required
@@ -105,7 +105,7 @@ export default function Create() {
           maxLength={100}
         />
 
-        <button className="px-8 py-4 mb-2 text-xs text-white bg-black w-max">Setup Your Account</button>
+        <button className="px-8 py-4 mb-2 text-xs text-white bg-black rounded-md w-max">Setup Your Account</button>
       </form>
     </div>
   );
