@@ -25,7 +25,7 @@ export default function App(props:any) {
     <Link
       href={props.link}
       className={`flex w-max cursor-pointer flex-row content-center items-center  px-3 py-[6px] transition-all bg-gray-50 md:bg-transparent border border-gray-300  rounded-md h-[calc(11*4px)] md:h-max md:border-none md:rounded-none  duration-100 ease-linear md:mx-0 md:w-full md:space-x-[10px] md:px-[6px] md:py-[8px] md:pr-8  ${
-        a.opened ? "" : ""
+        a.opened ? "md:bg-gray-50 bg-white" : ""
       }`}
     >
  
