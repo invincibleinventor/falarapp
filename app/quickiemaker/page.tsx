@@ -183,9 +183,9 @@ async function uploadFile(bucketName:string, id:string, fileName:string, file:an
     };
   return(
   <div className="flex  h-screen w-[calc(100vw-68px)] flex-col content-center items-start md:w-full">
-              <h1 className="mx-4 mt-4 text-3xl font-bold text-black md:mb-2 md:mt-[calc(18*4px)] md:text-3xl">New Quickie</h1>
+              <h1 className="mx-4 mt-4 text-2xl font-semibold md:font-bold text-black md:mb-2 md:mt-[calc(18*4px)] md:text-3xl">New Quickie</h1>
 
-    <textarea onChange={(e:any)=>setText(e.target.value)} maxLength={150} className="w-full h-full px-4 py-5 mb-auto text-xl bg-transparent outline-none resize-none placeholder:text-gray-600 md:m-4 md:p-0" placeholder="What's on your mind?">
+    <textarea onChange={(e:any)=>setText(e.target.value)} maxLength={150} className="w-full h-full px-4 py-5 mb-auto text-lg bg-transparent outline-none resize-none md:text-xl placeholder:text-gray-600 md:m-4 md:p-0" placeholder="What's on your mind?">
         
     </textarea>
     <div className="flex flex-row w-full px-4 space-x-4">
@@ -196,12 +196,12 @@ async function uploadFile(bucketName:string, id:string, fileName:string, file:an
         </div>
       ))}
     </div>
-    <div className="absolute bottom-0 flex flex-row items-center content-center w-full h-16 px-6 ml-4 ">
+    <div className="absolute bottom-0 flex flex-row items-center content-center w-full h-16 px-8 ml-4 ">
         
-        <button className="ml-auto mr-6 " onClick={(e:any)=>handleClick(e)}><svg xmlns="http://www.w3.org/2000/svg" className="text-gray-800" width="2em" height="2em" viewBox="0 0 20 20"><path fill="currentColor" d="M10 5.5a4.5 4.5 0 1 1-9 0a4.5 4.5 0 0 1 9 0m-4-2a.5.5 0 0 0-1 0V5H3.5a.5.5 0 0 0 0 1H5v1.5a.5.5 0 0 0 1 0V6h1.5a.5.5 0 0 0 0-1H6zm8 .5h-3.207a5.466 5.466 0 0 0-.393-1H14a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-3.6c.317.162.651.294 1 .393V14c0 .373.102.722.28 1.02l4.669-4.588a1.5 1.5 0 0 1 2.102 0l4.67 4.588A1.99 1.99 0 0 0 16 14V6a2 2 0 0 0-2-2m0 3.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0m-1 0a.5.5 0 1 0-1 0a.5.5 0 0 0 1 0m-8.012 8.226A1.99 1.99 0 0 0 6 16h8c.37 0 .715-.1 1.012-.274l-4.662-4.58a.5.5 0 0 0-.7 0z"/></svg></button>
+        <button className="ml-auto mr-8 " onClick={(e:any)=>handleClick(e)}><svg xmlns="http://www.w3.org/2000/svg" className="text-gray-800" width="2em" height="2em" viewBox="0 0 20 20"><path fill="currentColor" d="M10 5.5a4.5 4.5 0 1 1-9 0a4.5 4.5 0 0 1 9 0m-4-2a.5.5 0 0 0-1 0V5H3.5a.5.5 0 0 0 0 1H5v1.5a.5.5 0 0 0 1 0V6h1.5a.5.5 0 0 0 0-1H6zm8 .5h-3.207a5.466 5.466 0 0 0-.393-1H14a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-3.6c.317.162.651.294 1 .393V14c0 .373.102.722.28 1.02l4.669-4.588a1.5 1.5 0 0 1 2.102 0l4.67 4.588A1.99 1.99 0 0 0 16 14V6a2 2 0 0 0-2-2m0 3.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0m-1 0a.5.5 0 1 0-1 0a.5.5 0 0 0 1 0m-8.012 8.226A1.99 1.99 0 0 0 6 16h8c.37 0 .715-.1 1.012-.274l-4.662-4.58a.5.5 0 0 0-.7 0z"/></svg></button>
         <input             ref={hiddenFileInput}
   type="file" className="hidden" onChange={onChange} accept="image/png, image/jpeg, image/jpg, image/gif" name="file" multiple />
-             <button disabled={disabled} onClick={()=>publish()} className="px-6 py-3 text-sm text-white bg-black">Publish</button>
+             <button disabled={disabled} onClick={()=>publish()} className="px-6 py-3 text-sm text-white bg-black rounded-md">Publish</button>
 
     </div>
   </div>
