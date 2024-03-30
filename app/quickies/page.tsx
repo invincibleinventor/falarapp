@@ -142,7 +142,7 @@ export default async function Index() {
                       </h1>
                       <Link
                         href="/explore"
-                        className={`mx-auto mt-3 w-max px-8 py-3 text-xs font-bold  ${
+                        className={`mx-auto mt-3 rounded-md w-max px-8 py-3 text-xs font-bold  ${
                           1 == 1 ? "bg-black text-white" : "border-2 bg-white"
                         }`}
                       >

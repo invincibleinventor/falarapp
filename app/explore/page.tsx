@@ -89,7 +89,7 @@ export default async function Index() {
                 ) : (
                   <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
                     <div className="flex flex-col gap-2 mx-auto max-w-max">
-                      <h1 className="mx-auto text-lg font-semibold text-center text-black">No Posts To View!</h1>
+                      <h1 className="mx-auto text-lg font-semibold text-center text-black">No Users To View!</h1>
                       <h1 className="mx-auto text-sm text-center text-gray-800">
                         Follow people to view their posts on your home feed. The more people you follow, the more posts
                         on your feed

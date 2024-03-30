@@ -98,13 +98,13 @@ export default async function Index() {
                   <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
                     <div className="flex flex-col gap-2 mx-auto max-w-max">
                       <h1 className="mx-auto text-lg font-semibold text-center text-black">No Posts To View!</h1>
-                      <h1 className="mx-auto text-sm text-center text-gray-800">
+                      <h1 className="mx-auto text-sm text-center text-gray-800 rounded-md">
                         Your bookmarked posts appear in here. Seems like you have not bookmarked anything yet. Bookmark
                         posts to view them here.
                       </h1>
                       <Link
                         href="/"
-                        className={`mx-auto mt-3 w-max px-8 py-3 text-xs font-bold  ${
+                        className={`mx-auto rounded-md mt-3 w-max px-8 py-3 text-xs font-bold  ${
                           1 == 1 ? "bg-black text-white" : "border-2 bg-white"
                         }`}
                       >
