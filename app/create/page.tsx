@@ -105,7 +105,7 @@ export default function Create() {
           </label>
           <input
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full px-4 py-2 mb-6 mr-4 text-sm bg-white border "
+            className="w-full px-4 py-2 mb-6 mr-4 text-sm bg-white border rounded-md "
             name="content"
             placeholder="Please Type Out Your Title"
             required
@@ -117,7 +117,7 @@ export default function Create() {
           </label>
           <textarea
             onChange={(e) => setExcerpt(e.target.value)}
-            className="w-full px-4 py-2 mb-6 mr-4 text-sm bg-white border "
+            className="w-full px-4 py-2 mb-6 mr-4 text-sm bg-white border rounded-md "
             name="content"
             placeholder="Please Type Out Your Excerpt"
             required
@@ -133,16 +133,16 @@ export default function Create() {
           <label className="mb-1 text-base" htmlFor="content">
             Cover Image
           </label>
-          <div className="relative px-4 py-2 mb-6 border aspect-video shrink-0">
+          <div className="relative px-4 py-2 mb-6 border rounded-md aspect-video shrink-0">
             <img
               src={cover}
               
-              className="absolute inset-0 object-cover aspect-video shrink-0"
+              className="absolute inset-0 object-cover rounded-md aspect-video shrink-0"
               alt="cover"
             />
             <button
               onClick={(e:any) => (setChanged(true), handleClick(e))}
-              className="absolute inset-0 px-6 py-3 m-auto text-xs text-white h-max w-max bg-black/60 backdrop-blur-sm"
+              className="absolute inset-0 px-6 py-3 m-auto text-xs text-white rounded-md h-max w-max bg-black/60 backdrop-blur-sm"
             >
               Change Cover
             </button>
@@ -162,7 +162,7 @@ export default function Create() {
             />
           </div>
 
-          <button className="px-8 py-4 mb-2 text-xs text-white bg-black w-max">Publish This Post</button>
+          <button className="px-8 py-4 mb-2 text-xs text-white bg-black rounded-md w-max">Publish This Post</button>
         </form>
       </div>
     </div>
