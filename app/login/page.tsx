@@ -85,7 +85,7 @@ export default function Login() {
           ></input>
           <button
             onClick={(e) => (e.preventDefault(), console.log("login"), login())}
-            className="px-5 py-3 mt-4 text-xs font-medium text-white bg-black "
+            className="px-5 py-3 mt-4 text-xs font-medium text-white bg-black rounded-md"
           >
             Sign In To Your Account
           </button>
