@@ -26,7 +26,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const date1 = new Date();
   const isSupabaseConnected = canInitSupabaseClient();
 const [empty,setEmpty] = useState(false)
-  const [posts,setPosts] = useState([])
+  const [posts,setPosts] = useState<any>([])
 const [loading,setLoading] = useState(false)
   const [l,setL] = useState([])
   const [myname,setMyname] = useState("")

@@ -23,7 +23,7 @@ export default function Index({ params }: { params: { slug: string } }) {
 
   const isSupabaseConnected = canInitSupabaseClient();
   const [empty,setEmpty] = useState(false)
-  const [users,setUsers] = useState([])
+  const [users,setUsers] = useState<any>([])
   const [loading,setLoading] = useState(true)
   const [tempsearch,setTempSearch] = useState('')
  const [search,setSearch] = useState(params.slug)
