@@ -79,7 +79,7 @@ export default function CommentsComponent(props:any) {
     <>
       {props.loggedin && (
         <div className="flex flex-col space-y-2">
-          <div className="flex flex-row px-0 mt-4 mb-3 space-x-4">
+          <div className="flex flex-row px-1 mt-4 mb-3 space-x-4">
             <Image width={32} height={32} src={props.myphoto} className="w-8 h-8 rounded-md shrink-0" alt="comment" />
             <textarea
               required

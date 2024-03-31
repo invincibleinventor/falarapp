@@ -88,7 +88,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 }
               }
             }}
-            defaultValue={search}
+            defaultValue={search.replaceAll('%20',' ')}
             onChange={(e) => setTempSearch(e.target.value.trim())}
             minLength={4}
             maxLength={50}
@@ -124,12 +124,12 @@ export default function Page({ params }: { params: { slug: string } }) {
                     The text you searched for does not match any post. Please use a different search term.
                   </h1>
                   <Link
-                    href="/"
-                    className={`mx-auto mt-3 w-max px-8 py-3 text-xs font-bold  ${
+                    href="/search/posts/"
+                    className={`mx-auto mt-3 w-max px-8 py-3 rounded-md text-xs font-bold  ${
                       1 == 1 ? "bg-black text-white" : "border-2 bg-white"
                     }`}
                   >
-                    Return To Home
+                    Search Something Else
                   </Link>
                 </div>
               </div>

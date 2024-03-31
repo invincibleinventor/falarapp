@@ -173,7 +173,7 @@ export default async function App({ params }: { params: { slug: string } }) {
             {imauthor && (
               <Link
                 href={"/edit/" + params.slug}
-                className="my-4 mt-6 flex cursor-pointer flex-row  content-center items-center space-x-[16px] px-1  pr-0"
+                className="my-4 ml-auto mt-6 flex cursor-pointer flex-row  content-center items-center space-x-[16px] px-1  pr-0"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                   <path
