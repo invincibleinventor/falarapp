@@ -205,6 +205,7 @@ export default async function App({ params }: { params: { slug: string } }) {
               {content}
             </Markdown>
           </div>
+          {loggedin &&
           <section className="px-8 pt-0 pb-8" id="comments">
             <h1 className="mb-2 text-lg font-bold">Comments</h1>
 
@@ -218,8 +219,10 @@ export default async function App({ params }: { params: { slug: string } }) {
               loggedin={loggedin}
             />
           </section>
+}
         </div>
       )}
+      {loggedin &&
       <div className="absolute bottom-0 flex flex-row w-full bg-white border-t h-14 border-t-gray-200 ">
         <BookMarksComponent
           userliked={userbookmarked}
@@ -250,6 +253,7 @@ export default async function App({ params }: { params: { slug: string } }) {
           <h1 className="text-xs md:text-sm">Comments</h1>
         </Link>
       </div>
+}
     </div>
   ) : (
     <div className="flex items-center content-center w-full h-screen"></div>
