@@ -146,7 +146,7 @@ const [myhandle,setMyhandle] = useState("")
             <div className="flex flex-col gap-2 mb-20 animate-in hiddenscroll">
               {!loading ? (
                 !empty ? (
-                  posts.map((post) => (
+                  posts.map((post:any) => (
                     <PostComponent
                       id={post.id}
                       cover={post.cover}
