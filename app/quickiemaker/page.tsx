@@ -153,8 +153,9 @@ const formatText = (text:string) => {
               }
               else{ if (data && data.length>0){
                const posts = data[0]["posts"]
+               
                posts.push(id)
-               const {error}  = await supabase.from('hashtags').upsert({posts:posts,id:data[0]["id"],hashtag:hashtags[i]})
+               const {error}  = await supabase.from('hashtags').upsert({posts:posts,id:data[0]["id"],hashtag:hashtags[i],postcount:posts.length})
                 if(error){
                   console.log(error)
                 }
@@ -166,7 +167,7 @@ const formatText = (text:string) => {
               else{
                 const posts = []
                 posts.push(id)
-                const {error}  = await supabase.from('hashtags').upsert({posts:posts,hashtag:hashtags[i]})
+                const {error}  = await supabase.from('hashtags').upsert({posts:posts,hashtag:hashtags[i],postcount:posts.length})
                 if(error){
                   console.log(error)
                 }
