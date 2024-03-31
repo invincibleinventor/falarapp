@@ -1,7 +1,6 @@
 'use client'
 import MoreUsers from "@/components/MoreSearchUsers";
 
-import Search from "@/components/SearchComponent";
 import UserComponent from "@/components/UserComponent";
 import { createClient } from "@/utils/supabase/client";
 import TimeAgo from "javascript-time-ago";
@@ -28,7 +27,6 @@ export default function Index({ params }: { params: { slug: string } }) {
   const [loading,setLoading] = useState(true)
   const [tempsearch,setTempSearch] = useState('')
  const [search,setSearch] = useState(params.slug)
-  const [userid,setUserid]  = useState('')
   const [myhandle,setMyhandle] = useState('')
   const [followinglist,setFollowinglist] =useState([])
   useEffect(()=>{
@@ -38,7 +36,6 @@ export default function Index({ params }: { params: { slug: string } }) {
         data: { user },
       } = await supabase.auth.getUser();
       if(user){
-        setUserid(user.id)
         usersid=user.id
       }
     const { data, error } = await supabase.from("user").select("*").not("id", "in", `(${usersid})`).textSearch("name_handle_about", `'${search}' | '${search.toLowerCase()}' | '${search.toUpperCase()}'`)
@@ -111,7 +108,7 @@ get();
             <div className="grid items-center content-center grid-cols-1 gap-2 px-5 animate-in hiddenscroll xl:grid-cols-2">
               {!loading ? (
                 !empty ? (
-                  users.map((user) => (
+                  users.map((user:any) => (
                     <UserComponent
                       myID={myhandle}
                       key={user.id}

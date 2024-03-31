@@ -88,6 +88,25 @@ async function uploadFile(bucketName:string, id:string, fileName:string, file:an
     })
 }
 
+const formatText = (text:string) => {
+  console.log("text", text)
+  const content = text.split(/((?:#|@|https?:\/\/[^\s]+)[a-zA-Z]+)/);
+  let hashtag;
+  let tagarray:any = [];
+  content.map((word) => {
+      if (word.startsWith("#")) {
+          hashtag = word.replace('#', '')
+          tagarray.push(hashtag)
+      
+      }
+  });
+  console.log(
+    tagarray
+  )
+  return tagarray.reduce(function(a,b){if(a.indexOf(b)<0)a.push(b);return a;},[]);;
+  
+
+}
 
   async function publish(){
     setDisabled(true)
@@ -106,6 +125,8 @@ async function uploadFile(bucketName:string, id:string, fileName:string, file:an
         window.location.replace('/quickies')
       }
       else{
+
+        
     const {data,error} = await supabase.from('user').select('*').eq('id',user.user.id)
     if(!error && data){
       handle=data[0]["handle"]
@@ -117,13 +138,49 @@ async function uploadFile(bucketName:string, id:string, fileName:string, file:an
 
       }
       else{
-        if(imgsSrc.length>0){
-          const {data,error}  = await supabase.from('quickies').select('*').eq("poster", user?.user.id)
+        const {data,error}  = await supabase.from('quickies').select('*').eq("poster", user?.user.id)
           .order("id", { ascending: false })
           .limit(1);
          
           if(data && !error){
             const id = data[0]["id"]
+            const hashtags = formatText(text)
+            if(hashtags.length>0){
+            for(let i = 0;i<hashtags.length;i++){
+              const {data,error} = await supabase.from('hashtags').select('*').eq('hashtag',hashtags[i])
+              if(error){
+                console.log(error)
+              }
+              else{ if (data && data.length>0){
+               const posts = data[0]["posts"]
+               posts.push(id)
+               const {error}  = await supabase.from('hashtags').upsert({posts:posts,id:data[0]["id"],hashtag:hashtags[i]})
+                if(error){
+                  console.log(error)
+                }
+                else{
+                  window.location.replace('/quickies')
+                }
+               
+              }
+              else{
+                const posts = []
+                posts.push(id)
+                const {error}  = await supabase.from('hashtags').upsert({posts:posts,hashtag:hashtags[i]})
+                if(error){
+                  console.log(error)
+                }
+                else{
+                  window.location.replace('/quickies')
+                }
+              }
+            }
+            }
+
+
+            }
+        if(imgsSrc.length>0){
+          
             for(let i =0;i<imgsSrc.length;i++){
               console.log(imgsSrc[i])
 
@@ -153,9 +210,10 @@ async function uploadFile(bucketName:string, id:string, fileName:string, file:an
           
         }
         else{
-          window.location.replace('/')
+          window.location.replace('/quickies')
         }
       }
+     
     }
     }
   }
