@@ -50,7 +50,7 @@ const [myhandle,setMyhandle] = useState("")
     setUserBookmarked(u![0]["bookmarks"])
     setUserliked(u![0]["liked"])
     let ds = [];
-    const a = l
+    const a:any = l
     a.push(h)
     setL(a)
     const { data, error } = await supabase
