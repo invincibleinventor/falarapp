@@ -34,7 +34,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   let myhandle = "";
   let userliked :any[] = [];
   let userbookmarked:any[] = [];
-  let tagarray = []
+  let tagarray:any[] = []
 
   async function get() {
     const { data: user } = await supabase.auth.getUser();
