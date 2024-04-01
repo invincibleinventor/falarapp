@@ -35,7 +35,7 @@ export default async function Trending(){
     const {data,error} = await supabase.from('trending').select(h.toString()).eq('date',date)
     if(data && data.length>0){
         a = data[0][h];
-        const sortedArray = Object.entries(a).sort(([, valueA], [, valueB]) => valueB - valueA);
+        const sortedArray = Object.entries(a).sort(([, valueA] : [any,any], [, valueB] :[any,any]) => valueB - valueA);
         a = Object.fromEntries(sortedArray);       
          a = Object.fromEntries(
             Object.entries(a).slice(0, 5)
