@@ -20,9 +20,11 @@ photocount = props.image.length;
     console.log("text", text)
     const content = text.split(/((?:#|@|https?:\/\/[^\s]+)[a-zA-Z]+)/);
     let hashtag;
+    const regex = /^[a-zA-Z]+$/;
+
     let username;
     return content.map((word) => {
-        if (word.startsWith("#")) {
+        if (word.startsWith("#") && regex.test(word.slice(1,word.length-1))) {
             hashtag = word.replace('#', '')
             return <Link legacyBehavior href={`/hashtag/${hashtag}`}><a
                 className="text-blue-500 hover:text-blue-600">{word}</a></Link>;

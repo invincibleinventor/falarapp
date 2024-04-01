@@ -140,7 +140,7 @@ export default async function App({ params }: { params: { slug: string } }) {
   console.log(comments);
   console.log("above");
   return !loading ? (
-    <div className="relative flex flex-col flex-1 h-screen overflow-hidden bg-white">
+    <div className="relative flex flex-col flex-1 h-screen overflow-hidden bg-white md:ml-4 lg:mx-4">
       {error && (
         <div className="flex items-center content-center w-full h-screen px-10 sm:px-24 md:px-16 lg:px-24">
           <div className="flex flex-col gap-2 mx-auto max-w-max">

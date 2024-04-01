@@ -2,13 +2,10 @@
 "use client";
 import { createClient } from "@/utils/supabase/client";
 import "@mdxeditor/editor/style.css";
-import MDEditor from "@uiw/react-md-editor";
-import Image from "next/image";
-import Link from "next/link";
-import { redirect } from "next/navigation";
+
 import { MouseEvent, useRef, useState } from "react";
-import rehypeSanitize from "rehype-sanitize";
 import * as tus from 'tus-js-client'
+
 export default function Create() {
   const [disabled,setDisabled] = useState(false)
   const [text,setText] = useState('')
@@ -92,9 +89,11 @@ const formatText = (text:string) => {
   console.log("text", text)
   const content = text.split(/((?:#|@|https?:\/\/[^\s]+)[a-zA-Z]+)/);
   let hashtag;
+  const regex = /^[a-zA-Z]+$/;
+
   let tagarray:any = [];
   content.map((word) => {
-      if (word.startsWith("#")) {
+      if (word.startsWith("#") && regex.test(word.slice(1,word.length-1))) {
           hashtag = word.replace('#', '')
           tagarray.push(hashtag)
       
@@ -157,13 +156,88 @@ const formatText = (text:string) => {
                posts.push(id)
                const {error}  = await supabase.from('hashtags').upsert({posts:posts,id:data[0]["id"],hashtag:hashtags[i],postcount:posts.length})
                 if(error){
+                  console.log('roeks')
                   console.log(error)
                 }
                 else{
-                  window.location.replace('/quickies')
+                  const date = new Date().toLocaleDateString('en-IN');
+                  const hour = new Date().getHours()
+                  console.log('ingaye')
+                  const {data,error} = await supabase.from('trending').select('*').eq('date',date)
+                  let a:any;
+                    let h;
+                    if(hour>=0 && hour<3){
+                     h=0
+                    }
+                    else if(hour>=3 && hour<6){
+                      h=3
+                     }
+                     else if(hour>=6 && hour<9){
+                      h=6
+                     }
+                     else if(hour>=9 && hour<12){
+                      h=9
+                     }
+                     else if(hour>=12 && hour<15){
+                      h=12
+                     }
+                     else if(hour>=15 && hour<18){
+                      h=15
+                     }
+                     else if(hour>=18 && hour<21){
+                      h=18
+                     }
+                     else{
+                      h=21
+                     }
+                     if(error){
+                      alert(error)
+                     }
+                     else{
+                  if(data && data.length>0){
+                    a=data[0][h]  
+                     if(Object.keys(a).includes(hashtags[i]))
+                     {
+                      a[hashtags[i]]=a[hashtags[i]]+1
+                      console.log(a)
+                      const {error} = await supabase.from('trending').update({[h]:a}).eq('date',date)
+                      if(!error){
+                        window.location.replace('/quickies')
+                      }
+                    }
+                     else{
+                      console.log(a)
+                      console.log('ingathaan')
+                      a[hashtags[i]]=1
+                      console.log(a)
+                      const {error} = await supabase.from('trending').update({[h]:a}).eq('date',date)
+                      if(!error){
+                        window.location.replace('/quickies')
+                      }
+                      else{
+                        console.log(error)
+                      }
+                     }
+                     
+                     
+                     
+                  }
+                  else{
+                    
+                    a={}
+                   
+                     a[hashtags[i]]=1
+                     console.log(a)
+                     const {error} = await supabase.from('trending').insert({'date':date,[h]:a})
+                     if(!error)
+                       window.location.replace('/quickies')
+                     }
+                    }
+                  
+                }
                 }
                
-              }
+              
               else{
                 const posts = []
                 posts.push(id)
@@ -172,14 +246,84 @@ const formatText = (text:string) => {
                   console.log(error)
                 }
                 else{
-                  window.location.replace('/quickies')
+                  const date = new Date().toLocaleDateString('en-IN');
+                  const hour = new Date().getHours()
+                  console.log('ok')
+                  const {data,error} = await supabase.from('trending').select('*').eq('date',date.toString())
+                  console.log('ingaye out uh')
+                  let a:any;
+                    let h;
+                    if(hour>=0 && hour<3){
+                     h=0
+                    }
+                    else if(hour>=3 && hour<6){
+                      h=3
+                     }
+                     else if(hour>=6 && hour<9){
+                      h=6
+                     }
+                     else if(hour>=9 && hour<12){
+                      h=9
+                     }
+                     else if(hour>=12 && hour<15){
+                      h=12
+                     }
+                     else if(hour>=15 && hour<18){
+                      h=15
+                     }
+                     else if(hour>=18 && hour<21){
+                      h=18
+                     }
+                     else{
+                      h=21
+                     }
+                     if(error){
+                      console.log(error)
+                     }
+                     else{
+                      console.log('good to go')
+                  if(data && data.length>0){
+                    a=data[0][h]
+                     if(hashtags[i] in a)
+                     {
+                      a[hashtags[i]]=a[hashtags[i]]+1
+                      const {error} = await supabase.from('trending').update({[h]:a}).eq('date',date)
+                      if(!error){
+                        window.location.replace('/quickies')
+                      }
+                    }
+                     else{
+                      a[hashtags[i]]=1
+                      const {error} = await supabase.from('trending').update({[h]:a}).eq('date',date)
+                      if(!error){
+                        window.location.replace('/quickies')
+                      }
+                     }
+                     
+                     
+                     
+                  }
+                  else{
+                    
+                    a={}
+                   
+                     a[hashtags[i]]=1
+                     const {error} = await supabase.from('trending').insert({date:date,[h]:a})
+                     if(!error)
+                       window.location.replace('/quickies')
+                     }
+                    }
+                  
                 }
               }
+            
             }
-            }
+          }
 
-
             }
+            
+            window.location.replace('/quickies')
+
         if(imgsSrc.length>0){
           
             for(let i =0;i<imgsSrc.length;i++){

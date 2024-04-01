@@ -1,6 +1,7 @@
 import More from "@/components/MoreQuickies";
 import PostComponent from "@/components/QuickieComponent";
 import Search from "@/components/SearchComponent";
+import Trending from "@/components/Trending";
 import { createClient } from "@/utils/supabase/server";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
@@ -105,8 +106,15 @@ export default async function Index() {
           <div className="p-4 py-2 mx-1 md:mx-1">
             <Search page="quickies" text="Evolt" />
           </div>
+          
           <div className="h-full overflow-y-scroll hiddenscroll">
             <div className="flex flex-col gap-2 mb-20 animate-in hiddenscroll">
+              <div className="px-5 lg:hidden">
+                <h1 className="pl-1 my-2 mb-4 font-bold text-md font-inter">Trending</h1>
+              <Trending/>
+              <h1 className="pl-[4px] mt-5 my-1 font-bold text-md font-inter">Posts you may like</h1>
+
+              </div>
               {!loading ? (
                 !empty ? (
                   posts.map((post) => (
