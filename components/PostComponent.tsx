@@ -25,7 +25,7 @@ export default function Post(props:any) {
   return (
     <div className="animate-in" >
       <div className="w-full px-6 py-[6px]">
-      <article className="py-6 border-b border-gray-900">
+      <article className="py-6 pt-0 border-b border-gray-900">
   <Link href={"/profile/"+props.handle} className="flex gap-2">
     <a href="/medium-clone/u/Shark">
       <img
