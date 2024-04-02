@@ -24,8 +24,8 @@ export default function App(props:any) {
   return (
     <Link
       href={props.link}
-      className={`mx-2  flex w-max cursor-pointer flex-row content-center items-center  px-3  py-[10px] transition-all bg-gray-800/20 md:bg-transparent rounded-lg h-[calc(13*4px)] md:h-max md:border-none  duration-100 ease-linear md:mx-0 md:w-full md:space-x-[10px] md:px-[14px] md:py-[10px] md:pr-8  ${
-        a.opened ? "md:bg-gray-700/20 bg-gray-700/30" : ""
+      className={`mx-2  flex w-max cursor-pointer flex-row content-center items-center  px-3  py-[10px] transition-all bg-gray-800/10 md:bg-transparent rounded-lg h-[calc(13*4px)] md:h-max md:border-none  duration-100 ease-linear md:mx-0 md:w-full md:space-x-[10px] md:px-[14px] md:py-[10px] md:pr-8  ${
+        a.opened ? "md:bg-gray-900/50 bg-gray-800/40" : ""
       }`}
     >
       <svg

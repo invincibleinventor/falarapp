@@ -72,7 +72,7 @@ export default function CommentComponent(props:any) {
     });
   }
   return (
-    <div className="flex flex-row w-full gap-4 my-2">
+    <div className="flex flex-row w-full gap-4 pt-1 pb-4 my-0 border-b border-b-gray-900">
       <Link href={`/profile/${props.handle}`} className="w-10 h-10 shrink-0">
         <Image
           width={32}
@@ -89,7 +89,7 @@ export default function CommentComponent(props:any) {
           </Link>
           <h1 className="ml-auto text-xs font-normal text-gray-300">{props.time}</h1>
         </div>
-        <h1 className="mt-[2px] text-[14px] font-normal text-gray-400">{formatText(props.content)}</h1>
+        <h1 className="mt-[2px] text-[12px] font-normal text-gray-400">{formatText(props.content)}</h1>
         <div className="my-1 ml-auto mt-2 flex flex-row content-center items-center space-x-[8px]">
           {props.loggedin && (
             <svg
