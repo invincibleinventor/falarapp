@@ -25,11 +25,11 @@ export default function Post(props:any) {
   return (
     <div className="animate-in" >
       <div className="w-full px-5 py-[6px]">
-        <div  className="flex flex-col border border-gray-300 rounded-md bg-gray-50 md:gap-0">
-          <div  className="flex items-center content-center bg-black rounded-md ">
+        <div  className="flex flex-col rounded-lg md:gap-0 bg-gray-900/20">
+          <div  className="flex items-center content-center rounded-md ">
             <img
            
-              className="object-cover rounded-t-md aspect-video"
+              className="object-cover rounded-t-lg aspect-video"
               src={props.cover ? props.cover : "https://picsum.photos/300/400"}
               // src={"https://picsum.photos/300/400"}
               alt="cover"
@@ -43,11 +43,11 @@ export default function Post(props:any) {
               <Link href={`/profile/`+props.handle} className="flex flex-row gap-[2px]">
                 <div className="flex flex-col content-center flex-1 gap-[2px] py-0 pl-2 rounded-lg">
                   <div className="flex flex-row items-center content-center">
-                  <h1 className="text-sm font-medium text-black "><span className="inline-block md:hidden">{x}</span><span className="hidden md:inline-block">{props.name}</span></h1>
-                  <h1 className="ml-2 text-xs font-normal text-gray-600 ">@{props.handle}</h1>
+                  <h1 className="text-sm font-semibold text-gray-300 "><span className="inline-block md:hidden">{x}</span><span className="hidden md:inline-block">{props.name}</span></h1>
+                  <h1 className="ml-2 text-xs font-normal text-gray-500 ">@{props.handle}</h1>
 
                   </div>
-                  <h1 className="text-xs font-medium text-gray-600">{props.time}</h1>
+                  <h1 className="text-xs font-medium text-gray-500">{props.time}</h1>
 
                 </div>
 
@@ -62,7 +62,7 @@ export default function Post(props:any) {
               <Link  href={`/post/${props.id}`} className="my-3 mb-[6px] flex w-full flex-row justify-between ">
                 <h1
                   style={{ wordBreak: "break-word", whiteSpace: "normal" }}
-                  className="text-lg font-bold two-line-ellipsis md:text-lg md:font-semibold "
+                  className="text-lg font-bold text-gray-300 font-pops two-line-ellipsis md:text-lg md:font-semibold "
                 >
                   {a}
                 </h1>
@@ -70,7 +70,7 @@ export default function Post(props:any) {
 
               <h1
                 style={{ wordBreak: "break-word", whiteSpace: "normal" }}
-                className="four-line-ellipsis text-xs font-normal leading-[20px] text-gray-900 md:text-sm md:leading-[25px]"
+                className="four-line-ellipsis text-xs font-normal leading-[20px] mt-2 text-gray-400 md:text-sm md:leading-[25px]"
               >
                 {s}
               </h1>

@@ -77,26 +77,27 @@ export default function CommentComponent(props:any) {
         <Image
           width={32}
           height={32}
-          className="w-8 h-8 m-auto border border-gray-200 rounded-md shrink-0"
+          className="w-8 h-8 m-auto rounded-md shrink-0"
           src={props.profile!}
           alt="profile"
         />
       </Link>
       <div className="flex w-full flex-col gap-[2px]">
         <div className="flex flex-row items-center content-center w-full">
-          <Link href={`/profile/${props.handle}`} className="text-base font-semibold">
+          <Link href={`/profile/${props.handle}`} className="text-[14px] font-semibold text-gray-300">
             {props.name}
           </Link>
-          <h1 className="ml-auto text-sm font-normal">{props.time}</h1>
+          <h1 className="ml-auto text-xs font-normal text-gray-400">{props.time}</h1>
         </div>
-        <h1 className="text-sm font-normal text-gray-800">{formatText(props.content)}</h1>
-        <div className="my-1 mt-2 flex flex-row content-center items-center space-x-[8px]">
+        <h1 className="mt-[2px] text-[14px] font-normal text-gray-400">{formatText(props.content)}</h1>
+        <div className="my-1 ml-auto mt-2 flex flex-row content-center items-center space-x-[8px]">
           {props.loggedin && (
             <svg
               onClick={() => (!disabled ? (toggleLiked(!liked), setLiked(!liked)) : console.log("hold up!"))}
               xmlns="http://www.w3.org/2000/svg"
               width="14"
               height="14"
+              className="text-gray-300"
               viewBox="0 0 48 48"
             >
               {liked ? (
@@ -120,7 +121,7 @@ export default function CommentComponent(props:any) {
               )}
             </svg>
           )}
-          <h1 className="text-xs">{likes} Likes</h1>
+          <h1 className="text-xs text-gray-400 ">{likes} Likes</h1>
         </div>
       </div>
     </div>

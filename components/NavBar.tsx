@@ -9,7 +9,7 @@ export default function App$() {
       <div className={`  flex w-max flex-col items-start p-0 md:pr-0 ${loc.startsWith("/post/") ? "md:flex" : ""}`}>
         <Link className="flex flex-row mt-1" href="/">
           <svg
-            className="ml-[8px] mr-2 mt-[2px] h-[51px] w-[51px] cursor-pointer rounded-full p-[10px] text-black transition-all  duration-100 ease-linear hover:bg-gray-400 md:ml-[4px] md:mr-0"
+            className="ml-[8px] mr-2 mt-[2px] h-[51px] w-[51px] cursor-pointer rounded-full p-[10px] text-gray-300 transition-all  duration-100 ease-linear hover:bg-gray-900 md:ml-[4px] md:mr-0"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
@@ -27,7 +27,7 @@ export default function App$() {
             />
           </svg>
         </Link>
-        <div className="flex flex-col space-y-3 py-4 pt-[14px] md:mt-7 md:space-y-[4px] md:bg-neutral-100 md:px-4 md:pt-[4px]">
+        <div className="flex flex-col space-y-3 py-4 pt-[14px] md:mt-7 md:space-y-[8px] md:bg-neutral-100 md:px-4 md:pt-[4px]">
           <Headeritem
             link="/"
             url={
@@ -110,7 +110,7 @@ export default function App$() {
             name="More"
           ></Headeritem>
           <Link href={(loc.includes('quickie') || loc.includes("hashtag"))?"/quickiemaker":"/create"} className="pt-5">
-            <div className="mx-auto flex rounded-md h-[52px]  w-[52px] cursor-pointer  flex-row content-center items-center bg-black p-3 transition-all duration-100 ease-linear hover:bg-black md:mr-auto md:h-[44px] md:w-[calc(180px)] md:py-[14px]">
+            <div className="mx-auto flex rounded-md h-[52px]  w-[52px] cursor-pointer  flex-row content-center items-center bg-blue-700 p-3 transition-all duration-100 ease-linear hover:bg-blue-600 md:mr-auto md:h-[44px] md:w-[calc(180px)] md:py-[14px]">
               <span className={`mx-auto hidden pt-[0px] text-center text-xs font-medium  text-white md:inline-block`}>
                 New {loc.includes('quickie')?'Quickie':'Post'}
               </span>

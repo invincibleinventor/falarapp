@@ -13,17 +13,17 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="noSelect font-poppins">
+    <html lang="en" className="noSelect font-inter">
       <head>
         <Script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></Script>
       </head>
 
-      <body className="bg-gray-100 bg-cover" lang="en">
+      <body className="bg-black bg-cover" lang="en">
         <main>
           <section className="relative m-auto flex h-screen flex-row content-center items-center overflow-hidden sm:w-screen lg:w-[1070px] xl:w-[1200px]">
             <NavBar></NavBar>
-            <div className="w-full mt-0 ">
-              <div className="items-center content-center flex-1 w-full h-screen px-0 border-x border-x-gray-100 backdrop-blur-md md:border-none">
+            <div className="w-full ">
+              <div className="items-center content-center flex-1 w-full h-screen px-0 backdrop-blur-md md:border-none">
                 {children}
               </div>
             </div>

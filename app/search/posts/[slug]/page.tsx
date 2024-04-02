@@ -66,11 +66,11 @@ export default function Page({ params }: { params: { slug: string } }) {
     <div className="flex-1 h-screen p-0 py-2 overflow-hidden">
       <div className="p-4 py-2 mx-1 md:mx-1">
         <div className="relative items-center content-center">
-          <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            className=" absolute inset-y-0 my-auto ml-6 h-[18px] w-[18px] text-black"
-          >
+        <svg
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+        className="md:bottom-3 absolute inset-y-0 right-0 my-auto mr-6 h-[14px] w-[14px] text-gray-400"
+      >
             <g>
               <path
                 fill="currentColor"
@@ -93,7 +93,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             minLength={4}
             maxLength={50}
             type="search"
-            className="font-poppins peer h-12 w-full border border-gray-200 bg-white pl-14 pr-8 text-[14px] placeholder:text-gray-600 focus:bg-white focus:outline-black"
+            className="font-inter md:mb-3 rounded-md peer h-[48px] w-full bg-gray-700/20 focus:outline-none pl-6 pr-14 text-[14px] placeholder:text-gray-400 text-gray-300"
             placeholder={"Search Posts"}
           ></input>
         </div>
@@ -118,19 +118,19 @@ export default function Page({ params }: { params: { slug: string } }) {
               ))
             ) : (
               <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
-                <div className="flex flex-col gap-2 mx-auto max-w-max">
-                  <h1 className="mx-auto text-lg font-semibold text-center text-black">No Posts To View!</h1>
-                  <h1 className="mx-auto text-sm text-center text-gray-800">
-                    The text you searched for does not match any post. Please use a different search term.
-                  </h1>
-                  <Link
-                    href="/search/posts/"
-                    className={`mx-auto mt-3 w-max px-8 py-3 rounded-md text-xs font-bold  ${
-                      1 == 1 ? "bg-black text-white" : "border-2 bg-white"
-                    }`}
-                  >
-                    Search Something Else
-                  </Link>
+                <div className="flex flex-col gap-4 mx-auto max-w-max">
+                <h1 className="mx-auto text-xl font-semibold text-center text-gray-300">No Posts To View!</h1>
+                    <h1 className="mx-auto text-sm text-center text-gray-500">
+                      Your search results appear here. Seems like there are no posts related to your search term.
+                    </h1>
+                    <Link
+                      href="/search/posts"
+                      className={`mx-auto mt-5 w-max px-8  py-3 text-xs font-bold  ${
+                        1 == 1 ? "bg-blue-700 rounded-md  text-white" : "border-2 bg-white"
+                      }`}
+                    >
+                      Search Something Else
+                    </Link>
                 </div>
               </div>
             )
@@ -139,7 +139,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               <Oval
                 height={80}
                 width={80}
-                color="#000000"
+                color="#FFFFFF"
                 wrapperStyle={{}}
                 wrapperClass="mx-auto mt-5"
                 visible={true}

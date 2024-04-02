@@ -11,7 +11,7 @@ export default function Search(props:any) {
       <svg
         viewBox="0 0 24 24"
         aria-hidden="true"
-        className=" absolute inset-y-0 my-auto ml-6 h-[18px] w-[18px] text-black"
+        className="md:bottom-3 absolute inset-y-0 right-0 my-auto mr-6 h-[14px] w-[14px] text-gray-400"
       >
         <g>
           <path
@@ -28,7 +28,8 @@ export default function Search(props:any) {
         minLength={4}
         maxLength={50}
         type="search"
-        className="font-poppins rounded-md peer h-12 w-full border border-gray-300 bg-gray-50 focus:outline-none focus:bg-white pl-14 pr-8 text-[14px] placeholder:text-gray-600 focus:bg-white "
+        
+        className="font-inter md:mb-3 rounded-md peer h-[48px] w-full bg-gray-700/20 focus:outline-none pl-6 pr-14 text-[14px] placeholder:text-gray-400 text-gray-300"
         placeholder={"Search " + props.text}
       ></input>
     </div>

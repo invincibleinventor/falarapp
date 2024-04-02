@@ -90,11 +90,11 @@ export default function CommentsComponent(props:any) {
               }}
               onChange={(e) => setText(e.target.value)}
               ref={inputRef}
-              className="w-full px-4 py-2 text-sm border rounded-md outline-none focus:border-gray-700"
+              className="w-full px-4 py-2 text-sm text-gray-300 border border-gray-900 rounded-md outline-none bg-gray-900/20 "
               placeholder={"Post a comment publicly as " + props.myname}
             ></textarea>
           </div>
-          <div className={!posted ? "hidden" : "mx-auto text-xs"}>
+          <div className={!posted ? "hidden" : "mx-auto text-gray-300 text-xs"}>
             <h1>Posted</h1>
           </div>
         </div>

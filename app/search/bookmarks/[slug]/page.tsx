@@ -80,14 +80,14 @@ export default function Page({ params }: { params: { slug: string } }) {
   }, [search]);
   if (isSupabaseConnected) {
     return (
-      <div className="h-screen flex-1 overflow-hidden p-0 py-2">
-        <div className="mx-1 p-4 py-2 md:mx-1">
-          <div className="relative content-center items-center">
-            <svg
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-              className=" absolute inset-y-0 my-auto ml-6 h-[18px] w-[18px] text-black"
-            >
+      <div className="flex-1 h-screen p-0 py-2 overflow-hidden">
+        <div className="p-4 py-2 mx-1 md:mx-1">
+          <div className="relative items-center content-center">
+          <svg
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+        className="md:bottom-3 absolute inset-y-0 right-0 my-auto mr-6 h-[14px] w-[14px] text-gray-400"
+      >
               <g>
                 <path
                   fill="currentColor"
@@ -110,13 +110,13 @@ export default function Page({ params }: { params: { slug: string } }) {
               minLength={4}
               maxLength={50}
               type="search"
-              className="font-poppins peer h-12 w-full border border-gray-200 bg-white pl-14 pr-8 text-[14px] placeholder:text-gray-600 focus:bg-white focus:outline-black"
+              className="font-inter md:mb-3 rounded-md peer h-[48px] w-full bg-gray-700/20 focus:outline-none pl-6 pr-14 text-[14px] placeholder:text-gray-400 text-gray-300"
               placeholder={"Search Posts"}
             ></input>
           </div>
         </div>
-        <div className="hiddenscroll h-full overflow-y-scroll">
-          <div className="animate-in hiddenscroll mb-20 flex flex-col gap-2">
+        <div className="h-full overflow-y-scroll hiddenscroll">
+          <div className="flex flex-col gap-2 mb-20 animate-in hiddenscroll">
             {!loading ? (
               !empty ? (
                 posts.map((post:any) => (
@@ -134,17 +134,17 @@ export default function Page({ params }: { params: { slug: string } }) {
                   />
                 ))
               ) : (
-                <div className="mt-24 flex w-full content-center items-center px-10 sm:px-24 md:px-16 lg:px-24">
-                  <div className="mx-auto flex max-w-max flex-col gap-2">
-                    <h1 className="mx-auto text-center text-lg font-semibold text-black">No Posts To View!</h1>
-                    <h1 className="mx-auto text-center text-sm text-gray-400">
+                <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
+                  <div className="flex flex-col gap-4 mx-auto max-w-max">
+                    <h1 className="mx-auto text-xl font-semibold text-center text-gray-300">No Posts To View!</h1>
+                    <h1 className="mx-auto text-sm text-center text-gray-500">
                       Your bookmarked posts appear in here. Seems like you have not bookmarked anything that matches
                       your search. Bookmark posts to view them here.
                     </h1>
                     <Link
                       href="/"
-                      className={`mx-auto mt-3 w-max px-8 py-3 text-xs font-bold  ${
-                        1 == 1 ? "bg-black text-white" : "border-2 bg-white"
+                      className={`mx-auto mt-5 w-max px-8  py-3 text-xs font-bold  ${
+                        1 == 1 ? "bg-blue-700 rounded-md  text-white" : "border-2 bg-white"
                       }`}
                     >
                       Return To Home
@@ -153,11 +153,11 @@ export default function Page({ params }: { params: { slug: string } }) {
                 </div>
               )
             ) : (
-              <div className="flex h-screen w-full content-center items-center">
+              <div className="flex items-center content-center w-full h-screen">
                 <Oval
                   height={80}
                   width={80}
-                  color="#000000"
+                  color="#FFFFFF"
                   wrapperStyle={{}}
                   wrapperClass="mx-auto mt-5"
                   visible={true}
