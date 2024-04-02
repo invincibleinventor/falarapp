@@ -75,7 +75,7 @@ export default async function Index() {
           <div className="p-4 py-2 mx-1 md:mx-1">
             <Search page="bookmarks" text="Bookmarks" />
           </div>
-          <h1 className="px-6 my-4 mt-4 text-xl font-bold">My Bookmarks</h1>
+          <h1 className="px-6 my-4 mt-4 text-xl font-bold text-gray-300">My Bookmarks</h1>
           <div className="h-full overflow-y-scroll hiddenscroll">
             <div className="flex flex-col gap-2 mb-20 animate-in hiddenscroll">
               {!loading ? (
@@ -89,6 +89,7 @@ export default async function Index() {
                       key={post.id}
                       image={post.image}
                       dp={post.dp}
+                      likes={post.likes}
                       handle={post.handle}
                       name={post.name}
                       description={post.excerpt}
@@ -96,16 +97,16 @@ export default async function Index() {
                   ))
                 ) : (
                   <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
-                    <div className="flex flex-col gap-2 mx-auto max-w-max">
-                      <h1 className="mx-auto text-lg font-semibold text-center text-black">No Posts To View!</h1>
-                      <h1 className="mx-auto text-sm text-center text-gray-800 rounded-md">
+                    <div className="flex flex-col gap-4 mx-auto max-w-max">
+                      <h1 className="mx-auto text-lg font-semibold text-center text-gray-300">No Posts To View!</h1>
+                      <h1 className="mx-auto text-center text-gray-500 rounded-md text-md">
                         Your bookmarked posts appear in here. Seems like you have not bookmarked anything yet. Bookmark
                         posts to view them here.
                       </h1>
                       <Link
                         href="/"
                         className={`mx-auto rounded-md mt-3 w-max px-8 py-3 text-xs font-bold  ${
-                          1 == 1 ? "bg-black text-white" : "border-2 bg-white"
+                          1 == 1 ? "bg-blue-700 text-white" : "border-2 bg-white"
                         }`}
                       >
                         Return To Home

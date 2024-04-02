@@ -122,7 +122,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   return !loading ? (
     author ? (
       <div className={`h-screen flex-1 gap-2 overflow-hidden px-8`}>
-                <div style={{zIndex:1000}} className={"absolute py-4 flex flex-col content-center  top-0 bottom-0 left-0 right-0 w-64 h-48 mx-auto my-auto bg-white border border-black shadow-md md:w-84 lg:w-96 "+deleteDialog}>
+                <div style={{zIndex:1000}} className={"absolute py-4 flex flex-col content-center  top-0 bottom-0 left-0 right-0 w-64 h-48 mx-auto my-auto bg-white border animate-in border-black shadow-md md:w-84 lg:w-96 "+deleteDialog}>
                
                   <h1 className="mx-4 text-lg font-medium">Delete this post?</h1>
                   <h1 className="mx-4 mt-2 text-sm">Are you sure you want to delete this post?</h1>
@@ -135,20 +135,20 @@ export default function Page({ params }: { params: { slug: string } }) {
             action={create}
           >
           <div className="flex flex-row items-center content-center justify-between">
-            <h1 className="mb-6 text-2xl font-bold text-black md:text-3xl">Edit <span className="hidden md:inline-block">The</span> Post</h1>
+            <h1 className="mb-6 text-2xl font-bold text-gray-300 md:text-3xl">Edit <span className="hidden md:inline-block">The</span> Post</h1>
       <div className="flex flex-row items-center content-center pb-5 ">
-        <button  onClick={()=>toggledeleteDialog("")} disabled={deleteDialog!="hidden"?true:false} className="flex flex-row items-center content-center px-2 py-3 mx-0 space-x-3 text-sm ">
+        <button  onClick={()=>toggledeleteDialog("")} disabled={deleteDialog!="hidden"?true:false} className="flex flex-row items-center content-center px-2 py-3 mx-0 space-x-3 text-sm text-gray-300 ">
         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256"><path fill="currentColor" d="M216 48h-40v-8a24 24 0 0 0-24-24h-48a24 24 0 0 0-24 24v8H40a8 8 0 0 0 0 16h8v144a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16V64h8a8 8 0 0 0 0-16M96 40a8 8 0 0 1 8-8h48a8 8 0 0 1 8 8v8H96Zm96 168H64V64h128Zm-80-104v64a8 8 0 0 1-16 0v-64a8 8 0 0 1 16 0m48 0v64a8 8 0 0 1-16 0v-64a8 8 0 0 1 16 0"/></svg>        <h1>Delete <span className="hidden md:inline-block">Post</span></h1>
       </button>
       </div>
 </div>
-            <label className="mb-1 text-base" htmlFor="content">
+            <label className="mb-1 text-base text-gray-300" htmlFor="content">
               Title
             </label>
             <input
             disabled={deleteDialog!="hidden"?true:false}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-4 py-2 mb-6 mr-4 text-sm bg-white border rounded-md "
+              className="w-full px-4 py-2 mb-6 mr-4 text-sm text-white border border-gray-900 rounded-md outline-none bg-gray-900/40 "
               name="content"
               placeholder="Please Type Out Your Title"
               required
@@ -156,13 +156,13 @@ export default function Page({ params }: { params: { slug: string } }) {
               maxLength={60}
               minLength={15}
             />
-            <label className="mb-1 text-base" htmlFor="content">
+            <label className="mb-1 text-base text-gray-300" htmlFor="content">
               Excerpt
             </label>
             <textarea
             disabled={deleteDialog!="hidden"?true:false}
               onChange={(e) => setExcerpt(e.target.value)}
-              className="w-full px-4 py-2 mb-6 mr-4 text-sm bg-white border rounded-md "
+              className="w-full h-32 px-4 py-2 mb-6 mr-4 text-sm text-white border border-gray-900 rounded-md outline-none bg-gray-900/40 "
               name="content"
               placeholder="Please Type Out Your Excerpt"
               required
@@ -175,11 +175,11 @@ export default function Page({ params }: { params: { slug: string } }) {
                 setCover(URL.createObjectURL(e.target.files[0]));
                 setFile(e.target.files[0]);
               }}
-              className="inset-x-0 bottom-0 hidden mx-auto rounded-md"
+              className="inset-x-0 bottom-0 hidden mx-auto border border-gray-900 rounded-md bg-gray-900/40"
               type="file"
               ref={hiddenFileInput}
             />
-            <label className="mb-1 text-base" htmlFor="content">
+            <label className="mb-1 text-base text-gray-300" htmlFor="content">
               Cover Image
             </label>
             <div className="relative px-4 py-2 mb-6 border rounded-md aspect-video shrink-0">
@@ -203,7 +203,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             <label className="mb-1 text-base" htmlFor="content">
               Content
             </label>
-            <div data-color-mode="light">
+            <div data-color-mode="dark">
               <MDEditor
                 className="mx-[2px] mb-6 shrink rounded-md"
                 style={{ borderRadius: "0px", height: "100px !important" }}
@@ -215,23 +215,23 @@ export default function Page({ params }: { params: { slug: string } }) {
               />
             </div>
 
-            <button disabled={deleteDialog!="hidden"?true:false} className="px-8 py-4 mb-2 text-xs font-medium text-white bg-black rounded-md w-max">Publish This Post</button>
+            <button disabled={deleteDialog!="hidden"?true:false} className="px-8 py-4 mb-2 text-xs font-medium text-white bg-blue-700 rounded-md w-max">Publish This Post</button>
           </form>
         </div>
       </div>
     ) : (
       <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
-        <div className="flex flex-col gap-2 mx-auto max-w-max">
-          <h1 className="mx-auto text-lg font-semibold text-center text-black">
+        <div className="flex flex-col gap-4 mx-auto max-w-max">
+          <h1 className="mx-auto text-lg font-semibold text-center text-gray-300">
             You are not allowed to edit this post.
           </h1>
-          <h1 className="mx-auto text-sm text-center text-gray-800">
+          <h1 className="mx-auto text-center text-gray-500 text-md">
             Only the Author of the post is allowed to edit a post. Try from a different account or leave this page.
           </h1>
           <Link
             href="/"
-            className={`mx-auto mt-3 w-max px-8 py-3 text-xs font-bold  ${
-              1 == 1 ? "bg-black text-white" : "border-2 bg-white"
+            className={`mx-auto mt-3 rounded-md w-max px-8 py-3 text-xs font-bold  ${
+              1 == 1 ? "bg-blue-700 text-white" : "border-2 bg-white"
             }`}
           >
             Return To Home
@@ -244,7 +244,7 @@ export default function Page({ params }: { params: { slug: string } }) {
       <Oval
         height={80}
         width={80}
-        color="#000"
+        color="#FFF"
         wrapperStyle={{}}
         wrapperClass="mx-auto"
         visible={true}

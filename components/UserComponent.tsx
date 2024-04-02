@@ -71,14 +71,14 @@ export default function UserComponent(props:any) {
   return (
     <Link
       href={"/profile/" + props.handle}
-      className="mx-auto my-2 flex md:h-[270.29px] w-[calc(303.86px-27px)] border border-gray-300 rounded-md  bg-gray-50 flex-col border md:pb-4 pb-5 p-4 xl:mx-2 xl:w-auto"
+      className="mx-auto my-2 flex md:h-[270.29px] w-[calc(303.86px)] border border-gray-900 rounded-md  bg-gray-900/50 flex-col border md:pb-4 pb-5 p-4 xl:mx-2 xl:w-auto"
     >
       <div className="flex flex-row items-center content-center justify-between">
         <div className="flex flex-row items-center content-center space-x-3">
           <Image width={40} height={40} src={props.image} className="object-cover w-10 h-10 rounded-md" alt="profile-pic" />
           <div className="flex flex-col ">
-            <h1 className="text-base font-bold">{a}</h1>
-            <h1 className="text-xs font-normal">@{props.handle}</h1>
+            <h1 className="text-base font-bold text-gray-300">{a}</h1>
+            <h1 className="text-xs font-normal text-gray-500">@{props.handle}</h1>
           </div>
         </div>
         <button
@@ -86,26 +86,26 @@ export default function UserComponent(props:any) {
           className={
             imfollowing
               ? "h-max border border-black bg-white px-4 py-1 text-xs  rounded-md text-black"
-              : "h-max border border-black bg-black px-4 py-1 text-xs rounded-md text-white"
+              : "h-max border border-black bg-blue-700 px-4 py-1 text-xs rounded-md text-white"
           }
         >
           {imfollowing ? "Unfollow" : "Follow"}
         </button>
       </div>
-      <div className="flex flex-row items-center content-center gap-6 p-4 mx-0 my-6 mb-4 border border-gray-800 rounded-md">
+      <div className="flex flex-row items-center content-center gap-6 p-4 mx-0 my-6 mb-4 bg-gray-900 border rounded-md border-gray-800/70">
         <div className="flex flex-row w-full md:mx-auto">
           <div className="flex flex-col items-center content-center gap-1 mx-auto w-max">
-            <h1 className="text-xs font-semibold">Followers</h1>
-            <h1 className="text-sm font-medium text-gray-700">{props.followers} Followers</h1>
+            <h1 className="text-xs font-semibold text-gray-300">Followers</h1>
+            <h1 className="text-sm font-medium text-gray-500">{props.followers} Followers</h1>
           </div>
           <div className="flex flex-col items-center content-center gap-1 mx-auto w-max">
-            <h1 className="text-xs font-semibold">Following</h1>
-            <h1 className="text-sm font-medium text-gray-700">{props.following} Following</h1>
+            <h1 className="text-xs font-semibold text-gray-300">Following</h1>
+            <h1 className="text-sm font-medium text-gray-500">{props.following} Following</h1>
           </div>
         </div>
       </div>
       <div className="mt-0 w-full px-[2px]">
-        <h1 className="text-sm fix-overflow four-line-ellipsis">{props.about}</h1>
+        <h1 className="text-sm text-gray-400 fix-overflow four-line-ellipsis">{props.about}</h1>
       </div>
     </Link>
   );
