@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></Script>
       </head>
 
-      <body className="bg-black bg-cover" lang="en">
+      <body className="bg-gray-900 bg-cover" lang="en">
         <main>
           <section className="relative m-auto flex h-screen flex-row content-center items-center overflow-hidden sm:w-screen lg:w-[1070px] xl:w-[1200px]">
             <NavBar></NavBar>
