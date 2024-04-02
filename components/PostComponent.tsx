@@ -85,7 +85,7 @@ src={props.cover}
       </button>
     </div>
   </div>
-</article>;
+</article>
       </div>
     </div>
   );
