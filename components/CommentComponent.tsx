@@ -82,12 +82,12 @@ export default function CommentComponent(props:any) {
           alt="profile"
         />
       </Link>
-      <div className="flex w-full flex-col gap-[2px]">
+      <div className="flex w-full flex-col gap-[4px]">
         <div className="flex flex-row items-center content-center w-full">
           <Link href={`/profile/${props.handle}`} className="text-[14px] font-semibold text-gray-300">
             {props.name}
           </Link>
-          <h1 className="ml-auto text-xs font-normal text-gray-400">{props.time}</h1>
+          <h1 className="ml-auto text-xs font-normal text-gray-300">{props.time}</h1>
         </div>
         <h1 className="mt-[2px] text-[14px] font-normal text-gray-400">{formatText(props.content)}</h1>
         <div className="my-1 ml-auto mt-2 flex flex-row content-center items-center space-x-[8px]">
@@ -121,7 +121,7 @@ export default function CommentComponent(props:any) {
               )}
             </svg>
           )}
-          <h1 className="text-xs text-gray-400 ">{likes} Likes</h1>
+          <h1 className="text-xs font-medium text-gray-300">{likes} Likes</h1>
         </div>
       </div>
     </div>

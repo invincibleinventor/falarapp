@@ -243,6 +243,8 @@ export default function Page({ params }: { params: { slug: string } }) {
                       dp={post["dp"]}
                       handle={post["handle"]}
                       name={post["name"]}
+                      likes={post.likes}
+
                       description={post["excerpt"]}
                     />
                   ))

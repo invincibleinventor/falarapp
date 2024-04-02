@@ -8,7 +8,11 @@
   font-family: "Poppins", sans-serif;
 }
 .font-inter {
-  font-family: "Inter", sans-serif;
+  font-family: "Sohne", sans-serif;
+}
+@font-face {
+  font-family: Sohne;
+  src: url('/Sohne-Buch.ttf');
 }
 @layer base {
   :root {

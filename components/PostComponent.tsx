@@ -24,59 +24,68 @@ export default function Post(props:any) {
   }
   return (
     <div className="animate-in" >
-      <div className="w-full px-5 py-[6px]">
-        <div  className="flex flex-col rounded-lg md:gap-0 bg-gray-900/20">
-          <div  className="flex items-center content-center rounded-md ">
-            <img
-           
-              className="object-cover rounded-t-lg aspect-video"
-              src={props.cover ? props.cover : "https://picsum.photos/300/400"}
-              // src={"https://picsum.photos/300/400"}
-              alt="cover"
-            />
-          </div>
-          <div className="flex h-max flex-col gap-[8px] px-6 py-6 ">
-            <div className="flex flex-row items-center content-center gap-2 h-max shrink-0">
-             <Link className="w-10 h-10" href={`/profile/`+props.handle}>
-              <Image width={30} height={30} className="w-10 h-10 rounded-md shrink-0" src={props.dp} alt="dp" />
-             </Link>
-              <Link href={`/profile/`+props.handle} className="flex flex-row gap-[2px]">
-                <div className="flex flex-col content-center flex-1 gap-[2px] py-0 pl-2 rounded-lg">
-                  <div className="flex flex-row items-center content-center">
-                  <h1 className="text-sm font-semibold text-gray-300 "><span className="inline-block md:hidden">{x}</span><span className="hidden md:inline-block">{props.name}</span></h1>
-                  <h1 className="ml-2 text-xs font-normal text-gray-500 ">@{props.handle}</h1>
+      <div className="w-full px-6 py-[6px]">
+      <article className="py-6 border-b border-gray-900">
+  <Link href={"/profile/"+props.handle} className="flex gap-2">
+    <a href="/medium-clone/u/Shark">
+      <img
+        src={props.dp}
+        alt="user profile"
+        className="rounded-full object-cover min-w-[24px] max-w-[24px] h-6"
+      />
+    </a>
+    <div className="flex items-center content-center">
+      <h1>
+        <p className="text-sm font-medium text-gray-300 break-all line-clamp-1">{props.name}</p>
+      </h1>
+      <div className="mx-1 text-sm text-gray-500">·</div>
+      <span className="text-sm font-medium text-gray-500 whitespace-nowrap">{props.time}</span>
+    </div>
+  </Link>
+  <div className="flex flex-col mt-3">
+    <div className="flex grow">
+      <a
+        className="text-gray-500 grow"
+        href="/medium-clone/Shark/posts/the-odin-project-my-projects-u11e99qwyqvx"
+      >
+        <Link href={'/post/'+props.id} className="pb-2">
+          <h2 className="font-bold text-gray-300 md:text-[22px] leading-7 md:line-clamp-3 line-clamp-2 text-base">
+{a}          </h2>
+        </Link>
+        <p className="hidden my-2 mt-4 text-sm line-clamp-3 md:inline-block">
+{s}        </p>
+      </a>
+      <div className="md:ml-[60px] ml-6">
+        <h1
+          className="block md:w-[112px] md:h-[112px] w-[80px h-[56px]"
+        >
+          <img
+src={props.cover}
+            alt="The Odin Project - My projects"
+            className="object-cover w-full h-full max-w-full max-h-full"
+          />
+        </h1>
+      </div>
+    </div>
+    <div className="flex flex-row items-center mt-2 ">
+      <div className="grow flex flex-row items-center text-[13px]">
+        <h1
+          className="text-gray-400 bg-subtle-white rounded-full hover:bg-neutral-200 transition-colors duration-300 px-0 pl-0 py-[2px] mr-2"
+        >
+          {props.likes} Likes
+        </h1>
+        <div className="inline-block pr-2 text-sm text-gray-400">·</div>
 
-                  </div>
-                  <h1 className="text-xs font-medium text-gray-500">{props.time}</h1>
-
-                </div>
-
-              </Link>
-              
-              <div className="pl-3 ml-auto">
-                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none"><path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path fill="currentColor" d="M12 16.5a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3m0-6a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3m0-6a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3"/></g></svg>
-              </div>
-            </div>
-
-            <div>
-              <Link  href={`/post/${props.id}`} className="my-3 mb-[6px] flex w-full flex-row justify-between ">
-                <h1
-                  style={{ wordBreak: "break-word", whiteSpace: "normal" }}
-                  className="text-lg font-bold text-gray-300 font-pops two-line-ellipsis md:text-lg md:font-semibold "
-                >
-                  {a}
-                </h1>
-              </Link>
-
-              <h1
-                style={{ wordBreak: "break-word", whiteSpace: "normal" }}
-                className="four-line-ellipsis text-xs font-normal leading-[20px] mt-2 text-gray-400 md:text-sm md:leading-[25px]"
-              >
-                {s}
-              </h1>
-            </div>
-          </div>
-        </div>
+        <h1>
+          <span className="text-gray-400">Posted through @{props.handle}</span>
+        </h1>
+      </div>
+      <button className="px-2 text-lg text-gray-500 hover:text-zinc-700 disabled:opacity-40 disabled:cursor-not-allowed">
+        <i className="fa-regular fa-bookmark thin-icon"></i>
+      </button>
+    </div>
+  </div>
+</article>;
       </div>
     </div>
   );
