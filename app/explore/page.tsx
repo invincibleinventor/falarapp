@@ -67,7 +67,7 @@ export default async function Index() {
             <Search page="people" text="Users" />
           </div>
           <div className="h-full overflow-y-scroll hiddenscroll">
-            <div className="grid items-center content-center grid-cols-1 gap-2 px-5 animate-in hiddenscroll xl:grid-cols-2">
+            <div className="grid items-center content-center grid-cols-1 gap-2 px-5 xl:px-3 animate-in hiddenscroll xl:grid-cols-2">
               {!loading ? (
                 !empty ? (
                   users.map((user) => (
