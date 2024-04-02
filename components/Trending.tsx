@@ -6,6 +6,7 @@ export default async function Trending(){
     const supabase = createClient(cookieStore)
     const date = new Date().toLocaleDateString('en-IN')
     const hour = new Date().getHours()
+    
     let a:any={}
     let h;
                     if(hour>=0 && hour<3){
@@ -32,6 +33,7 @@ export default async function Trending(){
                      else{
                       h=21
                      }
+                     console.log(h)
     const {data,error} = await supabase.from('trending').select(h.toString()).eq('date',date)
     if(data && data.length>0){
         a = data[0][h];
@@ -53,6 +55,7 @@ export default async function Trending(){
     
     return(
         <div className="flex flex-col w-full h-full py-2 space-y-0 bg-white border border-gray-300 rounded-md">
+                 <h1>{hour}{date}</h1>
                  { Object.entries(a).map((t:any,k:any) : React.ReactNode => (<Link key={k} href={'/hashtag/'+t[0]} className="flex flex-col w-full p-4 py-4 px-6 space-y-[2px]"><h1 className="font-semibold text-md">#{t[0]}</h1><h1 className="text-sm">{t[1]} {t[1]>1?"Posts":"Post"}</h1></Link>)) }          
 
         </div>
