@@ -87,10 +87,13 @@ export default function CommentComponent(props:any) {
           <Link href={`/profile/${props.handle}`} className="text-[14px] font-semibold text-gray-300">
             {props.name}
           </Link>
-          <h1 className="ml-auto text-xs font-normal text-gray-300">{props.time}</h1>
+          
         </div>
         <h1 className="mt-[2px] text-[12px] font-normal text-gray-400">{formatText(props.content)}</h1>
-        <div className="my-1 ml-auto mt-2 flex flex-row content-center items-center space-x-[8px]">
+        <div className="flex flex-row w-full items-center content-center">
+          <h1 className="text-xs font-normal text-gray-300">{props.time}</h1>
+       
+      <div className="my-1 ml-auto mt-2 flex flex-row content-center items-center space-x-[8px]">
           {props.loggedin && (
             <svg
               onClick={() => (!disabled ? (toggleLiked(!liked), setLiked(!liked)) : console.log("hold up!"))}
@@ -123,6 +126,7 @@ export default function CommentComponent(props:any) {
           )}
           <h1 className="text-xs font-medium text-gray-300">{likes} Likes</h1>
         </div>
+          </div>
       </div>
     </div>
   );
