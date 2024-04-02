@@ -1,14 +1,13 @@
-import { createClient } from "@/utils/supabase/server"
-import { cookies } from "next/headers"
+'use client';
+import { createClient } from "@/utils/supabase/client"
 import Link from "next/link"
-export default async function Trending(){
-    const cookieStore = cookies()
-    const supabase = createClient(cookieStore)
+import { useEffect, useState } from "react"
+export default function Trending(){
+    const supabase = createClient()
     const date = new Date().toLocaleDateString('en-IN')
     const hour = new Date().getHours()
-    
-    let a:any={}
-    let h;
+    const [a,setA] = useState<any>({})
+    let h:any;
                     if(hour>=0 && hour<3){
                      h=0
                     }
@@ -34,14 +33,20 @@ export default async function Trending(){
                       h=21
                      }
                      console.log(h)
+                     useEffect(()=>{
+                        async function fetch(){
     const {data,error} = await supabase.from('trending').select(h.toString()).eq('date',date)
     if(data && data.length>0){
-        a = data[0][h];
-        const sortedArray = Object.entries(a).sort(([, valueA] : [any,any], [, valueB] :[any,any]) => valueB - valueA);
-        a = Object.fromEntries(sortedArray);       
-         a = Object.fromEntries(
-            Object.entries(a).slice(0, 5)
+       let j:any = data[0][h];
+       console.log(j)
+        const sortedArray = Object.entries(j).sort(([, valueA] : [any,any], [, valueB] :[any,any]) => valueB - valueA);
+        j = Object.fromEntries(sortedArray);       
+         j = Object.fromEntries(
+            Object.entries(j).slice(0, 5)
         )
+        setA(j)
+        console.log(j)
+        console.log(a)
         
       
         
@@ -52,10 +57,12 @@ export default async function Trending(){
     
             }
             }
+        }
+        fetch()
+        },[])
     
     return(
         <div className="flex flex-col w-full h-full py-2 space-y-0 bg-white border border-gray-300 rounded-md">
-                 <h1>{hour}{date}</h1>
                  { Object.entries(a).map((t:any,k:any) : React.ReactNode => (<Link key={k} href={'/hashtag/'+t[0]} className="flex flex-col w-full p-4 py-4 px-6 space-y-[2px]"><h1 className="font-semibold text-md">#{t[0]}</h1><h1 className="text-sm">{t[1]} {t[1]>1?"Posts":"Post"}</h1></Link>)) }          
 
         </div>
