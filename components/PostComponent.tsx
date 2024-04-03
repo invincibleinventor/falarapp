@@ -24,9 +24,9 @@ export default function Post(props:any) {
   }
   return (
     <div className="animate-in" >
-      <div className="w-full px-6 py-[6px]">
-      <article className="py-6 pt-0 border-b border-gray-900">
-  <Link href={"/profile/"+props.handle} className="flex gap-2">
+      <div className="w-full px-6 py-[6px] border-b border-gray-900">
+      <article className="px-2 py-6 pt-0 ">
+  <Link href={"/profile/"+props.handle} className="flex gap-2 mt-4">
     <a href="/medium-clone/u/Shark">
       <img
         src={props.dp}
@@ -61,8 +61,8 @@ export default function Post(props:any) {
         >
           <img
 src={props.cover}
-            alt="The Odin Project - My projects"
-            className="object-cover w-full h-full max-w-full max-h-full"
+         
+            className="object-cover aspect-[4/4] min-h-[64px] min-w-[64px] max-w-full max-h-full shrink-0"
           />
         </h1>
       </div>
@@ -77,7 +77,7 @@ src={props.cover}
         <div className="inline-block pr-2 text-sm text-gray-400">·</div>
 
         <h1>
-          <span className="text-gray-400">Posted through @{props.handle}</span>
+          <span className="text-gray-400">@{props.handle}</span>
         </h1>
       </div>
       <button className="px-2 text-lg text-gray-500 hover:text-zinc-700 disabled:opacity-40 disabled:cursor-not-allowed">

@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <section className="relative m-auto flex h-screen flex-row content-center items-center overflow-hidden sm:w-screen lg:w-[1070px] xl:w-[1200px]">
             <NavBar></NavBar>
             <div className="w-full ">
-              <div className="items-center content-center flex-1 w-full h-screen px-0 backdrop-blur-md md:border-none">
+              <div className="items-center content-center flex-1 w-full h-screen px-0 border-l md:mx-4 backdrop-blur-md border-l-gray-900 md:border-x md:border-x-gray-900">
                 {children}
               </div>
             </div>

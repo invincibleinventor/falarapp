@@ -140,7 +140,7 @@ export default async function App({ params }: { params: { slug: string } }) {
   console.log(comments);
   console.log("above");
   return !loading ? (
-    <div className="relative flex flex-col flex-1 h-screen overflow-hidden md:ml-4 lg:mx-4">
+    <div className="relative flex flex-col flex-1 h-screen overflow-hidden md:mr-4 lg:mx-0">
       {error && (
         <div className="flex items-center content-center w-full h-screen px-10 sm:px-24 md:px-16 lg:px-24">
           <div className="flex flex-col gap-4 mx-auto max-w-max">
@@ -207,8 +207,8 @@ export default async function App({ params }: { params: { slug: string } }) {
             </Markdown>
           </div>
           {loggedin &&
-          <section className="px-8 pt-0 pb-8" id="comments">
-            <h1 className="mb-2 text-lg font-bold text-gray-300">Comments</h1>
+          <section className="px-0 pt-0 pb-8" id="comments">
+            <h1 className="px-8 mb-2 text-lg font-bold text-gray-300">Comments</h1>
 
             <CommentsComponent
               myname={myname}
