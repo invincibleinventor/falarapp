@@ -6,7 +6,7 @@ import en from "javascript-time-ago/locale/en";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Oval } from "react-loader-spinner";
-import CommentComponent from "./CommentComponent";
+import CommentComponent from "./QuickieCommentsComponent";
 import MoreComments from "./MoreComments";
 export default function CommentsComponent(props:any) {
   TimeAgo.locale(en);
@@ -89,8 +89,7 @@ export default function CommentsComponent(props:any) {
     <>
       {props.loggedin && (
         <div className="flex flex-col space-y-2">
-          <div className="flex flex-row px-1 mt-4 mb-3 space-x-4">
-            <Image width={32} height={32} src={props.myphoto} className="w-8 h-8 rounded-md shrink-0" alt="comment" />
+          <div className="flex flex-row px-6 mt-4 mb-3 space-x-4">
             <textarea
               required
               minLength={5}
@@ -100,7 +99,7 @@ export default function CommentsComponent(props:any) {
               }}
               onChange={(e) => setText(e.target.value)}
               ref={inputRef}
-              className="w-full px-4 py-2 text-sm border rounded-md outline-none focus:border-gray-700"
+              className="w-full px-0 py-0 text-sm text-gray-300 bg-black outline-none"
               placeholder={"Post a comment publicly as " + props.myname}
             ></textarea>
           </div>
@@ -109,7 +108,7 @@ export default function CommentsComponent(props:any) {
           </div>
         </div>
       )}
-      <div className="flex flex-col px-0 my-3 mt-6 space-y-4">
+      <div className="flex flex-col px-0 mb-3">
         {!loading ? (
           <>
             {comments.map((comment:any) => (

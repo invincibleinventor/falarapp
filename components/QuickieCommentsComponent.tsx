@@ -132,7 +132,7 @@ export default function CommentComponent(props:any) {
           <h1 className="text-xs font-medium text-gray-300">{likes} Likes</h1>
         </div>
         </div>
-        <h1 className="mt-[16px] mb-2 text-[14px] font-normal text-gray-300">{formatText(props.content)}</h1>
+        <h1 className="mt-[16px] mb-2 px-[2px] text-[14px] font-normal text-gray-300">{formatText(props.content)}</h1>
         <div className="flex flex-row items-center content-center w-full">
        
       

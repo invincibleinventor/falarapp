@@ -152,19 +152,19 @@ export default async function App({ params }: { params: { slug: string } }) {
   console.log(comments);
   console.log("above");
   return !loading ? (
-    <div className="relative flex flex-col flex-1 h-screen overflow-hidden bg-white md:ml-4 lg:mx-4">
+    <div className="relative flex flex-col flex-1 h-screen overflow-hidden bg-black md:ml-4 lg:mx-4">
       {error && (
         <div className="flex items-center content-center w-full h-screen px-10 sm:px-24 md:px-16 lg:px-24">
-          <div className="flex flex-col gap-2 mx-auto max-w-max">
-            <h1 className="mx-auto text-lg font-semibold text-center text-black">That Post Doesn&apos;t Exist</h1>
-            <h1 className="mx-auto text-sm text-center text-gray-800">
-              That post does not exist. It must have been removed or deleted by the author. Please refresh if you think
+          <div className="flex flex-col gap-4 mx-auto max-w-max">
+            <h1 className="mx-auto text-lg font-semibold text-center text-gray-300">That Quickie Doesn&apos;t Exist</h1>
+            <h1 className="mx-auto text-center text-gray-500 text-md">
+              That quickie does not exist. It must have been removed or deleted by the author. Please refresh if you think
               that is not the case
             </h1>
             <Link
-              href="/"
-              className={`mx-auto mt-3 w-max px-8 py-3 text-xs font-bold ${
-                1 == 1 ? "bg-black text-white" : "border-2  bg-white "
+              href="/quickies"
+              className={`mx-auto mt-3 w-max rounded-md px-8 py-3 text-xs font-bold ${
+                1 == 1 ? "bg-blue-700 text-white" : "border-2  bg-white "
               }`}
             >
               Return Back
@@ -174,12 +174,12 @@ export default async function App({ params }: { params: { slug: string } }) {
       )}
       {!error && (
         <div className="hiddenscroll h-full w-[calc(100vw-68px)] overflow-hidden pb-14 md:w-full md:max-w-full md:border-x md:border-x-gray-200">
-          <div className="w-full px-0 py-[6px]">
+          <div className="w-full px-2 py-[6px] pb-0">
         <div  className="flex flex-col rounded-none md:gap-0">
           <div  className="flex items-center content-center bg-black rounded-md ">
             
           </div>
-          <div className="flex h-max flex-col gap-[8px] md:p-6 p-4 ">
+          <div className="flex h-max flex-col gap-[8px] md:p-6  p-4 ">
             <div className="flex flex-row items-center content-center gap-2 h-max shrink-0">
              <Link className="w-10 h-10" href={`/profile/`+author}>
               <Image width={30} height={30} className="w-10 h-10 rounded-md shrink-0" src={profile} alt="dp" />
@@ -187,11 +187,11 @@ export default async function App({ params }: { params: { slug: string } }) {
               <Link href={`/profile/`+author} className="flex flex-row gap-[2px]">
                 <div className="flex flex-col content-center flex-1 gap-[2px] py-0 pl-2 rounded-lg">
                   <div className="flex flex-row items-center content-center">
-                  <h1 className="text-sm font-medium text-black "><span className="inline-block md:hidden">{naam}</span><span className="hidden md:inline-block">{naam}</span></h1>
-                  <h1 className="ml-2 text-xs font-normal text-gray-600 ">@{author}</h1>
+                  <h1 className="text-sm font-medium text-gray-300 "><span className="inline-block md:hidden">{naam}</span><span className="hidden md:inline-block">{naam}</span></h1>
+                  <h1 className="ml-2 text-xs font-normal text-gray-500 ">@{author}</h1>
 
                   </div>
-                  <h1 className="text-xs font-medium text-gray-600">{timeAgo.format(Date.now() - time)}</h1>
+                  <h1 className="text-xs font-medium text-gray-500">{timeAgo.format(Date.now() - time)}</h1>
 
                 </div>
 
@@ -207,7 +207,7 @@ export default async function App({ params }: { params: { slug: string } }) {
 
               <h1
                 style={{ wordBreak: "break-word", whiteSpace: "normal" }}
-                className="my-4 text-sm font-normal text-gray-900 four-line-ellipsis md:text-base"
+                className="my-4 text-sm font-normal text-gray-300 four-line-ellipsis md:text-base"
               >
                 {formatText(content)}
               </h1>
@@ -231,8 +231,8 @@ export default async function App({ params }: { params: { slug: string } }) {
         </div>
       </div>
       {loggedin &&
-          <section className="px-6 pt-0 pb-8" id="comments">
-            <h1 className="mb-2 text-lg font-bold">Comments</h1>
+          <section className="px-0 pt-4 pb-8 border-t border-t-gray-900" id="comments">
+            <h1 className="px-6 mb-2 text-lg font-bold text-gray-300">Comments</h1>
 
             <CommentsComponent
               myname={myname}
@@ -248,7 +248,7 @@ export default async function App({ params }: { params: { slug: string } }) {
         </div>
       )}
       {loggedin &&
-      <div className="absolute bottom-0 flex flex-row w-full bg-white border-t h-14 border-t-gray-200 ">
+      <div className="absolute bottom-0 flex flex-row w-full bg-black border-t h-14 border-t-gray-900 ">
       
 
 <LikeComponent
@@ -267,7 +267,7 @@ export default async function App({ params }: { params: { slug: string } }) {
           liked={bookmarked}
           likes={bookmarkedlist.length}
         />
-        <Link href="#comments" className="flex flex-row items-center content-center px-6 space-x-2">
+        <Link href="#comments" className="flex flex-row items-center content-center px-6 space-x-2 text-gray-300">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16">
             <path
               fill="currentColor"

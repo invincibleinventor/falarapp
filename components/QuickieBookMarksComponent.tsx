@@ -74,7 +74,7 @@ const [likes,setLikes] = useState(props.likes)
   return (
     <div
       onClick={() => (!disabled ? (toggleLiked(!liked), setLiked(!liked)) : console.log("holdup"))}
-      className="flex cursor-pointer flex-row content-center items-center  space-x-[8px] px-6  pr-0"
+      className="flex cursor-pointer text-gray-300 flex-row content-center items-center  space-x-[8px] px-6  pr-0"
     >
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
         {liked ? (

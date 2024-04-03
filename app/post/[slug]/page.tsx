@@ -207,8 +207,8 @@ export default async function App({ params }: { params: { slug: string } }) {
             </Markdown>
           </div>
           {loggedin &&
-          <section className="px-0 pt-0 pb-8" id="comments">
-            <h1 className="px-8 mb-2 text-lg font-bold text-gray-300">Comments</h1>
+          <section className="px-0 pt-4 pb-8 border-t border-t-gray-900" id="comments">
+            <h1 className="px-6 mb-4 text-xl font-bold text-gray-300">Comments</h1>
 
             <CommentsComponent
               myname={myname}
