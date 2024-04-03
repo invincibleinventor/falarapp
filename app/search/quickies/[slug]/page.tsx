@@ -112,10 +112,10 @@ const [myhandle,setMyhandle] = useState("")
           <div className="p-4 py-2 mx-1 md:mx-1">
           <div className="relative items-center content-center">
           <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            className=" absolute inset-y-0 my-auto ml-6 h-[18px] w-[18px] text-black"
-          >
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+        className="md:bottom-3 absolute inset-y-0 right-0 my-auto mr-6 h-[14px] w-[14px] text-gray-400"
+      >
             <g>
               <path
                 fill="currentColor"
@@ -138,12 +138,12 @@ const [myhandle,setMyhandle] = useState("")
             minLength={4}
             maxLength={50}
             type="search"
-            className="font-poppins peer h-12 w-full border border-gray-200 bg-white pl-14 pr-8 text-[14px] placeholder:text-gray-600 focus:bg-white focus:outline-black"
+            className="font-inter md:mb-3 rounded-full peer h-[48px] w-full bg-gray-700/20 focus:outline-none pl-6 pr-14 text-[14px] placeholder:text-gray-400 text-gray-300"
             placeholder={"Search Quickies"}
           ></input>
         </div>       </div>
           <div className="h-full overflow-y-scroll hiddenscroll">
-            <div className="flex flex-col gap-2 mb-20 animate-in hiddenscroll">
+            <div className="flex flex-col gap-0 mb-20 animate-in hiddenscroll">
               {!loading ? (
                 !empty ? (
                   posts.map((post:any) => (

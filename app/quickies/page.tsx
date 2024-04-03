@@ -108,11 +108,11 @@ export default async function Index() {
           </div>
           
           <div className="h-full overflow-y-scroll hiddenscroll">
-            <div className="flex flex-col gap-2 mb-20 animate-in hiddenscroll">
-              <div className="px-5 lg:hidden">
-                <h1 className="pl-1 my-2 mb-4 font-bold text-md font-inter">Trending</h1>
+            <div className="flex flex-col gap-0 mb-20 animate-in hiddenscroll">
+              <div className=" lg:hidden">
+                <h1 className="px-8 my-4 mb-4 text-lg font-bold text-gray-300 font-inter">Trending</h1>
               <Trending/>
-              <h1 className="pl-[4px] mt-5 my-1 font-bold text-md font-inter">Posts you may like</h1>
+              <h1 className="px-8 my-1 mt-5 text-lg font-bold text-gray-300 font-inter">Posts you may like</h1>
 
               </div>
               {!loading ? (

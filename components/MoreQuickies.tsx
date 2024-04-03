@@ -129,7 +129,7 @@ export default function More(props:any) {
   }, [inView]);
   return (
     <>
-      <div className="flex flex-col items-center content-center w-full gap-2">
+      <div className="flex flex-col items-center content-center w-full gap-0">
         {posts.map((post:any) => (
           <QuickieComponent
           id={post.id}

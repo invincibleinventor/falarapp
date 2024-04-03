@@ -88,8 +88,9 @@ export default function CommentsComponent(props:any) {
   return (
     <>
       {props.loggedin && (
-        <div className="flex flex-col space-y-2">
-          <div className="flex flex-row px-6 mt-4 mb-3 space-x-4">
+        <div className="flex flex-col pt-2 space-y-2">
+          <div className="flex flex-row px-6 pt-2 pb-0 space-x-0">
+            <Image src={props.myphoto} width={32} height={32} className="w-10 h-10 rounded-full shrink-0"/>
             <textarea
               required
               minLength={5}
@@ -99,11 +100,11 @@ export default function CommentsComponent(props:any) {
               }}
               onChange={(e) => setText(e.target.value)}
               ref={inputRef}
-              className="w-full px-0 py-0 text-sm text-gray-300 bg-black outline-none"
+              className="w-full px-6 py-2 pl-4 text-gray-300 bg-black outline-none resize-none h-max text-md"
               placeholder={"Post a comment publicly as " + props.myname}
             ></textarea>
           </div>
-          <div className={!posted ? "hidden" : "mx-auto text-xs"}>
+          <div className={!posted ? "hidden" : "mx-auto text-gray-300 pb-6 text-xs"}>
             <h1>Posted</h1>
           </div>
         </div>

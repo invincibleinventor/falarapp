@@ -20,7 +20,7 @@ export default function CommentComponent(props:any) {
       });
       console.log(l);
       const { error } = await supabase
-        .from("comments")
+        .from("commentquickies")
         .update({ liked: l, likes: likes - 1 })
         .eq("comment_id", props.comment_id);
       if (error) {
@@ -36,7 +36,7 @@ export default function CommentComponent(props:any) {
       l.push(props.myhandle);
       console.log(l);
       const { error } = await supabase
-        .from("comments")
+        .from("commentquickies")
         .update({ liked: l, likes: likes + 1 })
         .eq("comment_id", props.comment_id);
 
@@ -72,7 +72,7 @@ export default function CommentComponent(props:any) {
     });
   }
   return (
-    <div className="flex flex-row w-full gap-4 px-6 pt-6 pb-4 my-0 border-y border-y-gray-900">
+    <div className="flex flex-row w-full gap-4 px-6 pt-6 pb-4 my-0 md:pr-8 lg:pr-6 border-y border-y-gray-900">
       
       <div className="flex w-full flex-col gap-[4px]">
         <div className="flex flex-row items-center content-center space-x-4">
@@ -80,7 +80,7 @@ export default function CommentComponent(props:any) {
         <Image
           width={32}
           height={32}
-          className="w-10 h-10 m-auto rounded-md shrink-0"
+          className="w-10 h-10 m-auto rounded-full shrink-0"
           src={props.profile!}
           alt="profile"
         />
@@ -132,9 +132,9 @@ export default function CommentComponent(props:any) {
           <h1 className="text-xs font-medium text-gray-300">{likes} Likes</h1>
         </div>
         </div>
-        <h1 className="mt-[16px] mb-2 px-[2px] text-[14px] font-normal text-gray-300">{formatText(props.content)}</h1>
+        <h1 className="mt-[8px] ml-14 mb-2 text-[16px] font-normal text-gray-300">{formatText(props.content)}</h1>
         <div className="flex flex-row items-center content-center w-full">
-       
+     
       
           </div>
       </div>

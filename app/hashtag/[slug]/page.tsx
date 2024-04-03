@@ -120,7 +120,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
             <Search page="quickies" text="Evolt" />
           </div>
           <div className="h-full overflow-y-scroll hiddenscroll">
-            <div className="flex flex-col gap-2 mb-20 animate-in hiddenscroll">
+            <div className="flex flex-col gap-0 mb-20 animate-in hiddenscroll">
               {!loading ? (
                 !empty ? (
                   posts.map((post) => (

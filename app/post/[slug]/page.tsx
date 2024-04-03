@@ -151,7 +151,7 @@ export default async function App({ params }: { params: { slug: string } }) {
             </h1>
             <Link
               href="/"
-              className={`mx-auto mt-4 rounded-md w-max px-8 py-3 text-xs font-bold ${
+              className={`mx-auto mt-4 rounded-full w-max px-8 py-3 text-xs font-bold ${
                 1 == 1 ? "bg-blue-700 text-white" : "border-2  bg-white "
               }`}
             >
@@ -191,7 +191,7 @@ export default async function App({ params }: { params: { slug: string } }) {
             )}
             <div className="flex flex-row items-center content-center justify-between mt-6 text-lg">
               <Link href={"/profile/" + author} className="flex flex-row items-center content-center">
-                <Image width={24} height={24} alt="profile" className="w-8 h-8 mr-3 rounded-md" src={profile} />
+                <Image width={24} height={24} alt="profile" className="w-8 h-8 mr-3 rounded-full" src={profile} />
                 <h1 className="text-xs font-medium text-gray-300 md:text-sm">{name}</h1>
               </Link>
 

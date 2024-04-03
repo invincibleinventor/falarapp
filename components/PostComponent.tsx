@@ -27,13 +27,11 @@ export default function Post(props:any) {
       <div className="w-full px-6 py-[6px] border-b border-gray-900">
       <article className="px-2 py-6 pt-0 ">
   <Link href={"/profile/"+props.handle} className="flex gap-2 mt-4">
-    <a href="/medium-clone/u/Shark">
       <img
         src={props.dp}
         alt="user profile"
         className="rounded-full object-cover min-w-[24px] max-w-[24px] h-6"
       />
-    </a>
     <div className="flex items-center content-center">
       <h1>
         <p className="text-sm font-medium text-gray-300 break-all line-clamp-1">{props.name}</p>
@@ -44,9 +42,8 @@ export default function Post(props:any) {
   </Link>
   <div className="flex flex-col mt-3">
     <div className="flex grow">
-      <a
+      <div
         className="text-gray-500 grow"
-        href="/medium-clone/Shark/posts/the-odin-project-my-projects-u11e99qwyqvx"
       >
         <Link href={'/post/'+props.id} className="pb-2">
           <h2 className="font-bold text-gray-300 md:text-[22px] leading-7 md:line-clamp-3 line-clamp-2 text-base">
@@ -54,7 +51,7 @@ export default function Post(props:any) {
         </Link>
         <p className="hidden my-2 mt-4 text-sm line-clamp-3 md:inline-block">
 {s}        </p>
-      </a>
+      </div>
       <div className="md:ml-[60px] ml-6">
         <h1
           className="block md:w-[112px] md:h-[112px] w-[80px h-[56px]"

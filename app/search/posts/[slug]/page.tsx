@@ -93,7 +93,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             minLength={4}
             maxLength={50}
             type="search"
-            className="font-inter md:mb-3 rounded-md peer h-[48px] w-full bg-gray-700/20 focus:outline-none pl-6 pr-14 text-[14px] placeholder:text-gray-400 text-gray-300"
+            className="font-inter md:mb-3 rounded-full peer h-[48px] w-full bg-gray-700/20 focus:outline-none pl-6 pr-14 text-[14px] placeholder:text-gray-400 text-gray-300"
             placeholder={"Search Posts"}
           ></input>
         </div>
