@@ -64,39 +64,39 @@ export default function Login() {
       <Image width={250} height={250} alt="login" src="/evoltlogin.jpg" className="object-cover w-full h-64" />
       <div className="flex flex-col mx-auto ">
         <form className="flex flex-col content-center gap-2 p-2 text-xs font-normal">
-          <h1 className="pt-2 mt-4 text-xl font-black ">Register / Login</h1>
-          <h1 className="mt-3 pl-[1px] text-xs font-medium text-black">Email Address</h1>
+          <h1 className="pt-2 mt-4 text-xl font-black text-gray-300 "> </h1>
+          <h1 className="mt-3 pl-[1px] text-xs font-medium text-gray-300">Email Address</h1>
           <input
             onChange={(e) => {
               setEmail(e.target.value);
             }}
             type="email"
-            className="px-5 py-3 bg-white border rounded-md outline-none w-max placeholder:text-gray-600 "
+            className="px-5 py-3 mt-1 text-gray-300 border rounded-full outline-none focus:outline-blue-700 bg-gray-900/40 w-max placeholder:text-gray-400 "
             placeholder="Your Email Address"
           ></input>
-          <h1 className="pl-[1px] mt-4 text-xs font-medium text-black">Password</h1>
+          <h1 className="pl-[1px] mt-4 text-xs font-medium text-gray-300">Password</h1>
           <input
             onChange={(e) => {
               setPassword(e.target.value);
             }}
             type="password"
-            className="px-5 py-3 bg-white border rounded-md outline-none w-max placeholder:text-gray-600 "
+            className="px-5 py-3 mt-1 text-gray-300 border rounded-full outline-none focus:outline-blue-700 bg-gray-900/40 w-max placeholder:text-gray-400 "
             placeholder="Your Password"
           ></input>
           <button
             onClick={(e) => (e.preventDefault(), console.log("login"), login())}
-            className="px-5 py-3 mt-4 text-xs font-medium text-white bg-black rounded-md"
+            className="px-5 py-3 mt-4 mb-2 text-xs font-medium text-white bg-blue-700 rounded-full"
           >
             Sign In To Your Account
           </button>
           <button
             onClick={(e) => (e.preventDefault(), console.log("register"), register())}
-            className="px-5 py-3 text-xs font-medium text-black border rounded-md bg-gray-50"
+            className="px-5 py-3 text-xs font-medium text-gray-300 border rounded-full bg-gray-900/40"
           >
             Register Your Account
           </button>
           <button
-            className="flex justify-center gap-4 px-5 py-3 text-xs font-medium text-black bg-white border rounded-md "
+            className="flex justify-center gap-4 px-5 py-3 mt-6 text-xs font-medium text-gray-300 bg-gray-900 border rounded-full "
             onClick={() => (console.log("google"), signWithGoogle())}
           >
             <svg width="16" height="16" viewBox="0 0 775 794" fill="none" xmlns="http://www.w3.org/2000/svg">
