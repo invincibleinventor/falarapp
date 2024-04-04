@@ -78,26 +78,26 @@ export default function CommentsComponent(props:any) {
   return (
     <>
       {props.loggedin && (
-        <div className="flex flex-col space-y-2">
-          <div className="flex flex-row px-6 pt-2 pb-0 space-x-0">
-            <Image alt={""} src={props.myphoto} width={32} height={32} className="w-10 h-10 rounded-full shrink-0"/>
-            <textarea
-              required
-              minLength={5}
-              maxLength={100}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") post();
-              }}
-              onChange={(e) => setText(e.target.value)}
-              ref={inputRef}
-              className="w-full px-6 py-2 pl-4 text-gray-300 bg-black outline-none resize-none h-max text-md"
-              placeholder={"Post a comment publicly as " + props.myname}
-            ></textarea>
-          </div>
-          <div className={!posted ? "hidden" : "mx-auto text-gray-300 text-xs"}>
-            <h1>Posted</h1>
-          </div>
-        </div>
+               <div className="flex flex-col pt-2 space-y-2">
+               <div className="flex flex-row px-6 pt-2 pb-0 space-x-0">
+                 <Image alt={""} src={props.myphoto} width={32} height={32} className="w-6 h-6 rounded-full shrink-0"/>
+                 <textarea
+                   required
+                   minLength={5}
+                   maxLength={100}
+                   onKeyDown={(e) => {
+                     if (e.key === "Enter") post();
+                   }}
+                   onChange={(e) => setText(e.target.value)}
+                   ref={inputRef}
+                   className="w-full px-6  pt-[2px] pl-4 mb-4 text-sm font-medium text-gray-300 bg-black outline-none resize-none placeholder:font-medium md:text-base h-max text-md"
+                   placeholder={"Post a comment publicly as " + props.myname}
+                 ></textarea>
+               </div>
+               <div className={!posted ? "hidden" : "mx-auto text-gray-300 pb-6 text-xs"}>
+                 <h1>Posted</h1>
+               </div>
+             </div>
       )}
       <div className="flex flex-col px-0 my-3 mt-0 space-y-0">
         {!loading ? (

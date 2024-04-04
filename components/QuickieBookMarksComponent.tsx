@@ -74,9 +74,9 @@ const [likes,setLikes] = useState(props.likes)
   return (
     <div
       onClick={() => (!disabled ? (toggleLiked(!liked), setLiked(!liked)) : console.log("holdup"))}
-      className="flex cursor-pointer text-gray-300 flex-row content-center items-center  space-x-[8px] px-6  pr-0"
+      className="flex cursor-pointer text-gray-400 flex-row content-center items-center  space-x-[8px] px-6  pr-0"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
         {liked ? (
           <path fill="#1DA1F2" d="M17 3H7a2 2 0 0 0-2 2v16l7-3l7 3V5a2 2 0 0 0-2-2" />
         ) : (
@@ -84,7 +84,7 @@ const [likes,setLikes] = useState(props.likes)
         )}
       </svg>
 
-      <h1 className="text-sm">{likes}</h1>
+      <h1 className="text-xs">{likes}</h1>
     </div>
   );
 }

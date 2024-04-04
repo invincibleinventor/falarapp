@@ -3,7 +3,7 @@
 import { createClient } from "@/utils/supabase/client";
 import "@mdxeditor/editor/style.css";
 
-import { MouseEvent, useRef, useState } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
 import * as tus from 'tus-js-client'
 
 export default function Create() {
@@ -322,7 +322,6 @@ const formatText = (text:string) => {
 
             }
             
-            window.location.replace('/quickies')
 
         if(imgsSrc.length>0){
           
@@ -343,10 +342,12 @@ const formatText = (text:string) => {
                 const {error} = await supabase.from('quickies').update({image:imgarray}).eq('id',id)
               if(error){
                 console.log(error)
+
                 
               }
               else{
                 window.location.replace('/quickies')
+
               }
             })
               

@@ -181,22 +181,23 @@ export default async function App({ params }: { params: { slug: string } }) {
           </div>
           <div className="flex h-max flex-col gap-[8px] p-4 ">
             <div className="flex flex-row items-center content-center gap-2 h-max shrink-0">
-             <Link className="w-10 h-10" href={`/profile/`+author}>
-              <Image width={30} height={30} className="w-10 h-10 rounded-full shrink-0" src={profile} alt="dp" />
-             </Link>
-              <Link href={`/profile/`+author} className="flex flex-row gap-[2px]">
-                <div className="flex flex-col content-center flex-1 gap-[1px] py-0 pl-2 rounded-lg">
-                  <div className="flex flex-row items-center content-center">
-                  <h1 className="text-sm font-semibold text-gray-300 "><span className="inline-block md:hidden">{naam}</span><span className="hidden md:inline-block">{naam}</span></h1>
-                  <h1 className="ml-2 text-xs font-normal text-gray-500 ">@{author}</h1>
+            <Link href={"/profile/"+author} className="flex gap-2 mt-0">
+      <img
+        src={profile}
+        alt="user profile"
+        className="rounded-full object-cover min-w-[24px] max-w-[24px] h-6"
+      />
+    <div className="flex items-center content-center">
+      <h1>
+        <p className="text-sm font-medium text-gray-300 break-all line-clamp-1">{naam}</p>
+      </h1>
+      <div className="mx-1 text-sm text-gray-500">·</div>
+      <span className="text-sm font-medium text-gray-500 whitespace-nowrap">@{author}</span>
+      
+    </div>
+   
+  </Link>
 
-                  </div>
-                  <h1 className="text-xs font-medium text-gray-500">{timeAgo.format(Date.now() - time)}</h1>
-
-                </div>
-
-              </Link>
-              
               <div className="pl-3 ml-auto text-gray-300">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none"><path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path fill="currentColor" d="M12 16.5a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3m0-6a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3m0-6a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3"/></g></svg>
               </div>
@@ -207,12 +208,12 @@ export default async function App({ params }: { params: { slug: string } }) {
 
               <h1
                 style={{ wordBreak: "break-word", whiteSpace: "normal" }}
-                className="my-4 text-sm font-normal text-gray-300 ml-14 four-line-ellipsis md:text-base"
+                className="my-4 mt-2 text-base font-normal text-gray-300 four-line-ellipsis md:text-base"
               >
                 {formatText(content)}
               </h1>
               {photocount>0  &&
-              <div className={photocount==1?"w-full border rounded-md mt-4 aspect-video h-full":"mt-4 md:gap-2 gap-1 grid-cols-2 grid"}>
+              <div className={photocount==1?"mb-4 w-full border rounded-md mt-4 aspect-video h-full":"mt-4 mb-4 md:gap-2 gap-1 grid-cols-2 grid"}>
                 {image.map((image:string) => 
                 <Iof key={image} src={image}/>
                 )}
@@ -222,7 +223,8 @@ export default async function App({ params }: { params: { slug: string } }) {
 
               <div className="flex flex-row items-center content-center mt-0">
       
-         
+              <h1 className="ml-auto text-sm font-medium text-gray-500">{timeAgo.format(Date.now() - time)}</h1>
+
 
 
               </div>
@@ -268,7 +270,7 @@ export default async function App({ params }: { params: { slug: string } }) {
           likes={bookmarkedlist.length}
         />
         <Link href="#comments" className="flex flex-row items-center content-center px-6 space-x-2 text-gray-300 md:mr-2 lg:mr-0">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
             <path
               fill="currentColor"
               fillRule="evenodd"

@@ -72,40 +72,44 @@ export default function CommentComponent(props:any) {
     });
   }
   return (
-    <div className="flex flex-row w-full gap-4 px-6 pt-6 pb-4 my-0 md:pr-8 lg:pr-6 border-y border-y-gray-900">
+    <div className="flex flex-row w-full gap-4 px-6 pt-4 pb-2 my-0 border-y border-y-gray-900">
       
       <div className="flex w-full flex-col gap-[4px]">
         <div className="flex flex-row items-center content-center space-x-4">
-        <Link href={`/profile/${props.handle}`} className="w-10 h-10 shrink-0">
-        <Image
-          width={32}
-          height={32}
-          className="w-10 h-10 m-auto rounded-full shrink-0"
-          src={props.profile!}
-          alt="profile"
-        />
-      </Link>
-      <div className="flex flex-col w-full">
-        <Link  href={`/profile/${props.handle}`} className="flex flex-row content-center w-full space-x-2">
-          <h1 className="text-[14px] font-semibold  text-gray-300">
-            {props.name}
-          </h1>
-          <h1 className="text-[12px]  text-gray-500">
-            @{props.handle}
-          </h1>
-          
-        </Link>
-        <h1 className="text-xs font-normal text-gray-500">{props.time}</h1>
+        <Link href={"/profile/"+props.handle} className="flex gap-2 mt-0">
+      <img
+        src={props.profile}
+        alt="user profile"
+        className="rounded-full object-cover min-w-[24px] max-w-[24px] h-6"
+      />
+    <div className="flex items-center content-center w-full ml-0">
+      <h1>
+        <p className="text-sm font-normal text-gray-300 ">{props.name}</p>
+      </h1>
+      <div className="mx-1 text-sm text-gray-500">.</div>
+      <span className="text-sm font-normal text-gray-500 whitespace-nowrap">@{props.handle}</span>
+      <div className="mx-[6px] text-sm text-gray-500">·</div>
 
+      <span className="ml-auto text-xs font-normal text-gray-500 whitespace-nowrap">{props.time}</span>
+
+    </div>
+  
+  </Link>
+     
         </div>
-        <div className="mb-4 w-full  flex flex-row content-center items-center space-x-[8px]">
+        
+        <h1 className="mt-[8px] mb-2 ml-0 text-[15px] font-normal text-gray-300">{formatText(props.content)}</h1>
+        <div className="flex flex-row items-center content-center w-full pb-4">
+
+        <div className=" w-full   flex flex-row content-center items-center space-x-[8px]">
+
           {props.loggedin && (
             <svg
               onClick={() => (!disabled ? (toggleLiked(!liked), setLiked(!liked)) : console.log("hold up!"))}
               xmlns="http://www.w3.org/2000/svg"
               width="14"
               height="14"
-              className="ml-auto text-gray-300"
+              className="ml-auto text-gray-300 "
               viewBox="0 0 48 48"
             >
               {liked ? (
@@ -131,10 +135,6 @@ export default function CommentComponent(props:any) {
           )}
           <h1 className="text-xs font-medium text-gray-300">{likes} Likes</h1>
         </div>
-        </div>
-        <h1 className="mt-[8px] ml-14 mb-2 text-[16px] font-normal text-gray-300">{formatText(props.content)}</h1>
-        <div className="flex flex-row items-center content-center w-full">
-     
       
           </div>
       </div>

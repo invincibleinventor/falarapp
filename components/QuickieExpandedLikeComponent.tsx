@@ -83,8 +83,8 @@ export default function LikeComponent(props:any) {
       <svg
         onClick={() => (!disabled ? (toggleLiked(!liked), setLiked(!liked)) : console.log("holdup"))}
         xmlns="http://www.w3.org/2000/svg"
-        width="18"
-        height="18"
+        width="14"
+        height="14"
         viewBox="0 0 48 48"
       >
         {liked ? (
@@ -108,7 +108,7 @@ export default function LikeComponent(props:any) {
         )}
       </svg>
 
-      <h1 className="text-xs md:text-sm">{likes}</h1>
+      <h1 className="text-xs">{likes}</h1>
     </div>
   );
 }
