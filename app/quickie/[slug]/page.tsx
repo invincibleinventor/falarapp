@@ -174,7 +174,7 @@ export default async function App({ params }: { params: { slug: string } }) {
       )}
       {!error && (
         <div className="hiddenscroll h-full w-[calc(100vw-68px)] mx-0 overflow-hidden pb-14 md:w-full md:max-w-full px-0">
-          <div className="w-full px-2 py-[6px] pb-0">
+          <div className="w-full lg:pr-2 px-2 py-[6px] pb-0">
         <div  className="flex flex-col rounded-none md:gap-0">
           <div  className="flex items-center content-center bg-black rounded-md ">
             
@@ -233,7 +233,7 @@ export default async function App({ params }: { params: { slug: string } }) {
         </div>
       </div>
       {loggedin &&
-          <section className="px-0 pt-4 pb-8 border-t border-t-gray-900" id="comments">
+          <section className="px-0 pt-4 pb-8 border-t lg:pr-0 border-t-gray-900" id="comments">
             <h1 className="px-6 mb-2 text-lg font-bold text-gray-300">Comments</h1>
 
             <CommentsComponent

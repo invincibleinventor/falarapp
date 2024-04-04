@@ -167,7 +167,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     <div className="flex-1 h-screen p-0 overflow-hidden">
       <div className="h-full pb-10 overflow-y-scroll hiddenscroll">
         <div className="relative h-64">
-          <div className="m-4 h-48 w-[calc(100%)-8px]  bg-gray-200 ">
+          <div className="m-4 h-48 w-[calc(100%)-8px] rounded-md  bg-gray-200 ">
             {cover && (
               <Image
                 width={180}
@@ -190,8 +190,8 @@ export default function Page({ params }: { params: { slug: string } }) {
               onClick={() => onfollow()}
               className={`absolute rounded-md bottom-10 right-7 px-8 py-3 text-xs font-semibold md:right-12  ${
                 !(imfollowing || myself)
-                  ? "border-[1px] border-black bg-black text-white"
-                  : "border border-black bg-white text-black"
+                  ? "border-[1px] bg-black text-white"
+                  : "border-[1px] bg-white text-black"
               }`}
             >
               {myself ? "Edit Profile" : imfollowing ? "Unfollow" : "Follow"}
@@ -201,12 +201,12 @@ export default function Page({ params }: { params: { slug: string } }) {
         <div className="flex flex-col gap-2 ml-8 md:ml-14">
           {found && (
             <div className="flex flex-col content-center sm:gap-2 sm:items-center sm:flex-row ">
-              <h1 className="text-xl font-semibold">{name}</h1>
-              <h1 className="text-sm font-normal text-gray-600">@{params.slug}</h1>
+              <h1 className="text-xl font-semibold text-gray-300">{name}</h1>
+              <h1 className="text-sm font-normal text-gray-500">@{params.slug}</h1>
             </div>
           )}
           <div className="flex flex-col justify-between gap-2 sm:gap-0 sm:flex-row">
-          <h1 className="pr-12 text-sm font-normal leading-relaxed text-gray-700 sm:text-gray-600">{about}</h1>
+          <h1 className="pr-12 text-sm font-normal leading-relaxed text-gray-500 sm:text-gray-500">{about}</h1>
 
           <div className={resume?"mr-16  flex flex-row":"mr-16 flex flex-row"}>
           <Link href={"/resume/"+params.slug} className={resume?"text-sm font-medium text-blue-600":"hidden"}>View Resume</Link>
@@ -218,17 +218,17 @@ export default function Page({ params }: { params: { slug: string } }) {
             <div className="flex flex-row items-center content-center gap-6 p-4 mx-8 my-4 mb-1 border border-gray-700 rounded-md md:mx-14">
               <div className="flex flex-row w-full md:mx-auto">
                 <div className="flex flex-col items-center content-center gap-1 mx-auto w-max">
-                  <h1 className="text-xs font-semibold">Followers</h1>
-                  <h1 className="text-sm font-medium text-gray-700">{followers} Followers</h1>
+                  <h1 className="text-xs font-semibold text-gray-300">Followers</h1>
+                  <h1 className="text-sm font-medium text-gray-500">{followers} Followers</h1>
                 </div>
                 <div className="flex flex-col items-center content-center gap-1 mx-auto w-max">
-                  <h1 className="text-xs font-semibold">Following</h1>
-                  <h1 className="text-sm font-medium text-gray-700">{following} Following</h1>
+                  <h1 className="text-xs font-semibold text-gray-300">Following</h1>
+                  <h1 className="text-sm font-medium text-gray-500">{following} Following</h1>
                 </div>
               </div>
             </div>
-            <h1 className="px-8 mt-8 mb-4 text-xl font-bold md:mb-4 md:mt-10 md:px-14 ">{name}&apos;s Posts</h1>
-            <div className="flex flex-col gap-2 px-3 md:px-9">
+            <h1 className="px-8 mt-8 mb-4 text-xl font-bold text-white md:mb-4 md:mt-10 md:px-8 ">{name}&apos;s Posts</h1>
+            <div className="flex flex-col gap-2 px-0 md:px-0">
               {!loading ? (
                 posts.length > 0 ? (
                   posts.map((post:any) => (

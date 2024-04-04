@@ -7,11 +7,11 @@ export default function Search(props:any) {
     window.location.replace("/search/" + props.page + "/" + value);
   }
   return (
-    <div className="relative items-center content-center">
+    <div className="relative items-center content-center lg:pr-0">
       <svg
         viewBox="0 0 24 24"
         aria-hidden="true"
-        className="md:bottom-3 absolute inset-y-0 right-0 my-auto mr-6 h-[14px] w-[14px] text-gray-400"
+        className="md:bottom-3 absolute inset-y-0 right-0 my-auto mr-6 md:mr-10 lg:mr-6 h-[14px] w-[14px] text-gray-400"
       >
         <g>
           <path
