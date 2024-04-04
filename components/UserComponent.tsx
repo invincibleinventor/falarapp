@@ -71,7 +71,7 @@ export default function UserComponent(props:any) {
   return (
     <Link
       href={"/profile/" + props.handle}
-      className="mx-auto my-2 flex md:h-[270.29px] w-[calc(303.86px)] rounded-md   flex-col border md:pb-4 pb-5 p-4 xl:mx-2 xl:w-auto"
+      className="mx-auto my-2 flex md:h-[270.29px] w-[calc(303.86px)] rounded-md   flex-col  md:pb-4 pb-5 p-4 xl:mx-2 xl:w-auto"
     >
       <div className="flex flex-row items-center content-center justify-between">
         <div className="flex flex-row items-center content-center space-x-3">
@@ -92,7 +92,7 @@ export default function UserComponent(props:any) {
           {imfollowing ? "Unfollow" : "Follow"}
         </button>
       </div>
-      <div className="flex flex-row items-center content-center gap-6 p-4 mx-0 my-6 mb-4 border rounded-md bg-gray-900/20 ">
+      <div className="flex flex-row items-center content-center gap-6 p-4 mx-0 my-6 mb-4 border rounded-md bg-gray-900/40 ">
         <div className="flex flex-row w-full md:mx-auto">
           <div className="flex flex-col items-center content-center gap-1 mx-auto w-max">
             <h1 className="text-xs font-semibold text-gray-300">Followers</h1>
