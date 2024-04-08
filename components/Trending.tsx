@@ -62,7 +62,7 @@ export default function Trending(){
         },[])
     
     return(
-        <div className="flex flex-col w-full h-full px-2 py-0 space-y-0 text-gray-300 border border-t lg:pr-0 lg:rounded-lg lg:border-none border-t-gray-900 lg:py-2 lg:text-gray-400 ">
+        <div className="flex flex-col w-full h-full px-2 py-0 space-y-0 text-gray-300 lg:pr-0 lg:rounded-lg lg:border-none lg:py-2 lg:text-gray-400 ">
                  { Object.entries(a).map((t:any,k:any) : React.ReactNode => (<Link key={k} href={'/hashtag/'+t[0]} className="flex flex-row items-center content-center w-full p-4 px-6 py-4 lg:px-2"><h1 className="text-sm font-semibold">#{t[0]}</h1><h1 className="ml-auto text-xs font-medium text-gray-300">{t[1]} {t[1]>1?"Posts":"Post"}</h1></Link>)) }          
 
         </div>

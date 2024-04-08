@@ -65,7 +65,7 @@ export default function Create() {
   return (
     <div className={`mx-auto flex h-screen w-full max-w-lg flex-col items-center justify-center px-10 `}>
       <form
-        className="flex flex-col justify-center w-full gap-2 pr-10 my-auto ml-auto animate-in text-foreground"
+        className="flex flex-col justify-center w-full gap-2 my-auto ml-auto animate-in text-foreground"
         action={create}
       >
         <label className="text-sm text-gray-300" htmlFor="name">
@@ -105,7 +105,7 @@ export default function Create() {
           maxLength={100}
         />
 
-        <button className="px-8 py-4 mb-2 text-xs text-white bg-blue-700 rounded-full w-max">Setup Your Account</button>
+        <button className="px-8 py-4 mx-auto mb-2 text-xs text-white bg-blue-700 rounded-full w-max">Setup Your Account</button>
       </form>
     </div>
   );

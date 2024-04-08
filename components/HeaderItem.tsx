@@ -29,7 +29,7 @@ export default function App(props:any) {
       }`}
     >
       <svg
-        className={`h-[26px] md:h-[24px] md:w-[24px] w-[26px] stroke-[2px] p-[2px] text-gray-200 ${a.opened ? "text-gray-400 md:text-gray-200" : "md:text-gray-200"}`}
+        className={`h-[26px] md:h-[24px] md:w-[24px] w-[26px] stroke-[2px] p-[2px] text-gray-400 ${a.opened ? "text-gray-400 md:text-gray-200" : "md:text-gray-200"}`}
         xmlns="http://www.w3.org/2000/svg"
         width="16"
         height="16"

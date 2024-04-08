@@ -200,7 +200,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 Change Cover
               </button>
             </div>
-            <label className="mb-1 text-base" htmlFor="content">
+            <label className="mb-1 text-base text-gray-300" htmlFor="content">
               Content
             </label>
             <div data-color-mode="dark">

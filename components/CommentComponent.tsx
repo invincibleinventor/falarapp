@@ -87,7 +87,7 @@ export default function CommentComponent(props:any) {
         <p className="text-sm font-semibold text-gray-300 ">{props.name}</p>
       </h1>
       <div className="mx-1 text-sm text-gray-500"></div>
-      <span className="text-sm font-semibold text-gray-500 whitespace-nowrap">@{props.handle}</span>
+      <span className="text-sm font-medium text-gray-500 whitespace-nowrap">@{props.handle}</span>
       <div className="mx-[6px] text-sm text-gray-500">·</div>
 
       <span className="ml-auto text-xs font-normal text-gray-500 whitespace-nowrap">{props.time}</span>
