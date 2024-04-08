@@ -167,13 +167,13 @@ export default function Page({ params }: { params: { slug: string } }) {
     <div className="flex-1 h-screen p-0 overflow-hidden">
       <div className="h-full pb-10 overflow-y-scroll hiddenscroll">
         <div className="relative h-64">
-          <div className="m-4 h-48 w-[calc(100%)-8px] rounded-md  bg-gray-200 ">
+          <div className="m-0 h-48 w-[calc(100%)] rounded-none  bg-gray-200 ">
             {cover && (
               <Image
                 width={180}
                 height={180}
                 src={`${found ?(cover ? cover : "/bg.jpg") : "/bg.jpg"}`}
-                className="object-cover w-full h-48 border rounded-md "
+                className="object-cover w-full h-48 border rounded-none "
                 alt="cover"
               />
             )}
@@ -181,16 +181,16 @@ export default function Page({ params }: { params: { slug: string } }) {
           <Image
             width={90}
             height={90}
-            className="absolute w-24 h-24 rounded-md bottom-5 left-7 md:left-12"
+            className="absolute w-24 h-24 rounded-full bottom-5 left-7 md:left-12"
             src={`${(found ? image : "/usernotfound.png")}`}
             alt="userimage"
           />
           {found && loggedin && (
             <button
               onClick={() => onfollow()}
-              className={`absolute rounded-md bottom-10 right-7 px-8 py-3 text-xs font-semibold md:right-12  ${
+              className={`absolute rounded-full bottom-10 right-7 px-8 py-3 text-xs font-semibold md:right-12  ${
                 !(imfollowing || myself)
-                  ? "border-[1px] bg-black text-white"
+                  ? "border-[1px] bg-blue-500 text-white"
                   : "border-[1px] bg-white text-black"
               }`}
             >
@@ -215,7 +215,7 @@ export default function Page({ params }: { params: { slug: string } }) {
         </div>
         {found && (
           <>
-            <div className="flex flex-row items-center content-center gap-6 p-4 mx-8 my-4 mb-1 border border-gray-700 rounded-md md:mx-14">
+            <div className="flex flex-row items-center content-center gap-6 p-4 mx-8 my-4 mb-1 rounded-md bg-gray-800/30 md:mx-14">
               <div className="flex flex-row w-full md:mx-auto">
                 <div className="flex flex-col items-center content-center gap-1 mx-auto w-max">
                   <h1 className="text-xs font-semibold text-gray-300">Followers</h1>
@@ -250,7 +250,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                   ))
                 ) : (
                   <>
-                    <h1 className="px-[20px] text-sm font-medium text-gray-700">
+                    <h1 className="px-[32px] text-sm font-medium text-gray-700">
                       No Posts To Display. {name} haven&apos;t posted anything yet.
                     </h1>
                   </>

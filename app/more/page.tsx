@@ -28,10 +28,10 @@ await fetchdata()
         <div>
             <div className="flex flex-row items-start content-center w-full px-4 md:mr-[calc(46.5*4px)]  h-[calc(100vh-104px)]">
                 <div className="flex flex-col space-y-2">
-                    <h1 className="text-xl font-semibold text-black">
+                    <h1 className="text-xl font-semibold text-gray-300">
                        {!isresume? "Resume Setup":"Edit Resume"}
                     </h1>
-                    <h1 className="pb-3 text-sm font-normal text-black">
+                    <h1 className="pb-3 text-sm font-normal text-gray-500">
                        {!isresume? "Your resume is not setup yet. Your resume showcases a breif overview of yourself to other people on Evolt.":"Your resume has been successfully setup at Evolt. You can edit it anytime. It is publicly visible to all users until you remove it."}  
                     </h1>
                     <Toggle isresume={isresume}></Toggle>

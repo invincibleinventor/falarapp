@@ -110,7 +110,7 @@ export default function Create() {
             width={110}
             height={110}
             src={image}
-            className="absolute inset-x-0 bottom-0 w-24 h-24 mx-auto rounded-md"
+            className="absolute inset-x-0 bottom-0 w-24 h-24 mx-auto rounded-full"
             alt="image"
           />
 
@@ -131,12 +131,12 @@ export default function Create() {
         className="flex flex-col justify-center w-full max-w-lg gap-2 mx-auto mt-44 animate-in text-foreground md:mt-44 md:px-10"
         action={create}
       >
-        <label className="mx-6 text-base" htmlFor="name">
+        <label className="mx-6 text-sm text-gray-300" htmlFor="name">
           Name
         </label>
         <input
           onChange={(e) => setName(e.target.value)}
-          className="px-4 py-2 mx-6 mb-4 text-sm bg-white border rounded-md"
+          className="px-4 py-2 mx-6 mb-4 text-sm text-white border rounded-md bg-gray-900/40"
           name="name"
           defaultValue={name}
           placeholder="Please Type Out Your Display Name"
@@ -145,13 +145,13 @@ export default function Create() {
           maxLength={20}
         />
 
-        <label className="mx-6 text-base" htmlFor="content">
+        <label className="mx-6 text-sm text-gray-300" htmlFor="content">
           About
         </label>
         <textarea
           defaultValue={about}
           onChange={(e) => setAbout(e.target.value)}
-          className="px-4 py-2 mx-6 mb-4 text-sm bg-white border rounded-md"
+          className="px-4 py-2 mx-6 mb-4 text-sm text-white border rounded-full bg-gray-900/40"
           name="content"
           placeholder="Please Type About Yourself"
           required
@@ -159,7 +159,7 @@ export default function Create() {
           maxLength={100}
         />
 
-        <button className="px-8 py-4 mx-auto mb-2 text-xs text-white bg-black rounded-md w-max">Save Your Changes</button>
+        <button className="px-8 py-4 mx-auto mb-2 text-xs text-white bg-blue-500 rounded-full w-max">Save Your Changes</button>
       </form>
     </div>
   );
