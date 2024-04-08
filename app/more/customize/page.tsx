@@ -136,7 +136,7 @@ export default function Create() {
         </label>
         <input
           onChange={(e) => setName(e.target.value)}
-          className="px-4 py-2 mx-6 mb-4 text-sm text-white border rounded-md bg-gray-900/40"
+          className="px-4 py-2 mx-6 mb-4 text-sm text-white border rounded-full bg-gray-900/40"
           name="name"
           defaultValue={name}
           placeholder="Please Type Out Your Display Name"
