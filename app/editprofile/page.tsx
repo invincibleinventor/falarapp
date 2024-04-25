@@ -50,7 +50,7 @@ export default function Create() {
         about: about,
         image: image,
         followers: [],
-        following: ["evolt"],
+        following: [],
         bookmarks: [],
         liked: [],
         private: false,
