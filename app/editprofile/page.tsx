@@ -50,7 +50,7 @@ export default function Create() {
         about: about,
         image: image,
         followers: [],
-        following: [],
+        following: ["evolt"],
         bookmarks: [],
         liked: [],
         private: false,
@@ -58,7 +58,19 @@ export default function Create() {
       if (error) {
         console.log(error);
       } else {
-        window.location.replace("/");
+        const {data:d} = await supabase.from('user').select('*').eq('handle','evolt')
+        if(d && d.length>0){
+        let ls = d[0]["followers"]
+        ls.push(handle.toLowerCase())
+          const {error:es} = await supabase.from('user').update({followers:ls}).eq('handle','evolt')
+          if(es){
+            console.log(es)
+          }
+          else{
+            window.location.replace("/");
+          }
+        }
+      
       }
     }
   }
