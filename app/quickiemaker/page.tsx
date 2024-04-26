@@ -166,10 +166,11 @@ const formatText = (text:string) => {
                   console.log(error)
                 }
                 else{
-                  const date = new Date().toLocaleDateString('en-IN',  { year: 'numeric', month: '2-digit', day: '2-digit' });
-                  const hour = new Date().getHours()
+                  const date = new Date().toLocaleDateString('en-IN');
+                  const formattedDate = `${new Date(date).getFullYear()}-${new Date(date).getMonth() + 1}-${new Date(date).getDay()}`;
+                                    const hour = new Date().getHours()
                   console.log('ingaye')
-                  const {data,error} = await supabase.from('trending').select('*').eq('date',date)
+                  const {data,error} = await supabase.from('trending').select('*').eq('date',formattedDate.toString())
                   let a:any;
                     let h;
                     if(hour>=0 && hour<3){
@@ -262,11 +263,12 @@ const formatText = (text:string) => {
                   console.log(error)
                 }
                 else{
-                  const date = new Date().toLocaleDateString('en-IN',  { year: 'numeric', month: '2-digit', day: '2-digit' });
-            
+                  const date = new Date().toLocaleDateString('en-IN');
+                  const formattedDate = `${new Date(date).getFullYear()}-${new Date(date).getMonth() + 1}-${new Date(date).getDay()}`;
+                  
                      const hour = new Date().getHours()
                   console.log('ok')
-                  const {data,error} = await supabase.from('trending').select('*').eq('date',date)
+                  const {data,error} = await supabase.from('trending').select('*').eq('date',formattedDate.toString())
                   console.log('ingaye out uh')
                   let a:any;
                     let h;
