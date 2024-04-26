@@ -5,7 +5,12 @@ import "@mdxeditor/editor/style.css";
 
 import { MouseEvent, useEffect, useRef, useState } from "react";
 import * as tus from 'tus-js-client'
-
+export function dateToYMD(date:Date) {
+  const d = date.getDate();
+  const m = date.getMonth() + 1; //Month from 0 to 11
+  const y = date.getFullYear();
+  return '' + y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
+} 
 export default function Create() {
   const [disabled,setDisabled] = useState(false)
   const [text,setText] = useState('')
@@ -85,6 +90,7 @@ async function uploadFile(bucketName:string, id:string, fileName:string, file:an
     })
 }
 
+
 const formatText = (text:string) => {
   console.log("text", text)
   const content = text.split(/((?:#|@|https?:\/\/[^\s]+)[a-zA-Z]+)/);
@@ -160,7 +166,8 @@ const formatText = (text:string) => {
                   console.log(error)
                 }
                 else{
-                  const date = new Date().toLocaleDateString('en-IN');
+                  const ask = new Date().toLocaleDateString('en-IN');
+                  const date = dateToYMD(new Date(ask))
                   const hour = new Date().getHours()
                   console.log('ingaye')
                   const {data,error} = await supabase.from('trending').select('*').eq('date',date.toString())
@@ -256,8 +263,9 @@ const formatText = (text:string) => {
                   console.log(error)
                 }
                 else{
-                  const date = new Date().toLocaleDateString('en-IN');
-                  const hour = new Date().getHours()
+                  const ask = new Date().toLocaleDateString('en-IN');
+                  const date = dateToYMD(new Date(ask))               
+                     const hour = new Date().getHours()
                   console.log('ok')
                   const {data,error} = await supabase.from('trending').select('*').eq('date',date.toString())
                   console.log('ingaye out uh')
