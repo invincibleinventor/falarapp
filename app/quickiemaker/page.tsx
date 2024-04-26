@@ -259,7 +259,7 @@ const formatText = (text:string) => {
                   const date = new Date().toLocaleDateString('en-IN');
                   const hour = new Date().getHours()
                   console.log('ok')
-                  const {data,error} = await supabase.from('trending').select('*').eq('date',date.toString())
+                  const {data,error} = await supabase.from('trending').select('*').eq('date',date)
                   console.log('ingaye out uh')
                   let a:any;
                     let h;
