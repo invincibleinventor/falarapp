@@ -5,7 +5,7 @@ import "@mdxeditor/editor/style.css";
 
 import { MouseEvent, useEffect, useRef, useState } from "react";
 import * as tus from 'tus-js-client'
-export function dateToYMD(date:Date) {
+function dateToYMD(date:Date) {
   const d = date.getDate();
   const m = date.getMonth() + 1; //Month from 0 to 11
   const y = date.getFullYear();
