@@ -3,7 +3,7 @@
 import { createClient } from "@/utils/supabase/client";
 import "@mdxeditor/editor/style.css";
 
-import { MouseEvent, useEffect, useRef, useState } from "react";
+import { MouseEvent, useRef, useState } from "react";
 import * as tus from 'tus-js-client'
 function dateToYMD(date:Date) {
   const d = date.getDate();
@@ -166,11 +166,10 @@ const formatText = (text:string) => {
                   console.log(error)
                 }
                 else{
-                  const ask = new Date().toLocaleDateString('en-IN');
-                  const date = dateToYMD(new Date(ask))
+                  const date = new Date().toLocaleDateString('en-IN',  { year: 'numeric', month: '2-digit', day: '2-digit' });
                   const hour = new Date().getHours()
                   console.log('ingaye')
-                  const {data,error} = await supabase.from('trending').select('*').eq('date',date.toString())
+                  const {data,error} = await supabase.from('trending').select('*').eq('date',date)
                   let a:any;
                     let h;
                     if(hour>=0 && hour<3){
@@ -263,11 +262,11 @@ const formatText = (text:string) => {
                   console.log(error)
                 }
                 else{
-                  const ask = new Date().toLocaleDateString('en-IN');
-                  const date = dateToYMD(new Date(ask))               
+                  const date = new Date().toLocaleDateString('en-IN',  { year: 'numeric', month: '2-digit', day: '2-digit' });
+            
                      const hour = new Date().getHours()
                   console.log('ok')
-                  const {data,error} = await supabase.from('trending').select('*').eq('date',date.toString())
+                  const {data,error} = await supabase.from('trending').select('*').eq('date',date)
                   console.log('ingaye out uh')
                   let a:any;
                     let h;
