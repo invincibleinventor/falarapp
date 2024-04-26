@@ -192,6 +192,8 @@ const formatText = (text:string) => {
                      }
                      if(error){
                       alert(error)
+                        console.log(error)
+                       
                      }
                      else{
                   if(data && data.length>0){
@@ -204,6 +206,9 @@ const formatText = (text:string) => {
                       if(!error){
                         window.location.replace('/quickies')
                       }
+                      else{
+                        console.log(error)
+                       }
                     }
                      else{
                       console.log(a)
@@ -229,9 +234,14 @@ const formatText = (text:string) => {
                      a[hashtags[i]]=1
                      console.log(a)
                      const {error} = await supabase.from('trending').insert({'date':date,[h]:a})
-                     if(!error)
+                     if(!error){
                        window.location.replace('/quickies')
                      }
+                       else{
+                      console.log(error)
+                     }
+                     }
+                     
                     }
                   
                 }
@@ -291,6 +301,9 @@ const formatText = (text:string) => {
                       if(!error){
                         window.location.replace('/quickies')
                       }
+                      else{
+                        console.log(error)
+                       }
                     }
                      else{
                       a[hashtags[i]]=1
@@ -298,6 +311,9 @@ const formatText = (text:string) => {
                       if(!error){
                         window.location.replace('/quickies')
                       }
+                      else{
+                        console.log(error)
+                       }
                      }
                      
                      
@@ -309,9 +325,13 @@ const formatText = (text:string) => {
                    
                      a[hashtags[i]]=1
                      const {error} = await supabase.from('trending').insert({date:date,[h]:a})
-                     if(!error)
-                       window.location.replace('/quickies')
+                     if(!error){
+                       window.location.replace('/quickies') }
+                      else{
+                        console.log(error)
+                       }
                      }
+                    
                     }
                   
                 }
