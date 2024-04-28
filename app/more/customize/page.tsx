@@ -151,7 +151,7 @@ export default function Create() {
         <textarea
           defaultValue={about}
           onChange={(e) => setAbout(e.target.value)}
-          className="px-4 py-2 mx-6 mb-4 text-sm text-white border rounded-full bg-gray-900/40"
+          className="px-4 py-2 mx-6 mb-4 text-sm text-white border rounded-lg bg-gray-900/40"
           name="content"
           placeholder="Please Type About Yourself"
           required
