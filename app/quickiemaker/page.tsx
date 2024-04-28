@@ -1,18 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/jsx-key */
 "use client";
 import { createClient } from "@/utils/supabase/client";
 import "@mdxeditor/editor/style.css";
 
-import { MouseEvent, useRef, useState } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
 import * as tus from 'tus-js-client'
-function dateToYMD(date:Date) {
-  const d = date.getDate();
-  const m = date.getMonth() + 1; //Month from 0 to 11
-  const y = date.getFullYear();
-  return '' + y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
-} 
+
 export default function Create() {
   const [disabled,setDisabled] = useState(false)
+  const [date,setDate] = useState<any>()
+  const [hour,setHour] = useState<any>()
   const [text,setText] = useState('')
     const hiddenFileInput = useRef<HTMLInputElement | null>(null);
   const handleClick = (event: MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -27,6 +25,20 @@ export default function Create() {
   setImgsSrc(b)
     
   }
+  useEffect(()=>{
+    const d = new Date().toLocaleDateString('en-IN');
+    console.log(d)
+    const s = d.split('/')
+
+    const year = s[2]
+    const month = s[1]
+    const da = s[0]
+    const sa = year+'/'+month+'/'+da
+    setDate(sa)
+    const h = new Date().getHours()
+    setHour(h)
+    
+  },[])
   function dataURLtoFile(dataurl:any, filename:any) {
     let arr = dataurl.split(','),
         mime = arr[0].match(/:(.*?);/)[1],
@@ -166,11 +178,9 @@ const formatText = (text:string) => {
                   console.log(error)
                 }
                 else{
-                  const date = new Date().toLocaleDateString('en-IN');
-                  const formattedDate = `${new Date(date).getFullYear()}-${new Date(date).getMonth() + 1}-${new Date(date).getDay()}`;
-                                    const hour = new Date().getHours()
+                                
                   console.log('ingaye')
-                  const {data,error} = await supabase.from('trending').select('*').eq('date',formattedDate.toString())
+                  const {data,error} = await supabase.from('trending').select('*').eq('date',date)
                   let a:any;
                     let h;
                     if(hour>=0 && hour<3){
@@ -263,12 +273,9 @@ const formatText = (text:string) => {
                   console.log(error)
                 }
                 else{
-                  const date = new Date().toLocaleDateString('en-IN');
-                  const formattedDate = `${new Date(date).getFullYear()}-${new Date(date).getMonth() + 1}-${new Date(date).getDay()}`;
                   
-                     const hour = new Date().getHours()
                   console.log('ok')
-                  const {data,error} = await supabase.from('trending').select('*').eq('date',formattedDate.toString())
+                  const {data,error} = await supabase.from('trending').select('*').eq('date',date)
                   console.log('ingaye out uh')
                   let a:any;
                     let h;

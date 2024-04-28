@@ -4,38 +4,50 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 export default function Trending(){
     const supabase = createClient()
-    const date = new Date().toLocaleDateString('en-IN')
-    const hour = new Date().getHours()
+    const [date,setDate] = useState<any>()
+    const [hour, setHour] = useState<any>()
+    
     const [a,setA] = useState<any>({})
+    useEffect(()=>{
+        const d = new Date().toLocaleDateString('en-IN');
+        console.log(d)
+        const s = d.split('/')
+    
+        const year = s[2]
+        const month = s[1]
+        const da = s[0]
+        const sa = year+'/'+month+'/'+da
+        setDate(sa)
+        const hs = new Date().getHours()
+        setHour(hs)
     let h:any;
-                    if(hour>=0 && hour<3){
+                    if(hs>=0 && hs<3){
                      h=0
                     }
-                    else if(hour>=3 && hour<6){
+                    else if(hs>=3 && hs<6){
                       h=3
                      }
-                     else if(hour>=6 && hour<9){
+                     else if(hs>=6 && hs<9){
                       h=6
                      }
-                     else if(hour>=9 && hour<12){
+                     else if(hs>=9 && hs<12){
                       h=9
                      }
-                     else if(hour>=12 && hour<15){
+                     else if(hs>=12 && hs<15){
                       h=12
                      }
-                     else if(hour>=15 && hour<18){
+                     else if(hs>=15 && hs<18){
                       h=15
                      }
-                     else if(hour>=18 && hour<21){
+                     else if(hs>=18 && hs<21){
                       h=18
                      }
                      else{
                       h=21
                      }
                      console.log(h)
-                     useEffect(()=>{
                         async function fetch(){
-    const {data,error} = await supabase.from('trending').select(h.toString()).eq('date',date)
+    const {data,error} = await supabase.from('trending').select(h.toString()).eq('date',sa)
     if(data && data.length>0){
        let j:any = data[0][h];
        console.log(j)
