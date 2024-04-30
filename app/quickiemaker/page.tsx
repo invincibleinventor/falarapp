@@ -40,11 +40,11 @@ export default function Create() {
     
   },[])
   function dataURLtoFile(dataurl:any, filename:any) {
-    let arr = dataurl.split(','),
-        mime = arr[0].match(/:(.*?);/)[1],
-        bstr = atob(arr[arr.length - 1]), 
-        n = bstr.length, 
-        u8arr = new Uint8Array(n);
+    const arr = dataurl.split(',')
+       const mime = arr[0].match(/:(.*?);/)[1]
+      const  bstr = atob(arr[arr.length - 1])
+       let  n = bstr.length
+       const  u8arr = new Uint8Array(n)
     while(n--){
         u8arr[n] = bstr.charCodeAt(n);
     }
@@ -109,7 +109,7 @@ const formatText = (text:string) => {
   let hashtag;
   const regex = /^[a-zA-Z]+$/;
 
-  let tagarray:any = [];
+  const tagarray:any = [];
   content.map((word) => {
       if (word.startsWith("#") && regex.test(word.slice(1,word.length-1))) {
           hashtag = word.replace('#', '')

@@ -34,9 +34,9 @@ export default function More(props:any) {
           const ds = data;
           for await (const [index, post] of ds.entries()) {
             let liked = false;
-        let likedlist: string | any[] = ds[index].liked
+        const likedlist: string | any[] = ds[index].liked
         let bookmarked = false;
-        let bookmarkedlist: any[] = ds[index].bookmarked;
+        const bookmarkedlist: any[] = ds[index].bookmarked;
         if(likedlist.includes(props.myhandle)){
           liked = true
         }
@@ -84,9 +84,9 @@ export default function More(props:any) {
             const { data } = await supabase.from("user").select("*").eq("id", post.poster);
             if (data) {
               let liked = false;
-              let likedlist: string | any[] = ds[index].liked
+              const likedlist: string | any[] = ds[index].liked
               let bookmarked = false;
-              let bookmarkedlist: any[] = ds[index].bookmarked;
+              const bookmarkedlist: any[] = ds[index].bookmarked;
               if(likedlist.includes(props.myhandle)){
                 liked = true
               }

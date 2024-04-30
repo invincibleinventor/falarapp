@@ -60,7 +60,7 @@ export default function Create() {
       } else {
         const {data:d} = await supabase.from('user').select('*').eq('handle','evolt')
         if(d && d.length>0){
-        let ls = d[0]["followers"]
+        const ls = d[0]["followers"]
         ls.push(handle.toLowerCase())
           const {error:es} = await supabase.from('user').update({followers:ls}).eq('handle','evolt')
           if(es){

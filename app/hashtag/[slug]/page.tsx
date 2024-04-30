@@ -68,9 +68,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
       for await (const [index, post] of ds.entries()) {
        
         let liked = false;
-        let likedlist: string | any[] = ds[index].liked
+        const likedlist: string | any[] = ds[index].liked
         let bookmarked = false;
-        let bookmarkedlist: any[] = ds[index].bookmarked;
+        const bookmarkedlist: any[] = ds[index].bookmarked;
         if(likedlist.includes(myhandle)){
           liked = true
         }
