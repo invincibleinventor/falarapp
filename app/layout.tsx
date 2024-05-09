@@ -6,9 +6,9 @@ const defaultUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` 
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Evolt - A Modern E-Journal",
+  title: "Evolt - A New Step In Socializing",
   description:
-    "Evolt is a modern open source internet journal aimed at empowering authors with content freedom and ownership",
+    "Evolt is a microblogging community aimed at empowering authors with a platform to express themselves at their will.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></Script>
       </head>
 
-      <body className="bg-black bg-cover" lang="en">
+      <body className="bg-cover bg-[#000408]" lang="en">
         <main>
           <section className="relative m-auto flex h-screen flex-row content-center items-center overflow-hidden sm:w-screen lg:w-[1070px] xl:w-[1200px]">
             <NavBar></NavBar>

@@ -59,13 +59,13 @@ export default function CommentComponent(props:any) {
         if (word.startsWith("#")) {
             hashtag = word.replace('#', '')
             return <Link legacyBehavior href={`/hashtag/${hashtag}`}><a
-                className="text-blue-500 hover:text-blue-600">{word}</a></Link>;
+                className="text-cyan-600 hover:text-cyan-700">{word}</a></Link>;
         } else if (word.startsWith("@")) {
             username = word.replace('@', '')
             return <Link legacyBehavior href={`/profile/${username}`}><a
-                className="text-blue-500 hover:text-blue-600">{word}</a></Link>;
+                className="text-cyan-600 hover:text-cyan-700">{word}</a></Link>;
         } else if (word.includes("http")) {
-            return <a target="_blank" href={word} className="text-blue-500 hover:text-blue-600">{word}</a>
+            return <a target="_blank" href={word} className="text-cyan-600 hover:text-cyan-700">{word}</a>
         } else {
             return word;
         }
@@ -98,7 +98,7 @@ export default function CommentComponent(props:any) {
      
         </div>
         
-        <h1 className="mt-[8px] mb-2 ml-0 text-[15px] font-normal text-gray-300">{formatText(props.content)}</h1>
+        <h1 className="mt-[8px] mb-2 ml-0 text-[15px] font-medium text-gray-300">{formatText(props.content)}</h1>
         <div className="flex flex-row items-center content-center w-full pb-4">
 
         <div className=" w-full   flex flex-row content-center items-center space-x-[8px]">

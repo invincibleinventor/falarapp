@@ -86,7 +86,7 @@ export default function UserComponent(props:any) {
           className={
             imfollowing
               ? "h-max border border-black bg-white px-4 py-1 text-xs  rounded-full text-black"
-              : "h-max border border-black bg-blue-700 px-4 py-1 text-xs rounded-full text-white"
+              : "h-max border border-black bg-cyan-800 px-4 py-1 text-xs rounded-full text-white"
           }
         >
           {imfollowing ? "Unfollow" : "Follow"}

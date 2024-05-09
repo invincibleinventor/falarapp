@@ -136,13 +136,13 @@ export default async function App({ params }: { params: { slug: string } }) {
         if (word.startsWith("#")) {
             hashtag = word.replace('#', '')
             return <Link legacyBehavior href={`/hashtag/${hashtag}`}><a
-                className="text-blue-500 hover:text-blue-600">{word}</a></Link>;
+                className="text-cyan-600 hover:text-cyan-700">{word}</a></Link>;
         } else if (word.startsWith("@")) {
             username = word.replace('@', '')
             return <Link legacyBehavior href={`/profile/${username}`}><a
-                className="text-blue-500 hover:text-blue-600">{word}</a></Link>;
+                className="text-cyan-600 hover:text-cyan-700">{word}</a></Link>;
         } else if (word.includes("http")) {
-            return <a target="_blank" href={word} className="text-blue-500 hover:text-blue-600">{word}</a>
+            return <a target="_blank" href={word} className="text-cyan-600 hover:text-cyan-700">{word}</a>
         } else {
             return word;
         }
@@ -152,7 +152,7 @@ export default async function App({ params }: { params: { slug: string } }) {
   console.log(comments);
   console.log("above");
   return !loading ? (
-    <div className="relative flex flex-col flex-1 h-screen overflow-hidden bg-black ">
+    <div className="relative flex flex-col flex-1 h-screen overflow-hidden bg-transparent ">
       {error && (
         <div className="flex items-center content-center w-full h-screen px-10 sm:px-24 md:px-16 lg:px-24">
           <div className="flex flex-col gap-4 mx-auto max-w-max">
@@ -208,7 +208,7 @@ export default async function App({ params }: { params: { slug: string } }) {
 
               <h1
                 style={{ wordBreak: "break-word", whiteSpace: "normal" }}
-                className="my-4 mt-2 text-base font-normal text-gray-300 four-line-ellipsis md:text-base"
+                className="my-4 mt-2 text-base font-medium text-gray-300 four-line-ellipsis md:text-base"
               >
                 {formatText(content)}
               </h1>
@@ -250,7 +250,7 @@ export default async function App({ params }: { params: { slug: string } }) {
         </div>
       )}
       {loggedin &&
-      <div className="absolute bottom-0 flex flex-row w-full bg-black border-t h-14 border-t-gray-900 ">
+      <div className="absolute bottom-0 flex flex-row w-full border-t bg-black/40 h-14 border-t-gray-900 ">
       
 
 <LikeComponent

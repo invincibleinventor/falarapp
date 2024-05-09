@@ -224,7 +224,7 @@ export default async function App({ params }: { params: { slug: string } }) {
         </div>
       )}
       {loggedin &&
-      <div className="absolute bottom-0 flex flex-row w-full bg-black border-t border-x h-14 border-t-gray-900 border-x-gray-900">
+      <div className="absolute bottom-0 flex flex-row w-full border-t bg-[#000205] border-x h-14 border-t-gray-900 border-x-gray-900">
         <BookMarksComponent
           userliked={userbookmarked}
           postid={params.slug}

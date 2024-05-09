@@ -75,7 +75,7 @@ export default async function Index() {
           <div className="p-4 py-2 mx-1 md:mx-1">
             <Search page="bookmarks" text="Bookmarks" />
           </div>
-          <h1 className="px-6 my-4 mt-4 text-xl font-bold text-gray-300">My Bookmarks</h1>
+          <h1 className="px-8 my-4 mt-4 text-xl font-bold text-gray-300">My Bookmarks</h1>
           <div className="h-full overflow-y-scroll hiddenscroll">
             <div className="flex flex-col gap-2 mb-20 animate-in hiddenscroll">
               {!loading ? (
@@ -105,8 +105,8 @@ export default async function Index() {
                       </h1>
                       <Link
                         href="/"
-                        className={`mx-auto rounded-md mt-3 w-max px-8 py-3 text-xs font-bold  ${
-                          1 == 1 ? "bg-blue-700 text-white" : "border-2 bg-white"
+                        className={`mx-auto mt-3 rounded-full w-max px-8 py-3 text-xs font-medium  ${
+                          1 == 1 ? "bg-cyan-800 text-white" : "border-2 bg-white"
                         }`}
                       >
                         Return To Home

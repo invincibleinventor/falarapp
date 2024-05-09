@@ -25,13 +25,13 @@ photocount = props.image.length;
         if (word.startsWith("#") && regex.test(word.slice(1,word.length-1))) {
             hashtag = word.replace('#', '')
             return <Link legacyBehavior href={`/hashtag/${hashtag}`}><a
-                className="text-blue-500 hover:text-blue-600">{word}</a></Link>;
+                className="text-cyan-600 hover:text-cyan-700">{word}</a></Link>;
         } else if (word.startsWith("@")) {
             username = word.replace('@', '')
             return <Link legacyBehavior href={`/profile/${username}`}><a
-                className="text-blue-500 hover:text-blue-600">{word}</a></Link>;
+                className="text-cyan-600 hover:text-cyan-700">{word}</a></Link>;
         } else if (word.includes("http")) {
-            return <a target="_blank" href={word} className="text-blue-500 hover:text-blue-600">{word}</a>
+            return <a target="_blank" href={word} className="text-cyan-600 hover:text-cyan-700">{word}</a>
         } else {
             return word;
         }

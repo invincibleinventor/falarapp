@@ -71,7 +71,7 @@ export default function Login() {
               setEmail(e.target.value);
             }}
             type="email"
-            className="px-5 py-3 mt-1 text-gray-300 border rounded-full outline-none focus:outline-blue-700 bg-gray-900/40 w-max placeholder:text-gray-400 "
+            className="w-full px-5 py-3 mt-1 text-gray-300 bg-black border border-gray-900 rounded-full outline-none focus:outline-cyan-800 placeholder:text-gray-400 "
             placeholder="Your Email Address"
           ></input>
           <h1 className="pl-[1px] mt-4 text-xs font-medium text-gray-300">Password</h1>
@@ -80,23 +80,23 @@ export default function Login() {
               setPassword(e.target.value);
             }}
             type="password"
-            className="px-5 py-3 mt-1 text-gray-300 border rounded-full outline-none focus:outline-blue-700 bg-gray-900/40 w-max placeholder:text-gray-400 "
+            className="w-full px-5 py-3 mt-1 text-gray-300 bg-black border border-gray-900 rounded-full outline-none focus:outline-cyan-800 placeholder:text-gray-400 "
             placeholder="Your Password"
           ></input>
           <button
             onClick={(e) => (e.preventDefault(), console.log("login"), login())}
-            className="px-5 py-3 mt-4 mb-2 text-xs font-medium text-white bg-blue-700 rounded-full"
+            className="px-5 py-3 mt-4 mb-2 text-xs font-medium text-white rounded-full bg-cyan-800"
           >
             Sign In To Your Account
           </button>
           <button
             onClick={(e) => (e.preventDefault(), console.log("register"), register())}
-            className="px-5 py-3 text-xs font-medium text-gray-300 border rounded-full bg-gray-900/40"
+            className="px-5 py-3 text-xs font-medium text-gray-300 bg-black border border-gray-900 rounded-full"
           >
             Register Your Account
           </button>
           <button
-            className="flex justify-center gap-4 px-5 py-3 mt-6 text-xs font-medium text-gray-300 bg-gray-900 border rounded-full "
+            className="flex justify-center gap-4 px-5 py-3 mt-6 text-xs font-medium text-gray-300 bg-black border border-gray-900 rounded-full "
             onClick={() => (console.log("google"), signWithGoogle())}
           >
             <svg width="16" height="16" viewBox="0 0 775 794" fill="none" xmlns="http://www.w3.org/2000/svg">

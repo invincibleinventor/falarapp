@@ -126,8 +126,8 @@ export default function Page({ params }: { params: { slug: string } }) {
                     </h1>
                     <Link
                       href="/search/posts"
-                      className={`mx-auto mt-5 w-max px-8  py-3 text-xs font-bold  ${
-                        1 == 1 ? "bg-blue-700 rounded-md  text-white" : "border-2 bg-white"
+                      className={`mx-auto mt-5 w-max px-8  py-3 text-xs font-medium  ${
+                        1 == 1 ? "bg-cyan-800 rounded-full  text-white" : "border-2 bg-white"
                       }`}
                     >
                       Search Something Else

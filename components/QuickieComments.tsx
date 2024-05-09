@@ -100,7 +100,7 @@ export default function CommentsComponent(props:any) {
               }}
               onChange={(e) => setText(e.target.value)}
               ref={inputRef}
-              className="w-full px-6  pt-[2px] pl-4 mb-4 text-sm font-medium text-gray-300 bg-black outline-none resize-none placeholder:font-medium md:text-base h-max text-md"
+              className="w-full px-6  pt-[2px] pl-4 mb-4 text-sm font-medium text-gray-300 bg-transparent outline-none resize-none placeholder:font-medium md:text-base h-max text-md"
               placeholder={"Post a comment publicly as " + props.myname}
             ></textarea>
           </div>
