@@ -2,14 +2,8 @@
 import Headeritem from "@/components/SettingsItem";
 import { usePathname } from "next/navigation";
 export default function SettingsBar() {
-  const loc = usePathname();
-  return (
-    <div className="mb-auto ">
-      <div className={`absolute md:static left-0  flex w-max  flex-col items-start px-2 md:p-0 ${loc.startsWith("/post/") ? "md:flex" : ""}`}>
-       
-        <div className="flex flex-row md:flex-col space-x-1 md:space-x-0 py-4 pt-[14px] md:mt-[calc(17*4px)] md:space-y-[0px] md:px-4 md:pt-[4px]">
-        
-          <Headeritem
+  /*
+   <Headeritem
             link="/more"
 url={
   <g fill="currentColor"><path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5M5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1z"/><path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/></g>
@@ -17,6 +11,15 @@ url={
 }
           name="Resume">
            </Headeritem>
+  */
+  const loc = usePathname();
+  return (
+    <div className="mb-auto ">
+      <div className={`absolute md:static left-0  flex w-max  flex-col items-start px-2 md:p-0 ${loc.startsWith("/post/") ? "md:flex" : ""}`}>
+       
+        <div className="flex flex-row md:flex-col space-x-1 md:space-x-0 py-4 pt-[14px] md:mt-[calc(17*4px)] md:space-y-[0px] md:px-4 md:pt-[4px]">
+        
+         
           <Headeritem
             link="/more/customize"
             url={<path

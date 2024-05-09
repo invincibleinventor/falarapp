@@ -136,7 +136,7 @@ export default function Create() {
         </label>
         <input
           onChange={(e) => setName(e.target.value)}
-          className="px-4 py-2 mx-6 mb-4 text-sm text-white border rounded-full bg-gray-900/40"
+          className="px-4 py-2 mx-6 mb-4 text-sm text-white bg-black border border-gray-900 rounded-md"
           name="name"
           defaultValue={name}
           placeholder="Please Type Out Your Display Name"
@@ -151,7 +151,7 @@ export default function Create() {
         <textarea
           defaultValue={about}
           onChange={(e) => setAbout(e.target.value)}
-          className="px-4 py-2 mx-6 mb-4 text-sm text-white border rounded-lg bg-gray-900/40"
+          className="px-4 py-2 mx-6 mb-4 text-sm text-white bg-black border border-gray-900 rounded-md"
           name="content"
           placeholder="Please Type About Yourself"
           required
@@ -159,7 +159,7 @@ export default function Create() {
           maxLength={100}
         />
 
-        <button className="px-8 py-4 mx-auto mb-2 text-xs text-white bg-blue-500 rounded-full w-max">Save Your Changes</button>
+        <button className="px-8 py-4 mx-auto mb-2 text-xs font-medium text-white rounded-full bg-cyan-800 w-max">Save Your Changes</button>
       </form>
     </div>
   );

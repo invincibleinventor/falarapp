@@ -141,15 +141,15 @@ export default async function Index() {
                 ) : (
                   <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
                     <div className="flex flex-col gap-2 mx-auto max-w-max">
-                      <h1 className="mx-auto text-lg font-semibold text-center text-black">No Quickies To View!</h1>
-                      <h1 className="mx-auto text-sm text-center text-gray-800">
+                      <h1 className="mx-auto text-lg font-semibold text-center text-gray-300">No Quickies To View!</h1>
+                      <h1 className="mx-auto text-sm text-center text-gray-400">
                         Follow people to view their quickies on your feed. The more people you follow, the more quickies
                         on your feed
                       </h1>
                       <Link
                         href="/explore"
-                        className={`mx-auto mt-3 rounded-md w-max px-8 py-3 text-xs font-bold  ${
-                          1 == 1 ? "bg-black text-white" : "border-2 bg-white"
+                        className={`mx-auto mt-3 rounded-full w-max px-8 py-3 text-xs font-medium  ${
+                          1 == 1 ? "bg-cyan-800 text-white" : "border-2 bg-white"
                         }`}
                       >
                         Explore People

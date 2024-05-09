@@ -190,7 +190,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               onClick={() => onfollow()}
               className={`absolute rounded-full bottom-10 right-7 px-8 py-3 text-xs font-semibold md:right-12  ${
                 !(imfollowing || myself)
-                  ? "border-[1px] bg-blue-500 text-white"
+                  ? "border-[1px] bg-cyan-800 text-white"
                   : "border-[1px] bg-white text-black"
               }`}
             >

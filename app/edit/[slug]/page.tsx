@@ -148,7 +148,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             <input
             disabled={deleteDialog!="hidden"?true:false}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-4 py-2 mb-6 mr-4 text-sm text-white border border-gray-900 rounded-md outline-none bg-gray-900/40 "
+              className="w-full px-4 py-2 mb-6 mr-4 text-sm text-white bg-black border border-gray-900 rounded-md outline-none "
               name="content"
               placeholder="Please Type Out Your Title"
               required
@@ -162,7 +162,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             <textarea
             disabled={deleteDialog!="hidden"?true:false}
               onChange={(e) => setExcerpt(e.target.value)}
-              className="w-full h-32 px-4 py-2 mb-6 mr-4 text-sm text-white border border-gray-900 rounded-md outline-none bg-gray-900/40 "
+              className="w-full h-32 px-4 py-2 mb-6 mr-4 text-sm text-white bg-black border border-gray-900 rounded-md outline-none"
               name="content"
               placeholder="Please Type Out Your Excerpt"
               required
@@ -215,7 +215,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               />
             </div>
 
-            <button disabled={deleteDialog!="hidden"?true:false} className="px-8 py-4 mb-2 text-xs font-medium text-white bg-blue-700 rounded-md w-max">Publish This Post</button>
+            <button disabled={deleteDialog!="hidden"?true:false} className="px-8 py-4 mb-2 text-xs font-medium text-white rounded-md bg-cyan-800 w-max">Publish This Post</button>
           </form>
         </div>
       </div>
@@ -230,8 +230,8 @@ export default function Page({ params }: { params: { slug: string } }) {
           </h1>
           <Link
             href="/"
-            className={`mx-auto mt-3 rounded-md w-max px-8 py-3 text-xs font-bold  ${
-              1 == 1 ? "bg-blue-700 text-white" : "border-2 bg-white"
+            className={`mx-auto mt-3 rounded-md w-max px-8 py-3 text-xs font-medium  ${
+              1 == 1 ? "bg-cyan-800 text-white" : "border-2 bg-white"
             }`}
           >
             Return To Home

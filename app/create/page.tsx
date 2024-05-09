@@ -105,24 +105,24 @@ export default function Create() {
           </label>
           <input
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full text-white px-4 py-2 mb-6 mr-4 border-gray-900 rounded-md text-smborder bg-gray-900/40 "
+            className="w-full px-4 py-2 mb-6 mr-4 text-sm text-white bg-black border border-gray-900 rounded-md "
             name="content"
             placeholder="Please Type Out Your Title"
             required
             maxLength={60}
-            minLength={15}
+            minLength={5}
           />
           <label className="mb-1 text-base text-gray-300" htmlFor="content">
             Excerpt
           </label>
           <textarea
             onChange={(e) => setExcerpt(e.target.value)}
-            className="w-full text-white px-4 py-2 mb-6 mr-4 text-sm border border-gray-900 rounded-md bg-gray-900/40 "
+            className="w-full px-4 py-2 mb-6 mr-4 text-sm text-white bg-black border border-gray-900 rounded-md "
             name="content"
             placeholder="Please Type Out Your Excerpt"
             required
             maxLength={150}
-            minLength={90}
+            minLength={10}
           />
           <input
             onChange={(e:any) => (setCover(URL.createObjectURL(e.target.files[0])), setFile(e.target.files[0]))}
@@ -162,7 +162,7 @@ export default function Create() {
             />
           </div>
 
-          <button className="px-8 py-4 mb-2 text-xs text-white bg-blue-700 rounded-md w-max">Publish This Post</button>
+          <button className="px-8 py-4 mb-2 text-xs font-medium text-white rounded-md bg-cyan-800 w-max">Publish This Post</button>
         </form>
       </div>
     </div>
