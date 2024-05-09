@@ -32,7 +32,7 @@ await fetchdata()
                        {!isresume? "Resume Setup":"Edit Resume"}
                     </h1>
                     <h1 className="pb-3 text-sm font-normal text-gray-500">
-                       {!isresume? "Your resume is not setup yet. Your resume showcases a breif overview of yourself to other people on Evolt.":"Your resume has been successfully setup at Evolt. You can edit it anytime. It is publicly visible to all users until you remove it."}  
+                       {!isresume? "Your resume is not setup yet. Your resume showcases a breif overview of yourself to other people on Falar.":"Your resume has been successfully setup at Falar. You can edit it anytime. It is publicly visible to all users until you remove it."}  
                     </h1>
                     <Toggle isresume={isresume}></Toggle>
                 </div>

@@ -1,4 +1,4 @@
-package com.evolt;
+package com.falar;
 
 import com.getcapacitor.BridgeActivity;
 

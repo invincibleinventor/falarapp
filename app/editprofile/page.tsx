@@ -50,7 +50,7 @@ export default function Create() {
         about: about,
         image: image,
         followers: [],
-        following: ["evolt"],
+        following: ["falar"],
         bookmarks: [],
         liked: [],
         private: false,
@@ -58,11 +58,11 @@ export default function Create() {
       if (error) {
         console.log(error);
       } else {
-        const {data:d} = await supabase.from('user').select('*').eq('handle','evolt')
+        const {data:d} = await supabase.from('user').select('*').eq('handle','falar')
         if(d && d.length>0){
         const ls = d[0]["followers"]
         ls.push(handle.toLowerCase())
-          const {error:es} = await supabase.from('user').update({followers:ls}).eq('handle','evolt')
+          const {error:es} = await supabase.from('user').update({followers:ls}).eq('handle','falar')
           if(es){
             console.log(es)
           }

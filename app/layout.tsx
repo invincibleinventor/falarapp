@@ -6,9 +6,9 @@ const defaultUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` 
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Evolt - A New Step In Socializing",
+  title: "Falar - A New Step In Socializing",
   description:
-    "Evolt is a microblogging community aimed at empowering authors with a platform to express themselves at their will.",
+    "Falar is a microblogging community aimed at empowering authors with a platform to express themselves at their will.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

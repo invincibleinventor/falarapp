@@ -117,7 +117,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       <>
         <div className="flex-1 h-screen p-0 py-2 overflow-hidden">
           <div className="p-4 py-2 mx-1 md:mx-1">
-            <Search page="quickies" text="Evolt" />
+            <Search page="quickies" text="Falar" />
           </div>
           <div className="h-full overflow-y-scroll hiddenscroll">
             <div className="flex flex-col gap-0 mb-20 animate-in hiddenscroll">
