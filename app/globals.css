@@ -69,6 +69,13 @@
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
 }
+.mainbg{
+ background-image: url('/gradient.svg');
+ background-size: cover;
+ background-position: center;
+ background-repeat: no-repeat;
+}
+
 .hiddeninput {
   display: none !important;
 }
