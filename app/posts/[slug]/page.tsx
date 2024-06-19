@@ -22,6 +22,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [posts, setPosts] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   TimeAgo.locale(en);
+  const [empty,setEmpty] = useState(false)
 
   const timeAgo = new TimeAgo("en-US");
   const date1 = new Date();
@@ -49,6 +50,9 @@ export default function Page({ params }: { params: { slug: string } }) {
           }
         }
         setPosts(ds);
+        if(ds.length==0){
+          setEmpty(true)
+        }
         setLoading(false);
       }
     }
@@ -99,6 +103,10 @@ export default function Page({ params }: { params: { slug: string } }) {
                   description={post["excerpt"]}
                 />
               ))
+
+            )
+            (
+              
             ) : (
               <div className="flex items-center content-center w-full h-screen">
                 <Oval
