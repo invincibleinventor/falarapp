@@ -110,8 +110,8 @@ export default function App$() {
             name="More"
           ></Headeritem>
           <Link href={(loc.includes('quickie') || loc.includes("hashtag"))?"/quickiemaker":"/create"} className="pt-5">
-            <div className="mx-auto flex rounded-full md:rounded-full h-[52px]  w-[52px] cursor-pointer  flex-row content-center items-center bg-cyan-800 p-3 transition-all duration-100 ease-linear hover:bg-blue-600 md:mr-auto md:h-[44px] md:w-[calc(180px)] md:py-[14px]">
-              <span className={`mx-auto hidden pt-[0px] text-center text-xs font-medium  text-white md:inline-block`}>
+            <div className="mx-auto flex rounded-full md:rounded-full h-[52px]  w-[52px] cursor-pointer  flex-row content-center items-center bg-cyan-800 p-3 transition-all duration-100 ease-linear hover:bg-cyan-600 md:mr-auto md:h-[44px] md:w-[calc(180px)] md:py-[14px]">
+              <span className={`mx-auto hidden pt-[0px] text-center text-sm font-medium  text-white md:inline-block`}>
                 New {loc.includes('quickie')?'Quickie':'Post'}
               </span>
               <svg

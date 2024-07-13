@@ -227,7 +227,11 @@ export default function Page({ params }: { params: { slug: string } }) {
                 </div>
               </div>
             </div>
-            <h1 className="px-8 mt-8 mb-4 text-xl font-bold text-white md:mb-4 md:mt-10 md:px-8 ">{name}&apos;s Posts</h1>
+            <div className="flex items-center justify-between px-8 mt-8 mb-4 lex-row md:mb-4 md:mt-10">
+            <h1 className="text-xl font-bold text-white ">{name}&apos;s Posts</h1>
+            <Link href={"/quickies/"+params.slug} className="px-6 py-2 text-sm font-medium text-white rounded-full cursor-pointer bg-gray-900/50 ">View Quickies</Link>
+            
+            </div>
             <div className="flex flex-col gap-2 px-0 md:px-0">
               {!loading ? (
                 posts.length > 0 ? (
