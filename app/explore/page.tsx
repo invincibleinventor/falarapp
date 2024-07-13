@@ -48,7 +48,10 @@ export default async function Index() {
       for await (const [index, user] of ds.entries()) {
         if (ifollow.includes(user.handle)) {
           ds[index]["isfollowing"] = true;
+          console.log(user.handle,ifollow)
         } else {
+          console.log(user.handle,ifollow)
+
           ds[index]["isfollowing"] = false;
         }
       }
