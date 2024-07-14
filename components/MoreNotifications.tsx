@@ -4,72 +4,37 @@ import { createClient } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { Oval } from "react-loader-spinner";
-import UserComponent from "./UserComponent";
+import Notification from "./Notification";
 
-export default function MoreUsers() {
-  const [users, setUsers] = useState<any>([]);
+export default function MoreNotifications() {
+  const [notifications, setNotifications] = useState<any>([]);
   const [myhandle, setMyHandle] = useState("");
-  const [myimage,setMyImage] = useState("")
-  const [, setUserId] = useState("");
   const supabase = createClient();
   const [followinglist, setFollowingList] = useState([]);
-  const PAGE_COUNT = 4;
+  const PAGE_COUNT = 10;
   const [offset, setOffset] = useState(1);
   const { ref, inView } = useInView();
   const [halt, setHalt] = useState(false);
-  useEffect(() => {
-    async function set() {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (user) {
-        setUserId(user.id);
-      }
-      const { data } = await supabase
-        .from("user")
-        .select("*")
-        .eq("id", user?.id);
-      if (data) {
-        setMyHandle(data[0]["handle"]);
-        setMyImage(data[0]["image"])
-        setFollowingList(data[0]["following"]);
-      }
-    }
-    set();
-  }, []);
+
 
   async function get(from: number, to: number) {
     const {
       data: { user },
     } = await supabase.auth.getUser();
     const { data, error } = await supabase
-      .from("user")
+      .from("notifications")
       .select("*")
       .range(from, to)
-      .not("id", "in", `(${user?.id})`);
+      .eq("to", `(${user?.id})`);
     if (error) {
       console.log(error);
     } else {
       if (data && data.length > 0) {
         console.log(data);
         const ds = data;
-        const {
-          data: { user },
-        } = await supabase.auth.getUser();
+       
 
-        const { data: x } = await supabase
-          .from("user")
-          .select("*")
-          .eq("id", user?.id);
-
-        for await (const [index, post] of ds.entries()) {
-          if (x && x[0]["following"].includes(post.handle)) {
-            ds[index]["isfollowing"] = true;
-          } else {
-            ds[index]["isfollowing"] = false;
-          }
-        }
-        setUsers([...users, ...ds]);
+        setNotifications([...notifications, ...ds]);
         if (ds.length < PAGE_COUNT) {
           setHalt(true);
         }
@@ -91,22 +56,8 @@ export default function MoreUsers() {
   return (
     <div className="w-full">
       <div className="grid items-center content-center grid-cols-1 gap-2 px-3 animate-in hiddenscroll xl:grid-cols-2">
-        {users.map((user:any) => (
-          <UserComponent
-            myID={myhandle}
-            key={user["id"]}
-            followerlist={user["followers"]}
-            followinglist={followinglist}
-            id={user["id"]}
-            name={user["name"]}
-            following={user.following?.length}
-            isfollowing={user.isfollowing}
-            handle={user.handle}
-            about={user.about}
-            followers={user.followers.length}
-            image={user.image}
-            myImage={myimage}
-          />
+        {notifications.map((notification:any) => (
+         <Notification title={notification.title} description={notification.description} type={notification.type} url={notification.url} image={notification.image} key={notification.id}></Notification>
         ))}
       </div>
       <div className="flex flex-col items-center content-center w-full">

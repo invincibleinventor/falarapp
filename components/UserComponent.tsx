@@ -53,8 +53,22 @@ export default function UserComponent(props:any) {
       if (error || e) {
         console.log(error);
       } else {
-        console.log(data);
-      }
+        const {data:x,error:es} = await supabase.from('notifications').select('*').eq('url','/profile/'+myId)
+        if(es){
+          console.log(es)
+        }
+        else{
+          if(x && x.length>0){
+            
+          }
+          else{
+            const {error:e} = await supabase.from('notifications').insert({type:'follow',to:props.id,description:"@"+myId+" has followed you! Follow them back?", url: '/profile/'+myId,title: "New Follower!",image:props.myImage})
+            if(e){
+              console.log(e)
+            }
+          }
+        }
+        console.log(data);      }
       setImFollowing(true);
       setFollowerList(arr);
       setFollowingList(arr2);

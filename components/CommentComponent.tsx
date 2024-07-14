@@ -72,7 +72,7 @@ export default function CommentComponent(props:any) {
     });
   }
   return (
-    <div className="flex flex-row w-full gap-4 px-6 pt-4 pb-2 my-0 border-y border-y-gray-900">
+    <div id={props.id} className="flex flex-row w-full gap-4 px-6 pt-4 pb-2 my-0 border-y border-y-gray-900">
       
       <div className="flex w-full flex-col gap-[4px]">
         <div className="flex flex-row items-center content-center space-x-4">

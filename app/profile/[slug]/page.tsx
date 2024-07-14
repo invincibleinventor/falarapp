@@ -15,6 +15,8 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [image, setImage] = useState("");
   const [posts, setPosts] = useState<any>([]);
   const [resume,setIsResume] = useState(false);
+  const [myImage,setMyImage] = useState('')
+  const [hisId,setHisId]=useState('')
   const [loggedin, setloggedin] = useState(false);
   const [about, setAbout] = useState("");
   const [loading, setLoading] = useState(true);
@@ -47,6 +49,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           {
             setFound(true);
             setName(pd[0].name);
+            setHisId(pd[0].id)
             setCover(pd[0].cover);
             setAbout(pd[0].about);
             setImage(pd[0].image);
@@ -57,6 +60,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             if (session) {
               const { data } = await supabase.from("user").select("*").eq("id", session.user.id);
               if (data) {
+                setMyImage(data[0].image);
                 setMyId(data[0].handle);
                 setFollowerList(pd[0].followers);
                 setFollowingList(data[0].following);
@@ -155,7 +159,23 @@ export default function Page({ params }: { params: { slug: string } }) {
         if (error) {
           console.log(error);
         } else {
+          const {data:x,error:es} = await supabase.from('notifications').select('*').eq('url','/profile/'+myId)
+          if(es){
+            console.log(es)
+          }
+          else{
+            if(x && x.length>0){
+              
+            }
+            else{
+              const {error:e} = await supabase.from('notifications').insert({type:'follow',to:hisId,description:"@"+myId+" has followed you! Follow them back?", url: '/profile/'+myId,title: "New Follower!",image:myImage})
+              if(e){
+                console.log(e)
+              }
+            }
+          }
           console.log(data);
+
         }
         setImFollowing(true);
         setFollowerList(arr);
@@ -229,7 +249,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             </div>
             <div className="flex items-center justify-between px-8 mt-8 mb-4 lex-row md:mb-4 md:mt-10">
             <h1 className="text-xl font-bold text-white ">{name}&apos;s Posts</h1>
-            <Link href={"/quickies/"+params.slug} className="px-6 py-2 text-sm font-medium text-white rounded-full cursor-pointer bg-gray-900/50 ">View Quickies</Link>
+            <Link href={"/quickies/"+params.slug} className="py-2 text-sm font-medium text-white rounded-full cursor-pointer md:px-6 md:bg-gray-900/50 ">View Quickies</Link>
             
             </div>
             <div className="flex flex-col gap-2 px-0 md:px-0">

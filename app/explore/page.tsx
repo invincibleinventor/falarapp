@@ -30,6 +30,7 @@ export default async function Index() {
   } = await supabase.auth.getUser();
   const userid = user?.id;
   let myhandle = "";
+  let myImage = "";
   let followinglist: any[] = [];
   async function get() {
     const { data, error } = await supabase.from("user").select("*").not("id", "in", `(${userid})`).limit(4);
@@ -43,6 +44,7 @@ export default async function Index() {
         ifollow = u[0]["following"];
         followinglist = ifollow;
         myhandle = u[0]["handle"];
+        myImage = u[0]["image"]
       }
 
       for await (const [index, user] of ds.entries()) {
@@ -80,6 +82,7 @@ export default async function Index() {
                       followerlist={user.followers}
                       followinglist={followinglist}
                       id={user.id}
+                      myImage={myImage}
                       name={user.name}
                       following={user.following.length}
                       isfollowing={user.isfollowing}
