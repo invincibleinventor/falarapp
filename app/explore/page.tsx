@@ -84,6 +84,7 @@ export default async function Index() {
                       id={user.id}
                       myImage={myImage}
                       name={user.name}
+                      notifications={user.notifications}
                       following={user.following.length}
                       isfollowing={user.isfollowing}
                       handle={user.handle}

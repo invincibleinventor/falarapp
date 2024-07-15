@@ -29,6 +29,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [followinglist, setFollowingList] = useState<any>([]);
   const [found, setFound] = useState(true);
   const [myself, setMyself] = useState(false);
+  const [notifications,setNotifications] = useState(0)
   const [myId, setMyId] = useState<string | undefined>();
 
   useEffect(() => {
@@ -52,6 +53,8 @@ export default function Page({ params }: { params: { slug: string } }) {
             setHisId(pd[0].id)
             setCover(pd[0].cover);
             setAbout(pd[0].about);
+            setNotifications(pd[0].notifications)
+
             setImage(pd[0].image);
             setIsResume(pd[0].isresume);
             setFollowers(pd[0].followers.length);
@@ -169,9 +172,17 @@ export default function Page({ params }: { params: { slug: string } }) {
             }
             else{
               const {error:e} = await supabase.from('notifications').insert({type:'follow',to:hisId,description:"@"+myId+" has followed you! Follow them back?", url: '/profile/'+myId,title: "New Follower!",image:myImage})
+              const notify = notifications+1
+              const {error:es} = await supabase.from('user').update({'notifications':notify}).eq('id',hisId)
+
               if(e){
                 console.log(e)
               }
+              if(es){
+                console.log(es)
+              }
+              
+
             }
           }
           console.log(data);
@@ -248,8 +259,8 @@ export default function Page({ params }: { params: { slug: string } }) {
               </div>
             </div>
             <div className="flex items-center justify-between px-8 mt-8 mb-4 lex-row md:mb-4 md:mt-10">
-            <h1 className="text-xl font-bold text-white ">{name}&apos;s Posts</h1>
-            <Link href={"/quickies/"+params.slug} className="py-2 text-sm font-medium text-white rounded-full cursor-pointer md:px-6 md:bg-gray-900/50 ">View Quickies</Link>
+            <h1 className="text-lg font-bold text-white ">{name}&apos;s Posts</h1>
+            <Link href={"/quickies/"+params.slug} className="py-2 ml-2 text-sm font-medium text-white rounded-full cursor-pointer md:px-6 md:bg-gray-900/50 ">View Quickies</Link>
             
             </div>
             <div className="flex flex-col gap-2 px-0 md:px-0">

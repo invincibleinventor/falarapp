@@ -9,11 +9,15 @@ export default function Page(){
     const [loading,setLoading] = useState(true)
     const supabase = createClient()
     const [notifications,setNotifications] = useState<any>()
+    const [userid,setUserid] = useState("")
     const [empty,setEmpty] = useState(true)
     useEffect(()=>{
         async function get(){
             const {data:user,error} = await supabase.auth.getUser()
             if(user){
+              if(user.user){
+                setUserid(user.user.id)
+              }
             const {data:d,error:e} = await supabase.from('notifications').select('*').eq('to',user.user?.id)
             
             if(d && d.length>0){
@@ -44,7 +48,9 @@ export default function Page(){
               notifications.map((post: { [x: string]: any; }) => (
                 <Notification
                   id={post["id"]}
+                  userid={userid}
                   title={post["title"]}
+                  notifications={notifications.length}
                   key={post["id"]}
                   image={post["image"]}
                   description={post["description"]}

@@ -63,9 +63,15 @@ export default function UserComponent(props:any) {
           }
           else{
             const {error:e} = await supabase.from('notifications').insert({type:'follow',to:props.id,description:"@"+myId+" has followed you! Follow them back?", url: '/profile/'+myId,title: "New Follower!",image:props.myImage})
+            const notifs = notifications+1
+            const {error:es} = await supabase.from('user').update({'notifications':notifs}).eq('id',props.id)
             if(e){
               console.log(e)
             }
+            if(es){
+              console.log(es)
+            }
+           
           }
         }
         console.log(data);      }
@@ -77,6 +83,7 @@ export default function UserComponent(props:any) {
   const [imfollowing, setImFollowing] = useState(props.isfollowing);
   const [followerlist, setFollowerList] = useState(props.followerlist);
   const [followinglist, setFollowingList] = useState(props.followinglist);
+  const [notifications,setNotifications] = useState(props.notifications)
   let a = props.name;
   if (a.length >= 11) {
     a = a.slice(0, 7);

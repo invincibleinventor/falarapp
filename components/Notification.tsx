@@ -7,11 +7,20 @@ export default function Notification(props:any)
     const supabase = createClient()
     async function notify(){
         const {error} = await supabase.from('notifications').update({seen:true}).eq('id',props.id)
+        const notify = props.notifications-1
+        const {error:es} = await supabase.from('user').update({'notifications':notify}).eq('id',props.userid)
+
         if(error){
             console.log(error)
         }
+        
         else{
             window.location.replace(props.url)
+        }
+
+        if(es){
+            alert(es.message)
+            console.log(es)
         }
     }
     return(

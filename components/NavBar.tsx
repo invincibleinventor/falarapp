@@ -1,12 +1,39 @@
-"use client";
 import Headeritem from "@/components/HeaderItem";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-export default function App$() {
-  const loc = usePathname();
+import Notificationitem from "@/components/Notificationitem";
+import { useEffect, useState } from "react";
+import { createClient } from "@/utils/supabase/server";
+import Button from "./NewButton";
+import { cookies } from "next/headers";
+export default async function App$() {
+  let notifications = 0
+  const cookieStore = cookies()
+  const supabase = createClient(cookieStore)
+ 
+    async function get(){
+      const {data:user} = await supabase.auth.getUser()
+      if(user.user){
+        const {data,error} = await supabase.from('user').select('*').eq('id',user.user.id)
+        if(error){
+          console.log(error)
+        } 
+        else{
+          if(data && data.length>0){
+            notifications =  data[0]["notifications"]
+            console.log(notifications)
+          }
+        }
+      }
+    }
+    await get()
+   
+    
+
+
   return (
     <div className="mb-auto lg:w-[400px]">
-      <div className={`  flex w-max flex-col items-start p-0 md:pr-4 ${loc.startsWith("/post/") ? "md:flex" : ""}`}>
+      <div className={`  flex w-max flex-col items-start p-0 md:pr-4 `}>
         <Link className="flex flex-row mt-1" href="/">
           <svg
             className="ml-[8px] mr-2 mt-[2px] h-[51px] w-[51px] cursor-pointer rounded-full p-[10px] text-gray-300 transition-all  duration-100 ease-linear hover:bg-gray-900 md:ml-[4px] md:mr-0"
@@ -50,8 +77,9 @@ export default function App$() {
             }
             name="Quickies"
           ></Headeritem>
-          <Headeritem
+          <Notificationitem
             link="/notifications"
+            notifications={notifications}
             url={
               <path
                 fill="currentColor"
@@ -59,7 +87,7 @@ export default function App$() {
               />
             }
             name="Notifications"
-          ></Headeritem>
+          ></Notificationitem>
           <Headeritem
             link="/explore"
             url={
@@ -109,23 +137,7 @@ export default function App$() {
             }
             name="More"
           ></Headeritem>
-          <Link href={(loc.includes('quickie') || loc.includes("hashtag"))?"/quickiemaker":"/create"} className="pt-5">
-            <div className="mx-auto flex rounded-full md:rounded-full h-[52px]  w-[52px] cursor-pointer  flex-row content-center items-center bg-cyan-800 p-3 transition-all duration-100 ease-linear hover:bg-cyan-600 md:mr-auto md:h-[44px] md:w-[calc(180px)] md:py-[14px]">
-              <span className={`mx-auto hidden pt-[0px] text-center text-sm font-medium  text-white md:inline-block`}>
-                New {loc.includes('quickie')?'Quickie':'Post'}
-              </span>
-              <svg
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                className="m-auto h-[22px] w-[22px] text-white md:hidden"
-                style={{ fill: "white" }}
-              >
-                <g>
-                  <path d="M23 3c-6.62-.1-10.38 2.421-13.05 6.03C7.29 12.61 6 17.331 6 22h2c0-1.007.07-2.012.19-3H12c4.1 0 7.48-3.082 7.94-7.054C22.79 10.147 23.17 6.359 23 3zm-7 8h-1.5v2H16c.63-.016 1.2-.08 1.72-.188C16.95 15.24 14.68 17 12 17H8.55c.57-2.512 1.57-4.851 3-6.78 2.16-2.912 5.29-4.911 9.45-5.187C20.95 8.079 19.9 11 16 11zM4 9V6H1V4h3V1h2v3h3v2H6v3H4z"></path>
-                </g>
-              </svg>
-            </div>
-          </Link>
+          <Button/>
         </div>
       </div>
     </div>
