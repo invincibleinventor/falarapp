@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 export default function Post(props:any) {
+  const timeStamp = new Date().getTime()
   let s = props.description;
   let x = props.name;
   if (x.length >= 11) {
@@ -57,7 +58,7 @@ export default function Post(props:any) {
           className="block md:w-[112px] md:h-[112px] w-[80px h-[56px]"
         >
           <img
-src={props.cover}
+src={props.cover+?+timeStamp}
          
             className="object-cover aspect-[4/4] min-h-[64px] min-w-[64px] max-w-full max-h-full shrink-0"
           />
