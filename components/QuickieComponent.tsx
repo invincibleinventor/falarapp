@@ -81,7 +81,7 @@ photocount = props.image.length;
               {photocount>0  &&
               <div className={photocount==1?"w-full border ml-0 rounded-md mt-4 aspect-video h-full mb-4":"mt-4 mb-4 md:gap-2 gap-1 grid-cols-2 grid"}>
                 {props.image.map((image:string) => 
-                  <img onClick={()=>window.open(image,'_blank')?.focus()} className="object-cover w-full border rounded-md h-max aspect-video" src={image+"?"+timeStamp}></img>
+                  <img onClick={()=>window.open(image,'_blank')?.focus()} className="object-cover w-full border rounded-md h-max aspect-video" src={image}></img>
                 )}
               </div>
 }
