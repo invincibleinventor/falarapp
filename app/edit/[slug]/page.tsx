@@ -101,7 +101,7 @@ export default function Page({ params }: { params: { slug: string } }) {
       if (changed) {
         
           const newCover = await coverChange(params.slug);
-          const { error: es } = await supabase.from("posts").update({ cover: newCover }).eq("id", data[0]["id"]);
+          const { error: es } = await supabase.from("posts").update({ cover: newCover }).eq("id", params.slug);
           if (es) {
             alert(es.message);
           } else {
