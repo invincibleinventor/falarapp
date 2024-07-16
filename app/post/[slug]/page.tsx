@@ -15,6 +15,7 @@ export default async function App({ params }: { params: { slug: string } }) {
   const supabase = createClient(cookieStore);
   let author = "";
   let content = "";
+  const timeStamp = new Date().getTime()
   let title = "";
   let name = "";
   let cover = "";
@@ -77,7 +78,7 @@ export default async function App({ params }: { params: { slug: string } }) {
         profile = u[0].image;
         content = data[0]["content"];
         title = data[0]["title"];
-        cover = data[0]["cover"];
+        cover = data[0]["cover"]+"?"+timeStamp
       }
       const date2 = new Date(data[0].created_at);
       time = date1.getTime() - date2.getTime();
