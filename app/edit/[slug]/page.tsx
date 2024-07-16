@@ -109,6 +109,9 @@ export default function Page({ params }: { params: { slug: string } }) {
           }
         
       }
+      else{window.location.replace("/")
+
+      }
     }
   }
   return !loading ? (
