@@ -216,7 +216,7 @@ export default async function App({ params }: { params: { slug: string } }) {
               {photocount>0  &&
               <div className={photocount==1?"mb-4 w-full border rounded-md mt-4 aspect-video h-full":"mt-4 mb-4 md:gap-2 gap-1 grid-cols-2 grid"}>
                 {image.map((image:string) => 
-                <Iof key={image} src={image+"?"+timeStamp}/>
+                <Iof key={image} src={image}/>
                 )}
               </div>
 }
