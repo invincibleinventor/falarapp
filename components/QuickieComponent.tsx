@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import BookMarksComponent from "./QuickieBookMarksComponent";
 import LikeComponent from "./QuickieLikeComponent";
 export default function Post(props:any) {
+  const timeStamp = new Date().getTime()
   let x = props.name;
   if (x.length >= 11) {
     x = x.slice(0, 7);

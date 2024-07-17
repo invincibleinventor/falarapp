@@ -14,6 +14,7 @@ export default async function App({ params }: { params: { slug: string } }) {
   const supabase = createClient(cookieStore);
   let author = "";
   let content = "";
+  const timeStamp = new Date().getTime()
   let image:any[]=[];
   let profile = "";
   let error = false;

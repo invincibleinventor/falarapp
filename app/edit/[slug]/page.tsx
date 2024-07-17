@@ -99,23 +99,18 @@ export default function Page({ params }: { params: { slug: string } }) {
       console.log(error);
     } else {
       if (changed) {
-        const { data } = await supabase
-          .from("posts")
-          .select("*")
-          .eq("poster", user?.id)
-          .order("id", { ascending: false })
-          .limit(1);
-        if (data) {
-          const newCover = await coverChange(data[0]["id"]);
-          const { error: es } = await supabase.from("posts").update({ cover: newCover }).eq("id", data[0]["id"]);
+        
+          const newCover = await coverChange(params.slug);
+          const { error: es } = await supabase.from("posts").update({ cover: newCover }).eq("id", params.slug);
           if (es) {
             alert(es.message);
           } else {
             window.location.replace("/");
           }
-        } else {
-          window.location.replace("/");
-        }
+        
+      }
+      else{window.location.replace("/")
+
       }
     }
   }
