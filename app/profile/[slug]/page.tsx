@@ -1,6 +1,7 @@
 "use client";
 import More from "@/components/More";
 import PostComponent from "@/components/PostComponent";
+import notification from "@/utils/notifications/notification";
 import { createClient } from "@/utils/supabase/client";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
@@ -162,29 +163,8 @@ export default function Page({ params }: { params: { slug: string } }) {
         if (error) {
           console.log(error);
         } else {
-          const {data:x,error:es} = await supabase.from('notifications').select('*').eq('url','/profile/'+myId)
-          if(es){
-            console.log(es)
-          }
-          else{
-            if(x && x.length>0){
-              
-            }
-            else{
-              const {error:e} = await supabase.from('notifications').insert({type:'follow',to:hisId,description:"@"+myId+" has followed you! Follow them back?", url: '/profile/'+myId,title: "New Follower!",image:myImage})
-              const notify = notifications+1
-              const {error:es} = await supabase.from('user').update({'notifications':notify}).eq('id',hisId)
-
-              if(e){
-                console.log(e)
-              }
-              if(es){
-                console.log(es)
-              }
-              
-
-            }
-          }
+        
+          notification(notifications,supabase,hisId,'/profile/'+myId,"New Follower",'follow',"@"+myId+" has followed you! Follow them back?",myImage)
           console.log(data);
 
         }

@@ -125,7 +125,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                       Your search results appear here. Seems like there are no posts related to your search term.
                     </h1>
                     <Link
-                      href="/search/posts"
+                      href="/search/posts/*"
                       className={`mx-auto mt-5 w-max px-8  py-3 text-xs font-medium  ${
                         1 == 1 ? "bg-cyan-800 rounded-full  text-white" : "border-2 bg-white"
                       }`}

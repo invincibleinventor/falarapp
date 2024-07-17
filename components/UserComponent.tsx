@@ -1,5 +1,6 @@
 "use client";
 
+import notification from "@/utils/notifications/notification";
 import { createClient } from "@/utils/supabase/client";
 import Image from "next/image";
 import Link from "next/link";
@@ -31,7 +32,6 @@ export default function UserComponent(props:any) {
       if (error || e) {
         console.log(error);
       } else {
-        console.log(data);
       }
       setFollowerList(arr);
       setFollowingList(arr2);
@@ -53,27 +53,10 @@ export default function UserComponent(props:any) {
       if (error || e) {
         console.log(error);
       } else {
-        const {data:x,error:es} = await supabase.from('notifications').select('*').eq('url','/profile/'+myId)
-        if(es){
-          console.log(es)
-        }
-        else{
-          if(x && x.length>0){
-            
-          }
-          else{
-            const {error:e} = await supabase.from('notifications').insert({type:'follow',to:props.id,description:"@"+myId+" has followed you! Follow them back?", url: '/profile/'+myId,title: "New Follower!",image:props.myImage})
-            const notifs = notifications+1
-            const {error:es} = await supabase.from('user').update({'notifications':notifs}).eq('id',props.id)
-            if(e){
-              console.log(e)
-            }
-            if(es){
-              console.log(es)
-            }
-           
-          }
-        }
+      
+          
+        notification(notifications,supabase,props.id,'/profile/'+myId,"New Follower",'follow',"@"+myId+" has followed you! Follow them back?",props.myImage)
+
         console.log(data);      }
       setImFollowing(true);
       setFollowerList(arr);

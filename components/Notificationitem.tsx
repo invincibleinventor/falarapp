@@ -9,10 +9,12 @@ export default function App(props:any) {
   const a = { opened: false };
 const supabase = createClient()
 const  [notifications,setNotifications] = useState(props.notifications)
-
+function deploy(payload:any){
+  if(payload.new.id==props.id && payload.new.notifications>0){setNotifications( payload.new.notifications)}
+}
 supabase
 .channel('notification_update')
-.on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'user' }, (payload:any)=>(setNotifications( payload.new.notifications)))
+.on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'user' }, (payload:any)=>(console.log('beloww'),console.log(payload),deploy(payload)))
 .subscribe()
   if (loc == props.link) {
     console.log(props.link);

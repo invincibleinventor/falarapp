@@ -10,11 +10,12 @@ export default async function App$() {
   let notifications = 0
   const cookieStore = cookies()
   const supabase = createClient(cookieStore)
- 
+ let id;
     async function get(){
       const {data:user} = await supabase.auth.getUser()
       if(user.user){
-        const {data,error} = await supabase.from('user').select('*').eq('id',user.user.id)
+        id=user.user.id
+        const {data,error} = await supabase.from('user').select('*').eq('to',user.user.id)
         if(error){
           console.log(error)
         } 
@@ -78,6 +79,7 @@ export default async function App$() {
             name="Quickies"
           ></Headeritem>
           <Notificationitem
+          id={id}
             link="/notifications"
             notifications={notifications}
             url={

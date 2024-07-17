@@ -12,8 +12,9 @@ export default function Login() {
     const { error } = await supabase.auth.signInWithPassword({ email: email, password: password });
     if (error) {
       console.log(error);
+      alert(error.message)
     } else {
-      router.refresh();
+     window.location.replace("/editprofile");
     }
   }
   async function register() {
@@ -24,8 +25,9 @@ export default function Login() {
     });
     if (error) {
       console.log(error);
+      alert(error.message)
     } else {
-      router.refresh();
+     window.location.replace("/editprofile");
     }
   }
 
