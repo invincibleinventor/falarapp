@@ -42,7 +42,7 @@ export default function Page(){
             <h1 className="text-xl font-semibold text-white">Notifications</h1>
             </div>
             <div className="h-full overflow-y-scroll hiddenscroll">
-            <div className="flex flex-col gap-2 mb-20 animate-in hiddenscroll">
+            <div className="flex flex-col gap-0 mb-20 animate-in hiddenscroll">
             {!loading ? (
                 !empty ? (                
               notifications.map((post: { [x: string]: any; }) => (

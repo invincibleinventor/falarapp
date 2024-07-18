@@ -15,7 +15,7 @@ export default async function App$() {
       const {data:user} = await supabase.auth.getUser()
       if(user.user){
         id=user.user.id
-        const {data,error} = await supabase.from('user').select('*').eq('to',user.user.id)
+        const {data,error} = await supabase.from('user').select('*').eq('id',user.user.id)
         if(error){
           console.log(error)
         } 
