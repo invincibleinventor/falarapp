@@ -28,6 +28,8 @@ export default async function App({ params }: { params: { slug: string } }) {
   let myphoto = "";
   let myhandle = "";
   let loggedin = false;
+  let blocked :any[] = [];
+  let authorid = 'sample';
   let liked = false;
   let likedlist: string | any[] = [];
   let bookmarked = false;
@@ -50,6 +52,7 @@ export default async function App({ params }: { params: { slug: string } }) {
       if (users) {
         myphoto = users[0]["image"];
         myname = users[0]["name"];
+        blocked = users[0]["blocked"];
         myhandle = users[0]["handle"];
         userliked = users[0]["liked"];
         userbookmarked = users[0]["bookmarks"];
@@ -74,6 +77,7 @@ export default async function App({ params }: { params: { slug: string } }) {
         if (author == myhandle) {
           imauthor = true;
         }
+        authorid = data[0]["poster"]
         name = u[0].name;
         profile = u[0].image;
         content = data[0]["content"];
@@ -90,7 +94,7 @@ export default async function App({ params }: { params: { slug: string } }) {
   }
 
   await set();
-
+  
   async function fetchcomments() {
     const { data, error } = await supabase
       .from("comments")
@@ -142,7 +146,7 @@ export default async function App({ params }: { params: { slug: string } }) {
   console.log("above");
   return !loading ? (
     <div className="relative flex flex-col flex-1 h-screen overflow-hidden md:mr-4 lg:mx-0">
-      {error && (
+      {(error || blocked.includes(authorid)) && (
         <div className="flex items-center content-center w-full h-screen px-10 sm:px-24 md:px-16 lg:px-24">
           <div className="flex flex-col gap-4 mx-auto max-w-max">
             <h1 className="mx-auto text-xl font-semibold text-center text-gray-300">That Post Doesn&apos;t Exist</h1>
@@ -161,7 +165,7 @@ export default async function App({ params }: { params: { slug: string } }) {
           </div>
         </div>
       )}
-      {!error && (
+      {(!error && !blocked.includes(authorid)) && (
         <div className="hiddenscroll h-full w-[calc(100vw-68px)] overflow-hidden pb-14 md:w-full md:max-w-full md:border-x md:border-x-gray-900">
           <div className="relative aspect-video">
             <img
@@ -207,7 +211,7 @@ export default async function App({ params }: { params: { slug: string } }) {
               {content}
             </Markdown>
           </div>
-          {loggedin &&
+          {(loggedin && !blocked.includes(authorid)) &&
           <section className="px-0 pt-4 pb-8 border-t border-t-gray-900" id="comments">
             <h1 className="px-6 mb-4 text-xl font-bold text-gray-300">Comments</h1>
 
@@ -224,7 +228,7 @@ export default async function App({ params }: { params: { slug: string } }) {
 }
         </div>
       )}
-      {loggedin &&
+      {(loggedin && !blocked.includes(authorid)) &&
       <div className="absolute bottom-0 flex flex-row w-full border-t bg-[#000205] border-x h-14 border-t-gray-900 border-x-gray-900">
         <BookMarksComponent
           userliked={userbookmarked}

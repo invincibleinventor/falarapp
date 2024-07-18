@@ -31,9 +31,11 @@ export default async function App({ params }: { params: { slug: string } }) {
   let bookmarked = false;
   let bookmarkedlist: any[] = [];
   let userliked: any[] = [];
+  let blocked: any[] = [];
   let userbookmarked: any[] = [];
   let comments: any[] = [];
   TimeAgo.locale(en);
+  let authorid;
   let user = "";
   const timeAgo = new TimeAgo("en-US");
   const date1 = new Date();
@@ -47,13 +49,15 @@ export default async function App({ params }: { params: { slug: string } }) {
       const { data: users } = await supabase.from("user").select("*").eq("id", user);
       if (users) {
         myphoto = users[0]["image"];
+        blocked = users[0]["blocked"]
         myname = users[0]["name"];
         myhandle = users[0]["handle"];
         userliked = users[0]["liked"];
         userbookmarked = users[0]["bookmarks"];
       }
     }
-    const { data, error: e } = await supabase.from("quickies").select("*").eq("id", params.slug);
+    const blockedpostgres = blocked.toString()
+    const { data, error: e } = await supabase.from("quickies").select("*").eq("id", params.slug)
     if (data && data.length > 0) {
       error = false;
       const l = data[0]["liked"];
@@ -71,6 +75,7 @@ export default async function App({ params }: { params: { slug: string } }) {
         author = u[0]["handle"];
         
         naam = u[0].name;
+        authorid = u[0].id;
         profile = u[0].image;
         content = data[0]["content"];
         image=data[0]["image"];
@@ -154,7 +159,7 @@ export default async function App({ params }: { params: { slug: string } }) {
   console.log("above");
   return !loading ? (
     <div className="relative flex flex-col flex-1 h-screen overflow-hidden bg-transparent ">
-      {error && (
+      {(error || blocked.includes(authorid)) && (
         <div className="flex items-center content-center w-full h-screen px-10 sm:px-24 md:px-16 lg:px-24">
           <div className="flex flex-col gap-4 mx-auto max-w-max">
             <h1 className="mx-auto text-lg font-semibold text-center text-gray-300">That Quickie Doesn&apos;t Exist</h1>
@@ -173,7 +178,7 @@ export default async function App({ params }: { params: { slug: string } }) {
           </div>
         </div>
       )}
-      {!error && (
+      {(!error &&  !blocked.includes(authorid)) && (
         <div className="hiddenscroll h-full w-[calc(100vw-68px)] mx-0 overflow-hidden pb-14 md:w-full md:max-w-full px-0">
           <div className="w-full lg:pr-2 px-2 py-[6px] pb-0">
         <div  className="flex flex-col rounded-none md:gap-0">

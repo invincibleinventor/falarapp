@@ -54,7 +54,7 @@ photocount = props.image.length;
         alt="user profile"
         className="rounded-full object-cover min-w-[24px] max-w-[24px] h-6"
       />
-    <div className="flex items-center content-center">
+    <div  className="flex items-center content-center">
       <h1>
         <p className="text-sm font-medium text-gray-300 break-all line-clamp-1">{props.name}</p>
       </h1>
@@ -75,7 +75,6 @@ photocount = props.image.length;
                 className="mt-[6px] pl-0 ml-0 text-[16px] font-medium text-gray-300 four-line-ellipsis md:text-[15px]"
               >
                 {formatText(props.description)}
-              </Link>
 
              
               {photocount>0  &&
@@ -86,6 +85,7 @@ photocount = props.image.length;
               </div>
 }
 
+</Link>
 
               <div className="flex px-[2px] flex-row items-center content-center mt-4">
               

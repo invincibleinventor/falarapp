@@ -239,7 +239,7 @@ window.location.reload()
             src={`${(found ? image : "/usernotfound.png")}`}
             alt="userimage"
           />
-          {found && loggedin && (
+          {found && loggedin && !blocked &&(
             <button
               onClick={() => onfollow()}
               className={`absolute rounded-full bottom-10 right-7 px-8 py-3 text-xs font-semibold md:right-12  ${
@@ -253,7 +253,7 @@ window.location.reload()
           )}
         </div>
         <div className="flex flex-col gap-2 ml-8 md:ml-14">
-          {found && (
+          {found  && (
             <div className="flex flex-row items-start justify-between">
             <div className="flex flex-col content-center sm:gap-2 sm:items-center sm:flex-row ">
               <h1 className="text-xl font-semibold text-gray-300">{name}</h1>
@@ -266,14 +266,15 @@ window.location.reload()
             </div>
           )}
           <div className="flex flex-col justify-between gap-2 sm:gap-0 sm:flex-row">
-          <h1 className="pr-12 text-sm font-normal leading-relaxed text-gray-500 sm:text-gray-500">{about}</h1>
+          
+          <h1 className="pr-12 text-sm font-normal leading-relaxed text-gray-500 sm:text-gray-500">{!blocked?about:'You have blocked this user. Unblock them to view their posts.'}</h1>
 
           <div className={resume?"mr-16  flex flex-row":"mr-16 flex flex-row"}>
           <Link href={"/resume/"+params.slug} className={resume?"text-sm font-medium text-blue-600":"hidden"}>View Resume</Link>
         </div>
           </div>
         </div>
-        {found && (
+        {found && !blocked && (
           <>
             <div className="flex flex-row items-center content-center gap-6 p-4 mx-8 my-4 mb-1 rounded-md bg-gray-800/30 md:mx-14">
               <div className="flex flex-row w-full md:mx-auto">
