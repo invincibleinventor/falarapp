@@ -12,6 +12,7 @@ export default async function notification(notifications:any,supabase:any,to:any
             else{
               const {data:s,error:f} = await supabase.from('user').select('notifications').eq('id',to)
               if(s && s.length>0){
+                alert(s[0]["notifications"])
               const {error:e} = await supabase.from('notifications').insert({type:type,to:to,description:description, url: url,title: title,image:image})
               const notify = s[0]["notifications"]+1
               const {error:es} = await supabase.from('user').update({'notifications':notify}).eq('id',to)

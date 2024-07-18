@@ -7,7 +7,13 @@ export default function Notification(props:any)
     const supabase = createClient()
     async function notify(){
         const {error} = await supabase.from('notifications').update({seen:true}).eq('id',props.id)
-        const notify = props.notifications-1
+        const {data:s,error:ss} = await supabase.from('user').select('notifications').eq('id',props.userid)
+        if(ss){
+            alert(ss.message)
+        }
+        else{
+            if(s && s.length>0){
+                const notify = s[0]["notifications"]-1
         const {error:es} = await supabase.from('user').update({'notifications':notify}).eq('id',props.userid)
 
         if(error){
@@ -21,7 +27,8 @@ export default function Notification(props:any)
         if(es){
             alert(es.message)
             console.log(es)
-        }
+        }}
+    }
     }
     return(
 <div onClick={()=>(notify())} className={`flex cursor-pointer flex-row px-8 py-5 space-x-5 border-b border-b-gray-900 ${!props.seen?'bg-cyan-500/10':'bg-black'}`}>
