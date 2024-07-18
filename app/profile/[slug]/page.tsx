@@ -22,6 +22,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [about, setAbout] = useState("");
   const [loading, setLoading] = useState(true);
   const [cover, setCover] = useState("true");
+  const [myuserid,setMyuserid] = useState("")
   const [name, setName] = useState("");
   const [following, setFollowing] = useState(0);
   const [imfollowing, setImFollowing] = useState(false);
@@ -32,7 +33,8 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [myself, setMyself] = useState(false);
   const [notifications,setNotifications] = useState(0)
   const [myId, setMyId] = useState<string | undefined>();
-
+  const [blockedlist,setBlockedlist] =useState<any>([])
+  const [blocked,setBlocked] = useState(false)
   useEffect(() => {
     async function get() {
       const {
@@ -66,8 +68,21 @@ export default function Page({ params }: { params: { slug: string } }) {
               if (data) {
                 setMyImage(data[0].image);
                 setMyId(data[0].handle);
+                setMyuserid(session.user.id)
+                setBlockedlist(data[0].blocked);
                 setFollowerList(pd[0].followers);
                 setFollowingList(data[0].following);
+                console.log('below')
+                console.log(pd[0].id)
+                console.log(data[0].blocked)
+                if(data[0].blocked.includes(pd[0].id)){
+                  setBlocked(true)
+                  console.log('blockkkedd')
+                }
+                else{
+                  console.log('illla')
+                  setBlocked(false)
+                }
                 if (data[0].handle == params.slug) {
                   setMyself(true);
                 } else if (pd[0].followers.includes(data[0].handle)) {
@@ -87,6 +102,34 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   TimeAgo.locale(en);
 
+
+
+  async function determine(){
+    if(blocked){
+      let b = blockedlist
+      b = b.filter((item: string) => item !== hisId);
+      const {error} = await supabase.from('user').update({blocked:b}).eq('id',myuserid)
+      if(error){
+        alert(error)
+      }
+      else{
+window.location.reload()
+      }    }
+    else{
+      const b = blockedlist
+      b.push(hisId)
+      
+      const {error} = await supabase.from('user').update({blocked:b}).eq('id',myuserid)
+      if(error){
+        alert(error)
+      }
+      else{
+        window.location.reload()
+      }
+    }
+  }
+
+  
   const timeAgo = new TimeAgo("en-US");
   const date1 = new Date();
   useEffect(() => {
@@ -211,9 +254,15 @@ export default function Page({ params }: { params: { slug: string } }) {
         </div>
         <div className="flex flex-col gap-2 ml-8 md:ml-14">
           {found && (
+            <div className="flex flex-row items-start justify-between">
             <div className="flex flex-col content-center sm:gap-2 sm:items-center sm:flex-row ">
               <h1 className="text-xl font-semibold text-gray-300">{name}</h1>
+              
               <h1 className="text-sm font-normal text-gray-500">@{params.slug}</h1>
+            </div>
+            {!myself &&
+            <button onClick={()=>determine()} className="px-6 py-2 mr-8 text-xs font-medium text-white border border-red-900 rounded-full bg-red-900/10 md:mr-14">{blocked?'Unblock':'Block User'}</button>
+}
             </div>
           )}
           <div className="flex flex-col justify-between gap-2 sm:gap-0 sm:flex-row">
