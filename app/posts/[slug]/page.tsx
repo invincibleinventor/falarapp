@@ -89,8 +89,8 @@ export default function Page({ params }: { params: { slug: string } }) {
         <div className="h-full overflow-y-scroll hiddenscroll">
           <div className="flex flex-col gap-2 mb-20 animate-in hiddenscroll">
             {!loading ? (
-              posts.map((post: { [x: string]: any; }) => (
-                <PostComponent
+                  posts.map((post:any) => (
+                    <PostComponent
                   id={post["id"]}
                   title={post["title"]}
                   cover={post["cover"]}

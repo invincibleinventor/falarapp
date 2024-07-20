@@ -28,12 +28,14 @@ export default async function Index() {
   let empty = true;
   let posts: any[] = [];
   let loading = true;
+  let myblocked:any[] =[]
   let l: any[] = [];
   async function get() {
     const { data: user } = await supabase.auth.getUser();
     const s = user.user!.id;
     const { data: u } = await supabase.from("user").select("*").eq("id", s);
     l = u![0]["following"];
+     myblocked = u![0]["blocked"]
     const h = u![0]["handle"];
     let ds = [];
 
@@ -43,6 +45,7 @@ export default async function Index() {
       .select("*")
       .order("id", { ascending: false })
       .in("handle", l)
+      .not("poster","in",`(${myblocked.toString()})`)
       .limit(5);
     if (error) {
     } else {
@@ -119,7 +122,7 @@ export default async function Index() {
               ) : (
                 <div className="flex items-center content-center w-full h-screen"></div>
               )}
-              <More in={l}></More>{" "}
+              <More myblocked={myblocked} in={l}></More>{" "}
             </div>{" "}
           </div>
         </div>

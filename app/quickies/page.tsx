@@ -35,15 +35,17 @@ export default async function Index() {
   let myhandle = "";
   let userliked :any[] = [];
   let userbookmarked:any[] = [];
-  
-  async function get() {
+  let myblocked :any[]=[]
+    async function get() {
     const { data: user } = await supabase.auth.getUser();
     const s = user.user!.id;
+    
     const { data: u } = await supabase.from("user").select("*").eq("id", s);
     l = u![0]["following"];
     const h = u![0]["handle"];
     myname = u![0]["name"]
     myphoto = u![0]["image"]
+    myblocked = u![0]["blocked"]
     myhandle = u![0]["handle"]
     userbookmarked = u![0]["bookmarks"]
     userliked = u![0]["liked"]
@@ -55,6 +57,7 @@ export default async function Index() {
       .select("*")
       .order("id", { ascending: false })
       .in("handle", l)
+      .not("poster","in",`(${myblocked.toString()})`)
       .limit(5);
     if (error) {
     } else {
@@ -160,7 +163,7 @@ export default async function Index() {
               ) : (
                 <div className="flex items-center content-center w-full h-screen"></div>
               )}
-              <More myhandle={myhandle} myname={myname} myphoto={myphoto} userliked={userliked} userbookmarked={userbookmarked} in={l}></More>{" "}
+              <More myblocked ={myblocked} myhandle={myhandle} myname={myname} myphoto={myphoto} userliked={userliked} userbookmarked={userbookmarked} in={l}></More>{" "}
             </div>{" "}
           </div>
         </div>

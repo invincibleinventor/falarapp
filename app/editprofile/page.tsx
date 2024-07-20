@@ -40,7 +40,7 @@ export default function Create() {
   async function create() {
     const { data } = await supabase.from("user").select("*").eq("handle", handle);
     if (data && data.length > 0) {
-      alert("Handle Already Exists");
+      alert("Username Already Exists");
     } else {
       const { error } = await supabase.from("user").insert({
         email: email,
@@ -87,19 +87,19 @@ export default function Create() {
           onChange={(e) => setName(e.target.value)}
           className="px-4 py-2 mb-6 text-sm text-gray-300 bg-black border border-gray-900 rounded-md outline-none focus:outline-cyan-800"
           name="name"
-          placeholder="Please Type Out Your Display Name"
+          placeholder="Please Type Out Your Name"
           required
           minLength={4}
           maxLength={20}
         />
         <label className="text-sm text-gray-300" htmlFor="name">
-          Handle - You cannot change this later
+          Username - You cannot change this later
         </label>
         <input
           onChange={(e) => setHandle(e.target.value.trim().replace(" ", "_"))}
           className="px-4 py-2 mb-6 text-sm text-gray-300 bg-black border border-gray-900 rounded-md outline-none focus:outline-cyan-800"
-          name="handke"
-          placeholder="Please Type Out Your Handle"
+          name="handle"
+          placeholder="Please Type Out Your Username"
           required
           minLength={4}
           maxLength={12}

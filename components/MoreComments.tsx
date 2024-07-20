@@ -25,6 +25,7 @@ export default function CommentsComponent(props:any) {
       .select("*")
       .eq("id", props.slug)
       .order("likes", { ascending: false })
+      .not("poster","in",`(${props.myblocked})`)
       .range(from, to);
     if (error) {
       console.log(error);
@@ -77,7 +78,7 @@ export default function CommentsComponent(props:any) {
   }, [inView]);
   return (
     <>
-      <div className="my-3 mt-6 flex flex-col space-y-4">
+      <div className="flex flex-col my-3 mt-6 space-y-4">
         {!loading ? (
           comments.map((comment:any) => (
             <CommentComponent
@@ -95,7 +96,7 @@ export default function CommentsComponent(props:any) {
               loggedin={props.loggedin}
             />
           ))
-        ) : (
+        ) : (comments && comments.length>0 &&
           <>
             <Oval
               height={40}

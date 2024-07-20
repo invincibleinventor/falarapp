@@ -169,8 +169,8 @@ export default async function App({ params }: { params: { slug: string } }) {
             </h1>
             <Link
               href="/quickies"
-              className={`mx-auto mt-3 w-max rounded-md px-8 py-3 text-xs font-bold ${
-                1 == 1 ? "bg-blue-700 text-white" : "border-2  bg-white "
+              className={`mx-auto mt-3 w-max rounded-full px-8 py-3 text-xs font-bold ${
+                1 == 1 ? "bg-cyan-800 text-white" : "border-2  bg-white "
               }`}
             >
               Return Back
@@ -243,6 +243,7 @@ export default async function App({ params }: { params: { slug: string } }) {
             <h1 className="px-6 mb-2 text-lg font-bold text-gray-300">Comments</h1>
 
             <CommentsComponent
+            myblocked={blocked}
               myname={myname}
               myphoto={myphoto}
               handle={myhandle}
@@ -255,7 +256,7 @@ export default async function App({ params }: { params: { slug: string } }) {
 }
         </div>
       )}
-      {loggedin &&
+      {loggedin && !blocked &&
       <div className="absolute bottom-0 flex flex-row w-full border-t bg-black/40 h-14 border-t-gray-900 ">
       
 

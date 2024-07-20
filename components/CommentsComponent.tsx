@@ -37,6 +37,7 @@ export default function CommentsComponent(props:any) {
         .select("*")
         .eq("id", props.slug)
         .order("likes", { ascending: false })
+        .not("poster","in",`(${props.myblocked.toString()})`)
         .limit(5);
       if (data && data.length != 0) {
         let l = [];
@@ -118,7 +119,7 @@ export default function CommentsComponent(props:any) {
                 loggedin={props.loggedin}
               />
             ))}
-            <MoreComments myhandle={props.myhandle} loggedin={props.loggedin} slug={props.slug} />
+            <MoreComments myblocked={props.myblocked} myhandle={props.myhandle} loggedin={props.loggedin} slug={props.slug} />
           </>
         ) : (
           <Oval

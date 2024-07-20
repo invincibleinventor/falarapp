@@ -37,6 +37,7 @@ export const config = {
     "/messages",
     "/myself",
     "/quickies",
+    "/quickies/:path*",
     "/quickiemaker",
     "/setupresume",
     "/editresume",
@@ -44,6 +45,8 @@ export const config = {
     "/bookmarks",
     "/posts/:path*",
     "/search/bookmarks/:path*",
-    "/search/posts/:path*"
+    "/search/posts/:path*",
+    "/search/quickies/:path*",
+    "/search/people/:path*"
   ],
 };

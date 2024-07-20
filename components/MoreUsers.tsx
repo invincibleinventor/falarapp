@@ -6,7 +6,7 @@ import { useInView } from "react-intersection-observer";
 import { Oval } from "react-loader-spinner";
 import UserComponent from "./UserComponent";
 
-export default function MoreUsers() {
+export default function MoreUsers(props:any) {
   const [users, setUsers] = useState<any>([]);
   const [myhandle, setMyHandle] = useState("");
   const [myimage,setMyImage] = useState("")
@@ -39,14 +39,12 @@ export default function MoreUsers() {
   }, []);
 
   async function get(from: number, to: number) {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+ 
     const { data, error } = await supabase
       .from("user")
       .select("*")
       .range(from, to)
-      .not("id", "in", `(${user?.id})`);
+      .not("id", "in", `(${props.blocked.toString()})`);
     if (error) {
       console.log(error);
     } else {

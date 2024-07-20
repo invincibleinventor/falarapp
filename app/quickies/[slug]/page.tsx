@@ -35,20 +35,30 @@ export default async function Index({ params }: { params: { slug: string } }) {
   let myhandle = "";
   let userliked :any[] = [];
   let userbookmarked:any[] = [];
+  let myblocked = "";
   
   async function get() {
     const { data: user } = await supabase.auth.getUser();
+   
+    
     const s = user.user!.id;
     const { data: u } = await supabase.from("user").select("*").eq("id", s);
+    myblocked = u![0]["blocked"]
+
+    const { data: hs } = await supabase.from("user").select("*").eq("handle", params.slug);
+    if(hs && hs.length>0){
+      if(!myblocked.includes(hs[0]["id"])){
+        console.log(myblocked,hs[0]["id"])
     l = u![0]["following"];
     const h = u![0]["handle"];
     myname = u![0]["name"]
+    
     myphoto = u![0]["image"]
     myhandle = u![0]["handle"]
     userbookmarked = u![0]["bookmarks"]
     userliked = u![0]["liked"]
     let ds = [];
-
+    
     l.push(h);
     const { data, error } = await supabase
       .from("quickies")
@@ -98,7 +108,18 @@ export default async function Index({ params }: { params: { slug: string } }) {
       loading = false;
     }
   }
+  else{
+    empty = true
+    loading = false
+  }
+}
+else{
+  empty=true;loading=false
+}
+
+}
   await get();
+
 
   if (isSupabaseConnected) {
     return (
@@ -144,7 +165,7 @@ export default async function Index({ params }: { params: { slug: string } }) {
                     <div className="flex flex-col gap-2 mx-auto max-w-max">
                       <h1 className="mx-auto text-lg font-semibold text-center text-gray-300">No Quickies To View!</h1>
                       <h1 className="mx-auto text-sm text-center text-gray-400">
-                        The user you searched haven&apos;t posted yet. But fret not! There are several great quickies from other users on the app.
+                        The user you searched haven&apos;t posted yet or they have blocked you. But fret not! There are several great quickies from other users on the app.
                       </h1>
                       <Link
                         href="/explore"
@@ -160,7 +181,9 @@ export default async function Index({ params }: { params: { slug: string } }) {
               ) : (
                 <div className="flex items-center content-center w-full h-screen"></div>
               )}
-              <More handle={params.slug} myhandle={myhandle} myname={myname} myphoto={myphoto} userliked={userliked} userbookmarked={userbookmarked} in={l}></More>{" "}
+              {!empty &&
+              <More myblocked={myblocked} handle={params.slug} myhandle={myhandle} myname={myname} myphoto={myphoto} userliked={userliked} userbookmarked={userbookmarked} in={l}></More>
+              }{" "}
             </div>{" "}
           </div>
         </div>

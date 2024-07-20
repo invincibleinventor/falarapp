@@ -24,6 +24,7 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   const timeAgo = new TimeAgo("en-US");
   const date1 = new Date();
+  const [blocked,setBlocked] = useState<any>([])
   const isSupabaseConnected = canInitSupabaseClient();
 const [empty,setEmpty] = useState(false)
   const [posts,setPosts] = useState<any>([])
@@ -49,6 +50,7 @@ const [myhandle,setMyhandle] = useState("")
     setMyhandle(u![0]["handle"])
     setUserBookmarked(u![0]["bookmarks"])
     setUserliked(u![0]["liked"])
+    setBlocked(u![0]["blocked"])
     let ds = [];
     const a:any = l
     a.push(h)
@@ -57,7 +59,9 @@ const [myhandle,setMyhandle] = useState("")
       .from("quickies")
       .select("*")
       .order("id", { ascending: false })
-      .in("handle", l)
+      .in("handle", u![0]["following"])
+      .not("poster","in",`(${u![0]["blocked"].toString()})`)
+
       .textSearch("content", `'${search}' | '${search.toLowerCase()}' | '${search.toUpperCase()}'`)
 
       .limit(5);
@@ -172,8 +176,8 @@ const [myhandle,setMyhandle] = useState("")
                 ) : (
                   <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
                     <div className="flex flex-col gap-2 mx-auto max-w-max">
-                      <h1 className="mx-auto text-lg font-semibold text-center text-black">No Quickies To View!</h1>
-                      <h1 className="mx-auto text-sm text-center text-gray-800">
+                      <h1 className="mx-auto text-lg font-semibold text-center text-gray-300">No Quickies To View!</h1>
+                      <h1 className="mx-auto text-sm text-center text-gray-600">
                         Follow people to view their quickies on your feed. The more people you follow, the more quickies
                         on your feed
                       </h1>
@@ -192,7 +196,7 @@ const [myhandle,setMyhandle] = useState("")
                 <div className="flex items-center content-center w-full h-screen"></div>
               )}
               
-              <More slug={search} myhandle={myhandle} myname={myname} myphoto={myphoto} userliked={userliked} userbookmarked={userbookmarked} in={l}></More>{" "}
+              <More myblocked={blocked} slug={search} myhandle={myhandle} myname={myname} myphoto={myphoto} userliked={userliked} userbookmarked={userbookmarked} in={l}></More>{" "}
             </div>{" "}
           </div>
         </div>

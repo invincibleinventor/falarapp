@@ -18,7 +18,7 @@ export default function CommentsComponent(props:any) {
   const [text, setText] = useState("");
   const inputRef = useRef<HTMLInputElement | any>(null);
   const [commentChange, setCommentChange] = useState(false);
-
+  
   const [posted, setPosted] = useState(false);
   async function post() {
     const { error } = await supabase.from("quickiecomments").insert({ content: text, id: props.slug, handle: props.myhandle });
@@ -47,6 +47,7 @@ export default function CommentsComponent(props:any) {
         .select("*")
         .eq("id", props.slug)
         .order("likes", { ascending: false })
+        .not("poster","in",`(${props.myblocked})`)
         .limit(5);
       if (data && data.length != 0) {
         let l = [];
@@ -131,6 +132,7 @@ export default function CommentsComponent(props:any) {
             <MoreComments myhandle={props.myhandle} loggedin={props.loggedin} slug={props.slug} />
           </>
         ) : (
+          comments && comments.length>0 &&
           <Oval
             height={40}
             width={40}
@@ -143,7 +145,7 @@ export default function CommentsComponent(props:any) {
             strokeWidth={2}
             strokeWidthSecondary={2}
           />
-        )}
+)}
       </div>
     </>
   );

@@ -124,7 +124,36 @@ window.location.reload()
         alert(error)
       }
       else{
-        window.location.reload()
+        if (followerlist.includes(myId)) {
+          console.log("uesuesues");
+          let arr:any = followerlist;
+          console.log("before");
+          console.log(arr);
+          arr = arr.filter((item:any) => item !== myId);
+          let arr2 = followinglist;
+          arr2 = arr2.filter((item: string) => item !== params.slug);
+  
+          console.log(arr);
+          const { data, error } = await supabase
+            .from("user")
+            .update({ followers: arr })
+            .eq("handle", params.slug)
+            .select();
+  
+          if (error) {
+            console.log(error);
+          } else {
+            console.log(data);
+          
+          setFollowerList(arr);
+          setFollowingList(arr2);
+          setImFollowing(false);
+          window.location.reload()
+          }
+        }
+        else{
+          window.location.reload()
+        }
       }
     }
   }
@@ -336,7 +365,7 @@ window.location.reload()
                   />
                 </div>
               )}
-              <More handle={params.slug} />
+              <More myblocked={blocked} handle={params.slug} />
             </div>
           </>
         )}

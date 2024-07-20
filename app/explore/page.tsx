@@ -31,9 +31,16 @@ export default async function Index() {
   const userid = user?.id;
   let myhandle = "";
   let myImage = "";
+  let blocked : any[] = [];
   let followinglist: any[] = [];
   async function get() {
-    const { data, error } = await supabase.from("user").select("*").not("id", "in", `(${userid})`).limit(4);
+    const {data:us} = await supabase.from('user').select('blocked').eq('id',userid)
+    if(us){
+      blocked = us[0]["blocked"]
+    }
+    blocked.push(userid)
+ 
+    const { data, error } = await supabase.from("user").select("*").not("id", "in", `(${blocked.toString()})`).limit(4);
     if (error) {
       console.log(error);
     } else {
@@ -116,7 +123,7 @@ export default async function Index() {
                 <div className="flex items-center content-center w-full h-screen"></div>
               )}
             </div>
-            <MoreUsers></MoreUsers>
+            <MoreUsers blocked={blocked}></MoreUsers>
           </div>
         </div>
       </>

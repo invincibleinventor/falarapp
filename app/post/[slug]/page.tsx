@@ -10,6 +10,7 @@ import Link from "next/link";
 import { ClassAttributes, ImgHTMLAttributes, JSX } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+export const revalidate = 60;
 export default async function App({ params }: { params: { slug: string } }) {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
@@ -221,6 +222,7 @@ export default async function App({ params }: { params: { slug: string } }) {
               handle={myhandle}
               id={user}
               myhandle={myhandle}
+              myblocked={blocked}
               slug={params.slug}
               loggedin={loggedin}
             />

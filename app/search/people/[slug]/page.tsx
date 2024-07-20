@@ -32,13 +32,19 @@ export default function Index({ params }: { params: { slug: string } }) {
   useEffect(()=>{
   async function get() {
     let usersid;
+    let blocked;
     const {
         data: { user },
       } = await supabase.auth.getUser();
       if(user){
         usersid=user.id
       }
-    const { data, error } = await supabase.from("user").select("*").not("id", "in", `(${usersid})`).textSearch("name_handle_about", `'${search}' | '${search.toLowerCase()}' | '${search.toUpperCase()}'`)
+    const {data:us} = await supabase.from('user').select('*').eq('id',usersid)
+    if(us && us.length>0){
+      blocked=us[0]["blocked"]
+    }
+    blocked.push(usersid)
+    const { data, error } = await supabase.from("user").select("*").not("id", "in", `(${blocked.toString()})`).textSearch("name_handle_about", `'${search}' | '${search.toLowerCase()}' | '${search.toUpperCase()}'`)
     .limit(4);
     if (error) {
       console.log(error);

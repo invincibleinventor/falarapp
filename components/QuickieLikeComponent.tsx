@@ -15,6 +15,7 @@ export default function LikeComponent(props:any) {
     if (like == false) {
       // let l = likedlist;
       setDisabled(true);
+      setLikes(likes - 1);
 
       // l = l.filter(function (item) {
       //   return item !== props.handle;
@@ -32,6 +33,8 @@ export default function LikeComponent(props:any) {
       const { error: e } = await supabase.from("user").update({ quickieliked: u }).eq("handle", props.handle);
       if (e) {
         alert(e.message);
+        setLikes(likes + 1);
+
       } else {
         toggleLiked(false);
 
@@ -43,12 +46,13 @@ export default function LikeComponent(props:any) {
             setuLikedList(d[0]["quickieliked"]);
             setDisabled(false);
 
-            setLikes(likes - 1);
           }
         }
       }
     } else {
       const l = likedlist;
+      setLikes(likes + 1);
+
       setDisabled(true);
       l.push(props.handle);
       const u = ulikedlist;
@@ -63,6 +67,7 @@ export default function LikeComponent(props:any) {
       if (error || e) {
         alert(error!.message);
         alert(e!.message);
+        setLikes(likes-1)
       } else {
         const { data } = await supabase.from("quickies").select("liked").eq("id", props.postid);
         if (data) {
@@ -72,7 +77,6 @@ export default function LikeComponent(props:any) {
             setuLikedList(d[0]["quickieliked"]);
           }
           setDisabled(false);
-          setLikes(likes + 1);
           toggleLiked(true);
         }
       }

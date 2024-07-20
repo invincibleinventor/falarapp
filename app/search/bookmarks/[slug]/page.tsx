@@ -23,6 +23,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [search, setSearch] = useState(params.slug);
   const [tempsearch, setTempSearch] = useState("");
   const timeAgo = new TimeAgo("en-US");
+  
   const date1 = new Date();
   const isSupabaseConnected = canInitSupabaseClient();
   const [empty, setEmpty] = useState(true);
@@ -34,8 +35,11 @@ export default function Page({ params }: { params: { slug: string } }) {
       const { data: user } = await supabase.auth.getUser();
       const s = user?.user?.id;
       const { data: u } = await supabase.from("user").select("*").eq("id", s);
+    
       let l = [];
+      let blocked = [];
       if (u) {
+        blocked = u[0]["blocked"];
         l = u[0]["bookmarks"];
       }
       console.log("below");
@@ -48,6 +52,7 @@ export default function Page({ params }: { params: { slug: string } }) {
         .order("id", { ascending: false })
         .textSearch("title_excerpt_content", `'${search}' | '${search.toLowerCase()}' | '${search.toUpperCase()}'`)
         .in("id", l)
+        .not("id","in",`(${blocked.toString()})`)
         .limit(5);
       if (error) {
         console.log(error);

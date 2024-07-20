@@ -13,6 +13,8 @@ const [likes,setLikes] = useState(props.likes)
   async function setLiked(like: boolean) {
     if (like == false) {
       let l = likedlist;
+      setLikes(likes-1)
+
       console.log(l);
       setDisabled(true);
 
@@ -30,6 +32,8 @@ const [likes,setLikes] = useState(props.likes)
 
       const { error } = await supabase.from("quickies").update({ bookmarked: l }).eq("id", props.postid);
       if (error || e) {
+        setLikes(likes+1)
+
         alert(error!.message);
         alert(e!.message);
       } else {
@@ -37,7 +41,6 @@ const [likes,setLikes] = useState(props.likes)
         if (data) {
           setLikedList(data[0]["bookmarked"]);
           toggleLiked(false);
-          setLikes(likes-1)
           const { data: d } = await supabase.from("user").select("quickiebookmarks").eq("handle", props.handle);
           if (d) setuLikedList(d[0]["quickiebookmarks"]);
           setDisabled(false);
@@ -46,6 +49,7 @@ const [likes,setLikes] = useState(props.likes)
     } else {
       const l = likedlist;
       setDisabled(true);
+      setLikes(likes+1)
 
       l.push(props.handle);
       const u = ulikedlist;
@@ -56,6 +60,7 @@ const [likes,setLikes] = useState(props.likes)
       const { error } = await supabase.from("quickies").update({ bookmarked: l }).eq("id", props.postid);
 
       if (error || e) {
+        setLikes(likes-1)
         alert(error!.message);
         alert(e!.message);
       } else {
