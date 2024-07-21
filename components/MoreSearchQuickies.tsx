@@ -25,6 +25,7 @@ export default function More(props:any) {
         .select("*")
         .eq("handle", props.handle)
         .order("id", { ascending: false })
+        .not("poster","in",`(${props.myblocked.toString()})`)
         .range(from, to);
       if (error) {
         console.log(error);
@@ -73,6 +74,7 @@ export default function More(props:any) {
         .select("*")
         .order("id", { ascending: false })
         .in("handle", props.in)
+        .not("poster","in",`(${props.myblocked.toString()})`)
         .range(from, to);
       if (error) {
         console.log(error);

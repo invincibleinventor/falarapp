@@ -1,6 +1,7 @@
 import BookMarksComponent from "@/components/BookMarksComponent";
 import CommentsComponent from "@/components/CommentsComponent";
 import LikeComponent from "@/components/LikeComponent";
+import Menu from "@/components/Menu";
 import { createClient } from "@/utils/supabase/server";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
@@ -195,13 +196,16 @@ export default async function App({ params }: { params: { slug: string } }) {
                 <h1 className="inline-block text-sm text-gray-300">Edit Post</h1>
               </Link>
             )}
+
             <div className="flex flex-row items-center content-center justify-between mt-6 text-lg">
               <Link href={"/profile/" + author} className="flex flex-row items-center content-center">
                 <Image width={24} height={24} alt="profile" className="w-8 h-8 mr-3 rounded-full" src={profile} />
                 <h1 className="text-xs font-medium text-gray-300 md:text-sm">{name}</h1>
               </Link>
 
-              <h1 className="text-xs font-normal text-gray-300 md:text-sm"><span className="hidden md:inline-block">Posted</span> {timeAgo.format(Date.now() - time)}</h1>
+              <div className="flex flex-row"><h1 className="text-xs font-normal text-gray-300 md:text-sm"><span className="hidden md:inline-block">Posted</span> {timeAgo.format(Date.now() - time)}   </h1>           <Menu type="quickie" id={params.slug} myhandle={myhandle} handle={author}/>
+              </div>
+              
             </div>
             <Markdown
             

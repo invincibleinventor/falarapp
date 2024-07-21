@@ -29,6 +29,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [empty, setEmpty] = useState(true);
   const [posts, setPosts] = useState<any>([]);
   const [loading, setLoading] = useState(true);
+  const [blocked,setBlocked] = useState([])
   useEffect(() => {
     async function get() {
       setLoading(true);
@@ -45,7 +46,7 @@ export default function Page({ params }: { params: { slug: string } }) {
       console.log("below");
       console.log(l);
       let ds = [];
-
+      setBlocked(blocked)
       const { data, error } = await supabase
         .from("posts")
         .select("*")
@@ -173,7 +174,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 />
               </div>
             )}
-            <MoreBookMarks slug={search} />{" "}
+            <MoreBookMarks  slug={search} />{" "}
           </div>{" "}
         </div>
       </div>

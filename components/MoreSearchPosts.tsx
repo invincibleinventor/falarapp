@@ -22,6 +22,7 @@ export default function MoreSearchPosts(props:any) {
       .from("posts")
       .select("*")
       .order("id", { ascending: false })
+      .not("poster","in",`(${props.myblocked})`)
       .textSearch(
         "title_excerpt_content",
         `'${props.slug}' | '${props.slug.toLowerCase()}' | '${props.slug.toUpperCase()}'`
@@ -65,7 +66,7 @@ export default function MoreSearchPosts(props:any) {
   }, [inView]);
   return (
     <>
-      <div className="flex flex-col content-center items-center gap-2">
+      <div className="flex flex-col items-center content-center gap-2">
         {posts.map((post:any) => (
           <PostComponent
             id={post.id}

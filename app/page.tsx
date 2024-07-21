@@ -122,7 +122,9 @@ export default async function Index() {
               ) : (
                 <div className="flex items-center content-center w-full h-screen"></div>
               )}
-              <More myblocked={myblocked} in={l}></More>{" "}
+              
+              <More myblocked={myblocked} in={l}></More>
+              {" "}
             </div>{" "}
           </div>
         </div>

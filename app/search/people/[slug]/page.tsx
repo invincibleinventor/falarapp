@@ -29,6 +29,7 @@ export default function Index({ params }: { params: { slug: string } }) {
  const [search,setSearch] = useState(params.slug)
   const [myhandle,setMyhandle] = useState('')
   const [followinglist,setFollowinglist] =useState([])
+  const [blocked,setBlocked] = useState([])
   useEffect(()=>{
   async function get() {
     let usersid;
@@ -44,6 +45,7 @@ export default function Index({ params }: { params: { slug: string } }) {
       blocked=us[0]["blocked"]
     }
     blocked.push(usersid)
+    setBlocked(blocked)
     const { data, error } = await supabase.from("user").select("*").not("id", "in", `(${blocked.toString()})`).textSearch("name_handle_about", `'${search}' | '${search.toLowerCase()}' | '${search.toUpperCase()}'`)
     .limit(4);
     if (error) {
@@ -154,7 +156,7 @@ get();
                 <div className="flex items-center content-center w-full h-screen"></div>
               )}
             </div>
-            <MoreUsers search={search}></MoreUsers>
+            <MoreUsers myblocked={blocked} search={search}></MoreUsers>
           </div>
         </div>
       </>

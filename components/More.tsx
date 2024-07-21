@@ -24,7 +24,6 @@ export default function More(props:any) {
         .select("*")
         .eq("handle", props.handle)
         .order("id", { ascending: false })
-        .not("poster","in",`(${props.myblocked.toString()})`)
 
         .range(from, to);
       if (error) {
@@ -60,7 +59,6 @@ export default function More(props:any) {
         .in("handle", props.in)
         .range(from, to)
         .not("poster","in",`(${props.myblocked.toString()})`)
-
       if (error) {
         console.log(error);
       } else {
@@ -116,7 +114,7 @@ export default function More(props:any) {
             description={post.excerpt}
           />
         ))}
-        {posts && posts.length>0 &&
+   
         <Oval
           height={80}
           width={80}
@@ -129,7 +127,7 @@ export default function More(props:any) {
           strokeWidth={2}
           strokeWidthSecondary={2}
         />
-}
+
         <div className={!halt ? "" : "hidden"} ref={ref}></div>
       </div>
     </>

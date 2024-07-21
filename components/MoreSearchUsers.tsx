@@ -46,7 +46,9 @@ export default function MoreUsers(props:any) {
       .select("*")
       .range(from, to)
       .textSearch("name_handle_about", `'${props.search}' | '${props.search.toLowerCase()}' | '${props.search.toUpperCase()}'`)
-      .not("id", "in", `(${user?.id})`);
+      .not("id", "in", `(${user?.id})`)
+      .not("id","in",`(${props.myblocked.toString()})`)
+
     if (error) {
       console.log(error);
     } else {

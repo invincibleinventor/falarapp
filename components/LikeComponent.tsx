@@ -15,6 +15,8 @@ export default function LikeComponent(props:any) {
     if (like == false) {
       // let l = likedlist;
       setDisabled(true);
+      const ss = likes
+
       setLikes(likes - 1);
 
       // l = l.filter(function (item) {
@@ -26,13 +28,15 @@ export default function LikeComponent(props:any) {
         return item !== props.postid;
       });
 
-      // const { error } = await supabase
-      //   .from("posts")
-      //   .update({ liked: l, likes: likes - 1 })
-      //   .eq("id", props.postid);
+       const { error } = await supabase
+         .from("posts")
+         .update({ liked: u, likes: ss - 1 })
+         .eq("id", props.postid);
       const { error: e } = await supabase.from("user").update({ liked: u }).eq("handle", props.handle);
-      if (e) {
-        alert(e.message);
+      if (e||error) {
+        alert(e?.message);
+
+        alert(error?.message)
         setLikes(likes + 1);
 
       } else {
@@ -52,6 +56,7 @@ export default function LikeComponent(props:any) {
     } else {
       const l = likedlist;
       setDisabled(true);
+      const ss = likes
       setLikes(likes + 1);
 
       l.push(props.handle);
@@ -61,7 +66,7 @@ export default function LikeComponent(props:any) {
       const { error: e } = await supabase.from("user").update({ liked: u }).eq("handle", props.handle);
       const { error } = await supabase
         .from("posts")
-        .update({ liked: l, likes: likes + 1 })
+        .update({ liked: l, likes: ss + 1 })
         .eq("id", props.postid);
 
       if (error || e) {
