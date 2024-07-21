@@ -13,23 +13,23 @@ export default function LikeComponent(props:any) {
 
   async function setLiked(like: boolean) {
     if (like == false) {
-      // let l = likedlist;
+       let l = likedlist;
       setDisabled(true);
       setLikes(likes - 1);
 
-      // l = l.filter(function (item) {
-      //   return item !== props.handle;
-      // });
+       l = l.filter(function (item) {
+        return item !== props.handle;
+       });
       let u = ulikedlist;
 
       u = u.filter(function (item:any) {
         return item !== props.postid;
       });
 
-      // const { error } = await supabase
-      //   .from("posts")
-      //   .update({ liked: l, likes: likes - 1 })
-      //   .eq("id", props.postid);
+       const { error } = await supabase
+        .from("quickies")
+         .update({ liked: l, likes: likes - 1 })
+         .eq("id", props.postid);
       const { error: e } = await supabase.from("user").update({ quickieliked: u }).eq("handle", props.handle);
       if (e) {
         alert(e.message);
