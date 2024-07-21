@@ -27,7 +27,7 @@ export default function LikeComponent(props:any) {
       });
 
       const { error } = await supabase
-      .from("posts")
+      .from("quickies")
       .update({ liked: l, likes: x- 1 })
       .eq("id", props.postid);
       const { error: e } = await supabase.from("user").update({ quickieliked: u }).eq("handle", props.handle);
