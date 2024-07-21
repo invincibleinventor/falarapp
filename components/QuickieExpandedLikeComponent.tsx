@@ -13,25 +13,28 @@ export default function LikeComponent(props:any) {
 
   async function setLiked(like: boolean) {
     if (like == false) {
-      // let l = likedlist;
+      let l = likedlist;
       setDisabled(true);
 
       // l = l.filter(function (item) {
       //   return item !== props.handle;
       // });
       let u = ulikedlist;
-
+      let x = likes
+      setLikes(likes-1)
       u = u.filter(function (item:any) {
         return item !== props.postid;
       });
 
-      // const { error } = await supabase
-      //   .from("posts")
-      //   .update({ liked: l, likes: likes - 1 })
-      //   .eq("id", props.postid);
+      const { error } = await supabase
+      .from("posts")
+      .update({ liked: l, likes: x- 1 })
+      .eq("id", props.postid);
       const { error: e } = await supabase.from("user").update({ quickieliked: u }).eq("handle", props.handle);
-      if (e) {
-        alert(e.message);
+      if (e||error) {
+        alert(e!.message)
+        alert(error!.message)
+        setLikes(likes + 1)
       } else {
         toggleLiked(false);
 
@@ -43,26 +46,29 @@ export default function LikeComponent(props:any) {
             setuLikedList(d[0]["quickieliked"]);
             setDisabled(false);
 
-            setLikes(likes - 1);
+            
           }
         }
       }
     } else {
       const l = likedlist;
       setDisabled(true);
+      let x = likes;
       l.push(props.handle);
       const u = ulikedlist;
+      setLikes(likes + 1);
       u.push(props.postid);
       console.log(l);
       const { error: e } = await supabase.from("user").update({ quickieliked: u }).eq("handle", props.handle);
       const { error } = await supabase
         .from("quickies")
-        .update({ liked: l, likes: likes + 1 })
+        .update({ liked: l, likes: x + 1 })
         .eq("id", props.postid);
 
       if (error || e) {
         alert(error!.message);
         alert(e!.message);
+        setLikes(likes - 1);
       } else {
         const { data } = await supabase.from("quickies").select("liked").eq("id", props.postid);
         if (data) {
@@ -72,7 +78,7 @@ export default function LikeComponent(props:any) {
             setuLikedList(d[0]["quickieliked"]);
           }
           setDisabled(false);
-          setLikes(likes + 1);
+          
           toggleLiked(true);
         }
       }
