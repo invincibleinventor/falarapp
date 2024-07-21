@@ -16,9 +16,9 @@ export default function LikeComponent(props:any) {
       let l = likedlist;
       setDisabled(true);
 
-      // l = l.filter(function (item) {
-      //   return item !== props.handle;
-      // });
+      l = l.filter(function (item) {
+         return item !== props.handle;
+      });
       let u = ulikedlist;
       let x = likes
       setLikes(likes-1)
