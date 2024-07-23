@@ -52,18 +52,18 @@ photocount = props.image.length;
           </div>
           <div className="flex h-max flex-col gap-[8px] md:p-6 p-4 ">
           <div  className="flex gap-2 mt-0">
-            <Link href={"/profile/"+props.handle} className="flex gap-2 mt-0">
+            <Link href={"/profile/"+props.handle} className="flex gap-[10px] mt-0">
       <img
         src={props.dp}
         alt="user profile"
-        className="rounded-full object-cover min-w-[24px] max-w-[24px] h-6"
+        className="rounded-full object-cover min-w-[28px] max-w-[28px] h-7"
       />
     <div  className="flex items-center content-center">
       <h1>
-        <p className="text-sm font-medium text-gray-300 break-all line-clamp-1">{props.name}</p>
+        <p className="text-base font-medium text-gray-300 break-all line-clamp-1">{props.name}</p>
       </h1>
-      <div className="mx-1 text-sm text-gray-500">·</div>
-      <span className="text-sm font-medium text-gray-500 whitespace-nowrap">@{props.handle}</span>
+      <div className="mx-1 text-base text-gray-500">·</div>
+      <span className="text-base font-medium text-gray-500 whitespace-nowrap">@{props.handle}</span>
       </div>
     </Link>
        <Menu type="quickie" id={props.id} myhandle={props.myhandle} handle={props.handle}/>
@@ -75,15 +75,15 @@ photocount = props.image.length;
             <Link
               href={'/quickie/'+props.id}
                 style={{ wordBreak: "break-word", whiteSpace: "normal" }}
-                className="mt-[6px] pl-0 ml-0 text-[16px] font-medium text-gray-300 four-line-ellipsis md:text-[15px]"
+                className="mt-[6px] pl-0 ml-0 text-[18px] font-medium text-gray-300 four-line-ellipsis md:text-[17px]"
               >
                 {formatText(props.description)}
 
              
               {photocount>0  &&
-              <div className={photocount==1?"w-full border ml-0 rounded-md mt-4 aspect-video h-full mb-4":"mt-4 mb-4 md:gap-2 gap-1 grid-cols-2 grid"}>
+              <div className={photocount==1?"w-full border ml-0 rounded-md mt-4 aspect-video h-full mb-4":photocount==3?"mt-4 mb-4 md:gap-2 gap-1 grid thrip":"mt-4 mb-4 md:gap-2 gap-1 grid-cols-2 grid"}>
                 {props.image.map((image:string) => 
-                  <img onClick={()=>window.open(image,'_blank')?.focus()} className="object-cover w-full border rounded-md h-max aspect-video" src={image}></img>
+                  <img onClick={()=>window.open(image,'_blank')?.focus()} className={`object-cover w-full border rounded-lg h-max ${props.image.length==2?'aspect-[8/10]':props.image.length==4?'aspect-video':'aspect-video'}`} src={image}></img>
                 )}
               </div>
 }
@@ -110,7 +110,7 @@ photocount = props.image.length;
           likes={props.bookmarkedlist.length}
         />
          <Link href={"/quickie/"+props.id} className="flex flex-row items-center content-center pl-6 pr-2 space-x-2 text-gray-400">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16">
             <path
               fill="currentColor"
               fillRule="evenodd"
@@ -118,11 +118,11 @@ photocount = props.image.length;
               clipRule="evenodd"
             />
           </svg>{" "}
-          <h1 className="text-xs">{props.comments}</h1>
+          <h1 className="text-sm">{props.comments}</h1>
         </Link>
         <span className="ml-auto"></span>
 
-        <h1 className="text-sm font-medium text-gray-500 ">{props.time}</h1>
+        <h1 className="text-[13px] font-medium text-gray-500 capitalize ">{props.time}</h1>
 
 
 

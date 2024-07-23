@@ -108,14 +108,21 @@ const formatText = (text:string) => {
   const content = text.split(/((?:#|@|https?:\/\/[^\s]+)[a-zA-Z]+)/);
   let hashtag;
   const regex = /^[a-zA-Z]+$/;
-
+let mention;
   const tagarray:any = [];
+  const mentionarray:any = [];
   content.map((word) => {
       if (word.startsWith("#") && regex.test(word.slice(1,word.length-1))) {
           hashtag = word.replace('#', '')
           tagarray.push(hashtag)
+          
       
       }
+      if (word.startsWith("@") && regex.test(word.slice(1,word.length-1))) {
+        mention = word.replace('@', '')
+        mentionarray.push(mention)
+    
+    }
   });
   console.log(
     tagarray
@@ -271,6 +278,7 @@ const formatText = (text:string) => {
                 const {error}  = await supabase.from('hashtags').upsert({posts:posts,hashtag:hashtags[i],postcount:posts.length})
                 if(error){
                   console.log(error)
+                  alert(error.message)
                 }
                 else{
                   
@@ -305,6 +313,7 @@ const formatText = (text:string) => {
                      }
                      if(error){
                       console.log(error)
+                    alert(error.message)
                      }
                      else{
                       console.log('good to go')
@@ -319,6 +328,7 @@ const formatText = (text:string) => {
                       }
                       else{
                         console.log(error)
+                        alert(error.message)
                        }
                     }
                      else{
@@ -329,6 +339,7 @@ const formatText = (text:string) => {
                       }
                       else{
                         console.log(error)
+                        alert(error.message)
                        }
                      }
                      
@@ -345,6 +356,7 @@ const formatText = (text:string) => {
                        window.location.replace('/quickies') }
                       else{
                         console.log(error)
+                        alert(error.message)
                        }
                      }
                     
@@ -378,6 +390,7 @@ const formatText = (text:string) => {
                 const {error} = await supabase.from('quickies').update({image:imgarray}).eq('id',id)
               if(error){
                 console.log(error)
+                alert(error.message)
 
                 
               }

@@ -188,18 +188,18 @@ export default async function App({ params }: { params: { slug: string } }) {
           </div>
           <div className="flex h-max flex-col gap-[8px] p-4 ">
             <div className="flex flex-row items-center content-center gap-2 h-max shrink-0">
-            <Link href={"/profile/"+author} className="flex gap-2 mt-0">
+            <Link href={"/profile/"+author} className="flex gap-[10px] mt-0">
       <img
         src={profile}
         alt="user profile"
-        className="rounded-full object-cover min-w-[24px] max-w-[24px] h-6"
+        className="rounded-full object-cover min-w-[28px] max-w-[28px] h-7"
       />
     <div className="flex items-center content-center">
       <h1>
-        <p className="text-sm font-medium text-gray-300 break-all line-clamp-1">{naam}</p>
+        <p className="text-base font-medium text-gray-300 break-all line-clamp-1">{naam}</p>
       </h1>
-      <div className="mx-1 text-sm text-gray-500">·</div>
-      <span className="text-sm font-medium text-gray-500 whitespace-nowrap">@{author}</span>
+      <div className="mx-1 text-base text-gray-500">·</div>
+      <span className="text-base font-medium text-gray-500 whitespace-nowrap">@{author}</span>
       
     </div>
    
@@ -213,12 +213,12 @@ export default async function App({ params }: { params: { slug: string } }) {
 
               <h1
                 style={{ wordBreak: "break-word", whiteSpace: "normal" }}
-                className="my-4 mt-2 text-base font-medium text-gray-300 four-line-ellipsis md:text-base"
+                className="my-4 mt-2 text-lg font-medium text-gray-300 four-line-ellipsis md:text-lg"
               >
                 {formatText(content)}
               </h1>
               {photocount>0  &&
-              <div className={photocount==1?"mb-4 w-full border rounded-md mt-4 aspect-video h-full":"mt-4 mb-4 md:gap-2 gap-1 grid-cols-2 grid"}>
+              <div className={photocount==1?"w-full border ml-0 rounded-md mt-4 aspect-video h-full mb-4":photocount==3?"mt-4 mb-4 md:gap-2 gap-1 grid thrip":"mt-4 mb-4 md:gap-2 gap-1 grid-cols-2 grid"}>
                 {image.map((image:string) => 
                 <Iof key={image} src={image}/>
                 )}

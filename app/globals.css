@@ -77,6 +77,36 @@
   display: none !important;
 }
 
+
+
+
+.thrip {
+ 
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.thrip img:nth-of-type(1) {
+  grid-row: 1 / span 2;
+  @apply aspect-[8.65/10]
+}
+
+.thrip img:nth-of-type(2) {
+  grid-row: 1;
+ 
+
+}
+
+.thrip img:nth-of-type(3) {
+  grid-row: 2;
+
+}
+
+
+
+
 .img-wrap {
   overflow: hidden;
 }

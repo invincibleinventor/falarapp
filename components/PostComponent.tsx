@@ -60,7 +60,7 @@ export default function Post(props:any) {
           <img
 src={props.cover+"?"+timeStamp}
          
-            className="object-cover aspect-[4/4] min-h-[64px] min-w-[64px] max-w-full max-h-full shrink-0"
+            className="object-cover rounded-xl aspect-[4/4] min-h-[64px] min-w-[64px] max-w-full max-h-full shrink-0"
           />
         </h1>
       </div>
