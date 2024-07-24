@@ -1,14 +1,15 @@
 import NavBar from "@/components/NavBar";
 import Script from "next/script";
 import "./globals.css";
+import {AppConfig} from '@/config/config'
 import Sidebar from "@/components/SideBar";
 const defaultUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000";
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Falar - A New Step In Socializing",
+  title: AppConfig.title+" - "+AppConfig.subtitle,
   description:
-    "Falar is a microblogging community aimed at empowering authors with a platform to express themselves at their will.",
+    AppConfig.description,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

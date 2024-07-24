@@ -7,17 +7,17 @@ import { useEffect, useRef, useState } from "react";
 export default function Create() {
   const supabase = createClient();
   const hiddenFileInput = useRef<HTMLInputElement | any>();
-  const hiddenProfileInput = useRef<HTMLInputElement | null>();
+  const hiddenProfileInput = useRef<HTMLInputElement | any>();
   const handleClick = () => {
     hiddenFileInput.current?.click();
   };
   const handleProfileClick = () => {
-    hiddenFileInput.current?.click();
+    hiddenProfileInput.current?.click();
   };
   const [changed, setChanged] = useState(false);
   const [changedprofile, setChangedProfile] = useState(false);
   const [file, setFile] = useState<any>();
-  const [profile, setProfile] = useState();
+  const [profile, setProfile] = useState<any>();
   async function coverChange() {
     console.log("here here");
     const bucket = "covers";
@@ -42,6 +42,33 @@ export default function Create() {
       return;
     }
   }
+
+
+  async function profileChange() {
+    console.log("here here");
+    const bucket = "profile";
+
+    // Call Storage API to upload file
+    const { error } = await supabase.storage.from(bucket).upload("/public/" + handle + ".jpg", profile, { upsert: true });
+
+    // Handle error if upload failed
+    if (error) {
+      alert("Error uploading file.");
+      return;
+    } else {
+      const { error: es } = await supabase
+        .from("user")
+        .update({
+          image: "https://xiexuntwvmedvyxokvvf.supabase.co/storage/v1/object/public/profile/public/" + handle + ".jpg",
+        })
+        .eq("handle", handle);
+      if (es) {
+        alert(es.message);
+      }
+      return;
+    }
+  }
+
   useEffect(() => {
     async function get() {
       const {
@@ -76,7 +103,9 @@ export default function Create() {
     if (changed) {
       await coverChange();
     }
-
+    if (changedprofile) {
+      await profileChange();
+    }
     const { error } = await supabase.from("user").update({ name: name, about: about }).eq("handle", handle);
     if (error) {
       console.log(error);
@@ -105,15 +134,37 @@ export default function Create() {
             <input id="fupload" className="hidden" />
             Change Cover Picture
           </div>
-
-          <Image
+          <div className="absolute inset-x-0 bottom-0">
+<div className="relative">
+       <Image
             width={110}
             height={110}
             src={image}
-            className="absolute inset-x-0 bottom-0 w-24 h-24 mx-auto rounded-full"
+            className="w-24 h-24 mx-auto rounded-full "
             alt="image"
           />
+            <div
+            onClick={handleProfileClick}
+            className="absolute text-xs flex items-center content-center text-white rounded-full cursor-pointer left-16 right-0 mx-auto top-[70%] w-6 h-6  bg-cyan-700/70 drop-shadow-lg backdrop-blur-lg"
+          >
+            {" "}
+            <svg className="mx-auto" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M3 17.46v3.04c0 .28.22.5.5.5h3.04c.13 0 .26-.05.35-.15L17.81 9.94l-3.75-3.75L3.15 17.1c-.1.1-.15.22-.15.36M20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83l3.75 3.75z"/></svg>
+            <input id="profileupload" className="hidden" />
+            <input
+            onChange={(e:any) => {
+              setImage(URL.createObjectURL(e.target.files![0]));
+              setChangedProfile(true);
+              setProfile(e.target.files[0]);
+            }}
+            className="absolute inset-x-0 bottom-0 hidden mx-auto"
+            type="file"
+            ref={hiddenProfileInput}
+          />
+            
+          </div>
 
+</div>
+</div>
           <input
             onChange={(e:any) => {
               setCover(URL.createObjectURL(e.target.files![0]));
@@ -124,6 +175,9 @@ export default function Create() {
             type="file"
             ref={hiddenFileInput}
           />
+        
+
+       
         </div>
       </div>
 

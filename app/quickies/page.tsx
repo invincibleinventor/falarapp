@@ -2,6 +2,7 @@ import More from "@/components/MoreQuickies";
 import PostComponent from "@/components/QuickieComponent";
 import Search from "@/components/SearchComponent";
 import Trending from "@/components/Trending";
+import { AppConfig } from "@/config/config";
 import { createClient } from "@/utils/supabase/server";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
@@ -107,7 +108,7 @@ export default async function Index() {
       <>
         <div className="flex-1 h-screen p-0 py-2 overflow-hidden">
           <div className="p-4 py-2 pb-2 mx-1 md:mx-1">
-            <Search page="quickies" text="Falar" />
+            <Search page="quickies" text={AppConfig.title} />
           </div>
           
           <div className="h-full overflow-y-scroll hiddenscroll">

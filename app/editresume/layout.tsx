@@ -1,12 +1,13 @@
 import Script from "next/script";
 import "../globals.css";
+import { AppConfig } from "@/config/config";
 const defaultUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000";
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Falar - A Modern E-Journal",
+  title: AppConfig.title+" - "+AppConfig.subtitle,
   description:
-    "Falar is a modern open source internet journal aimed at empowering authors with content freedom and ownership",
+    AppConfig.description
 };
 
 export default function ResumeLayout({ children }: { children: React.ReactNode }) {

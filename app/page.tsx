@@ -1,6 +1,7 @@
 import More from "@/components/More";
 import PostComponent from "@/components/PostComponent";
 import Search from "@/components/SearchComponent";
+import { AppConfig } from "@/config/config";
 import { createClient } from "@/utils/supabase/server";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
@@ -78,7 +79,7 @@ export default async function Index() {
       <>
         <div className="flex-1 h-screen p-0 py-2 overflow-hidden">
           <div className="p-4 py-2 mx-1 md:mx-1">
-            <Search page="posts" text="Falar" />
+            <Search page="posts" text={AppConfig.title} />
           </div>
           <div className="h-full overflow-y-scroll hiddenscroll">
             <div className="flex flex-col gap-2 mb-20 animate-in hiddenscroll">

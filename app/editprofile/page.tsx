@@ -1,4 +1,5 @@
 "use client";
+import { AppConfig } from "@/config/config";
 import { createClient } from "@/utils/supabase/client";
 import { redirect } from "next/navigation";
 
@@ -50,7 +51,7 @@ export default function Create() {
         about: about,
         image: image,
         followers: [],
-        following: ["falar"],
+        following: [AppConfig.officialaccount],
         bookmarks: [],
         liked: [],
         private: false,
@@ -58,11 +59,11 @@ export default function Create() {
       if (error) {
         console.log(error);
       } else {
-        const {data:d} = await supabase.from('user').select('*').eq('handle','falar')
+        const {data:d} = await supabase.from('user').select('*').eq('handle',AppConfig.officialaccount)
         if(d && d.length>0){
         const ls = d[0]["followers"]
         ls.push(handle.toLowerCase())
-          const {error:es} = await supabase.from('user').update({followers:ls}).eq('handle','falar')
+          const {error:es} = await supabase.from('user').update({followers:ls}).eq('handle',AppConfig.officialaccount)
           if(es){
             console.log(es)
           }

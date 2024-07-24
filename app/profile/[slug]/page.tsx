@@ -256,7 +256,7 @@ window.location.reload()
                 width={180}
                 height={180}
                 src={`${found ?(cover ? cover : "/bg.jpg") : "/bg.jpg"}`}
-                className="object-cover w-full h-48 border rounded-none "
+                className="object-cover w-full h-48 rounded-none "
                 alt="cover"
               />
             )}

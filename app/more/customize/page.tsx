@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import Toggle from "./components/resumetoggle";
 import { createClient } from "@/utils/supabase/server";
+import { AppConfig } from "@/config/config";
 let isresume = false;
 
 export default async function page(){
@@ -32,7 +33,7 @@ await fetchdata()
                        {!isresume? "Resume Setup":"Edit Resume"}
                     </h1>
                     <h1 className="pb-3 text-sm font-normal text-gray-500">
-                       {!isresume? "Your resume is not setup yet. Your resume showcases a breif overview of yourself to other people on Falar.":"Your resume has been successfully setup at Falar. You can edit it anytime. It is publicly visible to all users until you remove it."}  
+                       {!isresume? `Your resume is not setup yet. Your resume showcases a breif overview of yourself to other people on ${AppConfig.title}.`:`Your resume has been successfully setup at ${AppConfig.title}. You can edit it anytime. It is publicly visible to all users until you remove it.`}  
                     </h1>
                     <Toggle isresume={isresume}></Toggle>
                 </div>
