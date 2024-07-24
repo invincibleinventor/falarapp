@@ -66,7 +66,7 @@ photocount = props.image.length;
       <span className="text-base font-medium text-gray-500 whitespace-nowrap">@{props.handle}</span>
       </div>
     </Link>
-       <Menu type="quickie" id={props.id} myhandle={props.myhandle} handle={props.handle}/>
+       <Menu type="quickie" id={props.id}  myhandle={props.myhandle} handle={props.handle}/>
 
   </div>
 
