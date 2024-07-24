@@ -84,7 +84,7 @@ export default function Create() {
             setName(data[0]["name"]);
             setHandle(data[0]["handle"]);
             setAbout(data[0]["about"]);
-            setImage(data[0]["image"]);
+            setImage(data[0]["image"] + "?" + new Date().getTime()) 
             setCover(data[0]["cover"] + "?" + new Date().getTime());
           }
         }
