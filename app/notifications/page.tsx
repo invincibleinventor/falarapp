@@ -62,7 +62,7 @@ export default function Page(){
             )
                :(
                 <div>
-                    <h1 className="mx-auto my-20 text-sm font-medium text-center text-white">No Notifications Yet!</h1>
+                    <h1 className="mx-auto my-20 text-base font-medium text-center text-gray-300 font-poppins">No Notifications Yet!</h1>
                 </div>
                ) )
             
