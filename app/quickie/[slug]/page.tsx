@@ -143,13 +143,13 @@ export default async function App({ params }: { params: { slug: string } }) {
         if (word.startsWith("#")) {
             hashtag = word.replace('#', '')
             return <Link legacyBehavior href={`/hashtag/${hashtag}`}><a
-                className="text-cyan-600 hover:text-cyan-700">{word}</a></Link>;
+                className="text-cyan-800 hover:text-cyan-900">{word}</a></Link>;
         } else if (word.startsWith("@")) {
             username = word.replace('@', '')
             return <Link legacyBehavior href={`/profile/${username}`}><a
-                className="text-cyan-600 hover:text-cyan-700">{word}</a></Link>;
+                className="text-cyan-800 hover:text-cyan-900">{word}</a></Link>;
         } else if (word.includes("http")) {
-            return <a target="_blank" href={word} className="text-cyan-600 hover:text-cyan-700">{word}</a>
+            return <a target="_blank" href={word} className="text-cyan-800 hover:text-cyan-900">{word}</a>
         } else {
             return word;
         }
@@ -256,7 +256,7 @@ export default async function App({ params }: { params: { slug: string } }) {
         </div>
       )}
       {loggedin && !blocked.includes(authorid) &&
-      <div className="absolute bottom-0 flex flex-row w-full border-t bg-black/40 h-14 border-t-gray-900 ">
+      <div className="absolute bottom-0 flex flex-row w-full bg-black border-t h-14 border-t-gray-900 ">
       
 
 <LikeComponent

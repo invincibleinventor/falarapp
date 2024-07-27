@@ -44,11 +44,11 @@ supabase
     >
 
       <svg
-        className={`h-[26px] md:h-[24px] md:w-[24px] w-[26px] stroke-[2px] p-[2px] text-gray-400 ${a.opened ? "text-gray-400 md:text-gray-200" : "md:text-gray-200"}`}
+        className={`h-[22px] md:h-[22px] md:w-[22px] w-[26px] stroke-[2px] pb-[2px] text-gray-400 ${a.opened ? "text-gray-400 md:text-gray-200" : "md:text-gray-200"}`}
         xmlns="http://www.w3.org/2000/svg"
         width="16"
         height="16"
-        viewBox="0 0 16 16"
+        viewBox="0 0 128 128"
       >
         {props.url}
       </svg>

@@ -6,7 +6,7 @@ export default function Trending(){
     const supabase = createClient()
     const [date,setDate] = useState<any>()
     const [hour, setHour] = useState<any>()
-    
+  
     const [a,setA] = useState<any>({})
     useEffect(()=>{
         const d = new Date().toLocaleDateString('en-IN');
@@ -73,10 +73,17 @@ export default function Trending(){
         fetch()
         },[])
     
-    return(
+    return Object.entries(a).length>0 ? (
         <div className="flex flex-col w-full h-full px-2 py-0 space-y-0 text-gray-300 lg:pr-0 lg:rounded-lg lg:border-none lg:py-2 lg:text-gray-300 ">
                  { Object.entries(a).map((t:any,k:any) : React.ReactNode => (<Link key={k} href={'/hashtag/'+t[0]} className="flex flex-row items-center content-center w-full p-4 px-6 py-4 lg:px-2"><h1 className="text-sm font-semibold">#{t[0]}</h1><h1 className="ml-auto text-xs font-medium text-gray-300">{t[1]} {t[1]>1?"Posts":"Post"}</h1></Link>)) }          
 
         </div>
+    ) :
+    (
+        <div className="hidden lg:block">
+        <div className="flex flex-col w-full h-full px-2 py-0 space-y-0 text-gray-300 lg:pr-0 lg:rounded-lg lg:border-none lg:py-2 lg:text-gray-300 ">
+            <h1 className="mx-auto my-4 text-sm text-neutral-400">No Trending Hashtags</h1>
+</div>
+</div>
     )
 }

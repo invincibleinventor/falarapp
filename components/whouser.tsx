@@ -48,7 +48,7 @@ export default function Whouser(props:any){
     <img className="flex-shrink-0 w-6 h-6 rounded-full shrink-0" src={props.profile}/>
     <h1 className="text-xs font-medium text-white">{props.name}</h1>
     </Link>
-    <button onClick={()=>follow() } className="px-4 py-[2px] text-[10px] font-medium text-white rounded-full bg-cyan-900">Follow</button>
+    <button onClick={()=>follow() } className="px-4 py-[2px] text-[10px] font-medium text-white rounded-full bg-cyan-800">Follow</button>
   </div>
     )
 }

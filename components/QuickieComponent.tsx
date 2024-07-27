@@ -31,13 +31,13 @@ photocount = props.image.length;
         if (word.startsWith("#") && regex.test(word.slice(1,word.length-1))) {
             hashtag = word.replace('#', '')
             return <Link legacyBehavior href={`/hashtag/${hashtag}`}><a
-                className="text-cyan-600 hover:text-cyan-700">{word}</a></Link>;
+                className="text-cyan-800 hover:text-cyan-900">{word}</a></Link>;
         } else if (word.startsWith("@")) {
             username = word.replace('@', '')
             return <Link legacyBehavior href={`/profile/${username}`}><a
-                className="text-cyan-600 hover:text-cyan-700">{word}</a></Link>;
+                className="text-cyan-800 hover:text-cyan-900">{word}</a></Link>;
         } else if (word.includes("http")) {
-            return <a target="_blank" href={word} className="text-cyan-600 hover:text-cyan-700">{word}</a>
+            return <a target="_blank" href={word} className="text-cyan-800 hover:text-cyan-900">{word}</a>
         } else {
             return word;
         }
@@ -53,8 +53,10 @@ photocount = props.image.length;
           <div className="flex h-max flex-col gap-[8px] md:p-6 p-4 ">
           <div  className="flex gap-2 mt-0">
             <Link href={"/profile/"+props.handle} className="flex gap-[10px] mt-0">
-      <img
-        src={props.dp}
+      <Image
+      width={28}
+      height={28}
+        src={props.dp+"?"+new Date().getTime()}
         alt="user profile"
         className="rounded-full object-cover min-w-[28px] max-w-[28px] h-7"
       />
@@ -75,7 +77,7 @@ photocount = props.image.length;
             <Link
               href={'/quickie/'+props.id}
                 style={{ wordBreak: "break-word", whiteSpace: "normal" }}
-                className="mt-[6px] pl-0 ml-0 text-[18px] font-medium text-gray-300 four-line-ellipsis md:text-[17px]"
+                className="mt-[6px] pl-0 ml-0 text-[18px] font-normal  text-gray-300 four-line-ellipsis md:text-[17px]"
               >
                 {formatText(props.description)}
 

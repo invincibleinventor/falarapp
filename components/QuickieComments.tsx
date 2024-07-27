@@ -18,7 +18,8 @@ export default function CommentsComponent(props:any) {
   const [text, setText] = useState("");
   const inputRef = useRef<HTMLInputElement | any>(null);
   const [commentChange, setCommentChange] = useState(false);
-  
+  const[state, setState]=useState('');
+
   const [posted, setPosted] = useState(false);
   async function post() {
     const { error } = await supabase.from("quickiecomments").insert({ content: text, id: props.slug, handle: props.myhandle });
@@ -99,8 +100,9 @@ export default function CommentsComponent(props:any) {
               onKeyDown={(e) => {
                 if (e.key === "Enter") post();
               }}
-              onChange={(e) => setText(e.target.value)}
+              onChange={(e) => (setState(e.target.value),setText(e.target.value))}
               ref={inputRef}
+              value={state}
               className="w-full px-6  pt-[2px] pl-4 mb-4 text-sm font-medium text-gray-300 bg-transparent outline-none resize-none placeholder:font-medium md:text-base h-max text-md"
               placeholder={"Post a comment publicly as " + props.myname}
             ></textarea>
@@ -118,6 +120,7 @@ export default function CommentsComponent(props:any) {
                 time={timeAgo.format(Date.now() - comment.newtime)}
                 myhandle={props.myhandle}
                 likedbypeople={comment.liked}
+                stateChanger={setState}
                 comment_id={comment.comment_id}
                 key={comment.comment_id}
                 likes={comment.likes}

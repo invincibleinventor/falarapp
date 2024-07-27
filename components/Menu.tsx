@@ -27,7 +27,7 @@ export default function Menu(props:any){
                              <div style={{zIndex:1000000}} className={`absolute py-4 flex flex-col content-center mt-10 top-0 bottom-0 left-0 right-0 w-64 h-28 mx-auto my-auto bg-[#040404] rounded-lg border animate-in border-gray-900 shadow-md  md:w-84 lg:w-96 ${deleteDialog?'':'hidden'}`}>
                
                <h1 className="mx-4 mb-4 text-lg font-medium text-white">Delete this quickie?</h1>
-               <div className="flex flex-row items-center content-center w-full pt-0 mt-auto ml-auto"><button onClick={()=>toggledeleteDialog(false)} className="px-[18px] py-2 mt-auto text-sm font-medium text-white">Cancel</button><button onClick={()=>del()} className="px-6 py-2 mt-auto mb-1 ml-auto mr-4 text-xs font-medium text-white rounded-lg bg-cyan-700">Delete It</button></div>
+               <div className="flex flex-row items-center content-center w-full pt-0 mt-auto ml-auto"><button onClick={()=>toggledeleteDialog(false)} className="px-[18px] py-2 mt-auto text-sm font-medium text-white">Cancel</button><button onClick={()=>del()} className="px-6 py-2 mt-auto mb-1 ml-auto mr-4 text-xs font-medium text-white rounded-lg bg-cyan-800">Delete It</button></div>
              </div>
         <div className="relative pl-3 ml-auto text-gray-300">
 

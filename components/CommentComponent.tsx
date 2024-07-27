@@ -59,13 +59,13 @@ export default function CommentComponent(props:any) {
         if (word.startsWith("#")) {
             hashtag = word.replace('#', '')
             return <Link legacyBehavior href={`/hashtag/${hashtag}`}><a
-                className="text-cyan-600 hover:text-cyan-700">{word}</a></Link>;
+                className="text-cyan-800 hover:text-cyan-900">{word}</a></Link>;
         } else if (word.startsWith("@")) {
             username = word.replace('@', '')
             return <Link legacyBehavior href={`/profile/${username}`}><a
-                className="text-cyan-600 hover:text-cyan-700">{word}</a></Link>;
+                className="text-cyan-800 hover:text-cyan-900">{word}</a></Link>;
         } else if (word.includes("http")) {
-            return <a target="_blank" href={word} className="text-cyan-600 hover:text-cyan-700">{word}</a>
+            return <a target="_blank" href={word} className="text-cyan-800 hover:text-cyan-900">{word}</a>
         } else {
             return word;
         }
@@ -134,6 +134,10 @@ export default function CommentComponent(props:any) {
             </svg>
           )}
           <h1 className="text-xs font-medium text-gray-300">{likes} Likes</h1>
+          <div onClick={()=>props.stateChanger('@'+props.handle+" ")} className="flex flex-row items-center content-center pl-2 space-x-2 text-xs font-medium text-gray-300 cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><path fill="currentColor" fillRule="evenodd" d="M19.5 6.25a.75.75 0 0 1 .75.75c0 2.244-.952 3.72-2.187 4.609c-1.196.861-2.61 1.141-3.563 1.141H6.31l3.72 3.72a.75.75 0 1 1-1.06 1.06l-5-5a.75.75 0 0 1 0-1.06l5-5a.75.75 0 1 1 1.06 1.06l-3.72 3.72h8.19c.713 0 1.8-.22 2.687-.859c.848-.61 1.563-1.635 1.563-3.391a.75.75 0 0 1 .75-.75" clipRule="evenodd"></path></svg>
+           <h1> Reply</h1></div>
+          
         </div>
       
           </div>
