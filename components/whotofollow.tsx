@@ -7,8 +7,8 @@ export default async function WhoToFollow(){
     const {data:u} = await supabase.auth.getUser()
     let loggedin = false;
     let empty = true;
-    let userlist = [];
-    let following = []
+    let userlist: any[] = [];
+    let following:any[] = []
     let myid = ''
     let myhandle = ''
     let myImage = '';
