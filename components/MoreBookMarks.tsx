@@ -73,7 +73,7 @@ export default function MoreBookMarks(props: { slug: string }) {
   }, [inView]);
   return (
     <>
-      <div className="flex flex-col content-center items-center gap-2">
+      <div className="flex flex-col items-center content-center gap-2">
         {posts.map((post:any) => (
           <PostComponent
             id={post.id}

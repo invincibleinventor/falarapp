@@ -19,45 +19,12 @@ export default function More(props:any) {
   const date1 = new Date();
 
   async function get(from: number, to: number) {
-    if (props.handle) {
-      const { data, error } = await supabase
-        .from("posts")
-        .select("*")
-        .eq("handle", props.handle)
-        .order("id", { ascending: false })
-
-        .range(from, to);
-      if (error) {
-        console.log(error);
-      } else {
-        if (data && data.length > 0) {
-          console.log(data);
-          const ds = data;
-          for await (const [index, post] of ds.entries()) {
-            const { data } = await supabase.from("user").select("*").eq("id", post.poster);
-            if (data) {
-              ds[index].name = data[0].name;
-
-              ds[index].dp = data[0].image;
-
-              const date2 = new Date(ds[index].created_at);
-              ds[index].diff = date1.getTime() - date2.getTime();
-            }
-          }
-          setPosts((prev:any) => [...prev, ...ds]);
-          if (ds.length < PAGE_COUNT) {
-            setHalt(true);
-          }
-        } else {
-          setHalt(true);
-        }
-      }
-    } else {
+   
       const { data, error } = await supabase
         .from("posts")
         .select("*")
         .order("id", { ascending: false })
-        .in("handle", props.in)
+        .in("id",props.l)
         .range(from, to)
         .not("poster","in",`(${props.myblocked.toString()})`)
       if (error) {
@@ -84,7 +51,7 @@ export default function More(props:any) {
         } else {
           setHalt(true);
         }
-      }
+      
     }
   }
   useEffect(() => {

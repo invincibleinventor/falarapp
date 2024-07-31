@@ -1,4 +1,4 @@
-import More from "@/components/More";
+import More from "@/components/BookMarksMore";
 import PostComponent from "@/components/PostComponent";
 import Search from "@/components/SearchComponent";
 import { createClient } from "@/utils/supabase/server";
@@ -25,6 +25,7 @@ export default async function Index() {
   const date1 = new Date();
   const isSupabaseConnected = canInitSupabaseClient();
   let empty = true;
+  let myblocked: any[] = []
   let posts: any[] = [];
   let loading = true;
   let l: readonly any[] = [];
@@ -34,6 +35,7 @@ export default async function Index() {
     const { data: u } = await supabase.from("user").select("*").eq("id", s);
     if (u) {
       l = u[0]["bookmarks"];
+      myblocked = u[0]["blocked"]
     }
     console.log("below");
     console.log(l);
@@ -44,6 +46,7 @@ export default async function Index() {
       .select("*")
       .order("id", { ascending: false })
       .in("id", l)
+      .not("poster","in",`(${myblocked.toString()})`)
       .limit(5);
     if (error) {
     } else {
@@ -117,7 +120,7 @@ export default async function Index() {
               ) : (
                 <div className="flex items-center content-center w-full h-screen"></div>
               )}
-              <More in={l}></More>{" "}
+              <More myblocked = {myblocked} l={l}></More>{" "}
             </div>{" "}
           </div>
         </div>
