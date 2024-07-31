@@ -203,7 +203,7 @@ export default async function App({ params }: { params: { slug: string } }) {
                 <h1 className="text-xs font-medium text-gray-300 md:text-sm">{name}</h1>
               </Link>
 
-              <div className="flex flex-row"><h1 className="text-xs font-normal text-gray-300 md:text-sm"><span className="hidden md:inline-block">Posted</span> {timeAgo.format(Date.now() - time)}   </h1>           <Menu type="quickie" id={params.slug} myhandle={myhandle} handle={author}/>
+              <div className="flex flex-row"><h1 className="text-xs font-normal text-gray-300 md:text-sm"><span className="hidden md:inline-block">Posted</span> {timeAgo.format(Date.now() - time)}   </h1>         {myhandle!==author &&  <Menu type="post" id={params.slug} myhandle={myhandle} handle={author}/> }
               </div>
               
             </div>

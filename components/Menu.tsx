@@ -38,7 +38,7 @@ export default function Menu(props:any){
       <svg xmlns="http://www.w3.org/2000/svg" width="1.1em" height="1.1em" viewBox="0 0 24 24"><path fill="currentColor" d="M15.73 3H8.27L3 8.27v7.46L8.27 21h7.46L21 15.73V8.27zM19 14.9L14.9 19H9.1L5 14.9V9.1L9.1 5h5.8L19 9.1z"/><circle cx="12" cy="16" r="1" fill="currentColor"/><path fill="currentColor" d="M11 7h2v7h-2z"/></svg>
       <h1 className="text-sm font-medium">Report</h1>
       </div>
-      {props.myhandle==props.handle &&
+      {props.type=='quickie' && props.myhandle==props.handle &&
       <div  onClick={()=>toggledeleteDialog(!deleteDialog)}  className="flex flex-row items-center content-center px-4 py-3 space-x-3 text-red-400 cursor-pointer hover:rounded-xl hover:bg-gray-900">
       <svg xmlns="http://www.w3.org/2000/svg" width="1.1em" height="1.1em" viewBox="0 0 24 24"><path fill="currentColor" d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6zM8 9h8v10H8zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"/></svg>        
             <h1 className="text-sm font-medium text-red-400">Delete</h1>
