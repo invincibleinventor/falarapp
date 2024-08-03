@@ -1,21 +1,25 @@
 /* eslint-disable react/jsx-key */
 "use client";
-import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import BookMarksComponent from "./QuickieBookMarksComponent";
 import LikeComponent from "./QuickieLikeComponent";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Menu from "./Menu";
+import { useRouter } from "next/navigation";
 export default function Post(props:any) {
   const [dialogopened,setDialogopened] = useState(false)
+  const router = useRouter()
+  const [imgdp,setimgdp]  = useState(props.dp)
+
+  useEffect(() => {
+  setimgdp(imgdp+"?"+new Date().getTime())
+  },[])
   const timeStamp = new Date().getTime()
   let x = props.name;
   if (x.length >= 11) {
     x = x.slice(0, 7);
     x += "...";
   }
-  const a = props.title;
 let photocount;
   if(props.image){
 photocount = props.image.length;
@@ -53,10 +57,10 @@ photocount = props.image.length;
           <div className="flex h-max flex-col gap-[8px] md:p-6 p-4 ">
           <div  className="flex gap-2 mt-0">
             <Link href={"/profile/"+props.handle} className="flex gap-[10px] mt-0">
-      <Image
+      <img
       width={28}
       height={28}
-        src={props.dp+"?"+new Date().getTime()}
+        src={imgdp}
         alt="user profile"
         className="rounded-full object-cover min-w-[28px] max-w-[28px] h-7"
       />
@@ -74,10 +78,10 @@ photocount = props.image.length;
 
             <div>
           
-            <Link
-              href={'/quickie/'+props.id}
+            <div
+              onClick={()=>router.push('/quickie/'+props.id)}
                 style={{ wordBreak: "break-word", whiteSpace: "normal" }}
-                className="mt-[6px] pl-0 ml-0 text-[18px] font-normal  text-gray-300 four-line-ellipsis md:text-[17px]"
+                className="cursor-pointer mt-[6px] pl-0 ml-0 text-[18px] font-normal  text-gray-300 four-line-ellipsis md:text-[17px]"
               >
                 {formatText(props.description)}
 
@@ -85,12 +89,12 @@ photocount = props.image.length;
               {photocount>0  &&
               <div className={photocount==1?"w-full border ml-0 rounded-md mt-4 aspect-video h-full mb-4":photocount==3?"mt-4 mb-4 md:gap-2 gap-1 grid thrip":"mt-4 mb-4 md:gap-2 gap-1 grid-cols-2 grid"}>
                 {props.image.map((image:string) => 
-                  <img onClick={()=>window.open(image,'_blank')?.focus()} className={`object-cover w-full border rounded-lg h-max ${props.image.length==2?'aspect-[8/10]':props.image.length==4?'aspect-video':'aspect-video'}`} src={image}></img>
+                  <img key={image}  className={`object-cover w-full border rounded-lg h-max ${props.image.length==2?'aspect-[8/10]':props.image.length==4?'aspect-video':'aspect-video'}`} src={image}></img>
                 )}
               </div>
 }
 
-</Link>
+</div>
 
               <div className="flex px-[2px] flex-row items-center content-center mt-4">
               
