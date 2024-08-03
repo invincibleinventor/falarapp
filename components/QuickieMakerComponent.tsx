@@ -417,7 +417,7 @@ let mention;
     
     };
   return(
-    <div className="lg:w-[544px] min-h-[80px] lg:mr-[400px] shadow-lg border border-gray-900 rounded-2xl mx-auto">
+    <div className="lg:w-[544px] min-w-[150px] animate-in min-h-[80px] lg:mr-[400px] shadow-lg border border-gray-900 rounded-2xl mx-auto">
   <div className="relative flex flex-col items-start content-center rounded-2xl  bg-[#0e0e0e]">
     <div className="flex flex-row w-full bg-black border-b rounded-t-2xl border-b-gray-900">
               <h1 className="px-2 mx-4 my-6 text-xl font-semibold text-gray-300 md:font-bold md:text-xl">New Quickie</h1>
