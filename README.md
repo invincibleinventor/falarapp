@@ -1,5 +1,7 @@
 # FALAR
 
+[https://falarapp.vercel.app](https://falarapp.vercel.app)
+
 ![alt text](https://github.com/invincibleinventor/falarapp/blob/main/mockup.png?raw=true)
 
 
