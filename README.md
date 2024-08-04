@@ -1,3 +1,5 @@
+# FA:AR
+
 Falar is an open source social networking platform that has (almost) all the features in a modern social network. Inspired by X (formerly Twitter). Very Work-In-Progress. Uses NextJS and TailwindCSS for the frontend and Supabase as a serverless backend.
 
 ### Features
