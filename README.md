@@ -1,20 +1,22 @@
-Falar is an open source content based social publishing platform that provides content freedom to creators. Very WIP. Uses NextJS and Tailwind for the frontend and Supabase as a serverless backend.
+Falar is an open source social networking platform that has (almost) all the features in a modern social network. Inspired by X (formerly Twitter). Very Work-In-Progress. Uses NextJS and TailwindCSS for the frontend and Supabase as a serverless backend.
 
 ### Features
 
-- Sign In Through Google OAuth
-- Persistent Sign In Session
-- Create Posts, Edit Or Delete Them
-- Like Posts
-- Bookmark Posts
-- Comment On Posts
-- Like Comments
-- User Profile with Profile Picture and Cover Image
-- Ability to edit profile
-- Follow Users
+- Persistent Sign In Through Google OAuth
+- CRUD operations - Create, Read, Update and Delete posts.
+- Like, reply and bookmark posts and like and reply to other replies
+- Full markdown support for creating posts
+- Block and report users.
+- Delete and Deactivate account. 
+- User Profiles
+- Follow and Unfollow users
+- Feed based on following and random content
+- Hashtags and mention other users (@ mentions)
+- Trending tab that shows the top hashtags for the past 3 hours
+- Quickies - Short form posts much like tweets
+- Clicks - Photos that delete after 24 hours (like Instagram stories)
 - Notification System
-- Full Text Search on Posts , People and Bookmarks
-- more to come...
+- and much more...
 
 ### Tech Stack
 
@@ -30,14 +32,9 @@ Falar is an open source content based social publishing platform that provides c
 - Client and Server components are seperated in proper bounds. Intensive tasks are loaded through the server and interactivity is done through client components
 - This project therefore demands a good knowledge on NextJS 13 Server Actions & Client Components
 
-### For Contributors
+### Future Updates 
 
-- Create a local copy of this project
-- Create a local .env.local file with the following
-- ```
-  NEXT_PUBLIC_SUPABASE_URL=
-  NEXT_PUBLIC_SUPABASE_ANON_KEY=
-  ```
-- IMPORTANT: Add the .env.local file to .gitignore if you want your keys to stay private
-- Enable Google OAuth in Supabase. Follow official Supabase docs for clear instructions
-- Make sure to deploy the env variables when using a hosting provider.
+- Extend the notification system
+- Ability to direct message other users
+- Content recommendation through OpenAI
+
