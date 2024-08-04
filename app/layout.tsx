@@ -1,15 +1,14 @@
 import NavBar from "@/components/NavBar";
 import Script from "next/script";
 import "./globals.css";
-import {AppConfig} from '@/config/config'
+import { AppConfig } from "@/config/config";
 import Sidebar from "@/components/SideBar";
 const defaultUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000";
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: AppConfig.title+" - "+AppConfig.subtitle,
-  description:
-    AppConfig.description,
+  title: AppConfig.title + " - " + AppConfig.subtitle,
+  description: AppConfig.description,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -28,9 +27,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 {children}
               </div>
             </div>
-          
+
             <Sidebar></Sidebar>
-            
           </section>
         </main>
       </body>

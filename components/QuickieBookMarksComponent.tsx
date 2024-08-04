@@ -2,28 +2,28 @@
 import { createClient } from "@/utils/supabase/client";
 import { useState } from "react";
 
-export default function BookMarksComponent(props:any) {
+export default function BookMarksComponent(props: any) {
   const supabase = createClient();
   const [likedlist, setLikedList] = useState(props.likedlist);
 
   const [liked, toggleLiked] = useState(props.liked);
   const [ulikedlist, setuLikedList] = useState(props.userliked);
   const [disabled, setDisabled] = useState(false);
-const [likes,setLikes] = useState(props.likes)
+  const [likes, setLikes] = useState(props.likes);
   async function setLiked(like: boolean) {
     if (like == false) {
       let l = likedlist;
-      setLikes(likes-1)
+      setLikes(likes - 1);
 
       console.log(l);
       setDisabled(true);
 
-      l = l.filter(function (item:any) {
+      l = l.filter(function (item: any) {
         return item !== props.handle;
       });
       let u = ulikedlist;
 
-      u = u.filter(function (item:any) {
+      u = u.filter(function (item: any) {
         return item !== props.postid;
       });
 
@@ -32,7 +32,7 @@ const [likes,setLikes] = useState(props.likes)
 
       const { error } = await supabase.from("quickies").update({ bookmarked: l }).eq("id", props.postid);
       if (error || e) {
-        setLikes(likes+1)
+        setLikes(likes + 1);
 
         alert(error!.message);
         alert(e!.message);
@@ -49,7 +49,7 @@ const [likes,setLikes] = useState(props.likes)
     } else {
       const l = likedlist;
       setDisabled(true);
-      setLikes(likes+1)
+      setLikes(likes + 1);
 
       l.push(props.handle);
       const u = ulikedlist;
@@ -60,7 +60,7 @@ const [likes,setLikes] = useState(props.likes)
       const { error } = await supabase.from("quickies").update({ bookmarked: l }).eq("id", props.postid);
 
       if (error || e) {
-        setLikes(likes-1)
+        setLikes(likes - 1);
         alert(error!.message);
         alert(e!.message);
       } else {
@@ -68,7 +68,7 @@ const [likes,setLikes] = useState(props.likes)
         if (data) {
           setLikedList(data[0]["bookmarked"]);
           toggleLiked(true);
-          setLikes(likes+1)
+          setLikes(likes + 1);
           const { data: d } = await supabase.from("user").select("quickiebookmarks").eq("handle", props.handle);
           if (d) setuLikedList(d[0]["quickiebookmarks"]);
           setDisabled(false);

@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function App(props:any) {
+export default function App(props: any) {
   const loc = usePathname();
   const a = { opened: false };
 
@@ -11,17 +11,13 @@ export default function App(props:any) {
     a.opened = true;
   } else if (props.link == "/myself" && loc.startsWith("/profile")) {
     a.opened = true;
-  }
-  else if (props.link == 'more' && loc.startsWith("/more")) {
+  } else if (props.link == "more" && loc.startsWith("/more")) {
     a.opened = true;
-  }
-  else if (props.link == '/' && (loc=="/all" || loc=='/')) {
+  } else if (props.link == "/" && (loc == "/all" || loc == "/")) {
     a.opened = true;
-  }
-  else if (props.link == '/quickies' && (loc=="/quickies/all" || loc=='/quickies')) {
+  } else if (props.link == "/quickies" && (loc == "/quickies/all" || loc == "/quickies")) {
     a.opened = true;
-  }
-  else if (props.link == "/myself" && loc == "/customize") {
+  } else if (props.link == "/myself" && loc == "/customize") {
     a.opened = true;
   } else {
     console.log("");

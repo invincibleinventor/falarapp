@@ -6,13 +6,13 @@ import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { Oval } from "react-loader-spinner";
 import QuickieComponent from "./QuickieComponent";
-export default function More(props:any) {
+export default function More(props: any) {
   const supabase = createClient();
   const [offset, setOffset] = useState(1);
   const { ref, inView } = useInView();
   const [halt, setHalt] = useState(false);
   const [posts, setPosts] = useState<any>([]);
-  
+
   TimeAgo.locale(en);
   const PAGE_COUNT = 5;
   const timeAgo = new TimeAgo("en-US");
@@ -34,28 +34,26 @@ export default function More(props:any) {
           const ds = data;
           for await (const [index, post] of ds.entries()) {
             let liked = false;
-        const likedlist: string | any[] = ds[index].liked
-        let bookmarked = false;
-        const bookmarkedlist: any[] = ds[index].bookmarked;
-        if(likedlist.includes(props.myhandle)){
-          liked = true
-        }
-        if(bookmarkedlist.includes(props.myhandle)){
-          bookmarked=true
-        }
-        
-        ds[index].liked=liked
-          ds[index].bookmarked=bookmarked
-          ds[index].bookmarkedlist=bookmarkedlist
-          ds[index].likedlist=likedlist
-          console.log(likedlist)
-           
+            const likedlist: string | any[] = ds[index].liked;
+            let bookmarked = false;
+            const bookmarkedlist: any[] = ds[index].bookmarked;
+            if (likedlist.includes(props.myhandle)) {
+              liked = true;
+            }
+            if (bookmarkedlist.includes(props.myhandle)) {
+              bookmarked = true;
+            }
 
-              const date2 = new Date(ds[index].created_at);
-              ds[index].diff = date1.getTime() - date2.getTime();
-            
+            ds[index].liked = liked;
+            ds[index].bookmarked = bookmarked;
+            ds[index].bookmarkedlist = bookmarkedlist;
+            ds[index].likedlist = likedlist;
+            console.log(likedlist);
+
+            const date2 = new Date(ds[index].created_at);
+            ds[index].diff = date1.getTime() - date2.getTime();
           }
-          setPosts((prev:any) => [...prev, ...ds]);
+          setPosts((prev: any) => [...prev, ...ds]);
           if (ds.length < PAGE_COUNT) {
             setHalt(true);
           }
@@ -67,7 +65,7 @@ export default function More(props:any) {
       const { data, error } = await supabase
         .from("quickies")
         .select("*,user(name,handle,image)")
-        .in("id",props.in)
+        .in("id", props.in)
         .order("id", { ascending: false })
         .range(from, to);
       if (error) {
@@ -77,28 +75,25 @@ export default function More(props:any) {
           console.log(data);
           const ds = data;
           for await (const [index, post] of ds.entries()) {
-           
-              let liked = false;
-              const likedlist: string | any[] = ds[index].liked
-              let bookmarked = false;
-              const bookmarkedlist: any[] = ds[index].bookmarked;
-              if(likedlist.includes(props.myhandle)){
-                liked = true
-              }
-              if(bookmarkedlist.includes(props.myhandle)){
-                bookmarked=true
-              }
-              
-              ds[index].liked=liked
-                ds[index].bookmarked=bookmarked
-                ds[index].bookmarkedlist=bookmarkedlist
-                ds[index].likedlist=likedlist
-                console.log(likedlist)
-           
+            let liked = false;
+            const likedlist: string | any[] = ds[index].liked;
+            let bookmarked = false;
+            const bookmarkedlist: any[] = ds[index].bookmarked;
+            if (likedlist.includes(props.myhandle)) {
+              liked = true;
+            }
+            if (bookmarkedlist.includes(props.myhandle)) {
+              bookmarked = true;
+            }
 
-              const date2 = new Date(ds[index].created_at);
-              ds[index].diff = date1.getTime() - date2.getTime();
-            
+            ds[index].liked = liked;
+            ds[index].bookmarked = bookmarked;
+            ds[index].bookmarkedlist = bookmarkedlist;
+            ds[index].likedlist = likedlist;
+            console.log(likedlist);
+
+            const date2 = new Date(ds[index].created_at);
+            ds[index].diff = date1.getTime() - date2.getTime();
           }
           setPosts([...posts, ...ds]);
           if (ds.length < PAGE_COUNT) {
@@ -123,26 +118,26 @@ export default function More(props:any) {
   return (
     <>
       <div className="flex flex-col items-center content-center w-full gap-2">
-        {posts.map((post:any) => (
+        {posts.map((post: any) => (
           <QuickieComponent
-          id={post.id}
-          cover={post.cover}
-          title={post.title}
-          time={timeAgo.format(Date.now() - post.diff)}
-          key={post.id}
-          image={post.image}
-          userliked={props.userliked}
-          userbookmarked={props.userbookmarked}
-          bookmarkedlist={post.bookmarkedlist}
-          likedlist={post.likedlist}
-          myhandle={props.myhandle}
-          dp={post.user.image}
-          bookmarked={post.bookmarked}
-          liked={post.liked}
-          handle={post.handle}
-          name={post.user.name}
-          comments={post.comments}
-          description={post.content}
+            id={post.id}
+            cover={post.cover}
+            title={post.title}
+            time={timeAgo.format(Date.now() - post.diff)}
+            key={post.id}
+            image={post.image}
+            userliked={props.userliked}
+            userbookmarked={props.userbookmarked}
+            bookmarkedlist={post.bookmarkedlist}
+            likedlist={post.likedlist}
+            myhandle={props.myhandle}
+            dp={post.user.image}
+            bookmarked={post.bookmarked}
+            liked={post.liked}
+            handle={post.handle}
+            name={post.user.name}
+            comments={post.comments}
+            description={post.content}
           />
         ))}
         <Oval

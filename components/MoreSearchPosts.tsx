@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { Oval } from "react-loader-spinner";
 import PostComponent from "./PostComponent";
-export default function MoreSearchPosts(props:any) {
+export default function MoreSearchPosts(props: any) {
   const supabase = createClient();
   const [offset, setOffset] = useState(1);
   const { ref, inView } = useInView();
@@ -22,7 +22,7 @@ export default function MoreSearchPosts(props:any) {
       .from("posts")
       .select("*,user(name,handle,image)")
       .order("id", { ascending: false })
-      .not("poster","in",`(${props.myblocked})`)
+      .not("poster", "in", `(${props.myblocked})`)
       .textSearch(
         "title_excerpt_content",
         `'${props.slug}' | '${props.slug.toLowerCase()}' | '${props.slug.toUpperCase()}'`
@@ -35,11 +35,8 @@ export default function MoreSearchPosts(props:any) {
         console.log(data);
         const ds = data;
         for await (const [index, post] of ds.entries()) {
-          
-
-            const date2 = new Date(ds[index].created_at);
-            ds[index].diff = date1.getTime() - date2.getTime();
-          
+          const date2 = new Date(ds[index].created_at);
+          ds[index].diff = date1.getTime() - date2.getTime();
         }
         setPosts([...posts, ...ds]);
         if (ds.length < PAGE_COUNT) {
@@ -63,7 +60,7 @@ export default function MoreSearchPosts(props:any) {
   return (
     <>
       <div className="flex flex-col items-center content-center gap-2">
-        {posts.map((post:any) => (
+        {posts.map((post: any) => (
           <PostComponent
             id={post.id}
             type="profile"

@@ -7,7 +7,7 @@ Falar is an open source social networking platform that has (almost) all the fea
 - Like, reply and bookmark posts and like and reply to other replies
 - Full markdown support for creating posts
 - Block and report users.
-- Delete and Deactivate account. 
+- Delete and Deactivate account.
 - User Profiles
 - Follow and Unfollow users
 - Feed based on following and random content
@@ -32,9 +32,8 @@ Falar is an open source social networking platform that has (almost) all the fea
 - Client and Server components are seperated in proper bounds. Intensive tasks are loaded through the server and interactivity is done through client components
 - This project therefore demands a good knowledge on NextJS 13 Server Actions & Client Components
 
-### Future Updates 
+### Future Updates
 
 - Extend the notification system
 - Ability to direct message other users
 - Content recommendation through OpenAI
-

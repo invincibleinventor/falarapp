@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -12,7 +12,7 @@
 }
 @font-face {
   font-family: Sohne;
-  src: url('/Sohne-Buch.ttf');
+  src: url("/Sohne-Buch.ttf");
 }
 @layer base {
   :root {
@@ -69,19 +69,15 @@
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
 }
-.mainbg{
- background-color: black;
+.mainbg {
+  background-color: black;
 }
 
 .hiddeninput {
   display: none !important;
 }
 
-
-
-
 .thrip {
- 
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   box-sizing: border-box;
@@ -90,22 +86,16 @@
 
 .thrip img:nth-of-type(1) {
   grid-row: 1 / span 2;
-  @apply aspect-[8.65/10]
+  @apply aspect-[8.65/10];
 }
 
 .thrip img:nth-of-type(2) {
   grid-row: 1;
- 
-
 }
 
 .thrip img:nth-of-type(3) {
   grid-row: 2;
-
 }
-
-
-
 
 .img-wrap {
   overflow: hidden;
@@ -165,13 +155,23 @@ select {
     transform: translateY(0);
   }
 }
-input[type=search]::-ms-clear { display: none; width : 0; height: 0; }
-input[type=search]::-ms-reveal { display: none; width : 0; height: 0; }
+input[type="search"]::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}
+input[type="search"]::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
 /* clears the ‘X’ from Chrome */
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
-input[type="search"]::-webkit-search-results-decoration { display: none; }
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
 .parent-container {
   overflow-x: hidden; /* Prevent overflow on the X axis */
   width: 100%;

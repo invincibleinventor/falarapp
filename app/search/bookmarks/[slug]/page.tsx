@@ -23,20 +23,20 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [search, setSearch] = useState(params.slug);
   const [tempsearch, setTempSearch] = useState("");
   const timeAgo = new TimeAgo("en-US");
-  
+
   const date1 = new Date();
   const isSupabaseConnected = canInitSupabaseClient();
   const [empty, setEmpty] = useState(true);
   const [posts, setPosts] = useState<any>([]);
   const [loading, setLoading] = useState(true);
-  const [blocked,setBlocked] = useState([])
+  const [blocked, setBlocked] = useState([]);
   useEffect(() => {
     async function get() {
       setLoading(true);
       const { data: user } = await supabase.auth.getUser();
       const s = user?.user?.id;
       const { data: u } = await supabase.from("user").select("*").eq("id", s);
-    
+
       let l = [];
       let blocked = [];
       if (u) {
@@ -46,14 +46,14 @@ export default function Page({ params }: { params: { slug: string } }) {
       console.log("below");
       console.log(l);
       let ds = [];
-      setBlocked(blocked)
+      setBlocked(blocked);
       const { data, error } = await supabase
         .from("posts")
         .select("*,user(name,handle,image)")
         .order("id", { ascending: false })
         .textSearch("title_excerpt_content", `'${search}' | '${search.toLowerCase()}' | '${search.toUpperCase()}'`)
         .in("id", l)
-        .not("id","in",`(${blocked.toString()})`)
+        .not("id", "in", `(${blocked.toString()})`)
         .limit(5);
       if (error) {
         console.log(error);
@@ -62,11 +62,10 @@ export default function Page({ params }: { params: { slug: string } }) {
         ds = data;
 
         for await (const [index, post] of ds.entries()) {
-          
-            const date2 = new Date(ds[index].created_at);
-            ds[index].diff = date1.getTime() - date2.getTime();
-          }
-        
+          const date2 = new Date(ds[index].created_at);
+          ds[index].diff = date1.getTime() - date2.getTime();
+        }
+
         if (ds.length > 0) {
           setEmpty(false);
         } else {
@@ -86,11 +85,11 @@ export default function Page({ params }: { params: { slug: string } }) {
       <div className="flex-1 h-screen p-0 py-2 overflow-hidden">
         <div className="p-4 py-2 mx-1 md:mx-1">
           <div className="relative items-center content-center">
-          <svg
-        viewBox="0 0 24 24"
-        aria-hidden="true"
-        className="md:bottom-3 absolute inset-y-0 right-0 my-auto mr-6 h-[14px] w-[14px] text-gray-400"
-      >
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              className="md:bottom-3 absolute inset-y-0 right-0 my-auto mr-6 h-[14px] w-[14px] text-gray-400"
+            >
               <g>
                 <path
                   fill="currentColor"
@@ -122,7 +121,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           <div className="flex flex-col gap-2 mb-20 animate-in hiddenscroll">
             {!loading ? (
               !empty ? (
-                posts.map((post:any) => (
+                posts.map((post: any) => (
                   <PostComponent
                     id={post.id}
                     title={post.title}
@@ -171,7 +170,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 />
               </div>
             )}
-            <MoreBookMarks  slug={search} />{" "}
+            <MoreBookMarks slug={search} />{" "}
           </div>{" "}
         </div>
       </div>

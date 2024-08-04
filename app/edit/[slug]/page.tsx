@@ -32,14 +32,14 @@ export default function Page({ params }: { params: { slug: string } }) {
     }
   }
 
-  const handleClick = (event:any) => {
+  const handleClick = (event: any) => {
     event.preventDefault();
     hiddenFileInput!.current!.click();
   };
 
   const [content, setContent] = useState("");
   const [excerpt, setExcerpt] = useState("");
-  const [deleteDialog,toggledeleteDialog] = useState("hidden")
+  const [deleteDialog, toggledeleteDialog] = useState("hidden");
   const [cover, setCover] = useState("/bgcover.jpg");
   const [file, setFile] = useState<any>();
   const [changed, setChanged] = useState(false);
@@ -71,20 +71,15 @@ export default function Page({ params }: { params: { slug: string } }) {
 
     check();
   }, []);
-  async function del(){
-    toggledeleteDialog('hidden')
-    setLoading(true)
-    const { error } = await supabase
-  .from('posts')
-  .delete()
-  .eq('id', params.slug)
-  if(error){
-    alert(error)
-
-  }
-  else{
-    window.location.replace("/");
-  }
+  async function del() {
+    toggledeleteDialog("hidden");
+    setLoading(true);
+    const { error } = await supabase.from("posts").delete().eq("id", params.slug);
+    if (error) {
+      alert(error);
+    } else {
+      window.location.replace("/");
+    }
   }
   async function create() {
     const {
@@ -99,49 +94,78 @@ export default function Page({ params }: { params: { slug: string } }) {
       console.log(error);
     } else {
       if (changed) {
-        
-          const newCover = await coverChange(params.slug);
-          const { error: es } = await supabase.from("posts").update({ cover: newCover }).eq("id", params.slug);
-          if (es) {
-            alert(es.message);
-          } else {
-            window.location.replace("/");
-          }
-        
-      }
-      else{window.location.replace("/")
-
+        const newCover = await coverChange(params.slug);
+        const { error: es } = await supabase.from("posts").update({ cover: newCover }).eq("id", params.slug);
+        if (es) {
+          alert(es.message);
+        } else {
+          window.location.replace("/");
+        }
+      } else {
+        window.location.replace("/");
       }
     }
   }
   return !loading ? (
     author ? (
       <div className={`h-screen flex-1 gap-2 overflow-hidden px-8`}>
-                <div style={{zIndex:1000}} className={"absolute py-4 flex flex-col content-center  top-0 bottom-0 left-0 right-0 w-64 h-48 mx-auto my-auto bg-white border animate-in border-black shadow-md md:w-84 lg:w-96 "+deleteDialog}>
-               
-                  <h1 className="mx-4 text-lg font-medium">Delete this post?</h1>
-                  <h1 className="mx-4 mt-2 text-sm">Are you sure you want to delete this post?</h1>
-                  <div className="flex flex-row items-center content-center w-full pt-4 mt-auto ml-auto border-t"><button onClick={()=>toggledeleteDialog("hidden")} className="px-6 py-3 mt-auto text-sm font-medium text-black">Cancel</button><button onClick={()=>del()} className="px-6 py-3 mt-auto ml-auto mr-4 text-xs font-medium text-white bg-black">Delete It</button></div>
-                </div>
+        <div
+          style={{ zIndex: 1000 }}
+          className={
+            "absolute py-4 flex flex-col content-center  top-0 bottom-0 left-0 right-0 w-64 h-48 mx-auto my-auto bg-white border animate-in border-black shadow-md md:w-84 lg:w-96 " +
+            deleteDialog
+          }
+        >
+          <h1 className="mx-4 text-lg font-medium">Delete this post?</h1>
+          <h1 className="mx-4 mt-2 text-sm">Are you sure you want to delete this post?</h1>
+          <div className="flex flex-row items-center content-center w-full pt-4 mt-auto ml-auto border-t">
+            <button
+              onClick={() => toggledeleteDialog("hidden")}
+              className="px-6 py-3 mt-auto text-sm font-medium text-black"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={() => del()}
+              className="px-6 py-3 mt-auto ml-auto mr-4 text-xs font-medium text-white bg-black"
+            >
+              Delete It
+            </button>
+          </div>
+        </div>
 
         <div className="h-full overflow-y-scroll hiddenscroll">
           <form
             className="flex flex-col justify-center w-full gap-2 py-10 my-auto overflow-x-hidden animate-in text-foreground"
             action={create}
           >
-          <div className="flex flex-row items-center content-center justify-between">
-            <h1 className="mb-6 text-2xl font-bold text-gray-300 md:text-3xl">Edit <span className="hidden md:inline-block">The</span> Post</h1>
-      <div className="flex flex-row items-center content-center pb-5 ">
-        <button  onClick={()=>toggledeleteDialog("")} disabled={deleteDialog!="hidden"?true:false} className="flex flex-row items-center content-center px-2 py-3 mx-0 space-x-3 text-sm text-gray-300 ">
-        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256"><path fill="currentColor" d="M216 48h-40v-8a24 24 0 0 0-24-24h-48a24 24 0 0 0-24 24v8H40a8 8 0 0 0 0 16h8v144a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16V64h8a8 8 0 0 0 0-16M96 40a8 8 0 0 1 8-8h48a8 8 0 0 1 8 8v8H96Zm96 168H64V64h128Zm-80-104v64a8 8 0 0 1-16 0v-64a8 8 0 0 1 16 0m48 0v64a8 8 0 0 1-16 0v-64a8 8 0 0 1 16 0"/></svg>        <h1>Delete <span className="hidden md:inline-block">Post</span></h1>
-      </button>
-      </div>
-</div>
+            <div className="flex flex-row items-center content-center justify-between">
+              <h1 className="mb-6 text-2xl font-bold text-gray-300 md:text-3xl">
+                Edit <span className="hidden md:inline-block">The</span> Post
+              </h1>
+              <div className="flex flex-row items-center content-center pb-5 ">
+                <button
+                  onClick={() => toggledeleteDialog("")}
+                  disabled={deleteDialog != "hidden" ? true : false}
+                  className="flex flex-row items-center content-center px-2 py-3 mx-0 space-x-3 text-sm text-gray-300 "
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256">
+                    <path
+                      fill="currentColor"
+                      d="M216 48h-40v-8a24 24 0 0 0-24-24h-48a24 24 0 0 0-24 24v8H40a8 8 0 0 0 0 16h8v144a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16V64h8a8 8 0 0 0 0-16M96 40a8 8 0 0 1 8-8h48a8 8 0 0 1 8 8v8H96Zm96 168H64V64h128Zm-80-104v64a8 8 0 0 1-16 0v-64a8 8 0 0 1 16 0m48 0v64a8 8 0 0 1-16 0v-64a8 8 0 0 1 16 0"
+                    />
+                  </svg>{" "}
+                  <h1>
+                    Delete <span className="hidden md:inline-block">Post</span>
+                  </h1>
+                </button>
+              </div>
+            </div>
             <label className="mb-1 text-base text-gray-300" htmlFor="content">
               Title
             </label>
             <input
-            disabled={deleteDialog!="hidden"?true:false}
+              disabled={deleteDialog != "hidden" ? true : false}
               onChange={(e) => setTitle(e.target.value)}
               className="w-full px-4 py-2 mb-6 mr-4 text-sm text-white bg-black border border-gray-900 rounded-md outline-none "
               name="content"
@@ -155,7 +179,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               Excerpt
             </label>
             <textarea
-            disabled={deleteDialog!="hidden"?true:false}
+              disabled={deleteDialog != "hidden" ? true : false}
               onChange={(e) => setExcerpt(e.target.value)}
               className="w-full h-32 px-4 py-2 mb-6 mr-4 text-sm text-white bg-black border border-gray-900 rounded-md outline-none"
               name="content"
@@ -166,7 +190,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               minLength={90}
             />
             <input
-              onChange={(e:any) => {
+              onChange={(e: any) => {
                 setCover(URL.createObjectURL(e.target.files[0]));
                 setFile(e.target.files[0]);
               }}
@@ -178,14 +202,9 @@ export default function Page({ params }: { params: { slug: string } }) {
               Cover Image
             </label>
             <div className="relative px-4 py-2 mb-6 border rounded-md aspect-video shrink-0">
-            <img
-              src={cover}
-              
-              className="absolute inset-0 object-cover rounded-md aspect-video shrink-0"
-              alt="cover"
-            />
+              <img src={cover} className="absolute inset-0 object-cover rounded-md aspect-video shrink-0" alt="cover" />
               <button
-              disabled={deleteDialog!="hidden"?true:false}
+                disabled={deleteDialog != "hidden" ? true : false}
                 onClick={(e) => {
                   setChanged(true);
                   handleClick(e);
@@ -210,7 +229,12 @@ export default function Page({ params }: { params: { slug: string } }) {
               />
             </div>
 
-            <button disabled={deleteDialog!="hidden"?true:false} className="px-8 py-4 mb-2 text-xs font-medium text-white rounded-md bg-cyan-800 w-max">Publish This Post</button>
+            <button
+              disabled={deleteDialog != "hidden" ? true : false}
+              className="px-8 py-4 mb-2 text-xs font-medium text-white rounded-md bg-cyan-800 w-max"
+            >
+              Publish This Post
+            </button>
           </form>
         </div>
       </div>

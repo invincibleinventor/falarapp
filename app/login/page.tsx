@@ -12,9 +12,9 @@ export default function Login() {
     const { error } = await supabase.auth.signInWithPassword({ email: email, password: password });
     if (error) {
       console.log(error);
-      alert(error.message)
+      alert(error.message);
     } else {
-     window.location.replace("/editprofile");
+      window.location.replace("/editprofile");
     }
   }
   async function register() {
@@ -25,9 +25,9 @@ export default function Login() {
     });
     if (error) {
       console.log(error);
-      alert(error.message)
+      alert(error.message);
     } else {
-     window.location.replace("/editprofile");
+      window.location.replace("/editprofile");
     }
   }
 
@@ -38,12 +38,8 @@ export default function Login() {
         data: { user },
       } = await supabase.auth.getUser();
       if (user) {
-       
-      
         return window.location.replace("/editprofile");
-        
       }
-      
     }
 
     check();

@@ -25,7 +25,7 @@ export default async function Index() {
   const date1 = new Date();
   const isSupabaseConnected = canInitSupabaseClient();
   let empty = true;
-  let myblocked: any[] = []
+  let myblocked: any[] = [];
   let posts: any[] = [];
   let loading = true;
   let l: readonly any[] = [];
@@ -35,7 +35,7 @@ export default async function Index() {
     const { data: u } = await supabase.from("user").select("*").eq("id", s);
     if (u) {
       l = u[0]["bookmarks"];
-      myblocked = u[0]["blocked"]
+      myblocked = u[0]["blocked"];
     }
     console.log("below");
     console.log(l);
@@ -46,17 +46,15 @@ export default async function Index() {
       .select("*,user(name,handle,image)")
       .order("id", { ascending: false })
       .in("id", l)
-      .not("poster","in",`(${myblocked.toString()})`)
+      .not("poster", "in", `(${myblocked.toString()})`)
       .limit(5);
     if (error) {
     } else {
       ds = data;
 
       for await (const [index, post] of ds.entries()) {
-      
-          const date2 = new Date(ds[index].created_at);
-          ds[index].diff = date1.getTime() - date2.getTime();
-        
+        const date2 = new Date(ds[index].created_at);
+        ds[index].diff = date1.getTime() - date2.getTime();
       }
       if (ds.length > 0) {
         empty = false;
@@ -117,7 +115,7 @@ export default async function Index() {
               ) : (
                 <div className="flex items-center content-center w-full h-screen"></div>
               )}
-              <More myblocked = {myblocked} l={l}></More>{" "}
+              <More myblocked={myblocked} l={l}></More>{" "}
             </div>{" "}
           </div>
         </div>

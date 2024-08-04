@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-export default function Search(props:any) {
+export default function Search(props: any) {
   const [value, setValue] = useState("");
   function search() {
     console.log("ok");
@@ -28,7 +28,6 @@ export default function Search(props:any) {
         minLength={4}
         maxLength={50}
         type="search"
-        
         className="font-inter md:mb-3 rounded-full peer h-[48px] w-full bg-gray-700/20 focus:outline-none pl-6 pr-14 text-[14px] placeholder:text-gray-400 text-gray-300"
         placeholder={"Search " + props.text}
       ></input>

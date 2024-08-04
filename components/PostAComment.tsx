@@ -3,7 +3,7 @@ import { createClient } from "@/utils/supabase/client";
 import Image from "next/image";
 import { useRef, useState } from "react";
 
-export default function PostAComment(props:any) {
+export default function PostAComment(props: any) {
   const supabase = createClient();
   const [text, setText] = useState("");
   const inputRef = useRef<HTMLInputElement | any>(null);

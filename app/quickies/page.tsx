@@ -35,66 +35,64 @@ export default async function Index() {
   let myname = "";
   let myphoto = "";
   let myhandle = "";
-  let userliked :any[] = [];
-  let userbookmarked:any[] = [];
-  let myblocked :any[]=[]
-    async function get() {
+  let userliked: any[] = [];
+  let userbookmarked: any[] = [];
+  let myblocked: any[] = [];
+  async function get() {
     const { data: user } = await supabase.auth.getUser();
     const s = user.user!.id;
-    
+
     const { data: u } = await supabase.from("user").select("*").eq("id", s);
     l = u![0]["following"];
     const h = u![0]["handle"];
-    myname = u![0]["name"]
-    myphoto = u![0]["image"]
-    myblocked = u![0]["blocked"]
-    myhandle = u![0]["handle"]
-    userbookmarked = u![0]["bookmarks"]
-    userliked = u![0]["liked"]
+    myname = u![0]["name"];
+    myphoto = u![0]["image"];
+    myblocked = u![0]["blocked"];
+    myhandle = u![0]["handle"];
+    userbookmarked = u![0]["bookmarks"];
+    userliked = u![0]["liked"];
     let ds = [];
 
     l.push(h);
     const { data, error } = await supabase
       .from("quickies")
-      .select(`*, 
+      .select(
+        `*, 
         user (
         name,
         handle,
         image
-        )`)
+        )`
+      )
       .order("id", { ascending: false })
       .in("handle", l)
-      .not("poster","in",`(${myblocked.toString()})`)
+      .not("poster", "in", `(${myblocked.toString()})`)
       .limit(5);
     if (error) {
-      console.log(error)
+      console.log(error);
     } else {
       ds = data;
-      console.log('okok')
-      console.log(ds)
+      console.log("okok");
+      console.log(ds);
 
       for await (const [index, post] of ds.entries()) {
-       
         let liked = false;
-        const likedlist: string | any[] = ds[index].liked
+        const likedlist: string | any[] = ds[index].liked;
         let bookmarked = false;
         const bookmarkedlist: any[] = ds[index].bookmarked;
-        if(likedlist.includes(myhandle)){
-          liked = true
+        if (likedlist.includes(myhandle)) {
+          liked = true;
         }
-        if(bookmarkedlist.includes(myhandle)){
-          bookmarked=true
+        if (bookmarkedlist.includes(myhandle)) {
+          bookmarked = true;
         }
-        
-        ds[index].liked=liked
-          ds[index].bookmarked=bookmarked
-          ds[index].bookmarkedlist=bookmarkedlist
-          ds[index].likedlist=likedlist
-          const date2 = new Date(ds[index].created_at);
-          ds[index].diff = date1.getTime() - date2.getTime();
-     
-          
-        
+
+        ds[index].liked = liked;
+        ds[index].bookmarked = bookmarked;
+        ds[index].bookmarkedlist = bookmarkedlist;
+        ds[index].likedlist = likedlist;
+        const date2 = new Date(ds[index].created_at);
+        ds[index].diff = date1.getTime() - date2.getTime();
       }
 
       if (ds.length > 0) {
@@ -111,68 +109,69 @@ export default async function Index() {
   if (isSupabaseConnected) {
     return (
       <>
-        
-          <div className="h-full overflow-y-scroll hiddenscroll">
-            <div className="flex flex-col gap-0 mb-20 animate-in hiddenscroll">
-              <div className="parent-container">
-           {/* <Stories></Stories> */}
+        <div className="h-full overflow-y-scroll hiddenscroll">
+          <div className="flex flex-col gap-0 mb-20 animate-in hiddenscroll">
+            <div className="parent-container">{/* <Stories></Stories> */}</div>
+            <div className=" lg:hidden">
+              <Trending />
             </div>
-
-              <div className=" lg:hidden">
-              <Trending/>
-
-              </div>
-              {!loading ? (
-                !empty ? (
-                  posts.map((post) => (
-                    <PostComponent
-                      id={post.id}
-                      cover={post.cover}
-                      title={post.title}
-                      time={timeAgo.format(Date.now() - post.diff)}
-                      key={post.id}
-                      image={post.image}
-                      comments={post.comments}
-
-                      userliked={userliked}
-                      userbookmarked={userbookmarked}
-                      bookmarkedlist={post.bookmarkedlist}
-                      likedlist={post.likedlist}
-                      myhandle={myhandle}
-                      dp={post.user.image}
-                      bookmarked={post.bookmarked}
-                      liked={post.liked}
-                      handle={post.handle}
-                      name={post.user.name}
-                      description={post.content}
-                    />
-                  ))
-                ) : (
-                  <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
-                    <div className="flex flex-col gap-2 mx-auto max-w-max">
-                      <h1 className="mx-auto text-lg font-semibold text-center text-gray-300">No Quickies To View!</h1>
-                      <h1 className="mx-auto text-sm text-center text-gray-400">
-                        Follow people to view their quickies on your feed. The more people you follow, the more quickies
-                        on your feed
-                      </h1>
-                      <Link
-                        href="/explore"
-                        className={`mx-auto mt-3 rounded-full w-max px-8 py-3 text-xs font-medium  ${
-                          1 == 1 ? "bg-cyan-800 text-white" : "border-2 bg-white"
-                        }`}
-                      >
-                        Explore People
-                      </Link>
-                    </div>
-                  </div>
-                )
+            {!loading ? (
+              !empty ? (
+                posts.map((post) => (
+                  <PostComponent
+                    id={post.id}
+                    cover={post.cover}
+                    title={post.title}
+                    time={timeAgo.format(Date.now() - post.diff)}
+                    key={post.id}
+                    image={post.image}
+                    comments={post.comments}
+                    userliked={userliked}
+                    userbookmarked={userbookmarked}
+                    bookmarkedlist={post.bookmarkedlist}
+                    likedlist={post.likedlist}
+                    myhandle={myhandle}
+                    dp={post.user.image}
+                    bookmarked={post.bookmarked}
+                    liked={post.liked}
+                    handle={post.handle}
+                    name={post.user.name}
+                    description={post.content}
+                  />
+                ))
               ) : (
-                <div className="flex items-center content-center w-full h-screen"></div>
-              )}
-              <More myblocked ={myblocked} myhandle={myhandle} myname={myname} myphoto={myphoto} userliked={userliked} userbookmarked={userbookmarked} in={l}></More>{" "}
-            </div>{" "}
-          </div>
-
+                <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
+                  <div className="flex flex-col gap-2 mx-auto max-w-max">
+                    <h1 className="mx-auto text-lg font-semibold text-center text-gray-300">No Quickies To View!</h1>
+                    <h1 className="mx-auto text-sm text-center text-gray-400">
+                      Follow people to view their quickies on your feed. The more people you follow, the more quickies
+                      on your feed
+                    </h1>
+                    <Link
+                      href="/explore"
+                      className={`mx-auto mt-3 rounded-full w-max px-8 py-3 text-xs font-medium  ${
+                        1 == 1 ? "bg-cyan-800 text-white" : "border-2 bg-white"
+                      }`}
+                    >
+                      Explore People
+                    </Link>
+                  </div>
+                </div>
+              )
+            ) : (
+              <div className="flex items-center content-center w-full h-screen"></div>
+            )}
+            <More
+              myblocked={myblocked}
+              myhandle={myhandle}
+              myname={myname}
+              myphoto={myphoto}
+              userliked={userliked}
+              userbookmarked={userbookmarked}
+              in={l}
+            ></More>{" "}
+          </div>{" "}
+        </div>
       </>
     );
   } else {

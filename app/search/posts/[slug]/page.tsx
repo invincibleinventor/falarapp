@@ -21,26 +21,25 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [empty, setEmpty] = useState(true);
   const [posts, setPosts] = useState<Record<string, unknown>[]>([]);
   const [loading, setLoading] = useState(true);
-  const [blocked,setblocked] = useState([])
+  const [blocked, setblocked] = useState([]);
 
   useEffect(() => {
     async function get() {
       setLoading(true);
       let id;
       let blocked;
-      const {data:u} = await supabase.auth.getUser()
-      if(u.user){
-         id = u.user.id
-         const {data,error}  = await supabase.from('user').select('blocked').eq('id',id)
-         if(data && data.length>0){
-            setblocked(data[0]["blocked"])
-            blocked = data[0]["blocked"]
-         }
-         else{
-          if(error){
-            console.log(error.message)
+      const { data: u } = await supabase.auth.getUser();
+      if (u.user) {
+        id = u.user.id;
+        const { data, error } = await supabase.from("user").select("blocked").eq("id", id);
+        if (data && data.length > 0) {
+          setblocked(data[0]["blocked"]);
+          blocked = data[0]["blocked"];
+        } else {
+          if (error) {
+            console.log(error.message);
           }
-         }
+        }
       }
       const { data, error } = await supabase
         .from("posts")
@@ -48,7 +47,7 @@ export default function Page({ params }: { params: { slug: string } }) {
         .order("id", { ascending: false })
         .textSearch("title_excerpt_content", `'${search}' | '${search.toLowerCase()}' | '${search.toUpperCase()}'`)
         .limit(5)
-        .not('poster','in',`(${blocked.toString()})`);
+        .not("poster", "in", `(${blocked.toString()})`);
       if (error) {
         console.log(error);
       } else {
@@ -56,10 +55,8 @@ export default function Page({ params }: { params: { slug: string } }) {
         const ds = data;
 
         for await (const [index, post] of ds.entries()) {
-        
-            const date2 = new Date(ds[index].created_at);
-            ds[index].diff = date1.getTime() - date2.getTime();
-          
+          const date2 = new Date(ds[index].created_at);
+          ds[index].diff = date1.getTime() - date2.getTime();
         }
         if (ds.length > 0) {
           setEmpty(false);
@@ -80,11 +77,11 @@ export default function Page({ params }: { params: { slug: string } }) {
     <div className="flex-1 h-screen p-0 py-2 overflow-hidden">
       <div className="p-4 py-2 mx-1 md:mx-1">
         <div className="relative items-center content-center">
-        <svg
-        viewBox="0 0 24 24"
-        aria-hidden="true"
-        className="md:bottom-3 absolute inset-y-0 right-0 my-auto mr-6 h-[14px] w-[14px] text-gray-400"
-      >
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            className="md:bottom-3 absolute inset-y-0 right-0 my-auto mr-6 h-[14px] w-[14px] text-gray-400"
+          >
             <g>
               <path
                 fill="currentColor"
@@ -102,7 +99,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 }
               }
             }}
-            defaultValue={search.replaceAll('%20',' ')}
+            defaultValue={search.replaceAll("%20", " ")}
             onChange={(e) => setTempSearch(e.target.value.trim())}
             minLength={4}
             maxLength={50}
@@ -116,7 +113,7 @@ export default function Page({ params }: { params: { slug: string } }) {
         <div className="flex flex-col gap-2 mb-20 animate-in hiddenscroll">
           {!loading ? (
             !empty ? (
-              posts.map((post:any) => (
+              posts.map((post: any) => (
                 <PostComponent
                   cover={post.cover}
                   id={post.id}
@@ -134,18 +131,18 @@ export default function Page({ params }: { params: { slug: string } }) {
             ) : (
               <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
                 <div className="flex flex-col gap-4 mx-auto max-w-max">
-                <h1 className="mx-auto text-xl font-semibold text-center text-gray-300">No Posts To View!</h1>
-                    <h1 className="mx-auto text-sm text-center text-gray-500">
-                      Your search results appear here. Seems like there are no posts related to your search term.
-                    </h1>
-                    <Link
-                      href="/search/posts/*"
-                      className={`mx-auto mt-5 w-max px-8  py-3 text-xs font-medium  ${
-                        1 == 1 ? "bg-cyan-800 rounded-full  text-white" : "border-2 bg-white"
-                      }`}
-                    >
-                      Search Something Else
-                    </Link>
+                  <h1 className="mx-auto text-xl font-semibold text-center text-gray-300">No Posts To View!</h1>
+                  <h1 className="mx-auto text-sm text-center text-gray-500">
+                    Your search results appear here. Seems like there are no posts related to your search term.
+                  </h1>
+                  <Link
+                    href="/search/posts/*"
+                    className={`mx-auto mt-5 w-max px-8  py-3 text-xs font-medium  ${
+                      1 == 1 ? "bg-cyan-800 rounded-full  text-white" : "border-2 bg-white"
+                    }`}
+                  >
+                    Search Something Else
+                  </Link>
                 </div>
               </div>
             )

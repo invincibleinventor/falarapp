@@ -1,4 +1,3 @@
-
 "use client";
 import { createClient } from "@/utils/supabase/client";
 import TimeAgo from "javascript-time-ago";
@@ -7,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { Oval } from "react-loader-spinner";
 import PostComponent from "./PostComponent";
-export default function More(props:any) {
+export default function More(props: any) {
   const supabase = createClient();
 
   const [offset, setOffset] = useState(1);
@@ -35,14 +34,10 @@ export default function More(props:any) {
           console.log(data);
           const ds = data;
           for await (const [index, post] of ds.entries()) {
-           
-             
-
-              const date2 = new Date(ds[index].created_at);
-              ds[index].diff = date1.getTime() - date2.getTime();
-            
+            const date2 = new Date(ds[index].created_at);
+            ds[index].diff = date1.getTime() - date2.getTime();
           }
-          setPosts((prev:any) => [...prev, ...ds]);
+          setPosts((prev: any) => [...prev, ...ds]);
           if (ds.length < PAGE_COUNT) {
             setHalt(true);
           }
@@ -56,7 +51,7 @@ export default function More(props:any) {
         .select("*,user(name,handle,image)")
         .order("id", { ascending: false })
         .range(from, to)
-        .not("poster","in",`(${props.myblocked.toString()})`)
+        .not("poster", "in", `(${props.myblocked.toString()})`);
       if (error) {
         console.log(error);
       } else {
@@ -64,11 +59,8 @@ export default function More(props:any) {
           console.log(data);
           const ds = data;
           for await (const [index, post] of ds.entries()) {
-           
-
-              const date2 = new Date(ds[index].created_at);
-              ds[index].diff = date1.getTime() - date2.getTime();
-            
+            const date2 = new Date(ds[index].created_at);
+            ds[index].diff = date1.getTime() - date2.getTime();
           }
           setPosts([...posts, ...ds]);
           if (ds.length < PAGE_COUNT) {
@@ -93,7 +85,7 @@ export default function More(props:any) {
   return (
     <>
       <div className="flex flex-col items-center content-center gap-2">
-        {posts.map((post:any) => (
+        {posts.map((post: any) => (
           <PostComponent
             id={post.id}
             type="profile"
@@ -108,7 +100,7 @@ export default function More(props:any) {
             description={post.excerpt}
           />
         ))}
-   
+
         <Oval
           height={80}
           width={80}

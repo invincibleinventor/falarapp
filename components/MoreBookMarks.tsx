@@ -42,12 +42,10 @@ export default function MoreBookMarks(props: { slug: string }) {
         console.log(data);
         const ds = data;
         for await (const [index, post] of ds.entries()) {
-         
+          const date2 = new Date(ds[index].created_at);
+          ds[index].diff = date1.getTime() - date2.getTime();
+        }
 
-            const date2 = new Date(ds[index].created_at);
-            ds[index].diff = date1.getTime() - date2.getTime();
-          }
-        
         setPosts([...posts, ...ds]);
         if (ds.length < PAGE_COUNT) {
           setHalt(true);
@@ -70,7 +68,7 @@ export default function MoreBookMarks(props: { slug: string }) {
   return (
     <>
       <div className="flex flex-col items-center content-center gap-2">
-        {posts.map((post:any) => (
+        {posts.map((post: any) => (
           <PostComponent
             id={post.id}
             type="profile"

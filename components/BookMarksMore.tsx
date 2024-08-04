@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { Oval } from "react-loader-spinner";
 import PostComponent from "./PostComponent";
-export default function More(props:any) {
+export default function More(props: any) {
   const supabase = createClient();
 
   const [offset, setOffset] = useState(1);
@@ -19,37 +19,31 @@ export default function More(props:any) {
   const date1 = new Date();
 
   async function get(from: number, to: number) {
-   
-      const { data, error } = await supabase
-        .from("posts")
-        .select("*,user(name,handle,image)")
-        .order("id", { ascending: false })
-        .in("id",props.l)
-        .range(from, to)
-        .not("poster","in",`(${props.myblocked.toString()})`)
-      if (error) {
-        console.log(error);
-      } else {
-        if (data && data.length > 0) {
-          console.log(data);
-          const ds = data;
-          for await (const [index, post] of ds.entries()) {
-           
-
-              const date2 = new Date(ds[index].created_at);
-              ds[index].diff = date1.getTime() - date2.getTime();
-            
-          }
-          setPosts([...posts, ...ds]);
-          if (ds.length < PAGE_COUNT) {
-            setHalt(true);
-          }
-        } else {
+    const { data, error } = await supabase
+      .from("posts")
+      .select("*,user(name,handle,image)")
+      .order("id", { ascending: false })
+      .in("id", props.l)
+      .range(from, to)
+      .not("poster", "in", `(${props.myblocked.toString()})`);
+    if (error) {
+      console.log(error);
+    } else {
+      if (data && data.length > 0) {
+        console.log(data);
+        const ds = data;
+        for await (const [index, post] of ds.entries()) {
+          const date2 = new Date(ds[index].created_at);
+          ds[index].diff = date1.getTime() - date2.getTime();
+        }
+        setPosts([...posts, ...ds]);
+        if (ds.length < PAGE_COUNT) {
           setHalt(true);
         }
-      
+      } else {
+        setHalt(true);
       }
-    
+    }
   }
   useEffect(() => {
     if (!halt && inView) {
@@ -64,7 +58,7 @@ export default function More(props:any) {
   return (
     <>
       <div className="flex flex-col items-center content-center gap-2">
-        {posts.map((post:any) => (
+        {posts.map((post: any) => (
           <PostComponent
             id={post.id}
             type="profile"
@@ -79,7 +73,7 @@ export default function More(props:any) {
             description={post.excerpt}
           />
         ))}
-   
+
         <Oval
           height={80}
           width={80}

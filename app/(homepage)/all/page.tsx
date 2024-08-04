@@ -27,14 +27,14 @@ export default async function Index() {
   let empty = true;
   let posts: any[] = [];
   let loading = true;
-  let myblocked:any[] =[]
+  let myblocked: any[] = [];
   let l: any[] = [];
   async function get() {
     const { data: user } = await supabase.auth.getUser();
     const s = user.user!.id;
     const { data: u } = await supabase.from("user").select("*").eq("id", s);
     l = u![0]["following"];
-     myblocked = u![0]["blocked"]
+    myblocked = u![0]["blocked"];
     const h = u![0]["handle"];
     let ds = [];
 
@@ -43,19 +43,17 @@ export default async function Index() {
       .from("posts")
       .select("*,user(name,handle,image)")
       .order("id", { ascending: false })
-      .not("poster","in",`(${myblocked.toString()})`)
+      .not("poster", "in", `(${myblocked.toString()})`)
       .limit(5);
     if (error) {
-      console.log(error)
+      console.log(error);
     } else {
       ds = data;
 
       for await (const [index, post] of ds.entries()) {
-     
-          const date2 = new Date(ds[index].created_at);
-          ds[index].diff = date1.getTime() - date2.getTime();
-        }
-      
+        const date2 = new Date(ds[index].created_at);
+        ds[index].diff = date1.getTime() - date2.getTime();
+      }
 
       if (ds.length > 0) {
         empty = false;
@@ -71,54 +69,50 @@ export default async function Index() {
   if (isSupabaseConnected) {
     return (
       <>
-       
-          <div className="h-full overflow-y-scroll hiddenscroll">
-            <div className="flex flex-col gap-2 mb-20 animate-in hiddenscroll">
-              {!loading ? (
-                !empty ? (
-                  posts.map((post) => (
-                    <PostComponent
-                      id={post.id}
-                      cover={post.cover}
-                      title={post.title}
-                      time={timeAgo.format(Date.now() - post.diff)}
-                      key={post.id}
-                      image={post.image}
-                      dp={post.user.image}
-                      handle={post.handle}
-                      likes={post.likes}
-
-                      name={post.user.name}
-                      description={post.excerpt}
-                    />
-                  ))
-                ) : (
-                  <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
-                    <div className="flex flex-col gap-2 mx-auto max-w-max">
-                      <h1 className="mx-auto text-lg font-semibold text-center text-gray-300">No Posts To View!</h1>
-                      <h1 className="mx-auto text-sm text-center text-gray-400">
-                        Follow people to view their posts on your home feed. The more people you follow, the more posts
-                        on your feed
-                      </h1>
-                      <Link
-                        href="/explore"
-                        className={`mx-auto mt-3 rounded-full w-max px-8 py-3 text-xs font-medium  ${
-                          1 == 1 ? "bg-cyan-800 text-white" : "border-2 bg-white"
-                        }`}
-                      >
-                        Explore People
-                      </Link>
-                    </div>
-                  </div>
-                )
+        <div className="h-full overflow-y-scroll hiddenscroll">
+          <div className="flex flex-col gap-2 mb-20 animate-in hiddenscroll">
+            {!loading ? (
+              !empty ? (
+                posts.map((post) => (
+                  <PostComponent
+                    id={post.id}
+                    cover={post.cover}
+                    title={post.title}
+                    time={timeAgo.format(Date.now() - post.diff)}
+                    key={post.id}
+                    image={post.image}
+                    dp={post.user.image}
+                    handle={post.handle}
+                    likes={post.likes}
+                    name={post.user.name}
+                    description={post.excerpt}
+                  />
+                ))
               ) : (
-                <div className="flex items-center content-center w-full h-screen"></div>
-              )}
-              
-              <More myblocked={myblocked}></More>
-              {" "}
-            </div>{" "}
-          </div>
+                <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
+                  <div className="flex flex-col gap-2 mx-auto max-w-max">
+                    <h1 className="mx-auto text-lg font-semibold text-center text-gray-300">No Posts To View!</h1>
+                    <h1 className="mx-auto text-sm text-center text-gray-400">
+                      Follow people to view their posts on your home feed. The more people you follow, the more posts on
+                      your feed
+                    </h1>
+                    <Link
+                      href="/explore"
+                      className={`mx-auto mt-3 rounded-full w-max px-8 py-3 text-xs font-medium  ${
+                        1 == 1 ? "bg-cyan-800 text-white" : "border-2 bg-white"
+                      }`}
+                    >
+                      Explore People
+                    </Link>
+                  </div>
+                </div>
+              )
+            ) : (
+              <div className="flex items-center content-center w-full h-screen"></div>
+            )}
+            <More myblocked={myblocked}></More>{" "}
+          </div>{" "}
+        </div>
       </>
     );
   } else {

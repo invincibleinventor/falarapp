@@ -17,7 +17,6 @@ export async function middleware(request: NextRequest) {
     if (data && data.length > 0) {
       return response;
     }
-   
   }
   const redirectUrl = request.nextUrl.clone();
   redirectUrl.pathname = "/login";
@@ -48,6 +47,6 @@ export const config = {
     "/search/bookmarks/:path*",
     "/search/posts/:path*",
     "/search/quickies/:path*",
-    "/search/people/:path*"
+    "/search/people/:path*",
   ],
 };

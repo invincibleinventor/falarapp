@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { Oval } from "react-loader-spinner";
 import CommentComponent from "./CommentComponent";
-export default function CommentsComponent(props:any) {
+export default function CommentsComponent(props: any) {
   const supabase = createClient();
   TimeAgo.locale(en);
   const timeAgo = new TimeAgo("en-US");
@@ -25,7 +25,7 @@ export default function CommentsComponent(props:any) {
       .select("*,user(name,handle,image)")
       .eq("id", props.slug)
       .order("likes", { ascending: false })
-      .not("poster","in",`(${props.myblocked})`)
+      .not("poster", "in", `(${props.myblocked})`)
       .range(from, to);
     if (error) {
       console.log(error);
@@ -35,22 +35,21 @@ export default function CommentsComponent(props:any) {
         const l = data;
         for await (const [index, comment] of l.entries()) {
           console.log(index, comment);
-        
-           
-            const date2 = new Date(l[index].time);
-            l[index].newtime = date1.getTime() - date2.getTime();
-            if (props.loggedin) {
-              if (l[index].liked.includes(props.myhandle)) {
-                console.log(props.myhandle, index);
-                l[index].likedbyme = true;
-              } else {
-                l[index].likedbyme = false;
-              }
+
+          const date2 = new Date(l[index].time);
+          l[index].newtime = date1.getTime() - date2.getTime();
+          if (props.loggedin) {
+            if (l[index].liked.includes(props.myhandle)) {
+              console.log(props.myhandle, index);
+              l[index].likedbyme = true;
             } else {
               l[index].likedbyme = false;
             }
-            console.log(l[index]);
+          } else {
+            l[index].likedbyme = false;
           }
+          console.log(l[index]);
+        }
         setComments([...comments, ...l]);
         setLoading(false);
         if (l.length < PAGE_COUNT) {
@@ -74,40 +73,41 @@ export default function CommentsComponent(props:any) {
   return (
     <>
       <div className="flex flex-col my-3 mt-6 space-y-4">
-        {!loading ? (
-          comments.map((comment:any) => (
-            <CommentComponent
-              time={timeAgo.format(Date.now() - comment.newtime)}
-              myhandle={props.myhandle}
-              likedbypeople={comment.liked}
-              comment_id={comment.comment_id}
-              key={comment.comment_id}
-              handle={comment.handle}
-              likes={comment.likes}
-              likedbyme={comment.likedbyme}
-              name={comment.user.name}
-              profile={comment.user.image}
-              content={comment.content}
-              loggedin={props.loggedin}
-            />
-          ))
-        ) : (comments && comments.length>0 &&
-          <>
-            <Oval
-              height={40}
-              width={40}
-              color="#000000"
-              wrapperStyle={{}}
-              wrapperClass="mx-auto mt-5"
-              visible={!halt ? true : false}
-              ariaLabel="oval-loading"
-              secondaryColor="#808080"
-              strokeWidth={2}
-              strokeWidthSecondary={2}
-            />
-            <div className={!halt ? "" : "hidden"} ref={ref}></div>
-          </>
-        )}
+        {!loading
+          ? comments.map((comment: any) => (
+              <CommentComponent
+                time={timeAgo.format(Date.now() - comment.newtime)}
+                myhandle={props.myhandle}
+                likedbypeople={comment.liked}
+                comment_id={comment.comment_id}
+                key={comment.comment_id}
+                handle={comment.handle}
+                likes={comment.likes}
+                likedbyme={comment.likedbyme}
+                name={comment.user.name}
+                profile={comment.user.image}
+                content={comment.content}
+                loggedin={props.loggedin}
+              />
+            ))
+          : comments &&
+            comments.length > 0 && (
+              <>
+                <Oval
+                  height={40}
+                  width={40}
+                  color="#000000"
+                  wrapperStyle={{}}
+                  wrapperClass="mx-auto mt-5"
+                  visible={!halt ? true : false}
+                  ariaLabel="oval-loading"
+                  secondaryColor="#808080"
+                  strokeWidth={2}
+                  strokeWidthSecondary={2}
+                />
+                <div className={!halt ? "" : "hidden"} ref={ref}></div>
+              </>
+            )}
       </div>
     </>
   );

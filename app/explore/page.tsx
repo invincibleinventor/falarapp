@@ -31,15 +31,15 @@ export default async function Index() {
   const userid = user?.id;
   let myhandle = "";
   let myImage = "";
-  let blocked : any[] = [];
+  let blocked: any[] = [];
   let followinglist: any[] = [];
   async function get() {
-    const {data:us} = await supabase.from('user').select('blocked').eq('id',userid)
-    if(us){
-      blocked = us[0]["blocked"]
+    const { data: us } = await supabase.from("user").select("blocked").eq("id", userid);
+    if (us) {
+      blocked = us[0]["blocked"];
     }
-    blocked.push(userid)
- 
+    blocked.push(userid);
+
     const { data, error } = await supabase.from("user").select("*").not("id", "in", `(${blocked.toString()})`).limit(4);
     if (error) {
       console.log(error);
@@ -51,15 +51,15 @@ export default async function Index() {
         ifollow = u[0]["following"];
         followinglist = ifollow;
         myhandle = u[0]["handle"];
-        myImage = u[0]["image"]
+        myImage = u[0]["image"];
       }
 
       for await (const [index, user] of ds.entries()) {
         if (ifollow.includes(user.handle)) {
           ds[index]["isfollowing"] = true;
-          console.log(user.handle,ifollow)
+          console.log(user.handle, ifollow);
         } else {
-          console.log(user.handle,ifollow)
+          console.log(user.handle, ifollow);
 
           ds[index]["isfollowing"] = false;
         }

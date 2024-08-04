@@ -2,7 +2,7 @@
 import { createClient } from "@/utils/supabase/client";
 import { useState } from "react";
 
-export default function LikeComponent(props:any) {
+export default function LikeComponent(props: any) {
   const supabase = createClient();
 
   const [likedlist, setLikedList] = useState(props.likedlist);
@@ -13,28 +13,27 @@ export default function LikeComponent(props:any) {
 
   async function setLiked(like: boolean) {
     if (like == false) {
-       let l = likedlist;
+      let l = likedlist;
       setDisabled(true);
       setLikes(likes - 1);
 
-       l = l.filter(function (item:any) {
+      l = l.filter(function (item: any) {
         return item !== props.handle;
-       });
+      });
       let u = ulikedlist;
 
-      u = u.filter(function (item:any) {
+      u = u.filter(function (item: any) {
         return item !== props.postid;
       });
 
-       const { error } = await supabase
+      const { error } = await supabase
         .from("quickies")
-         .update({ liked: l, likes: likes - 1 })
-         .eq("id", props.postid);
+        .update({ liked: l, likes: likes - 1 })
+        .eq("id", props.postid);
       const { error: e } = await supabase.from("user").update({ quickieliked: u }).eq("handle", props.handle);
       if (e) {
         alert(e.message);
         setLikes(likes + 1);
-
       } else {
         toggleLiked(false);
 
@@ -45,7 +44,6 @@ export default function LikeComponent(props:any) {
           if (d) {
             setuLikedList(d[0]["quickieliked"]);
             setDisabled(false);
-
           }
         }
       }
@@ -67,7 +65,7 @@ export default function LikeComponent(props:any) {
       if (error || e) {
         alert(error!.message);
         alert(e!.message);
-        setLikes(likes-1)
+        setLikes(likes - 1);
       } else {
         const { data } = await supabase.from("quickies").select("liked").eq("id", props.postid);
         if (data) {

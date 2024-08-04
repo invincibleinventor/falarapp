@@ -15,14 +15,14 @@ export default function Page({ params }: { params: { slug: string } }) {
   const supabase = createClient();
   const [image, setImage] = useState("");
   const [posts, setPosts] = useState<any>([]);
-  const [resume,setIsResume] = useState(false);
-  const [myImage,setMyImage] = useState('')
-  const [hisId,setHisId]=useState('')
+  const [resume, setIsResume] = useState(false);
+  const [myImage, setMyImage] = useState("");
+  const [hisId, setHisId] = useState("");
   const [loggedin, setloggedin] = useState(false);
   const [about, setAbout] = useState("");
   const [loading, setLoading] = useState(true);
   const [cover, setCover] = useState("true");
-  const [myuserid,setMyuserid] = useState("")
+  const [myuserid, setMyuserid] = useState("");
   const [name, setName] = useState("");
   const [following, setFollowing] = useState(0);
   const [imfollowing, setImFollowing] = useState(false);
@@ -31,10 +31,10 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [followinglist, setFollowingList] = useState<any>([]);
   const [found, setFound] = useState(true);
   const [myself, setMyself] = useState(false);
-  const [notifications,setNotifications] = useState(0)
+  const [notifications, setNotifications] = useState(0);
   const [myId, setMyId] = useState<string | undefined>();
-  const [blockedlist,setBlockedlist] =useState<any>([])
-  const [blocked,setBlocked] = useState(false)
+  const [blockedlist, setBlockedlist] = useState<any>([]);
+  const [blocked, setBlocked] = useState(false);
   useEffect(() => {
     async function get() {
       const {
@@ -53,10 +53,10 @@ export default function Page({ params }: { params: { slug: string } }) {
           {
             setFound(true);
             setName(pd[0].name);
-            setHisId(pd[0].id)
+            setHisId(pd[0].id);
             setCover(pd[0].cover);
             setAbout(pd[0].about);
-            setNotifications(pd[0].notifications)
+            setNotifications(pd[0].notifications);
 
             setImage(pd[0].image);
             setIsResume(pd[0].isresume);
@@ -68,20 +68,19 @@ export default function Page({ params }: { params: { slug: string } }) {
               if (data) {
                 setMyImage(data[0].image);
                 setMyId(data[0].handle);
-                setMyuserid(session.user.id)
+                setMyuserid(session.user.id);
                 setBlockedlist(data[0].blocked);
                 setFollowerList(pd[0].followers);
                 setFollowingList(data[0].following);
-                console.log('below')
-                console.log(pd[0].id)
-                console.log(data[0].blocked)
-                if(data[0].blocked.includes(pd[0].id)){
-                  setBlocked(true)
-                  console.log('blockkkedd')
-                }
-                else{
-                  console.log('illla')
-                  setBlocked(false)
+                console.log("below");
+                console.log(pd[0].id);
+                console.log(data[0].blocked);
+                if (data[0].blocked.includes(pd[0].id)) {
+                  setBlocked(true);
+                  console.log("blockkkedd");
+                } else {
+                  console.log("illla");
+                  setBlocked(false);
                 }
                 if (data[0].handle == params.slug) {
                   setMyself(true);
@@ -102,69 +101,63 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   TimeAgo.locale(en);
 
-
-
-  async function determine(){
-    if(blocked){
-      let b = blockedlist
+  async function determine() {
+    if (blocked) {
+      let b = blockedlist;
       b = b.filter((item: string) => item !== hisId);
-      const {error} = await supabase.from('user').update({blocked:b}).eq('id',myuserid)
-      if(error){
-        alert(error)
+      const { error } = await supabase.from("user").update({ blocked: b }).eq("id", myuserid);
+      if (error) {
+        alert(error);
+      } else {
+        window.location.reload();
       }
-      else{
-window.location.reload()
-      }    }
-    else{
-      const b = blockedlist
-      b.push(hisId)
-      
-      const {error} = await supabase.from('user').update({blocked:b}).eq('id',myuserid)
-      if(error){
-        alert(error)
-      }
-      else{
+    } else {
+      const b = blockedlist;
+      b.push(hisId);
+
+      const { error } = await supabase.from("user").update({ blocked: b }).eq("id", myuserid);
+      if (error) {
+        alert(error);
+      } else {
         if (followerlist.includes(myId)) {
           console.log("uesuesues");
-          let arr:any = followerlist;
+          let arr: any = followerlist;
           console.log("before");
           console.log(arr);
-          arr = arr.filter((item:any) => item !== myId);
+          arr = arr.filter((item: any) => item !== myId);
           let arr2 = followinglist;
           arr2 = arr2.filter((item: string) => item !== params.slug);
-  
+
           console.log(arr);
           const { data, error } = await supabase
             .from("user")
             .update({ followers: arr })
             .eq("handle", params.slug)
             .select();
-            const { data:d, error:e } = await supabase
+          const { data: d, error: e } = await supabase
             .from("user")
             .update({ following: arr2 })
             .eq("handle", myId)
             .select();
-  
-          if (error||e) {
+
+          if (error || e) {
             console.log(error?.message);
-            console.log(e?.message)
+            console.log(e?.message);
           } else {
             console.log(data);
-          
-          setFollowerList(arr);
-          setFollowingList(arr2);
-          setImFollowing(false);
-          window.location.reload()
+
+            setFollowerList(arr);
+            setFollowingList(arr2);
+            setImFollowing(false);
+            window.location.reload();
           }
-        }
-        else{
-          window.location.reload()
+        } else {
+          window.location.reload();
         }
       }
     }
   }
 
-  
   const timeAgo = new TimeAgo("en-US");
   const date1 = new Date();
   useEffect(() => {
@@ -181,12 +174,10 @@ window.location.reload()
         console.log(data);
         const ds = data;
         for await (const [index, post] of ds.entries()) {
-         
+          const date2 = new Date(ds[index].created_at);
+          ds[index].diff = date1.getTime() - date2.getTime();
+        }
 
-            const date2 = new Date(ds[index].created_at);
-            ds[index].diff = date1.getTime() - date2.getTime();
-          }
-        
         setPosts(ds);
         setLoading(false);
       }
@@ -199,10 +190,10 @@ window.location.reload()
     } else {
       if (followerlist.includes(myId)) {
         console.log("uesuesues");
-        let arr:any = followerlist;
+        let arr: any = followerlist;
         console.log("before");
         console.log(arr);
-        arr = arr.filter((item:any) => item !== myId);
+        arr = arr.filter((item: any) => item !== myId);
         let arr2 = followinglist;
         arr2 = arr2.filter((item: string) => item !== params.slug);
 
@@ -212,11 +203,15 @@ window.location.reload()
           .update({ followers: arr })
           .eq("handle", params.slug)
           .select();
-          const { data:d, error:e } = await supabase.from("user").update({ following: arr2 }).eq("handle", myId).select();
+        const { data: d, error: e } = await supabase
+          .from("user")
+          .update({ following: arr2 })
+          .eq("handle", myId)
+          .select();
 
         if (error || e) {
           console.log(error?.message);
-          console.log(e?.message)
+          console.log(e?.message);
         } else {
           console.log(data);
         }
@@ -224,9 +219,9 @@ window.location.reload()
         setFollowingList(arr2);
         setImFollowing(false);
       } else {
-        const arr:any = followerlist;
+        const arr: any = followerlist;
         arr.push(myId);
-        let arr2:any = [];
+        let arr2: any = [];
         arr2 = followinglist;
         arr2.push(params.slug);
         console.log(arr);
@@ -235,16 +230,27 @@ window.location.reload()
           .update({ followers: arr })
           .eq("handle", params.slug)
           .select();
-          const { data:d, error:e } = await supabase.from("user").update({ following: arr2 }).eq("handle", myId).select();
+        const { data: d, error: e } = await supabase
+          .from("user")
+          .update({ following: arr2 })
+          .eq("handle", myId)
+          .select();
 
-        if (error||e) {
+        if (error || e) {
           console.log(error?.message);
-          console.log(e?.message)
+          console.log(e?.message);
         } else {
-        
-          notification(notifications,supabase,hisId,'/profile/'+myId,"New Follower",'follow',"@"+myId+" has followed you! Follow them back?",myImage)
+          notification(
+            notifications,
+            supabase,
+            hisId,
+            "/profile/" + myId,
+            "New Follower",
+            "follow",
+            "@" + myId + " has followed you! Follow them back?",
+            myImage
+          );
           console.log(data);
-
         }
         setImFollowing(true);
         setFollowerList(arr);
@@ -261,10 +267,9 @@ window.location.reload()
               <Image
                 width={180}
                 unoptimized={true}
-
                 height={180}
-                loader = {()=>(found ? cover ? cover : "/bg.jpg" : "/bg.jpg")}
-                src={`${found ? cover ? cover : "/bg.jpg" : "/bg.jpg"}`}
+                loader={() => (found ? (cover ? cover : "/bg.jpg") : "/bg.jpg")}
+                src={`${found ? (cover ? cover : "/bg.jpg") : "/bg.jpg"}`}
                 className="object-cover w-full h-48 rounded-none "
                 alt="cover"
               />
@@ -275,17 +280,15 @@ window.location.reload()
             height={90}
             unoptimized={true}
             className="absolute w-24 h-24 rounded-full bottom-5 left-7 md:left-12"
-            loader = {()=>(found ? image : "/usernotfound.png")}
+            loader={() => (found ? image : "/usernotfound.png")}
             src={`${found ? image : "/usernotfound.png"}`}
             alt="userimage"
           />
-          {found && loggedin && !blocked &&(
+          {found && loggedin && !blocked && (
             <button
               onClick={() => onfollow()}
               className={`absolute rounded-full bottom-10 right-7 px-8 py-3 text-xs font-semibold md:right-12  ${
-                !(imfollowing || myself)
-                  ? "border-[1px] bg-cyan-800 text-white"
-                  : "border-[1px] bg-white text-black"
+                !(imfollowing || myself) ? "border-[1px] bg-cyan-800 text-white" : "border-[1px] bg-white text-black"
               }`}
             >
               {myself ? "Edit Profile" : imfollowing ? "Unfollow" : "Follow"}
@@ -293,31 +296,45 @@ window.location.reload()
           )}
         </div>
         <div className="flex flex-col gap-0 ml-8 md:ml-14">
-          {found  && (
+          {found && (
             <div className="flex flex-row items-start justify-between">
-            <div className="flex flex-col content-center sm:gap-2 sm:items-center sm:flex-row ">
-              <h1 className="text-xl font-semibold text-gray-300">{name}</h1>
-              
-              <h1 className="text-sm font-normal text-gray-500">@{params.slug}</h1>
-              
-            </div>
-            {!myself &&
-            <div className="flex flex-row items-center content-center gap-2 mb-2">
-            <button onClick={()=>determine()} className="px-4 py-1 text-xs font-medium text-red-400 border-2 rounded-full border-red-900/40 ">{blocked?'Unblock':'Block'}</button>
-            <Link href={"/report/user/"+params.slug} className="px-4 py-1 mr-8 text-[10px] font-medium text-white border-2 border-gray-900 rounded-full md:mr-14">{'Report'}</Link>
-              </div>
-}
-            </div>
-            
-          )}
-          
-          <div className="flex flex-col justify-between gap-2 sm:gap-0 sm:flex-row">
-          
-          <h1 style={{ wordBreak: "break-word", whiteSpace: "normal" }} className="pr-12 text-sm font-normal leading-relaxed text-gray-500 two-line-elipsis sm:text-gray-500">{!blocked?about:'You have blocked this user. Unblock them to view their posts.'}</h1>
+              <div className="flex flex-col content-center sm:gap-2 sm:items-center sm:flex-row ">
+                <h1 className="text-xl font-semibold text-gray-300">{name}</h1>
 
-          <div className={resume?"mr-16  flex flex-row":"mr-16 flex flex-row"}>
-          <Link href={"/resume/"+params.slug} className={resume?"text-sm font-medium text-blue-600":"hidden"}>View Resume</Link>
-        </div>
+                <h1 className="text-sm font-normal text-gray-500">@{params.slug}</h1>
+              </div>
+              {!myself && (
+                <div className="flex flex-row items-center content-center gap-2 mb-2">
+                  <button
+                    onClick={() => determine()}
+                    className="px-4 py-1 text-xs font-medium text-red-400 border-2 rounded-full border-red-900/40 "
+                  >
+                    {blocked ? "Unblock" : "Block"}
+                  </button>
+                  <Link
+                    href={"/report/user/" + params.slug}
+                    className="px-4 py-1 mr-8 text-[10px] font-medium text-white border-2 border-gray-900 rounded-full md:mr-14"
+                  >
+                    {"Report"}
+                  </Link>
+                </div>
+              )}
+            </div>
+          )}
+
+          <div className="flex flex-col justify-between gap-2 sm:gap-0 sm:flex-row">
+            <h1
+              style={{ wordBreak: "break-word", whiteSpace: "normal" }}
+              className="pr-12 text-sm font-normal leading-relaxed text-gray-500 two-line-elipsis sm:text-gray-500"
+            >
+              {!blocked ? about : "You have blocked this user. Unblock them to view their posts."}
+            </h1>
+
+            <div className={resume ? "mr-16  flex flex-row" : "mr-16 flex flex-row"}>
+              <Link href={"/resume/" + params.slug} className={resume ? "text-sm font-medium text-blue-600" : "hidden"}>
+                View Resume
+              </Link>
+            </div>
           </div>
         </div>
         {found && !blocked && (
@@ -335,14 +352,18 @@ window.location.reload()
               </div>
             </div>
             <div className="flex items-center justify-between px-8 mt-8 mb-4 lex-row md:mb-4 md:mt-10">
-            <h1 className="text-lg font-bold text-white ">{name}&apos;s Posts</h1>
-            <Link href={"/quickies/"+params.slug} className="py-2 ml-2 text-sm font-medium text-white rounded-full cursor-pointer md:px-6 md:bg-gray-900/50 ">View Quickies</Link>
-            
+              <h1 className="text-lg font-bold text-white ">{name}&apos;s Posts</h1>
+              <Link
+                href={"/quickies/" + params.slug}
+                className="py-2 ml-2 text-sm font-medium text-white rounded-full cursor-pointer md:px-6 md:bg-gray-900/50 "
+              >
+                View Quickies
+              </Link>
             </div>
             <div className="flex flex-col gap-2 px-0 md:px-0">
               {!loading ? (
                 posts.length > 0 ? (
-                  posts.map((post:any) => (
+                  posts.map((post: any) => (
                     <PostComponent
                       id={post["id"]}
                       type="profile"
@@ -355,7 +376,6 @@ window.location.reload()
                       handle={post["handle"]}
                       name={post["user"]["name"]}
                       likes={post.likes}
-
                       description={post["excerpt"]}
                     />
                   ))

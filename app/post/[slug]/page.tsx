@@ -17,7 +17,7 @@ export default async function App({ params }: { params: { slug: string } }) {
   const supabase = createClient(cookieStore);
   let author = "";
   let content = "";
-  const timeStamp = new Date().getTime()
+  const timeStamp = new Date().getTime();
   let title = "";
   let name = "";
   let cover = "";
@@ -30,8 +30,8 @@ export default async function App({ params }: { params: { slug: string } }) {
   let myphoto = "";
   let myhandle = "";
   let loggedin = false;
-  let blocked :any[] = [];
-  let authorid = 'sample';
+  let blocked: any[] = [];
+  let authorid = "sample";
   let liked = false;
   let likedlist: string | any[] = [];
   let bookmarked = false;
@@ -79,12 +79,12 @@ export default async function App({ params }: { params: { slug: string } }) {
         if (author == myhandle) {
           imauthor = true;
         }
-        authorid = data[0]["poster"]
+        authorid = data[0]["poster"];
         name = u[0].name;
         profile = u[0].image;
         content = data[0]["content"];
         title = data[0]["title"];
-        cover = data[0]["cover"]+"?"+timeStamp
+        cover = data[0]["cover"] + "?" + timeStamp;
       }
       const date2 = new Date(data[0].created_at);
       time = date1.getTime() - date2.getTime();
@@ -96,7 +96,7 @@ export default async function App({ params }: { params: { slug: string } }) {
   }
 
   await set();
-  
+
   async function fetchcomments() {
     const { data, error } = await supabase
       .from("comments")
@@ -167,22 +167,31 @@ export default async function App({ params }: { params: { slug: string } }) {
           </div>
         </div>
       )}
-      {(!error && !blocked.includes(authorid)) && (
+      {!error && !blocked.includes(authorid) && (
         <div className="hiddenscroll h-full w-[calc(100vw-68px)] overflow-hidden pb-14 md:w-full md:max-w-full md:border-x md:border-x-gray-900">
           <div className="relative aspect-video">
             <img
               alt="coveri"
               src={cover ? cover : "https://picsum.photos/2000/3000"}
-              className="absolute inset-0 object-cover w-full h-full aspect-video"            />
+              className="absolute inset-0 object-cover w-full h-full aspect-video"
+            />
           </div>
           <div className="flex flex-col flex-1 w-full max-w-full p-8">
-            <h1 className="fix-overflow text-gray-300 text-3xl font-extrabold md:text-5xl md:leading-[calc(14*4px)]">{title}</h1>
+            <h1 className="fix-overflow text-gray-300 text-3xl font-extrabold md:text-5xl md:leading-[calc(14*4px)]">
+              {title}
+            </h1>
             {imauthor && (
               <Link
                 href={"/edit/" + params.slug}
                 className="my-4 ml-auto mt-6 flex cursor-pointer flex-row  content-center items-center space-x-[16px] px-1  pr-0"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="text-gray-300" width="24" height="24" viewBox="0 0 24 24">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="text-gray-300"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
                   <path
                     fill="none"
                     stroke="currentColor"
@@ -203,12 +212,14 @@ export default async function App({ params }: { params: { slug: string } }) {
                 <h1 className="text-xs font-medium text-gray-300 md:text-sm">{name}</h1>
               </Link>
 
-              <div className="flex flex-row"><h1 className="text-xs font-normal text-gray-300 md:text-sm"><span className="hidden md:inline-block">Posted</span> {timeAgo.format(Date.now() - time)}   </h1>         {myhandle!==author &&  <Menu type="post" id={params.slug} myhandle={myhandle} handle={author}/> }
+              <div className="flex flex-row">
+                <h1 className="text-xs font-normal text-gray-300 md:text-sm">
+                  <span className="hidden md:inline-block">Posted</span> {timeAgo.format(Date.now() - time)}{" "}
+                </h1>{" "}
+                {myhandle !== author && <Menu type="post" id={params.slug} myhandle={myhandle} handle={author} />}
               </div>
-              
             </div>
             <Markdown
-            
               remarkPlugins={[remarkGfm]}
               components={components}
               className="mt-12 prose text-gray-300 prose-invert font-poppins fix-overflow"
@@ -216,56 +227,59 @@ export default async function App({ params }: { params: { slug: string } }) {
               {content}
             </Markdown>
           </div>
-          {(loggedin && !blocked.includes(authorid)) &&
-          <section className="px-0 pt-4 pb-8 border-t border-t-gray-900" id="comments">
-            <h1 className="px-6 mb-4 text-xl font-bold text-gray-300">Comments</h1>
+          {loggedin && !blocked.includes(authorid) && (
+            <section className="px-0 pt-4 pb-8 border-t border-t-gray-900" id="comments">
+              <h1 className="px-6 mb-4 text-xl font-bold text-gray-300">Comments</h1>
 
-            <CommentsComponent
-              myname={myname}
-              myphoto={myphoto}
-              handle={myhandle}
-              id={user}
-              myhandle={myhandle}
-              myblocked={blocked}
-              slug={params.slug}
-              loggedin={loggedin}
-            />
-          </section>
-}
+              <CommentsComponent
+                myname={myname}
+                myphoto={myphoto}
+                handle={myhandle}
+                id={user}
+                myhandle={myhandle}
+                myblocked={blocked}
+                slug={params.slug}
+                loggedin={loggedin}
+              />
+            </section>
+          )}
         </div>
       )}
-      {(loggedin && !blocked.includes(authorid)) &&
-      <div className="absolute bottom-0 flex flex-row w-full border-t bg-[#000205] border-x h-14 border-t-gray-900 border-x-gray-900">
-        <BookMarksComponent
-          userliked={userbookmarked}
-          postid={params.slug}
-          handle={myhandle}
-          likedlist={bookmarkedlist}
-          liked={bookmarked}
-        />
+      {loggedin && !blocked.includes(authorid) && (
+        <div className="absolute bottom-0 flex flex-row w-full border-t bg-[#000205] border-x h-14 border-t-gray-900 border-x-gray-900">
+          <BookMarksComponent
+            userliked={userbookmarked}
+            postid={params.slug}
+            handle={myhandle}
+            likedlist={bookmarkedlist}
+            liked={bookmarked}
+          />
 
-        <LikeComponent
-          userliked={userliked}
-          postid={params.slug}
-          handle={myhandle}
-          likedlist={likedlist}
-          liked={liked}
-          likes={likedlist.length}
-        />
+          <LikeComponent
+            userliked={userliked}
+            postid={params.slug}
+            handle={myhandle}
+            likedlist={likedlist}
+            liked={liked}
+            likes={likedlist.length}
+          />
 
-        <Link href="#comments" className="flex flex-row items-center content-center px-6 ml-auto space-x-2 text-gray-300">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16">
-            <path
-              fill="currentColor"
-              fillRule="evenodd"
-              d="m4 11.29l1-1v1.42l-1.15 1.14L3 12.5V10H1.5L1 9.5v-8l.5-.5h12l.5.5V6h-1V2H2v7h1.5l.5.5zM10.29 13l1.86 1.85l.85-.35V13h1.5l.5-.5v-5l-.5-.5h-8l-.5.5v5l.5.5zm.21-1H7V8h7v4h-1.5l-.5.5v.79l-1.15-1.14z"
-              clipRule="evenodd"
-            />
-          </svg>{" "}
-          <h1 className="text-xs md:text-sm">Comments</h1>
-        </Link>
-      </div>
-}
+          <Link
+            href="#comments"
+            className="flex flex-row items-center content-center px-6 ml-auto space-x-2 text-gray-300"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16">
+              <path
+                fill="currentColor"
+                fillRule="evenodd"
+                d="m4 11.29l1-1v1.42l-1.15 1.14L3 12.5V10H1.5L1 9.5v-8l.5-.5h12l.5.5V6h-1V2H2v7h1.5l.5.5zM10.29 13l1.86 1.85l.85-.35V13h1.5l.5-.5v-5l-.5-.5h-8l-.5.5v5l.5.5zm.21-1H7V8h7v4h-1.5l-.5.5v.79l-1.15-1.14z"
+                clipRule="evenodd"
+              />
+            </svg>{" "}
+            <h1 className="text-xs md:text-sm">Comments</h1>
+          </Link>
+        </div>
+      )}
     </div>
   ) : (
     <div className="flex items-center content-center w-full h-screen"></div>

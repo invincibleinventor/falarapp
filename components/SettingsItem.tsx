@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function App(props:any) {
+export default function App(props: any) {
   const loc = usePathname();
   const a = { opened: false };
 
@@ -11,11 +11,9 @@ export default function App(props:any) {
     a.opened = true;
   } else if (props.link == "/myself" && loc.startsWith("/profile")) {
     a.opened = true;
-  }
-  else if (props.link == 'more' && loc.startsWith("/more")) {
+  } else if (props.link == "more" && loc.startsWith("/more")) {
     a.opened = true;
-  }
-  else if (props.link == "/myself" && loc == "/customize") {
+  } else if (props.link == "/myself" && loc == "/customize") {
     a.opened = true;
   } else {
     console.log("");
@@ -28,7 +26,6 @@ export default function App(props:any) {
         a.opened ? "bg-gray-900/50" : ""
       }`}
     >
- 
       <svg
         className={`h-[20px] w-[20px] stroke-[2px] p-[2px] text-white ${a.opened ? "text-white" : "text-gray-600"}`}
         xmlns="http://www.w3.org/2000/svg"
@@ -36,15 +33,10 @@ export default function App(props:any) {
         height="16"
         viewBox="0 0 16 16"
       >
-        
         {props.url}
-      
       </svg>
 
-
-      {a.opened &&
-      <span className={"md:hidden px-2 text-xs font-pops text-white"}>{props.name}</span>
-}
+      {a.opened && <span className={"md:hidden px-2 text-xs font-pops text-white"}>{props.name}</span>}
       <span
         className={`font-pops hidden text-sm text-white md:inline-block ${
           a.opened ? "font-medium text-white" : "font-normal text-gray-600"

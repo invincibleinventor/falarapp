@@ -6,10 +6,10 @@ import { useInView } from "react-intersection-observer";
 import { Oval } from "react-loader-spinner";
 import UserComponent from "./UserComponent";
 
-export default function MoreUsers(props:any) {
+export default function MoreUsers(props: any) {
   const [users, setUsers] = useState<any>([]);
   const [myhandle, setMyHandle] = useState("");
-  const [myimage,setMyImage] = useState("")
+  const [myimage, setMyImage] = useState("");
   const [, setUserId] = useState("");
   const supabase = createClient();
   const [followinglist, setFollowingList] = useState([]);
@@ -25,13 +25,10 @@ export default function MoreUsers(props:any) {
       if (user) {
         setUserId(user.id);
       }
-      const { data } = await supabase
-        .from("user")
-        .select("*")
-        .eq("id", user?.id);
+      const { data } = await supabase.from("user").select("*").eq("id", user?.id);
       if (data) {
         setMyHandle(data[0]["handle"]);
-        setMyImage(data[0]["image"])
+        setMyImage(data[0]["image"]);
         setFollowingList(data[0]["following"]);
       }
     }
@@ -39,7 +36,6 @@ export default function MoreUsers(props:any) {
   }, []);
 
   async function get(from: number, to: number) {
- 
     const { data, error } = await supabase
       .from("user")
       .select("*")
@@ -55,10 +51,7 @@ export default function MoreUsers(props:any) {
           data: { user },
         } = await supabase.auth.getUser();
 
-        const { data: x } = await supabase
-          .from("user")
-          .select("*")
-          .eq("id", user?.id);
+        const { data: x } = await supabase.from("user").select("*").eq("id", user?.id);
 
         for await (const [index, post] of ds.entries()) {
           if (x && x[0]["following"].includes(post.handle)) {
@@ -89,7 +82,7 @@ export default function MoreUsers(props:any) {
   return (
     <div className="w-full">
       <div className="grid items-center content-center grid-cols-1 gap-2 px-3 animate-in hiddenscroll xl:grid-cols-2">
-        {users.map((user:any) => (
+        {users.map((user: any) => (
           <UserComponent
             myID={myhandle}
             key={user["id"]}

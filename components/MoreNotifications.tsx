@@ -16,32 +16,32 @@ export default function MoreNotifications() {
   const { ref, inView } = useInView();
   const [halt, setHalt] = useState(false);
 
-
   async function get(from: number, to: number) {
     const {
       data: { user },
     } = await supabase.auth.getUser();
-    const { data, error } = await supabase
-      .from("notifications")
-      .select("*")
-      .range(from, to)
-      .eq("to", `(${user?.id})`);
+    const { data, error } = await supabase.from("notifications").select("*").range(from, to).eq("to", `(${user?.id})`);
     if (error) {
       console.log(error);
+      setHalt(true)
     } else {
       if (data && data.length > 0) {
         console.log(data);
         const ds = data;
-       
 
         setNotifications([...notifications, ...ds]);
         if (ds.length < PAGE_COUNT) {
           setHalt(true);
         }
-      } else {
+       else {
         setHalt(true);
       }
     }
+    else{
+      setHalt(true)
+    }
+    }
+    
   }
   useEffect(() => {
     if (!halt && inView) {
@@ -56,8 +56,15 @@ export default function MoreNotifications() {
   return (
     <div className="w-full">
       <div className="grid items-center content-center grid-cols-1 gap-2 px-3 animate-in hiddenscroll xl:grid-cols-2">
-        {notifications.map((notification:any) => (
-         <Notification title={notification.title} description={notification.description} type={notification.type} url={notification.url} image={notification.image} key={notification.id}></Notification>
+        {notifications.map((notification: any) => (
+          <Notification
+            title={notification.title}
+            description={notification.description}
+            type={notification.type}
+            url={notification.url}
+            image={notification.image}
+            key={notification.id}
+          ></Notification>
         ))}
       </div>
       <div className="flex flex-col items-center content-center w-full">

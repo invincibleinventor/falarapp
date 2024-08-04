@@ -43,13 +43,14 @@ export default function Create() {
     }
   }
 
-
   async function profileChange() {
     console.log("here here");
     const bucket = "profile";
 
     // Call Storage API to upload file
-    const { error } = await supabase.storage.from(bucket).upload("/public/" + handle + ".jpg", profile, { upsert: true });
+    const { error } = await supabase.storage
+      .from(bucket)
+      .upload("/public/" + handle + ".jpg", profile, { upsert: true });
 
     // Handle error if upload failed
     if (error) {
@@ -84,7 +85,7 @@ export default function Create() {
             setName(data[0]["name"]);
             setHandle(data[0]["handle"]);
             setAbout(data[0]["about"]);
-            setImage(data[0]["image"] + "?" + new Date().getTime()) 
+            setImage(data[0]["image"] + "?" + new Date().getTime());
             setCover(data[0]["cover"] + "?" + new Date().getTime());
           }
         }
@@ -114,7 +115,9 @@ export default function Create() {
     }
   }
   return (
-    <div className={`relative mx-auto flex h-[calc(100vh-104px)] flex-1 flex-col items-center justify-center overflow-hidden`}>
+    <div
+      className={`relative mx-auto flex h-[calc(100vh-104px)] flex-1 flex-col items-center justify-center overflow-hidden`}
+    >
       <div className="absolute top-0 h-64 w-[calc(100%-20px)] max-w-full py-0 md:w-full md:px-4">
         <div className="relative h-64 w-[calc(100%)]">
           <div className="absolute top-0 h-[calc(52*4px)]  w-[calc(100%)] ">
@@ -135,38 +138,41 @@ export default function Create() {
             Change Cover Picture
           </div>
           <div className="absolute inset-x-0 bottom-0">
-<div className="relative">
-       <Image
-            width={110}
-            height={110}
-            src={image}
-            className="w-24 h-24 mx-auto rounded-full "
-            alt="image"
-          />
-            <div
-            onClick={handleProfileClick}
-            className="absolute text-xs flex items-center content-center text-white rounded-full cursor-pointer left-16 right-0 mx-auto top-[70%] w-6 h-6  bg-cyan-800 drop-shadow-lg border border-white"
-          >
-            {" "}
-            <svg className="mx-auto" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M3 17.46v3.04c0 .28.22.5.5.5h3.04c.13 0 .26-.05.35-.15L17.81 9.94l-3.75-3.75L3.15 17.1c-.1.1-.15.22-.15.36M20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83l3.75 3.75z"/></svg>
-            <input id="profileupload" className="hidden" />
-            <input
-            onChange={(e:any) => {
-              setImage(URL.createObjectURL(e.target.files![0]));
-              setChangedProfile(true);
-              setProfile(e.target.files[0]);
-            }}
-            className="absolute inset-x-0 bottom-0 hidden mx-auto"
-            type="file"
-            ref={hiddenProfileInput}
-          />
-            
+            <div className="relative">
+              <Image width={110} height={110} src={image} className="w-24 h-24 mx-auto rounded-full " alt="image" />
+              <div
+                onClick={handleProfileClick}
+                className="absolute text-xs flex items-center content-center text-white rounded-full cursor-pointer left-16 right-0 mx-auto top-[70%] w-6 h-6  bg-cyan-800 drop-shadow-lg border border-white"
+              >
+                {" "}
+                <svg
+                  className="mx-auto"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M3 17.46v3.04c0 .28.22.5.5.5h3.04c.13 0 .26-.05.35-.15L17.81 9.94l-3.75-3.75L3.15 17.1c-.1.1-.15.22-.15.36M20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83l3.75 3.75z"
+                  />
+                </svg>
+                <input id="profileupload" className="hidden" />
+                <input
+                  onChange={(e: any) => {
+                    setImage(URL.createObjectURL(e.target.files![0]));
+                    setChangedProfile(true);
+                    setProfile(e.target.files[0]);
+                  }}
+                  className="absolute inset-x-0 bottom-0 hidden mx-auto"
+                  type="file"
+                  ref={hiddenProfileInput}
+                />
+              </div>
+            </div>
           </div>
-
-</div>
-</div>
           <input
-            onChange={(e:any) => {
+            onChange={(e: any) => {
               setCover(URL.createObjectURL(e.target.files![0]));
               setChanged(true);
               setFile(e.target.files[0]);
@@ -175,9 +181,6 @@ export default function Create() {
             type="file"
             ref={hiddenFileInput}
           />
-        
-
-       
         </div>
       </div>
 
@@ -213,7 +216,9 @@ export default function Create() {
           maxLength={100}
         />
 
-        <button className="px-8 py-4 mx-auto mb-2 text-xs font-medium text-white rounded-full bg-cyan-800 w-max">Save Your Changes</button>
+        <button className="px-8 py-4 mx-auto mb-2 text-xs font-medium text-white rounded-full bg-cyan-800 w-max">
+          Save Your Changes
+        </button>
       </form>
     </div>
   );

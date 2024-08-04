@@ -2,7 +2,7 @@
 import { createClient } from "@/utils/supabase/client";
 import { useState } from "react";
 
-export default function LikeComponent(props:any) {
+export default function LikeComponent(props: any) {
   const supabase = createClient();
 
   const [likedlist, setLikedList] = useState(props.likedlist);
@@ -15,7 +15,7 @@ export default function LikeComponent(props:any) {
     if (like == false) {
       // let l = likedlist;
       setDisabled(true);
-      const ss = likes
+      const ss = likes;
 
       setLikes(likes - 1);
 
@@ -24,21 +24,20 @@ export default function LikeComponent(props:any) {
       // });
       let u = ulikedlist;
 
-      u = u.filter(function (item:any) {
+      u = u.filter(function (item: any) {
         return item !== props.postid;
       });
 
-       const { error } = await supabase
-         .from("posts")
-         .update({ liked: u, likes: ss - 1 })
-         .eq("id", props.postid);
+      const { error } = await supabase
+        .from("posts")
+        .update({ liked: u, likes: ss - 1 })
+        .eq("id", props.postid);
       const { error: e } = await supabase.from("user").update({ liked: u }).eq("handle", props.handle);
-      if (e||error) {
+      if (e || error) {
         alert(e?.message);
 
-        alert(error?.message)
+        alert(error?.message);
         setLikes(likes + 1);
-
       } else {
         toggleLiked(false);
 
@@ -49,14 +48,13 @@ export default function LikeComponent(props:any) {
           if (d) {
             setuLikedList(d[0]["liked"]);
             setDisabled(false);
-
           }
         }
       }
     } else {
       const l = likedlist;
       setDisabled(true);
-      const ss = likes
+      const ss = likes;
       setLikes(likes + 1);
 
       l.push(props.handle);

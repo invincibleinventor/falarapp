@@ -41,10 +41,7 @@ export default function Create() {
     const {
       data: { user },
     } = await supabase.auth.getUser();
-    const { data: u } = await supabase
-      .from("user")
-      .select("handle")
-      .eq("id", user?.id);
+    const { data: u } = await supabase.from("user").select("handle").eq("id", user?.id);
     const { data: check } = await supabase
       .from("posts")
       .select("*")
@@ -125,7 +122,7 @@ export default function Create() {
             minLength={10}
           />
           <input
-            onChange={(e:any) => (setCover(URL.createObjectURL(e.target.files[0])), setFile(e.target.files[0]))}
+            onChange={(e: any) => (setCover(URL.createObjectURL(e.target.files[0])), setFile(e.target.files[0]))}
             className="inset-x-0 bottom-0 hidden mx-auto"
             type="file"
             ref={hiddenFileInput}
@@ -134,14 +131,9 @@ export default function Create() {
             Cover Image
           </label>
           <div className="relative px-4 py-2 mb-6 border rounded-md aspect-video shrink-0">
-            <img
-              src={cover}
-              
-              className="absolute inset-0 object-cover rounded-md aspect-video shrink-0"
-              alt="cover"
-            />
+            <img src={cover} className="absolute inset-0 object-cover rounded-md aspect-video shrink-0" alt="cover" />
             <button
-              onClick={(e:any) => (setChanged(true), handleClick(e))}
+              onClick={(e: any) => (setChanged(true), handleClick(e))}
               className="absolute inset-0 px-6 py-3 m-auto text-xs text-white rounded-md h-max w-max bg-black/60 backdrop-blur-sm"
             >
               Change Cover
@@ -162,7 +154,9 @@ export default function Create() {
             />
           </div>
 
-          <button className="px-8 py-4 mb-2 text-xs font-medium text-white rounded-md bg-cyan-800 w-max">Publish This Post</button>
+          <button className="px-8 py-4 mb-2 text-xs font-medium text-white rounded-md bg-cyan-800 w-max">
+            Publish This Post
+          </button>
         </form>
       </div>
     </div>

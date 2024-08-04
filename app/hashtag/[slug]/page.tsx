@@ -9,7 +9,7 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 
 export default async function Page({ params }: { params: { slug: string } }) {
-    const cookieStore = cookies();
+  const cookieStore = cookies();
   const supabase = createClient(cookieStore);
   const canInitSupabaseClient = () => {
     // This function is just for the interactive tutorial.
@@ -33,9 +33,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
   let myname = "";
   let myphoto = "";
   let myhandle = "";
-  let userliked :any[] = [];
-  let userbookmarked:any[] = [];
-  let tagarray:any[] = []
+  let userliked: any[] = [];
+  let userbookmarked: any[] = [];
+  let tagarray: any[] = [];
 
   async function get() {
     const { data: user } = await supabase.auth.getUser();
@@ -43,73 +43,70 @@ export default async function Page({ params }: { params: { slug: string } }) {
     const { data: u } = await supabase.from("user").select("*").eq("id", s);
     l = u![0]["following"];
     const h = u![0]["handle"];
-    myname = u![0]["name"]
-    myphoto = u![0]["image"]
-    myhandle = u![0]["handle"]
-    userbookmarked = u![0]["bookmarks"]
-    userliked = u![0]["liked"]
-    const {data:hashtag,error} = await supabase.from('hashtags').select('posts').eq('hashtag',params.slug)
+    myname = u![0]["name"];
+    myphoto = u![0]["image"];
+    myhandle = u![0]["handle"];
+    userbookmarked = u![0]["bookmarks"];
+    userliked = u![0]["liked"];
+    const { data: hashtag, error } = await supabase.from("hashtags").select("posts").eq("hashtag", params.slug);
     let ds = [];
 
     l.push(h);
-    if(!error){
-    if(hashtag[0]){
-        if(hashtag[0]["posts"].length>0){
-            tagarray = hashtag[0]["posts"]
-    const { data, error } = await supabase
-      .from("quickies")
-      .select("*")
-      .order("id", { ascending: false })
-      .in("id",hashtag[0]["posts"])
-      .limit(5);
-    if (error) {
-    } else {
-      ds = data;
+    if (!error) {
+      if (hashtag[0]) {
+        if (hashtag[0]["posts"].length > 0) {
+          tagarray = hashtag[0]["posts"];
+          const { data, error } = await supabase
+            .from("quickies")
+            .select("*")
+            .order("id", { ascending: false })
+            .in("id", hashtag[0]["posts"])
+            .limit(5);
+          if (error) {
+          } else {
+            ds = data;
 
-      for await (const [index, post] of ds.entries()) {
-       
-        let liked = false;
-        const likedlist: string | any[] = ds[index].liked
-        let bookmarked = false;
-        const bookmarkedlist: any[] = ds[index].bookmarked;
-        if(likedlist.includes(myhandle)){
-          liked = true
-        }
-        if(bookmarkedlist.includes(myhandle)){
-          bookmarked=true
-        }
-        
-        ds[index].liked=liked
-          ds[index].bookmarked=bookmarked
-          ds[index].bookmarkedlist=bookmarkedlist
-          ds[index].likedlist=likedlist
-        const { data } = await supabase.from("user").select("*").eq("id", post.poster);
+            for await (const [index, post] of ds.entries()) {
+              let liked = false;
+              const likedlist: string | any[] = ds[index].liked;
+              let bookmarked = false;
+              const bookmarkedlist: any[] = ds[index].bookmarked;
+              if (likedlist.includes(myhandle)) {
+                liked = true;
+              }
+              if (bookmarkedlist.includes(myhandle)) {
+                bookmarked = true;
+              }
 
-        if (data) {
-          ds[index].name = data[0].name;
-          const date2 = new Date(ds[index].created_at);
-          ds[index].diff = date1.getTime() - date2.getTime();
-          ds[index].dp = data[0].image;
-          
-        }
-      }
+              ds[index].liked = liked;
+              ds[index].bookmarked = bookmarked;
+              ds[index].bookmarkedlist = bookmarkedlist;
+              ds[index].likedlist = likedlist;
+              const { data } = await supabase.from("user").select("*").eq("id", post.poster);
 
-      if (ds.length > 0) {
-        empty = false;
+              if (data) {
+                ds[index].name = data[0].name;
+                const date2 = new Date(ds[index].created_at);
+                ds[index].diff = date1.getTime() - date2.getTime();
+                ds[index].dp = data[0].image;
+              }
+            }
+
+            if (ds.length > 0) {
+              empty = false;
+            } else {
+              empty = true;
+            }
+            posts = ds;
+            loading = false;
+          }
+        }
       } else {
         empty = true;
+        loading = false;
       }
-      posts = ds;
-      loading = false;
     }
-}
   }
-  else{
-    empty = true
-    loading = false
-  }
-}
-}
 
   await get();
 
@@ -133,7 +130,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
                       key={post.id}
                       image={post.image}
                       comments={post.comments}
-
                       userliked={userliked}
                       userbookmarked={userbookmarked}
                       bookmarkedlist={post.bookmarkedlist}
@@ -168,7 +164,14 @@ export default async function Page({ params }: { params: { slug: string } }) {
               ) : (
                 <div className="flex items-center content-center w-full h-screen"></div>
               )}
-              <More myhandle={myhandle} myname={myname} myphoto={myphoto} userliked={userliked} userbookmarked={userbookmarked} in={tagarray}></More>{" "}
+              <More
+                myhandle={myhandle}
+                myname={myname}
+                myphoto={myphoto}
+                userliked={userliked}
+                userbookmarked={userbookmarked}
+                in={tagarray}
+              ></More>{" "}
             </div>{" "}
           </div>
         </div>

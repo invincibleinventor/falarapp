@@ -6,24 +6,24 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function UserComponent(props:any) {
+export default function UserComponent(props: any) {
   const supabase = createClient();
 
   const [myId] = useState(props.myID);
 
-  async function onfollow(handle:any) {
+  async function onfollow(handle: any) {
     if (imfollowing) {
       console.log("uesuesues");
       let arr = followerlist;
       console.log("before");
       console.log(arr);
-      arr = arr.filter((item:any) => item !== myId);
+      arr = arr.filter((item: any) => item !== myId);
       let arr2 = followinglist;
-      arr2 = arr2.filter((item:any) => item !== handle);
+      arr2 = arr2.filter((item: any) => item !== handle);
 
       console.log(arr);
       const { data, error } = await supabase.from("user").update({ followers: arr }).eq("handle", handle).select();
-      const { data:d, error:e } = await supabase.from("user").update({ following: arr2 }).eq("handle", myId).select();
+      const { data: d, error: e } = await supabase.from("user").update({ following: arr2 }).eq("handle", myId).select();
       // const { data: me, error: mee } = await supabase
       //   .from("user")
       //   .update({ following: arr2 })
@@ -43,7 +43,7 @@ export default function UserComponent(props:any) {
       arr2.push(handle);
       console.log(arr);
       const { data, error } = await supabase.from("user").update({ followers: arr }).eq("handle", handle).select();
-      const { data:d, error:e } = await supabase.from("user").update({ following: arr2 }).eq("handle", myId).select();
+      const { data: d, error: e } = await supabase.from("user").update({ following: arr2 }).eq("handle", myId).select();
 
       // const { data: me, error: mee } = await supabase
       //   .from("user")
@@ -53,11 +53,19 @@ export default function UserComponent(props:any) {
       if (error || e) {
         console.log(error);
       } else {
-      
-          
-        notification(notifications,supabase,props.id,'/profile/'+myId,"New Follower",'follow',"@"+myId+" has followed you! Follow them back?",props.myImage)
+        notification(
+          notifications,
+          supabase,
+          props.id,
+          "/profile/" + myId,
+          "New Follower",
+          "follow",
+          "@" + myId + " has followed you! Follow them back?",
+          props.myImage
+        );
 
-        console.log(data);      }
+        console.log(data);
+      }
       setImFollowing(true);
       setFollowerList(arr);
       setFollowingList(arr2);
@@ -66,7 +74,7 @@ export default function UserComponent(props:any) {
   const [imfollowing, setImFollowing] = useState(props.isfollowing);
   const [followerlist, setFollowerList] = useState(props.followerlist);
   const [followinglist, setFollowingList] = useState(props.followinglist);
-  const [notifications,setNotifications] = useState(props.notifications)
+  const [notifications, setNotifications] = useState(props.notifications);
   let a = props.name;
   if (a.length >= 11) {
     a = a.slice(0, 7);
@@ -79,7 +87,13 @@ export default function UserComponent(props:any) {
     >
       <div className="flex flex-row items-center content-center justify-between">
         <div className="flex flex-row items-center content-center space-x-3">
-          <Image width={40} height={40} src={props.image} className="object-cover w-10 h-10 rounded-full" alt="profile-pic" />
+          <Image
+            width={40}
+            height={40}
+            src={props.image}
+            className="object-cover w-10 h-10 rounded-full"
+            alt="profile-pic"
+          />
           <div className="flex flex-col ">
             <h1 className="text-base font-bold text-gray-300">{a}</h1>
             <h1 className="text-xs font-normal text-gray-500">@{props.handle}</h1>
