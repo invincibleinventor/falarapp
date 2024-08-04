@@ -17,6 +17,7 @@ export async function middleware(request: NextRequest) {
     if (data && data.length > 0) {
       return response;
     }
+   
   }
   const redirectUrl = request.nextUrl.clone();
   redirectUrl.pathname = "/login";

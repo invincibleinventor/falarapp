@@ -41,24 +41,21 @@ export default async function Index() {
     l.push(h);
     const { data, error } = await supabase
       .from("posts")
-      .select("*")
+      .select("*,user(name,handle,image)")
       .order("id", { ascending: false })
       .not("poster","in",`(${myblocked.toString()})`)
       .limit(5);
     if (error) {
+      console.log(error)
     } else {
       ds = data;
 
       for await (const [index, post] of ds.entries()) {
-        const { data } = await supabase.from("user").select("*").eq("id", post.poster);
-
-        if (data) {
-          ds[index].name = data[0].name;
+     
           const date2 = new Date(ds[index].created_at);
           ds[index].diff = date1.getTime() - date2.getTime();
-          ds[index].dp = data[0].image;
         }
-      }
+      
 
       if (ds.length > 0) {
         empty = false;
@@ -87,11 +84,11 @@ export default async function Index() {
                       time={timeAgo.format(Date.now() - post.diff)}
                       key={post.id}
                       image={post.image}
-                      dp={post.dp}
+                      dp={post.user.image}
                       handle={post.handle}
                       likes={post.likes}
 
-                      name={post.name}
+                      name={post.user.name}
                       description={post.excerpt}
                     />
                   ))

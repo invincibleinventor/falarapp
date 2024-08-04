@@ -57,7 +57,7 @@ const [myhandle,setMyhandle] = useState("")
     setL(a)
     const { data, error } = await supabase
       .from("quickies")
-      .select("*")
+      .select("*,user(name,handle,image)")
       .order("id", { ascending: false })
       .in("handle", u![0]["following"])
       .not("poster","in",`(${u![0]["blocked"].toString()})`)
@@ -86,15 +86,11 @@ const [myhandle,setMyhandle] = useState("")
           ds[index].bookmarked=bookmarked
           ds[index].bookmarkedlist=bookmarkedlist
           ds[index].likedlist=likedlist
-        const { data } = await supabase.from("user").select("*").eq("id", post.poster);
-
-        if (data) {
-          ds[index].name = data[0].name;
+    
           const date2 = new Date(ds[index].created_at);
           ds[index].diff = date1.getTime() - date2.getTime();
-          ds[index].dp = data[0].image;
           
-        }
+        
       }
 
       if (ds.length > 0) {
@@ -165,11 +161,11 @@ const [myhandle,setMyhandle] = useState("")
                       bookmarkedlist={post.bookmarkedlist}
                       likedlist={post.likedlist}
                       myhandle={myhandle}
-                      dp={post.dp}
+                      dp={post.user.image}
                       bookmarked={post.bookmarked}
                       liked={post.liked}
                       handle={post.handle}
-                      name={post.name}
+                      name={post.user.name}
                       description={post.content}
                     />
                   ))

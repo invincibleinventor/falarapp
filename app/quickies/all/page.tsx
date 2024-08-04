@@ -55,7 +55,7 @@ export default async function Index() {
     l.push(h);
     const { data, error } = await supabase
       .from("quickies")
-      .select("*")
+      .select("*,user(name,handle,image)")
       .order("id", { ascending: false })
       .not("poster","in",`(${myblocked.toString()})`)
       .limit(5);
@@ -80,15 +80,12 @@ export default async function Index() {
           ds[index].bookmarked=bookmarked
           ds[index].bookmarkedlist=bookmarkedlist
           ds[index].likedlist=likedlist
-        const { data } = await supabase.from("user").select("*").eq("id", post.poster);
-
-        if (data) {
-          ds[index].name = data[0].name;
+       
+         
           const date2 = new Date(ds[index].created_at);
           ds[index].diff = date1.getTime() - date2.getTime();
-          ds[index].dp = data[0].image;
           
-        }
+        
       }
 
       if (ds.length > 0) {
@@ -129,11 +126,11 @@ export default async function Index() {
                       bookmarkedlist={post.bookmarkedlist}
                       likedlist={post.likedlist}
                       myhandle={myhandle}
-                      dp={post.dp}
+                      dp={post.user.image}
                       bookmarked={post.bookmarked}
                       liked={post.liked}
                       handle={post.handle}
-                      name={post.name}
+                      name={post.user.name}
                       description={post.content}
                     />
                   ))

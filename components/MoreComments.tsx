@@ -22,7 +22,7 @@ export default function CommentsComponent(props:any) {
     //alert('reached')
     const { data, error } = await supabase
       .from("comments")
-      .select("*")
+      .select("*,user(name,handle,image)")
       .eq("id", props.slug)
       .order("likes", { ascending: false })
       .not("poster","in",`(${props.myblocked})`)
@@ -35,10 +35,8 @@ export default function CommentsComponent(props:any) {
         const l = data;
         for await (const [index, comment] of l.entries()) {
           console.log(index, comment);
-          const { data } = await supabase.from("user").select("*").eq("id", comment.poster);
-          if (data) {
-            l[index].name = data[0]["name"];
-            l[index].profile = data[0]["image"];
+        
+           
             const date2 = new Date(l[index].time);
             l[index].newtime = date1.getTime() - date2.getTime();
             if (props.loggedin) {
@@ -52,10 +50,7 @@ export default function CommentsComponent(props:any) {
               l[index].likedbyme = false;
             }
             console.log(l[index]);
-          } else {
-            l.splice(index, 1);
           }
-        }
         setComments([...comments, ...l]);
         setLoading(false);
         if (l.length < PAGE_COUNT) {
@@ -90,8 +85,8 @@ export default function CommentsComponent(props:any) {
               handle={comment.handle}
               likes={comment.likes}
               likedbyme={comment.likedbyme}
-              name={comment.name}
-              profile={comment.profile}
+              name={comment.user.name}
+              profile={comment.user.image}
               content={comment.content}
               loggedin={props.loggedin}
             />

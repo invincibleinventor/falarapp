@@ -1,6 +1,7 @@
 import More from "@/components/MoreQuickies";
 import PostComponent from "@/components/QuickieComponent";
 import Search from "@/components/SearchComponent";
+import Stories from "@/components/stories";
 import Trending from "@/components/Trending";
 import { AppConfig } from "@/config/config";
 import { createClient } from "@/utils/supabase/server";
@@ -55,14 +56,22 @@ export default async function Index() {
     l.push(h);
     const { data, error } = await supabase
       .from("quickies")
-      .select("*")
+      .select(`*, 
+        user (
+        name,
+        handle,
+        image
+        )`)
       .order("id", { ascending: false })
       .in("handle", l)
       .not("poster","in",`(${myblocked.toString()})`)
       .limit(5);
     if (error) {
+      console.log(error)
     } else {
       ds = data;
+      console.log('okok')
+      console.log(ds)
 
       for await (const [index, post] of ds.entries()) {
        
@@ -81,15 +90,11 @@ export default async function Index() {
           ds[index].bookmarked=bookmarked
           ds[index].bookmarkedlist=bookmarkedlist
           ds[index].likedlist=likedlist
-        const { data } = await supabase.from("user").select("*").eq("id", post.poster);
-
-        if (data) {
-          ds[index].name = data[0].name;
           const date2 = new Date(ds[index].created_at);
           ds[index].diff = date1.getTime() - date2.getTime();
-          ds[index].dp = data[0].image;
+     
           
-        }
+        
       }
 
       if (ds.length > 0) {
@@ -107,9 +112,12 @@ export default async function Index() {
     return (
       <>
         
-          
           <div className="h-full overflow-y-scroll hiddenscroll">
             <div className="flex flex-col gap-0 mb-20 animate-in hiddenscroll">
+              <div className="parent-container">
+           {/* <Stories></Stories> */}
+            </div>
+
               <div className=" lg:hidden">
               <Trending/>
 
@@ -131,11 +139,11 @@ export default async function Index() {
                       bookmarkedlist={post.bookmarkedlist}
                       likedlist={post.likedlist}
                       myhandle={myhandle}
-                      dp={post.dp}
+                      dp={post.user.image}
                       bookmarked={post.bookmarked}
                       liked={post.liked}
                       handle={post.handle}
-                      name={post.name}
+                      name={post.user.name}
                       description={post.content}
                     />
                   ))

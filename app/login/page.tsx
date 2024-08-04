@@ -38,8 +38,12 @@ export default function Login() {
         data: { user },
       } = await supabase.auth.getUser();
       if (user) {
+       
+      
         return window.location.replace("/editprofile");
+        
       }
+      
     }
 
     check();

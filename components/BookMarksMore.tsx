@@ -22,7 +22,7 @@ export default function More(props:any) {
    
       const { data, error } = await supabase
         .from("posts")
-        .select("*")
+        .select("*,user(name,handle,image)")
         .order("id", { ascending: false })
         .in("id",props.l)
         .range(from, to)
@@ -34,15 +34,11 @@ export default function More(props:any) {
           console.log(data);
           const ds = data;
           for await (const [index, post] of ds.entries()) {
-            const { data } = await supabase.from("user").select("*").eq("id", post.poster);
-            if (data) {
-              ds[index].name = data[0].name;
-
-              ds[index].dp = data[0].image;
+           
 
               const date2 = new Date(ds[index].created_at);
               ds[index].diff = date1.getTime() - date2.getTime();
-            }
+            
           }
           setPosts([...posts, ...ds]);
           if (ds.length < PAGE_COUNT) {
@@ -52,7 +48,8 @@ export default function More(props:any) {
           setHalt(true);
         }
       
-    }
+      }
+    
   }
   useEffect(() => {
     if (!halt && inView) {
@@ -76,9 +73,9 @@ export default function More(props:any) {
             time={timeAgo.format(Date.now() - post.diff)}
             key={post.id}
             image={post.image}
-            dp={post.dp}
+            dp={post.user.image}
             handle={post.handle}
-            name={post.name}
+            name={post.user.name}
             description={post.excerpt}
           />
         ))}

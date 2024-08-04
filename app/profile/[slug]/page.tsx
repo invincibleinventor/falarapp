@@ -171,7 +171,7 @@ window.location.reload()
     async function get() {
       const { data, error } = await supabase
         .from("posts")
-        .select("*")
+        .select("*,user(name,handle,image)")
         .eq("handle", params.slug)
         .order("id", { ascending: false })
         .limit(5);
@@ -181,16 +181,12 @@ window.location.reload()
         console.log(data);
         const ds = data;
         for await (const [index, post] of ds.entries()) {
-          const { data } = await supabase.from("user").select("*").eq("id", post.poster);
-          if (data) {
-            ds[index].name = data[0].name;
-
-            ds[index].dp = data[0].image;
+         
 
             const date2 = new Date(ds[index].created_at);
             ds[index].diff = date1.getTime() - date2.getTime();
           }
-        }
+        
         setPosts(ds);
         setLoading(false);
       }
@@ -264,8 +260,11 @@ window.location.reload()
             {cover && (
               <Image
                 width={180}
+                unoptimized={true}
+
                 height={180}
-                src={`${found ?(cover ? cover : "/bg.jpg") : "/bg.jpg"}`}
+                loader = {()=>(found ? cover ? cover : "/bg.jpg" : "/bg.jpg")}
+                src={`${found ? cover ? cover : "/bg.jpg" : "/bg.jpg"}`}
                 className="object-cover w-full h-48 rounded-none "
                 alt="cover"
               />
@@ -274,8 +273,10 @@ window.location.reload()
           <Image
             width={90}
             height={90}
+            unoptimized={true}
             className="absolute w-24 h-24 rounded-full bottom-5 left-7 md:left-12"
-            src={`${(found ? image : "/usernotfound.png")}`}
+            loader = {()=>(found ? image : "/usernotfound.png")}
+            src={`${found ? image : "/usernotfound.png"}`}
             alt="userimage"
           />
           {found && loggedin && !blocked &&(
@@ -312,7 +313,7 @@ window.location.reload()
           
           <div className="flex flex-col justify-between gap-2 sm:gap-0 sm:flex-row">
           
-          <h1 className="pr-12 text-sm font-normal leading-relaxed text-gray-500 sm:text-gray-500">{!blocked?about:'You have blocked this user. Unblock them to view their posts.'}</h1>
+          <h1 style={{ wordBreak: "break-word", whiteSpace: "normal" }} className="pr-12 text-sm font-normal leading-relaxed text-gray-500 two-line-elipsis sm:text-gray-500">{!blocked?about:'You have blocked this user. Unblock them to view their posts.'}</h1>
 
           <div className={resume?"mr-16  flex flex-row":"mr-16 flex flex-row"}>
           <Link href={"/resume/"+params.slug} className={resume?"text-sm font-medium text-blue-600":"hidden"}>View Resume</Link>
@@ -350,9 +351,9 @@ window.location.reload()
                       time={timeAgo.format(Date.now() - post["diff"])}
                       key={post["id"]}
                       image={post["image"]}
-                      dp={post["dp"]}
+                      dp={post["user"]["image"]}
                       handle={post["handle"]}
-                      name={post["name"]}
+                      name={post["user"]["name"]}
                       likes={post.likes}
 
                       description={post["excerpt"]}

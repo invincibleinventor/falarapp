@@ -45,7 +45,7 @@ export default function CommentsComponent(props:any) {
     async function fetchcomments() {
       const { data, error } = await supabase
         .from("quickiecomments")
-        .select("*")
+        .select("*,user(name,handle,image)")
         .eq("id", props.slug)
         .order("likes", { ascending: false })
         .not("poster","in",`(${props.myblocked})`)
@@ -55,10 +55,8 @@ export default function CommentsComponent(props:any) {
         l = data;
         for await (const [index, comment] of l.entries()) {
           console.log(index, comment);
-          const { data } = await supabase.from("user").select("*").eq("id", comment.poster);
-          if (data) {
-            l[index].name = data[0]["name"];
-            l[index].profile = data[0]["image"];
+        
+        
             const date2 = new Date(l[index].time);
             l[index].newtime = date1.getTime() - date2.getTime();
             if (props.loggedin) {
@@ -72,10 +70,7 @@ export default function CommentsComponent(props:any) {
               l[index].likedbyme = false;
             }
             console.log(l[index]);
-          } else {
-            l.splice(index, 1);
           }
-        }
         setComments(l);
         setLoading(false);
       } else if (!data || data.length == 0) {
@@ -125,9 +120,9 @@ export default function CommentsComponent(props:any) {
                 key={comment.comment_id}
                 likes={comment.likes}
                 likedbyme={comment.likedbyme}
-                name={comment.name}
+                name={comment.user.name}
                 handle={comment.handle}
-                profile={comment.profile}
+                profile={comment.user.image}
                 content={comment.content}
                 loggedin={props.loggedin}
               />

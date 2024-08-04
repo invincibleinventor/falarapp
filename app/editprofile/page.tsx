@@ -39,10 +39,29 @@ export default function Create() {
   const [image, setImage] = useState("");
 
   async function create() {
-    const { data } = await supabase.from("user").select("*").eq("handle", handle);
-    if (data && data.length > 0) {
-      alert("Username Already Exists");
-    } else {
+    const checkHandleExists = async (handle: string) => {
+      try {
+        const { data, error } = await supabase
+          .rpc('check_handle_existence', { p_handle: handle });
+    
+        if (error) {
+          throw error;
+        }
+    
+        return data.length > 0;
+      } catch (error) {
+        console.error('Error checking handle existence:', error);
+        throw error;
+      }
+    };
+    const exists = await checkHandleExists(handle);
+
+    
+    if(exists){
+      alert('This username cannot be used. Please try a different username.')
+    }
+    
+    else {
       const { error } = await supabase.from("user").insert({
         email: email,
         name: name,
@@ -77,10 +96,13 @@ export default function Create() {
   }
   return (
     <div className={`mx-auto flex h-screen w-full max-w-lg flex-col items-center justify-center px-10 `}>
+      
       <form
         className="flex flex-col justify-center w-full gap-2 my-auto ml-auto animate-in text-foreground"
         action={create}
       >
+        <h1 className="text-2xl font-semibold text-white">Welcome To {AppConfig.title}</h1>
+        <h1 className="pb-10 text-base font-normal text-gray-400 ">Let us setup your profile on {AppConfig.title}. Setup your profile to continue.</h1>
         <label className="text-sm text-gray-300" htmlFor="name">
           Name
         </label>
