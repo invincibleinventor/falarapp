@@ -75,9 +75,9 @@ export default function Menu(props: any) {
         </svg>
 
         <div
-          className={`absolute w-40 bg-[#090909]  rounded-xl shadow-sm border border-gray-900 shadow-gray-900 -left-[calc(34*4px)] top-8 flex flex-col ${dialogopened ? "" : "hidden"}`}
+          className={`absolute w-40 bg-[#020202] shadow-sm border border-gray-900 shadow-gray-900 -left-[calc(34*4px)] top-8 flex flex-col ${dialogopened ? "" : "hidden"}`}
         >
-          <div className="flex flex-row items-center content-center px-4 py-3 space-x-3 text-gray-300 cursor-pointer hover:rounded-xl hover:bg-gray-900">
+          <div className="flex flex-row items-center content-center px-4 py-3 space-x-3 text-gray-300 cursor-pointer hover:bg-gray-900">
             <svg xmlns="http://www.w3.org/2000/svg" width="1.1em" height="1.1em" viewBox="0 0 24 24">
               <path
                 fill="currentColor"
@@ -91,7 +91,7 @@ export default function Menu(props: any) {
           {props.type == "quickie" && props.myhandle == props.handle && (
             <div
               onClick={() => toggledeleteDialog(!deleteDialog)}
-              className="flex flex-row items-center content-center px-4 py-3 space-x-3 text-red-400 cursor-pointer hover:rounded-xl hover:bg-gray-900"
+              className="flex flex-row items-center content-center px-4 py-3 space-x-3 text-red-400 cursor-pointer hover:bg-gray-900"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="1.1em" height="1.1em" viewBox="0 0 24 24">
                 <path
