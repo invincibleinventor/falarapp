@@ -122,14 +122,7 @@ export default function Post(props: any) {
                   likes={props.likedlist.length}
                 />
 
-                <BookMarksComponent
-                  userliked={props.userbookmarked}
-                  postid={props.id}
-                  handle={props.myhandle}
-                  likedlist={props.bookmarkedlist}
-                  liked={props.bookmarked}
-                  likes={props.bookmarkedlist.length}
-                />
+               
                 <Link
                   href={"/quickie/" + props.id}
                   className="flex flex-row items-center content-center pl-6 pr-2 space-x-2 text-gray-400"
@@ -142,8 +135,16 @@ export default function Post(props: any) {
                       clipRule="evenodd"
                     />
                   </svg>{" "}
-                  <h1 className="text-sm">{props.comments}</h1>
+                  <h1 className="text-sm">{props.comments} Replies</h1>
                 </Link>
+                <BookMarksComponent
+                  userliked={props.userbookmarked}
+                  postid={props.id}
+                  handle={props.myhandle}
+                  likedlist={props.bookmarkedlist}
+                  liked={props.bookmarked}
+                  likes={props.bookmarkedlist.length}
+                />
                 <span className="ml-auto"></span>
 
                 <h1 className="text-[13px] font-medium text-gray-500 capitalize ">{props.time}</h1>

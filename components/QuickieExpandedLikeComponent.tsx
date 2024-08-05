@@ -20,7 +20,7 @@ export default function LikeComponent(props: any) {
         return item !== props.handle;
       });
       let u = ulikedlist;
-      let x = likes;
+      const x = likes;
       setLikes(likes - 1);
       u = u.filter(function (item: any) {
         return item !== props.postid;
@@ -51,7 +51,7 @@ export default function LikeComponent(props: any) {
     } else {
       const l = likedlist;
       setDisabled(true);
-      let x = likes;
+      const x = likes;
       l.push(props.handle);
       const u = ulikedlist;
       setLikes(likes + 1);
@@ -112,7 +112,7 @@ export default function LikeComponent(props: any) {
         )}
       </svg>
 
-      <h1 className="text-xs">{likes}</h1>
+      <h1 className="text-xs">{likes} Likes</h1>
     </div>
   );
 }

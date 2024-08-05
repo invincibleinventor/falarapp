@@ -152,7 +152,7 @@ export default function More(props: any) {
           strokeWidth={2}
           strokeWidthSecondary={2}
         />
-        <div className={!halt ? "" : "hidden"} ref={ref}></div>
+        <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
       </div>
     </>
   );

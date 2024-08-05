@@ -270,17 +270,9 @@ export default async function App({ params }: { params: { slug: string } }) {
             liked={liked}
             likes={likedlist.length}
           />
-          <BookMarksComponent
-            userliked={userbookmarked}
-            postid={params.slug}
-            handle={myhandle}
-            likedlist={bookmarkedlist}
-            liked={bookmarked}
-            likes={bookmarkedlist.length}
-          />
-          <Link
+           <Link
             href="#comments"
-            className="flex flex-row items-center content-center px-6 space-x-2 text-gray-300 md:mr-2 lg:mr-0"
+            className="flex flex-row items-center content-center px-6 pr-0 space-x-2 text-gray-300 lg:mr-0"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
               <path
@@ -292,6 +284,15 @@ export default async function App({ params }: { params: { slug: string } }) {
             </svg>{" "}
             <h1 className="text-xs md:text-sm">Comments</h1>
           </Link>
+          <BookMarksComponent
+            userliked={userbookmarked}
+            postid={params.slug}
+            handle={myhandle}
+            likedlist={bookmarkedlist}
+            liked={bookmarked}
+            likes={bookmarkedlist.length}
+          />
+         
         </div>
       )}
     </div>

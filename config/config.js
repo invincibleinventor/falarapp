@@ -3,5 +3,5 @@ export const AppConfig = {
   subtitle: "A Modern Social Network",
   officialaccount: "falar",
   description:
-    "Falar is a modern open source internet journal aimed at empowering authors with content freedom and ownership",
+    "Falar is a Next.JS and Supabase based social network. It is loaded with features and is backed by a stable codebase. Sign In to Falar today!",
 };

@@ -79,7 +79,7 @@ export default function BookMarksComponent(props: any) {
   return (
     <div
       onClick={() => (!disabled ? (toggleLiked(!liked), setLiked(!liked)) : console.log("holdup"))}
-      className="flex cursor-pointer text-gray-400 flex-row content-center items-center  space-x-[8px] px-6  pr-0"
+      className="flex flex-row items-center content-center px-4 text-gray-400 cursor-pointer"
     >
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
         {liked ? (
@@ -88,8 +88,6 @@ export default function BookMarksComponent(props: any) {
           <path fill="currentColor" d="m17 18l-5-2.18L7 18V5h10m0-2H7a2 2 0 0 0-2 2v16l7-3l7 3V5a2 2 0 0 0-2-2" />
         )}
       </svg>
-
-      <h1 className="text-sm">{likes}</h1>
     </div>
   );
 }

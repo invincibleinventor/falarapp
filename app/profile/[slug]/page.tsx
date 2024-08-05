@@ -32,6 +32,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [found, setFound] = useState(true);
   const [myself, setMyself] = useState(false);
   const [notifications, setNotifications] = useState(0);
+  const [hisblocked, setHisBlocked] = useState<any>([]);
   const [myId, setMyId] = useState<string | undefined>();
   const [blockedlist, setBlockedlist] = useState<any>([]);
   const [blocked, setBlocked] = useState(false);
@@ -57,7 +58,6 @@ export default function Page({ params }: { params: { slug: string } }) {
             setCover(pd[0].cover);
             setAbout(pd[0].about);
             setNotifications(pd[0].notifications);
-
             setImage(pd[0].image);
             setIsResume(pd[0].isresume);
             setFollowers(pd[0].followers.length);
@@ -71,6 +71,8 @@ export default function Page({ params }: { params: { slug: string } }) {
                 setMyuserid(session.user.id);
                 setBlockedlist(data[0].blocked);
                 setFollowerList(pd[0].followers);
+                setHisBlocked(pd[0].blockedby);
+
                 setFollowingList(data[0].following);
                 console.log("below");
                 console.log(pd[0].id);
