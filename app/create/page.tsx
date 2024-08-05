@@ -37,7 +37,9 @@ export default function Create() {
   const [file, setFile] = useState<any>();
   const [changed, setChanged] = useState(false);
   const [title, setTitle] = useState("");
+  const [disabled, setDisabled] = useState(false)
   async function create() {
+    setDisabled(true)
     const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -154,7 +156,7 @@ export default function Create() {
             />
           </div>
 
-          <button className="px-8 py-4 mb-2 text-xs font-medium text-white rounded-md bg-cyan-800 w-max">
+          <button disabled={disabled} className="px-8 py-4 mb-2 text-xs font-medium text-white rounded-md bg-cyan-800 w-max">
             Publish This Post
           </button>
         </form>
