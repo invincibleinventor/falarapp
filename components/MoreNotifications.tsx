@@ -55,7 +55,7 @@ export default function MoreNotifications() {
   }, [inView]);
   return (
     <div className="w-full">
-      <div className="grid items-center content-center grid-cols-1 gap-2 px-3 animate-in hiddenscroll xl:grid-cols-2">
+      <div className="grid items-center content-center grid-cols-1 gap-2 px-3 pb-20 animate-in hiddenscroll xl:grid-cols-2">
         {notifications.map((notification: any) => (
           <Notification
             title={notification.title}
@@ -67,7 +67,8 @@ export default function MoreNotifications() {
           ></Notification>
         ))}
       </div>
-      <div className="flex flex-col items-center content-center w-full">
+      <div className="flex flex-col items-center content-center w-full">      <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
+
         <Oval
           height={80}
           width={80}
@@ -81,7 +82,6 @@ export default function MoreNotifications() {
           strokeWidthSecondary={2}
         />
       </div>
-      <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
     </div>
   );
 }

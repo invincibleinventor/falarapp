@@ -110,6 +110,8 @@ export default function MoreUsers(props: any) {
         ))}
       </div>
       <div className="flex flex-col items-center content-center w-full">
+      <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
+
         <Oval
           height={80}
           width={80}
@@ -123,7 +125,6 @@ export default function MoreUsers(props: any) {
           strokeWidthSecondary={2}
         />
       </div>
-      <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
     </div>
   );
 }

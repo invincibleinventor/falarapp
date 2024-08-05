@@ -87,7 +87,7 @@ export default function Post(props: any) {
               <div
                 onClick={() => router.push("/quickie/" + props.id)}
                 style={{ wordBreak: "break-word", whiteSpace: "normal" }}
-                className="cursor-pointer mt-[6px] pl-0 ml-0 text-[18px] font-normal  text-gray-300 four-line-ellipsis md:text-[17px]"
+                className="cursor-pointer mt-[6px] pl-0 ml-0 text-[16px] font-normal  text-gray-300 four-line-ellipsis md:text-[16px]"
               >
                 {formatText(props.description)}
 
@@ -135,7 +135,7 @@ export default function Post(props: any) {
                       clipRule="evenodd"
                     />
                   </svg>{" "}
-                  <h1 className="text-sm">{props.comments} Replies</h1>
+                  <h1 className="text-xs">{props.comments} <span className="hidden md:inline-block">Replies</span></h1>
                 </Link>
                 <BookMarksComponent
                   userliked={props.userbookmarked}
@@ -147,7 +147,7 @@ export default function Post(props: any) {
                 />
                 <span className="ml-auto"></span>
 
-                <h1 className="text-[13px] font-medium text-gray-500 capitalize ">{props.time}</h1>
+                <h1 className="text-[12px] font-medium text-gray-500 capitalize ">{props.time}</h1>
               </div>
             </div>
           </div>

@@ -1,12 +1,27 @@
 "use client";
 
 import { createClient } from "@/utils/supabase/client";
-import { useState } from "react";
+import {  useEffect, useRef, useState } from "react";
 
 export default function Menu(props: any) {
   const [dialogopened, setDialogopened] = useState(false);
   const [deleteDialog, toggledeleteDialog] = useState(false);
 
+  
+  const btnRef = useRef<SVGSVGElement | null>(null);
+  useEffect(() => {
+    const closeDropdown = (e: MouseEvent) => {
+      if (btnRef.current && !btnRef.current.contains(e.target as Node)) {
+        setDialogopened(false);
+      }
+    };
+  
+    document.body.addEventListener('click', closeDropdown);
+    return () => {
+      document.body.removeEventListener('click', closeDropdown);
+    };
+  }, []);
+  
   async function del() {
     console.log("ok");
     toggledeleteDialog(false);
@@ -47,6 +62,7 @@ export default function Menu(props: any) {
           xmlns="http://www.w3.org/2000/svg"
           width="1em"
           height="1em"
+          ref={btnRef}
           viewBox="0 0 24 24"
         >
           <g fill="none">

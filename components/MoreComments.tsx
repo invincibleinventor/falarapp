@@ -73,7 +73,7 @@ export default function CommentsComponent(props: any) {
   }, [inView]);
   return (
     <>
-      <div className="flex flex-col my-3 mt-6 space-y-4">
+      <div className="flex flex-col pb-20 my-3 mt-6 space-y-4">
         {!loading
           ? comments.map((comment: any) => (
               <CommentComponent
@@ -93,7 +93,8 @@ export default function CommentsComponent(props: any) {
             ))
           : comments &&
             comments.length > 0 && (
-              <>
+              <>                <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
+
                 <Oval
                   height={40}
                   width={40}
@@ -106,7 +107,6 @@ export default function CommentsComponent(props: any) {
                   strokeWidth={2}
                   strokeWidthSecondary={2}
                 />
-                <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
               </>
             )}
       </div>

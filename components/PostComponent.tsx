@@ -24,7 +24,7 @@ export default function Post(props: any) {
     }
   }
   return (
-    <div className="animate-in">
+    <div className="w-full animate-in">
       <div className="w-full px-6 py-[6px] border-b border-gray-900">
         <article className="px-2 py-6 pt-0 ">
           <Link href={"/profile/" + props.handle} className="flex gap-2 mt-4">

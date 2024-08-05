@@ -85,7 +85,7 @@ export default function More(props: any) {
   }, [inView]);
   return (
     <>
-      <div className="flex flex-col items-center content-center gap-2">
+      <div className="flex flex-col items-center content-center gap-2 pb-20">
         {posts.map((post: any) => (
           <PostComponent
             id={post.id}
@@ -101,13 +101,14 @@ export default function More(props: any) {
             description={post.excerpt}
           />
         ))}
+        <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
 
         <Oval
           height={80}
           width={80}
           color="#000000"
           wrapperStyle={{}}
-          wrapperClass="mx-auto mt-5 mb-20"
+          wrapperClass="mx-auto mt-5"
           visible={!halt ? true : false}
           ariaLabel="oval-loading"
           secondaryColor="#808080"
@@ -115,7 +116,6 @@ export default function More(props: any) {
           strokeWidthSecondary={2}
         />
 
-        <div className={!halt ? "" : "hidden"} ref={ref}></div>
       </div>
     </>
   );

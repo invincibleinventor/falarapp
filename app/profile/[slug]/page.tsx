@@ -40,9 +40,9 @@ export default function Page({ params }: { params: { slug: string } }) {
   useEffect(() => {
     async function get() {
       const {
-        data: { session },
-      } = await supabase.auth.getSession();
-      if (session) {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (user) {
         setloggedin(true);
       }
       const { data: pd, error: pe } = await supabase.from("user").select("*").eq("handle", params.slug);
@@ -64,12 +64,12 @@ export default function Page({ params }: { params: { slug: string } }) {
             setFollowers(pd[0].followers.length);
             setFollowing(pd[0].following.length);
 
-            if (session) {
-              const { data } = await supabase.from("user").select("*").eq("id", session.user.id);
+            if (user) {
+              const { data } = await supabase.from("user").select("*").eq("id",user.id);
               if (data) {
                 setMyImage(data[0].image);
                 setMyId(data[0].handle);
-                setMyuserid(session.user.id);
+                setMyuserid(user.id);
                 setBlockedlist(data[0].blocked);
                 setFollowerList(pd[0].followers);
                 setblockedby(pd[0].blockedby);
@@ -116,20 +116,23 @@ export default function Page({ params }: { params: { slug: string } }) {
     if (blocked) {
       let b = blockedlist;
       let c = blockedby;
-      b = b.filter((item: string) => item !== myuserid);
+      b = b.filter((item: string) => item !== hisId);
 
-      c = c.filter((item: string) => item !== hisId);
+      c = c.filter((item: string) => item !== myuserid);
       const { error } = await supabase.from("user").update({ blocked: b }).eq("id", myuserid);
       if (error) {
         alert(error);
       } else {
+        console.log('okok')
         const { error } = await supabase.from("user").update({ blockedby: c }).eq("id", hisId);
         if(error){
           alert(error.message)
           console.log(error)
         }
         else{
-        window.location.reload();
+          console.log('ooo')
+
+       window.location.reload();
       }
     }
   }
@@ -180,10 +183,10 @@ export default function Page({ params }: { params: { slug: string } }) {
             setFollowerList(arr);
             setFollowingList(arr2);
             setImFollowing(false);
-            window.location.reload();
+           window.location.reload();
           }
         } else {
-          window.location.reload();
+         window.location.reload();
         }
       }
     }

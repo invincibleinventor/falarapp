@@ -120,7 +120,7 @@ export default function More(props: any) {
   }, [inView]);
   return (
     <>
-      <div className="flex flex-col items-center content-center w-full gap-2">
+      <div className="flex flex-col items-center content-center w-full gap-2 pb-20">
         {posts.map((post: any) => (
           <QuickieComponent
             id={post.id}
@@ -142,7 +142,8 @@ export default function More(props: any) {
             comments={post.comments}
             description={post.content}
           />
-        ))}
+        ))}        <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
+
         <Oval
           height={80}
           width={80}
@@ -155,7 +156,6 @@ export default function More(props: any) {
           strokeWidth={2}
           strokeWidthSecondary={2}
         />
-        <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
       </div>
     </>
   );

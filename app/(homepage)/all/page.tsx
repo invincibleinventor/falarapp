@@ -36,7 +36,7 @@ export default async function Index() {
     const { data: u } = await supabase.from("user").select("*").eq("id", s);
     l = u![0]["following"];
     myblocked = u![0]["blocked"];
-    blockedby = u![0]["blockedby"]
+    blockedby = u![0]["blockedby"]  
     const h = u![0]["handle"];
     let ds = [];
 
