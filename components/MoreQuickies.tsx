@@ -68,6 +68,7 @@ export default function More(props: any) {
         .from("quickies")
         .select("*, user(name,image,handle)")
         .order("id", { ascending: false })
+        .not("poster", "in", `(${props.newblocked.toString()})`)
         .in("handle", props.in)
         .not("poster", "in", `(${props.myblocked.toString()})`)
         .range(from, to);

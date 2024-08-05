@@ -40,13 +40,15 @@ export default function MoreUsers(props: any) {
       .from("user")
       .select("*")
       .range(from, to)
-      .not("id", "in", `(${props.blocked.toString()})`);
+      .not("id", "in", `(${props.blocked.toString()})`)
+      .not("id", "in", `(${props.newblocked.toString()})`)
+
     if (error) {
       console.log(error);
     } else {
       if (data && data.length > 0) {
         console.log(data);
-        const ds = data;
+        const ds = data
         const {
           data: { user },
         } = await supabase.auth.getUser();

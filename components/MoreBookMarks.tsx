@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { Oval } from "react-loader-spinner";
 import PostComponent from "./PostComponent";
-export default function MoreBookMarks(props: { slug: string }) {
+export default function MoreBookMarks(props: { slug: string, myblocked:any, newblocked:any }) {
   const supabase = createClient();
   const [offset, setOffset] = useState(1);
   const { ref, inView } = useInView();
@@ -30,6 +30,8 @@ export default function MoreBookMarks(props: { slug: string }) {
       .select("*,user(name,handle,image)")
       .order("id", { ascending: false })
       .in("id", l)
+      .not("poster","in",`(${props.myblocked.toString()})`)
+      .not("poster","in",`(${props.newblocked.toString()})`)
       .textSearch(
         "title_excerpt_content",
         `'${props.slug}' | '${props.slug.toLowerCase()}' | '${props.slug.toUpperCase()}'`

@@ -47,7 +47,9 @@ export default function MoreUsers(props: any) {
         `'${props.search}' | '${props.search.toLowerCase()}' | '${props.search.toUpperCase()}'`
       )
       .not("id", "in", `(${user?.id})`)
-      .not("id", "in", `(${props.myblocked.toString()})`);
+      .not("id", "in", `(${props.myblocked.toString()})`)
+      .not("id", "in", `(${props.newblocked.toString()})`)
+
 
     if (error) {
       console.log(error);

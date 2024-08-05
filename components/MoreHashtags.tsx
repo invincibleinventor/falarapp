@@ -65,6 +65,9 @@ export default function More(props: any) {
       const { data, error } = await supabase
         .from("quickies")
         .select("*,user(name,handle,image)")
+        .not("poster", "in", `(${props.myblocked.toString()})`)
+
+        .not("poster", "in", `(${props.newblocked.toString()})`)
         .in("id", props.in)
         .order("id", { ascending: false })
         .range(from, to);

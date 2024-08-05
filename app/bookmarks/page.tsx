@@ -27,6 +27,7 @@ export default async function Index() {
   let empty = true;
   let myblocked: any[] = [];
   let posts: any[] = [];
+  let newblocked :any[] = []
   let loading = true;
   let l: readonly any[] = [];
   async function get() {
@@ -36,6 +37,7 @@ export default async function Index() {
     if (u) {
       l = u[0]["bookmarks"];
       myblocked = u[0]["blocked"];
+      newblocked = u[0]["blockedby"]
     }
     console.log("below");
     console.log(l);
@@ -47,6 +49,7 @@ export default async function Index() {
       .order("id", { ascending: false })
       .in("id", l)
       .not("poster", "in", `(${myblocked.toString()})`)
+      .not("poster", "in", `(${newblocked.toString()})`)
       .limit(5);
     if (error) {
     } else {
@@ -115,7 +118,7 @@ export default async function Index() {
               ) : (
                 <div className="flex items-center content-center w-full h-screen"></div>
               )}
-              <More myblocked={myblocked} l={l}></More>{" "}
+              <More newblocked={newblocked} myblocked={myblocked} l={l}></More>{" "}
             </div>{" "}
           </div>
         </div>

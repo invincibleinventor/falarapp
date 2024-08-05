@@ -22,19 +22,22 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [posts, setPosts] = useState<Record<string, unknown>[]>([]);
   const [loading, setLoading] = useState(true);
   const [blocked, setblocked] = useState([]);
-
+const [newblocked,setnewblocked]  = useState([])
   useEffect(() => {
     async function get() {
       setLoading(true);
       let id;
       let blocked;
+      let newblocked;
       const { data: u } = await supabase.auth.getUser();
       if (u.user) {
         id = u.user.id;
-        const { data, error } = await supabase.from("user").select("blocked").eq("id", id);
+        const { data, error } = await supabase.from("user").select("*").eq("id", id);
         if (data && data.length > 0) {
           setblocked(data[0]["blocked"]);
+          setnewblocked(data[0]["blockedby"])
           blocked = data[0]["blocked"];
+          newblocked = data[0]["blockedby"]
         } else {
           if (error) {
             console.log(error.message);
@@ -47,7 +50,8 @@ export default function Page({ params }: { params: { slug: string } }) {
         .order("id", { ascending: false })
         .textSearch("title_excerpt_content", `'${search}' | '${search.toLowerCase()}' | '${search.toUpperCase()}'`)
         .limit(5)
-        .not("poster", "in", `(${blocked.toString()})`);
+        .not("poster", "in", `(${blocked.toString()})`)
+        .not("poster", "in", `(${newblocked.toString()})`);
       if (error) {
         console.log(error);
       } else {
@@ -162,7 +166,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               />
             </div>
           )}
-          <MoreSearchPosts myblocked={blocked} slug={search} />{" "}
+          <MoreSearchPosts newblocked={newblocked} myblocked={blocked} slug={search} />{" "}
         </div>{" "}
       </div>
     </div>

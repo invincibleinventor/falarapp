@@ -33,6 +33,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
   let myname = "";
   let myphoto = "";
   let myhandle = "";
+  let blocked: any[] = [];
+  let newblocked:any[] = [];
   let userliked: any[] = [];
   let userbookmarked: any[] = [];
   let tagarray: any[] = [];
@@ -44,6 +46,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
     l = u![0]["following"];
     const h = u![0]["handle"];
     myname = u![0]["name"];
+    blocked = u![0]['blocked']
+    newblocked = u![0]["blockedby"]
     myphoto = u![0]["image"];
     myhandle = u![0]["handle"];
     userbookmarked = u![0]["bookmarks"];
@@ -57,10 +61,13 @@ export default async function Page({ params }: { params: { slug: string } }) {
         if (hashtag[0]["posts"].length > 0) {
           tagarray = hashtag[0]["posts"];
           const { data, error } = await supabase
-            .from("quickies")
+            .from("quickies,user(name,handle,image)")
             .select("*")
             .order("id", { ascending: false })
             .in("id", hashtag[0]["posts"])
+            .not("poster", "in", `(${blocked.toString()})`)
+            .not("poster", "in", `(${newblocked.toString()})`)
+
             .limit(5);
           if (error) {
           } else {
@@ -82,14 +89,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
               ds[index].bookmarked = bookmarked;
               ds[index].bookmarkedlist = bookmarkedlist;
               ds[index].likedlist = likedlist;
-              const { data } = await supabase.from("user").select("*").eq("id", post.poster);
-
-              if (data) {
-                ds[index].name = data[0].name;
+             
                 const date2 = new Date(ds[index].created_at);
                 ds[index].diff = date1.getTime() - date2.getTime();
-                ds[index].dp = data[0].image;
-              }
+              
             }
 
             if (ds.length > 0) {
@@ -135,11 +138,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
                       bookmarkedlist={post.bookmarkedlist}
                       likedlist={post.likedlist}
                       myhandle={myhandle}
-                      dp={post.dp}
+                      dp={post.user.image}
                       bookmarked={post.bookmarked}
                       liked={post.liked}
                       handle={post.handle}
-                      name={post.name}
+                      name={post.user.name}
                       description={post.content}
                     />
                   ))
@@ -169,6 +172,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 myname={myname}
                 myphoto={myphoto}
                 userliked={userliked}
+                myblocked={blocked}
+                newblocked={newblocked}
                 userbookmarked={userbookmarked}
                 in={tagarray}
               ></More>{" "}

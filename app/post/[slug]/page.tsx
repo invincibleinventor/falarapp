@@ -2,6 +2,7 @@ import BookMarksComponent from "@/components/BookMarksComponent";
 import CommentsComponent from "@/components/CommentsComponent";
 import LikeComponent from "@/components/LikeComponent";
 import Menu from "@/components/Menu";
+import { AppConfig } from "@/config/config";
 import { createClient } from "@/utils/supabase/server";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
@@ -40,6 +41,7 @@ export default async function App({ params }: { params: { slug: string } }) {
   let userbookmarked: never[] = [];
   let comments: any[] = [];
   TimeAgo.locale(en);
+  let newblocked :any[] = []
   let user = "";
   const timeAgo = new TimeAgo("en-US");
   const date1 = new Date();
@@ -55,6 +57,7 @@ export default async function App({ params }: { params: { slug: string } }) {
         myphoto = users[0]["image"];
         myname = users[0]["name"];
         blocked = users[0]["blocked"];
+        newblocked = users[0]["blockedby"];
         myhandle = users[0]["handle"];
         userliked = users[0]["liked"];
         userbookmarked = users[0]["bookmarks"];
@@ -167,7 +170,7 @@ export default async function App({ params }: { params: { slug: string } }) {
           </div>
         </div>
       )}
-      {!error && !blocked.includes(authorid) && (
+      {!error && !newblocked.includes(authorid) && !blocked.includes(authorid) && (
         <div className="hiddenscroll h-full w-[calc(100vw-68px)] overflow-hidden pb-14 md:w-full md:max-w-full md:border-x md:border-x-gray-900">
           <div className="relative aspect-video">
             <img
@@ -227,7 +230,27 @@ export default async function App({ params }: { params: { slug: string } }) {
               {content}
             </Markdown>
           </div>
-          {loggedin && !blocked.includes(authorid) && (
+          {!loggedin && 
+            <>
+            <div className="h-1 mb-10 border-b border-b-gray-900"></div>
+      <div className="flex flex-col gap-4 px-10 mx-auto max-w-max">
+      <h1 className="mx-auto text-lg font-semibold text-center text-gray-300">Login To View Replies</h1>
+      <h1 className="mx-auto text-center text-gray-500 text-md">
+        Login to {AppConfig.title} to view the replies for this Quickie
+      </h1>
+      <Link
+        href="/"
+        className={`mx-auto mt-3 w-max rounded-full px-8 py-3 text-xs font-bold ${
+          1 == 1 ? "bg-cyan-800 text-white" : "border-2  bg-white "
+        }`}
+      >
+        Login Now
+      </Link>
+    </div>
+    </>
+      
+      }
+          {loggedin && !newblocked.includes(authorid) && !blocked.includes(authorid) && (
             <section className="px-0 pt-4 pb-8 border-t border-t-gray-900" id="comments">
               <h1 className="px-6 mb-4 text-xl font-bold text-gray-300">Comments</h1>
 
@@ -236,6 +259,7 @@ export default async function App({ params }: { params: { slug: string } }) {
                 myphoto={myphoto}
                 handle={myhandle}
                 id={user}
+                newblocked={newblocked}
                 myhandle={myhandle}
                 myblocked={blocked}
                 slug={params.slug}
@@ -245,7 +269,7 @@ export default async function App({ params }: { params: { slug: string } }) {
           )}
         </div>
       )}
-      {loggedin && !blocked.includes(authorid) && (
+      {loggedin && !blocked.includes(authorid) && !newblocked.includes(authorid)  && (
         <div className="absolute bottom-0 flex flex-row w-full border-t bg-[#000205] border-x h-14 border-t-gray-900 border-x-gray-900">
           <BookMarksComponent
             userliked={userbookmarked}

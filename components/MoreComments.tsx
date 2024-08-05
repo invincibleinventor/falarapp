@@ -25,7 +25,8 @@ export default function CommentsComponent(props: any) {
       .select("*,user(name,handle,image)")
       .eq("id", props.slug)
       .order("likes", { ascending: false })
-      .not("poster", "in", `(${props.myblocked})`)
+      .not("poster", "in", `(${props.myblocked.toString()})`)
+      .not("poster", "in", `(${props.newblocked.toString()})`)
       .range(from, to);
     if (error) {
       console.log(error);

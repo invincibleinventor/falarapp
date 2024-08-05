@@ -30,6 +30,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [posts, setPosts] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   const [blocked, setBlocked] = useState([]);
+  const [newblocked,setnewblocked] = useState([])
   useEffect(() => {
     async function get() {
       setLoading(true);
@@ -39,14 +40,17 @@ export default function Page({ params }: { params: { slug: string } }) {
 
       let l = [];
       let blocked = [];
+      let newblocked = [];
       if (u) {
         blocked = u[0]["blocked"];
+        newblocked = u[0]["blockedby"]
         l = u[0]["bookmarks"];
       }
       console.log("below");
       console.log(l);
       let ds = [];
       setBlocked(blocked);
+      setnewblocked(newblocked)
       const { data, error } = await supabase
         .from("posts")
         .select("*,user(name,handle,image)")
@@ -54,6 +58,7 @@ export default function Page({ params }: { params: { slug: string } }) {
         .textSearch("title_excerpt_content", `'${search}' | '${search.toLowerCase()}' | '${search.toUpperCase()}'`)
         .in("id", l)
         .not("id", "in", `(${blocked.toString()})`)
+        .not("id", "in", `(${newblocked.toString()})`)
         .limit(5);
       if (error) {
         console.log(error);
@@ -170,7 +175,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 />
               </div>
             )}
-            <MoreBookMarks slug={search} />{" "}
+            <MoreBookMarks newblocked={newblocked} myblocked={blocked} slug={search} />{" "}
           </div>{" "}
         </div>
       </div>

@@ -37,6 +37,7 @@ export default async function Index({ params }: { params: { slug: string } }) {
   let userliked: any[] = [];
   let userbookmarked: any[] = [];
   let myblocked = "";
+  let newblocked: any[] = []
 
   async function get() {
     const { data: user } = await supabase.auth.getUser();
@@ -44,15 +45,15 @@ export default async function Index({ params }: { params: { slug: string } }) {
     const s = user.user!.id;
     const { data: u } = await supabase.from("user").select("*").eq("id", s);
     myblocked = u![0]["blocked"];
-
+    newblocked = u![0]["blockedby"]
     const { data: hs } = await supabase.from("user").select("*").eq("handle", params.slug);
     if (hs && hs.length > 0) {
-      if (!myblocked.includes(hs[0]["id"])) {
+      if (!newblocked.includes(hs[0]["id"]) && !myblocked.includes(hs[0]["id"])) {
         console.log(myblocked, hs[0]["id"]);
         l = u![0]["following"];
         const h = u![0]["handle"];
         myname = u![0]["name"];
-
+        
         myphoto = u![0]["image"];
         myhandle = u![0]["handle"];
         userbookmarked = u![0]["bookmarks"];
@@ -176,6 +177,7 @@ export default async function Index({ params }: { params: { slug: string } }) {
                   handle={params.slug}
                   myhandle={myhandle}
                   myname={myname}
+                  newblocked={newblocked}
                   myphoto={myphoto}
                   userliked={userliked}
                   userbookmarked={userbookmarked}

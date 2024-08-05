@@ -32,7 +32,8 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [found, setFound] = useState(true);
   const [myself, setMyself] = useState(false);
   const [notifications, setNotifications] = useState(0);
-  const [hisblocked, setHisBlocked] = useState<any>([]);
+  const [blockedby, setblockedby] = useState<any>([]);
+  const [imblockedby, setimblockedby] = useState(false);
   const [myId, setMyId] = useState<string | undefined>();
   const [blockedlist, setBlockedlist] = useState<any>([]);
   const [blocked, setBlocked] = useState(false);
@@ -71,8 +72,8 @@ export default function Page({ params }: { params: { slug: string } }) {
                 setMyuserid(session.user.id);
                 setBlockedlist(data[0].blocked);
                 setFollowerList(pd[0].followers);
-                setHisBlocked(pd[0].blockedby);
-
+                setblockedby(pd[0].blockedby);
+                
                 setFollowingList(data[0].following);
                 console.log("below");
                 console.log(pd[0].id);
@@ -83,6 +84,14 @@ export default function Page({ params }: { params: { slug: string } }) {
                 } else {
                   console.log("illla");
                   setBlocked(false);
+                }
+
+                if (data[0].blockedby.includes(pd[0].id)) {
+                  setimblockedby(true);
+                  console.log("blockkkedd");
+                } else {
+                  console.log("illla");
+                  setimblockedby(false);
                 }
                 if (data[0].handle == params.slug) {
                   setMyself(true);
@@ -106,21 +115,41 @@ export default function Page({ params }: { params: { slug: string } }) {
   async function determine() {
     if (blocked) {
       let b = blockedlist;
-      b = b.filter((item: string) => item !== hisId);
+      let c = blockedby;
+      b = b.filter((item: string) => item !== myuserid);
+
+      c = c.filter((item: string) => item !== hisId);
       const { error } = await supabase.from("user").update({ blocked: b }).eq("id", myuserid);
       if (error) {
         alert(error);
       } else {
+        const { error } = await supabase.from("user").update({ blockedby: c }).eq("id", hisId);
+        if(error){
+          alert(error.message)
+          console.log(error)
+        }
+        else{
         window.location.reload();
       }
-    } else {
+    }
+  }
+    else {
       const b = blockedlist;
       b.push(hisId);
+      const c = blockedby;
+      c.push(myuserid)
 
       const { error } = await supabase.from("user").update({ blocked: b }).eq("id", myuserid);
+      
       if (error) {
+        
         alert(error);
       } else {
+        const { error } = await supabase.from("user").update({ blockedby: c }).eq("id", hisId);
+        if(error) {
+          console.log(error)
+          alert(error.message)
+        }
         if (followerlist.includes(myId)) {
           console.log("uesuesues");
           let arr: any = followerlist;
@@ -286,7 +315,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             src={`${found ? image : "/usernotfound.png"}`}
             alt="userimage"
           />
-          {found && loggedin && !blocked && (
+          {found && loggedin && !blocked  && !imblockedby && (
             <button
               onClick={() => onfollow()}
               className={`absolute rounded-full bottom-10 right-7 px-8 py-3 text-xs font-semibold md:right-12  ${
@@ -305,14 +334,15 @@ export default function Page({ params }: { params: { slug: string } }) {
 
                 <h1 className="text-sm font-normal text-gray-500">@{params.slug}</h1>
               </div>
-              {!myself && (
+              {!myself && loggedin && (
                 <div className="flex flex-row items-center content-center gap-2 mb-2">
+                  {!imblockedby &&
                   <button
                     onClick={() => determine()}
                     className="px-4 py-1 text-xs font-medium text-red-400 border-2 rounded-full border-red-900/40 "
                   >
-                    {blocked ? "Unblock" : "Block"}
-                  </button>
+                    {blocked  ? "Unblock" : "Block"}
+                  </button>}
                   <Link
                     href={"/report/user/" + params.slug}
                     className="px-4 py-1 mr-8 text-[10px] font-medium text-white border-2 border-gray-900 rounded-full md:mr-14"
@@ -329,7 +359,9 @@ export default function Page({ params }: { params: { slug: string } }) {
               style={{ wordBreak: "break-word", whiteSpace: "normal" }}
               className="pr-12 text-sm font-normal leading-relaxed text-gray-500 two-line-elipsis sm:text-gray-500"
             >
-              {!blocked ? about : "You have blocked this user. Unblock them to view their posts."}
+              {blocked && "You have blocked this user. Unblock them to view their posts."}
+              {imblockedby && !blocked && "This user has blocked you. You can no longer view their posts or quickies."}
+              {!blocked && !imblockedby && about}
             </h1>
 
             <div className={resume ? "mr-16  flex flex-row" : "mr-16 flex flex-row"}>
@@ -339,7 +371,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             </div>
           </div>
         </div>
-        {found && !blocked && (
+        {found && !blocked && !imblockedby && (
           <>
             <div className="flex flex-row items-center content-center gap-6 p-4 mx-8 my-4 mb-1 rounded-md bg-gray-800/30 md:mx-14">
               <div className="flex flex-row w-full md:mx-auto">
@@ -355,12 +387,14 @@ export default function Page({ params }: { params: { slug: string } }) {
             </div>
             <div className="flex items-center justify-between px-8 mt-8 mb-4 lex-row md:mb-4 md:mt-10">
               <h1 className="text-lg font-bold text-white ">{name}&apos;s Posts</h1>
+             {!blocked && !imblockedby &&
               <Link
                 href={"/quickies/" + params.slug}
                 className="py-2 ml-2 text-sm font-medium text-white rounded-full cursor-pointer md:px-6 md:bg-gray-900/50 "
               >
                 View Quickies
               </Link>
+}
             </div>
             <div className="flex flex-col gap-2 px-0 md:px-0">
               {!loading ? (

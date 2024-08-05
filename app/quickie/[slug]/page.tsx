@@ -10,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Iof from "@/components/Iof";
 import Menu from "@/components/Menu";
+import { AppConfig } from "@/config/config";
 export default async function App({ params }: { params: { slug: string } }) {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
@@ -24,6 +25,7 @@ export default async function App({ params }: { params: { slug: string } }) {
   let loading = false;
   let myname = "";
   let myphoto = "";
+  let newblocked :any[] = [];
   let myhandle = "";
   let loggedin = false;
   let liked = false;
@@ -51,6 +53,7 @@ export default async function App({ params }: { params: { slug: string } }) {
       if (users) {
         myphoto = users[0]["image"];
         blocked = users[0]["blocked"];
+        newblocked = users[0]["blockedby"]
         myname = users[0]["name"];
         myhandle = users[0]["handle"];
         userliked = users[0]["liked"];
@@ -188,7 +191,7 @@ export default async function App({ params }: { params: { slug: string } }) {
           </div>
         </div>
       )}
-      {!error && !blocked.includes(authorid) && (
+      {!error && !newblocked.includes(authorid) && !blocked.includes(authorid) && (
         <div className="hiddenscroll h-full w-[calc(100vw-68px)] mx-0 overflow-hidden pb-14 md:w-full md:max-w-full px-0">
           <div className="w-full lg:pr-2 px-2 py-[6px] pb-0">
             <div className="flex flex-col rounded-none md:gap-0">
@@ -241,8 +244,28 @@ export default async function App({ params }: { params: { slug: string } }) {
                 </div>
               </div>
             </div>
+            {!loggedin && 
+            <>
+            <div className="h-1 mb-10 border-b border-b-gray-900"></div>
+      <div className="flex flex-col gap-4 px-10 mx-auto max-w-max">
+      <h1 className="mx-auto text-lg font-semibold text-center text-gray-300">Login To View Replies</h1>
+      <h1 className="mx-auto text-center text-gray-500 text-md">
+        Login to {AppConfig.title} to view the replies for this Quickie
+      </h1>
+      <Link
+        href="/"
+        className={`mx-auto mt-3 w-max rounded-full px-8 py-3 text-xs font-bold ${
+          1 == 1 ? "bg-cyan-800 text-white" : "border-2  bg-white "
+        }`}
+      >
+        Login Now
+      </Link>
+    </div>
+    </>
+      
+      }
           </div>
-          {loggedin && (
+          {loggedin && !newblocked.includes(authorid) && !blocked.includes(authorid)  && (
             <section className="px-0 pt-4 pb-8 border-t lg:pr-0 border-t-gray-900" id="comments">
               <h1 className="px-6 mb-2 text-lg font-bold text-gray-300">Comments</h1>
 
@@ -252,6 +275,7 @@ export default async function App({ params }: { params: { slug: string } }) {
                 myphoto={myphoto}
                 handle={myhandle}
                 id={user}
+                newblocked={newblocked}
                 myhandle={myhandle}
                 slug={params.slug}
                 loggedin={loggedin}
@@ -260,7 +284,8 @@ export default async function App({ params }: { params: { slug: string } }) {
           )}
         </div>
       )}
-      {loggedin && !blocked.includes(authorid) && (
+      
+      {loggedin && !newblocked.includes(authorid) && !blocked.includes(authorid) && (
         <div className="absolute bottom-0 flex flex-row w-full bg-black border-t h-14 border-t-gray-900 ">
           <LikeComponent
             userliked={userliked}

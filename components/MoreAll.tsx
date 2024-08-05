@@ -51,7 +51,8 @@ export default function More(props: any) {
         .select("*,user(name,handle,image)")
         .order("id", { ascending: false })
         .range(from, to)
-        .not("poster", "in", `(${props.myblocked.toString()})`);
+        .not("poster", "in", `(${props.myblocked.toString()})`)
+        .not("poster", "in", `(${props.newblocked.toString()})`);
       if (error) {
         console.log(error);
       } else {
@@ -106,7 +107,7 @@ export default function More(props: any) {
           width={80}
           color="#000000"
           wrapperStyle={{}}
-          wrapperClass="mx-auto mt-5"
+          wrapperClass="mx-auto mt-5 mb-20"
           visible={!halt ? true : false}
           ariaLabel="oval-loading"
           secondaryColor="#808080"
@@ -114,7 +115,7 @@ export default function More(props: any) {
           strokeWidthSecondary={2}
         />
 
-        <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
+        <div className={!halt ? "" : "hidden"} ref={ref}></div>
       </div>
     </>
   );

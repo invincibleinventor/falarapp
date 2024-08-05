@@ -36,7 +36,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [userliked, setUserliked] = useState([]);
   const [search, setSearch] = useState(params.slug);
   const [tempsearch, setTempSearch] = useState("");
-
+const [newblocked,setnewblocked] = useState([])
   const [userbookmarked, setUserBookmarked] = useState([]);
   useEffect(() => {
     async function get() {
@@ -51,6 +51,7 @@ export default function Page({ params }: { params: { slug: string } }) {
       setUserBookmarked(u![0]["bookmarks"]);
       setUserliked(u![0]["liked"]);
       setBlocked(u![0]["blocked"]);
+      setnewblocked(u![0]["blockedby"])
       let ds = [];
       const a: any = l;
       a.push(h);
@@ -61,6 +62,7 @@ export default function Page({ params }: { params: { slug: string } }) {
         .order("id", { ascending: false })
         .in("handle", u![0]["following"])
         .not("poster", "in", `(${u![0]["blocked"].toString()})`)
+        .not("poster", "in", `(${u![0]["blockedby"].toString()})`)
 
         .textSearch("content", `'${search}' | '${search.toLowerCase()}' | '${search.toUpperCase()}'`)
 
@@ -192,6 +194,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 myblocked={blocked}
                 slug={search}
                 myhandle={myhandle}
+                newblocked={newblocked}
                 myname={myname}
                 myphoto={myphoto}
                 userliked={userliked}

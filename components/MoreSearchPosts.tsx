@@ -22,7 +22,9 @@ export default function MoreSearchPosts(props: any) {
       .from("posts")
       .select("*,user(name,handle,image)")
       .order("id", { ascending: false })
-      .not("poster", "in", `(${props.myblocked})`)
+      .not("poster", "in", `(${props.myblocked.toString()})`)
+      .not("poster", "in", `(${props.newblocked.toString()})`)
+
       .textSearch(
         "title_excerpt_content",
         `'${props.slug}' | '${props.slug.toLowerCase()}' | '${props.slug.toUpperCase()}'`

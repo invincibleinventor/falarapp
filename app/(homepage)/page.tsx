@@ -29,6 +29,7 @@ export default async function Index() {
   let empty = true;
   let posts: any[] = [];
   let loading = true;
+  let newblocked :any [] = []
   let myblocked: any[] = [];
   let l: any[] = [];
   async function get() {
@@ -37,6 +38,7 @@ export default async function Index() {
     const { data: u } = await supabase.from("user").select("*").eq("id", s);
     l = u![0]["following"];
     myblocked = u![0]["blocked"];
+    newblocked = u![0]["blockedby"]
     const h = u![0]["handle"];
     let ds = [];
 
@@ -47,6 +49,7 @@ export default async function Index() {
       .order("id", { ascending: false })
       .in("handle", l)
       .not("poster", "in", `(${myblocked.toString()})`)
+      .not("poster", "in", `(${newblocked.toString()})`)
       .limit(5);
     if (error) {
     } else {
@@ -112,7 +115,7 @@ export default async function Index() {
             ) : (
               <div className="flex items-center content-center w-full h-screen"></div>
             )}
-            <More myblocked={myblocked} in={l}></More>{" "}
+            <More newblocked={newblocked} myblocked={myblocked} in={l}></More>{" "}
           </div>{" "}
         </div>
       </>

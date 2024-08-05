@@ -33,6 +33,7 @@ export default async function Index() {
   let l: any[] = [];
   let myname = "";
   let myphoto = "";
+  let newblocked:any[] =[]
   let myhandle = "";
   let userliked: any[] = [];
   let userbookmarked: any[] = [];
@@ -48,6 +49,7 @@ export default async function Index() {
     myphoto = u![0]["image"];
     myblocked = u![0]["blocked"];
     myhandle = u![0]["handle"];
+    newblocked = u![0]["blockedby"]
     userbookmarked = u![0]["bookmarks"];
     userliked = u![0]["liked"];
     let ds = [];
@@ -58,6 +60,7 @@ export default async function Index() {
       .select("*,user(name,handle,image)")
       .order("id", { ascending: false })
       .not("poster", "in", `(${myblocked.toString()})`)
+      .not("poster", "in", `(${newblocked.toString()})`)
       .limit(5);
     if (error) {
     } else {
@@ -144,7 +147,9 @@ export default async function Index() {
             <More
               myblocked={myblocked}
               myhandle={myhandle}
+              newblocked={newblocked}
               myname={myname}
+              
               myphoto={myphoto}
               userliked={userliked}
               userbookmarked={userbookmarked}
