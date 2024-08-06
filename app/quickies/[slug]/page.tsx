@@ -115,7 +115,7 @@ export default async function Index({ params }: { params: { slug: string } }) {
   if (isSupabaseConnected) {
     return (
       <>
-        <div className="flex-1 h-screen p-0 py-0 overflow-hidden">
+        <div className="flex-1 h-screen p-0 -py-2 overflow-hidden">
           <div className="p-4 py-0 pb-2 mx-1 md:mx-1">
             <Search page="quickies" text={AppConfig.title} />
           </div>

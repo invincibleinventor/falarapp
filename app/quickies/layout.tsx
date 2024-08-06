@@ -12,7 +12,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     <div className="flex-1 h-screen p-0 py-0 overflow-hidden">
           {(pathname=="/quickies/all" || pathname=="/quickies") &&
 <>
-      <div className="p-4 py-6 pb-2 mx-1 md:mx-1">
+      <div className="p-4 py-4 pb-2 mx-1 md:mx-1">
         <Search page="quickies" text={AppConfig.title} />
       </div>
       <div className="flex flex-row flex-grow w-auto text-sm font-medium text-white font-inter">

@@ -87,7 +87,7 @@ export default function More(props: any) {
   }, [inView]);
   return (
     <>
-      <div className="flex flex-col items-center content-center gap-2 ">
+      <div className="flex flex-col items-center content-center gap-2 pb-20 ">
         {posts.map((post: any) => (
           <PostComponent
             id={post.id}

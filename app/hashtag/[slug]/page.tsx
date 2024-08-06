@@ -61,8 +61,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
         if (hashtag[0]["posts"].length > 0) {
           tagarray = hashtag[0]["posts"];
           const { data, error } = await supabase
-            .from("quickies,user(name,handle,image)")
-            .select("*")
+            .from("quickies")
+            .select("*,user(name,handle,image)")
             .order("id", { ascending: false })
             .in("id", hashtag[0]["posts"])
             .not("poster", "in", `(${blocked.toString()})`)
