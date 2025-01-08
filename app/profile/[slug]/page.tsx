@@ -384,7 +384,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           <div className="flex flex-col justify-between gap-2 sm:gap-0 sm:flex-row">
             <h1
               style={{ wordBreak: "break-word", whiteSpace: "normal" }}
-              className="pr-12 text-sm font-normal leading-relaxed text-gray-500 two-line-elipsis sm:text-gray-500"
+              className="mt-1 mr-12 text-sm font-normal leading-relaxed text-gray-500 two-line-elipsis sm:text-gray-500"
             >
               {blocked && "You have blocked this user. Unblock them to view their posts."}
               {imblockedby && !blocked && "This user has blocked you. You can no longer view their posts or quickies."}

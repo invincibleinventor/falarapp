@@ -1,0 +1,120 @@
+"filename", "language", "JavaScript", "TypeScript JSX", "TypeScript", "CSS", "JSON with Comments", "JSON", "Markdown", "XML", "comment", "blank", "total"
+"/Users/invincibleinventor/falarapp/.eslintrc.json", "JSON with Comments", 0, 0, 0, 0, 17, 0, 0, 0, 0, 2, 19
+"/Users/invincibleinventor/falarapp/.prettierrc", "JSON", 0, 0, 0, 0, 0, 18, 0, 0, 0, 1, 19
+"/Users/invincibleinventor/falarapp/README.md", "Markdown", 0, 0, 0, 0, 0, 0, 34, 0, 0, 13, 47
+"/Users/invincibleinventor/falarapp/app/(homepage)/all/page.tsx", "TypeScript JSX", 0, 116, 0, 0, 0, 0, 0, 0, 2, 7, 125
+"/Users/invincibleinventor/falarapp/app/(homepage)/layout.tsx", "TypeScript JSX", 0, 27, 0, 0, 0, 0, 0, 0, 0, 3, 30
+"/Users/invincibleinventor/falarapp/app/(homepage)/page.tsx", "TypeScript JSX", 0, 118, 0, 0, 0, 0, 0, 0, 2, 7, 127
+"/Users/invincibleinventor/falarapp/app/auth/callback/route.ts", "TypeScript", 0, 0, 15, 0, 0, 0, 0, 0, 4, 5, 24
+"/Users/invincibleinventor/falarapp/app/bookmarks/page.tsx", "TypeScript JSX", 0, 125, 0, 0, 0, 0, 0, 0, 2, 4, 131
+"/Users/invincibleinventor/falarapp/app/commentmaker/[slug]/page.tsx", "TypeScript JSX", 0, 389, 0, 0, 0, 0, 0, 0, 4, 19, 412
+"/Users/invincibleinventor/falarapp/app/create/page.tsx", "TypeScript JSX", 0, 158, 0, 0, 0, 0, 0, 0, 2, 7, 167
+"/Users/invincibleinventor/falarapp/app/createproject/layout.tsx", "TypeScript JSX", 0, 29, 0, 0, 0, 0, 0, 0, 0, 4, 33
+"/Users/invincibleinventor/falarapp/app/createstory/page.tsx", "TypeScript JSX", 0, 29, 0, 0, 0, 0, 0, 0, 0, 3, 32
+"/Users/invincibleinventor/falarapp/app/edit/[slug]/page.tsx", "TypeScript JSX", 0, 261, 0, 0, 0, 0, 0, 0, 2, 15, 278
+"/Users/invincibleinventor/falarapp/app/editprofile/page.tsx", "TypeScript JSX", 0, 139, 0, 0, 0, 0, 0, 0, 0, 9, 148
+"/Users/invincibleinventor/falarapp/app/editresume/layout.tsx", "TypeScript JSX", 0, 29, 0, 0, 0, 0, 0, 0, 0, 4, 33
+"/Users/invincibleinventor/falarapp/app/editresume/page.tsx", "TypeScript JSX", 0, 208, 0, 0, 0, 0, 0, 0, 0, 7, 215
+"/Users/invincibleinventor/falarapp/app/explore/page.tsx", "TypeScript JSX", 0, 129, 0, 0, 0, 0, 0, 0, 2, 7, 138
+"/Users/invincibleinventor/falarapp/app/globals.css", "CSS", 0, 0, 0, 180, 0, 0, 0, 0, 3, 17, 200
+"/Users/invincibleinventor/falarapp/app/hashtag/[slug]/page.tsx", "TypeScript JSX", 0, 174, 0, 0, 0, 0, 0, 0, 2, 13, 189
+"/Users/invincibleinventor/falarapp/app/layout.tsx", "TypeScript JSX", 0, 33, 0, 0, 0, 0, 0, 0, 0, 5, 38
+"/Users/invincibleinventor/falarapp/app/loading.tsx", "TypeScript JSX", 0, 20, 0, 0, 0, 0, 0, 0, 0, 1, 21
+"/Users/invincibleinventor/falarapp/app/login/page.tsx", "TypeScript JSX", 0, 123, 0, 0, 0, 0, 0, 0, 1, 5, 129
+"/Users/invincibleinventor/falarapp/app/messages/dms/[slug]/page.tsx", "TypeScript JSX", 0, 5, 0, 0, 0, 0, 0, 0, 0, 1, 6
+"/Users/invincibleinventor/falarapp/app/messages/group/[slug]/page.tsx", "TypeScript JSX", 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 4
+"/Users/invincibleinventor/falarapp/app/messages/layout.tsx", "TypeScript JSX", 0, 17, 0, 0, 0, 0, 0, 0, 0, 4, 21
+"/Users/invincibleinventor/falarapp/app/more/account/components/deactivatetoggle.tsx", "TypeScript JSX", 0, 59, 0, 0, 0, 0, 0, 0, 0, 11, 70
+"/Users/invincibleinventor/falarapp/app/more/account/components/logout.tsx", "TypeScript JSX", 0, 24, 0, 0, 0, 0, 0, 0, 0, 5, 29
+"/Users/invincibleinventor/falarapp/app/more/account/page.tsx", "TypeScript JSX", 0, 25, 0, 0, 0, 0, 0, 0, 0, 2, 27
+"/Users/invincibleinventor/falarapp/app/more/layout.tsx", "TypeScript JSX", 0, 14, 0, 0, 0, 0, 0, 0, 0, 2, 16
+"/Users/invincibleinventor/falarapp/app/more/page.tsx", "TypeScript JSX", 0, 209, 0, 0, 0, 0, 0, 0, 4, 13, 226
+"/Users/invincibleinventor/falarapp/app/myself/page.tsx", "TypeScript JSX", 0, 13, 0, 0, 0, 0, 0, 0, 0, 2, 15
+"/Users/invincibleinventor/falarapp/app/not-found.tsx", "TypeScript JSX", 0, 22, 0, 0, 0, 0, 0, 0, 0, 2, 24
+"/Users/invincibleinventor/falarapp/app/notifications/page.tsx", "TypeScript JSX", 0, 84, 0, 0, 0, 0, 0, 0, 0, 2, 86
+"/Users/invincibleinventor/falarapp/app/post/[slug]/page.tsx", "TypeScript JSX", 0, 298, 0, 0, 0, 0, 0, 0, 1, 13, 312
+"/Users/invincibleinventor/falarapp/app/posts/[slug]/page.tsx", "TypeScript JSX", 0, 120, 0, 0, 0, 0, 0, 0, 2, 5, 127
+"/Users/invincibleinventor/falarapp/app/profile/[slug]/page.tsx", "TypeScript JSX", 0, 465, 0, 0, 0, 0, 0, 0, 0, 26, 491
+"/Users/invincibleinventor/falarapp/app/quickie/[slug]/page.tsx", "TypeScript JSX", 0, 313, 0, 0, 0, 0, 0, 0, 1, 14, 328
+"/Users/invincibleinventor/falarapp/app/quickies/[slug]/layout.tsx", "TypeScript JSX", 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 9
+"/Users/invincibleinventor/falarapp/app/quickies/[slug]/page.tsx", "TypeScript JSX", 0, 181, 0, 0, 0, 0, 0, 0, 2, 13, 196
+"/Users/invincibleinventor/falarapp/app/quickies/all/page.tsx", "TypeScript JSX", 0, 152, 0, 0, 0, 0, 0, 0, 2, 11, 165
+"/Users/invincibleinventor/falarapp/app/quickies/layout.tsx", "TypeScript JSX", 0, 33, 0, 0, 0, 0, 0, 0, 0, 5, 38
+"/Users/invincibleinventor/falarapp/app/quickies/page.tsx", "TypeScript JSX", 0, 174, 0, 0, 0, 0, 0, 0, 2, 9, 185
+"/Users/invincibleinventor/falarapp/app/report/post/[slug]/page.tsx", "TypeScript JSX", 0, 3, 0, 0, 0, 0, 0, 0, 0, 1, 4
+"/Users/invincibleinventor/falarapp/app/report/quickie/[slug]/page.tsx", "TypeScript JSX", 0, 3, 0, 0, 0, 0, 0, 0, 0, 1, 4
+"/Users/invincibleinventor/falarapp/app/report/user/[slug]/page.tsx", "TypeScript JSX", 0, 3, 0, 0, 0, 0, 0, 0, 0, 1, 4
+"/Users/invincibleinventor/falarapp/app/resume/[slug]/page.tsx", "TypeScript JSX", 0, 30, 0, 0, 0, 0, 0, 0, 0, 2, 32
+"/Users/invincibleinventor/falarapp/app/search/bookmarks/[slug]/page.tsx", "TypeScript JSX", 0, 178, 0, 0, 0, 0, 0, 0, 2, 6, 186
+"/Users/invincibleinventor/falarapp/app/search/people/[slug]/page.tsx", "TypeScript JSX", 0, 169, 0, 0, 0, 0, 0, 0, 2, 6, 177
+"/Users/invincibleinventor/falarapp/app/search/posts/[slug]/page.tsx", "TypeScript JSX", 0, 165, 0, 0, 0, 0, 0, 0, 2, 8, 175
+"/Users/invincibleinventor/falarapp/app/search/quickies/[slug]/page.tsx", "TypeScript JSX", 0, 201, 0, 0, 0, 0, 0, 0, 2, 10, 213
+"/Users/invincibleinventor/falarapp/app/setupresume/layout.tsx", "TypeScript JSX", 0, 29, 0, 0, 0, 0, 0, 0, 0, 4, 33
+"/Users/invincibleinventor/falarapp/app/setupresume/page.tsx", "TypeScript JSX", 0, 203, 0, 0, 0, 0, 0, 0, 0, 8, 211
+"/Users/invincibleinventor/falarapp/app/stories/page.tsx", "TypeScript JSX", 0, 36, 0, 0, 0, 0, 0, 0, 2, 1, 39
+"/Users/invincibleinventor/falarapp/capacitor.config.ts", "TypeScript", 0, 0, 10, 0, 0, 0, 0, 0, 0, 3, 13
+"/Users/invincibleinventor/falarapp/components/BookMarksComponent.tsx", "TypeScript JSX", 0, 83, 0, 0, 0, 0, 0, 0, 0, 13, 96
+"/Users/invincibleinventor/falarapp/components/BookMarksMore.tsx", "TypeScript JSX", 0, 90, 0, 0, 0, 0, 0, 0, 0, 7, 97
+"/Users/invincibleinventor/falarapp/components/ClientTime.tsx", "TypeScript JSX", 0, 4, 0, 0, 0, 0, 0, 0, 0, 1, 5
+"/Users/invincibleinventor/falarapp/components/CommentComponent.tsx", "TypeScript JSX", 0, 162, 0, 0, 0, 0, 0, 0, 1, 9, 172
+"/Users/invincibleinventor/falarapp/components/CommentsComponent.tsx", "TypeScript JSX", 0, 142, 0, 0, 0, 0, 0, 0, 0, 4, 146
+"/Users/invincibleinventor/falarapp/components/Exports.tsx", "TypeScript JSX", 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 2
+"/Users/invincibleinventor/falarapp/components/HeaderItem.tsx", "TypeScript JSX", 0, 48, 0, 0, 0, 0, 0, 0, 0, 4, 52
+"/Users/invincibleinventor/falarapp/components/Iof.tsx", "TypeScript JSX", 0, 10, 0, 0, 0, 0, 0, 0, 0, 1, 11
+"/Users/invincibleinventor/falarapp/components/LikeComponent.tsx", "TypeScript JSX", 0, 113, 0, 0, 0, 0, 0, 0, 4, 15, 132
+"/Users/invincibleinventor/falarapp/components/Menu.tsx", "TypeScript JSX", 0, 102, 0, 0, 0, 0, 0, 0, 0, 8, 110
+"/Users/invincibleinventor/falarapp/components/MessageBar.tsx", "TypeScript JSX", 0, 32, 0, 0, 0, 0, 0, 0, 0, 6, 38
+"/Users/invincibleinventor/falarapp/components/MessageItem.tsx", "TypeScript JSX", 0, 23, 0, 0, 0, 0, 0, 0, 0, 7, 30
+"/Users/invincibleinventor/falarapp/components/More.tsx", "TypeScript JSX", 0, 115, 0, 0, 0, 0, 0, 0, 0, 10, 125
+"/Users/invincibleinventor/falarapp/components/MoreAll.tsx", "TypeScript JSX", 0, 115, 0, 0, 0, 0, 0, 0, 0, 8, 123
+"/Users/invincibleinventor/falarapp/components/MoreAllQuickies.tsx", "TypeScript JSX", 0, 153, 0, 0, 0, 0, 0, 0, 0, 13, 166
+"/Users/invincibleinventor/falarapp/components/MoreBookMarks.tsx", "TypeScript JSX", 0, 99, 0, 0, 0, 0, 0, 0, 0, 6, 105
+"/Users/invincibleinventor/falarapp/components/MoreBookmarkQuickies.tsx", "TypeScript JSX", 0, 111, 0, 0, 0, 0, 0, 0, 0, 11, 122
+"/Users/invincibleinventor/falarapp/components/MoreComments.tsx", "TypeScript JSX", 0, 109, 0, 0, 0, 0, 0, 0, 1, 6, 116
+"/Users/invincibleinventor/falarapp/components/MoreHashtags.tsx", "TypeScript JSX", 0, 152, 0, 0, 0, 0, 0, 0, 0, 11, 163
+"/Users/invincibleinventor/falarapp/components/MoreNotifications.tsx", "TypeScript JSX", 0, 79, 0, 0, 0, 0, 0, 0, 0, 9, 88
+"/Users/invincibleinventor/falarapp/components/MoreQuickies.tsx", "TypeScript JSX", 0, 154, 0, 0, 0, 0, 0, 0, 0, 12, 166
+"/Users/invincibleinventor/falarapp/components/MoreSearchPosts.tsx", "TypeScript JSX", 0, 93, 0, 0, 0, 0, 0, 0, 0, 6, 99
+"/Users/invincibleinventor/falarapp/components/MoreSearchQuickies.tsx", "TypeScript JSX", 0, 159, 0, 0, 0, 0, 0, 0, 0, 13, 172
+"/Users/invincibleinventor/falarapp/components/MoreSearchUsers.tsx", "TypeScript JSX", 0, 119, 0, 0, 0, 0, 0, 0, 0, 12, 131
+"/Users/invincibleinventor/falarapp/components/MoreUsers.tsx", "TypeScript JSX", 0, 114, 0, 0, 0, 0, 0, 0, 0, 10, 124
+"/Users/invincibleinventor/falarapp/components/NavBar.tsx", "TypeScript JSX", 0, 292, 0, 0, 0, 0, 0, 0, 0, 2, 294
+"/Users/invincibleinventor/falarapp/components/NewButton.tsx", "TypeScript JSX", 0, 59, 0, 0, 0, 0, 0, 0, 0, 3, 62
+"/Users/invincibleinventor/falarapp/components/Notification.tsx", "TypeScript JSX", 0, 41, 0, 0, 0, 0, 0, 0, 0, 4, 45
+"/Users/invincibleinventor/falarapp/components/Notificationitem.tsx", "TypeScript JSX", 0, 68, 0, 0, 0, 0, 0, 0, 0, 3, 71
+"/Users/invincibleinventor/falarapp/components/PostAComment.tsx", "TypeScript JSX", 0, 39, 0, 0, 0, 0, 0, 0, 0, 3, 42
+"/Users/invincibleinventor/falarapp/components/PostComponent.tsx", "TypeScript JSX", 0, 81, 0, 0, 0, 0, 0, 0, 0, 3, 84
+"/Users/invincibleinventor/falarapp/components/QCommentComponent.tsx", "TypeScript JSX", 0, 131, 0, 0, 0, 0, 0, 0, 1, 6, 138
+"/Users/invincibleinventor/falarapp/components/QuickieBookMarksComponent.tsx", "TypeScript JSX", 0, 88, 0, 0, 0, 0, 0, 0, 0, 15, 103
+"/Users/invincibleinventor/falarapp/components/QuickieComments.tsx", "TypeScript JSX", 0, 152, 0, 0, 0, 0, 0, 0, 0, 5, 157
+"/Users/invincibleinventor/falarapp/components/QuickieCommentsComponent.tsx", "TypeScript JSX", 0, 162, 0, 0, 0, 0, 0, 0, 1, 7, 170
+"/Users/invincibleinventor/falarapp/components/QuickieComponent.tsx", "TypeScript JSX", 0, 149, 0, 0, 0, 0, 0, 0, 1, 9, 159
+"/Users/invincibleinventor/falarapp/components/QuickieExpandedLikeComponent.tsx", "TypeScript JSX", 0, 117, 0, 0, 0, 0, 0, 0, 0, 12, 129
+"/Users/invincibleinventor/falarapp/components/QuickieLikeComponent.tsx", "TypeScript JSX", 0, 114, 0, 0, 0, 0, 0, 0, 0, 12, 126
+"/Users/invincibleinventor/falarapp/components/QuickieMakerComponent.tsx", "TypeScript JSX", 0, 407, 0, 0, 0, 0, 0, 0, 5, 18, 430
+"/Users/invincibleinventor/falarapp/components/SearchComponent.tsx", "TypeScript JSX", 0, 36, 0, 0, 0, 0, 0, 0, 0, 1, 37
+"/Users/invincibleinventor/falarapp/components/SettingsBar.tsx", "TypeScript JSX", 0, 36, 0, 0, 0, 0, 0, 0, 10, 2, 48
+"/Users/invincibleinventor/falarapp/components/SettingsItem.tsx", "TypeScript JSX", 0, 45, 0, 0, 0, 0, 0, 0, 0, 5, 50
+"/Users/invincibleinventor/falarapp/components/SideBar.tsx", "TypeScript JSX", 0, 16, 0, 0, 0, 0, 0, 0, 0, 1, 17
+"/Users/invincibleinventor/falarapp/components/StoriesView.tsx", "TypeScript JSX", 0, 24, 0, 0, 0, 0, 0, 0, 0, 2, 26
+"/Users/invincibleinventor/falarapp/components/StoryComponent.tsx", "TypeScript JSX", 0, 3, 0, 0, 0, 0, 0, 0, 0, 1, 4
+"/Users/invincibleinventor/falarapp/components/Trending.tsx", "TypeScript JSX", 0, 83, 0, 0, 0, 0, 0, 0, 0, 4, 87
+"/Users/invincibleinventor/falarapp/components/UserComponent.tsx", "TypeScript JSX", 0, 120, 0, 0, 0, 0, 0, 0, 0, 9, 129
+"/Users/invincibleinventor/falarapp/components/stories.tsx", "TypeScript JSX", 0, 21, 0, 0, 0, 0, 0, 0, 0, 1, 22
+"/Users/invincibleinventor/falarapp/components/whotofollow.tsx", "TypeScript JSX", 0, 66, 0, 0, 0, 0, 0, 0, 0, 4, 70
+"/Users/invincibleinventor/falarapp/components/whouser.tsx", "TypeScript JSX", 0, 64, 0, 0, 0, 0, 0, 0, 0, 7, 71
+"/Users/invincibleinventor/falarapp/config/config.js", "JavaScript", 7, 0, 0, 0, 0, 0, 0, 0, 0, 1, 8
+"/Users/invincibleinventor/falarapp/middleware.ts", "TypeScript", 0, 0, 43, 0, 0, 0, 0, 0, 5, 5, 53
+"/Users/invincibleinventor/falarapp/next.config.js", "JavaScript", 14, 0, 0, 0, 0, 0, 0, 0, 1, 2, 17
+"/Users/invincibleinventor/falarapp/package-lock.json", "JSON", 0, 0, 0, 0, 0, 18039, 0, 0, 0, 1, 18040
+"/Users/invincibleinventor/falarapp/package.json", "JSON", 0, 0, 0, 0, 0, 62, 0, 0, 0, 1, 63
+"/Users/invincibleinventor/falarapp/postcss.config.js", "JavaScript", 7, 0, 0, 0, 0, 0, 0, 0, 0, 1, 8
+"/Users/invincibleinventor/falarapp/public/gradient.svg", "XML", 0, 0, 0, 0, 0, 0, 0, 9, 0, 1, 10
+"/Users/invincibleinventor/falarapp/tailwind.config.js", "JavaScript", 19, 0, 0, 0, 0, 0, 0, 0, 2, 2, 23
+"/Users/invincibleinventor/falarapp/tsconfig.json", "JSON with Comments", 0, 0, 0, 0, 30, 0, 0, 0, 0, 1, 31
+"/Users/invincibleinventor/falarapp/utils/notifications/PostNotifications.ts", "TypeScript", 0, 0, 53, 0, 0, 0, 0, 0, 0, 2, 55
+"/Users/invincibleinventor/falarapp/utils/notifications/notification.ts", "TypeScript", 0, 0, 38, 0, 0, 0, 0, 0, 0, 2, 40
+"/Users/invincibleinventor/falarapp/utils/supabase/client.ts", "TypeScript", 0, 0, 3, 0, 0, 0, 0, 0, 0, 2, 5
+"/Users/invincibleinventor/falarapp/utils/supabase/middleware.ts", "TypeScript", 0, 0, 55, 0, 0, 0, 0, 0, 3, 4, 62
+"/Users/invincibleinventor/falarapp/utils/supabase/server.ts", "TypeScript", 0, 0, 23, 0, 0, 0, 0, 0, 6, 2, 31
+"Total", "-", 47, 10144, 240, 180, 47, 18119, 34, 9, 91, 718, 29629

@@ -1,0 +1,222 @@
+Date : 2025-01-08 18:58:20
+Directory : /Users/invincibleinventor/falarapp
+Total : 118 files,  28820 codes, 91 comments, 718 blanks, all 29629 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| JSON               |          3 |     18,119 |          0 |          3 |     18,122 |
+| TypeScript JSX     |         98 |     10,144 |         67 |        650 |     10,861 |
+| TypeScript         |          8 |        240 |         18 |         25 |        283 |
+| CSS                |          1 |        180 |          3 |         17 |        200 |
+| JavaScript         |          4 |         47 |          3 |          6 |         56 |
+| JSON with Comments |          2 |         47 |          0 |          3 |         50 |
+| Markdown           |          1 |         34 |          0 |         13 |         47 |
+| XML                |          1 |          9 |          0 |          1 |         10 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                   |        118 |     28,820 |         91 |        718 |     29,629 |
+| . (Files)                                                                           |         11 |     18,293 |          8 |         32 |     18,333 |
+| app                                                                                 |         50 |      5,543 |         50 |        330 |      5,923 |
+| app (Files)                                                                         |          4 |        255 |          3 |         25 |        283 |
+| app/(homepage)                                                                      |          3 |        261 |          4 |         17 |        282 |
+| app/(homepage) (Files)                                                              |          2 |        145 |          2 |         10 |        157 |
+| app/(homepage)/all                                                                  |          1 |        116 |          2 |          7 |        125 |
+| app/auth                                                                            |          1 |         15 |          4 |          5 |         24 |
+| app/auth/callback                                                                   |          1 |         15 |          4 |          5 |         24 |
+| app/bookmarks                                                                       |          1 |        125 |          2 |          4 |        131 |
+| app/commentmaker                                                                    |          1 |        389 |          4 |         19 |        412 |
+| app/commentmaker/[slug]                                                             |          1 |        389 |          4 |         19 |        412 |
+| app/create                                                                          |          1 |        158 |          2 |          7 |        167 |
+| app/createproject                                                                   |          1 |         29 |          0 |          4 |         33 |
+| app/createstory                                                                     |          1 |         29 |          0 |          3 |         32 |
+| app/edit                                                                            |          1 |        261 |          2 |         15 |        278 |
+| app/edit/[slug]                                                                     |          1 |        261 |          2 |         15 |        278 |
+| app/editprofile                                                                     |          1 |        139 |          0 |          9 |        148 |
+| app/editresume                                                                      |          2 |        237 |          0 |         11 |        248 |
+| app/explore                                                                         |          1 |        129 |          2 |          7 |        138 |
+| app/hashtag                                                                         |          1 |        174 |          2 |         13 |        189 |
+| app/hashtag/[slug]                                                                  |          1 |        174 |          2 |         13 |        189 |
+| app/login                                                                           |          1 |        123 |          1 |          5 |        129 |
+| app/messages                                                                        |          3 |         26 |          0 |          5 |         31 |
+| app/messages (Files)                                                                |          1 |         17 |          0 |          4 |         21 |
+| app/messages/dms                                                                    |          1 |          5 |          0 |          1 |          6 |
+| app/messages/dms/[slug]                                                             |          1 |          5 |          0 |          1 |          6 |
+| app/messages/group                                                                  |          1 |          4 |          0 |          0 |          4 |
+| app/messages/group/[slug]                                                           |          1 |          4 |          0 |          0 |          4 |
+| app/more                                                                            |          5 |        331 |          4 |         33 |        368 |
+| app/more (Files)                                                                    |          2 |        223 |          4 |         15 |        242 |
+| app/more/account                                                                    |          3 |        108 |          0 |         18 |        126 |
+| app/more/account (Files)                                                            |          1 |         25 |          0 |          2 |         27 |
+| app/more/account/components                                                         |          2 |         83 |          0 |         16 |         99 |
+| app/myself                                                                          |          1 |         13 |          0 |          2 |         15 |
+| app/notifications                                                                   |          1 |         84 |          0 |          2 |         86 |
+| app/post                                                                            |          1 |        298 |          1 |         13 |        312 |
+| app/post/[slug]                                                                     |          1 |        298 |          1 |         13 |        312 |
+| app/posts                                                                           |          1 |        120 |          2 |          5 |        127 |
+| app/posts/[slug]                                                                    |          1 |        120 |          2 |          5 |        127 |
+| app/profile                                                                         |          1 |        465 |          0 |         26 |        491 |
+| app/profile/[slug]                                                                  |          1 |        465 |          0 |         26 |        491 |
+| app/quickie                                                                         |          1 |        313 |          1 |         14 |        328 |
+| app/quickie/[slug]                                                                  |          1 |        313 |          1 |         14 |        328 |
+| app/quickies                                                                        |          5 |        549 |          6 |         38 |        593 |
+| app/quickies (Files)                                                                |          2 |        207 |          2 |         14 |        223 |
+| app/quickies/[slug]                                                                 |          2 |        190 |          2 |         13 |        205 |
+| app/quickies/all                                                                    |          1 |        152 |          2 |         11 |        165 |
+| app/report                                                                          |          3 |          9 |          0 |          3 |         12 |
+| app/report/post                                                                     |          1 |          3 |          0 |          1 |          4 |
+| app/report/post/[slug]                                                              |          1 |          3 |          0 |          1 |          4 |
+| app/report/quickie                                                                  |          1 |          3 |          0 |          1 |          4 |
+| app/report/quickie/[slug]                                                           |          1 |          3 |          0 |          1 |          4 |
+| app/report/user                                                                     |          1 |          3 |          0 |          1 |          4 |
+| app/report/user/[slug]                                                              |          1 |          3 |          0 |          1 |          4 |
+| app/resume                                                                          |          1 |         30 |          0 |          2 |         32 |
+| app/resume/[slug]                                                                   |          1 |         30 |          0 |          2 |         32 |
+| app/search                                                                          |          4 |        713 |          8 |         30 |        751 |
+| app/search/bookmarks                                                                |          1 |        178 |          2 |          6 |        186 |
+| app/search/bookmarks/[slug]                                                         |          1 |        178 |          2 |          6 |        186 |
+| app/search/people                                                                   |          1 |        169 |          2 |          6 |        177 |
+| app/search/people/[slug]                                                            |          1 |        169 |          2 |          6 |        177 |
+| app/search/posts                                                                    |          1 |        165 |          2 |          8 |        175 |
+| app/search/posts/[slug]                                                             |          1 |        165 |          2 |          8 |        175 |
+| app/search/quickies                                                                 |          1 |        201 |          2 |         10 |        213 |
+| app/search/quickies/[slug]                                                          |          1 |        201 |          2 |         10 |        213 |
+| app/setupresume                                                                     |          2 |        232 |          0 |         12 |        244 |
+| app/stories                                                                         |          1 |         36 |          2 |          1 |         39 |
+| components                                                                          |         50 |      4,796 |         24 |        342 |      5,162 |
+| config                                                                              |          1 |          7 |          0 |          1 |          8 |
+| public                                                                              |          1 |          9 |          0 |          1 |         10 |
+| utils                                                                               |          5 |        172 |          9 |         12 |        193 |
+| utils/notifications                                                                 |          2 |         91 |          0 |          4 |         95 |
+| utils/supabase                                                                      |          3 |         81 |          9 |          8 |         98 |
++-------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                            | language           | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| /Users/invincibleinventor/falarapp/.eslintrc.json                                   | JSON with Comments |         17 |          0 |          2 |         19 |
+| /Users/invincibleinventor/falarapp/.prettierrc                                      | JSON               |         18 |          0 |          1 |         19 |
+| /Users/invincibleinventor/falarapp/README.md                                        | Markdown           |         34 |          0 |         13 |         47 |
+| /Users/invincibleinventor/falarapp/app/(homepage)/all/page.tsx                      | TypeScript JSX     |        116 |          2 |          7 |        125 |
+| /Users/invincibleinventor/falarapp/app/(homepage)/layout.tsx                        | TypeScript JSX     |         27 |          0 |          3 |         30 |
+| /Users/invincibleinventor/falarapp/app/(homepage)/page.tsx                          | TypeScript JSX     |        118 |          2 |          7 |        127 |
+| /Users/invincibleinventor/falarapp/app/auth/callback/route.ts                       | TypeScript         |         15 |          4 |          5 |         24 |
+| /Users/invincibleinventor/falarapp/app/bookmarks/page.tsx                           | TypeScript JSX     |        125 |          2 |          4 |        131 |
+| /Users/invincibleinventor/falarapp/app/commentmaker/[slug]/page.tsx                 | TypeScript JSX     |        389 |          4 |         19 |        412 |
+| /Users/invincibleinventor/falarapp/app/create/page.tsx                              | TypeScript JSX     |        158 |          2 |          7 |        167 |
+| /Users/invincibleinventor/falarapp/app/createproject/layout.tsx                     | TypeScript JSX     |         29 |          0 |          4 |         33 |
+| /Users/invincibleinventor/falarapp/app/createstory/page.tsx                         | TypeScript JSX     |         29 |          0 |          3 |         32 |
+| /Users/invincibleinventor/falarapp/app/edit/[slug]/page.tsx                         | TypeScript JSX     |        261 |          2 |         15 |        278 |
+| /Users/invincibleinventor/falarapp/app/editprofile/page.tsx                         | TypeScript JSX     |        139 |          0 |          9 |        148 |
+| /Users/invincibleinventor/falarapp/app/editresume/layout.tsx                        | TypeScript JSX     |         29 |          0 |          4 |         33 |
+| /Users/invincibleinventor/falarapp/app/editresume/page.tsx                          | TypeScript JSX     |        208 |          0 |          7 |        215 |
+| /Users/invincibleinventor/falarapp/app/explore/page.tsx                             | TypeScript JSX     |        129 |          2 |          7 |        138 |
+| /Users/invincibleinventor/falarapp/app/globals.css                                  | CSS                |        180 |          3 |         17 |        200 |
+| /Users/invincibleinventor/falarapp/app/hashtag/[slug]/page.tsx                      | TypeScript JSX     |        174 |          2 |         13 |        189 |
+| /Users/invincibleinventor/falarapp/app/layout.tsx                                   | TypeScript JSX     |         33 |          0 |          5 |         38 |
+| /Users/invincibleinventor/falarapp/app/loading.tsx                                  | TypeScript JSX     |         20 |          0 |          1 |         21 |
+| /Users/invincibleinventor/falarapp/app/login/page.tsx                               | TypeScript JSX     |        123 |          1 |          5 |        129 |
+| /Users/invincibleinventor/falarapp/app/messages/dms/[slug]/page.tsx                 | TypeScript JSX     |          5 |          0 |          1 |          6 |
+| /Users/invincibleinventor/falarapp/app/messages/group/[slug]/page.tsx               | TypeScript JSX     |          4 |          0 |          0 |          4 |
+| /Users/invincibleinventor/falarapp/app/messages/layout.tsx                          | TypeScript JSX     |         17 |          0 |          4 |         21 |
+| /Users/invincibleinventor/falarapp/app/more/account/components/deactivatetoggle.tsx | TypeScript JSX     |         59 |          0 |         11 |         70 |
+| /Users/invincibleinventor/falarapp/app/more/account/components/logout.tsx           | TypeScript JSX     |         24 |          0 |          5 |         29 |
+| /Users/invincibleinventor/falarapp/app/more/account/page.tsx                        | TypeScript JSX     |         25 |          0 |          2 |         27 |
+| /Users/invincibleinventor/falarapp/app/more/layout.tsx                              | TypeScript JSX     |         14 |          0 |          2 |         16 |
+| /Users/invincibleinventor/falarapp/app/more/page.tsx                                | TypeScript JSX     |        209 |          4 |         13 |        226 |
+| /Users/invincibleinventor/falarapp/app/myself/page.tsx                              | TypeScript JSX     |         13 |          0 |          2 |         15 |
+| /Users/invincibleinventor/falarapp/app/not-found.tsx                                | TypeScript JSX     |         22 |          0 |          2 |         24 |
+| /Users/invincibleinventor/falarapp/app/notifications/page.tsx                       | TypeScript JSX     |         84 |          0 |          2 |         86 |
+| /Users/invincibleinventor/falarapp/app/post/[slug]/page.tsx                         | TypeScript JSX     |        298 |          1 |         13 |        312 |
+| /Users/invincibleinventor/falarapp/app/posts/[slug]/page.tsx                        | TypeScript JSX     |        120 |          2 |          5 |        127 |
+| /Users/invincibleinventor/falarapp/app/profile/[slug]/page.tsx                      | TypeScript JSX     |        465 |          0 |         26 |        491 |
+| /Users/invincibleinventor/falarapp/app/quickie/[slug]/page.tsx                      | TypeScript JSX     |        313 |          1 |         14 |        328 |
+| /Users/invincibleinventor/falarapp/app/quickies/[slug]/layout.tsx                   | TypeScript JSX     |          9 |          0 |          0 |          9 |
+| /Users/invincibleinventor/falarapp/app/quickies/[slug]/page.tsx                     | TypeScript JSX     |        181 |          2 |         13 |        196 |
+| /Users/invincibleinventor/falarapp/app/quickies/all/page.tsx                        | TypeScript JSX     |        152 |          2 |         11 |        165 |
+| /Users/invincibleinventor/falarapp/app/quickies/layout.tsx                          | TypeScript JSX     |         33 |          0 |          5 |         38 |
+| /Users/invincibleinventor/falarapp/app/quickies/page.tsx                            | TypeScript JSX     |        174 |          2 |          9 |        185 |
+| /Users/invincibleinventor/falarapp/app/report/post/[slug]/page.tsx                  | TypeScript JSX     |          3 |          0 |          1 |          4 |
+| /Users/invincibleinventor/falarapp/app/report/quickie/[slug]/page.tsx               | TypeScript JSX     |          3 |          0 |          1 |          4 |
+| /Users/invincibleinventor/falarapp/app/report/user/[slug]/page.tsx                  | TypeScript JSX     |          3 |          0 |          1 |          4 |
+| /Users/invincibleinventor/falarapp/app/resume/[slug]/page.tsx                       | TypeScript JSX     |         30 |          0 |          2 |         32 |
+| /Users/invincibleinventor/falarapp/app/search/bookmarks/[slug]/page.tsx             | TypeScript JSX     |        178 |          2 |          6 |        186 |
+| /Users/invincibleinventor/falarapp/app/search/people/[slug]/page.tsx                | TypeScript JSX     |        169 |          2 |          6 |        177 |
+| /Users/invincibleinventor/falarapp/app/search/posts/[slug]/page.tsx                 | TypeScript JSX     |        165 |          2 |          8 |        175 |
+| /Users/invincibleinventor/falarapp/app/search/quickies/[slug]/page.tsx              | TypeScript JSX     |        201 |          2 |         10 |        213 |
+| /Users/invincibleinventor/falarapp/app/setupresume/layout.tsx                       | TypeScript JSX     |         29 |          0 |          4 |         33 |
+| /Users/invincibleinventor/falarapp/app/setupresume/page.tsx                         | TypeScript JSX     |        203 |          0 |          8 |        211 |
+| /Users/invincibleinventor/falarapp/app/stories/page.tsx                             | TypeScript JSX     |         36 |          2 |          1 |         39 |
+| /Users/invincibleinventor/falarapp/capacitor.config.ts                              | TypeScript         |         10 |          0 |          3 |         13 |
+| /Users/invincibleinventor/falarapp/components/BookMarksComponent.tsx                | TypeScript JSX     |         83 |          0 |         13 |         96 |
+| /Users/invincibleinventor/falarapp/components/BookMarksMore.tsx                     | TypeScript JSX     |         90 |          0 |          7 |         97 |
+| /Users/invincibleinventor/falarapp/components/ClientTime.tsx                        | TypeScript JSX     |          4 |          0 |          1 |          5 |
+| /Users/invincibleinventor/falarapp/components/CommentComponent.tsx                  | TypeScript JSX     |        162 |          1 |          9 |        172 |
+| /Users/invincibleinventor/falarapp/components/CommentsComponent.tsx                 | TypeScript JSX     |        142 |          0 |          4 |        146 |
+| /Users/invincibleinventor/falarapp/components/Exports.tsx                           | TypeScript JSX     |          1 |          0 |          1 |          2 |
+| /Users/invincibleinventor/falarapp/components/HeaderItem.tsx                        | TypeScript JSX     |         48 |          0 |          4 |         52 |
+| /Users/invincibleinventor/falarapp/components/Iof.tsx                               | TypeScript JSX     |         10 |          0 |          1 |         11 |
+| /Users/invincibleinventor/falarapp/components/LikeComponent.tsx                     | TypeScript JSX     |        113 |          4 |         15 |        132 |
+| /Users/invincibleinventor/falarapp/components/Menu.tsx                              | TypeScript JSX     |        102 |          0 |          8 |        110 |
+| /Users/invincibleinventor/falarapp/components/MessageBar.tsx                        | TypeScript JSX     |         32 |          0 |          6 |         38 |
+| /Users/invincibleinventor/falarapp/components/MessageItem.tsx                       | TypeScript JSX     |         23 |          0 |          7 |         30 |
+| /Users/invincibleinventor/falarapp/components/More.tsx                              | TypeScript JSX     |        115 |          0 |         10 |        125 |
+| /Users/invincibleinventor/falarapp/components/MoreAll.tsx                           | TypeScript JSX     |        115 |          0 |          8 |        123 |
+| /Users/invincibleinventor/falarapp/components/MoreAllQuickies.tsx                   | TypeScript JSX     |        153 |          0 |         13 |        166 |
+| /Users/invincibleinventor/falarapp/components/MoreBookMarks.tsx                     | TypeScript JSX     |         99 |          0 |          6 |        105 |
+| /Users/invincibleinventor/falarapp/components/MoreBookmarkQuickies.tsx              | TypeScript JSX     |        111 |          0 |         11 |        122 |
+| /Users/invincibleinventor/falarapp/components/MoreComments.tsx                      | TypeScript JSX     |        109 |          1 |          6 |        116 |
+| /Users/invincibleinventor/falarapp/components/MoreHashtags.tsx                      | TypeScript JSX     |        152 |          0 |         11 |        163 |
+| /Users/invincibleinventor/falarapp/components/MoreNotifications.tsx                 | TypeScript JSX     |         79 |          0 |          9 |         88 |
+| /Users/invincibleinventor/falarapp/components/MoreQuickies.tsx                      | TypeScript JSX     |        154 |          0 |         12 |        166 |
+| /Users/invincibleinventor/falarapp/components/MoreSearchPosts.tsx                   | TypeScript JSX     |         93 |          0 |          6 |         99 |
+| /Users/invincibleinventor/falarapp/components/MoreSearchQuickies.tsx                | TypeScript JSX     |        159 |          0 |         13 |        172 |
+| /Users/invincibleinventor/falarapp/components/MoreSearchUsers.tsx                   | TypeScript JSX     |        119 |          0 |         12 |        131 |
+| /Users/invincibleinventor/falarapp/components/MoreUsers.tsx                         | TypeScript JSX     |        114 |          0 |         10 |        124 |
+| /Users/invincibleinventor/falarapp/components/NavBar.tsx                            | TypeScript JSX     |        292 |          0 |          2 |        294 |
+| /Users/invincibleinventor/falarapp/components/NewButton.tsx                         | TypeScript JSX     |         59 |          0 |          3 |         62 |
+| /Users/invincibleinventor/falarapp/components/Notification.tsx                      | TypeScript JSX     |         41 |          0 |          4 |         45 |
+| /Users/invincibleinventor/falarapp/components/Notificationitem.tsx                  | TypeScript JSX     |         68 |          0 |          3 |         71 |
+| /Users/invincibleinventor/falarapp/components/PostAComment.tsx                      | TypeScript JSX     |         39 |          0 |          3 |         42 |
+| /Users/invincibleinventor/falarapp/components/PostComponent.tsx                     | TypeScript JSX     |         81 |          0 |          3 |         84 |
+| /Users/invincibleinventor/falarapp/components/QCommentComponent.tsx                 | TypeScript JSX     |        131 |          1 |          6 |        138 |
+| /Users/invincibleinventor/falarapp/components/QuickieBookMarksComponent.tsx         | TypeScript JSX     |         88 |          0 |         15 |        103 |
+| /Users/invincibleinventor/falarapp/components/QuickieComments.tsx                   | TypeScript JSX     |        152 |          0 |          5 |        157 |
+| /Users/invincibleinventor/falarapp/components/QuickieCommentsComponent.tsx          | TypeScript JSX     |        162 |          1 |          7 |        170 |
+| /Users/invincibleinventor/falarapp/components/QuickieComponent.tsx                  | TypeScript JSX     |        149 |          1 |          9 |        159 |
+| /Users/invincibleinventor/falarapp/components/QuickieExpandedLikeComponent.tsx      | TypeScript JSX     |        117 |          0 |         12 |        129 |
+| /Users/invincibleinventor/falarapp/components/QuickieLikeComponent.tsx              | TypeScript JSX     |        114 |          0 |         12 |        126 |
+| /Users/invincibleinventor/falarapp/components/QuickieMakerComponent.tsx             | TypeScript JSX     |        407 |          5 |         18 |        430 |
+| /Users/invincibleinventor/falarapp/components/SearchComponent.tsx                   | TypeScript JSX     |         36 |          0 |          1 |         37 |
+| /Users/invincibleinventor/falarapp/components/SettingsBar.tsx                       | TypeScript JSX     |         36 |         10 |          2 |         48 |
+| /Users/invincibleinventor/falarapp/components/SettingsItem.tsx                      | TypeScript JSX     |         45 |          0 |          5 |         50 |
+| /Users/invincibleinventor/falarapp/components/SideBar.tsx                           | TypeScript JSX     |         16 |          0 |          1 |         17 |
+| /Users/invincibleinventor/falarapp/components/StoriesView.tsx                       | TypeScript JSX     |         24 |          0 |          2 |         26 |
+| /Users/invincibleinventor/falarapp/components/StoryComponent.tsx                    | TypeScript JSX     |          3 |          0 |          1 |          4 |
+| /Users/invincibleinventor/falarapp/components/Trending.tsx                          | TypeScript JSX     |         83 |          0 |          4 |         87 |
+| /Users/invincibleinventor/falarapp/components/UserComponent.tsx                     | TypeScript JSX     |        120 |          0 |          9 |        129 |
+| /Users/invincibleinventor/falarapp/components/stories.tsx                           | TypeScript JSX     |         21 |          0 |          1 |         22 |
+| /Users/invincibleinventor/falarapp/components/whotofollow.tsx                       | TypeScript JSX     |         66 |          0 |          4 |         70 |
+| /Users/invincibleinventor/falarapp/components/whouser.tsx                           | TypeScript JSX     |         64 |          0 |          7 |         71 |
+| /Users/invincibleinventor/falarapp/config/config.js                                 | JavaScript         |          7 |          0 |          1 |          8 |
+| /Users/invincibleinventor/falarapp/middleware.ts                                    | TypeScript         |         43 |          5 |          5 |         53 |
+| /Users/invincibleinventor/falarapp/next.config.js                                   | JavaScript         |         14 |          1 |          2 |         17 |
+| /Users/invincibleinventor/falarapp/package-lock.json                                | JSON               |     18,039 |          0 |          1 |     18,040 |
+| /Users/invincibleinventor/falarapp/package.json                                     | JSON               |         62 |          0 |          1 |         63 |
+| /Users/invincibleinventor/falarapp/postcss.config.js                                | JavaScript         |          7 |          0 |          1 |          8 |
+| /Users/invincibleinventor/falarapp/public/gradient.svg                              | XML                |          9 |          0 |          1 |         10 |
+| /Users/invincibleinventor/falarapp/tailwind.config.js                               | JavaScript         |         19 |          2 |          2 |         23 |
+| /Users/invincibleinventor/falarapp/tsconfig.json                                    | JSON with Comments |         30 |          0 |          1 |         31 |
+| /Users/invincibleinventor/falarapp/utils/notifications/PostNotifications.ts         | TypeScript         |         53 |          0 |          2 |         55 |
+| /Users/invincibleinventor/falarapp/utils/notifications/notification.ts              | TypeScript         |         38 |          0 |          2 |         40 |
+| /Users/invincibleinventor/falarapp/utils/supabase/client.ts                         | TypeScript         |          3 |          0 |          2 |          5 |
+| /Users/invincibleinventor/falarapp/utils/supabase/middleware.ts                     | TypeScript         |         55 |          3 |          4 |         62 |
+| /Users/invincibleinventor/falarapp/utils/supabase/server.ts                         | TypeScript         |         23 |          6 |          2 |         31 |
+| Total                                                                               |                    |     28,820 |         91 |        718 |     29,629 |
++-------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+

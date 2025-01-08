@@ -12,8 +12,7 @@ export default async function Index() {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
   const canInitSupabaseClient = () => {
-    // This function is just for the interactive tutorial.
-    // Feel free to remove it once you have Supabase connected.
+   
     try {
       createClient(cookieStore);
       return true;

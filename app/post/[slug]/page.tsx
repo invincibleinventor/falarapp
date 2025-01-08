@@ -162,7 +162,7 @@ export default async function App({ params }: { params: { slug: string } }) {
             <Link
               href="/"
               className={`mx-auto mt-4 rounded-full w-max px-8 py-3 text-xs font-bold ${
-                1 == 1 ? "bg-blue-700 text-white" : "border-2  bg-white "
+                1 == 1 ? "bg-cyan-700 text-white" : "border-2  bg-white "
               }`}
             >
               Return Back
