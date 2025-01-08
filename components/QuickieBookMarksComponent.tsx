@@ -9,7 +9,16 @@ export default function BookMarksComponent(props: any) {
   const [liked, toggleLiked] = useState(props.liked);
   const [ulikedlist, setuLikedList] = useState(props.userliked);
   const [disabled, setDisabled] = useState(false);
+  async function getdata(){
+    const {data:d,error:e}  = await supabase.from('quickies').select('*').eq('id',props.postid);
+    if(!e && d)
+      setLikedList((prev:any)=>d[0]["bookmarked"])
+      
+    
+    }
+    getdata();
   const [likes, setLikes] = useState(props.likes);
+  
   async function setLiked(like: boolean) {
     if (like == false) {
       let l = likedlist;

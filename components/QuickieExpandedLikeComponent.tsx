@@ -10,8 +10,18 @@ export default function LikeComponent(props: any) {
   const [ulikedlist, setuLikedList] = useState(props.userliked);
   const [disabled, setDisabled] = useState(false);
   const [likes, setLikes] = useState(props.likes);
-
+ 
   async function setLiked(like: boolean) {
+    async function getData(){
+      const {data:d,error:e}  = await supabase.from('quickies').select('*').eq('id',props.postid);
+      if(!e && d){
+        setLikedList((prev:any)=>d[0]["liked"])
+      setLikes((prev:any)=>d[0]["likes"])
+        
+      
+      }
+    }
+    getData()
     if (like == false) {
       let l = likedlist;
       setDisabled(true);

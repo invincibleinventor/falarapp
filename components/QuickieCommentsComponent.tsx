@@ -11,6 +11,13 @@ export default function CommentComponent(props: any) {
   const [likes, setLikes] = useState(props.likes);
   const [disabled, setDisabled] = useState(false);
   async function setLiked(like: boolean) {
+    const {data,error} = await supabase.from('commentquickies').select('*').eq('comment_id',props.comment_id);
+      if(data){
+      setLikes((prev:any)=>data[0]["likes"])
+      }
+      else{
+        if(error){alert(error.message)}
+      }
     setDisabled(true);
     if (like == false) {
       let l = props.likedbypeople;
