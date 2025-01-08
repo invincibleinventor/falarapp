@@ -147,7 +147,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 <button
                   onClick={() => toggledeleteDialog("")}
                   disabled={deleteDialog != "hidden" ? true : false}
-                  className="flex flex-row items-center content-center px-2 py-3 mx-0 space-x-3 text-sm text-gray-300 "
+                  className="flex flex-row items-center content-center px-6 py-3 mx-0 space-x-3 text-xs text-gray-300 transition-all duration-100 ease-linear bg-gray-900 rounded-full hover:bg-red-900"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256">
                     <path

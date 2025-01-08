@@ -114,8 +114,13 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   async function determine() {
     if (blocked) {
-      let b = blockedlist;
-      let c = blockedby;
+      const { data:mine } = await supabase.from("user").select("*").eq("id",myuserid);
+      const { data:his } = await supabase.from("user").select("*").eq("id",hisId);
+      let b,c;
+      if(mine && his){
+      b = mine[0]["blocked"];
+      c = his[0]["blockedby"];
+      }
       b = b.filter((item: string) => item !== hisId);
 
       c = c.filter((item: string) => item !== myuserid);
@@ -137,9 +142,19 @@ export default function Page({ params }: { params: { slug: string } }) {
     }
   }
     else {
-      const b = blockedlist;
+      const { data:mine } = await supabase.from("user").select("*").eq("id",myuserid);
+      const { data:his } = await supabase.from("user").select("*").eq("id",hisId);
+      let b,c;
+      let localfollowerlist,localfollowinglist;
+      if(mine && his){
+      b = mine[0]["blocked"];
+      c = his[0]["blockedby"];
+      localfollowerlist = his[0]["followers"]
+      localfollowinglist = mine[0]["following"];
+      
+    }
       b.push(hisId);
-      const c = blockedby;
+      
       c.push(myuserid)
 
       const { error } = await supabase.from("user").update({ blocked: b }).eq("id", myuserid);
@@ -153,13 +168,13 @@ export default function Page({ params }: { params: { slug: string } }) {
           console.log(error)
           alert(error.message)
         }
-        if (followerlist.includes(myId)) {
+        if (localfollowerlist.includes(myId)) {
           console.log("uesuesues");
-          let arr: any = followerlist;
+          let arr: any = localfollowerlist;
           console.log("before");
           console.log(arr);
           arr = arr.filter((item: any) => item !== myId);
-          let arr2 = followinglist;
+          let arr2 = localfollowinglist;
           arr2 = arr2.filter((item: string) => item !== params.slug);
 
           console.log(arr);
@@ -219,16 +234,25 @@ export default function Page({ params }: { params: { slug: string } }) {
     get();
   }, []);
   async function onfollow() {
+    let localfollowerlist,localfollowinglist
+    const { data:mine } = await supabase.from("user").select("*").eq("id",myuserid);
+    const { data:his } = await supabase.from("user").select("*").eq("id",hisId);
+    
+    if(mine && his){
+      localfollowerlist = his[0]["followers"]
+      localfollowinglist = mine[0]["following"]
+      
+  }
     if (myself) {
       router.push("/more/");
     } else {
-      if (followerlist.includes(myId)) {
+      if (localfollowerlist.includes(myId)) {
         console.log("uesuesues");
-        let arr: any = followerlist;
+        let arr: any = localfollowerlist;
         console.log("before");
         console.log(arr);
         arr = arr.filter((item: any) => item !== myId);
-        let arr2 = followinglist;
+        let arr2 = localfollowerlist;
         arr2 = arr2.filter((item: string) => item !== params.slug);
 
         console.log(arr);
@@ -253,10 +277,10 @@ export default function Page({ params }: { params: { slug: string } }) {
         setFollowingList(arr2);
         setImFollowing(false);
       } else {
-        const arr: any = followerlist;
+        const arr: any = localfollowerlist;
         arr.push(myId);
         let arr2: any = [];
-        arr2 = followinglist;
+        arr2 = localfollowinglist;
         arr2.push(params.slug);
         console.log(arr);
         const { data, error } = await supabase

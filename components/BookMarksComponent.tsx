@@ -5,7 +5,14 @@ import { useState } from "react";
 export default function BookMarksComponent(props: any) {
   const supabase = createClient();
   const [likedlist, setLikedList] = useState(props.likedlist);
-
+  async function getdata(){
+  const {data:d,error:e}  = await supabase.from('posts').select('*').eq('id',props.postid);
+  if(!e && d)
+    setLikedList((prev:any)=>d[0]["bookmarked"])
+    
+  
+  }
+  getdata();
   const [liked, toggleLiked] = useState(props.liked);
   const [ulikedlist, setuLikedList] = useState(props.userliked);
   const [disabled, setDisabled] = useState(false);

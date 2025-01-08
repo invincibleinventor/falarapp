@@ -12,23 +12,26 @@ export default function UserComponent(props: any) {
   const [myId] = useState(props.myID);
 
   async function onfollow(handle: any) {
+    let localfollowerlist,localfollowinglist;
+    const {data:his} = await supabase.from('user').select('*').eq('handle',handle);
+    const {data:mine} = await supabase.from('user').select('*').eq('handle',props.myID);
+    if(his && mine){
+    localfollowerlist = his[0]["followers"];
+    localfollowinglist = mine[0]["following"];
+    }
     if (imfollowing) {
       console.log("uesuesues");
-      let arr = followerlist;
+      let arr = localfollowerlist;
       console.log("before");
       console.log(arr);
       arr = arr.filter((item: any) => item !== myId);
-      let arr2 = followinglist;
+      let arr2 = localfollowinglist;
       arr2 = arr2.filter((item: any) => item !== handle);
 
       console.log(arr);
       const { data, error } = await supabase.from("user").update({ followers: arr }).eq("handle", handle).select();
       const { data: d, error: e } = await supabase.from("user").update({ following: arr2 }).eq("handle", myId).select();
-      // const { data: me, error: mee } = await supabase
-      //   .from("user")
-      //   .update({ following: arr2 })
-      //   .eq("handle", myId)
-      //   .select();
+    
       if (error || e) {
         console.log(error);
       } else {
@@ -37,19 +40,14 @@ export default function UserComponent(props: any) {
       setFollowingList(arr2);
       setImFollowing(false);
     } else {
-      const arr = followerlist;
+      const arr = localfollowerlist;
       arr.push(myId);
-      const arr2 = followinglist;
+      const arr2 = localfollowinglist;
       arr2.push(handle);
       console.log(arr);
       const { data, error } = await supabase.from("user").update({ followers: arr }).eq("handle", handle).select();
       const { data: d, error: e } = await supabase.from("user").update({ following: arr2 }).eq("handle", myId).select();
 
-      // const { data: me, error: mee } = await supabase
-      //   .from("user")
-      //   .update({ following: arr2 })
-      //   .eq("handle", myId)
-      //   .select();
       if (error || e) {
         console.log(error);
       } else {

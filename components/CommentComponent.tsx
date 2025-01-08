@@ -9,11 +9,22 @@ export default function CommentComponent(props: any) {
   const supabase = createClient();
   const [liked, toggleLiked] = useState(props.likedbyme);
   const [likes, setLikes] = useState(props.likes);
+  const [likedbypeople,setLikedbypeople] = useState(props.likedbypeople)
+  
   const [disabled, setDisabled] = useState(false);
   async function setLiked(like: boolean) {
+      const {data,error} = await supabase.from('comments').select('*').eq('comment_id',props.comment_id);
+      if(data){
+      setLikes((prev:any)=>data[0]["likes"])
+    setLikedbypeople((prev:any)=>data[0]["liked"])
+      }
+      else{
+        if(error){alert(error.message)}
+      }
+    
     setDisabled(true);
     if (like == false) {
-      let l = props.likedbypeople;
+      let l = likedbypeople;
       console.log(l);
       l = l.filter(function (item: any) {
         return item !== props.myhandle;
@@ -31,7 +42,7 @@ export default function CommentComponent(props: any) {
         setDisabled(false);
       }
     } else {
-      const l = props.likedbypeople;
+      const l = likedbypeople;
 
       l.push(props.myhandle);
       console.log(l);
