@@ -23,6 +23,13 @@ export default function CommentsComponent(props: any) {
   const [posted, setPosted] = useState(false);
   async function post() {
     const { error } = await supabase.from("comments").insert({ content: text, id: props.slug, handle: props.myhandle });
+    const  {data:d} = await supabase.from("posts").select("*").eq("id",props.slug);
+    if(d){ 
+    const { error :e} = await supabase.from("posts").update({replies:d[0]["replies"]+1}).eq("id",props.slug);
+    if(e){
+      alert(e.message);
+    }
+    }
     if (error) {
       console.log(error.message);
     } else {
@@ -77,7 +84,7 @@ export default function CommentsComponent(props: any) {
       {props.loggedin && (
         <div className="flex flex-col pt-2 space-y-2">
           <div className="flex flex-row px-6 pt-2 pb-0 space-x-0">
-            <Image alt={""} src={props.myphoto} width={32} height={32} className="w-6 h-6 rounded-full shrink-0" />
+            <Image alt={""} src={props.myphoto} width={32} height={32} className="rounded-md h-7 w-7 shrink-0" />
             <textarea
               required
               minLength={5}
@@ -116,12 +123,14 @@ export default function CommentsComponent(props: any) {
                 content={comment.content}
                 loggedin={props.loggedin}
                 stateChanger={setState}
+                postid={props.slug}
               />
             ))}
             <MoreComments
               myblocked={props.myblocked}
               myhandle={props.myhandle}
               loggedin={props.loggedin}
+              
               slug={props.slug}
             />
           </>

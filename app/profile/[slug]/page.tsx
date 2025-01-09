@@ -318,6 +318,13 @@ export default function Page({ params }: { params: { slug: string } }) {
   }
   return !loading ? (
     <div className="flex-1 h-screen p-0 overflow-hidden">
+        {!loggedin &&
+      
+      <div className="flex flex-row items-center content-center justify-between w-full px-6 py-4 space-y-1 bg-blue-600 ">
+        <h1 className="text-sm font-semibold text-white">Sign up to Falar to view more such interesting people</h1>
+        <Link href={('/login')} className="px-6 py-2 text-xs font-semibold text-blue-600 transition-all duration-200 ease-linear bg-white rounded-full hover:bg-gray-200 hover:shadow-lg w-max">Sign Up To Falar</Link>
+        </div>
+}
       <div className="h-full pb-10 overflow-y-scroll hiddenscroll">
         <div className="relative h-64">
           <div className="m-0 h-48 w-[calc(100%)] rounded-none  bg-gray-200 ">
@@ -337,7 +344,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             width={90}
             height={90}
             unoptimized={true}
-            className="absolute w-24 h-24 rounded-full bottom-5 left-7 md:left-12"
+            className="absolute w-24 h-24 rounded-lg bottom-5 left-7 md:left-12"
             loader={() => (found ? image : "/usernotfound.png")}
             src={`${found ? image : "/usernotfound.png"}`}
             alt="userimage"

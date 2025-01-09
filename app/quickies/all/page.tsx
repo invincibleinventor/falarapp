@@ -57,8 +57,11 @@ export default async function Index() {
     l.push(h);
     const { data, error } = await supabase
       .from("quickies")
+      
       .select("*,user(name,handle,image)")
       .order("id", { ascending: false })
+      .eq("parent",0)
+
       .not("poster", "in", `(${myblocked.toString()})`)
       .not("poster", "in", `(${newblocked.toString()})`)
       .limit(5);

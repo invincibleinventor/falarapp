@@ -33,13 +33,47 @@ export default function Menu(props: any) {
       window.location.replace("/quickies");
     }
   }
+  async function deleteComment(){
+    console.log("ok");
+    toggledeleteDialog(false);
+
+    const supabase = createClient();
+    const { error } = await supabase.from(props.alt).delete().eq("comment_id", props.id);
+    if (props.alt == "quickiecomments"){
+    const { data } = await supabase.from('quickies').select('*').eq('id',props.postid);
+    if(data){
+      const { error } = await supabase.from('quickies').update({comments:data[0]["comments"]-1}).eq('id',props.postid);
+      if(error){
+        alert(error.message);
+      }
+    }
+  }
+  else{
+    const { data } = await supabase.from('posts').select('*').eq('id',props.postid);
+    if(data){
+      const { error } = await supabase.from('posts').update({replies:data[0]["comments"]-1}).eq('id',props.postid);
+      if(error){
+        alert(error.message);
+      }
+    }
+  }
+    if (error) {
+      alert(error.message);
+    } else {
+      if(props.alt == "quickiecomments"){
+        window.location.replace("/quickie/" + props.postid);
+      }else{
+        window.location.replace("/post/" + props.postid);
+      }
+    }
+  }
   return (
     <div className="ml-auto">
       <div
         style={{ zIndex: 1000000 }}
-        className={`absolute py-4 flex flex-col content-center mt-10 top-0 bottom-0 left-0 right-0 w-64 h-28 mx-auto my-auto bg-[#040404] rounded-lg border animate-in border-gray-900 shadow-md  md:w-84 lg:w-96 ${deleteDialog ? "" : "hidden"}`}
+        className={`${props.type=="comment"?'fixed':'absolute'} py-4 flex flex-col content-center mt-10 top-0 bottom-0 left-0 right-0 w-64 h-28 mx-auto my-auto bg-[#040404] rounded-lg border animate-in border-gray-900 shadow-md  md:w-84 lg:w-96 ${deleteDialog ? "" : "hidden"}`}
       >
-        <h1 className="mx-4 mb-4 text-lg font-medium text-white">Delete this quickie?</h1>
+        <h1 className="mx-4 mb-4 text-lg font-medium text-white">Delete this {props.type=="comment"?"comment":"quickie"}?</h1>
         <div className="flex flex-row items-center content-center w-full pt-0 mt-auto ml-auto">
           <button
             onClick={() => toggledeleteDialog(false)}
@@ -48,7 +82,7 @@ export default function Menu(props: any) {
             Cancel
           </button>
           <button
-            onClick={() => del()}
+            onClick={() => props.type == "quickie" ? del() : deleteComment()}
             className="px-6 py-2 mt-auto mb-1 ml-auto mr-4 text-xs font-medium text-white rounded-lg bg-cyan-800"
           >
             Delete It
@@ -88,7 +122,7 @@ export default function Menu(props: any) {
             </svg>
             <h1 className="text-sm font-medium">Report</h1>
           </div>
-          {props.type == "quickie" && props.myhandle == props.handle && (
+          {(props.type == "comment" || props.type == "quickie") && props.myhandle == props.handle && (
             <div
               onClick={() => toggledeleteDialog(!deleteDialog)}
               className="flex flex-row items-center content-center px-4 py-3 space-x-3 text-red-400 cursor-pointer hover:bg-gray-900"

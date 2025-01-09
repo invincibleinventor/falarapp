@@ -88,6 +88,7 @@ export default function CommentsComponent(props: any) {
                 name={comment.user.name}
                 profile={comment.user.image}
                 content={comment.content}
+                postid={props.slug}
                 loggedin={props.loggedin}
               />
             ))

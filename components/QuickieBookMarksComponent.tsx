@@ -9,19 +9,20 @@ export default function BookMarksComponent(props: any) {
   const [liked, toggleLiked] = useState(props.liked);
   const [ulikedlist, setuLikedList] = useState(props.userliked);
   const [disabled, setDisabled] = useState(false);
-  async function getdata(){
-    const {data:d,error:e}  = await supabase.from('quickies').select('*').eq('id',props.postid);
-    if(!e && d)
-      setLikedList((prev:any)=>d[0]["bookmarked"])
-      
-    
-    }
-    getdata();
+  let locallikedlist:any;
+
   const [likes, setLikes] = useState(props.likes);
-  
   async function setLiked(like: boolean) {
+   
+      const {data:d,error:e}  = await supabase.from('quickies').select('*').eq('id',props.postid);
+      if(!e && d)
+  locallikedlist = d[0]["bookmarked"];
+  
+        
+      
+     
     if (like == false) {
-      let l = likedlist;
+      let l = locallikedlist;
       setLikes(likes - 1);
 
       console.log(l);
@@ -56,7 +57,7 @@ export default function BookMarksComponent(props: any) {
         }
       }
     } else {
-      const l = likedlist;
+      const l = locallikedlist;
       setDisabled(true);
       setLikes(likes + 1);
 
@@ -90,13 +91,14 @@ export default function BookMarksComponent(props: any) {
       onClick={() => (!disabled ? (toggleLiked(!liked), setLiked(!liked)) : console.log("holdup"))}
       className="flex flex-row items-center content-center px-4 text-gray-400 cursor-pointer"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
         {liked ? (
-          <path fill="#1DA1F2" d="M17 3H7a2 2 0 0 0-2 2v16l7-3l7 3V5a2 2 0 0 0-2-2" />
-        ) : (
-          <path fill="currentColor" d="m17 18l-5-2.18L7 18V5h10m0-2H7a2 2 0 0 0-2 2v16l7-3l7 3V5a2 2 0 0 0-2-2" />
-        )}
+          <path fill="#1DA1F2" d="m12 16.923l-3.738 1.608q-.808.348-1.535-.134Q6 17.916 6 17.052V5.616q0-.691.463-1.153T7.616 4h8.769q.69 0 1.153.463T18 5.616v11.436q0 .864-.727 1.345q-.727.482-1.535.134zm0-1.123l4.135 1.784q.307.135.586-.057q.279-.193.279-.52V5.617q0-.231-.192-.424T16.384 5H7.616q-.231 0-.424.192T7 5.616v11.392q0 .327.279.519t.586.057zM12 5H7h10z"/>        ) : (
+<path fill="currentColor" d="m12 16.923l-3.738 1.608q-.808.348-1.535-.134Q6 17.916 6 17.052V5.616q0-.691.463-1.153T7.616 4h8.769q.69 0 1.153.463T18 5.616v11.436q0 .864-.727 1.345q-.727.482-1.535.134zm0-1.123l4.135 1.784q.307.135.586-.057q.279-.193.279-.52V5.617q0-.231-.192-.424T16.384 5H7.616q-.231 0-.424.192T7 5.616v11.392q0 .327.279.519t.586.057zM12 5H7h10z"/>        )}
       </svg>
     </div>
   );
+  
 }
+
+

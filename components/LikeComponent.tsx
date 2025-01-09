@@ -10,23 +10,26 @@ export default function LikeComponent(props: any) {
   const [ulikedlist, setuLikedList] = useState(props.userliked);
   const [disabled, setDisabled] = useState(false);
   const [likes, setLikes] = useState(props.likes);
-  async function getData(){
-  const {data:d,error:e}  = await supabase.from('posts').select('*').eq('id',props.postid);
-  if(!e && d){
-    setLikedList((prev:any)=>d[0]["liked"])
-  setLikes((prev:any)=>d[0]["likes"])
-    
-  
-  }
-}
-getData()
+  let locallikedlist:any;
+  let locallikes:any;
+ 
   async function setLiked(like: boolean) {
+     
+    const {data:d,error:e}  = await supabase.from('posts').select('*').eq('id',props.postid);
+    if(!e && d){
+      locallikedlist = d[0]["liked"]
+    locallikes = d[0]["likes"]
+      
+    
+    }
+  
+  
     if (like == false) {
       // let l = likedlist;
       setDisabled(true);
-      const ss = likes;
+      const ss = locallikes;
 
-      setLikes(likes - 1);
+      setLikes(locallikes - 1);
 
       // l = l.filter(function (item) {
       //   return item !== props.handle;
@@ -46,7 +49,7 @@ getData()
         alert(e?.message);
 
         alert(error?.message);
-        setLikes(likes + 1);
+        setLikes(locallikes + 1);
       } else {
         toggleLiked(false);
 
@@ -61,10 +64,10 @@ getData()
         }
       }
     } else {
-      const l = likedlist;
+      const l = locallikedlist;
       setDisabled(true);
-      const ss = likes;
-      setLikes(likes + 1);
+      const ss = locallikes;
+      setLikes(locallikes + 1);
 
       l.push(props.handle);
       const u = ulikedlist;
@@ -78,7 +81,7 @@ getData()
 
       if (error || e) {
         alert(error!.message);
-        setLikes(likes - 1);
+        setLikes(locallikes - 1);
 
         alert(e!.message);
       } else {

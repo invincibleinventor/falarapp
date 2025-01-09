@@ -89,7 +89,7 @@ export default function UserComponent(props: any) {
             width={40}
             height={40}
             src={props.image}
-            className="object-cover w-10 h-10 rounded-full"
+            className="object-cover w-10 h-10 rounded-lg"
             alt="profile-pic"
           />
           <div className="flex flex-col ">

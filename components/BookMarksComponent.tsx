@@ -5,21 +5,20 @@ import { useState } from "react";
 export default function BookMarksComponent(props: any) {
   const supabase = createClient();
   const [likedlist, setLikedList] = useState(props.likedlist);
-  async function getdata(){
-  const {data:d,error:e}  = await supabase.from('posts').select('*').eq('id',props.postid);
-  if(!e && d)
-    setLikedList((prev:any)=>d[0]["bookmarked"])
-    
+  let locallikedlist:any;
   
-  }
-  getdata();
   const [liked, toggleLiked] = useState(props.liked);
   const [ulikedlist, setuLikedList] = useState(props.userliked);
   const [disabled, setDisabled] = useState(false);
 
   async function setLiked(like: boolean) {
+      const {data:d,error:e}  = await supabase.from('posts').select('*').eq('id',props.postid);
+      if(!e && d)
+        
+        locallikedlist = d[0]["bookmarked"]
+    
     if (like == false) {
-      let l = likedlist;
+      let l = locallikedlist;
       console.log(l);
       setDisabled(true);
 
@@ -50,7 +49,7 @@ export default function BookMarksComponent(props: any) {
         }
       }
     } else {
-      const l = likedlist;
+      const l = locallikedlist;
       setDisabled(true);
 
       l.push(props.handle);

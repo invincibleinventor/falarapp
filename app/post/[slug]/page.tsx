@@ -141,7 +141,7 @@ export default async function App({ params }: { params: { slug: string } }) {
     props: JSX.IntrinsicAttributes & ClassAttributes<HTMLImageElement> & ImgHTMLAttributes<HTMLImageElement>
   ) {
     // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-    return <img {...props} className="w-full max-w-full" />;
+    return <img {...props} className="w-full max-w-full rounded-lg" />;
   }
   const components = {
     img: ClickableImage,
@@ -151,6 +151,13 @@ export default async function App({ params }: { params: { slug: string } }) {
   console.log("above");
   return !loading ? (
     <div className="relative flex flex-col flex-1 h-screen overflow-hidden md:mr-4 lg:mx-0">
+      {!loggedin &&
+      
+      <div className="flex flex-row items-center content-center justify-between w-full px-6 py-4 space-y-1 bg-blue-600 md:border-x md:border-x-gray-900">
+        <h1 className="text-sm font-semibold text-white">Sign up to Falar to read more such interesting articles</h1>
+        <Link href={('/login')} className="px-6 py-2 text-xs font-semibold text-blue-600 transition-all duration-200 ease-linear bg-white rounded-full hover:bg-gray-200 hover:shadow-lg w-max">Sign Up To Falar</Link>
+        </div>
+}
       {(error || blocked.includes(authorid)) && (
         <div className="flex items-center content-center w-full h-screen px-10 sm:px-24 md:px-16 lg:px-24">
           <div className="flex flex-col gap-4 mx-auto max-w-max">
@@ -211,7 +218,7 @@ export default async function App({ params }: { params: { slug: string } }) {
 
             <div className="flex flex-row items-center content-center justify-between mt-6 text-lg">
               <Link href={"/profile/" + author} className="flex flex-row items-center content-center">
-                <Image width={24} height={24} alt="profile" className="w-8 h-8 mr-3 rounded-full" src={profile} />
+                <Image width={24} height={24} alt="profile" className="w-8 h-8 mr-3 rounded-md" src={profile} />
                 <h1 className="text-xs font-medium text-gray-300 md:text-sm">{name}</h1>
               </Link>
 
@@ -236,7 +243,7 @@ export default async function App({ params }: { params: { slug: string } }) {
       <div className="flex flex-col gap-4 px-10 mx-auto max-w-max">
       <h1 className="mx-auto text-lg font-semibold text-center text-gray-300">Login To View Replies</h1>
       <h1 className="mx-auto text-center text-gray-500 text-md">
-        Login to {AppConfig.title} to view the replies for this Quickie
+        Login to {AppConfig.title} to view the replies for this post
       </h1>
       <Link
         href="/"

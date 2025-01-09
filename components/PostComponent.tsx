@@ -31,7 +31,7 @@ export default function Post(props: any) {
             <img
               src={props.dp}
               alt="user profile"
-              className="rounded-full object-cover min-w-[24px] max-w-[24px] h-6"
+              className="rounded-md object-cover min-w-[24px] max-w-[24px] h-6"
             />
             <div className="flex items-center content-center">
               <h1>

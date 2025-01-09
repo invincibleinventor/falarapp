@@ -55,7 +55,7 @@ export default function Post(props: any) {
           <div className="flex h-max flex-col gap-[8px] md:p-6 p-4 ">
             <div className="flex flex-row items-center content-center gap-2 h-max shrink-0">
               <Link className="w-10 h-10" href={`/profile/` + props.handle}>
-                <Image width={30} height={30} className="w-10 h-10 rounded-md shrink-0" src={props.dp} alt="dp" />
+                <Image width={30} height={30} className="w-10 h-10 rounded-lg shrink-0" src={props.dp} alt="dp" />
               </Link>
               <Link href={`/profile/` + props.handle} className="flex flex-row gap-[2px]">
                 <div className="flex flex-col content-center flex-1 gap-[2px] py-0 pl-2 rounded-lg">

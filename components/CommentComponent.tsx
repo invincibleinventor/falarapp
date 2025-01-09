@@ -5,26 +5,28 @@ import { createClient } from "@/utils/supabase/client";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import Menu from "./Menu";
 export default function CommentComponent(props: any) {
   const supabase = createClient();
   const [liked, toggleLiked] = useState(props.likedbyme);
   const [likes, setLikes] = useState(props.likes);
   const [likedbypeople,setLikedbypeople] = useState(props.likedbypeople)
-  
+  let locallikes:any;
+  let locallikedlist:any;
   const [disabled, setDisabled] = useState(false);
   async function setLiked(like: boolean) {
       const {data,error} = await supabase.from('comments').select('*').eq('comment_id',props.comment_id);
       if(data){
-      setLikes((prev:any)=>data[0]["likes"])
-    setLikedbypeople((prev:any)=>data[0]["liked"])
-      }
+      locallikes = data[0]["likes"]
+      locallikedlist = data[0]["liked"]
+    }
       else{
         if(error){alert(error.message)}
       }
     
     setDisabled(true);
     if (like == false) {
-      let l = likedbypeople;
+      let l = locallikedlist;
       console.log(l);
       l = l.filter(function (item: any) {
         return item !== props.myhandle;
@@ -32,29 +34,29 @@ export default function CommentComponent(props: any) {
       console.log(l);
       const { error } = await supabase
         .from("comments")
-        .update({ liked: l, likes: likes - 1 })
+        .update({ liked: l, likes: locallikes - 1 })
         .eq("comment_id", props.comment_id);
       if (error) {
         alert(error.message);
       } else {
-        setLikes(likes - 1);
+        setLikes(locallikes - 1);
         toggleLiked(false);
         setDisabled(false);
       }
     } else {
-      const l = likedbypeople;
+      const l = locallikedlist;
 
       l.push(props.myhandle);
       console.log(l);
       const { error } = await supabase
         .from("comments")
-        .update({ liked: l, likes: likes + 1 })
+        .update({ liked: l, likes: locallikes + 1 })
         .eq("comment_id", props.comment_id);
 
       if (error) {
         alert(error.message);
       } else {
-        setLikes(likes + 1);
+        setLikes(locallikes + 1);
         toggleLiked(true);
         setDisabled(false);
       }
@@ -95,12 +97,12 @@ export default function CommentComponent(props: any) {
   return (
     <div id={props.id} className="flex flex-row w-full gap-4 px-6 pt-4 pb-2 my-0 border-y border-y-gray-900">
       <div className="flex w-full flex-col gap-[4px]">
-        <div className="flex flex-row items-center content-center space-x-4">
+        <div className="flex flex-row items-center content-center justify-between">
           <Link href={"/profile/" + props.handle} className="flex gap-2 mt-0">
             <img
               src={props.profile}
               alt="user profile"
-              className="rounded-full object-cover min-w-[24px] max-w-[24px] h-6"
+              className="rounded-md object-cover min-w-[24px] max-w-[24px] h-6"
             />
             <div className="flex items-center content-center w-full ml-2">
               <h1>
@@ -113,6 +115,8 @@ export default function CommentComponent(props: any) {
               <span className="ml-auto text-xs font-normal text-gray-500 whitespace-nowrap">{props.time}</span>
             </div>
           </Link>
+          <Menu type="comment" alt="comments" id={props.comment_id} postid={props.postid} myhandle={props.myhandle} handle={props.handle} />
+
         </div>
 
         <h1 className="mt-[2px] mb-2 ml-10 text-[15px] font-normal text-gray-300/90">{formatText(props.content)}</h1>

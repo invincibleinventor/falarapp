@@ -7,8 +7,10 @@ import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
 import { cookies } from "next/headers";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default async function Index() {
+  let loggedin = false;
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
   const canInitSupabaseClient = () => {
@@ -33,7 +35,14 @@ export default async function Index() {
   let l: any[] = [];
   async function get() {
     const { data: user } = await supabase.auth.getUser();
-    const s = user.user!.id;
+    let s:any;
+    if(user.user){
+      s = user.user.id;
+      loggedin = true;
+    }
+    else{
+      return redirect('/landing/')
+    }
     const { data: u } = await supabase.from("user").select("*").eq("id", s);
     l = u![0]["following"];
     myblocked = u![0]["blocked"];

@@ -10,28 +10,28 @@ export default function LikeComponent(props: any) {
   const [ulikedlist, setuLikedList] = useState(props.userliked);
   const [disabled, setDisabled] = useState(false);
   const [likes, setLikes] = useState(props.likes);
- 
+  let locallikedlist:any;
+    let locallikes:any;
   async function setLiked(like: boolean) {
-    async function getData(){
+   
       const {data:d,error:e}  = await supabase.from('quickies').select('*').eq('id',props.postid);
       if(!e && d){
-        setLikedList((prev:any)=>d[0]["liked"])
-      setLikes((prev:any)=>d[0]["likes"])
+        locallikedlist = d[0]["liked"]
+        locallikes = d[0]["likes"]
         
       
       }
-    }
-    getData()
+    
     if (like == false) {
-      let l = likedlist;
+      let l = locallikedlist;
       setDisabled(true);
 
       l = l.filter(function (item: any) {
         return item !== props.handle;
       });
       let u = ulikedlist;
-      const x = likes;
-      setLikes(likes - 1);
+      const x = locallikes;
+      setLikes(locallikes - 1);
       u = u.filter(function (item: any) {
         return item !== props.postid;
       });
@@ -44,7 +44,7 @@ export default function LikeComponent(props: any) {
       if (e || error) {
         alert(e!.message);
         alert(error!.message);
-        setLikes(likes + 1);
+        setLikes(locallikes + 1);
       } else {
         toggleLiked(false);
 
@@ -59,12 +59,12 @@ export default function LikeComponent(props: any) {
         }
       }
     } else {
-      const l = likedlist;
+      const l = locallikedlist;
       setDisabled(true);
-      const x = likes;
+      const x = locallikes;
       l.push(props.handle);
       const u = ulikedlist;
-      setLikes(likes + 1);
+      setLikes(locallikes + 1);
       u.push(props.postid);
       console.log(l);
       const { error: e } = await supabase.from("user").update({ quickieliked: u }).eq("handle", props.handle);
@@ -76,7 +76,7 @@ export default function LikeComponent(props: any) {
       if (error || e) {
         alert(error!.message);
         alert(e!.message);
-        setLikes(likes - 1);
+        setLikes(locallikes - 1);
       } else {
         const { data } = await supabase.from("quickies").select("liked").eq("id", props.postid);
         if (data) {
@@ -97,32 +97,32 @@ export default function LikeComponent(props: any) {
       <svg
         onClick={() => (!disabled ? (toggleLiked(!liked), setLiked(!liked)) : console.log("holdup"))}
         xmlns="http://www.w3.org/2000/svg"
-        width="14"
-        height="14"
+        width="20"
+        height="20"
         viewBox="0 0 48 48"
       >
         {liked ? (
-          <path
-            fill="red"
-            stroke="red"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="4"
-            d="M15 8C8.925 8 4 12.925 4 19c0 11 13 21 20 23.326C31 40 44 30 44 19c0-6.075-4.925-11-11-11c-3.72 0-7.01 1.847-9 4.674A10.987 10.987 0 0 0 15 8"
-          />
+           <path
+           fill="red"
+           stroke="red"
+           strokeLinecap="round"
+           strokeLinejoin="round"
+           strokeWidth="2"
+           d="M15 8C8.925 8 4 12.925 4 19c0 11 13 21 20 23.326C31 40 44 30 44 19c0-6.075-4.925-11-11-11c-3.72 0-7.01 1.847-9 4.674A10.987 10.987 0 0 0 15 8"
+         />
         ) : (
           <path
-            fill="none"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="4"
-            d="M15 8C8.925 8 4 12.925 4 19c0 11 13 21 20 23.326C31 40 44 30 44 19c0-6.075-4.925-11-11-11c-3.72 0-7.01 1.847-9 4.674A10.987 10.987 0 0 0 15 8"
-          />
+          fill="none"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M15 8C8.925 8 4 12.925 4 19c0 11 13 21 20 23.326C31 40 44 30 44 19c0-6.075-4.925-11-11-11c-3.72 0-7.01 1.847-9 4.674A10.987 10.987 0 0 0 15 8"
+        />
         )}
       </svg>
 
-      <h1 className="text-xs">{likes} Likes</h1>
+      <h1 className="text-sm">{likes}</h1>
     </div>
   );
 }

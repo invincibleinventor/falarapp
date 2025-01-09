@@ -56,7 +56,7 @@ export default function Whouser(props: any) {
   return (
     <div className="flex flex-row items-center content-center justify-between text-sm font-medium text-white">
       <Link href={"/profile/" + props.handle} className="flex flex-row items-center content-center gap-3">
-        <img className="flex-shrink-0 w-6 h-6 rounded-full shrink-0" src={props.profile} />
+        <img className="flex-shrink-0 w-6 h-6 rounded-md shrink-0" src={props.profile} />
         <h1 className="text-sm font-medium text-white">{modify(props.name)}</h1>
       </Link>
       <button

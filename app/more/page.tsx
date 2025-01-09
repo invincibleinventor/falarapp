@@ -139,7 +139,7 @@ export default function Create() {
           </div>
           <div className="absolute inset-x-0 bottom-0">
             <div className="relative">
-              <Image width={110} height={110} src={image} className="w-24 h-24 mx-auto rounded-full " alt="image" />
+              <Image width={110} height={110} src={image} className="w-24 h-24 mx-auto rounded-lg " alt="image" />
               <div
                 onClick={handleProfileClick}
                 className="absolute text-xs flex items-center content-center text-white rounded-full cursor-pointer left-16 right-0 mx-auto top-[70%] w-6 h-6  bg-cyan-800 drop-shadow-lg border border-white"

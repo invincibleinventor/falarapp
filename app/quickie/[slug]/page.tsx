@@ -172,6 +172,13 @@ export default async function App({ params }: { params: { slug: string } }) {
   console.log("above");
   return !loading ? (
     <div className="relative flex flex-col flex-1 h-screen overflow-hidden bg-transparent ">
+        {!loggedin &&
+      
+      <div className="flex flex-row items-center content-center justify-between w-full px-6 py-4 space-y-1 bg-blue-600 md:border-x md:border-x-gray-900">
+        <h1 className="text-sm font-semibold text-white">Sign up to Falar to view more such interesting quickies</h1>
+        <Link href={('/login')} className="px-6 py-2 text-xs font-semibold text-blue-600 transition-all duration-200 ease-linear bg-white rounded-full hover:bg-gray-200 hover:shadow-lg w-max">Sign Up To Falar</Link>
+        </div>
+}
       {(error || blocked.includes(authorid)) && (
         <div className="flex items-center content-center w-full h-screen px-10 sm:px-24 md:px-16 lg:px-24">
           <div className="flex flex-col gap-4 mx-auto max-w-max">
@@ -199,10 +206,12 @@ export default async function App({ params }: { params: { slug: string } }) {
               <div className="flex h-max flex-col gap-[8px] p-4 ">
                 <div className="flex flex-row items-center content-center gap-2 h-max shrink-0">
                   <Link href={"/profile/" + author} className="flex gap-[10px] mt-0">
-                    <img
+                    <Image
+                    width={28}
+                    height={28}
                       src={profile}
                       alt="user profile"
-                      className="rounded-full object-cover min-w-[28px] max-w-[28px] h-7"
+                      className="rounded-md object-cover min-w-[28px] max-w-[28px] h-7"
                     />
                     <div className="flex items-center content-center">
                       <h1>
@@ -299,14 +308,8 @@ export default async function App({ params }: { params: { slug: string } }) {
             href="#comments"
             className="flex flex-row items-center content-center px-6 pr-0 space-x-2 text-gray-300 lg:mr-0"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-              <path
-                fill="currentColor"
-                fillRule="evenodd"
-                d="m4 11.29l1-1v1.42l-1.15 1.14L3 12.5V10H1.5L1 9.5v-8l.5-.5h12l.5.5V6h-1V2H2v7h1.5l.5.5zM10.29 13l1.86 1.85l.85-.35V13h1.5l.5-.5v-5l-.5-.5h-8l-.5.5v5l.5.5zm.21-1H7V8h7v4h-1.5l-.5.5v.79l-1.15-1.14z"
-                clipRule="evenodd"
-              />
-            </svg>{" "}
+                              <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M5 3h13a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-4.59l-3.7 3.71c-.18.18-.43.29-.71.29a1 1 0 0 1-1-1v-3H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3m13 1H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h4v4l4-4h5a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2"/></svg>{" "}
+
             <h1 className="text-xs md:text-sm">Comments</h1>
           </Link>
           <BookMarksComponent

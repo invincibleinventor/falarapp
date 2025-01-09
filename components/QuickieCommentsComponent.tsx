@@ -5,13 +5,14 @@ import { createClient } from "@/utils/supabase/client";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import Menu from "./Menu";
 export default function CommentComponent(props: any) {
   const supabase = createClient();
   const [liked, toggleLiked] = useState(props.likedbyme);
   const [likes, setLikes] = useState(props.likes);
   const [disabled, setDisabled] = useState(false);
   async function setLiked(like: boolean) {
-    const {data,error} = await supabase.from('commentquickies').select('*').eq('comment_id',props.comment_id);
+    const {data,error} = await supabase.from('quickiecomments').select('*').eq('comment_id',props.comment_id);
       if(data){
       setLikes((prev:any)=>data[0]["likes"])
       }
@@ -27,7 +28,7 @@ export default function CommentComponent(props: any) {
       });
       console.log(l);
       const { error } = await supabase
-        .from("commentquickies")
+        .from("quickiecomments")
         .update({ liked: l, likes: likes - 1 })
         .eq("comment_id", props.comment_id);
       if (error) {
@@ -43,7 +44,7 @@ export default function CommentComponent(props: any) {
       l.push(props.myhandle);
       console.log(l);
       const { error } = await supabase
-        .from("commentquickies")
+        .from("quickiecomments")
         .update({ liked: l, likes: likes + 1 })
         .eq("comment_id", props.comment_id);
 
@@ -91,14 +92,14 @@ export default function CommentComponent(props: any) {
   return (
     <div className="flex flex-row w-full gap-4 px-6 pt-4 pb-2 my-0 border-y border-y-gray-900">
       <div className="flex w-full flex-col gap-[4px]">
-        <div className="flex flex-row items-center content-center space-x-4">
+        <div className="flex flex-row items-center content-center justify-between">
           <Link href={"/profile/" + props.handle} className="flex gap-2 mt-0">
             <Image
               width={28}
               height={28}
               src={props.profile + "?" + new Date().getTime()}
               alt="user profile"
-              className="rounded-full object-cover min-w-[24px] max-w-[24px] h-6"
+              className="rounded-md object-cover min-w-[24px] max-w-[24px] h-6"
             />
             <div className="flex items-center content-center w-full ml-0">
               <h1>
@@ -111,6 +112,8 @@ export default function CommentComponent(props: any) {
               <span className="ml-auto text-xs font-normal text-gray-500 whitespace-nowrap">{props.time}</span>
             </div>
           </Link>
+          <Menu type="comment" alt="quickiecomments" id={props.comment_id} postid={props.postid} myhandle={props.myhandle} handle={props.handle} />
+
         </div>
 
         <h1 className="mt-[8px] mb-2 ml-0 text-[15px] font-medium text-gray-300">{formatText(props.content)}</h1>

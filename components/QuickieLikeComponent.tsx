@@ -8,23 +8,23 @@ export default function LikeComponent(props: any) {
   const [likedlist, setLikedList] = useState(props.likedlist);
   const [liked, toggleLiked] = useState(props.liked);
   const [ulikedlist, setuLikedList] = useState(props.userliked);
-  const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState(false);    
   const [likes, setLikes] = useState(props.likes);
-  async function getData(){
+  let locallikedlist:any;
+  let locallikes:any;
+
+  async function setLiked(like: boolean) {
     const {data:d,error:e}  = await supabase.from('quickies').select('*').eq('id',props.postid);
     if(!e && d){
-      setLikedList((prev:any)=>d[0]["liked"])
-    setLikes((prev:any)=>d[0]["likes"])
+      locallikedlist = d[0]["liked"]
+    locallikes = d[0]["likes"]
       
     
     }
-  }
-  getData()
-  async function setLiked(like: boolean) {
     if (like == false) {
-      let l = likedlist;
+      let l = locallikedlist;
       setDisabled(true);
-      setLikes(likes - 1);
+      setLikes(locallikes - 1);
 
       l = l.filter(function (item: any) {
         return item !== props.handle;
@@ -42,7 +42,7 @@ export default function LikeComponent(props: any) {
       const { error: e } = await supabase.from("user").update({ quickieliked: u }).eq("handle", props.handle);
       if (e) {
         alert(e.message);
-        setLikes(likes + 1);
+        setLikes(locallikes + 1);
       } else {
         toggleLiked(false);
 
@@ -57,8 +57,8 @@ export default function LikeComponent(props: any) {
         }
       }
     } else {
-      const l = likedlist;
-      setLikes(likes + 1);
+      const l = locallikedlist;
+      setLikes(locallikes + 1);
 
       setDisabled(true);
       l.push(props.handle);
@@ -90,12 +90,12 @@ export default function LikeComponent(props: any) {
     }
   }
   return (
-    <div className="flex text-gray-400 flex-row content-center items-center space-x-[8px]  ">
+    <div className="flex cursor-pointer text-gray-400 flex-row content-center items-center space-x-[8px]  ">
       <svg
         onClick={() => (!disabled ? (toggleLiked(!liked), setLiked(!liked)) : console.log("holdup"))}
         xmlns="http://www.w3.org/2000/svg"
-        width="18"
-        height="18"
+        width="20"
+        height="20"
         viewBox="0 0 48 48"
       >
         {liked ? (
@@ -104,7 +104,7 @@ export default function LikeComponent(props: any) {
             stroke="red"
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeWidth="4"
+            strokeWidth="2"
             d="M15 8C8.925 8 4 12.925 4 19c0 11 13 21 20 23.326C31 40 44 30 44 19c0-6.075-4.925-11-11-11c-3.72 0-7.01 1.847-9 4.674A10.987 10.987 0 0 0 15 8"
           />
         ) : (
@@ -113,13 +113,14 @@ export default function LikeComponent(props: any) {
             stroke="currentColor"
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeWidth="4"
+            strokeWidth="2"
             d="M15 8C8.925 8 4 12.925 4 19c0 11 13 21 20 23.326C31 40 44 30 44 19c0-6.075-4.925-11-11-11c-3.72 0-7.01 1.847-9 4.674A10.987 10.987 0 0 0 15 8"
           />
         )}
       </svg>
 
-      <h1 className="text-xs">{likes} <span className="hidden md:inline-block">Likes</span></h1>
+
+      <h1 className="text-sm text-gray-400">{likes}<span className="hidden md:inline-block"></span></h1>
     </div>
   );
 }

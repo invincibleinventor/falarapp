@@ -5,6 +5,7 @@ import BookMarksComponent from "./QuickieBookMarksComponent";
 import LikeComponent from "./QuickieLikeComponent";
 import { useEffect, useState } from "react";
 import Menu from "./Menu";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 export default function Post(props: any) {
   const [dialogopened, setDialogopened] = useState(false);
@@ -65,12 +66,12 @@ export default function Post(props: any) {
           <div className="flex h-max flex-col gap-[8px] md:p-6 p-4 ">
             <div className="flex gap-2 mt-0">
               <Link href={"/profile/" + props.handle} className="flex gap-[10px] mt-0">
-                <img
+                <Image
                   width={28}
                   height={28}
                   src={imgdp}
                   alt="user profile"
-                  className="rounded-full object-cover min-w-[28px] max-w-[28px] h-7"
+                  className="rounded-md object-cover min-w-[28px] max-w-[28px] h-7"
                 />
                 <div className="flex items-center content-center">
                   <h1>
@@ -125,17 +126,10 @@ export default function Post(props: any) {
                
                 <Link
                   href={"/quickie/" + props.id}
-                  className="flex flex-row items-center content-center pl-6 pr-2 space-x-2 text-gray-400"
+                  className="flex flex-row items-center content-center pl-6 space-x-2 text-gray-400"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16">
-                    <path
-                      fill="currentColor"
-                      fillRule="evenodd"
-                      d="m4 11.29l1-1v1.42l-1.15 1.14L3 12.5V10H1.5L1 9.5v-8l.5-.5h12l.5.5V6h-1V2H2v7h1.5l.5.5zM10.29 13l1.86 1.85l.85-.35V13h1.5l.5-.5v-5l-.5-.5h-8l-.5.5v5l.5.5zm.21-1H7V8h7v4h-1.5l-.5.5v.79l-1.15-1.14z"
-                      clipRule="evenodd"
-                    />
-                  </svg>{" "}
-                  <h1 className="text-xs">{props.comments} <span className="hidden md:inline-block">Replies</span></h1>
+                  <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M5 3h13a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-4.59l-3.7 3.71c-.18.18-.43.29-.71.29a1 1 0 0 1-1-1v-3H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3m13 1H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h4v4l4-4h5a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2"/></svg>{" "}
+                  <h1 className="text-sm">{props.comments} <span className="hidden md:inline-block"></span></h1>
                 </Link>
                 <BookMarksComponent
                   userliked={props.userbookmarked}

@@ -15,7 +15,7 @@ export default function StoriesView(props: any) {
         <Image
           width={32}
           height={32}
-          className="absolute w-8 h-8 bg-purple-500 border border-white rounded-full left-3 top-2"
+          className="absolute w-8 h-8 bg-purple-500 border border-white rounded-lg left-3 top-2"
           src={props.profile}
           alt="story"
         />

@@ -68,6 +68,7 @@ export default async function Index() {
       )
       .order("id", { ascending: false })
       .in("handle", l)
+      .eq("parent",0)
       .not("poster", "in", `(${myblocked.toString()})`)
       .not("poster", "in", `(${newblocked.toString()})`)
       .limit(5);
