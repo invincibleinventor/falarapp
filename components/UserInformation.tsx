@@ -74,7 +74,7 @@ export default function UserInformation(props: any) {
 
             const newPosition = {
                 top: showAbove 
-                    ? rect.top + window.scrollY - popupHeight - 10
+                    ? rect.top + window.scrollY - popupHeight + 20
                     : rect.bottom + window.scrollY + 10,
                 left: Math.max(10, rect.left + window.scrollX),
                 showAbove
