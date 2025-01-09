@@ -213,7 +213,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     async function get() {
       const { data, error } = await supabase
         .from("posts")
-        .select("*,user(name,handle,image)")
+        .select("*,user(id,name,handle,image)")
         .eq("handle", params.slug)
         .order("id", { ascending: false })
         .limit(5);
@@ -305,6 +305,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             "/profile/" + myId,
             "New Follower",
             "follow",
+            myuserid,
             "@" + myId + " has followed you! Follow them back?",
             myImage
           );
@@ -445,6 +446,8 @@ export default function Page({ params }: { params: { slug: string } }) {
                       dp={post["user"]["image"]}
                       handle={post["handle"]}
                       name={post["user"]["name"]}
+                      userid={post.user.id}
+
                       likes={post.likes}
                       description={post["excerpt"]}
                     />

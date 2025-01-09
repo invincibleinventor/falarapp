@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import UserInformation from "./UserInformation";
 export default function Post(props: any) {
   let s = props.description;
   const timeStamp = new Date().getTime();
@@ -28,10 +29,8 @@ export default function Post(props: any) {
       <div className="w-full px-6 py-[6px] border-b border-gray-900">
         <article className="px-2 py-6 pt-0 ">
           <Link href={"/profile/" + props.handle} className="flex gap-2 mt-4">
-            <img
-              src={props.dp}
-              alt="user profile"
-              className="rounded-md object-cover min-w-[24px] max-w-[24px] h-6"
+           <UserInformation id={props.userid} image={props.dp}
+              imgclass="rounded-md object-cover min-w-[24px] max-w-[24px] h-6"
             />
             <div className="flex items-center content-center">
               <h1>

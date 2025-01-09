@@ -139,6 +139,7 @@ export default function Index({ params }: { params: { slug: string } }) {
                       about={user.about}
                       followers={user.followers.length}
                       image={user.image}
+                      cover={user.cover}
                     />
                   ))
                 ) : (

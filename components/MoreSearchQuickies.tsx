@@ -71,7 +71,7 @@ export default function More(props: any) {
     } else {
       const { data, error } = await supabase
         .from("quickies")
-        .select("*,user(name,handle,image)")
+        .select("*,user(id,name,handle,image)")
         .order("id", { ascending: false })
         .in("handle", props.in)
         .not("poster", "in", `(${props.myblocked.toString()})`)
@@ -134,6 +134,8 @@ export default function More(props: any) {
             id={post.id}
             cover={post.cover}
             title={post.title}
+            userid={post.user.id}
+
             time={timeAgo.format(Date.now() - post.diff)}
             key={post.id}
             image={post.image}

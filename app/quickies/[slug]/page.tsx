@@ -63,7 +63,7 @@ export default async function Index({ params }: { params: { slug: string } }) {
         l.push(h);
         const { data, error } = await supabase
           .from("quickies")
-          .select("*,user(name,handle,image)")
+          .select("*,user(id,name,handle,image)")
           .eq("handle", params.slug)
           .order("id", { ascending: false })
           .in("handle", l)
@@ -115,7 +115,7 @@ export default async function Index({ params }: { params: { slug: string } }) {
   if (isSupabaseConnected) {
     return (
       <>
-        <div className="flex-1 h-screen p-0 -py-2 overflow-hidden">
+        <div className="flex-1 h-screen p-0 overflow-hidden -py-2">
           <div className="p-4 py-0 pb-2 mx-1 md:mx-1">
             <Search page="quickies" text={AppConfig.title} />
           </div>
@@ -141,6 +141,8 @@ export default async function Index({ params }: { params: { slug: string } }) {
                       bookmarkedlist={post.bookmarkedlist}
                       likedlist={post.likedlist}
                       myhandle={myhandle}
+                      userid={post.user.id}
+
                       dp={post.user.image}
                       bookmarked={post.bookmarked}
                       liked={post.liked}

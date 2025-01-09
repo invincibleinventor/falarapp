@@ -19,7 +19,7 @@ export default function Create() {
         if (user) {
           const { data } = await supabase.from("user").select("*").eq("id", user.id);
           if (data && data.length > 0) {
-            return redirect("/");
+            window.location.replace("/home");
           } else {
             if (user.email) {
               setEmail(user.email);
@@ -85,7 +85,7 @@ export default function Create() {
           if (es) {
             console.log(es);
           } else {
-            window.location.replace("/");
+            window.location.replace("/home");
           }
         }
       }

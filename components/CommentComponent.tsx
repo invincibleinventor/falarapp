@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import Menu from "./Menu";
+import UserInformation from "./UserInformation";
 export default function CommentComponent(props: any) {
   const supabase = createClient();
   const [liked, toggleLiked] = useState(props.likedbyme);
@@ -99,10 +100,10 @@ export default function CommentComponent(props: any) {
       <div className="flex w-full flex-col gap-[4px]">
         <div className="flex flex-row items-center content-center justify-between">
           <Link href={"/profile/" + props.handle} className="flex gap-2 mt-0">
-            <img
-              src={props.profile}
-              alt="user profile"
-              className="rounded-md object-cover min-w-[24px] max-w-[24px] h-6"
+            <UserInformation
+              image={props.profile}
+              id={props.userid}
+              imgclass="rounded-md object-cover min-w-[24px] max-w-[24px] h-6"
             />
             <div className="flex items-center content-center w-full ml-2">
               <h1>

@@ -23,7 +23,7 @@ export default function MoreQuickieComments(props: any) {
   async function get(from: number, to: number) {
     const { data, error } = await supabase
       .from("quickiecomments")
-      .select("*,user(name,handle,image)")
+      .select("*,user(id,name,handle,image)")
       .eq("id", props.slug)
       .order("likes", { ascending: false })
       .not("poster", "in", `(${props.myblocked.toString()})`)
@@ -66,8 +66,7 @@ export default function MoreQuickieComments(props: any) {
 
   return (
     <div className="flex flex-col pb-20 ">
-      {!loading
-        ? comments.map((comment: any) => (
+      {comments.map((comment: any) => (
             <CommentComponent
               time={timeAgo.format(Date.now() - comment.newtime)}
               myhandle={props.myhandle}
@@ -76,6 +75,8 @@ export default function MoreQuickieComments(props: any) {
               key={comment.comment_id}
               handle={comment.handle}
               postid={props.slug}
+              userid={comment.user.id}
+
               likes={comment.likes}
               likedbyme={comment.likedbyme}
               name={comment.user.name}
@@ -83,9 +84,11 @@ export default function MoreQuickieComments(props: any) {
               content={comment.content}
               loggedin={props.loggedin}
             />
-          ))
-        : <Oval height={80} width={80} color="#000000" wrapperClass="mx-auto" visible={true} ariaLabel="loading-indicator" secondaryColor="#808080" strokeWidth={2} strokeWidthSecondary={2} />}
-      <div ref={ref} />
+          ))}
+            <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
+
+      <Oval height={80} width={80} color="#000000" wrapperClass="mx-auto"                   visible={!halt ? true : false}
+ ariaLabel="loading-indicator" secondaryColor="#808080" strokeWidth={2} strokeWidthSecondary={2} />
     </div>
   );
 }

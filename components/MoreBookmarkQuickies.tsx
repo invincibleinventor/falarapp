@@ -22,7 +22,7 @@ export default function More(props: any) {
    
       const { data, error } = await supabase
         .from("quickies")
-        .select("*, user(name,image,handle)")
+        .select("*, user(id,name,image,handle)")
         .order("id", { ascending: false })
         .not("poster", "in", `(${props.newblocked.toString()})`)
         .in("id", props.in)
@@ -95,6 +95,8 @@ export default function More(props: any) {
             bookmarked={post.bookmarked}
             liked={post.liked}
             handle={post.handle}
+            userid={post.user.id}
+
             name={post.user.name}
             comments={post.comments}
             description={post.content}

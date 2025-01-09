@@ -5,6 +5,7 @@ export default async function PostNotifications(
   url: any,
   title: any,
   type: any,
+  userid:any,
   postid: any,
   description: any,
   image: any
@@ -31,6 +32,7 @@ export default async function PostNotifications(
             description: description,
             postid: postid,
             url: url,
+            userid:userid,
             title: title,
             image: image,
           });

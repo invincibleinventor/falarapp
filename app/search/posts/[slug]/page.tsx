@@ -46,7 +46,7 @@ const [newblocked,setnewblocked]  = useState([])
       }
       const { data, error } = await supabase
         .from("posts")
-        .select("*,user(name,handle,image)")
+        .select("*,user(id,name,handle,image)")
         .order("id", { ascending: false })
         .textSearch("title_excerpt_content", `'${search}' | '${search.toLowerCase()}' | '${search.toUpperCase()}'`)
         .limit(5)
@@ -122,6 +122,8 @@ const [newblocked,setnewblocked]  = useState([])
                   cover={post.cover}
                   id={post.id}
                   title={post.title}
+                  userid={post.user.id}
+
                   time={timeAgo.format(Date.now() - post.diff)}
                   key={post.id}
                   image={post.user.image}

@@ -53,7 +53,7 @@ export default function Page({ params }: { params: { slug: string } }) {
       setnewblocked(newblocked)
       const { data, error } = await supabase
         .from("posts")
-        .select("*,user(name,handle,image)")
+        .select("*,user(id,name,handle,image)")
         .order("id", { ascending: false })
         .textSearch("title_excerpt_content", `'${search}' | '${search.toLowerCase()}' | '${search.toUpperCase()}'`)
         .in("id", l)
@@ -135,6 +135,8 @@ export default function Page({ params }: { params: { slug: string } }) {
                     image={post.image}
                     dp={post.user.image}
                     handle={post.handle}
+                    userid={post.user.id}
+
                     cover={post.cover}
                     name={post.user.name}
                     description={post.excerpt}
@@ -149,7 +151,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                       your search. Bookmark posts to view them here.
                     </h1>
                     <Link
-                      href="/"
+                      href="/home"
                       className={`mx-auto mt-3 rounded-full w-max px-8 py-3 text-xs font-medium  ${
                         1 == 1 ? "bg-cyan-800 text-white" : "border-2 bg-white"
                       }`}

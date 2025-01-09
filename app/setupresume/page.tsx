@@ -59,7 +59,7 @@ export default function Create() {
       if (e) {
         console.log(e);
       } else {
-        window.location.replace("/");
+        window.location.replace("/home");
       }
     }
   }

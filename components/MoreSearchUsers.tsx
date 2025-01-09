@@ -104,8 +104,11 @@ export default function MoreUsers(props: any) {
             isfollowing={user.isfollowing}
             handle={user.handle}
             about={user.about}
+            userid={user.id}
+
             followers={user.followers.length}
             image={user.image}
+            cover={user.cover}
           />
         ))}
       </div>

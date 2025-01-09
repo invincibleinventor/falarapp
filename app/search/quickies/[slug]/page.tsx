@@ -58,7 +58,7 @@ const [newblocked,setnewblocked] = useState([])
       setL(a);
       const { data, error } = await supabase
         .from("quickies")
-        .select("*,user(name,handle,image)")
+        .select("*,user(id,name,handle,image)")
         .order("id", { ascending: false })
         .in("handle", u![0]["following"])
         .not("poster", "in", `(${u![0]["blocked"].toString()})`)
@@ -160,6 +160,8 @@ const [newblocked,setnewblocked] = useState([])
                       bookmarkedlist={post.bookmarkedlist}
                       likedlist={post.likedlist}
                       myhandle={myhandle}
+                      userid={post.user.id}
+
                       dp={post.user.image}
                       bookmarked={post.bookmarked}
                       liked={post.liked}

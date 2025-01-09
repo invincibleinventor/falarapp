@@ -13,7 +13,7 @@ export default function Logout(props: any) {
     if (signouterror) {
       console.log(signouterror);
     } else {
-      window.location.replace("/");
+      window.location.replace("/home");
     }
   }
   return (

@@ -19,14 +19,12 @@ export default function CommentsComponent(props: any) {
   const [halt, setHalt] = useState(false);
   const PAGE_COUNT = 5;
   async function get(from: number, to: number) {
-    //alert('reached')
     const { data, error } = await supabase
       .from("comments")
-      .select("*,user(name,handle,image)")
+      .select("*,user(id,name,handle,image)")
       .eq("id", props.slug)
       .order("likes", { ascending: false })
       .not("poster", "in", `(${props.myblocked.toString()})`)
-      .not("poster", "in", `(${props.newblocked.toString()})`)
       .range(from, to);
     if (error) {
       console.log(error);
@@ -63,8 +61,7 @@ export default function CommentsComponent(props: any) {
   }
   useEffect(() => {
     if (!halt && inView) {
-      setOffset((prev) => prev + 1);
-
+      setOffset((prev:any) => prev + 1);
       const from = offset * PAGE_COUNT;
       const to = from + PAGE_COUNT - 1;
 
@@ -73,9 +70,9 @@ export default function CommentsComponent(props: any) {
   }, [inView]);
   return (
     <>
-      <div className="flex flex-col pb-20 my-3 mt-6 space-y-4">
-        {!loading
-          ? comments.map((comment: any) => (
+      <div className="flex flex-col pb-20">
+        
+        {comments.map((comment: any) => (<>
               <CommentComponent
                 time={timeAgo.format(Date.now() - comment.newtime)}
                 myhandle={props.myhandle}
@@ -85,16 +82,17 @@ export default function CommentsComponent(props: any) {
                 handle={comment.handle}
                 likes={comment.likes}
                 likedbyme={comment.likedbyme}
+                userid={comment.user.id}
+
                 name={comment.user.name}
                 profile={comment.user.image}
                 content={comment.content}
                 postid={props.slug}
                 loggedin={props.loggedin}
               />
-            ))
-          : comments &&
-            comments.length > 0 && (
-              <>                <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
+              </>
+        ))}
+            <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
 
                 <Oval
                   height={40}
@@ -108,8 +106,8 @@ export default function CommentsComponent(props: any) {
                   strokeWidth={2}
                   strokeWidthSecondary={2}
                 />
-              </>
-            )}
+              
+            
       </div>
     </>
   );

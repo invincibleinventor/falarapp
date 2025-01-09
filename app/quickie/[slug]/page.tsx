@@ -262,7 +262,7 @@ export default async function App({ params }: { params: { slug: string } }) {
         Login to {AppConfig.title} to view the replies for this Quickie
       </h1>
       <Link
-        href="/"
+        href="/home"
         className={`mx-auto mt-3 w-max rounded-full px-8 py-3 text-xs font-bold ${
           1 == 1 ? "bg-cyan-800 text-white" : "border-2  bg-white "
         }`}

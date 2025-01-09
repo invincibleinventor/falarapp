@@ -20,7 +20,7 @@ export default function MoreSearchPosts(props: any) {
   async function get(from: number, to: number) {
     const { data, error } = await supabase
       .from("posts")
-      .select("*,user(name,handle,image)")
+      .select("*,user(id,name,handle,image)")
       .order("id", { ascending: false })
       .not("poster", "in", `(${props.myblocked.toString()})`)
       .not("poster", "in", `(${props.newblocked.toString()})`)
@@ -74,6 +74,8 @@ export default function MoreSearchPosts(props: any) {
             dp={post.user.image}
             handle={post.handle}
             name={post.user.name}
+            userid={post.user.id}
+
             description={post.excerpt}
           />
         ))}

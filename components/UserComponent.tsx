@@ -5,52 +5,49 @@ import { createClient } from "@/utils/supabase/client";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import UserInformation from "./UserInformation";
 
 export default function UserComponent(props: any) {
   const supabase = createClient();
 
   const [myId] = useState(props.myID);
+  const [myuserid] = useState(props.userid);
+  const [imfollowing, setImFollowing] = useState(props.isfollowing);
+  const [followerlist, setFollowerList] = useState(props.followerlist);
+  const [followinglist, setFollowingList] = useState(props.followinglist);
+  const [notifications, setNotifications] = useState(props.notifications);
 
   async function onfollow(handle: any) {
     let localfollowerlist,localfollowinglist;
     const {data:his} = await supabase.from('user').select('*').eq('handle',handle);
     const {data:mine} = await supabase.from('user').select('*').eq('handle',props.myID);
     if(his && mine){
-    localfollowerlist = his[0]["followers"];
-    localfollowinglist = mine[0]["following"];
+      localfollowerlist = his[0]["followers"];
+      localfollowinglist = mine[0]["following"];
     }
     if (imfollowing) {
-      console.log("uesuesues");
       let arr = localfollowerlist;
-      console.log("before");
-      console.log(arr);
       arr = arr.filter((item: any) => item !== myId);
       let arr2 = localfollowinglist;
       arr2 = arr2.filter((item: any) => item !== handle);
 
-      console.log(arr);
       const { data, error } = await supabase.from("user").update({ followers: arr }).eq("handle", handle).select();
       const { data: d, error: e } = await supabase.from("user").update({ following: arr2 }).eq("handle", myId).select();
-    
-      if (error || e) {
-        console.log(error);
-      } else {
+      
+      if (!error && !e) {
+        setFollowerList(arr);
+        setFollowingList(arr2);
+        setImFollowing(false);
       }
-      setFollowerList(arr);
-      setFollowingList(arr2);
-      setImFollowing(false);
     } else {
       const arr = localfollowerlist;
       arr.push(myId);
       const arr2 = localfollowinglist;
       arr2.push(handle);
-      console.log(arr);
       const { data, error } = await supabase.from("user").update({ followers: arr }).eq("handle", handle).select();
       const { data: d, error: e } = await supabase.from("user").update({ following: arr2 }).eq("handle", myId).select();
 
-      if (error || e) {
-        console.log(error);
-      } else {
+      if (!error && !e) {
         notification(
           notifications,
           supabase,
@@ -58,41 +55,41 @@ export default function UserComponent(props: any) {
           "/profile/" + myId,
           "New Follower",
           "follow",
+          myuserid,
           "@" + myId + " has followed you! Follow them back?",
           props.myImage
         );
-
-        console.log(data);
+        setImFollowing(true);
+        setFollowerList(arr);
+        setFollowingList(arr2);
       }
-      setImFollowing(true);
-      setFollowerList(arr);
-      setFollowingList(arr2);
     }
+    return imfollowing;
   }
-  const [imfollowing, setImFollowing] = useState(props.isfollowing);
-  const [followerlist, setFollowerList] = useState(props.followerlist);
-  const [followinglist, setFollowingList] = useState(props.followinglist);
-  const [notifications, setNotifications] = useState(props.notifications);
+
   let a = props.name;
   if (a.length >= 11) {
     a = a.slice(0, 7);
     a += "...";
   }
+
   return (
     <Link
       href={"/profile/" + props.handle}
-      className="mx-auto my-2 flex md:h-[270.29px] w-[calc(303.86px)] rounded-md   flex-col  md:pb-4 pb-5 p-4 xl:mx-2 xl:w-auto"
+      className="mx-auto my-2 flex md:h-[270.29px] w-[calc(303.86px)] rounded-md flex-col md:pb-4 pb-5 p-4 xl:mx-2 xl:w-auto"
     >
       <div className="flex flex-row items-center content-center justify-between">
         <div className="flex flex-row items-center content-center space-x-3">
-          <Image
-            width={40}
-            height={40}
-            src={props.image}
-            className="object-cover w-10 h-10 rounded-lg"
+          <UserInformation
+            {...props}
+            imfollowing={imfollowing}
+            onfollow={onfollow}
+            id={props.userid}
+            image={props.image}
+            imgclass="object-cover w-10 h-10 rounded-lg"
             alt="profile-pic"
           />
-          <div className="flex flex-col ">
+          <div className="flex flex-col">
             <h1 className="text-base font-bold text-gray-300">{a}</h1>
             <h1 className="text-xs font-normal text-gray-500">@{props.handle}</h1>
           </div>
@@ -101,7 +98,7 @@ export default function UserComponent(props: any) {
           onClick={(e) => (e.stopPropagation(), e.preventDefault(), onfollow(props.handle))}
           className={
             imfollowing
-              ? "h-max border border-black bg-white px-4 py-1 text-xs  rounded-full text-black"
+              ? "h-max border border-black bg-white px-4 py-1 text-xs rounded-full text-black"
               : "h-max border border-black bg-cyan-800 px-4 py-1 text-xs rounded-full text-white"
           }
         >

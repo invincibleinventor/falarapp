@@ -22,7 +22,7 @@ export default function More(props: any) {
     if (props.handle) {
       const { data, error } = await supabase
         .from("quickies")
-        .select("*,user(name,handle,image)")
+        .select("*,user(id,name,handle,image)")
         .eq("handle", props.handle)
         .order("id", { ascending: false })
         .range(from, to);
@@ -64,7 +64,7 @@ export default function More(props: any) {
     } else {
       const { data, error } = await supabase
         .from("quickies")
-        .select("*,user(name,handle,image)")
+        .select("*,user(id,name,handle,image)")
         .not("poster", "in", `(${props.myblocked.toString()})`)
 
         .not("poster", "in", `(${props.newblocked.toString()})`)

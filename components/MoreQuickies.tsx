@@ -22,7 +22,7 @@ export default function More(props: any) {
     if (props.handle) {
       const { data, error } = await supabase
         .from("quickies")
-        .select("*, user(name,image,handle)")
+        .select("*, user(id,name,image,handle)")
         .eq("handle", props.handle)
         .order("id", { ascending: false })
         .not("poster", "in", `(${props.myblocked.toString()})`)
@@ -66,7 +66,7 @@ export default function More(props: any) {
     } else {
       const { data, error } = await supabase
         .from("quickies")
-        .select("*, user(name,image,handle)")
+        .select("*, user(id,name,image,handle)")
         .order("id", { ascending: false })
         .not("poster", "in", `(${props.newblocked.toString()})`)
         .in("handle", props.in)
@@ -142,6 +142,8 @@ export default function More(props: any) {
             name={post.user.name}
             comments={post.comments}
             description={post.content}
+            userid={post.user.id}
+
           />
         ))}
         <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>

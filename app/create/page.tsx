@@ -58,7 +58,7 @@ export default function Create() {
     }
     if (u) {
       if (s && s.excerpt == excerpt && s.title == title && s.handle == u[0]["handle"] && s.content == content) {
-        return redirect("/");
+        return redirect("/home");
       } else {
         const { error } = await supabase
           .from("posts")
@@ -80,10 +80,10 @@ export default function Create() {
               if (es) {
                 alert(es.message);
               } else {
-                window.location.replace("/");
+                window.location.replace("/home");
               }
             } else {
-              window.location.replace("/");
+              window.location.replace("/home");
             }
           }
         }

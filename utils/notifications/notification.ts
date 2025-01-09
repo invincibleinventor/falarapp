@@ -5,6 +5,7 @@ export default async function notification(
   url: any,
   title: any,
   type: any,
+  userid: any,
   description: any,
   image: any
 ) {
@@ -18,7 +19,7 @@ export default async function notification(
       if (s && s.length > 0) {
         const { error: e } = await supabase
           .from("notifications")
-          .insert({ type: type, to: to, description: description, url: url, title: title, image: image });
+          .insert({ type: type, to: to,userid:userid, description: description, url: url, title: title, image: image });
         const notify = s[0]["notifications"] + 1;
         const { error: es } = await supabase.from("user").update({ notifications: notify }).eq("id", to);
 

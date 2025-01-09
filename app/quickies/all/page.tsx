@@ -58,7 +58,7 @@ export default async function Index() {
     const { data, error } = await supabase
       .from("quickies")
       
-      .select("*,user(name,handle,image)")
+      .select("*,user(id,name,handle,image)")
       .order("id", { ascending: false })
       .eq("parent",0)
 
@@ -124,6 +124,8 @@ export default async function Index() {
                     userbookmarked={userbookmarked}
                     bookmarkedlist={post.bookmarkedlist}
                     likedlist={post.likedlist}
+                    userid={post.user.id}
+
                     myhandle={myhandle}
                     dp={post.user.image}
                     bookmarked={post.bookmarked}

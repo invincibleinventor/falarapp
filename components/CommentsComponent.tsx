@@ -42,7 +42,7 @@ export default function CommentsComponent(props: any) {
     async function fetchcomments() {
       const { data, error } = await supabase
         .from("comments")
-        .select("*,user(name,handle,image)")
+        .select("*,user(id,name,handle,image)")
         .eq("id", props.slug)
         .order("likes", { ascending: false })
         .not("poster", "in", `(${props.myblocked.toString()})`)
@@ -105,7 +105,7 @@ export default function CommentsComponent(props: any) {
           </div>
         </div>
       )}
-      <div className="flex flex-col px-0 my-3 mt-0 space-y-0">
+      <div className="relative flex flex-col px-0 my-3 mt-0 space-y-0">
         {!loading ? (
           <>
             {comments.map((comment: any) => (
@@ -120,12 +120,14 @@ export default function CommentsComponent(props: any) {
                 name={comment.user.name}
                 handle={comment.handle}
                 profile={comment.user.image}
+                userid={comment.user.id}
                 content={comment.content}
                 loggedin={props.loggedin}
                 stateChanger={setState}
                 postid={props.slug}
               />
             ))}
+            
             <MoreComments
               myblocked={props.myblocked}
               myhandle={props.myhandle}

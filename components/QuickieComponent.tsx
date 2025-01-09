@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Menu from "./Menu";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import UserInformation from "./UserInformation";
 export default function Post(props: any) {
   const [dialogopened, setDialogopened] = useState(false);
   const router = useRouter();
@@ -59,19 +60,17 @@ export default function Post(props: any) {
     });
   };
   return (
-    <div className="w-full animate-in">
+    <div className="relative w-full animate-in">
       <div className="w-full ">
         <div className="flex flex-col px-2 py-2 border-b md:pr-2 lg:pr-2 border-b-gray-900 md:py-0">
           <div className="flex items-center content-center bg-black rounded-md "></div>
           <div className="flex h-max flex-col gap-[8px] md:p-6 p-4 ">
             <div className="flex gap-2 mt-0">
-              <Link href={"/profile/" + props.handle} className="flex gap-[10px] mt-0">
-                <Image
-                  width={28}
-                  height={28}
-                  src={imgdp}
-                  alt="user profile"
-                  className="rounded-md object-cover min-w-[28px] max-w-[28px] h-7"
+              <Link href={"/profile/" + props.handle} className="flex  gap-[10px] mt-0">
+               <UserInformation
+                  image={imgdp}
+                  id={props.userid}
+                  imgclass="rounded-md object-cover min-w-[28px] max-w-[28px] h-7"
                 />
                 <div className="flex items-center content-center">
                   <h1>

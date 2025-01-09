@@ -45,7 +45,7 @@ export default async function Index() {
 
     const { data, error } = await supabase
       .from("posts")
-      .select("*,user(name,handle,image)")
+      .select("*,user(id,name,handle,image)")
       .order("id", { ascending: false })
       .in("id", l)
       .not("poster", "in", `(${myblocked.toString()})`)
@@ -105,7 +105,7 @@ export default async function Index() {
                         posts to view them here.
                       </h1>
                       <Link
-                        href="/"
+                        href="/home"
                         className={`mx-auto mt-3 rounded-full w-max px-8 py-3 text-xs font-medium  ${
                           1 == 1 ? "bg-cyan-800 text-white" : "border-2 bg-white"
                         }`}

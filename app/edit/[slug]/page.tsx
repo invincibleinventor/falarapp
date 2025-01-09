@@ -78,7 +78,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     if (error) {
       alert(error);
     } else {
-      window.location.replace("/");
+      window.location.replace("/home");
     }
   }
   async function create() {
@@ -99,10 +99,10 @@ export default function Page({ params }: { params: { slug: string } }) {
         if (es) {
           alert(es.message);
         } else {
-          window.location.replace("/");
+          window.location.replace("/home");
         }
       } else {
-        window.location.replace("/");
+        window.location.replace("/home");
       }
     }
   }
@@ -248,7 +248,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             Only the Author of the post is allowed to edit a post. Try from a different account or leave this page.
           </h1>
           <Link
-            href="/"
+            href="/home"
             className={`mx-auto mt-3 rounded-md w-max px-8 py-3 text-xs font-medium  ${
               1 == 1 ? "bg-cyan-800 text-white" : "border-2 bg-white"
             }`}

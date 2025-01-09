@@ -10,7 +10,7 @@ export default function Error({}) {
           That page does not exist. It must have been moved or deleted. Please refresh if you think that is not the case
         </h1>
         <Link
-          href="/"
+          href="/home"
           className={`mx-auto mt-3  w-max px-8 py-3 rounded-full text-xs font-medium ${
             1 == 1 ? "bg-cyan-800 text-white" : "bg-white text-white"
           }`}

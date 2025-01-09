@@ -21,7 +21,7 @@ export default function More(props: any) {
   async function get(from: number, to: number) {
     const { data, error } = await supabase
       .from("posts")
-      .select("*,user(name,handle,image)")
+      .select("*,user(id,name,handle,image)")
       .order("id", { ascending: false })
       .in("id", props.l)
       .range(from, to)

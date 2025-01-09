@@ -22,7 +22,7 @@ export default function More(props: any) {
     if (props.handle) {
       const { data, error } = await supabase
         .from("posts")
-        .select("*,user(name,handle,image)")
+        .select("*,user(id,name,handle,image)")
         .eq("handle", props.handle)
         .order("id", { ascending: false })
 
@@ -48,7 +48,7 @@ export default function More(props: any) {
     } else {
       const { data, error } = await supabase
         .from("posts")
-        .select("*,user(name,handle,image)")
+        .select("*,user(id,name,handle,image)")
         .order("id", { ascending: false })
         .in("handle", props.in)
         .range(from, to)
@@ -99,6 +99,8 @@ export default function More(props: any) {
             image={post.image}
             dp={post.user.image}
             handle={post.handle}
+            userid={post.user.id}
+
             name={post.user.name}
             description={post.excerpt}
           />

@@ -12,6 +12,7 @@ export default async function WhoToFollow() {
   let myid = "";
   let myhandle = "";
   let myImage = "";
+  let myuserid = "";
 
   if (u.user) {
     myid = u.user.id;
@@ -51,6 +52,7 @@ export default async function WhoToFollow() {
               key={user.id}
               hisid={user.id}
               name={user.name}
+              notifications={user.notifications}
               followinglist={following}
               myImage={myImage}
               profile={user.image}

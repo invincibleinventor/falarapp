@@ -22,7 +22,7 @@ export default function More(props: any) {
     if (props.handle) {
       const { data, error } = await supabase
         .from("posts")
-        .select("*,user(name,handle,image)")
+        .select("*,user(id,name,handle,image)")
         .eq("handle", props.handle)
         .order("id", { ascending: false })
 
@@ -48,7 +48,7 @@ export default function More(props: any) {
     } else {
       const { data, error } = await supabase
         .from("posts")
-        .select("*,user(name,handle,image)")
+        .select("*,user(id,name,handle,image)")
         .order("id", { ascending: false })
         .range(from, to)
         .not("poster", "in", `(${props.myblocked.toString()})`)
@@ -91,6 +91,8 @@ export default function More(props: any) {
             id={post.id}
             type="profile"
             title={post.title}
+            userid={post.user.id}
+
             cover={post.cover}
             time={timeAgo.format(Date.now() - post.diff)}
             key={post.id}

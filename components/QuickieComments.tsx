@@ -49,7 +49,7 @@ export default function CommentsComponent(props: any) {
     async function fetchcomments() {
       const { data, error } = await supabase
         .from("quickiecomments")
-        .select("*,user(name,handle,image)")
+        .select("*,user(id,name,handle,image)")
         .eq("id", props.slug)
         .order("likes", { ascending: false })
         .not("poster", "in", `(${props.myblocked.toString()})`)
@@ -81,6 +81,7 @@ export default function CommentsComponent(props: any) {
         setComments([]);
         setLoading(false);
       } else {
+        setLoading(false);
         console.log(error);
       }
     }
@@ -124,6 +125,7 @@ export default function CommentsComponent(props: any) {
                 stateChanger={setState}
                 comment_id={comment.comment_id}
                 key={comment.comment_id}
+                userid={comment.user.id}
                 likes={comment.likes}
                 likedbyme={comment.likedbyme}
                 postid={props.slug}
@@ -137,8 +139,7 @@ export default function CommentsComponent(props: any) {
             <MoreComments myhandle={props.myhandle} myblocked={props.myblocked} newblocked={props.newblocked} loggedin={props.loggedin} slug={props.slug} />
           </>
         ) : (
-          comments &&
-          comments.length > 0 && (
+          
             <Oval
               height={40}
               width={40}
@@ -151,7 +152,7 @@ export default function CommentsComponent(props: any) {
               strokeWidth={2}
               strokeWidthSecondary={2}
             />
-          )
+          
         )}
       </div>
     </>

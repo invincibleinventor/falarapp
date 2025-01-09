@@ -2,6 +2,7 @@ import BookMarksComponent from "@/components/BookMarksComponent";
 import CommentsComponent from "@/components/CommentsComponent";
 import LikeComponent from "@/components/LikeComponent";
 import Menu from "@/components/Menu";
+import UserInformation from "@/components/UserInformation";
 import { AppConfig } from "@/config/config";
 import { createClient } from "@/utils/supabase/server";
 import TimeAgo from "javascript-time-ago";
@@ -167,7 +168,7 @@ export default async function App({ params }: { params: { slug: string } }) {
               that is not the case
             </h1>
             <Link
-              href="/"
+              href="/home"
               className={`mx-auto mt-4 rounded-full w-max px-8 py-3 text-xs font-bold ${
                 1 == 1 ? "bg-cyan-700 text-white" : "border-2  bg-white "
               }`}
@@ -218,7 +219,7 @@ export default async function App({ params }: { params: { slug: string } }) {
 
             <div className="flex flex-row items-center content-center justify-between mt-6 text-lg">
               <Link href={"/profile/" + author} className="flex flex-row items-center content-center">
-                <Image width={24} height={24} alt="profile" className="w-8 h-8 mr-3 rounded-md" src={profile} />
+                <UserInformation id={user} image={profile} imgclass="w-8 h-8 mr-3 rounded-md" src={profile} />
                 <h1 className="text-xs font-medium text-gray-300 md:text-sm">{name}</h1>
               </Link>
 
@@ -246,7 +247,7 @@ export default async function App({ params }: { params: { slug: string } }) {
         Login to {AppConfig.title} to view the replies for this post
       </h1>
       <Link
-        href="/"
+        href="/home"
         className={`mx-auto mt-3 w-max rounded-full px-8 py-3 text-xs font-bold ${
           1 == 1 ? "bg-cyan-800 text-white" : "border-2  bg-white "
         }`}

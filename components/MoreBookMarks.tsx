@@ -27,7 +27,7 @@ export default function MoreBookMarks(props: { slug: string, myblocked:any, newb
     }
     const { data, error } = await supabase
       .from("posts")
-      .select("*,user(name,handle,image)")
+      .select("*,user(id,name,handle,image)")
       .order("id", { ascending: false })
       .in("id", l)
       .not("poster","in",`(${props.myblocked.toString()})`)
@@ -80,6 +80,8 @@ export default function MoreBookMarks(props: { slug: string, myblocked:any, newb
             key={post.id}
             image={post.image}
             dp={post.user.image}
+            userid={post.user.id}
+
             handle={post.handle}
             name={post.user.name}
             description={post.excerpt}

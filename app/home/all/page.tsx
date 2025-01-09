@@ -43,7 +43,7 @@ export default async function Index() {
     l.push(h);
     const { data, error } = await supabase
       .from("posts")
-      .select("*,user(name,handle,image)")
+      .select("*,user(id,name,handle,image)")
       .order("id", { ascending: false })
       .not("poster", "in", `(${myblocked.toString()})`)
       .not("poster", "in", `(${blockedby.toString()})`)
@@ -85,6 +85,8 @@ export default async function Index() {
                     key={post.id}
                     image={post.image}
                     dp={post.user.image}
+                    userid={post.user.id}
+
                     handle={post.handle}
                     likes={post.likes}
                     name={post.user.name}
