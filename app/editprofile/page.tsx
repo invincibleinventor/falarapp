@@ -19,7 +19,7 @@ export default function Create() {
         if (user) {
           const { data } = await supabase.from("user").select("*").eq("id", user.id);
           if (data && data.length > 0) {
-            window.location.replace("/home");
+            window.location.replace("/");
           } else {
             if (user.email) {
               setEmail(user.email);
@@ -85,7 +85,7 @@ export default function Create() {
           if (es) {
             console.log(es);
           } else {
-            window.location.replace("/home");
+            window.location.replace("/");
           }
         }
       }
@@ -106,7 +106,7 @@ export default function Create() {
         </label>
         <input
           onChange={(e) => setName(e.target.value)}
-          className="px-4 py-2 mb-6 text-sm text-neutral-300 bg-black border border-neutral-900 rounded-md outline-none focus:outline-cyan-800"
+          className="px-4 py-2 mb-6 text-sm bg-black border rounded-md outline-none text-neutral-300 border-neutral-900 focus:outline-cyan-800"
           name="name"
           placeholder="Please Type Out Your Name"
           required
@@ -118,7 +118,7 @@ export default function Create() {
         </label>
         <input
           onChange={(e) => setHandle(e.target.value.trim().replace(" ", "_"))}
-          className="px-4 py-2 mb-6 text-sm text-neutral-300 bg-black border border-neutral-900 rounded-md outline-none focus:outline-cyan-800"
+          className="px-4 py-2 mb-6 text-sm bg-black border rounded-md outline-none text-neutral-300 border-neutral-900 focus:outline-cyan-800"
           name="handle"
           placeholder="Please Type Out Your Username"
           required
@@ -130,7 +130,7 @@ export default function Create() {
         </label>
         <textarea
           onChange={(e) => setAbout(e.target.value)}
-          className="px-4 py-2 mb-6 text-sm text-neutral-300 bg-black border border-neutral-900 rounded-md outline-none focus:outline-cyan-800"
+          className="px-4 py-2 mb-6 text-sm bg-black border rounded-md outline-none text-neutral-300 border-neutral-900 focus:outline-cyan-800"
           name="content"
           placeholder="Please Type About Yourself"
           required

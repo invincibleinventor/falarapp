@@ -13,12 +13,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <Search page="posts" text={AppConfig.title} />
       </div>
       <div className="flex flex-row flex-grow w-auto text-sm font-medium text-white font-inter">
-        <Link href="/home" className={`w-1/2 py-4 text-center ${pathname == "/home" ? "border-b-2 border-b-cyan-800" : ""}`}>
+        <Link href="/" className={`w-1/2 py-4 text-center ${pathname == "/" ? "border-b-2 border-b-cyan-800" : ""}`}>
           Following
         </Link>
         <Link
-          href="/home/all"
-          className={`w-1/2 py-4 text-center ${pathname == "/home/all" ? "border-b-2 border-b-cyan-800" : ""}`}
+          href="/all"
+          className={`w-1/2 py-4 text-center ${pathname == "/all" ? "border-b-2 border-b-cyan-800" : ""}`}
         >
           Explore
         </Link>

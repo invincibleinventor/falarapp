@@ -21,6 +21,7 @@ export default async function WhoToFollow() {
       myhandle = data[0]["handle"];
       following = data[0]["following"];
       const blocked = data[0]["blocked"];
+      const myblocked = data[0]["blockedby"];
       const l = following;
       myImage = data[0]["image"];
       l.push(myhandle);
@@ -29,6 +30,7 @@ export default async function WhoToFollow() {
         .from("user")
         .select("*")
         .not("id", "in", `(${blocked.toString()})`)
+        .not("id", "in", `(${myblocked.toString()})`)
         .not("handle", "in", `(${l.toString()})`);
       if (d && d.length > 0) {
         const shuffled = d.sort(() => 0.5 - Math.random());

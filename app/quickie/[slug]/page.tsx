@@ -215,7 +215,7 @@ export default async function App({ params }: { params: { slug: string } }) {
                     />
                     <div className="flex items-center content-center">
                       <h1>
-                        <p className="text-base font-medium text-neutral-300 break-all line-clamp-1">{naam}</p>
+                        <p className="text-base font-medium break-all text-neutral-300 line-clamp-1">{naam}</p>
                       </h1>
                       <div className="mx-1 text-base text-neutral-500">·</div>
                       <span className="text-base font-medium text-neutral-500 whitespace-nowrap">@{author}</span>
@@ -262,7 +262,7 @@ export default async function App({ params }: { params: { slug: string } }) {
         Login to {AppConfig.title} to view the replies for this Quickie
       </h1>
       <Link
-        href="/home"
+        href="/"
         className={`mx-auto mt-3 w-max rounded-full px-8 py-3 text-xs font-bold ${
           1 == 1 ? "bg-cyan-800 text-white" : "border-2  bg-white "
         }`}
@@ -275,8 +275,7 @@ export default async function App({ params }: { params: { slug: string } }) {
       }
           </div>
           {loggedin && !newblocked.includes(authorid) && !blocked.includes(authorid)  && (
-            <section className="px-0 pt-4 pb-8 border-t lg:pr-0 border-t-neutral-900" id="comments">
-              <h1 className="px-6 mb-2 text-lg font-bold text-neutral-300">Comments</h1>
+            <section className="px-0 border-t lg:pr-0 border-t-neutral-900" id="comments">
 
               <CommentsComponent
                 myblocked={blocked}

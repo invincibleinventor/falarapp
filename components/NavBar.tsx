@@ -31,7 +31,7 @@ export default async function App$() {
   return (
     <div className="mb-auto lg:w-[400px]">
       <div className={`  flex w-max flex-col items-start p-0 md:pr-4 `}>
-        <Link className="flex flex-row mt-1" href="/home">
+        <Link className="flex flex-row mt-1" href="/">
           <svg
             className="ml-[8px] mr-2 mt-[2px] h-[51px] w-[51px] cursor-pointer rounded-full p-[10px] text-neutral-300 transition-all  duration-100 ease-linear hover:bg-neutral-900 md:ml-[4px] md:mr-0"
             xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +53,7 @@ export default async function App$() {
         </Link>
         <div className="flex flex-col space-y-3 py-4 pt-[14px] md:mt-7 md:space-y-[8px] md:px-4 md:pt-[4px]">
           <Headeritem
-            link="/home"
+            link="/"
             url={
               <g>
                 {" "}

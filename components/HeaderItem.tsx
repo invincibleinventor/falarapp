@@ -13,7 +13,7 @@ export default function App(props: any) {
     a.opened = true;
   } else if (props.link == "more" && loc.startsWith("/more")) {
     a.opened = true;
-  } else if (props.link == "/home" && (loc == "/home/all" || loc == "/home")) {
+  } else if (props.link == "/" && (loc == "/all" || loc == "/")) {
     a.opened = true;
   } else if (props.link == "/quickies" && (loc == "/quickies/all" || loc == "/quickies")) {
     a.opened = true;

@@ -74,7 +74,7 @@ export default function Post(props: any) {
                 />
                 <div className="flex items-center content-center">
                   <h1>
-                    <p className="text-base font-medium text-neutral-300 break-all line-clamp-1">{props.name}</p>
+                    <p className="text-base font-medium break-all text-neutral-300 line-clamp-1">{props.name}</p>
                   </h1>
                   <div className="mx-1 text-base text-neutral-500">·</div>
                   <span className="text-base font-medium text-neutral-500 whitespace-nowrap">@{props.handle}</span>
@@ -124,7 +124,7 @@ export default function Post(props: any) {
 
                
                 <Link
-                  href={"/quickie/" + props.id}
+                  href={"/quickie/" + props.id+"#comments"}
                   className="flex flex-row items-center content-center pl-6 space-x-2 text-neutral-400"
                 >
                   <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M5 3h13a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-4.59l-3.7 3.71c-.18.18-.43.29-.71.29a1 1 0 0 1-1-1v-3H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3m13 1H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h4v4l4-4h5a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2"/></svg>{" "}

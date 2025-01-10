@@ -168,7 +168,7 @@ export default async function App({ params }: { params: { slug: string } }) {
               that is not the case
             </h1>
             <Link
-              href="/home"
+              href="/"
               className={`mx-auto mt-4 rounded-full w-max px-8 py-3 text-xs font-bold ${
                 1 == 1 ? "bg-cyan-700 text-white" : "border-2  bg-white "
               }`}
@@ -217,9 +217,9 @@ export default async function App({ params }: { params: { slug: string } }) {
               </Link>
             )}
 
-            <div className="flex flex-row items-center content-center justify-between mt-6 text-lg">
+            <div className="sticky top-0 flex flex-row items-center content-center justify-between py-4 mt-2 text-lg bg-black/50 backdrop-blur-lg">
               <Link href={"/profile/" + author} className="flex flex-row items-center content-center">
-                <UserInformation id={user} image={profile} imgclass="w-8 h-8 mr-3 rounded-md" src={profile} />
+                <UserInformation id={user} image={profile} imgclass="w-7 h-7 mr-3 rounded-md" src={profile} />
                 <h1 className="text-xs font-medium text-neutral-300 md:text-sm">{name}</h1>
               </Link>
 
@@ -247,7 +247,7 @@ export default async function App({ params }: { params: { slug: string } }) {
         Login to {AppConfig.title} to view the replies for this post
       </h1>
       <Link
-        href="/home"
+        href="/"
         className={`mx-auto mt-3 w-max rounded-full px-8 py-3 text-xs font-bold ${
           1 == 1 ? "bg-cyan-800 text-white" : "border-2  bg-white "
         }`}
@@ -259,8 +259,7 @@ export default async function App({ params }: { params: { slug: string } }) {
       
       }
           {loggedin && !newblocked.includes(authorid) && !blocked.includes(authorid) && (
-            <section className="px-0 pt-4 pb-8 border-t border-t-neutral-900" id="comments">
-              <h1 className="px-6 mb-4 text-xl font-bold text-neutral-300">Comments</h1>
+            <section className="px-0 border-t border-t-neutral-900" id="comments">
 
               <CommentsComponent
                 myname={myname}
@@ -278,7 +277,7 @@ export default async function App({ params }: { params: { slug: string } }) {
         </div>
       )}
       {loggedin && !blocked.includes(authorid) && !newblocked.includes(authorid)  && (
-        <div className="absolute bottom-0 flex flex-row w-full border-t bg-[#000205] border-x h-14 border-t-neutral-900 border-x-neutral-900">
+        <div className="absolute bottom-0 z-[1000000] flex flex-row w-full border-t bg-[#000205]/30 backdrop-blur-lg border-x h-14 border-t-neutral-900 border-x-neutral-900">
           <BookMarksComponent
             userliked={userbookmarked}
             postid={params.slug}

@@ -14,9 +14,9 @@ export async function GET(request: Request) {
     const supabase = createClient(cookieStore);
     await supabase.auth.exchangeCodeForSession(code);
 
-    return NextResponse.redirect(requestUrl.origin);
+    return NextResponse.redirect(requestUrl.origin+'/');
   } else {
-    return NextResponse.redirect(requestUrl.origin);
+    return NextResponse.redirect(requestUrl.origin+'/');
   }
 
   // URL to redirect to after sign in process completes

@@ -76,6 +76,7 @@ export default function MoreQuickieComments(props: any) {
               handle={comment.handle}
               postid={props.slug}
               userid={comment.user.id}
+              stateChanger={props.setState}
 
               likes={comment.likes}
               likedbyme={comment.likedbyme}

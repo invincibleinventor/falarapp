@@ -82,8 +82,10 @@ export default function CommentsComponent(props: any) {
   return (
     <>
       {props.loggedin && (
-        <div className="flex flex-col pt-2 space-y-2">
-          <div className="flex flex-row px-6 pt-2 pb-0 space-x-0">
+        <div className="sticky bg-black/30 backdrop-blur-lg z-[100000] top-0 shadow-lg flex flex-col pt-6 space-y-2">
+                        <h1 className="sticky top-0 px-6 mb-4 text-xl font-bold text-neutral-300">Comments</h1>
+
+          <div className="flex flex-row px-6 pt-2 pb-0 space-x-0 ">
             <Image alt={""} src={props.myphoto} width={32} height={32} className="rounded-md h-7 w-7 shrink-0" />
             <textarea
               required
@@ -95,17 +97,17 @@ export default function CommentsComponent(props: any) {
               onChange={(e) => (setState(e.target.value), setText(e.target.value))}
               ref={inputRef}
               value={state}
-              className="w-full px-6  pt-[2px] pl-4 mb-4 text-sm font-medium text-neutral-300 bg-transparent outline-none resize-none placeholder:font-medium md:text-base h-max text-md"
+              className="w-full  px-6  pt-[2px] pl-4 mb-0 text-sm font-medium text-neutral-300 bg-transparent outline-none resize-none placeholder:font-medium md:text-base h-max text-md"
               placeholder={"Post a comment publicly as " + props.myname}
             ></textarea>
-            <button onClick={()=>post()} className="px-6 py-2 text-sm text-white transition-all duration-100 ease-linear bg-neutral-900 rounded-full hover:bg-neutral-800 h-max">Post</button>
+            <button onClick={()=>post()} className="px-6 py-2 text-sm text-white transition-all duration-100 ease-linear rounded-full bg-neutral-900 hover:bg-neutral-800 h-max">Post</button>
           </div>
           <div className={!posted ? "hidden" : "mx-auto text-neutral-300 pb-6 text-xs"}>
             <h1>Posted</h1>
           </div>
         </div>
       )}
-      <div className="relative flex flex-col px-0 my-3 mt-0 space-y-0">
+      <div className="relative flex flex-col px-0 my-3 mt-4 space-y-0">
         {!loading ? (
           <>
             {comments.map((comment: any) => (
@@ -132,7 +134,7 @@ export default function CommentsComponent(props: any) {
               myblocked={props.myblocked}
               myhandle={props.myhandle}
               loggedin={props.loggedin}
-              
+              setState={setState}
               slug={props.slug}
             />
           </>

@@ -58,7 +58,7 @@ export default function Create() {
     }
     if (u) {
       if (s && s.excerpt == excerpt && s.title == title && s.handle == u[0]["handle"] && s.content == content) {
-        return redirect("/home");
+        return redirect("/");
       } else {
         const { error } = await supabase
           .from("posts")
@@ -80,10 +80,10 @@ export default function Create() {
               if (es) {
                 alert(es.message);
               } else {
-                window.location.replace("/home");
+                window.location.replace("/");
               }
             } else {
-              window.location.replace("/home");
+              window.location.replace("/");
             }
           }
         }
@@ -104,7 +104,7 @@ export default function Create() {
           </label>
           <input
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full px-4 py-2 mb-6 mr-4 text-sm text-white bg-black border border-neutral-900 rounded-md "
+            className="w-full px-4 py-2 mb-6 mr-4 text-sm text-white bg-black border rounded-md border-neutral-900 "
             name="content"
             placeholder="Please Type Out Your Title"
             required
@@ -116,7 +116,7 @@ export default function Create() {
           </label>
           <textarea
             onChange={(e) => setExcerpt(e.target.value)}
-            className="w-full px-4 py-2 mb-6 mr-4 text-sm text-white bg-black border border-neutral-900 rounded-md "
+            className="w-full px-4 py-2 mb-6 mr-4 text-sm text-white bg-black border rounded-md border-neutral-900 "
             name="content"
             placeholder="Please Type Out Your Excerpt"
             required

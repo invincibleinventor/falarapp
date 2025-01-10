@@ -83,7 +83,7 @@ export default function CommentsComponent(props: any) {
                 likes={comment.likes}
                 likedbyme={comment.likedbyme}
                 userid={comment.user.id}
-
+                stateChanger={props.setState}
                 name={comment.user.name}
                 profile={comment.user.image}
                 content={comment.content}

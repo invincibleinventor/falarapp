@@ -45,7 +45,7 @@ export default function Toggle(props: any) {
         if (signouterror) {
           console.log(signouterror);
         } else {
-          window.location.replace("/home");
+          window.location.replace("/");
         }
       }
 

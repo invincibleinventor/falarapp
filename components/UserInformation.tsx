@@ -9,6 +9,7 @@ import notification from '@/utils/notifications/notification';
 export default function UserInformation(props: any) {
     const [handle, setHandle] = useState<any>()
     const supabase = createClient();
+    const [blocked,setBlocked] = useState<any>();
     const [user, setUser] = useState<any>()
     const [myImage,setMyImage]  = useState<any>()
     const [myId, setMyId] = useState<any>();
@@ -104,7 +105,7 @@ export default function UserInformation(props: any) {
             const { data: u } = await supabase.auth.getUser();
             if (u?.user) {
                 const { data, error } = await supabase.from('user').select('*').eq('id', props.id);
-                const { data: mine, error: e } = await supabase.from('user').select('image,handle').eq('id', u.user.id);
+                const { data: mine, error: e } = await supabase.from('user').select('image,handle,blocked,blockedby').eq('id', u.user.id);
     
                 if (data && mine && !error && mine.length > 0 && data.length > 0) {
                     setUser(data[0]);
@@ -112,7 +113,7 @@ export default function UserInformation(props: any) {
                     setMyId(mine[0].handle);
                     setUserid(u.user.id);
                     setMyImage(mine[0].image)
-    
+                    
                     // Determine imfollowing if props.imfollowing is not provided
                     if (props.imfollowing !== undefined) {
                         setImFollowing(props.imfollowing);
@@ -207,7 +208,7 @@ else{
                 pointerEvents: isVisible ? 'auto' : 'none',
                 visibility: isPositioned ? 'visible' : 'hidden'
             }}
-            className='w-64 h-auto p-2 pb-4 bg-black border border-neutral-900 rounded-lg shadow-lg shadow-neutral-900'
+            className='w-64 h-auto p-2 pb-4 bg-black border rounded-lg shadow-lg border-neutral-900 shadow-neutral-900'
         >
             <div className='relative w-full h-full'>
                 <img src={user.cover} className='w-full h-20 bg-black rounded-t-lg aspect-cover'></img>

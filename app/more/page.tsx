@@ -111,7 +111,7 @@ export default function Create() {
     if (error) {
       console.log(error);
     } else {
-      window.location.replace("/home");
+      window.location.replace("/");
     }
   }
   return (

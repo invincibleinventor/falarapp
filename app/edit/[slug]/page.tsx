@@ -78,7 +78,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     if (error) {
       alert(error);
     } else {
-      window.location.replace("/home");
+      window.location.replace("/");
     }
   }
   async function create() {
@@ -99,10 +99,10 @@ export default function Page({ params }: { params: { slug: string } }) {
         if (es) {
           alert(es.message);
         } else {
-          window.location.replace("/home");
+          window.location.replace("/");
         }
       } else {
-        window.location.replace("/home");
+        window.location.replace("/");
       }
     }
   }
@@ -147,7 +147,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 <button
                   onClick={() => toggledeleteDialog("")}
                   disabled={deleteDialog != "hidden" ? true : false}
-                  className="flex flex-row items-center content-center px-6 py-3 mx-0 space-x-3 text-xs text-neutral-300 transition-all duration-100 ease-linear bg-neutral-900 rounded-full hover:bg-red-900"
+                  className="flex flex-row items-center content-center px-6 py-3 mx-0 space-x-3 text-xs transition-all duration-100 ease-linear rounded-full text-neutral-300 bg-neutral-900 hover:bg-red-900"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256">
                     <path
@@ -167,7 +167,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             <input
               disabled={deleteDialog != "hidden" ? true : false}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-4 py-2 mb-6 mr-4 text-sm text-white bg-black border border-neutral-900 rounded-md outline-none "
+              className="w-full px-4 py-2 mb-6 mr-4 text-sm text-white bg-black border rounded-md outline-none border-neutral-900 "
               name="content"
               placeholder="Please Type Out Your Title"
               required
@@ -181,7 +181,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             <textarea
               disabled={deleteDialog != "hidden" ? true : false}
               onChange={(e) => setExcerpt(e.target.value)}
-              className="w-full h-32 px-4 py-2 mb-6 mr-4 text-sm text-white bg-black border border-neutral-900 rounded-md outline-none"
+              className="w-full h-32 px-4 py-2 mb-6 mr-4 text-sm text-white bg-black border rounded-md outline-none border-neutral-900"
               name="content"
               placeholder="Please Type Out Your Excerpt"
               required
@@ -194,7 +194,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 setCover(URL.createObjectURL(e.target.files[0]));
                 setFile(e.target.files[0]);
               }}
-              className="inset-x-0 bottom-0 hidden mx-auto border border-neutral-900 rounded-md bg-neutral-900/40"
+              className="inset-x-0 bottom-0 hidden mx-auto border rounded-md border-neutral-900 bg-neutral-900/40"
               type="file"
               ref={hiddenFileInput}
             />
@@ -248,7 +248,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             Only the Author of the post is allowed to edit a post. Try from a different account or leave this page.
           </h1>
           <Link
-            href="/home"
+            href="/"
             className={`mx-auto mt-3 rounded-md w-max px-8 py-3 text-xs font-medium  ${
               1 == 1 ? "bg-cyan-800 text-white" : "border-2 bg-white"
             }`}

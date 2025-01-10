@@ -151,7 +151,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                       your search. Bookmark posts to view them here.
                     </h1>
                     <Link
-                      href="/home"
+                      href="/"
                       className={`mx-auto mt-3 rounded-full w-max px-8 py-3 text-xs font-medium  ${
                         1 == 1 ? "bg-cyan-800 text-white" : "border-2 bg-white"
                       }`}

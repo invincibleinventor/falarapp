@@ -40,7 +40,7 @@ export default function Login() {
       if (user) {
         const {data,error} = await supabase.from('user').select('*').eq('id',user.id);
         if(data && !error){
-          return window.location.replace('/home')
+          return window.location.replace('/')
         }else{
           
           return window.location.replace("/editprofile");
@@ -79,7 +79,7 @@ export default function Login() {
               setEmail(e.target.value);
             }}
             type="email"
-            className="w-full px-5 py-3 mt-1 text-neutral-300 bg-black border border-neutral-900 rounded-full outline-none focus:outline-cyan-800 placeholder:text-neutral-400 "
+            className="w-full px-5 py-3 mt-1 bg-black border rounded-full outline-none text-neutral-300 border-neutral-900 focus:outline-cyan-800 placeholder:text-neutral-400 "
             placeholder="Your Email Address"
           ></input>
           <h1 className="pl-[1px] mt-4 text-xs font-medium text-neutral-300">Password</h1>
@@ -88,7 +88,7 @@ export default function Login() {
               setPassword(e.target.value);
             }}
             type="password"
-            className="w-full px-5 py-3 mt-1 text-neutral-300 bg-black border border-neutral-900 rounded-full outline-none focus:outline-cyan-800 placeholder:text-neutral-400 "
+            className="w-full px-5 py-3 mt-1 bg-black border rounded-full outline-none text-neutral-300 border-neutral-900 focus:outline-cyan-800 placeholder:text-neutral-400 "
             placeholder="Your Password"
           ></input>
           <button
@@ -99,12 +99,12 @@ export default function Login() {
           </button>
           <button
             onClick={(e) => (e.preventDefault(), console.log("register"), register())}
-            className="px-5 py-3 text-xs font-medium text-neutral-300 bg-black border border-neutral-900 rounded-full"
+            className="px-5 py-3 text-xs font-medium bg-black border rounded-full text-neutral-300 border-neutral-900"
           >
             Register Your Account
           </button>
           <button
-            className="flex justify-center gap-4 px-5 py-3 mt-6 text-xs font-medium text-neutral-300 bg-black border border-neutral-900 rounded-full "
+            className="flex justify-center gap-4 px-5 py-3 mt-6 text-xs font-medium bg-black border rounded-full text-neutral-300 border-neutral-900 "
             onClick={() => (console.log("google"), signWithGoogle())}
           >
             <svg width="16" height="16" viewBox="0 0 775 794" fill="none" xmlns="http://www.w3.org/2000/svg">

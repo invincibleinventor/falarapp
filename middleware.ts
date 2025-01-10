@@ -19,14 +19,13 @@ export async function middleware(request: NextRequest) {
     }
   }
   const redirectUrl = request.nextUrl.clone();
-  redirectUrl.pathname = "/";
-  redirectUrl.searchParams.set(`redirectedFrom`, request.nextUrl.pathname);
+  redirectUrl.pathname = "/login";
   return NextResponse.redirect(redirectUrl);
 }
 
 export const config = {
   matcher: [
-    "/home",
+    "/",
     "/explore",
     "/explore",
     "/create",
