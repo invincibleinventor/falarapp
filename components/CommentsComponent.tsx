@@ -133,6 +133,7 @@ export default function CommentsComponent(props: any) {
             <MoreComments
               myblocked={props.myblocked}
               myhandle={props.myhandle}
+              newblocked={props.newblocked}
               loggedin={props.loggedin}
               setState={setState}
               slug={props.slug}
