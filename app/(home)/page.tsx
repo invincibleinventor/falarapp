@@ -40,9 +40,6 @@ export default async function Index() {
       s = user.user.id;
       loggedin = true;
     }
-    else{
-      return redirect('/login')
-    }
     const { data: u } = await supabase.from("user").select("*").eq("id", s);
     l = u![0]["following"];
     myblocked = u![0]["blocked"];
