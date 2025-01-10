@@ -5,9 +5,10 @@ import { createClient } from "@/utils/supabase/client";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { Oval } from "react-loader-spinner";
-export default function Page({ params }: { params: { slug: string } }) {
+export default function Page({ params }: { params: Promise<{ slug: string }> }) {
+  const {slug} = use(params);
   const supabase = createClient();
   const canInitSupabaseClient = () => {
     // This function is just for the interactive tutorial.
@@ -20,7 +21,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     }
   };
   TimeAgo.locale(en);
-  const [search, setSearch] = useState(params.slug);
+  const [search, setSearch] = useState(slug);
   const [tempsearch, setTempSearch] = useState("");
   const timeAgo = new TimeAgo("en-US");
 

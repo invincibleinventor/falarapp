@@ -6,17 +6,18 @@ import { createClient } from "@/utils/supabase/client";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { Oval } from "react-loader-spinner";
 
-export default function Page({ params }: { params: { slug: string } }) {
+export default function Page({ params }: { params: Promise<{ slug: string }>}) {
+  const {slug} = use(params);
   const supabase = createClient();
 
   TimeAgo.locale(en);
   const date1 = new Date();
   const timeAgo = new TimeAgo("en-US");
 
-  const [search, setSearch] = useState(params.slug);
+  const [search, setSearch] = useState(slug);
   const [tempsearch, setTempSearch] = useState("");
   const [empty, setEmpty] = useState(true);
   const [posts, setPosts] = useState<Record<string, unknown>[]>([]);

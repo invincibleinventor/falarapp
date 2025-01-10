@@ -11,8 +11,9 @@ import Link from "next/link";
 import Iof from "@/components/Iof";
 import Menu from "@/components/Menu";
 import { AppConfig } from "@/config/config";
-export default async function App({ params }: { params: { slug: string } }) {
+export default async function App({ params }: { params: Promise<{ slug: string }>}) {
   const cookieStore = cookies();
+  const slug = (await params).slug;
   const supabase = createClient(cookieStore);
   let author = "";
   let content = "";
@@ -61,7 +62,7 @@ export default async function App({ params }: { params: { slug: string } }) {
       }
     }
     const blockedpostgres = blocked.toString();
-    const { data, error: e } = await supabase.from("quickies").select("*").eq("id", params.slug);
+    const { data, error: e } = await supabase.from("quickies").select("*").eq("id", slug);
     if (data && data.length > 0) {
       error = false;
       const l = data[0]["liked"];
@@ -102,7 +103,7 @@ export default async function App({ params }: { params: { slug: string } }) {
     const { data, error } = await supabase
       .from("quickiecomments")
       .select("*")
-      .eq("id", params.slug)
+      .eq("id", slug)
       .order("likes", { ascending: false });
     if (data && data.length != 0) {
       comments = data;
@@ -221,7 +222,7 @@ export default async function App({ params }: { params: { slug: string } }) {
                       <span className="text-base font-medium text-neutral-500 whitespace-nowrap">@{author}</span>
                     </div>
                   </Link>
-                  <Menu type="quickie" id={params.slug} myhandle={myhandle} handle={author} />
+                  <Menu type="quickie" id={slug} myhandle={myhandle} handle={author} />
                 </div>
 
                 <div>
@@ -285,7 +286,7 @@ export default async function App({ params }: { params: { slug: string } }) {
                 id={user}
                 newblocked={newblocked}
                 myhandle={myhandle}
-                slug={params.slug}
+                slug={slug}
                 loggedin={loggedin}
               />
             </section>
@@ -297,7 +298,7 @@ export default async function App({ params }: { params: { slug: string } }) {
         <div className="absolute bottom-0 flex flex-row w-full bg-black border-t h-14 border-t-neutral-900 ">
           <LikeComponent
             userliked={userliked}
-            postid={params.slug}
+            postid={slug}
             handle={myhandle}
             likedlist={likedlist}
             liked={liked}
@@ -313,7 +314,7 @@ export default async function App({ params }: { params: { slug: string } }) {
           </Link>
           <BookMarksComponent
             userliked={userbookmarked}
-            postid={params.slug}
+            postid={slug}
             handle={myhandle}
             likedlist={bookmarkedlist}
             liked={bookmarked}

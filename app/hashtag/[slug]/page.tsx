@@ -8,7 +8,8 @@ import en from "javascript-time-ago/locale/en";
 import { cookies } from "next/headers";
 import Link from "next/link";
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+  const slug = (await params).slug;
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
   const canInitSupabaseClient = () => {
@@ -52,7 +53,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     myhandle = u![0]["handle"];
     userbookmarked = u![0]["bookmarks"];
     userliked = u![0]["liked"];
-    const { data: hashtag, error } = await supabase.from("hashtags").select("posts").eq("hashtag", params.slug);
+    const { data: hashtag, error } = await supabase.from("hashtags").select("posts").eq("hashtag", slug);
     let ds = [];
 
     l.push(h);

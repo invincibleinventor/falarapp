@@ -3,10 +3,11 @@
 import { createClient } from "@/utils/supabase/client";
 import "@mdxeditor/editor/style.css";
 
-import { MouseEvent, useRef, useState } from "react";
+import { MouseEvent, use, useRef, useState } from "react";
 import * as tus from "tus-js-client";
 
-export default function Create({ params }: { params: { slug: string } }) {
+export default function Create({ params }: { params: Promise<{ slug: string }>}) {
+  const {slug} = use(params);
   const [disabled, setDisabled] = useState(false);
   const [text, setText] = useState("");
   const hiddenFileInput = useRef<HTMLInputElement | null>(null);
@@ -114,14 +115,14 @@ export default function Create({ params }: { params: { slug: string } }) {
         .order("comment_id", { ascending: false })
         .limit(1);
       if (check && check.length > 0 && check[0]["content"] == text) {
-        window.location.replace("/quickie/" + params.slug);
+        window.location.replace("/quickie/" + slug);
       } else {
         const { data, error } = await supabase.from("user").select("*").eq("id", user.user.id);
         if (!error && data) {
           handle = data[0]["handle"];
           const { error } = await supabase
             .from("commentquickies")
-            .insert({ id: params.slug, handle: handle, content: text });
+            .insert({ id: slug, handle: handle, content: text });
           if (error) {
             console.log("initial");
             console.log(error);
@@ -189,7 +190,7 @@ export default function Create({ params }: { params: { slug: string } }) {
                                 .update({ [h]: a })
                                 .eq("date", date);
                               if (!error) {
-                                window.location.replace("/quickie/" + params.slug);
+                                window.location.replace("/quickie/" + slug);
                               }
                             } else {
                               console.log(a);
@@ -201,7 +202,7 @@ export default function Create({ params }: { params: { slug: string } }) {
                                 .update({ [h]: a })
                                 .eq("date", date);
                               if (!error) {
-                                window.location.replace("/quickie/" + params.slug);
+                                window.location.replace("/quickie/" + slug);
                               } else {
                                 console.log(error);
                               }
@@ -212,7 +213,7 @@ export default function Create({ params }: { params: { slug: string } }) {
                             a[hashtags[i]] = 1;
                             console.log(a);
                             const { error } = await supabase.from("trending").insert({ date: date, [h]: a });
-                            if (!error) window.location.replace("/quickie/" + params.slug);
+                            if (!error) window.location.replace("/quickie/" + slug);
                           }
                         }
                       }
@@ -262,7 +263,7 @@ export default function Create({ params }: { params: { slug: string } }) {
                                 .update({ [h]: a })
                                 .eq("date", date);
                               if (!error) {
-                                window.location.replace("/quickie/" + params.slug);
+                                window.location.replace("/quickie/" + slug);
                               }
                             } else {
                               a[hashtags[i]] = 1;
@@ -271,7 +272,7 @@ export default function Create({ params }: { params: { slug: string } }) {
                                 .update({ [h]: a })
                                 .eq("date", date);
                               if (!error) {
-                                window.location.replace("/quickie/" + params.slug);
+                                window.location.replace("/quickie/" + slug);
                               }
                             }
                           } else {
@@ -279,7 +280,7 @@ export default function Create({ params }: { params: { slug: string } }) {
 
                             a[hashtags[i]] = 1;
                             const { error } = await supabase.from("trending").insert({ date: date, [h]: a });
-                            if (!error) window.location.replace("/quicki/e" + params.slug);
+                            if (!error) window.location.replace("/quicki/e" + slug);
                           }
                         }
                       }
@@ -288,7 +289,7 @@ export default function Create({ params }: { params: { slug: string } }) {
                 }
               }
 
-              window.location.replace("/quickie/" + params.slug);
+              window.location.replace("/quickie/" + slug);
 
               if (imgsSrc.length > 0) {
                 for (let i = 0; i < imgsSrc.length; i++) {
@@ -315,13 +316,13 @@ export default function Create({ params }: { params: { slug: string } }) {
                     if (error) {
                       console.log(error);
                     } else {
-                      window.location.replace("/quickie/" + params.slug);
+                      window.location.replace("/quickie/" + slug);
                     }
                   });
                 }
               }
             } else {
-              window.location.replace("/quickie/" + params.slug);
+              window.location.replace("/quickie/" + slug);
             }
           }
         }
@@ -369,7 +370,7 @@ export default function Create({ params }: { params: { slug: string } }) {
       <textarea
         onChange={(e: any) => setText(e.target.value)}
         maxLength={150}
-        className="w-full h-full px-6 py-5 mb-auto text-neutral-300 bg-transparent outline-none resize-none text-md md:text-lg placeholder:text-neutral-600 md:m-4 md:p-0 md:px-2"
+        className="w-full h-full px-6 py-5 mb-auto bg-transparent outline-none resize-none text-neutral-300 text-md md:text-lg placeholder:text-neutral-600 md:m-4 md:p-0 md:px-2"
         placeholder="What's on your mind?"
       ></textarea>
       <div className="grid w-full grid-cols-3 px-4 mb-20 border-t bg-black/40 border-t-neutral-900 sm:flex sm:flex-row ">

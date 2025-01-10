@@ -9,7 +9,7 @@ import en from "javascript-time-ago/locale/en";
 import { cookies } from "next/headers";
 import Link from "next/link";
 
-export default async function Index({ params }: { params: { slug: string } }) {
+export default async function Index({ params }: { params: Promise<{ slug: string }> }) {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
   const canInitSupabaseClient = () => {
@@ -23,7 +23,7 @@ export default async function Index({ params }: { params: { slug: string } }) {
     }
   };
   TimeAgo.locale(en);
-
+const slug = (await params).slug;
   const timeAgo = new TimeAgo("en-US");
   const date1 = new Date();
   const isSupabaseConnected = canInitSupabaseClient();
@@ -46,7 +46,7 @@ export default async function Index({ params }: { params: { slug: string } }) {
     const { data: u } = await supabase.from("user").select("*").eq("id", s);
     myblocked = u![0]["blocked"];
     newblocked = u![0]["blockedby"]
-    const { data: hs } = await supabase.from("user").select("*").eq("handle", params.slug);
+    const { data: hs } = await supabase.from("user").select("*").eq("handle", slug);
     if (hs && hs.length > 0) {
       if (!newblocked.includes(hs[0]["id"]) && !myblocked.includes(hs[0]["id"])) {
         console.log(myblocked, hs[0]["id"]);
@@ -64,7 +64,7 @@ export default async function Index({ params }: { params: { slug: string } }) {
         const { data, error } = await supabase
           .from("quickies")
           .select("*,user(id,name,handle,image)")
-          .eq("handle", params.slug)
+          .eq("handle", slug)
           .order("id", { ascending: false })
           .in("handle", l)
           .limit(5);
@@ -176,7 +176,7 @@ export default async function Index({ params }: { params: { slug: string } }) {
               {!empty && (
                 <More
                   myblocked={myblocked}
-                  handle={params.slug}
+                  handle={slug}
                   myhandle={myhandle}
                   myname={myname}
                   newblocked={newblocked}

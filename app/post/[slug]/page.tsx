@@ -14,7 +14,8 @@ import { ClassAttributes, ImgHTMLAttributes, JSX } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 export const revalidate = 60;
-export default async function App({ params }: { params: { slug: string } }) {
+export default async function App({ params }: {params: Promise<{ slug: string }> }) {
+  const slug = (await params).slug
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
   let author = "";
@@ -64,7 +65,7 @@ export default async function App({ params }: { params: { slug: string } }) {
         userbookmarked = users[0]["bookmarks"];
       }
     }
-    const { data, error: e } = await supabase.from("posts").select("*").eq("id", params.slug);
+    const { data, error: e } = await supabase.from("posts").select("*").eq("id", slug);
     if (data && data.length > 0) {
       error = false;
       const l = data[0]["liked"];
@@ -105,7 +106,7 @@ export default async function App({ params }: { params: { slug: string } }) {
     const { data, error } = await supabase
       .from("comments")
       .select("*")
-      .eq("id", params.slug)
+      .eq("id", slug)
       .order("likes", { ascending: false });
     if (data && data.length != 0) {
       comments = data;
@@ -193,7 +194,7 @@ export default async function App({ params }: { params: { slug: string } }) {
             </h1>
             {imauthor && (
               <Link
-                href={"/edit/" + params.slug}
+                href={"/edit/" + slug}
                 className="my-4 ml-auto mt-6 flex cursor-pointer flex-row  content-center items-center space-x-[16px] px-1  pr-0"
               >
                 <svg
@@ -227,7 +228,7 @@ export default async function App({ params }: { params: { slug: string } }) {
                 <h1 className="text-xs font-normal text-neutral-300 md:text-sm">
                   <span className="hidden md:inline-block">Posted</span> {timeAgo.format(Date.now() - time)}{" "}
                 </h1>{" "}
-                {myhandle !== author && <Menu type="post" id={params.slug} myhandle={myhandle} handle={author} />}
+                {myhandle !== author && <Menu type="post" id={slug} myhandle={myhandle} handle={author} />}
               </div>
             </div>
             <Markdown
@@ -269,7 +270,7 @@ export default async function App({ params }: { params: { slug: string } }) {
                 newblocked={newblocked}
                 myhandle={myhandle}
                 myblocked={blocked}
-                slug={params.slug}
+                slug={slug}
                 loggedin={loggedin}
               />
             </section>
@@ -280,7 +281,7 @@ export default async function App({ params }: { params: { slug: string } }) {
         <div className="absolute bottom-0 z-[1000000] flex flex-row w-full border-t bg-[#000205]/30 backdrop-blur-lg border-x h-14 border-t-neutral-900 border-x-neutral-900">
           <BookMarksComponent
             userliked={userbookmarked}
-            postid={params.slug}
+            postid={slug}
             handle={myhandle}
             likedlist={bookmarkedlist}
             liked={bookmarked}
@@ -288,7 +289,7 @@ export default async function App({ params }: { params: { slug: string } }) {
 
           <LikeComponent
             userliked={userliked}
-            postid={params.slug}
+            postid={slug}
             handle={myhandle}
             likedlist={likedlist}
             liked={liked}

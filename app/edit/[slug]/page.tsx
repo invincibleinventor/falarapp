@@ -5,11 +5,12 @@ import "@mdxeditor/editor/style.css";
 import MDEditor from "@uiw/react-md-editor";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState ,use} from "react";
 import { Oval } from "react-loader-spinner";
 import rehypeSanitize from "rehype-sanitize";
 
-export default function Page({ params }: { params: { slug: string } }) {
+export default function Page({ params }: {params: Promise<{ slug: string }>}) {
+  const {slug } = use(params);
   const supabase = createClient();
 
   const hiddenFileInput = useRef<HTMLInputElement | null>(null);
@@ -50,7 +51,7 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   useEffect(() => {
     async function check() {
-      const { data, error } = await supabase.from("posts").select("*").eq("id", params.slug);
+      const { data, error } = await supabase.from("posts").select("*").eq("id", slug);
       if (error) {
         setNotFound(true);
         setLoading(false);
@@ -74,7 +75,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   async function del() {
     toggledeleteDialog("hidden");
     setLoading(true);
-    const { error } = await supabase.from("posts").delete().eq("id", params.slug);
+    const { error } = await supabase.from("posts").delete().eq("id", slug);
     if (error) {
       alert(error);
     } else {
@@ -88,14 +89,14 @@ export default function Page({ params }: { params: { slug: string } }) {
 
     const { error } = await supabase
       .from("posts")
-      .upsert({ id: params.slug, excerpt: excerpt, content: content, title: title });
+      .upsert({ id: slug, excerpt: excerpt, content: content, title: title });
     if (error) {
       alert(error.message);
       console.log(error);
     } else {
       if (changed) {
-        const newCover = await coverChange(params.slug);
-        const { error: es } = await supabase.from("posts").update({ cover: newCover }).eq("id", params.slug);
+        const newCover = await coverChange(slug);
+        const { error: es } = await supabase.from("posts").update({ cover: newCover }).eq("id", slug);
         if (es) {
           alert(es.message);
         } else {

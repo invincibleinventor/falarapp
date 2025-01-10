@@ -3,10 +3,11 @@ import PostComponent from "@/components/PostComponent";
 import { createClient } from "@/utils/supabase/client";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { Oval } from "react-loader-spinner";
-export default function Page({ params }: { params: { slug: string } }) {
+export default function Page({ params }: { params: Promise<{ slug: string }> }) {
   const supabase = createClient();
+  const {slug} = use(params);
   const canInitSupabaseClient = () => {
     // This function is just for the interactive tutorial.
     // Feel free to remove it once you have Supabase connected.
@@ -31,7 +32,7 @@ export default function Page({ params }: { params: { slug: string } }) {
       const { data, error } = await supabase
         .from("posts")
         .select("*")
-        .eq("handle", params.slug)
+        .eq("handle", slug)
         .order("id", { ascending: false });
       if (error) {
         console.log(error);
@@ -80,7 +81,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               maxLength={50}
               type="search"
               className="font-inter md:mb-3 rounded-full peer h-[48px] w-full bg-neutral-700/20 focus:outline-none pl-6 pr-14 text-[14px] placeholder:text-neutral-400 text-neutral-300"
-              placeholder={"Search " + params.slug + "'s posts"}
+              placeholder={"Search " + slug + "'s posts"}
             ></input>
           </div>
         </div>

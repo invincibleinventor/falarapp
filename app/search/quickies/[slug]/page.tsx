@@ -6,9 +6,10 @@ import { createClient } from "@/utils/supabase/client";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 
-export default function Page({ params }: { params: { slug: string } }) {
+export default function Page({ params }: { params: Promise<{ slug: string }> }) {
+  const {slug } = use(params)
   const supabase = createClient();
   const canInitSupabaseClient = () => {
     // This function is just for the interactive tutorial.
@@ -34,7 +35,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [myphoto, setMyphoto] = useState("");
   const [myhandle, setMyhandle] = useState("");
   const [userliked, setUserliked] = useState([]);
-  const [search, setSearch] = useState(params.slug);
+  const [search, setSearch] = useState(slug);
   const [tempsearch, setTempSearch] = useState("");
 const [newblocked,setnewblocked] = useState([])
   const [userbookmarked, setUserBookmarked] = useState([]);
