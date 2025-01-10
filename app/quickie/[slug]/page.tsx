@@ -12,7 +12,7 @@ import Iof from "@/components/Iof";
 import Menu from "@/components/Menu";
 import { AppConfig } from "@/config/config";
 export default async function App({ params }: { params: Promise<{ slug: string }>}) {
-  const cookieStore = cookies();
+  const cookieStore =  cookies();
   const slug = (await params).slug;
   const supabase = createClient(cookieStore);
   let author = "";
