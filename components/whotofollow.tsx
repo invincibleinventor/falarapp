@@ -43,7 +43,7 @@ export default async function WhoToFollow() {
   }
   return loggedin && !empty ? (
     <div className="w-full flex flex-col space-y-1  pt-[14px] md:mt-[calc(17*4px)] md:space-y-[0px] md:mx-4 md:pt-[4px]">
-      <div className="px-5 py-4 mx-10 rounded-lg bg-gray-900/30">
+      <div className="px-5 py-4 mx-10 rounded-lg bg-neutral-900/30">
         <h1 className="mb-5 text-base font-medium text-white font-poppins">Who To Follow</h1>
         <div className="flex flex-col space-y-5">
           {userlist.map((user: any) => (

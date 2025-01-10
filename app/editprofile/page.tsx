@@ -98,39 +98,39 @@ export default function Create() {
         action={create}
       >
         <h1 className="text-2xl font-semibold text-white">Welcome To {AppConfig.title}</h1>
-        <h1 className="pb-10 text-base font-normal text-gray-400 ">
+        <h1 className="pb-10 text-base font-normal text-neutral-400 ">
           Let us setup your profile on {AppConfig.title}. Setup your profile to continue.
         </h1>
-        <label className="text-sm text-gray-300" htmlFor="name">
+        <label className="text-sm text-neutral-300" htmlFor="name">
           Name
         </label>
         <input
           onChange={(e) => setName(e.target.value)}
-          className="px-4 py-2 mb-6 text-sm text-gray-300 bg-black border border-gray-900 rounded-md outline-none focus:outline-cyan-800"
+          className="px-4 py-2 mb-6 text-sm text-neutral-300 bg-black border border-neutral-900 rounded-md outline-none focus:outline-cyan-800"
           name="name"
           placeholder="Please Type Out Your Name"
           required
           minLength={4}
           maxLength={20}
         />
-        <label className="text-sm text-gray-300" htmlFor="name">
+        <label className="text-sm text-neutral-300" htmlFor="name">
           Username - You cannot change this later
         </label>
         <input
           onChange={(e) => setHandle(e.target.value.trim().replace(" ", "_"))}
-          className="px-4 py-2 mb-6 text-sm text-gray-300 bg-black border border-gray-900 rounded-md outline-none focus:outline-cyan-800"
+          className="px-4 py-2 mb-6 text-sm text-neutral-300 bg-black border border-neutral-900 rounded-md outline-none focus:outline-cyan-800"
           name="handle"
           placeholder="Please Type Out Your Username"
           required
           minLength={4}
           maxLength={12}
         />
-        <label className="text-sm text-gray-300" htmlFor="content">
+        <label className="text-sm text-neutral-300" htmlFor="content">
           About
         </label>
         <textarea
           onChange={(e) => setAbout(e.target.value)}
-          className="px-4 py-2 mb-6 text-sm text-gray-300 bg-black border border-gray-900 rounded-md outline-none focus:outline-cyan-800"
+          className="px-4 py-2 mb-6 text-sm text-neutral-300 bg-black border border-neutral-900 rounded-md outline-none focus:outline-cyan-800"
           name="content"
           placeholder="Please Type About Yourself"
           required

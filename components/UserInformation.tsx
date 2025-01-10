@@ -207,7 +207,7 @@ else{
                 pointerEvents: isVisible ? 'auto' : 'none',
                 visibility: isPositioned ? 'visible' : 'hidden'
             }}
-            className='w-64 h-auto p-2 pb-4 bg-black border border-gray-900 rounded-lg shadow-lg shadow-gray-900'
+            className='w-64 h-auto p-2 pb-4 bg-black border border-neutral-900 rounded-lg shadow-lg shadow-neutral-900'
         >
             <div className='relative w-full h-full'>
                 <img src={user.cover} className='w-full h-20 bg-black rounded-t-lg aspect-cover'></img>
@@ -216,7 +216,7 @@ else{
                     <div className='flex flex-row items-center content-center justify-between'>
                         <div className='flex flex-col '>
                             <h1 className='text-base font-semibold text-white'>{user.name}</h1>
-                            <h1 className='text-sm text-gray-500'>@{user.handle}</h1>
+                            <h1 className='text-sm text-neutral-500'>@{user.handle}</h1>
                         </div>
                         <div className='ml-auto'>
                             {myId != handle &&
@@ -234,20 +234,20 @@ else{
                         </div>
                     </div>
                     <div className='flex flex-row space-x-[4px] two-line-ellipsis items-center content-center'>
-                        <h1 className='text-sm text-gray-300'>{user.about}</h1>
+                        <h1 className='text-sm text-neutral-300'>{user.about}</h1>
                     </div>
                     <div className='grid grid-cols-2 pt-2'>
                         <div className='flex flex-row items-center content-center space-x-1'>
-                            <h1 className="text-sm font-semibold text-gray-300">
+                            <h1 className="text-sm font-semibold text-neutral-300">
                                 {user.followers?.length}
                             </h1>
-                            <h1 className="text-sm text-gray-500">Followers</h1>
+                            <h1 className="text-sm text-neutral-500">Followers</h1>
                         </div>
                         <div className='flex flex-row items-center content-center space-x-1'>
-                            <h1 className="text-sm font-semibold text-gray-300">
+                            <h1 className="text-sm font-semibold text-neutral-300">
                                 {user.following?.length}
                             </h1>
-                            <h1 className="text-sm text-gray-500">Following</h1>
+                            <h1 className="text-sm text-neutral-500">Following</h1>
                         </div>
                     </div>
                 </div>

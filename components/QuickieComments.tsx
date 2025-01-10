@@ -103,13 +103,13 @@ export default function CommentsComponent(props: any) {
               onChange={(e) => (setState(e.target.value), setText(e.target.value))}
               ref={inputRef}
               value={state}
-              className="w-full px-6  pt-[2px] pl-4 mb-4 text-sm font-medium text-gray-300 bg-transparent outline-none resize-none placeholder:font-medium md:text-base h-max text-md"
+              className="w-full px-6  pt-[2px] pl-4 mb-4 text-sm font-medium text-neutral-300 bg-transparent outline-none resize-none placeholder:font-medium md:text-base h-max text-md"
               placeholder={"Post a comment publicly as " + props.myname}
             ></textarea>
-                        <button onClick={()=>post()} className="px-6 py-2 text-sm text-white transition-all duration-100 ease-linear bg-gray-900 rounded-full hover:bg-gray-800 h-max">Post</button>
+                        <button onClick={()=>post()} className="px-6 py-2 text-sm text-white transition-all duration-100 ease-linear bg-neutral-900 rounded-full hover:bg-neutral-800 h-max">Post</button>
 
           </div>
-          <div className={!posted ? "hidden" : "mx-auto text-gray-300 pb-6 text-xs"}>
+          <div className={!posted ? "hidden" : "mx-auto text-neutral-300 pb-6 text-xs"}>
             <h1>Posted</h1>
           </div>
         </div>

@@ -76,7 +76,7 @@ export default async function Index() {
           <div className="p-4 py-2 mx-1 md:mx-1">
             <Search page="bookmarks" text="Bookmarks" />
           </div>
-          <h1 className="px-8 my-4 mt-4 text-xl font-bold text-gray-300">My Bookmarks</h1>
+          <h1 className="px-8 my-4 mt-4 text-xl font-bold text-neutral-300">My Bookmarks</h1>
           <div className="h-full overflow-y-scroll hiddenscroll">
             <div className="flex flex-col gap-2 mb-20 animate-in hiddenscroll">
               {!loading ? (
@@ -99,8 +99,8 @@ export default async function Index() {
                 ) : (
                   <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
                     <div className="flex flex-col gap-4 mx-auto max-w-max">
-                      <h1 className="mx-auto text-lg font-semibold text-center text-gray-300">No Posts To View!</h1>
-                      <h1 className="mx-auto text-center text-gray-500 rounded-md text-md">
+                      <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">No Posts To View!</h1>
+                      <h1 className="mx-auto text-center text-neutral-500 rounded-md text-md">
                         Your bookmarked posts appear in here. Seems like you have not bookmarked anything yet. Bookmark
                         posts to view them here.
                       </h1>

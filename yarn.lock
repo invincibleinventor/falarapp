@@ -230,7 +230,7 @@
     react-devtools-inline "4.4.0"
     react-is "^17.0.2"
 
-"@emotion/is-prop-valid@^0.8.2":
+"@emotion/is-prop-valid@*", "@emotion/is-prop-valid@^0.8.2":
   version "0.8.8"
   resolved "https://registry.npmjs.org/@emotion/is-prop-valid/-/is-prop-valid-0.8.8.tgz"
   integrity sha512-u5WtneEAr5IDG2Wv65yhunPSMLIpuKsbuOktRojfrEiEvRyC85LgPMZI63cr7NUqT8ZIGdSVg8ZKGxIug4lXcA==
@@ -2431,6 +2431,11 @@ clone-response@^1.0.2:
   dependencies:
     mimic-response "^1.0.0"
 
+clsx@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.npmjs.org/clsx/-/clsx-2.1.1.tgz"
+  integrity sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==
+
 cm6-theme-basic-light@^0.2.0:
   version "0.2.0"
   resolved "https://registry.npmjs.org/cm6-theme-basic-light/-/cm6-theme-basic-light-0.2.0.tgz"
@@ -3513,6 +3518,15 @@ fraction.js@^4.2.0:
   version "4.3.7"
   resolved "https://registry.npmjs.org/fraction.js/-/fraction.js-4.3.7.tgz"
   integrity sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==
+
+framer-motion@^11.16.4:
+  version "11.16.4"
+  resolved "https://registry.npmjs.org/framer-motion/-/framer-motion-11.16.4.tgz"
+  integrity sha512-7ncPlBjrYX6iQXcTSw1kvZcHSVjEuOAW3uWuu+/+chUS4UWBMe8kCjniE4VMc2/BMo0su0Uw9sw0aWS9anpPWA==
+  dependencies:
+    motion-dom "^11.16.4"
+    motion-utils "^11.16.0"
+    tslib "^2.4.0"
 
 framer-motion@6.5.1:
   version "6.5.1"
@@ -5971,6 +5985,26 @@ mkdirp@^1.0.3:
   resolved "https://registry.npmjs.org/mkdirp/-/mkdirp-1.0.4.tgz"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
+motion-dom@^11.16.4:
+  version "11.16.4"
+  resolved "https://registry.npmjs.org/motion-dom/-/motion-dom-11.16.4.tgz"
+  integrity sha512-2wuCie206pCiP2K23uvwJeci4pMFfyQKpWI0Vy6HrCTDzDCer4TsYtT7IVnuGbDeoIV37UuZiUr6SZMHEc1Vww==
+  dependencies:
+    motion-utils "^11.16.0"
+
+motion-utils@^11.16.0:
+  version "11.16.0"
+  resolved "https://registry.npmjs.org/motion-utils/-/motion-utils-11.16.0.tgz"
+  integrity sha512-ngdWPjg31rD4WGXFi0eZ00DQQqKKu04QExyv/ymlC+3k+WIgYVFbt6gS5JsFPbJODTF/r8XiE/X+SsoT9c0ocw==
+
+motion@^11.16.4:
+  version "11.16.4"
+  resolved "https://registry.npmjs.org/motion/-/motion-11.16.4.tgz"
+  integrity sha512-Ut4Lv41Bh8QRmBM56zwVXZsRS/jUTVjS081xnHF7zCl2I24v5Kb5/FU5oogSfCCQY/T/BZnIhkIe5PH8BDZIAA==
+  dependencies:
+    framer-motion "^11.16.4"
+    tslib "^2.4.0"
+
 mri@^1.1.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/mri/-/mri-1.2.0.tgz"
@@ -6707,7 +6741,7 @@ react-devtools-inline@4.4.0:
   dependencies:
     es6-symbol "^3"
 
-"react-dom@^16.0.0 || ^17.0.0 || ^18.0.0", "react-dom@^16.8 || ^17.0 || ^18.0", "react-dom@^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc", "react-dom@^16.8.0 || ^17 || ^18", "react-dom@^17.0.0 || ^18.0.0 || ^19.0.0", react-dom@^18.0.0, react-dom@^18.2.0, "react-dom@^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0", "react-dom@>= 16.8.0", "react-dom@>=16.8 || ^17.0.0 || ^18.0.0", react-dom@>=16.8.0, react-dom@>=17.x, react-dom@18.2.0:
+"react-dom@^16.0.0 || ^17.0.0 || ^18.0.0", "react-dom@^16.8 || ^17.0 || ^18.0", "react-dom@^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc", "react-dom@^16.8.0 || ^17 || ^18", "react-dom@^17.0.0 || ^18.0.0 || ^19.0.0", react-dom@^18.0.0, "react-dom@^18.0.0 || ^19.0.0", react-dom@^18.2.0, "react-dom@^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0", "react-dom@>= 16.8.0", "react-dom@>=16.8 || ^17.0.0 || ^18.0.0", react-dom@>=16.8.0, react-dom@>=17.x, react-dom@18.2.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
   integrity sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==
@@ -6839,7 +6873,7 @@ react-style-singleton@^2.2.1, react-style-singleton@^2.2.2:
     get-nonce "^1.0.0"
     tslib "^2.0.0"
 
-"react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8 || ^17.0 || ^18.0", "react@^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc", "react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17 || ^18 || ^19", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc", "react@^16.x || ^17.x || ^18.x || ^19.0.0 || ^19.0.0-rc", "react@^17.0.0 || ^18.0.0 || ^19.0.0", react@^18.0.0, react@^18.2.0, "react@^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0", "react@>= 16 || ^19.0.0-rc", "react@>= 16.8 || 18.0.0", "react@>= 16.8.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0 || ^19.0.0-0", react@>=0.14.7, react@>=16, react@>=16.12.0, react@>=16.13.1, react@>=16.8, "react@>=16.8 || ^17.0.0 || ^18.0.0", react@>=16.8.0, react@>=16.8.2, react@>=17.x, react@>=18, react@18.2.0:
+"react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8 || ^17.0 || ^18.0", "react@^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc", "react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17 || ^18 || ^19", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc", "react@^16.x || ^17.x || ^18.x || ^19.0.0 || ^19.0.0-rc", "react@^17.0.0 || ^18.0.0 || ^19.0.0", react@^18.0.0, "react@^18.0.0 || ^19.0.0", react@^18.2.0, "react@^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0", "react@>= 16 || ^19.0.0-rc", "react@>= 16.8 || 18.0.0", "react@>= 16.8.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0 || ^19.0.0-0", react@>=0.14.7, react@>=16, react@>=16.12.0, react@>=16.13.1, react@>=16.8, "react@>=16.8 || ^17.0.0 || ^18.0.0", react@>=16.8.0, react@>=16.8.2, react@>=17.x, react@>=18, react@18.2.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
@@ -7675,6 +7709,11 @@ tabbable@^6.0.1:
   version "6.2.0"
   resolved "https://registry.npmjs.org/tabbable/-/tabbable-6.2.0.tgz"
   integrity sha512-Cat63mxsVJlzYvN51JmVXIgNoUokrIaT2zLclCXjRd8boZ0004U4KCs/sToJ75C6sdlByWxpYnb5Boif1VSFew==
+
+tailwind-merge@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.npmjs.org/tailwind-merge/-/tailwind-merge-2.6.0.tgz"
+  integrity sha512-P+Vu1qXfzediirmHOC3xKGAYeZtPcV9g76X+xg2FD4tYgR71ewMA35Y3sCz3zhiN/dwefRpJX0yBcgwi1fXNQA==
 
 tailwind-merge@1.8.1:
   version "1.8.1"

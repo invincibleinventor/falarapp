@@ -84,7 +84,7 @@ const [newblocked,setnewblocked]  = useState([])
           <svg
             viewBox="0 0 24 24"
             aria-hidden="true"
-            className="md:bottom-3 absolute inset-y-0 right-0 my-auto mr-6 h-[14px] w-[14px] text-gray-400"
+            className="md:bottom-3 absolute inset-y-0 right-0 my-auto mr-6 h-[14px] w-[14px] text-neutral-400"
           >
             <g>
               <path
@@ -108,7 +108,7 @@ const [newblocked,setnewblocked]  = useState([])
             minLength={4}
             maxLength={50}
             type="search"
-            className="font-inter md:mb-3 rounded-full peer h-[48px] w-full bg-gray-700/20 focus:outline-none pl-6 pr-14 text-[14px] placeholder:text-gray-400 text-gray-300"
+            className="font-inter md:mb-3 rounded-full peer h-[48px] w-full bg-neutral-700/20 focus:outline-none pl-6 pr-14 text-[14px] placeholder:text-neutral-400 text-neutral-300"
             placeholder={"Search Posts"}
           ></input>
         </div>
@@ -137,8 +137,8 @@ const [newblocked,setnewblocked]  = useState([])
             ) : (
               <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
                 <div className="flex flex-col gap-4 mx-auto max-w-max">
-                  <h1 className="mx-auto text-xl font-semibold text-center text-gray-300">No Posts To View!</h1>
-                  <h1 className="mx-auto text-sm text-center text-gray-500">
+                  <h1 className="mx-auto text-xl font-semibold text-center text-neutral-300">No Posts To View!</h1>
+                  <h1 className="mx-auto text-sm text-center text-neutral-500">
                     Your search results appear here. Seems like there are no posts related to your search term.
                   </h1>
                   <Link

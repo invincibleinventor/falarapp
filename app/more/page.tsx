@@ -125,7 +125,7 @@ export default function Create() {
               width={200}
               height={200}
               src={cover ? cover : ""}
-              className="rounded-md h-[calc(52*4px)] w-[calc(100%)] border border-gray-500 object-cover "
+              className="rounded-md h-[calc(52*4px)] w-[calc(100%)] border border-neutral-500 object-cover "
               alt="cover"
             />
           </div>
@@ -142,7 +142,7 @@ export default function Create() {
               <Image width={110} height={110} src={image} className="w-24 h-24 mx-auto rounded-lg " alt="image" />
               <div
                 onClick={handleProfileClick}
-                className="absolute text-xs flex items-center content-center text-white rounded-full cursor-pointer left-16 right-0 mx-auto top-[70%] w-6 h-6  bg-cyan-800 drop-shadow-lg border border-white"
+                className="absolute text-xs flex items-center content-center text-white rounded-full cursor-pointer left-20 right-0 mx-auto top-[80%] w-7 h-7  bg-cyan-700 shadow-lg border border-white"
               >
                 {" "}
                 <svg
@@ -188,12 +188,12 @@ export default function Create() {
         className="flex flex-col justify-center w-full max-w-lg gap-2 mx-auto mt-44 animate-in text-foreground md:mt-44 md:px-10"
         action={create}
       >
-        <label className="mx-6 text-sm text-gray-300" htmlFor="name">
+        <label className="mx-6 text-sm text-neutral-300" htmlFor="name">
           Name
         </label>
         <input
           onChange={(e) => setName(e.target.value)}
-          className="px-4 py-2 mx-6 mb-4 text-sm text-white bg-black border border-gray-900 rounded-md"
+          className="px-4 py-2 mx-6 mb-4 text-sm text-white bg-black border rounded-md border-neutral-900"
           name="name"
           defaultValue={name}
           placeholder="Please Type Out Your Display Name"
@@ -202,13 +202,13 @@ export default function Create() {
           maxLength={20}
         />
 
-        <label className="mx-6 text-sm text-gray-300" htmlFor="content">
+        <label className="mx-6 text-sm text-neutral-300" htmlFor="content">
           About
         </label>
         <textarea
           defaultValue={about}
           onChange={(e) => setAbout(e.target.value)}
-          className="px-4 py-2 mx-6 mb-4 text-sm text-white bg-black border border-gray-900 rounded-md"
+          className="px-4 py-2 mx-6 mb-4 text-sm text-white bg-black border rounded-md border-neutral-900"
           name="content"
           placeholder="Please Type About Yourself"
           required

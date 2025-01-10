@@ -154,16 +154,16 @@ export default async function App({ params }: { params: { slug: string } }) {
     <div className="relative flex flex-col flex-1 h-screen overflow-hidden md:mr-4 lg:mx-0">
       {!loggedin &&
       
-      <div className="flex flex-row items-center content-center justify-between w-full px-6 py-4 space-y-1 bg-blue-600 md:border-x md:border-x-gray-900">
+      <div className="flex flex-row items-center content-center justify-between w-full px-6 py-4 space-y-1 bg-blue-600 md:border-x md:border-x-neutral-900">
         <h1 className="text-sm font-semibold text-white">Sign up to Falar to read more such interesting articles</h1>
-        <Link href={('/login')} className="px-6 py-2 text-xs font-semibold text-blue-600 transition-all duration-200 ease-linear bg-white rounded-full hover:bg-gray-200 hover:shadow-lg w-max">Sign Up To Falar</Link>
+        <Link href={('/login')} className="px-6 py-2 text-xs font-semibold text-blue-600 transition-all duration-200 ease-linear bg-white rounded-full hover:bg-neutral-200 hover:shadow-lg w-max">Sign Up To Falar</Link>
         </div>
 }
       {(error || blocked.includes(authorid)) && (
         <div className="flex items-center content-center w-full h-screen px-10 sm:px-24 md:px-16 lg:px-24">
           <div className="flex flex-col gap-4 mx-auto max-w-max">
-            <h1 className="mx-auto text-xl font-semibold text-center text-gray-300">That Post Doesn&apos;t Exist</h1>
-            <h1 className="mx-auto text-sm text-center text-gray-500">
+            <h1 className="mx-auto text-xl font-semibold text-center text-neutral-300">That Post Doesn&apos;t Exist</h1>
+            <h1 className="mx-auto text-sm text-center text-neutral-500">
               That post does not exist. It must have been removed or deleted by the author. Please refresh if you think
               that is not the case
             </h1>
@@ -179,7 +179,7 @@ export default async function App({ params }: { params: { slug: string } }) {
         </div>
       )}
       {!error && !newblocked.includes(authorid) && !blocked.includes(authorid) && (
-        <div className="hiddenscroll h-full w-[calc(100vw-68px)] overflow-hidden pb-14 md:w-full md:max-w-full md:border-x md:border-x-gray-900">
+        <div className="hiddenscroll h-full w-[calc(100vw-68px)] overflow-hidden pb-14 md:w-full md:max-w-full md:border-x md:border-x-neutral-900">
           <div className="relative aspect-video">
             <img
               alt="coveri"
@@ -188,7 +188,7 @@ export default async function App({ params }: { params: { slug: string } }) {
             />
           </div>
           <div className="flex flex-col flex-1 w-full max-w-full p-8">
-            <h1 className="fix-overflow text-gray-300 text-3xl font-extrabold md:text-5xl md:leading-[calc(14*4px)]">
+            <h1 className="fix-overflow text-neutral-300 text-3xl font-extrabold md:text-5xl md:leading-[calc(14*4px)]">
               {title}
             </h1>
             {imauthor && (
@@ -198,7 +198,7 @@ export default async function App({ params }: { params: { slug: string } }) {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="text-gray-300"
+                  className="text-neutral-300"
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
@@ -213,18 +213,18 @@ export default async function App({ params }: { params: { slug: string } }) {
                   />
                 </svg>
 
-                <h1 className="inline-block text-sm text-gray-300">Edit Post</h1>
+                <h1 className="inline-block text-sm text-neutral-300">Edit Post</h1>
               </Link>
             )}
 
             <div className="flex flex-row items-center content-center justify-between mt-6 text-lg">
               <Link href={"/profile/" + author} className="flex flex-row items-center content-center">
                 <UserInformation id={user} image={profile} imgclass="w-8 h-8 mr-3 rounded-md" src={profile} />
-                <h1 className="text-xs font-medium text-gray-300 md:text-sm">{name}</h1>
+                <h1 className="text-xs font-medium text-neutral-300 md:text-sm">{name}</h1>
               </Link>
 
               <div className="flex flex-row">
-                <h1 className="text-xs font-normal text-gray-300 md:text-sm">
+                <h1 className="text-xs font-normal text-neutral-300 md:text-sm">
                   <span className="hidden md:inline-block">Posted</span> {timeAgo.format(Date.now() - time)}{" "}
                 </h1>{" "}
                 {myhandle !== author && <Menu type="post" id={params.slug} myhandle={myhandle} handle={author} />}
@@ -233,17 +233,17 @@ export default async function App({ params }: { params: { slug: string } }) {
             <Markdown
               remarkPlugins={[remarkGfm]}
               components={components}
-              className="mt-12 prose text-gray-300 prose-invert font-poppins fix-overflow"
+              className="mt-12 prose text-neutral-300 prose-invert font-poppins fix-overflow"
             >
               {content}
             </Markdown>
           </div>
           {!loggedin && 
             <>
-            <div className="h-1 mb-10 border-b border-b-gray-900"></div>
+            <div className="h-1 mb-10 border-b border-b-neutral-900"></div>
       <div className="flex flex-col gap-4 px-10 mx-auto max-w-max">
-      <h1 className="mx-auto text-lg font-semibold text-center text-gray-300">Login To View Replies</h1>
-      <h1 className="mx-auto text-center text-gray-500 text-md">
+      <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">Login To View Replies</h1>
+      <h1 className="mx-auto text-center text-neutral-500 text-md">
         Login to {AppConfig.title} to view the replies for this post
       </h1>
       <Link
@@ -259,8 +259,8 @@ export default async function App({ params }: { params: { slug: string } }) {
       
       }
           {loggedin && !newblocked.includes(authorid) && !blocked.includes(authorid) && (
-            <section className="px-0 pt-4 pb-8 border-t border-t-gray-900" id="comments">
-              <h1 className="px-6 mb-4 text-xl font-bold text-gray-300">Comments</h1>
+            <section className="px-0 pt-4 pb-8 border-t border-t-neutral-900" id="comments">
+              <h1 className="px-6 mb-4 text-xl font-bold text-neutral-300">Comments</h1>
 
               <CommentsComponent
                 myname={myname}
@@ -278,7 +278,7 @@ export default async function App({ params }: { params: { slug: string } }) {
         </div>
       )}
       {loggedin && !blocked.includes(authorid) && !newblocked.includes(authorid)  && (
-        <div className="absolute bottom-0 flex flex-row w-full border-t bg-[#000205] border-x h-14 border-t-gray-900 border-x-gray-900">
+        <div className="absolute bottom-0 flex flex-row w-full border-t bg-[#000205] border-x h-14 border-t-neutral-900 border-x-neutral-900">
           <BookMarksComponent
             userliked={userbookmarked}
             postid={params.slug}
@@ -298,7 +298,7 @@ export default async function App({ params }: { params: { slug: string } }) {
 
           <Link
             href="#comments"
-            className="flex flex-row items-center content-center px-6 ml-auto space-x-2 text-gray-300"
+            className="flex flex-row items-center content-center px-6 ml-auto space-x-2 text-neutral-300"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16">
               <path

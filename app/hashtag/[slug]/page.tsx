@@ -150,7 +150,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                   <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
                     <div className="flex flex-col gap-2 mx-auto max-w-max">
                       <h1 className="mx-auto text-lg font-semibold text-center text-white">No Quickies To View!</h1>
-                      <h1 className="mx-auto text-sm text-center text-gray-300">
+                      <h1 className="mx-auto text-sm text-center text-neutral-300">
                         No posts containing such hashtag is found. Explore other quickies?
                       </h1>
                       <Link

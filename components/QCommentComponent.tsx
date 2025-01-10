@@ -50,7 +50,7 @@ export default function Post(props: any) {
   return (
     <div className="w-full animate-in">
       <div className="w-full px-5 py-[6px]">
-        <div className="flex flex-col border border-gray-300 rounded-md bg-gray-50 md:gap-0">
+        <div className="flex flex-col border border-neutral-300 rounded-md bg-neutral-50 md:gap-0">
           <div className="flex items-center content-center bg-black rounded-md "></div>
           <div className="flex h-max flex-col gap-[8px] md:p-6 p-4 ">
             <div className="flex flex-row items-center content-center gap-2 h-max shrink-0">
@@ -64,9 +64,9 @@ export default function Post(props: any) {
                       <span className="inline-block md:hidden">{x}</span>
                       <span className="hidden md:inline-block">{props.name}</span>
                     </h1>
-                    <h1 className="ml-2 text-xs font-normal text-gray-600 ">@{props.handle}</h1>
+                    <h1 className="ml-2 text-xs font-normal text-neutral-600 ">@{props.handle}</h1>
                   </div>
-                  <h1 className="text-xs font-medium text-gray-600">{props.time}</h1>
+                  <h1 className="text-xs font-medium text-neutral-600">{props.time}</h1>
                 </div>
               </Link>
 
@@ -96,7 +96,7 @@ export default function Post(props: any) {
               <Link
                 href={"/quickie/" + props.id}
                 style={{ wordBreak: "break-word", whiteSpace: "normal" }}
-                className="text-sm font-normal text-gray-900 four-line-ellipsis md:text-base"
+                className="text-sm font-normal text-neutral-900 four-line-ellipsis md:text-base"
               >
                 {formatText(props.description)}
               </Link>

@@ -91,7 +91,7 @@ export default function CommentComponent(props: any) {
     });
   };
   return (
-    <div className="flex flex-row w-full gap-4 px-6 pt-4 pb-2 my-0 border-y border-y-gray-900">
+    <div className="flex flex-row w-full gap-4 px-6 pt-4 pb-2 my-0 border-y border-y-neutral-900">
       <div className="flex w-full flex-col gap-[4px]">
         <div className="flex flex-row items-center content-center justify-between">
           <Link href={"/profile/" + props.handle} className="flex gap-2 mt-0">
@@ -103,20 +103,20 @@ export default function CommentComponent(props: any) {
             />
             <div className="flex items-center content-center w-full ml-0">
               <h1>
-                <p className="text-sm font-normal text-gray-300 ">{props.name}</p>
+                <p className="text-sm font-normal text-neutral-300 ">{props.name}</p>
               </h1>
-              <div className="mx-1 text-sm text-gray-500">.</div>
-              <span className="text-sm font-normal text-gray-500 whitespace-nowrap">@{props.handle}</span>
-              <div className="mx-[6px] text-sm text-gray-500">·</div>
+              <div className="mx-1 text-sm text-neutral-500">.</div>
+              <span className="text-sm font-normal text-neutral-500 whitespace-nowrap">@{props.handle}</span>
+              <div className="mx-[6px] text-sm text-neutral-500">·</div>
 
-              <span className="ml-auto text-xs font-normal text-gray-500 whitespace-nowrap">{props.time}</span>
+              <span className="ml-auto text-xs font-normal text-neutral-500 whitespace-nowrap">{props.time}</span>
             </div>
           </Link>
           <Menu type="comment" alt="quickiecomments" id={props.comment_id} postid={props.postid} myhandle={props.myhandle} handle={props.handle} />
 
         </div>
 
-        <h1 className="mt-[8px] mb-2 ml-0 text-[15px] font-medium text-gray-300">{formatText(props.content)}</h1>
+        <h1 className="mt-[8px] mb-2 ml-0 text-[15px] font-medium text-neutral-300">{formatText(props.content)}</h1>
         <div className="flex flex-row items-center content-center w-full pb-4">
           <div className=" w-full   flex flex-row content-center items-center space-x-[8px]">
             {props.loggedin && (
@@ -125,7 +125,7 @@ export default function CommentComponent(props: any) {
                 xmlns="http://www.w3.org/2000/svg"
                 width="14"
                 height="14"
-                className="ml-auto text-gray-300 "
+                className="ml-auto text-neutral-300 "
                 viewBox="0 0 48 48"
               >
                 {liked ? (
@@ -149,10 +149,10 @@ export default function CommentComponent(props: any) {
                 )}
               </svg>
             )}
-            <h1 className="text-xs font-medium text-gray-300">{likes} Likes</h1>
+            <h1 className="text-xs font-medium text-neutral-300">{likes} Likes</h1>
             <div
               onClick={() => props.stateChanger("@" + props.handle + " ")}
-              className="flex flex-row items-center content-center pl-2 space-x-2 text-xs font-medium text-gray-300 cursor-pointer"
+              className="flex flex-row items-center content-center pl-2 space-x-2 text-xs font-medium text-neutral-300 cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
                 <path

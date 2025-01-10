@@ -1,7 +1,7 @@
-export default function Page()  {
+export default function Page(){
     return(
-        <div className="w-full h-screen text-white">
-            helo
+        <div className="w-screen h-screen text-white bg-neutral-900">
+
         </div>
     )
 }

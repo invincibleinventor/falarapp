@@ -71,7 +71,7 @@ export default function Menu(props: any) {
     <div className="ml-auto">
       <div
         style={{ zIndex: 1000000 }}
-        className={`${props.type=="comment"?'fixed':'absolute'} py-4 flex flex-col content-center mt-10 top-0 bottom-0 left-0 right-0 w-64 h-28 mx-auto my-auto bg-[#040404] rounded-lg border animate-in border-gray-900 shadow-md  md:w-84 lg:w-96 ${deleteDialog ? "" : "hidden"}`}
+        className={`${props.type=="comment"?'fixed':'absolute'} py-4 flex flex-col content-center mt-10 top-0 bottom-0 left-0 right-0 w-64 h-28 mx-auto my-auto bg-[#040404] rounded-lg border animate-in border-neutral-900 shadow-md  md:w-84 lg:w-96 ${deleteDialog ? "" : "hidden"}`}
       >
         <h1 className="mx-4 mb-4 text-lg font-medium text-white">Delete this {props.type=="comment"?"comment":"quickie"}?</h1>
         <div className="flex flex-row items-center content-center w-full pt-0 mt-auto ml-auto">
@@ -89,7 +89,7 @@ export default function Menu(props: any) {
           </button>
         </div>
       </div>
-      <div className="relative pl-3 ml-auto text-gray-300">
+      <div className="relative pl-3 ml-auto text-neutral-300">
         <svg
           className="cursor-pointer"
           onClick={() => setDialogopened(!dialogopened)}
@@ -109,9 +109,9 @@ export default function Menu(props: any) {
         </svg>
 
         <div
-          className={`absolute w-40 bg-[#020202] shadow-sm border border-gray-900 shadow-gray-900 -left-[calc(34*4px)] top-8 flex flex-col ${dialogopened ? "" : "hidden"}`}
+          className={`absolute w-40 bg-[#020202] shadow-sm border border-neutral-900 shadow-neutral-900 -left-[calc(34*4px)] top-8 flex flex-col ${dialogopened ? "" : "hidden"}`}
         >
-          <div className="flex flex-row items-center content-center px-4 py-3 space-x-3 text-gray-300 cursor-pointer hover:bg-gray-900">
+          <div className="flex flex-row items-center content-center px-4 py-3 space-x-3 text-neutral-300 cursor-pointer hover:bg-neutral-900">
             <svg xmlns="http://www.w3.org/2000/svg" width="1.1em" height="1.1em" viewBox="0 0 24 24">
               <path
                 fill="currentColor"
@@ -125,7 +125,7 @@ export default function Menu(props: any) {
           {(props.type == "comment" || props.type == "quickie") && props.myhandle == props.handle && (
             <div
               onClick={() => toggledeleteDialog(!deleteDialog)}
-              className="flex flex-row items-center content-center px-4 py-3 space-x-3 text-red-400 cursor-pointer hover:bg-gray-900"
+              className="flex flex-row items-center content-center px-4 py-3 space-x-3 text-red-400 cursor-pointer hover:bg-neutral-900"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="1.1em" height="1.1em" viewBox="0 0 24 24">
                 <path

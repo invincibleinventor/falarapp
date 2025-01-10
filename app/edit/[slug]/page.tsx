@@ -140,14 +140,14 @@ export default function Page({ params }: { params: { slug: string } }) {
             action={create}
           >
             <div className="flex flex-row items-center content-center justify-between">
-              <h1 className="mb-6 text-2xl font-bold text-gray-300 md:text-3xl">
+              <h1 className="mb-6 text-2xl font-bold text-neutral-300 md:text-3xl">
                 Edit <span className="hidden md:inline-block">The</span> Post
               </h1>
               <div className="flex flex-row items-center content-center pb-5 ">
                 <button
                   onClick={() => toggledeleteDialog("")}
                   disabled={deleteDialog != "hidden" ? true : false}
-                  className="flex flex-row items-center content-center px-6 py-3 mx-0 space-x-3 text-xs text-gray-300 transition-all duration-100 ease-linear bg-gray-900 rounded-full hover:bg-red-900"
+                  className="flex flex-row items-center content-center px-6 py-3 mx-0 space-x-3 text-xs text-neutral-300 transition-all duration-100 ease-linear bg-neutral-900 rounded-full hover:bg-red-900"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256">
                     <path
@@ -161,13 +161,13 @@ export default function Page({ params }: { params: { slug: string } }) {
                 </button>
               </div>
             </div>
-            <label className="mb-1 text-base text-gray-300" htmlFor="content">
+            <label className="mb-1 text-base text-neutral-300" htmlFor="content">
               Title
             </label>
             <input
               disabled={deleteDialog != "hidden" ? true : false}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-4 py-2 mb-6 mr-4 text-sm text-white bg-black border border-gray-900 rounded-md outline-none "
+              className="w-full px-4 py-2 mb-6 mr-4 text-sm text-white bg-black border border-neutral-900 rounded-md outline-none "
               name="content"
               placeholder="Please Type Out Your Title"
               required
@@ -175,13 +175,13 @@ export default function Page({ params }: { params: { slug: string } }) {
               maxLength={60}
               minLength={15}
             />
-            <label className="mb-1 text-base text-gray-300" htmlFor="content">
+            <label className="mb-1 text-base text-neutral-300" htmlFor="content">
               Excerpt
             </label>
             <textarea
               disabled={deleteDialog != "hidden" ? true : false}
               onChange={(e) => setExcerpt(e.target.value)}
-              className="w-full h-32 px-4 py-2 mb-6 mr-4 text-sm text-white bg-black border border-gray-900 rounded-md outline-none"
+              className="w-full h-32 px-4 py-2 mb-6 mr-4 text-sm text-white bg-black border border-neutral-900 rounded-md outline-none"
               name="content"
               placeholder="Please Type Out Your Excerpt"
               required
@@ -194,11 +194,11 @@ export default function Page({ params }: { params: { slug: string } }) {
                 setCover(URL.createObjectURL(e.target.files[0]));
                 setFile(e.target.files[0]);
               }}
-              className="inset-x-0 bottom-0 hidden mx-auto border border-gray-900 rounded-md bg-gray-900/40"
+              className="inset-x-0 bottom-0 hidden mx-auto border border-neutral-900 rounded-md bg-neutral-900/40"
               type="file"
               ref={hiddenFileInput}
             />
-            <label className="mb-1 text-base text-gray-300" htmlFor="content">
+            <label className="mb-1 text-base text-neutral-300" htmlFor="content">
               Cover Image
             </label>
             <div className="relative px-4 py-2 mb-6 border rounded-md aspect-video shrink-0">
@@ -214,7 +214,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 Change Cover
               </button>
             </div>
-            <label className="mb-1 text-base text-gray-300" htmlFor="content">
+            <label className="mb-1 text-base text-neutral-300" htmlFor="content">
               Content
             </label>
             <div data-color-mode="dark">
@@ -241,10 +241,10 @@ export default function Page({ params }: { params: { slug: string } }) {
     ) : (
       <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
         <div className="flex flex-col gap-4 mx-auto max-w-max">
-          <h1 className="mx-auto text-lg font-semibold text-center text-gray-300">
+          <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">
             You are not allowed to edit this post.
           </h1>
-          <h1 className="mx-auto text-center text-gray-500 text-md">
+          <h1 className="mx-auto text-center text-neutral-500 text-md">
             Only the Author of the post is allowed to edit a post. Try from a different account or leave this page.
           </h1>
           <Link

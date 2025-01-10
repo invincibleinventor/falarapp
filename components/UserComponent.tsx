@@ -90,8 +90,8 @@ export default function UserComponent(props: any) {
             alt="profile-pic"
           />
           <div className="flex flex-col">
-            <h1 className="text-base font-bold text-gray-300">{a}</h1>
-            <h1 className="text-xs font-normal text-gray-500">@{props.handle}</h1>
+            <h1 className="text-base font-bold text-neutral-300">{a}</h1>
+            <h1 className="text-xs font-normal text-neutral-500">@{props.handle}</h1>
           </div>
         </div>
         <button
@@ -105,20 +105,20 @@ export default function UserComponent(props: any) {
           {imfollowing ? "Unfollow" : "Follow"}
         </button>
       </div>
-      <div className="flex flex-row items-center content-center gap-6 p-4 mx-0 my-6 mb-4 border rounded-md bg-gray-900/40 ">
+      <div className="flex flex-row items-center content-center gap-6 p-4 mx-0 my-6 mb-4 border rounded-md bg-neutral-900/40 ">
         <div className="flex flex-row w-full md:mx-auto">
           <div className="flex flex-col items-center content-center gap-1 mx-auto w-max">
-            <h1 className="text-xs font-semibold text-gray-300">Followers</h1>
-            <h1 className="text-sm font-medium text-gray-500">{props.followers} Followers</h1>
+            <h1 className="text-xs font-semibold text-neutral-300">Followers</h1>
+            <h1 className="text-sm font-medium text-neutral-500">{props.followers} Followers</h1>
           </div>
           <div className="flex flex-col items-center content-center gap-1 mx-auto w-max">
-            <h1 className="text-xs font-semibold text-gray-300">Following</h1>
-            <h1 className="text-sm font-medium text-gray-500">{props.following} Following</h1>
+            <h1 className="text-xs font-semibold text-neutral-300">Following</h1>
+            <h1 className="text-sm font-medium text-neutral-500">{props.following} Following</h1>
           </div>
         </div>
       </div>
       <div className="mt-0 w-full px-[2px]">
-        <h1 className="text-sm text-gray-400 fix-overflow four-line-ellipsis">{props.about}</h1>
+        <h1 className="text-sm text-neutral-400 fix-overflow four-line-ellipsis">{props.about}</h1>
       </div>
     </Link>
   );

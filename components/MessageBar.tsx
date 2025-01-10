@@ -30,7 +30,7 @@ export default function MessageBar(props:any){
     }
     }
     return(
-        <div className="flex flex-col flex-grow divide-y divide-gray-800 md:flex-none">
+        <div className="flex flex-col flex-grow divide-y divide-neutral-800 md:flex-none">
            <MessageItem onClick={()=>handle('"/messages/dms/1212"')}  name="Sample" message="Nice message" dp="https://picsum.photos/200/400"/>
           
         </div>

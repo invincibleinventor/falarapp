@@ -174,16 +174,16 @@ export default async function App({ params }: { params: { slug: string } }) {
     <div className="relative flex flex-col flex-1 h-screen overflow-hidden bg-transparent ">
         {!loggedin &&
       
-      <div className="flex flex-row items-center content-center justify-between w-full px-6 py-4 space-y-1 bg-blue-600 md:border-x md:border-x-gray-900">
+      <div className="flex flex-row items-center content-center justify-between w-full px-6 py-4 space-y-1 bg-blue-600 md:border-x md:border-x-neutral-900">
         <h1 className="text-sm font-semibold text-white">Sign up to Falar to view more such interesting quickies</h1>
-        <Link href={('/login')} className="px-6 py-2 text-xs font-semibold text-blue-600 transition-all duration-200 ease-linear bg-white rounded-full hover:bg-gray-200 hover:shadow-lg w-max">Sign Up To Falar</Link>
+        <Link href={('/login')} className="px-6 py-2 text-xs font-semibold text-blue-600 transition-all duration-200 ease-linear bg-white rounded-full hover:bg-neutral-200 hover:shadow-lg w-max">Sign Up To Falar</Link>
         </div>
 }
       {(error || blocked.includes(authorid)) && (
         <div className="flex items-center content-center w-full h-screen px-10 sm:px-24 md:px-16 lg:px-24">
           <div className="flex flex-col gap-4 mx-auto max-w-max">
-            <h1 className="mx-auto text-lg font-semibold text-center text-gray-300">That Quickie Doesn&apos;t Exist</h1>
-            <h1 className="mx-auto text-center text-gray-500 text-md">
+            <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">That Quickie Doesn&apos;t Exist</h1>
+            <h1 className="mx-auto text-center text-neutral-500 text-md">
               That quickie does not exist. It must have been removed or deleted by the author. Please refresh if you
               think that is not the case
             </h1>
@@ -215,10 +215,10 @@ export default async function App({ params }: { params: { slug: string } }) {
                     />
                     <div className="flex items-center content-center">
                       <h1>
-                        <p className="text-base font-medium text-gray-300 break-all line-clamp-1">{naam}</p>
+                        <p className="text-base font-medium text-neutral-300 break-all line-clamp-1">{naam}</p>
                       </h1>
-                      <div className="mx-1 text-base text-gray-500">·</div>
-                      <span className="text-base font-medium text-gray-500 whitespace-nowrap">@{author}</span>
+                      <div className="mx-1 text-base text-neutral-500">·</div>
+                      <span className="text-base font-medium text-neutral-500 whitespace-nowrap">@{author}</span>
                     </div>
                   </Link>
                   <Menu type="quickie" id={params.slug} myhandle={myhandle} handle={author} />
@@ -227,7 +227,7 @@ export default async function App({ params }: { params: { slug: string } }) {
                 <div>
                   <h1
                     style={{ wordBreak: "break-word", whiteSpace: "normal" }}
-                    className="my-4 mt-2 text-base text-gray-300 four-line-ellipsis md:text-lg"
+                    className="my-4 mt-2 text-base text-neutral-300 four-line-ellipsis md:text-lg"
                   >
                     {formatText(content)}
                   </h1>
@@ -248,17 +248,17 @@ export default async function App({ params }: { params: { slug: string } }) {
                   )}
 
                   <div className="flex flex-row items-center content-center mt-0">
-                    <h1 className="ml-auto text-sm font-medium text-gray-500">{timeAgo.format(Date.now() - time)}</h1>
+                    <h1 className="ml-auto text-sm font-medium text-neutral-500">{timeAgo.format(Date.now() - time)}</h1>
                   </div>
                 </div>
               </div>
             </div>
             {!loggedin && 
             <>
-            <div className="h-1 mb-10 border-b border-b-gray-900"></div>
+            <div className="h-1 mb-10 border-b border-b-neutral-900"></div>
       <div className="flex flex-col gap-4 px-10 mx-auto max-w-max">
-      <h1 className="mx-auto text-lg font-semibold text-center text-gray-300">Login To View Replies</h1>
-      <h1 className="mx-auto text-center text-gray-500 text-md">
+      <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">Login To View Replies</h1>
+      <h1 className="mx-auto text-center text-neutral-500 text-md">
         Login to {AppConfig.title} to view the replies for this Quickie
       </h1>
       <Link
@@ -275,8 +275,8 @@ export default async function App({ params }: { params: { slug: string } }) {
       }
           </div>
           {loggedin && !newblocked.includes(authorid) && !blocked.includes(authorid)  && (
-            <section className="px-0 pt-4 pb-8 border-t lg:pr-0 border-t-gray-900" id="comments">
-              <h1 className="px-6 mb-2 text-lg font-bold text-gray-300">Comments</h1>
+            <section className="px-0 pt-4 pb-8 border-t lg:pr-0 border-t-neutral-900" id="comments">
+              <h1 className="px-6 mb-2 text-lg font-bold text-neutral-300">Comments</h1>
 
               <CommentsComponent
                 myblocked={blocked}
@@ -295,7 +295,7 @@ export default async function App({ params }: { params: { slug: string } }) {
       )}
       
       {loggedin && !newblocked.includes(authorid) && !blocked.includes(authorid) && (
-        <div className="absolute bottom-0 flex flex-row w-full bg-black border-t h-14 border-t-gray-900 ">
+        <div className="absolute bottom-0 flex flex-row w-full bg-black border-t h-14 border-t-neutral-900 ">
           <LikeComponent
             userliked={userliked}
             postid={params.slug}
@@ -306,7 +306,7 @@ export default async function App({ params }: { params: { slug: string } }) {
           />
            <Link
             href="#comments"
-            className="flex flex-row items-center content-center px-6 pr-0 space-x-2 text-gray-300 lg:mr-0"
+            className="flex flex-row items-center content-center px-6 pr-0 space-x-2 text-neutral-300 lg:mr-0"
           >
                               <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M5 3h13a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-4.59l-3.7 3.71c-.18.18-.43.29-.71.29a1 1 0 0 1-1-1v-3H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3m13 1H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h4v4l4-4h5a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2"/></svg>{" "}
 

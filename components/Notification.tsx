@@ -31,14 +31,14 @@ export default function Notification(props: any) {
   return (
     <div
       onClick={() => notify()}
-      className={`flex cursor-pointer  flex-row px-8 py-5 space-x-5 border-b border-b-gray-900 ${!props.seen ? "bg-cyan-500/10" : "bg-black"}`}
+      className={`flex cursor-pointer  flex-row px-8 py-5 space-x-5 border-b border-b-neutral-900 ${!props.seen ? "bg-cyan-500/10" : "bg-black"}`}
     >
       <div className="relative flex flex-col items-center content-center flex-shrink-0 shrink-0">
         <UserInformation image = {props.image} imgclass="w-8 h-8 rounded-lg lg:h-10 lg:w-10" id={props.userid}></UserInformation>
       </div>
       <div className="flex flex-col space-y-[2px]">
         <h1 className="text-base font-medium text-white lg:text-lg">{props.title}</h1>
-        <h1 className="text-xs text-gray-500 lg:text-sm">{props.description}</h1>
+        <h1 className="text-xs text-neutral-500 lg:text-sm">{props.description}</h1>
       </div>
     </div>
   );

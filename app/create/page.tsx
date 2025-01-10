@@ -97,26 +97,26 @@ export default function Create() {
           className="flex flex-col justify-center w-full gap-2 py-10 pr-5 my-auto overflow-x-hidden animate-in text-foreground"
           action={create}
         >
-          <h1 className="mb-6 text-2xl font-bold text-gray-300 md:text-3xl">Publish New Post</h1>
+          <h1 className="mb-6 text-2xl font-bold text-neutral-300 md:text-3xl">Publish New Post</h1>
 
-          <label className="mb-1 text-base text-gray-300" htmlFor="content">
+          <label className="mb-1 text-base text-neutral-300" htmlFor="content">
             Title
           </label>
           <input
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full px-4 py-2 mb-6 mr-4 text-sm text-white bg-black border border-gray-900 rounded-md "
+            className="w-full px-4 py-2 mb-6 mr-4 text-sm text-white bg-black border border-neutral-900 rounded-md "
             name="content"
             placeholder="Please Type Out Your Title"
             required
             maxLength={60}
             minLength={5}
           />
-          <label className="mb-1 text-base text-gray-300" htmlFor="content">
+          <label className="mb-1 text-base text-neutral-300" htmlFor="content">
             Excerpt
           </label>
           <textarea
             onChange={(e) => setExcerpt(e.target.value)}
-            className="w-full px-4 py-2 mb-6 mr-4 text-sm text-white bg-black border border-gray-900 rounded-md "
+            className="w-full px-4 py-2 mb-6 mr-4 text-sm text-white bg-black border border-neutral-900 rounded-md "
             name="content"
             placeholder="Please Type Out Your Excerpt"
             required
@@ -129,7 +129,7 @@ export default function Create() {
             type="file"
             ref={hiddenFileInput}
           />
-          <label className="mb-1 text-base text-gray-300" htmlFor="content">
+          <label className="mb-1 text-base text-neutral-300" htmlFor="content">
             Cover Image
           </label>
           <div className="relative px-4 py-2 mb-6 border rounded-md aspect-video shrink-0">
@@ -141,7 +141,7 @@ export default function Create() {
               Change Cover
             </button>
           </div>
-          <label className="mb-1 text-base text-gray-300" htmlFor="content">
+          <label className="mb-1 text-base text-neutral-300" htmlFor="content">
             Content
           </label>
           <div data-color-mode="dark">

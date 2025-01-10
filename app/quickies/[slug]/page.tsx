@@ -154,8 +154,8 @@ export default async function Index({ params }: { params: { slug: string } }) {
                 ) : (
                   <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
                     <div className="flex flex-col gap-2 mx-auto max-w-max">
-                      <h1 className="mx-auto text-lg font-semibold text-center text-gray-300">No Quickies To View!</h1>
-                      <h1 className="mx-auto text-sm text-center text-gray-400">
+                      <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">No Quickies To View!</h1>
+                      <h1 className="mx-auto text-sm text-center text-neutral-400">
                         The user you searched haven&apos;t posted yet or they have blocked you. But fret not! There are
                         several great quickies from other users on the app.
                       </h1>

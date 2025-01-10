@@ -34,7 +34,7 @@ export default function Page() {
   });
   return (
     <div className="flex-1 h-screen p-0 py-2 overflow-hidden">
-      <div className="flex flex-row items-center justify-between px-8 py-4 pb-5 border-b border-b-gray-900 h-max">
+      <div className="flex flex-row items-center justify-between px-8 py-4 pb-5 border-b border-b-neutral-900 h-max">
         <h1 className="text-xl font-semibold text-white">Notifications</h1>
       </div>
       <div className="h-full overflow-y-scroll hiddenscroll">
@@ -56,7 +56,7 @@ export default function Page() {
               ))
             ) : (
               <div>
-                <h1 className="mx-auto my-20 text-base font-medium text-center text-gray-300 font-poppins">
+                <h1 className="mx-auto my-20 text-base font-medium text-center text-neutral-300 font-poppins">
                   No Notifications Yet!
                 </h1>
               </div>

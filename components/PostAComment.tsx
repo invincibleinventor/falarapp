@@ -30,7 +30,7 @@ export default function PostAComment(props: any) {
         }}
         onChange={(e) => setText(e.target.value)}
         ref={inputRef}
-        className="w-full border px-4 py-2 outline-none focus:border-gray-700"
+        className="w-full border px-4 py-2 outline-none focus:border-neutral-700"
         placeholder={"Post a comment publicly as " + props.myname}
       ></textarea>
       <div className={!posted ? "hidden" : "w-full px-5 py-4 text-xs"}>

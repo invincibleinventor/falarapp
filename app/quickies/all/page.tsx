@@ -138,8 +138,8 @@ export default async function Index() {
               ) : (
                 <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
                   <div className="flex flex-col gap-2 mx-auto max-w-max">
-                    <h1 className="mx-auto text-lg font-semibold text-center text-gray-300">No Quickies To View!</h1>
-                    <h1 className="mx-auto text-sm text-center text-gray-400">
+                    <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">No Quickies To View!</h1>
+                    <h1 className="mx-auto text-sm text-center text-neutral-400">
                       Sad! No one has posted anything on this app yet. Be the first one to do so! Start by clicking on
                       the button with the feather icon in the left sidebar.
                     </h1>

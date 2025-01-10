@@ -70,9 +70,9 @@ export default function Create() {
           className="flex flex-col justify-center w-full gap-2 my-auto ml-auto md:pr-10 hiddenscroll animate-in text-foreground"
           action={create}
         >
-          <div className="pb-5 mx-0 mt-5 mb-10 rounded-lg bg-gradient-to-br from-black to-gray-700">
+          <div className="pb-5 mx-0 mt-5 mb-10 rounded-lg bg-gradient-to-br from-black to-neutral-700">
             <h1 className="mt-5 ml-5 mr-5 text-2xl font-semibold text-white md:text-3xl">Setup Resume</h1>
-            <h1 className="mt-2 ml-5 mr-5 text-xs font-normal leading-relaxed text-gray-300 md:mt-3">
+            <h1 className="mt-2 ml-5 mr-5 text-xs font-normal leading-relaxed text-neutral-300 md:mt-3">
               Your resume gives a brief professional overview about yourself. Make sure to be honest on all fields in
               this form. You can edit this later anytime
             </h1>
