@@ -220,7 +220,7 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
 
             <div className="sticky top-0 flex flex-row items-center content-center justify-between py-4 mt-2 text-lg bg-black/50 backdrop-blur-lg">
               <Link href={"/profile/" + author} className="flex flex-row items-center content-center">
-                <UserInformation id={user} image={profile} imgclass="w-7 h-7 mr-3 rounded-md" src={profile} />
+                <UserInformation id={authorid} image={profile} imgclass="w-7 h-7 mr-3 rounded-md"  />
                 <h1 className="text-xs font-medium text-neutral-300 md:text-sm">{name}</h1>
               </Link>
 

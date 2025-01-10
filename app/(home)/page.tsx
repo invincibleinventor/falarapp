@@ -41,7 +41,7 @@ export default async function Index() {
       loggedin = true;
     }
     else{
-      return redirect('/landing/')
+      return redirect('/login')
     }
     const { data: u } = await supabase.from("user").select("*").eq("id", s);
     l = u![0]["following"];
