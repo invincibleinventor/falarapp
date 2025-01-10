@@ -12,7 +12,6 @@ export default async function WhoToFollow() {
   let myid = "";
   let myhandle = "";
   let myImage = "";
-  let myuserid = "";
 
   if (u.user) {
     myid = u.user.id;

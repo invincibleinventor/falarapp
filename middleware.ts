@@ -19,7 +19,7 @@ export async function middleware(request: NextRequest) {
     }
   }
   const redirectUrl = request.nextUrl.clone();
-  redirectUrl.pathname = "/login";
+  redirectUrl.pathname = "/";
   redirectUrl.searchParams.set(`redirectedFrom`, request.nextUrl.pathname);
   return NextResponse.redirect(redirectUrl);
 }

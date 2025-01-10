@@ -8,9 +8,10 @@ import en from "javascript-time-ago/locale/en";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { Oval } from "react-loader-spinner";
-export default function Page({ params }: { params: { slug: string } }) {
+export default function Page({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params);
   const router = useRouter();
   const supabase = createClient();
   const [image, setImage] = useState("");
@@ -45,7 +46,7 @@ export default function Page({ params }: { params: { slug: string } }) {
       if (user) {
         setloggedin(true);
       }
-      const { data: pd, error: pe } = await supabase.from("user").select("*").eq("handle", params.slug);
+      const { data: pd, error: pe } = await supabase.from("user").select("*").eq("handle", slug);
       if (pe || pd.length == 0) {
         setFound(false);
         setAbout("That user does not exist or you do not have access to view their profile");
@@ -93,7 +94,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                   console.log("illla");
                   setimblockedby(false);
                 }
-                if (data[0].handle == params.slug) {
+                if (data[0].handle == slug) {
                   setMyself(true);
                 } else if (pd[0].followers.includes(data[0].handle)) {
                   setImFollowing(true);
@@ -175,13 +176,13 @@ export default function Page({ params }: { params: { slug: string } }) {
           console.log(arr);
           arr = arr.filter((item: any) => item !== myId);
           let arr2 = localfollowinglist;
-          arr2 = arr2.filter((item: string) => item !== params.slug);
+          arr2 = arr2.filter((item: string) => item !== slug);
 
           console.log(arr);
           const { data, error } = await supabase
             .from("user")
             .update({ followers: arr })
-            .eq("handle", params.slug)
+            .eq("handle", slug)
             .select();
           const { data: d, error: e } = await supabase
             .from("user")
@@ -214,7 +215,7 @@ export default function Page({ params }: { params: { slug: string } }) {
       const { data, error } = await supabase
         .from("posts")
         .select("*,user(id,name,handle,image)")
-        .eq("handle", params.slug)
+        .eq("handle", slug)
         .order("id", { ascending: false })
         .limit(5);
       if (error) {
@@ -253,13 +254,13 @@ export default function Page({ params }: { params: { slug: string } }) {
         console.log(arr);
         arr = arr.filter((item: any) => item !== myId);
         let arr2 = localfollowerlist;
-        arr2 = arr2.filter((item: string) => item !== params.slug);
+        arr2 = arr2.filter((item: string) => item !== slug);
 
         console.log(arr);
         const { data, error } = await supabase
           .from("user")
           .update({ followers: arr })
-          .eq("handle", params.slug)
+          .eq("handle", slug)
           .select();
         const { data: d, error: e } = await supabase
           .from("user")
@@ -281,12 +282,12 @@ export default function Page({ params }: { params: { slug: string } }) {
         arr.push(myId);
         let arr2: any = [];
         arr2 = localfollowinglist;
-        arr2.push(params.slug);
+        arr2.push(slug);
         console.log(arr);
         const { data, error } = await supabase
           .from("user")
           .update({ followers: arr })
-          .eq("handle", params.slug)
+          .eq("handle", slug)
           .select();
         const { data: d, error: e } = await supabase
           .from("user")
@@ -367,7 +368,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               <div className="flex flex-col content-center sm:gap-2 sm:items-center sm:flex-row ">
                 <h1 className="text-xl font-semibold text-gray-300">{name}</h1>
 
-                <h1 className="text-sm font-normal text-gray-500">@{params.slug}</h1>
+                <h1 className="text-sm font-normal text-gray-500">@{slug}</h1>
               </div>
               {!myself && loggedin && (
                 <div className="flex flex-row items-center content-center gap-2 mb-2">
@@ -379,7 +380,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                     {blocked  ? "Unblock" : "Block"}
                   </button>}
                   <Link
-                    href={"/report/user/" + params.slug}
+                    href={"/report/user/" + slug}
                     className="px-4 py-1 mr-8 text-[10px] font-medium text-white border-2 border-gray-900 rounded-full md:mr-14"
                   >
                     {"Report"}
@@ -400,7 +401,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             </h1>
 
             <div className={resume ? "mr-16  flex flex-row" : "mr-16 flex flex-row"}>
-              <Link href={"/resume/" + params.slug} className={resume ? "text-sm font-medium text-blue-600" : "hidden"}>
+              <Link href={"/resume/" + slug} className={resume ? "text-sm font-medium text-blue-600" : "hidden"}>
                 View Resume
               </Link>
             </div>
@@ -424,7 +425,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               <h1 className="text-lg font-bold text-white ">{name}&apos;s Posts</h1>
              {!blocked && !imblockedby &&
               <Link
-                href={"/quickies/" + params.slug}
+                href={"/quickies/" + slug}
                 className="py-2 ml-2 text-sm font-medium text-white rounded-full cursor-pointer md:px-6 md:bg-gray-900/50 "
               >
                 View Quickies
@@ -475,7 +476,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                   />
                 </div>
               )}
-              <More myblocked={blocked} handle={params.slug} />
+              <More myblocked={blocked} handle={slug} />
             </div>
           </>
         )}

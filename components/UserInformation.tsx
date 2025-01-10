@@ -10,6 +10,7 @@ export default function UserInformation(props: any) {
     const [handle, setHandle] = useState<any>()
     const supabase = createClient();
     const [user, setUser] = useState<any>()
+    const [myImage,setMyImage]  = useState<any>()
     const [myId, setMyId] = useState<any>();
     const [myuserid, setUserid] = useState<any>();
     const [showPopup, setShowPopup] = useState(false);
@@ -73,6 +74,7 @@ export default function UserInformation(props: any) {
             const showAbove = spaceBelow < popupHeight && rect.top > popupHeight;
 
             const newPosition = {
+                
                 top: showAbove 
                     ? rect.top + window.scrollY - popupHeight + 20
                     : rect.bottom + window.scrollY + 10,
@@ -102,13 +104,14 @@ export default function UserInformation(props: any) {
             const { data: u } = await supabase.auth.getUser();
             if (u?.user) {
                 const { data, error } = await supabase.from('user').select('*').eq('id', props.id);
-                const { data: mine, error: e } = await supabase.from('user').select('handle').eq('id', u.user.id);
+                const { data: mine, error: e } = await supabase.from('user').select('image,handle').eq('id', u.user.id);
     
                 if (data && mine && !error && mine.length > 0 && data.length > 0) {
                     setUser(data[0]);
                     setHandle(data[0].handle);
                     setMyId(mine[0].handle);
                     setUserid(u.user.id);
+                    setMyImage(mine[0].image)
     
                     // Determine imfollowing if props.imfollowing is not provided
                     if (props.imfollowing !== undefined) {
@@ -177,7 +180,7 @@ else{
           "follow",
           myuserid,
           "@" + myId + " has followed you! Follow them back?",
-          props.myImage
+          myImage
         );
         setImFollowing(true);
         setFollowerList(arr);

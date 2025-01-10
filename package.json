@@ -1,7 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "NODE_OPTIONS='--inspect' next dev",
+
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -20,6 +21,8 @@
     "ably": "^2.3.0",
     "autoprefixer": "10.4.15",
     "geist": "^1.0.0",
+    "gulp-header": "^1.8.9",
+    "gulp-util": "^1.0.0",
     "javascript-time-ago": "^1.0.16",
     "next": "latest",
     "postcss": "^8.4.32",
@@ -53,7 +56,6 @@
     "eslint-config-next": "^14.0.4",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-tailwindcss": "^3.13.1",
     "heroicons": "^2.0.18",
     "prettier": "^3.3.3",
     "react-loader-spinner": "^6.1.0",

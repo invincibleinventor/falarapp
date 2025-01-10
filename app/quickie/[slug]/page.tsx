@@ -227,7 +227,7 @@ export default async function App({ params }: { params: { slug: string } }) {
                 <div>
                   <h1
                     style={{ wordBreak: "break-word", whiteSpace: "normal" }}
-                    className="my-4 mt-2 text-lg font-medium text-gray-300 four-line-ellipsis md:text-lg"
+                    className="my-4 mt-2 text-base text-gray-300 four-line-ellipsis md:text-lg"
                   >
                     {formatText(content)}
                   </h1>
