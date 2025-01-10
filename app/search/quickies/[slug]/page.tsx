@@ -61,7 +61,6 @@ const [newblocked,setnewblocked] = useState([])
         .from("quickies")
         .select("*,user(id,name,handle,image)")
         .order("id", { ascending: false })
-        .in("handle", u![0]["following"])
         .not("poster", "in", `(${u![0]["blocked"].toString()})`)
         .not("poster", "in", `(${u![0]["blockedby"].toString()})`)
 
