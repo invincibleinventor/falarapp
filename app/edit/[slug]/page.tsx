@@ -230,7 +230,7 @@ export default function Page({ params }: {params: Promise<{ slug: string }>}) {
 
             <button
               disabled={deleteDialog != "hidden" ? true : false}
-              className="px-8 py-4 mb-2 text-xs font-medium text-white rounded-md bg-primary-800 w-max"
+              className="px-8 py-4 mb-2 text-xs font-semibold text-white rounded-full bg-primary-800 w-max"
             >
               Publish This Post
             </button>
