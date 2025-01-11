@@ -17,7 +17,11 @@ export default function App(props: any) {
     a.opened = true;
   } else if (props.link == "/quickies" && (loc == "/quickies/all" || loc == "/quickies")) {
     a.opened = true;
-  } else if (props.link == "/myself" && loc == "/customize") {
+  }
+ else if (props.link == "/bookmarks" && (loc == "/bookmarks/quickies" || loc == "/bookmarks")) {
+a.opened = true;
+}
+   else if (props.link == "/myself" && loc == "/customize") {
     a.opened = true;
   } else {
     console.log("");

@@ -147,8 +147,7 @@ export default function Index({ params }: { params: Promise<{ slug: string }>}) 
                     <div className="flex flex-col gap-2 mx-auto max-w-max">
                       <h1 className="mx-auto text-lg font-semibold text-center text-black">No Users To View!</h1>
                       <h1 className="mx-auto text-sm text-center text-neutral-800">
-                        Follow people to view their posts on your home feed. The more people you follow, the more posts
-                        on your feed
+                        The user you are searching for does not exist or may have blocked you. But fret not! There are several more interesting people on Falar
                       </h1>
 
                       <Link

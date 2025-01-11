@@ -12,13 +12,15 @@ export default function LikeComponent(props: any) {
   const [likes, setLikes] = useState(props.likes);
   let locallikedlist:any;
   let locallikes:any;
-
+let localuserlist:any;
   async function setLiked(like: boolean) {
     const {data:d,error:e}  = await supabase.from('quickies').select('*').eq('id',props.postid);
-    if(!e && d){
+   // const {data:u} = await supabase.from('user').select('*').eq('handle',props.handle);
+
+    if(!e && d ){
       locallikedlist = d[0]["liked"]
     locallikes = d[0]["likes"]
-      
+      localuserlist = ulikedlist
     
     }
     if (like == false) {
@@ -29,10 +31,10 @@ export default function LikeComponent(props: any) {
       l = l.filter(function (item: any) {
         return item !== props.handle;
       });
-      let u = ulikedlist;
+      let u = localuserlist;
 
       u = u.filter(function (item: any) {
-        return item !== props.postid;
+        return item !== props.postid.toString();
       });
 
       const { error } = await supabase
@@ -62,7 +64,7 @@ export default function LikeComponent(props: any) {
 
       setDisabled(true);
       l.push(props.handle);
-      const u = ulikedlist;
+      const u = localuserlist;
       u.push(props.postid);
       console.log(l);
       const { error: e } = await supabase.from("user").update({ quickieliked: u }).eq("handle", props.handle);

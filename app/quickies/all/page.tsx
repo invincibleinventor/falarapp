@@ -49,8 +49,8 @@ export default async function Index() {
     myblocked = u![0]["blocked"];
     myhandle = u![0]["handle"];
     newblocked = u![0]["blockedby"]
-    userbookmarked = u![0]["bookmarks"];
-    userliked = u![0]["liked"];
+    userbookmarked = u![0]["quickiebookmarks"];
+    userliked = u![0]["quickieliked"];
     let ds = [];
 
     l.push(h);

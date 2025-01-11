@@ -19,7 +19,54 @@ export default function More(props: any) {
   const date1 = new Date();
 
   async function get(from: number, to: number) {
-   
+   if(props.slug){
+      const { data, error } = await supabase
+        .from("quickies")
+        .select("*, user(id,name,image,handle)")
+        .order("id", { ascending: false })
+        .not("poster", "in", `(${props.newblocked.toString()})`)
+        .in("id", props.in)
+        .textSearch("content", `'${props.slug}' | '${props.slug.toLowerCase()}' | '${props.slug.toUpperCase()}'`)
+
+        .not("poster", "in", `(${props.myblocked.toString()})`)
+        .range(from, to);
+      if (error) {
+        console.log(error);
+      } else {
+        if (data && data.length > 0) {
+          console.log(data);
+          const ds = data;
+          for await (const [index, post] of ds.entries()) {
+            let liked = false;
+            const likedlist: string | any[] = ds[index].liked;
+            let bookmarked = false;
+            const bookmarkedlist: any[] = ds[index].bookmarked;
+            if (likedlist.includes(props.myhandle)) {
+              liked = true;
+            }
+            if (bookmarkedlist.includes(props.myhandle)) {
+              bookmarked = true;
+            }
+
+            ds[index].liked = liked;
+            ds[index].bookmarked = bookmarked;
+            ds[index].bookmarkedlist = bookmarkedlist;
+            ds[index].likedlist = likedlist;
+            console.log(likedlist);
+
+            const date2 = new Date(ds[index].created_at);
+            ds[index].diff = date1.getTime() - date2.getTime();
+          }
+          setPosts([...posts, ...ds]);
+          if (ds.length < PAGE_COUNT) {
+            setHalt(true);
+          }
+        } else {
+          setHalt(true);
+        }
+      }
+    }
+    else{
       const { data, error } = await supabase
         .from("quickies")
         .select("*, user(id,name,image,handle)")
@@ -63,6 +110,7 @@ export default function More(props: any) {
           setHalt(true);
         }
       }
+    }
     
   }
   useEffect(() => {

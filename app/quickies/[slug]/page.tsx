@@ -55,8 +55,8 @@ const slug = (await params).slug;
         
         myphoto = u![0]["image"];
         myhandle = u![0]["handle"];
-        userbookmarked = u![0]["bookmarks"];
-        userliked = u![0]["liked"];
+        userbookmarked = u![0]["quickiebookmarks"];
+        userliked = u![0]["quickieliked"];
         let ds = [];
 
         l.push(h);

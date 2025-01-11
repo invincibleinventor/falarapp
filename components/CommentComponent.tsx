@@ -17,7 +17,9 @@ export default function CommentComponent(props: any) {
   const [disabled, setDisabled] = useState(false);
   async function setLiked(like: boolean) {
       const {data,error} = await supabase.from('comments').select('*').eq('comment_id',props.comment_id);
+
       if(data){
+        
       locallikes = data[0]["likes"]
       locallikedlist = data[0]["liked"]
     }

@@ -72,9 +72,7 @@ export default async function Index() {
     return (
       <>
         <div className="flex-1 h-screen p-0 py-2 overflow-hidden">
-          <div className="p-4 py-2 mx-1 md:mx-1">
-            <Search page="bookmarks" text="Bookmarks" />
-          </div>
+        
           <h1 className="px-8 my-4 mt-4 text-xl font-bold text-neutral-300">My Bookmarks</h1>
           <div className="h-full overflow-y-scroll hiddenscroll">
             <div className="flex flex-col gap-2 mb-20 animate-in hiddenscroll">
@@ -121,7 +119,7 @@ export default async function Index() {
             </div>{" "}
           </div>
         </div>
-      </>
+      </> 
     );
   } else {
     return <></>;

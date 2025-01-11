@@ -1,5 +1,5 @@
 "use client";
-import More from "@/components/MoreQuickies";
+import More from "@/components/MoreBookmarkQuickies";
 import PostComponent from "@/components/QuickieComponent";
 import Search from "@/components/SearchComponent";
 import { createClient } from "@/utils/supabase/client";
@@ -43,7 +43,6 @@ const [newblocked,setnewblocked] = useState([])
       const { data: user } = await supabase.auth.getUser();
       const s = user.user!.id;
       const { data: u } = await supabase.from("user").select("*").eq("id", s);
-      setL(u![0]["following"]);
       const h = u![0]["handle"];
       setMyname(u![0]["name"]);
       setMyphoto(u![0]["image"]);
@@ -52,17 +51,16 @@ const [newblocked,setnewblocked] = useState([])
       setUserliked(u![0]["quickieliked"]);
       setBlocked(u![0]["blocked"]);
       setnewblocked(u![0]["blockedby"])
+      setL(u![0]["quickiebookmarks"])
       let ds = [];
-      const a: any = l;
-      a.push(h);
-      setL(a);
+     
       const { data, error } = await supabase
         .from("quickies")
         .select("*,user(id,name,handle,image)")
         .order("id", { ascending: false })
         .not("poster", "in", `(${u![0]["blocked"].toString()})`)
         .not("poster", "in", `(${u![0]["blockedby"].toString()})`)
-
+        .in("id", u![0]["quickiebookmarks"])
         .textSearch("content", `'${search}' | '${search.toLowerCase()}' | '${search.toUpperCase()}'`)
 
         .limit(5);
@@ -173,8 +171,8 @@ const [newblocked,setnewblocked] = useState([])
                   <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
                     <div className="flex flex-col gap-2 mx-auto max-w-max">
                       <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">No Quickies To View!</h1>
-                      <h1 className="mx-auto text-sm text-center text-neutral-600">
-                        There are no quickies that match your search. Maybe try exploring other quickies?
+                      <h1 className="mx-auto text-sm text-center text-neutral-400">
+                        Bookmark more quickies to see them in the search results. Explore more quickies to bookmark
                       </h1>
                       <Link
                         href="/quickies/all"
@@ -182,7 +180,7 @@ const [newblocked,setnewblocked] = useState([])
                           1 == 1 ? "bg-primary-800 text-white" : "border-2 bg-white"
                         }`}
                       >
-                        Explore Quickies
+                        Explore quickies
                       </Link>
                     </div>
                   </div>

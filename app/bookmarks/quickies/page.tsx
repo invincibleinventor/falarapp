@@ -1,4 +1,4 @@
-import More from "@/components/MoreQuickies";
+import More from "@/components/MoreBookmarkQuickies";
 import PostComponent from "@/components/QuickieComponent";
 import Search from "@/components/SearchComponent";
 import Stories from "@/components/stories";
@@ -53,9 +53,8 @@ export default async function Index() {
     userbookmarked = u![0]["quickiebookmarks"];
     userliked = u![0]["quickieliked"];
     let ds = [];
-
-    l.push(h);
-    const { data, error } = await supabase
+    l = userbookmarked
+        const { data, error } = await supabase
       .from("quickies")
       .select(
         `*, 
@@ -67,7 +66,7 @@ export default async function Index() {
         )`
       )
       .order("id", { ascending: false })
-      .in("handle", l)
+      .in("id", l)
       .eq("parent",0)
       .not("poster", "in", `(${myblocked.toString()})`)
       .not("poster", "in", `(${newblocked.toString()})`)
@@ -113,12 +112,12 @@ export default async function Index() {
   if (isSupabaseConnected) {
     return (
       <>
-        <div className="h-full overflow-y-scroll hiddenscroll">
+        <div className="h-full py-2 overflow-y-scroll hiddenscroll">
+        <h1 className="px-8 my-4 mt-4 text-xl font-bold text-neutral-300">My Bookmarks</h1>
+
           <div className="flex flex-col gap-0 mb-20 animate-in hiddenscroll">
             <div className="parent-container">{/* <Stories></Stories> */}</div>
-            <div className=" lg:hidden">
-              <Trending />
-            </div>
+            
             {!loading ? (
               !empty ? (
                 posts.map((post) => (

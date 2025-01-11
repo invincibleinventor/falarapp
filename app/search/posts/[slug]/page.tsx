@@ -140,15 +140,15 @@ const [newblocked,setnewblocked]  = useState([])
                 <div className="flex flex-col gap-4 mx-auto max-w-max">
                   <h1 className="mx-auto text-xl font-semibold text-center text-neutral-300">No Posts To View!</h1>
                   <h1 className="mx-auto text-sm text-center text-neutral-400">
-                    Your search results appear here. Seems like there are no posts related to your search term.
+                    Your search results appear here. Seems like there are no posts related to your search term. Explore other posts maybe?
                   </h1>
                   <Link
-                    href="/search/posts/*"
+                    href="/all"
                     className={`mx-auto mt-5 w-max px-8  py-3 text-xs font-medium  ${
                       1 == 1 ? "bg-primary-800 rounded-full  text-white" : "border-2 bg-white"
                     }`}
                   >
-                    Search Something Else
+                    Explore Posts
                   </Link>
                 </div>
               </div>

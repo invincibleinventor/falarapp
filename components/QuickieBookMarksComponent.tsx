@@ -10,16 +10,17 @@ export default function BookMarksComponent(props: any) {
   const [ulikedlist, setuLikedList] = useState(props.userliked);
   const [disabled, setDisabled] = useState(false);
   let locallikedlist:any;
-
+  
+let localuserlist:any;
   const [likes, setLikes] = useState(props.likes);
   async function setLiked(like: boolean) {
    
-      const {data:d,error:e}  = await supabase.from('quickies').select('*').eq('id',props.postid);
-      if(!e && d)
+    const {data:d,error:e}  = await supabase.from('quickies').select('*').eq('id',props.postid);
+    if(!e && d ){
   locallikedlist = d[0]["bookmarked"];
   
-        
-      
+      localuserlist = ulikedlist
+    }
      
     if (like == false) {
       let l = locallikedlist;
@@ -31,12 +32,13 @@ export default function BookMarksComponent(props: any) {
       l = l.filter(function (item: any) {
         return item !== props.handle;
       });
-      let u = ulikedlist;
-
+      let u = localuserlist;
+console.log(props.postid)
       u = u.filter(function (item: any) {
-        return item !== props.postid;
+        return item !== props.postid.toString();
       });
-
+      console.log('inga')
+      console.log(u)
       console.log(l);
       const { error: e } = await supabase.from("user").update({ quickiebookmarks: u }).eq("handle", props.handle);
 
@@ -62,7 +64,7 @@ export default function BookMarksComponent(props: any) {
       setLikes(likes + 1);
 
       l.push(props.handle);
-      const u = ulikedlist;
+      const u = localuserlist;
       u.push(props.postid);
       console.log(l);
       const { error: e } = await supabase.from("user").update({ quickiebookmarks: u }).eq("handle", props.handle);

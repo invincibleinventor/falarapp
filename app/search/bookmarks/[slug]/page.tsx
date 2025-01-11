@@ -151,12 +151,12 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
                       your search. Bookmark posts to view them here.
                     </h1>
                     <Link
-                      href="/"
+                      href="/all"
                       className={`mx-auto mt-3 rounded-full w-max px-8 py-3 text-xs font-medium  ${
                         1 == 1 ? "bg-primary-800 text-white" : "border-2 bg-white"
                       }`}
                     >
-                      Return To Home
+                      Explore Posts
                     </Link>
                   </div>
                 </div>

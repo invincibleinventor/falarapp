@@ -6,17 +6,19 @@ export default function BookMarksComponent(props: any) {
   const supabase = createClient();
   const [likedlist, setLikedList] = useState(props.likedlist);
   let locallikedlist:any;
-  
+  let localuserlist:any;
   const [liked, toggleLiked] = useState(props.liked);
   const [ulikedlist, setuLikedList] = useState(props.userliked);
   const [disabled, setDisabled] = useState(false);
 
   async function setLiked(like: boolean) {
       const {data:d,error:e}  = await supabase.from('posts').select('*').eq('id',props.postid);
+
       if(!e && d)
-        
+      {
+        localuserlist = ulikedlist
         locallikedlist = d[0]["bookmarked"]
-    
+      }
     if (like == false) {
       let l = locallikedlist;
       console.log(l);
@@ -25,10 +27,10 @@ export default function BookMarksComponent(props: any) {
       l = l.filter(function (item: any) {
         return item !== props.handle;
       });
-      let u = ulikedlist;
+      let u = localuserlist;
 
       u = u.filter(function (item: any) {
-        return item !== props.postid;
+        return item !== props.postid.toString();
       });
 
       console.log(l);
@@ -53,7 +55,7 @@ export default function BookMarksComponent(props: any) {
       setDisabled(true);
 
       l.push(props.handle);
-      const u = ulikedlist;
+      const u = localuserlist;
       u.push(props.postid);
       console.log(l);
       const { error: e } = await supabase.from("user").update({ bookmarks: u }).eq("handle", props.handle);
