@@ -20,7 +20,7 @@ export default async function Page() {
       <div className={`h-screen flex-1 gap-2 overflow-hidden px-8`}>
         <div className="h-full overflow-y-scroll hiddenscroll">
           <form className="flex flex-col justify-center w-full gap-2 py-10 pr-5 my-auto overflow-x-hidden animate-in text-foreground">
-            <button className="px-8 py-4 mb-2 text-xs font-medium text-white rounded-md bg-cyan-800 w-max">
+            <button className="px-8 py-4 mb-2 text-xs font-medium text-white rounded-md bg-primary-800 w-max">
               Publish This Post
             </button>
           </form>

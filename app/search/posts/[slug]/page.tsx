@@ -139,13 +139,13 @@ const [newblocked,setnewblocked]  = useState([])
               <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
                 <div className="flex flex-col gap-4 mx-auto max-w-max">
                   <h1 className="mx-auto text-xl font-semibold text-center text-neutral-300">No Posts To View!</h1>
-                  <h1 className="mx-auto text-sm text-center text-neutral-500">
+                  <h1 className="mx-auto text-sm text-center text-neutral-400">
                     Your search results appear here. Seems like there are no posts related to your search term.
                   </h1>
                   <Link
                     href="/search/posts/*"
                     className={`mx-auto mt-5 w-max px-8  py-3 text-xs font-medium  ${
-                      1 == 1 ? "bg-cyan-800 rounded-full  text-white" : "border-2 bg-white"
+                      1 == 1 ? "bg-primary-800 rounded-full  text-white" : "border-2 bg-white"
                     }`}
                   >
                     Search Something Else

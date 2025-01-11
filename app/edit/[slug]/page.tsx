@@ -19,10 +19,8 @@ export default function Page({ params }: {params: Promise<{ slug: string }>}) {
     console.log("here here");
     const bucket = "posts";
 
-    // Call Storage API to upload file
     const { error } = await supabase.storage.from(bucket).upload("/covers/" + id + ".jpg", file, { upsert: true });
 
-    // Handle error if upload failed
     if (error) {
       alert("Error uploading file.");
     } else {
@@ -232,7 +230,7 @@ export default function Page({ params }: {params: Promise<{ slug: string }>}) {
 
             <button
               disabled={deleteDialog != "hidden" ? true : false}
-              className="px-8 py-4 mb-2 text-xs font-medium text-white rounded-md bg-cyan-800 w-max"
+              className="px-8 py-4 mb-2 text-xs font-medium text-white rounded-md bg-primary-800 w-max"
             >
               Publish This Post
             </button>
@@ -245,13 +243,13 @@ export default function Page({ params }: {params: Promise<{ slug: string }>}) {
           <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">
             You are not allowed to edit this post.
           </h1>
-          <h1 className="mx-auto text-center text-neutral-500 text-md">
+          <h1 className="mx-auto text-center text-neutral-400 text-md">
             Only the Author of the post is allowed to edit a post. Try from a different account or leave this page.
           </h1>
           <Link
             href="/"
             className={`mx-auto mt-3 rounded-md w-max px-8 py-3 text-xs font-medium  ${
-              1 == 1 ? "bg-cyan-800 text-white" : "border-2 bg-white"
+              1 == 1 ? "bg-primary-800 text-white" : "border-2 bg-white"
             }`}
           >
             Return To Home

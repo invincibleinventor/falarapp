@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import { AppConfig } from "@/config/config";
 import Sidebar from "@/components/SideBar";
+import { ThemeProvider } from "@/lib/themecontext";
 const defaultUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000";
 
 export const metadata = {
@@ -13,6 +14,8 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
+    <ThemeProvider>
+
     <html lang="en" className="noSelect font-sohne">
       <head>
         <Script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></Script>
@@ -33,5 +36,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
       </body>
     </html>
+    </ThemeProvider>
   );
 }

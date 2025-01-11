@@ -22,10 +22,8 @@ export default function Create() {
     console.log("here here");
     const bucket = "covers";
 
-    // Call Storage API to upload file
     const { error } = await supabase.storage.from(bucket).upload("/public/" + handle + ".jpg", file, { upsert: true });
 
-    // Handle error if upload failed
     if (error) {
       alert("Error uploading file.");
       return;
@@ -47,12 +45,10 @@ export default function Create() {
     console.log("here here");
     const bucket = "profile";
 
-    // Call Storage API to upload file
     const { error } = await supabase.storage
       .from(bucket)
       .upload("/public/" + handle + ".jpg", profile, { upsert: true });
 
-    // Handle error if upload failed
     if (error) {
       alert("Error uploading file.");
       return;
@@ -124,7 +120,7 @@ export default function Create() {
             <Image
               width={200}
               height={200}
-              src={cover ? cover : ""}
+              src={cover ? cover : "/bg.jpg"}
               className="rounded-md h-[calc(52*4px)] w-[calc(100%)] border border-neutral-500 object-cover "
               alt="cover"
             />
@@ -139,10 +135,10 @@ export default function Create() {
           </div>
           <div className="absolute inset-x-0 bottom-0">
             <div className="relative">
-              <Image width={110} height={110} src={image} className="w-24 h-24 mx-auto rounded-lg " alt="image" />
+              <Image width={110} height={110} src={image?image:'/user.jpg'} className="w-24 h-24 mx-auto rounded-lg " alt="image" />
               <div
                 onClick={handleProfileClick}
-                className="absolute text-xs flex items-center content-center text-white rounded-full cursor-pointer left-20 right-0 mx-auto top-[80%] w-7 h-7  bg-cyan-700 shadow-lg border border-white"
+                className="absolute text-xs flex items-center content-center text-white rounded-full cursor-pointer left-20 right-0 mx-auto top-[80%] w-7 h-7  bg-primary-700 shadow-lg border-[0.5px] border-neutral-400"
               >
                 {" "}
                 <svg
@@ -216,7 +212,7 @@ export default function Create() {
           maxLength={100}
         />
 
-        <button className="px-8 py-4 mx-auto mb-2 text-xs font-medium text-white rounded-full bg-cyan-800 w-max">
+        <button className="px-8 py-4 mx-auto mb-2 text-xs font-medium text-white rounded-full bg-primary-800 w-max">
           Save Your Changes
         </button>
       </form>

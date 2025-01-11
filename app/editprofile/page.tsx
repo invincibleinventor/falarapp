@@ -106,7 +106,7 @@ export default function Create() {
         </label>
         <input
           onChange={(e) => setName(e.target.value)}
-          className="px-4 py-2 mb-6 text-sm bg-black border rounded-md outline-none text-neutral-300 border-neutral-900 focus:outline-cyan-800"
+          className="px-4 py-2 mb-6 text-sm bg-black border rounded-md outline-none text-neutral-300 border-neutral-900 focus:outline-primary-800"
           name="name"
           placeholder="Please Type Out Your Name"
           required
@@ -118,7 +118,7 @@ export default function Create() {
         </label>
         <input
           onChange={(e) => setHandle(e.target.value.trim().replace(" ", "_"))}
-          className="px-4 py-2 mb-6 text-sm bg-black border rounded-md outline-none text-neutral-300 border-neutral-900 focus:outline-cyan-800"
+          className="px-4 py-2 mb-6 text-sm bg-black border rounded-md outline-none text-neutral-300 border-neutral-900 focus:outline-primary-800"
           name="handle"
           placeholder="Please Type Out Your Username"
           required
@@ -130,7 +130,7 @@ export default function Create() {
         </label>
         <textarea
           onChange={(e) => setAbout(e.target.value)}
-          className="px-4 py-2 mb-6 text-sm bg-black border rounded-md outline-none text-neutral-300 border-neutral-900 focus:outline-cyan-800"
+          className="px-4 py-2 mb-6 text-sm bg-black border rounded-md outline-none text-neutral-300 border-neutral-900 focus:outline-primary-800"
           name="content"
           placeholder="Please Type About Yourself"
           required
@@ -138,7 +138,7 @@ export default function Create() {
           maxLength={100}
         />
 
-        <button className="px-8 py-4 mx-auto mb-2 text-xs font-medium text-white rounded-full bg-cyan-800 w-max">
+        <button className="px-8 py-4 mx-auto mb-2 text-xs font-medium text-white rounded-full bg-primary-800 w-max">
           Setup Your Account
         </button>
       </form>

@@ -147,19 +147,19 @@ export default async function App({ params }: { params: Promise<{ slug: string }
         hashtag = word.replace("#", "");
         return (
           <Link legacyBehavior href={`/hashtag/${hashtag}`}>
-            <a className="text-cyan-800 hover:text-cyan-900">{word}</a>
+            <a className="text-primary-600 hover:text-primary-700">{word}</a>
           </Link>
         );
       } else if (word.startsWith("@")) {
         username = word.replace("@", "");
         return (
           <Link legacyBehavior href={`/profile/${username}`}>
-            <a className="text-cyan-800 hover:text-cyan-900">{word}</a>
+            <a className="text-primary-600 hover:text-primary-700">{word}</a>
           </Link>
         );
       } else if (word.includes("http")) {
         return (
-          <a target="_blank" href={word} className="text-cyan-800 hover:text-cyan-900">
+          <a target="_blank" href={word} className="text-primary-600 hover:text-primary-700">
             {word}
           </a>
         );
@@ -184,14 +184,14 @@ export default async function App({ params }: { params: Promise<{ slug: string }
         <div className="flex items-center content-center w-full h-screen px-10 sm:px-24 md:px-16 lg:px-24">
           <div className="flex flex-col gap-4 mx-auto max-w-max">
             <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">That Quickie Doesn&apos;t Exist</h1>
-            <h1 className="mx-auto text-center text-neutral-500 text-md">
+            <h1 className="mx-auto text-center text-neutral-400 text-md">
               That quickie does not exist. It must have been removed or deleted by the author. Please refresh if you
               think that is not the case
             </h1>
             <Link
               href="/quickies"
               className={`mx-auto mt-3 w-max rounded-full px-8 py-3 text-xs font-bold ${
-                1 == 1 ? "bg-cyan-800 text-white" : "border-2  bg-white "
+                1 == 1 ? "bg-primary-800 text-white" : "border-2  bg-white "
               }`}
             >
               Return Back
@@ -218,8 +218,8 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                       <h1>
                         <p className="text-base font-medium break-all text-neutral-300 line-clamp-1">{naam}</p>
                       </h1>
-                      <div className="mx-1 text-base text-neutral-500">·</div>
-                      <span className="text-base font-medium text-neutral-500 whitespace-nowrap">@{author}</span>
+                      <div className="mx-1 text-base text-neutral-400">·</div>
+                      <span className="text-base font-medium text-neutral-400 whitespace-nowrap">@{author}</span>
                     </div>
                   </Link>
                   <Menu type="quickie" id={slug} myhandle={myhandle} handle={author} />
@@ -249,7 +249,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                   )}
 
                   <div className="flex flex-row items-center content-center mt-0">
-                    <h1 className="ml-auto text-sm font-medium text-neutral-500">{timeAgo.format(Date.now() - time)}</h1>
+                    <h1 className="ml-auto text-sm font-medium text-neutral-400">{timeAgo.format(Date.now() - time)}</h1>
                   </div>
                 </div>
               </div>
@@ -259,13 +259,13 @@ export default async function App({ params }: { params: Promise<{ slug: string }
             <div className="h-1 mb-10 border-b border-b-neutral-900"></div>
       <div className="flex flex-col gap-4 px-10 mx-auto max-w-max">
       <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">Login To View Replies</h1>
-      <h1 className="mx-auto text-center text-neutral-500 text-md">
+      <h1 className="mx-auto text-center text-neutral-400 text-md">
         Login to {AppConfig.title} to view the replies for this Quickie
       </h1>
       <Link
         href="/"
         className={`mx-auto mt-3 w-max rounded-full px-8 py-3 text-xs font-bold ${
-          1 == 1 ? "bg-cyan-800 text-white" : "border-2  bg-white "
+          1 == 1 ? "bg-primary-800 text-white" : "border-2  bg-white "
         }`}
       >
         Login Now
@@ -306,7 +306,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
           />
            <Link
             href="#comments"
-            className="flex flex-row items-center content-center px-6 pr-0 space-x-2 text-neutral-300 lg:mr-0"
+            className="flex flex-row items-center content-center px-6 pr-0 space-x-2 text-white lg:mr-0"
           >
                               <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M5 3h13a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-4.59l-3.7 3.71c-.18.18-.43.29-.71.29a1 1 0 0 1-1-1v-3H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3m13 1H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h4v4l4-4h5a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2"/></svg>{" "}
 

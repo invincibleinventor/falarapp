@@ -9,8 +9,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
   const supabase = createClient();
   const {slug} = use(params);
   const canInitSupabaseClient = () => {
-    // This function is just for the interactive tutorial.
-    // Feel free to remove it once you have Supabase connected.
+
     try {
       createClient();
       return true;

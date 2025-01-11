@@ -114,7 +114,6 @@ export default function UserInformation(props: any) {
                     setUserid(u.user.id);
                     setMyImage(mine[0].image)
                     
-                    // Determine imfollowing if props.imfollowing is not provided
                     if (props.imfollowing !== undefined) {
                         setImFollowing(props.imfollowing);
                     } else {
@@ -129,7 +128,7 @@ export default function UserInformation(props: any) {
         }
     
         fetchData();
-    }, [props.id, props.imfollowing]); // Add dependencies to avoid unnecessary fetches
+    }, [props.id, props.imfollowing]);
     
 
     const handleFollow = async (e: React.MouseEvent) => {
@@ -217,7 +216,7 @@ else{
                     <div className='flex flex-row items-center content-center justify-between'>
                         <div className='flex flex-col '>
                             <h1 className='text-base font-semibold text-white'>{user.name}</h1>
-                            <h1 className='text-sm text-neutral-500'>@{user.handle}</h1>
+                            <h1 className='text-sm text-neutral-400'>@{user.handle}</h1>
                         </div>
                         <div className='ml-auto'>
                             {myId != handle &&
@@ -226,7 +225,7 @@ else{
                                     className={
                                         imfollowing
                                             ? "h-max border border-black bg-white px-4 py-1 text-xs  rounded-full text-black"
-                                            : "h-max border border-black bg-cyan-800 px-4 py-1 text-xs rounded-full text-white"
+                                            : "h-max border border-black bg-primary-800 px-4 py-1 text-xs rounded-full text-white"
                                     }
                                 >
                                     {imfollowing ? "Unfollow" : "Follow"}
@@ -242,13 +241,13 @@ else{
                             <h1 className="text-sm font-semibold text-neutral-300">
                                 {user.followers?.length}
                             </h1>
-                            <h1 className="text-sm text-neutral-500">Followers</h1>
+                            <h1 className="text-sm text-neutral-400">Followers</h1>
                         </div>
                         <div className='flex flex-row items-center content-center space-x-1'>
                             <h1 className="text-sm font-semibold text-neutral-300">
                                 {user.following?.length}
                             </h1>
-                            <h1 className="text-sm text-neutral-500">Following</h1>
+                            <h1 className="text-sm text-neutral-400">Following</h1>
                         </div>
                     </div>
                 </div>

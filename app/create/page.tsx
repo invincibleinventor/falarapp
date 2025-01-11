@@ -12,10 +12,8 @@ export default function Create() {
     console.log("here here");
     const bucket = "posts";
 
-    // Call Storage API to upload file
     const { error } = await supabase.storage.from(bucket).upload("/covers/" + id + ".jpg", file, { upsert: true });
 
-    // Handle error if upload failed
     if (error) {
       alert("Error uploading file.");
     } else {
@@ -156,7 +154,7 @@ export default function Create() {
             />
           </div>
 
-          <button disabled={disabled} className="px-8 py-4 mb-2 text-xs font-medium text-white rounded-md bg-cyan-800 w-max">
+          <button disabled={disabled} className="px-8 py-4 mb-2 text-xs font-medium text-white rounded-md bg-primary-800 w-max">
             Publish This Post
           </button>
         </form>

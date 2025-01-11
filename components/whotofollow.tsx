@@ -38,6 +38,8 @@ export default async function WhoToFollow() {
         userlist = shuffled.slice(0, 3);
 
         empty = false;
+        console.log('belowwwww')
+        console.log(userlist)
       } else {
         empty = true;
       }

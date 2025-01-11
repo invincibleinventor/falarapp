@@ -10,8 +10,7 @@ export default async function Index() {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
   const canInitSupabaseClient = () => {
-    // This function is just for the interactive tutorial.
-    // Feel free to remove it once you have Supabase connected.
+
     try {
       createClient(cookieStore);
       return true;
@@ -104,7 +103,7 @@ export default async function Index() {
                     <Link
                       href="/explore"
                       className={`mx-auto mt-3 rounded-full w-max px-8 py-3 text-xs font-medium  ${
-                        1 == 1 ? "bg-cyan-800 text-white" : "border-2 bg-white"
+                        1 == 1 ? "bg-primary-800 text-white" : "border-2 bg-white"
                       }`}
                     >
                       Explore People

@@ -26,19 +26,19 @@ export default function Post(props: any) {
         hashtag = word.replace("#", "");
         return (
           <Link legacyBehavior href={`/hashtag/${hashtag}`}>
-            <a className="text-cyan-800 hover:text-cyan-900">{word}</a>
+            <a className="text-primary-600 hover:text-primary-700">{word}</a>
           </Link>
         );
       } else if (word.startsWith("@")) {
         username = word.replace("@", "");
         return (
           <Link legacyBehavior href={`/profile/${username}`}>
-            <a className="text-cyan-800 hover:text-cyan-900">{word}</a>
+            <a className="text-primary-600 hover:text-primary-700">{word}</a>
           </Link>
         );
       } else if (word.includes("http")) {
         return (
-          <a target="_blank" href={word} className="text-cyan-800 hover:text-cyan-900">
+          <a target="_blank" href={word} className="text-primary-600 hover:text-primary-700">
             {word}
           </a>
         );
@@ -50,7 +50,7 @@ export default function Post(props: any) {
   return (
     <div className="w-full animate-in">
       <div className="w-full px-5 py-[6px]">
-        <div className="flex flex-col border border-neutral-300 rounded-md bg-neutral-50 md:gap-0">
+        <div className="flex flex-col border rounded-md border-neutral-300 bg-neutral-50 md:gap-0">
           <div className="flex items-center content-center bg-black rounded-md "></div>
           <div className="flex h-max flex-col gap-[8px] md:p-6 p-4 ">
             <div className="flex flex-row items-center content-center gap-2 h-max shrink-0">

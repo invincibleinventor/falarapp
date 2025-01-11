@@ -27,7 +27,7 @@ export default function App(props: any) {
     <Link
       href={props.link}
       className={`mx-2  flex w-max cursor-pointer flex-row content-center items-center  px-3  py-[10px] transition-all bg-neutral-800/10 md:bg-transparent rounded-full md:rounded-full h-[calc(13*4px)] md:h-max md:border-none  duration-100 ease-linear md:mx-0 md:w-full md:space-x-[10px] md:px-[14px] md:py-[10px] md:pr-8  ${
-        a.opened ? "md:bg-neutral-700/30 bg-neutral-800/40" : ""
+        a.opened ? "md:bg-neutral-900 bg-neutral-900" : ""
       }`}
     >
       <svg

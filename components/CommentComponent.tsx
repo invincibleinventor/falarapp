@@ -74,19 +74,19 @@ export default function CommentComponent(props: any) {
         hashtag = word.replace("#", "");
         return (
           <Link legacyBehavior href={`/hashtag/${hashtag}`}>
-            <a className="text-cyan-800 hover:text-cyan-900">{word}</a>
+            <a className="text-primary-600 hover:text-primary-700">{word}</a>
           </Link>
         );
       } else if (word.startsWith("@")) {
         username = word.replace("@", "");
         return (
           <Link legacyBehavior href={`/profile/${username}`}>
-            <a className="text-cyan-800 hover:text-cyan-900">{word}</a>
+            <a className="text-primary-600 hover:text-primary-700">{word}</a>
           </Link>
         );
       } else if (word.includes("http")) {
         return (
-          <a target="_blank" href={word} className="text-cyan-800 hover:text-cyan-900">
+          <a target="_blank" href={word} className="text-primary-600 hover:text-primary-700">
             {word}
           </a>
         );
@@ -109,11 +109,11 @@ export default function CommentComponent(props: any) {
               <h1>
                 <p className="text-sm font-semibold text-neutral-300 ">{props.name}</p>
               </h1>
-              <div className="mx-1 text-sm text-neutral-500"></div>
-              <span className="text-sm font-medium text-neutral-500 whitespace-nowrap">@{props.handle}</span>
-              <div className="mx-[6px] text-sm text-neutral-500">·</div>
+              <div className="mx-1 text-sm text-neutral-400"></div>
+              <span className="text-sm font-medium text-neutral-400 whitespace-nowrap">@{props.handle}</span>
+              <div className="mx-[6px] text-sm text-neutral-400">·</div>
 
-              <span className="ml-auto text-xs font-normal text-neutral-500 whitespace-nowrap">{props.time}</span>
+              <span className="ml-auto text-xs font-normal text-neutral-400 whitespace-nowrap">{props.time}</span>
             </div>
           </Link>
           <Menu type="comment" alt="comments" id={props.comment_id} postid={props.postid} myhandle={props.myhandle} handle={props.handle} />
@@ -156,7 +156,7 @@ export default function CommentComponent(props: any) {
             <h1 className="text-xs font-medium text-neutral-300">{likes} Likes</h1>
             <div
               onClick={() => props.stateChanger("@" + props.handle + " ")}
-              className="flex flex-row items-center content-center pl-2 space-x-2 text-xs font-medium text-neutral-300 cursor-pointer"
+              className="flex flex-row items-center content-center pl-2 space-x-2 text-xs font-medium cursor-pointer text-neutral-300"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
                 <path

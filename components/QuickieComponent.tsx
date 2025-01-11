@@ -38,19 +38,19 @@ export default function Post(props: any) {
         hashtag = word.replace("#", "");
         return (
           <Link legacyBehavior href={`/hashtag/${hashtag}`}>
-            <a className="text-cyan-800 hover:text-cyan-900">{word}</a>
+            <a className="text-primary-600 hover:text-primary-700">{word}</a>
           </Link>
         );
       } else if (word.startsWith("@")) {
         username = word.replace("@", "");
         return (
           <Link legacyBehavior href={`/profile/${username}`}>
-            <a className="text-cyan-800 hover:text-cyan-900">{word}</a>
+            <a className="text-primary-600 hover:text-primary-700">{word}</a>
           </Link>
         );
       } else if (word.includes("http")) {
         return (
-          <a target="_blank" href={word} className="text-cyan-800 hover:text-cyan-900">
+          <a target="_blank" href={word} className="text-primary-600 hover:text-primary-700">
             {word}
           </a>
         );
@@ -76,8 +76,8 @@ export default function Post(props: any) {
                   <h1>
                     <p className="text-base font-medium break-all text-neutral-300 line-clamp-1">{props.name}</p>
                   </h1>
-                  <div className="mx-1 text-base text-neutral-500">·</div>
-                  <span className="text-base font-medium text-neutral-500 whitespace-nowrap">@{props.handle}</span>
+                  <div className="mx-1 text-base text-neutral-400">·</div>
+                  <span className="text-base font-medium text-neutral-400 whitespace-nowrap">@{props.handle}</span>
                 </div>
               </Link>
               <Menu type="quickie" id={props.id} myhandle={props.myhandle} handle={props.handle} />
@@ -125,7 +125,7 @@ export default function Post(props: any) {
                
                 <Link
                   href={"/quickie/" + props.id+"#comments"}
-                  className="flex flex-row items-center content-center pl-6 space-x-2 text-neutral-400"
+                  className="flex flex-row items-center content-center pl-6 space-x-2 text-white"
                 >
                   <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M5 3h13a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-4.59l-3.7 3.71c-.18.18-.43.29-.71.29a1 1 0 0 1-1-1v-3H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3m13 1H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h4v4l4-4h5a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2"/></svg>{" "}
                   <h1 className="text-sm">{props.comments} <span className="hidden md:inline-block"></span></h1>
@@ -140,7 +140,7 @@ export default function Post(props: any) {
                 />
                 <span className="ml-auto"></span>
 
-                <h1 className="text-[12px] font-medium text-neutral-500 capitalize ">{props.time}</h1>
+                <h1 className="text-[12px] font-medium text-neutral-400 capitalize ">{props.time}</h1>
               </div>
             </div>
           </div>

@@ -90,7 +90,7 @@ export default function LikeComponent(props: any) {
     }
   }
   return (
-    <div className="flex cursor-pointer text-neutral-400 flex-row content-center items-center space-x-[8px]  ">
+    <div className="flex cursor-pointer text-white flex-row content-center items-center space-x-[8px]  ">
       <svg
         onClick={() => (!disabled ? (toggleLiked(!liked), setLiked(!liked)) : console.log("holdup"))}
         xmlns="http://www.w3.org/2000/svg"
@@ -120,7 +120,7 @@ export default function LikeComponent(props: any) {
       </svg>
 
 
-      <h1 className="text-sm text-neutral-400">{likes}<span className="hidden md:inline-block"></span></h1>
+      <h1 className="text-sm text-white">{likes}<span className="hidden md:inline-block"></span></h1>
     </div>
   );
 }

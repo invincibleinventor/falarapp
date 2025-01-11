@@ -34,7 +34,7 @@ export default function Post(props: any) {
             />
             <div className="flex items-center content-center">
               <h1>
-                <p className="text-sm font-medium text-neutral-300 break-all line-clamp-1">{props.name}</p>
+                <p className="text-sm font-medium break-all text-neutral-300 line-clamp-1">{props.name}</p>
               </h1>
               <div className="mx-1 text-sm text-neutral-500">·</div>
               <span className="text-sm font-medium text-neutral-500 whitespace-nowrap">{props.time}</span>
@@ -52,10 +52,18 @@ export default function Post(props: any) {
               </div>
               <div className="md:ml-[60px] ml-6">
                 <h1 className="block md:w-[112px] md:h-[112px] w-[80px h-[56px]">
-                  <img
+                  <div className="relative rounded-xl aspect-[4/4] min-h-[64px] min-w-[64px] max-w-full max-h-full shrink-0">
+                  <Image
+                    alt="cover"
+                    width={0}
+                    layout='fill'
+
+                    height={0}
+                    objectFit="cover"
                     src={props.cover + "?" + timeStamp}
                     className="object-cover rounded-xl aspect-[4/4] min-h-[64px] min-w-[64px] max-w-full max-h-full shrink-0"
                   />
+                  </div>
                 </h1>
               </div>
             </div>

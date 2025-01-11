@@ -11,8 +11,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
   const {slug} = use(params);
   const supabase = createClient();
   const canInitSupabaseClient = () => {
-    // This function is just for the interactive tutorial.
-    // Feel free to remove it once you have Supabase connected.
+
     try {
       createClient();
       return true;
@@ -147,14 +146,14 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
                 <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
                   <div className="flex flex-col gap-4 mx-auto max-w-max">
                     <h1 className="mx-auto text-xl font-semibold text-center text-neutral-300">No Posts To View!</h1>
-                    <h1 className="mx-auto text-sm text-center text-neutral-500">
+                    <h1 className="mx-auto text-sm text-center text-neutral-400">
                       Your bookmarked posts appear in here. Seems like you have not bookmarked anything that matches
                       your search. Bookmark posts to view them here.
                     </h1>
                     <Link
                       href="/"
                       className={`mx-auto mt-3 rounded-full w-max px-8 py-3 text-xs font-medium  ${
-                        1 == 1 ? "bg-cyan-800 text-white" : "border-2 bg-white"
+                        1 == 1 ? "bg-primary-800 text-white" : "border-2 bg-white"
                       }`}
                     >
                       Return To Home

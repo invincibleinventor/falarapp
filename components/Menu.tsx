@@ -83,7 +83,7 @@ export default function Menu(props: any) {
           </button>
           <button
             onClick={() => props.type == "quickie" ? del() : deleteComment()}
-            className="px-6 py-2 mt-auto mb-1 ml-auto mr-4 text-xs font-medium text-white rounded-lg bg-cyan-800"
+            className="px-6 py-2 mt-auto mb-1 ml-auto mr-4 text-xs font-medium text-white rounded-lg bg-primary-800"
           >
             Delete It
           </button>

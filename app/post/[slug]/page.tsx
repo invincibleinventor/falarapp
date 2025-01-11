@@ -164,14 +164,14 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
         <div className="flex items-center content-center w-full h-screen px-10 sm:px-24 md:px-16 lg:px-24">
           <div className="flex flex-col gap-4 mx-auto max-w-max">
             <h1 className="mx-auto text-xl font-semibold text-center text-neutral-300">That Post Doesn&apos;t Exist</h1>
-            <h1 className="mx-auto text-sm text-center text-neutral-500">
+            <h1 className="mx-auto text-sm text-center text-neutral-400">
               That post does not exist. It must have been removed or deleted by the author. Please refresh if you think
               that is not the case
             </h1>
             <Link
               href="/"
               className={`mx-auto mt-4 rounded-full w-max px-8 py-3 text-xs font-bold ${
-                1 == 1 ? "bg-cyan-700 text-white" : "border-2  bg-white "
+                1 == 1 ? "bg-primary-700 text-white" : "border-2  bg-white "
               }`}
             >
               Return Back
@@ -221,7 +221,8 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
             <div className="sticky top-0 flex flex-row items-center content-center justify-between py-4 mt-2 text-lg bg-black/50 backdrop-blur-lg">
               <Link href={"/profile/" + author} className="flex flex-row items-center content-center">
                 <UserInformation id={authorid} image={profile} imgclass="w-7 h-7 mr-3 rounded-md"  />
-                <h1 className="text-xs font-medium text-neutral-300 md:text-sm">{name}</h1>
+                <h1 className="text-xs font-medium text-white md:text-sm">{name}</h1>
+                
               </Link>
 
               <div className="flex flex-row">
@@ -244,13 +245,13 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
             <div className="h-1 mb-10 border-b border-b-neutral-900"></div>
       <div className="flex flex-col gap-4 px-10 mx-auto max-w-max">
       <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">Login To View Replies</h1>
-      <h1 className="mx-auto text-center text-neutral-500 text-md">
+      <h1 className="mx-auto text-center text-neutral-400 text-md">
         Login to {AppConfig.title} to view the replies for this post
       </h1>
       <Link
         href="/"
         className={`mx-auto mt-3 w-max rounded-full px-8 py-3 text-xs font-bold ${
-          1 == 1 ? "bg-cyan-800 text-white" : "border-2  bg-white "
+          1 == 1 ? "bg-primary-800 text-white" : "border-2  bg-white "
         }`}
       >
         Login Now

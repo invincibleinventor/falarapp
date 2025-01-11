@@ -85,14 +85,11 @@ export default function QuickieMakerComponent(props: any) {
         },
       });
 
-      // Check if there are any previous uploads to continue.
       return upload.findPreviousUploads().then(function (previousUploads) {
-        // Found previous uploads so we select the first one.
         if (previousUploads.length) {
           upload.resumeFromPreviousUpload(previousUploads[0]);
         }
 
-        // Start the upload
         upload.start();
       });
     });
@@ -383,7 +380,7 @@ export default function QuickieMakerComponent(props: any) {
         <textarea
           onChange={(e: any) => setText(e.target.value)}
           maxLength={150}
-          className="w-full h-full px-6 py-5 pr-5 mb-auto text-neutral-300 bg-transparent outline-none resize-none md:pr-4 hiddenscroll lg:pr-8 text-md md:text-lg placeholder:text-neutral-600 md:m-4 md:p-0 md:px-2"
+          className="w-full h-full px-6 py-5 pr-5 mb-auto bg-transparent outline-none resize-none text-neutral-300 md:pr-4 hiddenscroll lg:pr-8 text-md md:text-lg placeholder:text-neutral-600 md:m-4 md:p-0 md:px-2"
           placeholder="What's on your mind?"
         ></textarea>
         <div className="grid w-full grid-cols-3 px-4 mb-20 border-t bg-black/40 border-t-neutral-900 sm:flex sm:flex-row ">
@@ -418,7 +415,7 @@ export default function QuickieMakerComponent(props: any) {
           <button
             disabled={disabled}
             onClick={() => publish()}
-            className="px-6 py-3 ml-auto text-xs font-medium text-white rounded-full bg-cyan-900 md:mr-6 lg:mr-2"
+            className="px-6 py-3 ml-auto text-xs font-medium text-white rounded-full bg-primary-900 md:mr-6 lg:mr-2"
           >
             Publish
           </button>

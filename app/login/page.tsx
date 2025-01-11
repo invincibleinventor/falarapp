@@ -79,7 +79,7 @@ export default function Login() {
               setEmail(e.target.value);
             }}
             type="email"
-            className="w-full px-5 py-3 mt-1 bg-black border rounded-full outline-none text-neutral-300 border-neutral-900 focus:outline-cyan-800 placeholder:text-neutral-400 "
+            className="w-full px-5 py-3 mt-1 bg-black border rounded-full outline-none text-neutral-300 border-neutral-900 focus:outline-primary-800 placeholder:text-neutral-400 "
             placeholder="Your Email Address"
           ></input>
           <h1 className="pl-[1px] mt-4 text-xs font-medium text-neutral-300">Password</h1>
@@ -88,12 +88,12 @@ export default function Login() {
               setPassword(e.target.value);
             }}
             type="password"
-            className="w-full px-5 py-3 mt-1 bg-black border rounded-full outline-none text-neutral-300 border-neutral-900 focus:outline-cyan-800 placeholder:text-neutral-400 "
+            className="w-full px-5 py-3 mt-1 bg-black border rounded-full outline-none text-neutral-300 border-neutral-900 focus:outline-primary-800 placeholder:text-neutral-400 "
             placeholder="Your Password"
           ></input>
           <button
             onClick={(e) => (e.preventDefault(), console.log("login"), login())}
-            className="px-5 py-3 mt-4 mb-2 text-xs font-medium text-white rounded-full bg-cyan-800"
+            className="px-5 py-3 mt-4 mb-2 text-xs font-medium text-white rounded-full bg-primary-800"
           >
             Sign In To Your Account
           </button>

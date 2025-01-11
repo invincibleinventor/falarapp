@@ -91,7 +91,7 @@ export default function UserComponent(props: any) {
           />
           <div className="flex flex-col">
             <h1 className="text-base font-bold text-neutral-300">{a}</h1>
-            <h1 className="text-xs font-normal text-neutral-500">@{props.handle}</h1>
+            <h1 className="text-xs font-normal text-neutral-400">@{props.handle}</h1>
           </div>
         </div>
         <button
@@ -99,7 +99,7 @@ export default function UserComponent(props: any) {
           className={
             imfollowing
               ? "h-max border border-black bg-white px-4 py-1 text-xs rounded-full text-black"
-              : "h-max border border-black bg-cyan-800 px-4 py-1 text-xs rounded-full text-white"
+              : "h-max border border-black bg-primary-800 px-4 py-1 text-xs rounded-full text-white"
           }
         >
           {imfollowing ? "Unfollow" : "Follow"}
@@ -109,11 +109,11 @@ export default function UserComponent(props: any) {
         <div className="flex flex-row w-full md:mx-auto">
           <div className="flex flex-col items-center content-center gap-1 mx-auto w-max">
             <h1 className="text-xs font-semibold text-neutral-300">Followers</h1>
-            <h1 className="text-sm font-medium text-neutral-500">{props.followers} Followers</h1>
+            <h1 className="text-sm font-medium text-neutral-400">{props.followers} Followers</h1>
           </div>
           <div className="flex flex-col items-center content-center gap-1 mx-auto w-max">
             <h1 className="text-xs font-semibold text-neutral-300">Following</h1>
-            <h1 className="text-sm font-medium text-neutral-500">{props.following} Following</h1>
+            <h1 className="text-sm font-medium text-neutral-400">{props.following} Following</h1>
           </div>
         </div>
       </div>

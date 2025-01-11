@@ -23,11 +23,24 @@ export default function Whouser(props: any) {
   const supabase = createClient();
   const handle = props.handle;
   const hisid = props.hisid;
-  const followinglist = props.followinglist;
   const [notifications, setNotifications] = useState(props.notifications);
 
-  const followerlist = props.followerlist;
-  const [imfollowing,setImFollowing] = useState<any>(props.followerlist.includes(myhandle))
+  /*useEffect(()=>{
+    async function getData(){
+    const {data,error} = await supabase.from('user').select('followers').eq('id',hisid);
+    if(data){
+      if(data[0]["followers"].includes(myhandle)){
+        setImFollowing(true);
+      }
+    }
+    else{
+      if(error){
+        alert(error.message)
+      }
+    }
+  }
+  },[])*/
+  const [imfollowing,setImFollowing] = useState<any>(false);
   async function onfollow(handle: any) {
     let localfollowerlist,localfollowinglist;
     const {data:his} = await supabase.from('user').select('*').eq('handle',handle);
@@ -85,8 +98,8 @@ export default function Whouser(props: any) {
         <h1 className="text-sm font-medium text-white">{modify(props.name)}</h1>
       </Link>
       <button
-        onClick={() => onfollow(props.myhandle)}
-        className={!imfollowing?"px-4 py-[2px] font-poppins text-[12px] font-medium text-white rounded-full bg-cyan-800":"px-4 py-[2px] font-poppins text-[12px] font-medium  rounded-full bg-white text-black"}
+        onClick={() => onfollow(props.handle)}
+        className={!imfollowing?"px-4 py-[2px] font-poppins text-[12px] font-medium text-white rounded-full bg-primary-800":"px-4 py-[2px] font-poppins text-[12px] font-medium  rounded-full bg-white text-black"}
       >
        {imfollowing?'Unfollow':'Follow'}
       </button>
