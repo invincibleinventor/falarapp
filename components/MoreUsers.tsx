@@ -13,7 +13,7 @@ export default function MoreUsers(props: any) {
   const [, setUserId] = useState("");
   const supabase = createClient();
   const [followinglist, setFollowingList] = useState([]);
-  const PAGE_COUNT = 4;
+  const PAGE_COUNT = 8;
   const [offset, setOffset] = useState(1);
   const { ref, inView } = useInView();
   const [halt, setHalt] = useState(false);

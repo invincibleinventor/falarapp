@@ -324,12 +324,12 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
       
       <div className="flex flex-row items-center content-center justify-between w-full px-6 py-4 space-y-1 bg-blue-600 ">
         <h1 className="text-sm font-semibold text-white">Sign up to Falar to view more such interesting people</h1>
-        <Link href={('/login')} className="px-6 py-2 text-xs font-semibold text-blue-600 transition-all duration-200 ease-linear bg-white rounded-full hover:bg-gray-200 hover:shadow-lg w-max">Sign Up To Falar</Link>
+        <Link href={('/login')} className="px-6 py-2 text-xs font-semibold text-blue-600 transition-all duration-200 ease-linear bg-white rounded-full hover:bg-neutral-200 hover:shadow-lg w-max">Sign Up To Falar</Link>
         </div>
 }
       <div className="h-full pb-10 overflow-y-scroll hiddenscroll">
         <div className="relative h-64">
-          <div className="m-0 h-48 w-[calc(100%)] rounded-none  bg-gray-200 ">
+          <div className="m-0 h-48 w-[calc(100%)] rounded-none  bg-neutral-200 ">
             {cover && (
               <Image
                 width={180}
@@ -366,9 +366,9 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
           {found && (
             <div className="flex flex-row items-start justify-between">
               <div className="flex flex-col content-center sm:gap-2 sm:items-center sm:flex-row ">
-                <h1 className="text-xl font-semibold text-gray-300">{name}</h1>
+                <h1 className="text-xl font-semibold text-neutral-300">{name}</h1>
 
-                <h1 className="text-sm font-normal text-gray-500">@{slug}</h1>
+                <h1 className="text-sm font-normal text-neutral-500">@{slug}</h1>
               </div>
               {!myself && loggedin && (
                 <div className="flex flex-row items-center content-center gap-2 mb-2">
@@ -381,7 +381,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
                   </button>}
                   <Link
                     href={"/report/user/" + slug}
-                    className="px-4 py-1 mr-8 text-[10px] font-medium text-white border-2 border-gray-900 rounded-full md:mr-14"
+                    className="px-4 py-1 mr-8 text-[10px] font-medium text-white border-2 border-neutral-900 rounded-full md:mr-14"
                   >
                     {"Report"}
                   </Link>
@@ -393,7 +393,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
           <div className="flex flex-col justify-between gap-2 sm:gap-0 sm:flex-row">
             <h1
               style={{ wordBreak: "break-word", whiteSpace: "normal" }}
-              className="mt-1 mr-12 text-sm font-normal leading-relaxed text-gray-500 two-line-elipsis sm:text-gray-500"
+              className="mt-1 mr-12 text-sm font-normal leading-relaxed text-neutral-500 two-line-elipsis sm:text-neutral-500"
             >
               {blocked && "You have blocked this user. Unblock them to view their posts."}
               {imblockedby && !blocked && "This user has blocked you. You can no longer view their posts or quickies."}
@@ -409,15 +409,15 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
         </div>
         {found && !blocked && !imblockedby && (
           <>
-            <div className="flex flex-row items-center content-center gap-6 p-4 mx-8 my-4 mb-1 rounded-md bg-gray-800/30 md:mx-14">
+            <div className="flex flex-row items-center content-center gap-6 p-4 mx-8 my-4 mb-1 rounded-md bg-neutral-800/30 md:mx-14">
               <div className="flex flex-row w-full md:mx-auto">
                 <div className="flex flex-col items-center content-center gap-1 mx-auto w-max">
-                  <h1 className="text-xs font-semibold text-gray-300">Followers</h1>
-                  <h1 className="text-sm font-medium text-gray-500">{followers} Followers</h1>
+                  <h1 className="text-xs font-semibold text-neutral-300">Followers</h1>
+                  <h1 className="text-sm font-medium text-neutral-500">{followers} Followers</h1>
                 </div>
                 <div className="flex flex-col items-center content-center gap-1 mx-auto w-max">
-                  <h1 className="text-xs font-semibold text-gray-300">Following</h1>
-                  <h1 className="text-sm font-medium text-gray-500">{following} Following</h1>
+                  <h1 className="text-xs font-semibold text-neutral-300">Following</h1>
+                  <h1 className="text-sm font-medium text-neutral-500">{following} Following</h1>
                 </div>
               </div>
             </div>
@@ -426,7 +426,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
              {!blocked && !imblockedby &&
               <Link
                 href={"/quickies/" + slug}
-                className="py-2 ml-2 text-sm font-medium text-white rounded-full cursor-pointer md:px-6 md:bg-gray-900/50 "
+                className="py-2 ml-2 text-sm font-medium text-white rounded-full cursor-pointer md:px-6 md:bg-neutral-900/50 "
               >
                 View Quickies
               </Link>
@@ -455,7 +455,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
                   ))
                 ) : (
                   <>
-                    <h1 className="px-[32px] text-sm font-medium text-gray-700">
+                    <h1 className="px-[32px] text-sm font-medium text-neutral-500">
                       No Posts To Display. {name} haven&apos;t posted anything yet.
                     </h1>
                   </>

@@ -160,12 +160,12 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
         <Link href={('/login')} className="px-6 py-2 text-xs font-semibold text-blue-600 transition-all duration-200 ease-linear bg-white rounded-full hover:bg-neutral-200 hover:shadow-lg w-max">Sign Up To Falar</Link>
         </div>
 }
-      {(error || blocked.includes(authorid)) && (
+      {(error || newblocked.includes(authorid) || blocked.includes(authorid)) && (
         <div className="flex items-center content-center w-full h-screen px-10 sm:px-24 md:px-16 lg:px-24">
           <div className="flex flex-col gap-4 mx-auto max-w-max">
             <h1 className="mx-auto text-xl font-semibold text-center text-neutral-300">That Post Doesn&apos;t Exist</h1>
             <h1 className="mx-auto text-sm text-center text-neutral-400">
-              That post does not exist. It must have been removed or deleted by the author. Please refresh if you think
+              That post does not exist or you do not have permission to view it. It must have been removed or you must have been blocked by the author. Please refresh if you think
               that is not the case
             </h1>
             <Link

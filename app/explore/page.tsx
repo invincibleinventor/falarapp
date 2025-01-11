@@ -6,11 +6,12 @@ import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
 import { cookies } from "next/headers";
 import Link from "next/link";
+export const revalidate = 60;
 export default async function Index() {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
   const canInitSupabaseClient = () => {
-
+  
     try {
       createClient(cookieStore);
       return true;
@@ -42,7 +43,7 @@ export default async function Index() {
     }
     blocked.push(userid);
 
-    const { data, error } = await supabase.from("user").select("*").not("id", "in", `(${newblocked.toString()})`).not("id", "in", `(${blocked.toString()})`).limit(4);
+    const { data, error } = await supabase.from("user").select("*").not("id", "in", `(${newblocked.toString()})`).not("id", "in", `(${blocked.toString()})`).limit(8);
     if (error) {
       console.log(error);
     } else {

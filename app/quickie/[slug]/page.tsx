@@ -27,6 +27,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
   let myname = "";
   let myphoto = "";
   let newblocked :any[] = [];
+  let createdat:any;
   let myhandle = "";
   let loggedin = false;
   let liked = false;
@@ -88,7 +89,9 @@ export default async function App({ params }: { params: Promise<{ slug: string }
           photocount = data[0]["image"].length;
         }
       }
-      const date2 = new Date(data[0].created_at);
+      const date2 = new Date(data[0].created_at)
+      let d = date2;
+      createdat = d.toLocaleTimeString().replace(/:\d+ /, ' ') + "  •  " + date2.toDateString().replace(/^\S+\s/,'');
       time = date1.getTime() - date2.getTime();
       loading = false;
     } else if (e || data.length == 0) {
@@ -204,9 +207,9 @@ export default async function App({ params }: { params: Promise<{ slug: string }
           <div className="w-full lg:pr-2 px-2 py-[6px] pb-0">
             <div className="flex flex-col rounded-none md:gap-0">
               <div className="flex items-center content-center bg-black rounded-md "></div>
-              <div className="flex h-max flex-col gap-[8px] p-4 ">
+              <div className="flex h-max flex-col gap-[8px] pt-4 ">
                 <div className="flex flex-row items-center content-center gap-2 h-max shrink-0">
-                  <Link href={"/profile/" + author} className="flex gap-[10px] mt-0">
+                  <Link href={"/profile/" + author} className="flex gap-[10px] px-4 mt-0">
                     <Image
                     width={28}
                     height={28}
@@ -225,21 +228,22 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                   <Menu type="quickie" id={slug} myhandle={myhandle} handle={author} />
                 </div>
 
-                <div>
+                <div >
                   <h1
                     style={{ wordBreak: "break-word", whiteSpace: "normal" }}
-                    className="my-4 mt-2 text-base text-neutral-300 four-line-ellipsis md:text-lg"
+                    className="px-4 my-4 mt-2 text-base text-neutral-300 four-line-ellipsis md:text-lg"
                   >
                     {formatText(content)}
                   </h1>
+
                   {photocount > 0 && (
                     <div
                       className={
                         photocount == 1
-                          ? "w-full border ml-0 rounded-md mt-4 aspect-video h-full mb-4"
+                          ? "w-full px-4 border ml-0 rounded-md mt-4 aspect-video h-full"
                           : photocount == 3
-                            ? "mt-4 mb-4 md:gap-2 gap-1 grid thrip"
-                            : "mt-4 mb-4 md:gap-2 gap-1 grid-cols-2 grid"
+                            ? "mt-4 px-4  md:gap-2 gap-1 grid thrip"
+                            : "mt-4 px-4 md:gap-2 gap-1 grid-cols-2 grid"
                       }
                     >
                       {image.map((image: string) => (
@@ -247,16 +251,44 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                       ))}
                     </div>
                   )}
+                                    <h1 className="px-4 pt-0 pb-4 text-sm font-medium text-neutral-400">{createdat}</h1>
 
-                  <div className="flex flex-row items-center content-center mt-0">
-                    <h1 className="ml-auto text-sm font-medium text-neutral-400">{timeAgo.format(Date.now() - time)}</h1>
+
+                  <div className="flex flex-row items-center content-center justify-around py-3 mt-0 border-y border-y-neutral-900">
+                  <LikeComponent
+            userliked={userliked}
+            loggedin={loggedin}
+            postid={slug}
+            handle={myhandle}
+            likedlist={likedlist}
+            liked={liked}
+            likes={likedlist.length}
+          />
+           <Link
+            href="#comments"
+            className="flex flex-row items-center content-center px-6 pr-0 space-x-2 text-white lg:mr-0"
+          >
+                              <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M5 3h13a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-4.59l-3.7 3.71c-.18.18-.43.29-.71.29a1 1 0 0 1-1-1v-3H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3m13 1H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h4v4l4-4h5a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2"/></svg>{" "}
+
+            <h1 className="text-xs md:text-sm">{comments.length}</h1>
+          </Link>
+          <BookMarksComponent
+            userliked={userbookmarked}
+            postid={slug}
+            loggedin={loggedin}
+
+            handle={myhandle}
+            likedlist={bookmarkedlist}
+            liked={bookmarked}
+            likes={bookmarkedlist.length}
+          />
                   </div>
                 </div>
               </div>
             </div>
             {!loggedin && 
             <>
-            <div className="h-1 mb-10 border-b border-b-neutral-900"></div>
+            <div className="mb-12"></div>
       <div className="flex flex-col gap-4 px-10 mx-auto max-w-max">
       <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">Login To View Replies</h1>
       <h1 className="mx-auto text-center text-neutral-400 text-md">
@@ -276,7 +308,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
       }
           </div>
           {loggedin && !newblocked.includes(authorid) && !blocked.includes(authorid)  && (
-            <section className="px-0 border-t lg:pr-0 border-t-neutral-900" id="comments">
+            <section className="px-0 lg:pr-0 " id="comments">
 
               <CommentsComponent
                 myblocked={blocked}
@@ -294,35 +326,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
         </div>
       )}
       
-      {loggedin && !newblocked.includes(authorid) && !blocked.includes(authorid) && (
-        <div className="absolute bottom-0 flex flex-row w-full bg-black border-t h-14 border-t-neutral-900 ">
-          <LikeComponent
-            userliked={userliked}
-            postid={slug}
-            handle={myhandle}
-            likedlist={likedlist}
-            liked={liked}
-            likes={likedlist.length}
-          />
-           <Link
-            href="#comments"
-            className="flex flex-row items-center content-center px-6 pr-0 space-x-2 text-white lg:mr-0"
-          >
-                              <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M5 3h13a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-4.59l-3.7 3.71c-.18.18-.43.29-.71.29a1 1 0 0 1-1-1v-3H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3m13 1H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h4v4l4-4h5a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2"/></svg>{" "}
-
-            <h1 className="text-xs md:text-sm">Comments</h1>
-          </Link>
-          <BookMarksComponent
-            userliked={userbookmarked}
-            postid={slug}
-            handle={myhandle}
-            likedlist={bookmarkedlist}
-            liked={bookmarked}
-            likes={bookmarkedlist.length}
-          />
-         
-        </div>
-      )}
+      
     </div>
   ) : (
     <div className="flex items-center content-center w-full h-screen"></div>

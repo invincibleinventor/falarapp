@@ -4,7 +4,6 @@ import { useState } from "react";
 
 export default function LikeComponent(props: any) {
   const supabase = createClient();
-
   const [likedlist, setLikedList] = useState(props.likedlist);
   const [liked, toggleLiked] = useState(props.liked);
   const [ulikedlist, setuLikedList] = useState(props.userliked);
@@ -14,7 +13,12 @@ export default function LikeComponent(props: any) {
     let locallikes:any;
     let localuserlist:any
   async function setLiked(like: boolean) {
-   
+    const {data} = await supabase.auth.getUser();
+    if(!data.user){
+     setDisabled(true);
+       return;
+    }
+    toggleLiked(!liked)
       const {data:d,error:e}  = await supabase.from('quickies').select('*').eq('id',props.postid);
 
       if(!e && d){
@@ -95,9 +99,9 @@ export default function LikeComponent(props: any) {
     }
   }
   return (
-    <div className="flex text-white flex-row content-center items-center ml-auto space-x-[8px]  ">
+    <div className="flex cursor-pointer text-white flex-row content-center items-center  space-x-[8px]  ">
       <svg
-        onClick={() => (!disabled ? (toggleLiked(!liked), setLiked(!liked)) : console.log("holdup"))}
+        onClick={() => (!disabled ? ( setLiked(!liked)) : console.log("holdup"))}
         xmlns="http://www.w3.org/2000/svg"
         width="20"
         height="20"

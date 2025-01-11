@@ -1,14 +1,10 @@
 import More from "@/components/More";
 import PostComponent from "@/components/PostComponent";
-import Search from "@/components/SearchComponent";
-import { AppConfig } from "@/config/config";
 import { createClient } from "@/utils/supabase/server";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
 import { cookies } from "next/headers";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-
 export default async function Index() {
   let loggedin = false;
   const cookieStore = cookies();

@@ -14,7 +14,12 @@ export default function BookMarksComponent(props: any) {
 let localuserlist:any;
   const [likes, setLikes] = useState(props.likes);
   async function setLiked(like: boolean) {
-   
+   const {data} = await supabase.auth.getUser();
+   if(!data.user){
+    setDisabled(true);
+      return;
+   }
+   toggleLiked(!liked)
     const {data:d,error:e}  = await supabase.from('quickies').select('*').eq('id',props.postid);
     if(!e && d ){
   locallikedlist = d[0]["bookmarked"];
@@ -90,7 +95,7 @@ console.log(props.postid)
   }
   return (
     <div
-      onClick={() => (!disabled ? (toggleLiked(!liked), setLiked(!liked)) : console.log("holdup"))}
+      onClick={() => (!disabled ? ( setLiked(!liked)) : console.log("holdup"))}
       className="flex flex-row items-center content-center px-4 text-white cursor-pointer"
     >
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">

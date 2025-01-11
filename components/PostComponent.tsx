@@ -57,10 +57,10 @@ export default function Post(props: any) {
                     alt="cover"
                     width={0}
                     layout='fill'
-
+                    unoptimized={true}
                     height={0}
                     objectFit="cover"
-                    src={props.cover + "?" + timeStamp}
+                    src={props.cover}
                     className="object-cover rounded-xl aspect-[4/4] min-h-[64px] min-w-[64px] max-w-full max-h-full shrink-0"
                   />
                   </div>
