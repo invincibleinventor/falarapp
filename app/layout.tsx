@@ -4,15 +4,34 @@ import "./globals.css";
 import { AppConfig } from "@/config/config";
 import Sidebar from "@/components/SideBar";
 import { ThemeProvider } from "@/lib/themecontext";
+import { cookies } from "next/headers";
 const defaultUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000";
-
+import { createClient } from "@/utils/supabase/server";
 export const metadata = {
   metadataBase: new URL(defaultUrl),
   title: AppConfig.title + " - " + AppConfig.subtitle,
   description: AppConfig.description,
 };
+async function getuser() {
+  const cookieStore = cookies();
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const supabase = createClient(cookieStore);
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if(user){
+  return true;
+  }
+  
+  else{ return false};
+}
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+
+
+  const loggedin = await getuser();
+
   return (
     <ThemeProvider>
 
@@ -22,6 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
 
       <body className="bg-black" lang="en">
+        {loggedin && 
         <main>
           <section className="relative m-auto flex h-screen font-inter flex-row content-center items-center overflow-hidden sm:w-screen lg:w-[1070px] xl:w-[1200px]">
             <NavBar></NavBar>
@@ -34,6 +54,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Sidebar></Sidebar>
           </section>
         </main>
+        }
+       {!loggedin && (
+  <main className="">
+    {children}
+  </main>
+)}
       </body>
     </html>
     </ThemeProvider>

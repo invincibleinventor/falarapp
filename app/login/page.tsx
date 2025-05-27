@@ -68,43 +68,47 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col h-full">
-      <Image width={250} height={250} alt="login" src="/evoltlogin.jpg" className="object-cover w-full h-64" />
-      <div className="flex flex-col mx-auto ">
-        <form className="flex flex-col content-center gap-2 p-2 text-xs font-normal">
-          <h1 className="pt-2 mt-4 text-xl font-black text-neutral-300 "> </h1>
-          <h1 className="mt-3 pl-[1px] text-xs font-medium text-neutral-300">Email Address</h1>
+    <div className="flex flex-col w-full h-full">
+                <h1 className="pt-2 mx-auto mt-20 text-2xl font-semibold text-left font-pops w-3xl text-neutral-300">Welcome To Falar </h1>
+                <h1 className="pt-2 mx-auto mb-16 text-sm font-normal text-center font-pops max-w-96 text-neutral-400">Login to your account or create a new account to continue</h1>
+
+
+      <div className="flex flex-col my-auto items-center content-center mx-auto min-w-[250px] max-w-[300px]">
+        
+        <form className="flex flex-col gap-2 content-center p-2 my-auto w-full text-xs font-pops">
+          
+          <h1 className="mt-3 pl-[1px] text-sm font-medium text-white">Email Address</h1>
           <input
             onChange={(e) => {
               setEmail(e.target.value);
             }}
             type="email"
-            className="w-full px-5 py-3 mt-1 bg-black border rounded-full outline-none text-neutral-300 border-neutral-900 focus:outline-primary-800 placeholder:text-neutral-400 "
+            className="px-5 py-3 mt-1 w-full text-sm bg-black rounded-full border outline-none text-neutral-300 border-neutral-900 focus:outline-primary-800 placeholder:text-neutral-400"
             placeholder="Your Email Address"
           ></input>
-          <h1 className="pl-[1px] mt-4 text-xs font-medium text-neutral-300">Password</h1>
+          <h1 className="pl-[1px] mt-4 text-sm font-medium text-white">Password</h1>
           <input
             onChange={(e) => {
               setPassword(e.target.value);
             }}
             type="password"
-            className="w-full px-5 py-3 mt-1 bg-black border rounded-full outline-none text-neutral-300 border-neutral-900 focus:outline-primary-800 placeholder:text-neutral-400 "
+            className="px-5 py-3 mt-1 w-full text-sm bg-black rounded-full border outline-none text-neutral-300 border-neutral-900 focus:outline-primary-800 placeholder:text-neutral-400"
             placeholder="Your Password"
           ></input>
           <button
             onClick={(e) => (e.preventDefault(), console.log("login"), login())}
-            className="px-5 py-3 mt-4 mb-2 text-xs font-medium text-white rounded-full bg-primary-800"
+            className="px-5 py-3 mt-4 mb-2 text-sm font-medium text-white rounded-full bg-primary-800"
           >
             Sign In To Your Account
           </button>
           <button
             onClick={(e) => (e.preventDefault(), console.log("register"), register())}
-            className="px-5 py-3 text-xs font-medium bg-black border rounded-full text-neutral-300 border-neutral-900"
+            className="px-5 py-3 text-sm font-medium bg-black rounded-full border text-neutral-300 border-neutral-900"
           >
             Register Your Account
           </button>
           <button
-            className="flex justify-center gap-4 px-5 py-3 mt-6 text-xs font-medium bg-black border rounded-full text-neutral-300 border-neutral-900 "
+            className="flex gap-4 justify-center px-5 py-3 mt-6 text-sm font-medium bg-black rounded-full border text-neutral-300 border-neutral-900"
             onClick={() => (console.log("google"), signWithGoogle())}
           >
             <svg width="16" height="16" viewBox="0 0 775 794" fill="none" xmlns="http://www.w3.org/2000/svg">

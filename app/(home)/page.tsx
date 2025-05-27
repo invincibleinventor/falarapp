@@ -1,3 +1,4 @@
+import Landing from "@/components/landing";
 import More from "@/components/More";
 import PostComponent from "@/components/PostComponent";
 import { createClient } from "@/utils/supabase/server";
@@ -30,14 +31,24 @@ export default async function Index() {
   let myblocked: any[] = [];
   let l: any[] = [];
   async function get() {
+    let ls = false;
     const { data: user } = await supabase.auth.getUser();
-    let s:any;
-    if(user.user){
-      s = user.user.id;
-      loggedin = true;
-    }
-    const { data: u } = await supabase.from("user").select("*").eq("id", s);
-    l = u![0]["following"];
+let s: any;
+if (user.user) {
+  s = user.user.id;
+  ls = true;
+} else {
+  return false;
+}
+
+const { data: u, error: uErr } = await supabase.from("user").select("*").eq("id", s);
+
+if (!u || u.length === 0 || uErr) {
+  return false; 
+}
+
+l = u[0]["following"];
+
     myblocked = u![0]["blocked"];
     newblocked = u![0]["blockedby"]
     const h = u![0]["handle"];
@@ -69,13 +80,12 @@ export default async function Index() {
       posts = ds;
       loading = false;
     }
+    return ls;
   }
-  await get();
-
-  if (isSupabaseConnected) {
-    return (
-      <>
-        <div className="h-full overflow-y-scroll hiddenscroll">
+  loggedin = await get();
+return(<>
+      
+        <div className="overflow-y-scroll h-full hiddenscroll">
           <div className="flex flex-col gap-2 mb-20 animate-in hiddenscroll">
             {!loading ? (
               !empty ? (
@@ -96,7 +106,7 @@ export default async function Index() {
                   />
                 ))
               ) : (
-                <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
+                <div className="flex content-center items-center px-10 mt-24 w-full sm:px-24 md:px-16 lg:px-24">
                   <div className="flex flex-col gap-2 mx-auto max-w-max">
                     <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">No Posts To View!</h1>
                     <h1 className="mx-auto text-sm text-center text-neutral-400">
@@ -115,14 +125,13 @@ export default async function Index() {
                 </div>
               )
             ) : (
-              <div className="flex items-center content-center w-full h-screen"></div>
+              <div className="flex content-center items-center w-full h-screen"></div>
             )}
             <More newblocked={newblocked} myblocked={myblocked} in={l}></More>{" "}
           </div>{" "}
         </div>
+  
       </>
     );
-  } else {
-    return <></>;
-  }
+  
 }
