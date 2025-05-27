@@ -103,12 +103,12 @@ export default function Login() {
           </button>
           <button
             onClick={(e) => (e.preventDefault(), console.log("register"), register())}
-            className="px-5 py-3 text-sm font-medium bg-black rounded-full border text-neutral-300 border-neutral-900"
+            className="px-5 py-3 text-sm font-medium bg-black rounded-full border text-neutral-300 border-neutral-800"
           >
             Register Your Account
           </button>
           <button
-            className="flex gap-4 justify-center px-5 py-3 mt-6 text-sm font-medium bg-black rounded-full border text-neutral-300 border-neutral-900"
+            className="flex gap-4 justify-center px-5 py-3 mt-6 text-sm font-medium bg-black rounded-full border text-neutral-300 border-neutral-800"
             onClick={() => (console.log("google"), signWithGoogle())}
           >
             <svg width="16" height="16" viewBox="0 0 775 794" fill="none" xmlns="http://www.w3.org/2000/svg">
