@@ -27,22 +27,22 @@ export default function Post(props: any) {
   return (
     <div className="w-full animate-in">
       <div className="w-full px-6 py-[6px] border-b border-neutral-900">
-        <article className="px-2 py-6 pt-0 ">
+        <article className="px-2 py-6 pt-0">
           <Link href={"/profile/" + props.handle} className="flex gap-2 mt-4">
            <UserInformation id={props.userid} image={props.dp}
               imgclass="rounded-md object-cover min-w-[24px] max-w-[24px] h-6"
             />
-            <div className="flex items-center content-center">
+            <div className="flex content-center items-center">
               <h1>
                 <p className="text-sm font-medium break-all text-neutral-300 line-clamp-1">{props.name}</p>
               </h1>
               <div className="mx-1 text-sm text-neutral-500">·</div>
-              <span className="text-sm font-medium text-neutral-500 whitespace-nowrap">{props.time}</span>
+              <span className="text-sm font-medium whitespace-nowrap text-neutral-500">{props.time}</span>
             </div>
           </Link>
           <div className="flex flex-col mt-3">
             <div className="flex grow">
-              <div className="text-neutral-500 grow">
+              <div className="text-neutral-400 grow">
                 <Link href={"/post/" + props.id} className="pb-2">
                   <h2 className="font-bold text-neutral-300 md:text-[22px] leading-7 md:line-clamp-3 line-clamp-2 text-base">
                     {a}{" "}
@@ -67,15 +67,15 @@ export default function Post(props: any) {
                 </h1>
               </div>
             </div>
-            <div className="flex flex-row items-center mt-2 ">
+            <div className="flex flex-row items-center mt-2">
               <div className="grow flex flex-row items-center text-[13px]">
-                <h1 className="text-neutral-400 bg-subtle-white rounded-full hover:bg-neutral-200 transition-colors duration-300 px-0 pl-0 py-[2px] mr-2">
+                <h1 className="text-neutral-300 bg-subtle-white rounded-full hover:bg-neutral-200 transition-colors duration-300 px-0 pl-0 py-[2px] mr-2">
                   {props.likes} Likes
                 </h1>
-                <div className="inline-block pr-2 text-sm text-neutral-400">·</div>
+                <div className="inline-block pr-2 text-sm text-neutral-300">·</div>
 
                 <h1>
-                  <span className="text-neutral-400">@{props.handle}</span>
+                  <span className="text-neutral-300">@{props.handle}</span>
                 </h1>
               </div>
               <button className="px-2 text-lg text-neutral-500 hover:text-zinc-700 disabled:opacity-40 disabled:cursor-not-allowed">

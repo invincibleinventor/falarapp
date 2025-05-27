@@ -6,11 +6,11 @@ export async function middleware(request: NextRequest) {
   const { supabase, response } = createClient(request);
 
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  if (session) {
-    const { data } = await supabase.from("user").select("*").eq("id", session.user.id);
+  if (user) {
+    const { data } = await supabase.from("user").select("*").eq("id", user.id);
     if (data && data.length > 0) {
       return response;
     }

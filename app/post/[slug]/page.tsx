@@ -49,9 +49,9 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
   const date1 = new Date();
 
   async function set() {
-    const { data: u } = await supabase.auth.getSession();
-    if (u.session) {
-      user = u.session.user.id;
+    const { data: u } = await supabase.auth.getUser();
+    if (u.user) {
+      user = u.user.id;
 
       loggedin = true;
       const { data: users } = await supabase.from("user").select("*").eq("id", user);
@@ -152,16 +152,16 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
   console.log(comments);
   console.log("above");
   return !loading ? (
-    <div className="relative flex flex-col flex-1 h-screen overflow-hidden md:mr-4 lg:mx-0">
+    <div className="flex overflow-hidden relative flex-col flex-1 h-screen md:mr-4 lg:mx-0">
       {!loggedin &&
       
-      <div className="flex flex-row items-center content-center justify-between w-full px-6 py-4 space-y-1 bg-blue-600 md:border-x md:border-x-neutral-900">
+      <div className="flex flex-row justify-between content-center items-center px-6 py-4 space-y-1 w-full bg-blue-600 md:border-x md:border-x-neutral-900">
         <h1 className="text-sm font-semibold text-white">Sign up to Falar to read more such interesting articles</h1>
-        <Link href={('/login')} className="px-6 py-2 text-xs font-semibold text-blue-600 transition-all duration-200 ease-linear bg-white rounded-full hover:bg-neutral-200 hover:shadow-lg w-max">Sign Up To Falar</Link>
+        <Link href={('/login')} className="px-6 py-2 w-max text-xs font-semibold text-blue-600 bg-white rounded-full transition-all duration-200 ease-linear hover:bg-neutral-200 hover:shadow-lg">Sign Up To Falar</Link>
         </div>
 }
       {(error || newblocked.includes(authorid) || blocked.includes(authorid)) && (
-        <div className="flex items-center content-center w-full h-screen px-10 sm:px-24 md:px-16 lg:px-24">
+        <div className="flex content-center items-center px-10 w-full h-screen sm:px-24 md:px-16 lg:px-24">
           <div className="flex flex-col gap-4 mx-auto max-w-max">
             <h1 className="mx-auto text-xl font-semibold text-center text-neutral-300">That Post Doesn&apos;t Exist</h1>
             <h1 className="mx-auto text-sm text-center text-neutral-400">
@@ -185,10 +185,10 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
             <img
               alt="coveri"
               src={cover ? cover : "https://picsum.photos/2000/3000"}
-              className="absolute inset-0 object-cover w-full h-full aspect-video"
+              className="object-cover absolute inset-0 w-full h-full aspect-video"
             />
           </div>
-          <div className="flex flex-col flex-1 w-full max-w-full p-8">
+          <div className="flex flex-col flex-1 p-8 w-full max-w-full">
             <h1 className="fix-overflow text-neutral-300 text-3xl font-extrabold md:text-5xl md:leading-[calc(14*4px)]">
               {title}
             </h1>
@@ -218,8 +218,8 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
               </Link>
             )}
 
-            <div className="sticky top-0 flex flex-row items-center content-center justify-between py-4 mt-2 text-lg bg-black/50 backdrop-blur-lg">
-              <Link href={"/profile/" + author} className="flex flex-row items-center content-center">
+            <div className="flex sticky top-0 flex-row justify-between content-center items-center py-4 mt-2 text-lg backdrop-blur-lg bg-black/50">
+              <Link href={"/profile/" + author} className="flex flex-row content-center items-center">
                 <UserInformation id={authorid} image={profile} imgclass="w-7 h-7 mr-3 rounded-md"  />
                 <h1 className="text-xs font-medium text-white md:text-sm">{name}</h1>
                 
@@ -242,7 +242,7 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
           </div>
           {!loggedin && 
             <>
-            <div className="h-1 mb-10 border-b border-b-neutral-900"></div>
+            <div className="mb-10 h-1 border-b border-b-neutral-900"></div>
       <div className="flex flex-col gap-4 px-10 mx-auto max-w-max">
       <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">Login To View Replies</h1>
       <h1 className="mx-auto text-center text-neutral-400 text-md">
@@ -299,7 +299,7 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
 
           <Link
             href="#comments"
-            className="flex flex-row items-center content-center px-6 ml-auto space-x-2 text-neutral-300"
+            className="flex flex-row content-center items-center px-6 ml-auto space-x-2 text-neutral-300"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16">
               <path
@@ -315,6 +315,6 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
       )}
     </div>
   ) : (
-    <div className="flex items-center content-center w-full h-screen"></div>
+    <div className="flex content-center items-center w-full h-screen"></div>
   );
 }

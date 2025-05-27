@@ -1,6 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 const withMT = require("@material-tailwind/react/utils/withMT");
 import colors from "tailwindcss/colors"
+const { themeVariants, prefersLight, prefersDark } = require('tailwindcss-theme-variants');
+
 
 module.exports = withMT({
   content: ["./app/**/*.{js,ts,jsx,tsx,mdx}", "./components/**/*.{js,ts,jsx,tsx,mdx}"],
@@ -31,8 +33,19 @@ module.exports = withMT({
       },
     },
   },
+  darkMode: 'class',
   plugins: [
     require("@tailwindcss/typography"),
     // ...
+    themeVariants({
+      themes: {
+        light: {
+          mediaQuery: prefersLight, // or "@media (prefers-color-scheme: light)"
+        },
+        dark: {
+          mediaQuery: prefersDark, // or "@media (prefers-color-scheme: dark)"
+        },
+      },
+    }),
   ],
 });

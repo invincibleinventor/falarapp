@@ -21,12 +21,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></Script>
       </head>
 
-      <body className="mainbg" lang="en">
+      <body className="bg-black" lang="en">
         <main>
-          <section className="relative m-auto flex h-screen flex-row content-center items-center overflow-hidden sm:w-screen lg:w-[1070px] xl:w-[1200px]">
+          <section className="relative m-auto flex h-screen font-inter flex-row content-center items-center overflow-hidden sm:w-screen lg:w-[1070px] xl:w-[1200px]">
             <NavBar></NavBar>
-            <div className="w-full ">
-              <div className="items-center content-center flex-1 w-full h-screen px-0 border-l md:mx-0 border-l-neutral-900 md:border-x md:border-x-neutral-900">
+            <div className="w-full">
+              <div className="flex-1 content-center items-center px-0 w-full h-screen border-l md:mx-0 border-l-neutral-900 md:border-x md:border-x-neutral-900">
                 {children}
               </div>
             </div>

@@ -11,6 +11,7 @@ import Link from "next/link";
 import Iof from "@/components/Iof";
 import Menu from "@/components/Menu";
 import { AppConfig } from "@/config/config";
+import Back from "@/components/back";
 export default async function App({ params }: { params: Promise<{ slug: string }>}) {
   const cookieStore =  cookies();
   const slug = (await params).slug;
@@ -46,9 +47,9 @@ export default async function App({ params }: { params: Promise<{ slug: string }
   const date1 = new Date();
 
   async function set() {
-    const { data: u } = await supabase.auth.getSession();
-    if (u.session) {
-      user = u.session.user.id;
+    const { data: u } = await supabase.auth.getUser();
+    if (u.user) {
+      user = u.user.id;
 
       loggedin = true;
       const { data: users } = await supabase.from("user").select("*").eq("id", user);
@@ -175,16 +176,16 @@ export default async function App({ params }: { params: Promise<{ slug: string }
   console.log(comments);
   console.log("above");
   return !loading ? (
-    <div className="relative flex flex-col flex-1 h-screen overflow-hidden bg-transparent ">
+    <div className="flex overflow-hidden relative flex-col flex-1 h-screen bg-transparent">
         {!loggedin &&
       
-      <div className="flex flex-row items-center content-center justify-between w-full px-6 py-4 space-y-1 bg-blue-600 md:border-x md:border-x-neutral-900">
+      <div className="flex flex-row justify-between content-center items-center px-6 py-4 space-y-1 w-full bg-blue-600 md:border-x md:border-x-neutral-900">
         <h1 className="text-sm font-semibold text-white">Sign up to Falar to view more such interesting quickies</h1>
-        <Link href={('/login')} className="px-6 py-2 text-xs font-semibold text-blue-600 transition-all duration-200 ease-linear bg-white rounded-full hover:bg-neutral-200 hover:shadow-lg w-max">Sign Up To Falar</Link>
+        <Link href={('/login')} className="px-6 py-2 w-max text-xs font-semibold text-blue-600 bg-white rounded-full transition-all duration-200 ease-linear hover:bg-neutral-200 hover:shadow-lg">Sign Up To Falar</Link>
         </div>
 }
       {(error || blocked.includes(authorid)) && (
-        <div className="flex items-center content-center w-full h-screen px-10 sm:px-24 md:px-16 lg:px-24">
+        <div className="flex content-center items-center px-10 w-full h-screen sm:px-24 md:px-16 lg:px-24">
           <div className="flex flex-col gap-4 mx-auto max-w-max">
             <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">That Quickie Doesn&apos;t Exist</h1>
             <h1 className="mx-auto text-center text-neutral-400 text-md">
@@ -204,11 +205,18 @@ export default async function App({ params }: { params: Promise<{ slug: string }
       )}
       {!error && !newblocked.includes(authorid) && !blocked.includes(authorid) && (
         <div className="hiddenscroll h-full w-[calc(100vw-68px)] mx-0 overflow-hidden pb-14 md:w-full md:max-w-full px-0">
+                        <div className="flex flex-row content-center items-center px-4 py-4 space-x-4 w-full text-white bg-black border-b border-b-neutral-900">
+                          <Back></Back>
+                          <h1 className="text-lg font-medium text-white font-poppins">
+                            
+                            Quickie
+                            </h1>
+                        </div>
+
           <div className="w-full lg:pr-2 px-2 py-[6px] pb-0">
             <div className="flex flex-col rounded-none md:gap-0">
-              <div className="flex items-center content-center bg-black rounded-md "></div>
               <div className="flex h-max flex-col gap-[8px] pt-4 ">
-                <div className="flex flex-row items-center content-center gap-2 h-max shrink-0">
+                <div className="flex flex-row gap-2 content-center items-center h-max shrink-0">
                   <Link href={"/profile/" + author} className="flex gap-[10px] px-4 mt-0">
                     <Image
                     width={28}
@@ -217,12 +225,12 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                       alt="user profile"
                       className="rounded-md object-cover min-w-[28px] max-w-[28px] h-7"
                     />
-                    <div className="flex items-center content-center">
+                    <div className="flex content-center items-center">
                       <h1>
                         <p className="text-base font-medium break-all text-neutral-300 line-clamp-1">{naam}</p>
                       </h1>
                       <div className="mx-1 text-base text-neutral-400">·</div>
-                      <span className="text-base font-medium text-neutral-400 whitespace-nowrap">@{author}</span>
+                      <span className="text-base font-medium whitespace-nowrap text-neutral-400">@{author}</span>
                     </div>
                   </Link>
                   <Menu type="quickie" id={slug} myhandle={myhandle} handle={author} />
@@ -254,7 +262,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                                     <h1 className="px-4 pt-0 pb-4 text-sm font-medium text-neutral-400">{createdat}</h1>
 
 
-                  <div className="flex flex-row items-center content-center justify-around py-3 mt-0 border-y border-y-neutral-900">
+                  <div className="flex flex-row justify-around content-center items-center py-3 mt-0 border-y border-y-neutral-900">
                   <LikeComponent
             userliked={userliked}
             loggedin={loggedin}
@@ -266,7 +274,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
           />
            <Link
             href="#comments"
-            className="flex flex-row items-center content-center px-6 pr-0 space-x-2 text-white lg:mr-0"
+            className="flex flex-row content-center items-center px-6 pr-0 space-x-2 text-white lg:mr-0"
           >
                               <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M5 3h13a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-4.59l-3.7 3.71c-.18.18-.43.29-.71.29a1 1 0 0 1-1-1v-3H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3m13 1H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h4v4l4-4h5a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2"/></svg>{" "}
 
@@ -308,7 +316,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
       }
           </div>
           {loggedin && !newblocked.includes(authorid) && !blocked.includes(authorid)  && (
-            <section className="px-0 lg:pr-0 " id="comments">
+            <section className="px-0 lg:pr-0" id="comments">
 
               <CommentsComponent
                 myblocked={blocked}
@@ -329,6 +337,6 @@ export default async function App({ params }: { params: Promise<{ slug: string }
       
     </div>
   ) : (
-    <div className="flex items-center content-center w-full h-screen"></div>
+    <div className="flex content-center items-center w-full h-screen"></div>
   );
 }

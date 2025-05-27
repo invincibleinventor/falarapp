@@ -349,7 +349,7 @@ export default function Create({ params }: { params: Promise<{ slug: string }>})
     <div className="flex  h-screen w-[calc(100vw-68px)] bg-neutral-900/20 flex-col content-center items-start md:w-full">
       <div className="flex flex-row w-full bg-black border-b border-b-neutral-900">
         <h1 className="px-2 mx-4 my-6 text-xl font-semibold text-neutral-300 md:font-bold md:text-xl">New Comment</h1>
-        <button className="ml-auto mr-6 " onClick={(e: any) => handleClick(e)}>
+        <button className="mr-6 ml-auto" onClick={(e: any) => handleClick(e)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="text-neutral-300"
@@ -367,10 +367,10 @@ export default function Create({ params }: { params: Promise<{ slug: string }>})
       <textarea
         onChange={(e: any) => setText(e.target.value)}
         maxLength={150}
-        className="w-full h-full px-6 py-5 mb-auto bg-transparent outline-none resize-none text-neutral-300 text-md md:text-lg placeholder:text-neutral-600 md:m-4 md:p-0 md:px-2"
+        className="px-6 py-5 mb-auto w-full h-full bg-transparent outline-none resize-none text-neutral-300 text-md md:text-lg placeholder:text-neutral-600 md:m-4 md:p-0 md:px-2"
         placeholder="What's on your mind?"
       ></textarea>
-      <div className="grid w-full grid-cols-3 px-4 mb-20 border-t bg-black/40 border-t-neutral-900 sm:flex sm:flex-row ">
+      <div className="grid grid-cols-3 px-4 mb-20 w-full border-t bg-black/40 border-t-neutral-900 sm:flex sm:flex-row">
         {imgsSrc.map((link, index) => (
           <div
             key={index}
@@ -378,7 +378,7 @@ export default function Create({ params }: { params: Promise<{ slug: string }>})
           >
             <button
               onClick={() => setarr(link)}
-              className="absolute top-0 flex items-center content-center w-4 h-4 font-medium text-white bg-red-700 rounded-full shadow-md right-2"
+              className="flex absolute top-0 right-2 content-center items-center w-4 h-4 font-medium text-white bg-red-700 rounded-full shadow-md"
             >
               <h1 className="mx-auto">-</h1>
             </button>
@@ -386,7 +386,7 @@ export default function Create({ params }: { params: Promise<{ slug: string }>})
           </div>
         ))}
       </div>
-      <div className="absolute bottom-0 flex flex-row items-center content-center w-full h-20 px-4 pl-4 bg-black border-t border-t-neutral-900 ">
+      <div className="flex absolute bottom-0 flex-row content-center items-center px-4 pl-4 w-full h-20 bg-black border-t border-t-neutral-900">
         <input
           ref={hiddenFileInput}
           type="file"
