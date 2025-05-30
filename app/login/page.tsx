@@ -70,7 +70,7 @@ export default function Login() {
   return (
     <div className="flex flex-col w-full h-full">
                 <h1 className="pt-2 mx-auto mt-20 text-2xl font-semibold text-left font-pops w-3xl text-neutral-300">Welcome To Falar </h1>
-                <h1 className="pt-2 mx-auto mb-16 text-sm font-normal text-center font-pops max-w-96 text-neutral-400">Login to your account or create a new account to continue</h1>
+                <h1 className="pt-2 mx-10 mb-16 text-sm font-normal text-center lg:mx-auto font-pops max-w-96 text-neutral-400">Login to your account or create a new account to continue</h1>
 
 
       <div className="flex flex-col my-auto items-center content-center mx-auto min-w-[250px] max-w-[300px]">

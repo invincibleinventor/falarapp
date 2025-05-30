@@ -260,7 +260,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                       ))}
                     </div>
                   )}
-                                    <h1 className="px-4 pt-0 pb-4 text-sm font-medium text-neutral-400">{createdat}</h1>
+                                    <h1 className="px-4 pt-4 pb-4 text-sm font-medium text-neutral-400">{createdat}</h1>
 
 
                   <div className="flex flex-row justify-around content-center items-center py-3 mt-0 border-y border-y-neutral-800">
