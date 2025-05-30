@@ -319,15 +319,15 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
     }
   }
   return !loading ? (
-    <div className="flex-1 h-screen p-0 overflow-hidden">
+    <div className="overflow-hidden flex-1 p-0 h-screen">
         {!loggedin &&
       
-      <div className="flex flex-row items-center content-center justify-between w-full px-6 py-4 space-y-1 bg-blue-600 ">
+      <div className="flex flex-row justify-between content-center items-center px-6 py-4 space-y-1 w-full bg-blue-600">
         <h1 className="text-sm font-semibold text-white">Sign up to Falar to view more such interesting people</h1>
-        <Link href={('/login')} className="px-6 py-2 text-xs font-semibold text-blue-600 transition-all duration-200 ease-linear bg-white rounded-full hover:bg-neutral-200 hover:shadow-lg w-max">Sign Up To Falar</Link>
+        <Link href={('/login')} className="px-6 py-2 w-max text-xs font-semibold text-blue-600 bg-white rounded-full transition-all duration-200 ease-linear hover:bg-neutral-200 hover:shadow-lg">Sign Up To Falar</Link>
         </div>
 }
-      <div className="h-full pb-10 overflow-y-scroll hiddenscroll">
+      <div className="overflow-y-scroll pb-10 h-full hiddenscroll">
         <div className="relative h-64">
           <div className="m-0 h-48 w-[calc(100%)] rounded-none  bg-neutral-200 ">
             {cover && (
@@ -337,7 +337,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
                 height={180}
                 loader={() => (found ? (cover ? cover : "/bg.jpg") : "/bg.jpg")}
                 src={`${found ? (cover ? cover : "/bg.jpg") : "/bg.jpg"}`}
-                className="object-cover w-full h-48 rounded-none "
+                className="object-cover w-full h-48 rounded-none"
                 alt="cover"
               />
             )}
@@ -346,7 +346,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
             width={90}
             height={90}
             unoptimized={true}
-            className="absolute w-24 h-24 rounded-lg bottom-5 left-7 md:left-12"
+            className="absolute bottom-5 left-7 w-24 h-24 rounded-xl md:left-12"
             loader={() => (found ? image : "/usernotfound.png")}
             src={`${found ? image : "/usernotfound.png"}`}
             alt="userimage"
@@ -364,18 +364,18 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
         </div>
         <div className="flex flex-col gap-0 ml-8 md:ml-14">
           {found && (
-            <div className="flex flex-row items-start justify-between">
-              <div className="flex flex-col content-center sm:gap-2 sm:items-center sm:flex-row ">
+            <div className="flex flex-row justify-between items-start">
+              <div className="flex flex-col content-center sm:gap-2 sm:items-center sm:flex-row">
                 <h1 className="text-xl font-semibold text-neutral-300">{name}</h1>
 
                 <h1 className="text-sm font-normal text-neutral-500">@{slug}</h1>
               </div>
               {!myself && loggedin && (
-                <div className="flex flex-row items-center content-center gap-2 mb-2">
+                <div className="flex flex-row gap-2 content-center items-center mb-2">
                   {!imblockedby &&
                   <button
                     onClick={() => determine()}
-                    className="px-4 py-1 text-xs font-medium text-red-400 border-2 rounded-full border-red-900/40 "
+                    className="px-4 py-1 text-xs font-medium text-red-400 rounded-full border-2 border-red-900/40"
                   >
                     {blocked  ? "Unblock" : "Block"}
                   </button>}
@@ -390,7 +390,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
             </div>
           )}
 
-          <div className="flex flex-col justify-between gap-2 sm:gap-0 sm:flex-row">
+          <div className="flex flex-col gap-2 justify-between sm:gap-0 sm:flex-row">
             <h1
               style={{ wordBreak: "break-word", whiteSpace: "normal" }}
               className="mt-1 mr-12 text-sm font-normal leading-relaxed text-neutral-500 two-line-elipsis sm:text-neutral-500"
@@ -400,7 +400,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
               {!blocked && !imblockedby && about}
             </h1>
 
-            <div className={resume ? "mr-16  flex flex-row" : "mr-16 flex flex-row"}>
+            <div className={resume ? "flex flex-row mr-16" : "flex flex-row mr-16"}>
               <Link href={"/resume/" + slug} className={resume ? "text-sm font-medium text-blue-600" : "hidden"}>
                 View Resume
               </Link>
@@ -409,24 +409,24 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
         </div>
         {found && !blocked && !imblockedby && (
           <>
-            <div className="flex flex-row items-center content-center gap-6 p-4 mx-8 my-4 mb-1 rounded-md bg-neutral-800/30 md:mx-14">
+            <div className="flex flex-row gap-6 content-center items-center p-4 mx-8 my-4 mb-1 rounded-md bg-neutral-800/30 md:mx-14">
               <div className="flex flex-row w-full md:mx-auto">
-                <div className="flex flex-col items-center content-center gap-1 mx-auto w-max">
+                <div className="flex flex-col gap-1 content-center items-center mx-auto w-max">
                   <h1 className="text-xs font-semibold text-neutral-300">Followers</h1>
                   <h1 className="text-sm font-medium text-neutral-500">{followers} Followers</h1>
                 </div>
-                <div className="flex flex-col items-center content-center gap-1 mx-auto w-max">
+                <div className="flex flex-col gap-1 content-center items-center mx-auto w-max">
                   <h1 className="text-xs font-semibold text-neutral-300">Following</h1>
                   <h1 className="text-sm font-medium text-neutral-500">{following} Following</h1>
                 </div>
               </div>
             </div>
-            <div className="flex items-center justify-between px-8 mt-8 mb-4 lex-row md:mb-4 md:mt-10">
-              <h1 className="text-lg font-bold text-white ">{name}&apos;s Posts</h1>
+            <div className="flex justify-between items-center px-8 mt-8 mb-4 lex-row md:mb-4 md:mt-10">
+              <h1 className="text-lg font-bold text-white">{name}&apos;s Posts</h1>
              {!blocked && !imblockedby &&
               <Link
                 href={"/quickies/" + slug}
-                className="py-2 ml-2 text-sm font-medium text-white rounded-full cursor-pointer md:px-6 md:bg-neutral-900/50 "
+                className="py-2 ml-2 text-sm font-medium text-white rounded-full cursor-pointer md:px-6 md:bg-neutral-900/50"
               >
                 View Quickies
               </Link>
@@ -461,7 +461,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
                   </>
                 )
               ) : (
-                <div className="flex flex-col items-center content-center mt-10">
+                <div className="flex flex-col content-center items-center mt-10">
                   <Oval
                     height={80}
                     width={80}
@@ -483,7 +483,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
       </div>
     </div>
   ) : (
-    <div className="flex items-center content-center w-full h-screen">
+    <div className="flex content-center items-center w-full h-screen">
       <Oval
         height={80}
         width={80}

@@ -16,7 +16,7 @@ export default function Tabbed(){
         <div className="p-4 py-4 pb-2 mx-1 md:mx-1">
         <Search page="quickies" text={AppConfig.title} />
         </div>
-    <div className="flex flex-row flex-grow w-auto text-sm font-medium text-white font-inter">
+    <div className="flex flex-row flex-grow w-auto text-base font-medium text-white font-pops">
     <Link
       href="/quickies"
       className={`w-1/2 py-4 text-center ${pathname == "/quickies" ? "border-b-2 border-b-primary-800" : ""}`}

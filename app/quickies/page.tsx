@@ -1,187 +1,170 @@
+'use client'
+
 import More from "@/components/MoreQuickies";
 import PostComponent from "@/components/QuickieComponent";
 import Search from "@/components/SearchComponent";
 import Stories from "@/components/stories";
 import Trending from "@/components/Trending";
 import { AppConfig } from "@/config/config";
-import { createClient } from "@/utils/supabase/server";
+import { createClient } from "@/utils/supabase/client";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
-import { cookies } from "next/headers";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-export default async function Index() {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
-  const canInitSupabaseClient = () => {
+TimeAgo.addLocale(en);
 
-    try {
-      createClient(cookieStore);
-      return true;
-    } catch (e) {
-      return false;
-    }
-  };
-  TimeAgo.locale(en);
-
+export default function Index() {
+  const supabase = createClient();
   const timeAgo = new TimeAgo("en-US");
   const date1 = new Date();
-  const isSupabaseConnected = canInitSupabaseClient();
-  let empty = true;
-  let posts: any[] = [];
-  let loading = true;
-  let l: any[] = [];
-  let myname = "";
-  let myphoto = "";
-  let myhandle = "";
-  let userliked: any[] = [];
-  let newblocked :any[] =[] 
-  let userbookmarked: any[] = [];
-  let myblocked: any[] = [];
-  async function get() {
-    const { data: user } = await supabase.auth.getUser();
-    const s = user.user!.id;
 
-    const { data: u } = await supabase.from("user").select("*").eq("id", s);
-    l = u![0]["following"];
-    const h = u![0]["handle"];
-    myname = u![0]["name"];
-    myphoto = u![0]["image"];
-    myblocked = u![0]["blocked"];
-    newblocked = u![0]["blockedby"]
-    myhandle = u![0]["handle"];
-    userbookmarked = u![0]["quickiebookmarks"];
-    userliked = u![0]["quickieliked"];
-    let ds = [];
+  const [empty, setempty] = useState(true);
+  const [posts, setposts] = useState<any[]>([]);
+  const [loading, setloading] = useState(true);
+  const [l, setl] = useState<any[]>([]);
+  const [myname, setmyname] = useState("");
+  const [myphoto, setmyphoto] = useState("");
+  const [myhandle, setmyhandle] = useState("");
+  const [userliked, setuserliked] = useState<any[]>([]);
+  const [userbookmarked, setuserbookmarked] = useState<any[]>([]);
+  const [myblocked, setmyblocked] = useState<any[]>([]);
+  const [newblocked, setnewblocked] = useState<any[]>([]);
 
-    l.push(h);
-    const { data, error } = await supabase
-      .from("quickies")
-      .select(
-        `*, 
+  useEffect(() => {
+    async function get() {
+      const { data: user } = await supabase.auth.getUser();
+      const s = user.user!.id;
+
+      const { data: u } = await supabase.from("user").select("*").eq("id", s);
+      let tempL = u![0]["following"];
+      const h = u![0]["handle"];
+      setmyname(u![0]["name"]);
+      setmyphoto(u![0]["image"]);
+      setmyblocked(u![0]["blocked"]);
+      setnewblocked(u![0]["blockedby"]);
+      setmyhandle(u![0]["handle"]);
+      setuserbookmarked(u![0]["quickiebookmarks"]);
+      setuserliked(u![0]["quickieliked"]);
+      tempL.push(h);
+      setl(tempL);
+
+      const { data, error } = await supabase
+        .from("quickies")
+        .select(
+          `*, 
         user (
-        name,
-        id,
-        handle,
-        image
+          name,
+          id,
+          handle,
+          image
         )`
-      )
-      .order("id", { ascending: false })
-      .in("handle", l)
-      .eq("parent",0)
-      .not("poster", "in", `(${myblocked.toString()})`)
-      .not("poster", "in", `(${newblocked.toString()})`)
-      .limit(5);
-    if (error) {
-      console.log(error);
-    } else {
-      ds = data;
-      console.log("okok");
-      console.log(ds);
+        )
+        .order("id", { ascending: false })
+        .in("handle", tempL)
+        .eq("parent", 0)
+        .not("poster", "in", `(${u![0]["blocked"].toString()})`)
+        .not("poster", "in", `(${u![0]["blockedby"].toString()})`)
+        .limit(5);
 
-      for await (const [index, post] of ds.entries()) {
-        let liked = false;
-        const likedlist: string | any[] = ds[index].liked;
-        let bookmarked = false;
-        const bookmarkedlist: any[] = ds[index].bookmarked;
-        if (likedlist.includes(myhandle)) {
-          liked = true;
-        }
-        if (bookmarkedlist.includes(myhandle)) {
-          bookmarked = true;
-        }
-
-        ds[index].liked = liked;
-        ds[index].bookmarked = bookmarked;
-        ds[index].bookmarkedlist = bookmarkedlist;
-        ds[index].likedlist = likedlist;
-        const date2 = new Date(ds[index].created_at);
-        ds[index].diff = date1.getTime() - date2.getTime();
-      }
-
-      if (ds.length > 0) {
-        empty = false;
+      if (error) {
+        console.log(error);
       } else {
-        empty = true;
+        const ds = data!;
+        for await (const [index, post] of ds.entries()) {
+          let liked = false;
+          const likedlist: string | any[] = ds[index].liked;
+          let bookmarked = false;
+          const bookmarkedlist: any[] = ds[index].bookmarked;
+          if (likedlist.includes(h)) {
+            liked = true;
+          }
+          if (bookmarkedlist.includes(h)) {
+            bookmarked = true;
+          }
+          ds[index].liked = liked;
+          ds[index].bookmarked = bookmarked;
+          ds[index].bookmarkedlist = bookmarkedlist;
+          ds[index].likedlist = likedlist;
+          const date2 = new Date(ds[index].created_at);
+          ds[index].diff = date1.getTime() - date2.getTime();
+        }
+
+        setposts(ds);
+        setempty(ds.length === 0);
+        setloading(false);
       }
-      posts = ds;
-      loading = false;
     }
-  }
-  await get();
+    get();
+  }, []);
 
-  if (isSupabaseConnected) {
-    return (
-      <>
-        <div className="h-full overflow-y-scroll hiddenscroll">
-          <div className="flex flex-col gap-0 mb-20 animate-in hiddenscroll">
-            <div className="parent-container">{/* <Stories></Stories> */}</div>
-            <div className=" lg:hidden">
-              <Trending />
-            </div>
-            {!loading ? (
-              !empty ? (
-                posts.map((post) => (
-                  <PostComponent
-                    id={post.id}
-                    cover={post.cover}
-                    title={post.title}
-                    time={timeAgo.format(Date.now() - post.diff)}
-                    key={post.id}
-                    image={post.image}
-                    comments={post.comments}
-                    userliked={userliked}
-                    userid={post.user.id}
-
-                    userbookmarked={userbookmarked}
-                    bookmarkedlist={post.bookmarkedlist}
-                    likedlist={post.likedlist}
-                    myhandle={myhandle}
-                    dp={post.user.image}
-                    bookmarked={post.bookmarked}
-                    liked={post.liked}
-                    handle={post.handle}
-                    name={post.user.name}
-                    description={post.content}
-                  />
-                ))
-              ) : (
-                <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
-                  <div className="flex flex-col gap-2 mx-auto max-w-max">
-                    <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">No Quickies To View!</h1>
-                    <h1 className="mx-auto text-sm text-center text-neutral-400">
-                      Follow people to view their quickies on your feed. The more people you follow, the more quickies
-                      on your feed
-                    </h1>
-                    <Link
-                      href="/explore"
-                      className={`mx-auto mt-3 rounded-full w-max px-8 py-3 text-xs font-medium  ${
-                        1 == 1 ? "bg-primary-800 text-white" : "border-2 bg-white"
-                      }`}
-                    >
-                      Explore People
-                    </Link>
-                  </div>
-                </div>
-              )
+  return (
+    <>
+      <div className="overflow-y-scroll h-full hiddenscroll">
+        <div className="flex flex-col gap-0 mb-20 animate-in hiddenscroll">
+          <div className="parent-container">{/* <Stories></Stories> */}</div>
+          <div className="lg:hidden">
+            <Trending />
+          </div>
+          {!loading ? (
+            !empty ? (
+              posts.map((post) => (
+                <PostComponent
+                  id={post.id}
+                  cover={post.cover}
+                  title={post.title}
+                  time={timeAgo.format(Date.now() - post.diff)}
+                  key={post.id}
+                  image={post.image}
+                  comments={post.comments}
+                  userliked={userliked}
+                  userid={post.user.id}
+                  userbookmarked={userbookmarked}
+                  bookmarkedlist={post.bookmarkedlist}
+                  likedlist={post.likedlist}
+                  myhandle={myhandle}
+                  dp={post.user.image}
+                  bookmarked={post.bookmarked}
+                  liked={post.liked}
+                  handle={post.handle}
+                  name={post.user.name}
+                  description={post.content}
+                />
+              ))
             ) : (
-              <div className="flex items-center content-center w-full h-screen"></div>
-            )}
-            <More
-              myblocked={myblocked}
-              myhandle={myhandle}
-              myname={myname}
-              myphoto={myphoto}
-              newblocked={newblocked}
-              userliked={userliked}
-              userbookmarked={userbookmarked}
-              in={l}
-            ></More>{" "}
-          </div>{" "}
+              <div className="flex content-center items-center px-10 mt-24 w-full sm:px-24 md:px-16 lg:px-24">
+                <div className="flex flex-col gap-2 mx-auto max-w-max">
+                  <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">No Quickies To View!</h1>
+                  <h1 className="mx-auto text-sm text-center text-neutral-400">
+                    Follow people to view their quickies on your feed. The more people you follow, the more quickies
+                    on your feed
+                  </h1>
+                  <Link
+                    href="/explore"
+                    className={`mx-auto mt-3 rounded-full w-max px-8 py-3 text-xs font-medium  ${
+                      1 == 1 ? "bg-primary-800 text-white" : "border-2 bg-white"
+                    }`}
+                  >
+                    Explore People
+                  </Link>
+                </div>
+              </div>
+            )
+          ) : (
+            <div className="flex content-center items-center w-full h-screen"></div>
+          )}
+          <More
+            myblocked={myblocked}
+            myhandle={myhandle}
+            myname={myname}
+            myphoto={myphoto}
+            newblocked={newblocked}
+            userliked={userliked}
+            userbookmarked={userbookmarked}
+            in={l}
+          ></More>
         </div>
-      </>
-    );
-  } else {
-    return <></>;
-  }
+      </div>
+    </>
+  );
 }

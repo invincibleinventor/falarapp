@@ -86,9 +86,9 @@ export default function Index({ params }: { params: Promise<{ slug: string }>}) 
   if (isSupabaseConnected) {
     return (
       <>
-        <div className="flex-1 h-screen p-0 py-2 pb-20 overflow-hidden">
+        <div className="overflow-hidden flex-1 p-0 py-2 pb-20 h-screen">
           <div className="p-4 py-2 mx-1 md:mx-1">
-            <div className="relative items-center content-center">
+            <div className="relative content-center items-center">
               <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -121,8 +121,8 @@ export default function Index({ params }: { params: Promise<{ slug: string }>}) 
               ></input>
             </div>{" "}
           </div>
-          <div className="h-full overflow-y-scroll hiddenscroll">
-            <div className="grid items-center content-center grid-cols-1 gap-2 px-5 animate-in hiddenscroll xl:grid-cols-2">
+          <div className="overflow-y-scroll h-full hiddenscroll">
+            <div className="grid grid-cols-1 gap-2 content-center items-center px-5 animate-in hiddenscroll xl:grid-cols-2">
               {!loading ? (
                 !empty ? (
                   users.map((user: any) => (
@@ -143,10 +143,10 @@ export default function Index({ params }: { params: Promise<{ slug: string }>}) 
                     />
                   ))
                 ) : (
-                  <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
-                    <div className="flex flex-col gap-2 mx-auto max-w-max">
-                      <h1 className="mx-auto text-lg font-semibold text-center text-black">No Users To View!</h1>
-                      <h1 className="mx-auto text-sm text-center text-neutral-800">
+                  <div className="flex flex-grow content-center items-center px-10 mx-auto mt-24">
+                    <div className="flex flex-col gap-2 ml-auto max-w-auto">
+                      <h1 className="mx-auto text-lg font-semibold text-center text-white">No Users To View!</h1>
+                      <h1 className="mx-auto text-sm text-center text-neutral-500">
                         The user you are searching for does not exist or may have blocked you. But fret not! There are several more interesting people on Falar
                       </h1>
 
@@ -162,7 +162,7 @@ export default function Index({ params }: { params: Promise<{ slug: string }>}) 
                   </div>
                 )
               ) : (
-                <div className="flex items-center content-center w-full h-screen"></div>
+                <div className="flex content-center items-center w-full h-screen"></div>
               )}
             </div>
             <MoreUsers newblocked={newblocked} myblocked={blocked} search={search}></MoreUsers>

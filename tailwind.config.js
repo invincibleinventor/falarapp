@@ -21,6 +21,8 @@ module.exports = withMT({
             700: 'var(--color-primary-700)',
             800: 'var(--color-primary-800)',
             900: 'var(--color-primary-900)',
+          
+            950: 'var(--color-primary-950)',
           },
         
         ...colors,

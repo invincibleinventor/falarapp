@@ -58,8 +58,8 @@ export default function App(props: any) {
           {props.url}
         </svg>
         <span
-          className={`font-inter font-medium hidden text-sm md:text-base text-black md:inline-block ${
-            a.opened ? "font-medium text-white" : "font-medium text-neutral-200"
+          className={`font-pops font-normal hidden text-sm md:text-base text-black md:inline-block ${
+            a.opened ? "font-medium text-white" : "font-medium text-white"
           } pt-[0px]`}
         >
           {props.name}

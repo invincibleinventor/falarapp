@@ -15,6 +15,7 @@ export const colorPalettes: Record<string, Record<string, string>> = {
     700: "#0e7490",
     800: "#155e75",
     900: "#164e63",
+    950: "#041c22", // darker than 083344
   },
   pink: {
     DEFAULT: "#ec4899",
@@ -28,6 +29,7 @@ export const colorPalettes: Record<string, Record<string, string>> = {
     700: "#be185d",
     800: "#9d174d",
     900: "#831843",
+    950: "#300012",
   },
   indigo: {
     DEFAULT: "#6366f1",
@@ -41,6 +43,7 @@ export const colorPalettes: Record<string, Record<string, string>> = {
     700: "#4338ca",
     800: "#3730a3",
     900: "#312e81",
+    950: "#130c41",
   },
   green: {
     DEFAULT: "#22c55e",
@@ -54,6 +57,7 @@ export const colorPalettes: Record<string, Record<string, string>> = {
     700: "#15803d",
     800: "#166534",
     900: "#14532d",
+    950: "#0b2917",
   },
   amber: {
     DEFAULT: "#f59e0b",
@@ -67,6 +71,7 @@ export const colorPalettes: Record<string, Record<string, string>> = {
     700: "#b45309",
     800: "#92400e",
     900: "#78350f",
+    950: "#2f1800",
   },
   red: {
     DEFAULT: "#ef4444",
@@ -80,6 +85,7 @@ export const colorPalettes: Record<string, Record<string, string>> = {
     700: "#b91c1c",
     800: "#991b1b",
     900: "#7f1d1d",
+    950: "#2b0606",
   },
   violet: {
     DEFAULT: "#8b5cf6",
@@ -93,6 +99,7 @@ export const colorPalettes: Record<string, Record<string, string>> = {
     700: "#6d28d9",
     800: "#5b21b6",
     900: "#4c1d95",
+    950: "#220448",
   },
   blue: {
     DEFAULT: "#3b82f6",
@@ -106,6 +113,7 @@ export const colorPalettes: Record<string, Record<string, string>> = {
     700: "#1d4ed8",
     800: "#1e40af",
     900: "#1e3a8a",
+    950: "#0c1c3a",
   },
   yellow: {
     DEFAULT: "#fbbf24",
@@ -119,6 +127,7 @@ export const colorPalettes: Record<string, Record<string, string>> = {
     700: "#92400e",
     800: "#78350f",
     900: "#6a3f09",
+    950: "#251600",
   },
   purple: {
     DEFAULT: "#8b5cf6",
@@ -132,6 +141,7 @@ export const colorPalettes: Record<string, Record<string, string>> = {
     700: "#6d28d9",
     800: "#5b21b6",
     900: "#4c1d95",
+    950: "#1a0633",
   },
   teal: {
     DEFAULT: "#14b8a6",
@@ -145,6 +155,7 @@ export const colorPalettes: Record<string, Record<string, string>> = {
     700: "#0b7f7a",
     800: "#085e60",
     900: "#064d4f",
+    950: "#021a1a",
   },
   lime: {
     DEFAULT: "#84cc16",
@@ -158,6 +169,7 @@ export const colorPalettes: Record<string, Record<string, string>> = {
     700: "#4b8e06",
     800: "#3b7200",
     900: "#2f6200",
+    950: "#192f00",
   },
   orange: {
     DEFAULT: "#fd8d3c",
@@ -171,6 +183,7 @@ export const colorPalettes: Record<string, Record<string, string>> = {
     700: "#e34b00",
     800: "#d53a00",
     900: "#bf2900",
+    950: "#3a0b00",
   },
   slate: {
     DEFAULT: "#64748b",
@@ -184,6 +197,7 @@ export const colorPalettes: Record<string, Record<string, string>> = {
     700: "#1e293b",
     800: "#0f172a",
     900: "#020617",
+    950: "#010203",
   },
   stone: {
     DEFAULT: "#9e9c8f",
@@ -197,6 +211,7 @@ export const colorPalettes: Record<string, Record<string, string>> = {
     700: "#5f5d51",
     800: "#444239",
     900: "#2e2c29",
+    950: "#1a1916",
   },
   fuchsia: {
     DEFAULT: "#d946ef",
@@ -210,6 +225,7 @@ export const colorPalettes: Record<string, Record<string, string>> = {
     700: "#861aa1",
     800: "#6e1c8c",
     900: "#581c6f",
+    950: "#300738",
   },
 };
 
@@ -222,10 +238,10 @@ type ThemeContextType = {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [currentColor, setCurrentColor] = useState<string>("cyan");
+  const [currentColor, setCurrentColor] = useState<string>("red");
 
   useEffect(() => {
-    const savedColor = localStorage.getItem("selectedColor") || "cyan";
+    const savedColor = localStorage.getItem("selectedColor") || "red";
     setCurrentColor(savedColor);
     updateCSSVariables(savedColor);
   }, []);

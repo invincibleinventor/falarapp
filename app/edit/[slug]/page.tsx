@@ -107,46 +107,46 @@ export default function Page({ params }: {params: Promise<{ slug: string }>}) {
   }
   return !loading ? (
     author ? (
-      <div className={`h-screen flex-1 gap-2 overflow-hidden px-8`}>
+      <div className={`overflow-hidden flex-1 gap-2 px-8 h-screen`}>
         <div
           style={{ zIndex: 1000 }}
           className={
-            "absolute py-4 flex flex-col content-center  top-0 bottom-0 left-0 right-0 w-64 h-48 mx-auto my-auto bg-white border animate-in border-black shadow-md md:w-84 lg:w-96 " +
+            "absolute py-6 flex flex-col content-center text-white top-0 bottom-0 left-0 right-0 w-64 h-48 mx-auto my-auto bg-black rounded-xl px-4 border animate-in border-neutral-900 shadow-md md:w-84 lg:w-96 " +
             deleteDialog
           }
         >
           <h1 className="mx-4 text-lg font-medium">Delete this post?</h1>
           <h1 className="mx-4 mt-2 text-sm">Are you sure you want to delete this post?</h1>
-          <div className="flex flex-row items-center content-center w-full pt-4 mt-auto ml-auto border-t">
+          <div className="flex flex-row content-center items-center pt-4 mt-auto ml-auto w-full border-t">
             <button
               onClick={() => toggledeleteDialog("hidden")}
-              className="px-6 py-3 mt-auto text-sm font-medium text-black"
+              className="px-6 py-3 mt-auto text-sm font-medium text-white"
             >
               Cancel
             </button>
             <button
               onClick={() => del()}
-              className="px-6 py-3 mt-auto ml-auto mr-4 text-xs font-medium text-white bg-black"
+              className="px-6 py-3 mt-auto mr-4 ml-auto text-sm font-medium text-white bg-red-800 rounded-lg"
             >
               Delete It
             </button>
           </div>
         </div>
 
-        <div className="h-full overflow-y-scroll hiddenscroll">
+        <div className="overflow-y-scroll h-full hiddenscroll">
           <form
-            className="flex flex-col justify-center w-full gap-2 py-10 my-auto overflow-x-hidden animate-in text-foreground"
+            className="flex overflow-x-hidden flex-col gap-2 justify-center py-10 my-auto w-full animate-in text-foreground"
             action={create}
           >
-            <div className="flex flex-row items-center content-center justify-between">
+            <div className="flex flex-row justify-between content-center items-center">
               <h1 className="mb-6 text-2xl font-bold text-neutral-300 md:text-3xl">
                 Edit <span className="hidden md:inline-block">The</span> Post
               </h1>
-              <div className="flex flex-row items-center content-center pb-5 ">
+              <div className="flex flex-row content-center items-center pb-5">
                 <button
                   onClick={() => toggledeleteDialog("")}
                   disabled={deleteDialog != "hidden" ? true : false}
-                  className="flex flex-row items-center content-center px-6 py-3 mx-0 space-x-3 text-xs transition-all duration-100 ease-linear rounded-full text-neutral-300 bg-neutral-900 hover:bg-red-900"
+                  className="flex flex-row content-center items-center px-6 py-3 mx-0 space-x-3 text-xs font-medium bg-black rounded-full transition-all duration-100 ease-linear text-neutral-300 hover:bg-red-900"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256">
                     <path
@@ -166,7 +166,7 @@ export default function Page({ params }: {params: Promise<{ slug: string }>}) {
             <input
               disabled={deleteDialog != "hidden" ? true : false}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-4 py-2 mb-6 mr-4 text-sm text-white bg-black border rounded-md outline-none border-neutral-900 "
+              className="px-4 py-2 mr-4 mb-6 w-full text-sm text-white bg-black rounded-md border outline-none border-neutral-900"
               name="content"
               placeholder="Please Type Out Your Title"
               required
@@ -180,7 +180,7 @@ export default function Page({ params }: {params: Promise<{ slug: string }>}) {
             <textarea
               disabled={deleteDialog != "hidden" ? true : false}
               onChange={(e) => setExcerpt(e.target.value)}
-              className="w-full h-32 px-4 py-2 mb-6 mr-4 text-sm text-white bg-black border rounded-md outline-none border-neutral-900"
+              className="px-4 py-2 mr-4 mb-6 w-full h-32 text-sm text-white bg-black rounded-md border outline-none border-neutral-900"
               name="content"
               placeholder="Please Type Out Your Excerpt"
               required
@@ -193,22 +193,22 @@ export default function Page({ params }: {params: Promise<{ slug: string }>}) {
                 setCover(URL.createObjectURL(e.target.files[0]));
                 setFile(e.target.files[0]);
               }}
-              className="inset-x-0 bottom-0 hidden mx-auto border rounded-md border-neutral-900 bg-neutral-900/40"
+              className="hidden inset-x-0 bottom-0 mx-auto rounded-md border border-neutral-900 bg-neutral-900/40"
               type="file"
               ref={hiddenFileInput}
             />
             <label className="mb-1 text-base text-neutral-300" htmlFor="content">
               Cover Image
             </label>
-            <div className="relative px-4 py-2 mb-6 border rounded-md aspect-video shrink-0">
-              <img src={cover} className="absolute inset-0 object-cover rounded-md aspect-video shrink-0" alt="cover" />
+            <div className="relative px-4 py-2 mb-6 rounded-md border aspect-video shrink-0">
+              <img src={cover} className="object-cover absolute inset-0 rounded-md aspect-video shrink-0" alt="cover" />
               <button
                 disabled={deleteDialog != "hidden" ? true : false}
                 onClick={(e) => {
                   setChanged(true);
                   handleClick(e);
                 }}
-                className="absolute inset-0 px-6 py-3 m-auto text-xs text-white rounded-md h-max w-max bg-black/60 backdrop-blur-sm"
+                className="absolute inset-0 px-6 py-3 m-auto w-max text-xs text-white rounded-md backdrop-blur-sm h-max bg-black/60"
               >
                 Change Cover
               </button>
@@ -230,7 +230,7 @@ export default function Page({ params }: {params: Promise<{ slug: string }>}) {
 
             <button
               disabled={deleteDialog != "hidden" ? true : false}
-              className="px-8 py-4 mb-2 text-xs font-semibold text-white rounded-full bg-primary-800 w-max"
+              className="px-8 py-4 mb-2 w-max text-xs font-semibold text-white rounded-full bg-primary-800"
             >
               Publish This Post
             </button>
@@ -238,7 +238,7 @@ export default function Page({ params }: {params: Promise<{ slug: string }>}) {
         </div>
       </div>
     ) : (
-      <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
+      <div className="flex content-center items-center px-10 mt-24 w-full sm:px-24 md:px-16 lg:px-24">
         <div className="flex flex-col gap-4 mx-auto max-w-max">
           <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">
             You are not allowed to edit this post.
@@ -258,7 +258,7 @@ export default function Page({ params }: {params: Promise<{ slug: string }>}) {
       </div>
     )
   ) : (
-    <div className="flex items-center content-center w-full h-screen">
+    <div className="flex content-center items-center w-full h-screen">
       <Oval
         height={80}
         width={80}

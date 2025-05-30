@@ -207,14 +207,14 @@ else{
                 pointerEvents: isVisible ? 'auto' : 'none',
                 visibility: isPositioned ? 'visible' : 'hidden'
             }}
-            className='w-64 h-auto p-2 pb-4 bg-black border rounded-lg shadow-lg border-neutral-900 shadow-neutral-900'
+            className='p-2 pb-4 w-64 h-auto bg-gradient-to-t to-black rounded-lg border shadow-lg from-primary-950 border-neutral-900 shadow-neutral-900'
         >
             <div className='relative w-full h-full'>
                 <img src={user.cover} className='w-full h-20 bg-black rounded-t-lg aspect-cover'></img>
-                <img className='absolute rounded-lg w-14 h-14 left-2 top-12' src={user.image}></img>
+                <img className='absolute left-2 top-12 w-14 h-14 rounded-lg' src={user.image}></img>
                 <div className='flex flex-col mx-2 mt-8 space-y-2'>
-                    <div className='flex flex-row items-center content-center justify-between'>
-                        <div className='flex flex-col '>
+                    <div className='flex flex-row justify-between content-center items-center'>
+                        <div className='flex flex-col'>
                             <h1 className='text-base font-semibold text-white'>{user.name}</h1>
                             <h1 className='text-sm text-neutral-400'>@{user.handle}</h1>
                         </div>
@@ -224,8 +224,8 @@ else{
                                     onClick={handleFollow}
                                     className={
                                         imfollowing
-                                            ? "h-max border border-black bg-white px-4 py-1 text-xs  rounded-full text-black"
-                                            : "h-max border border-black bg-primary-800 px-4 py-1 text-xs rounded-full text-white"
+                                            ? "px-4 py-1 text-xs text-black bg-white rounded-full border border-black h-max"
+                                            : "px-4 py-1 text-xs text-white rounded-full border border-black h-max bg-primary-800"
                                     }
                                 >
                                     {imfollowing ? "Unfollow" : "Follow"}
@@ -237,13 +237,13 @@ else{
                         <h1 className='text-sm text-neutral-300'>{user.about}</h1>
                     </div>
                     <div className='grid grid-cols-2 pt-2'>
-                        <div className='flex flex-row items-center content-center space-x-1'>
+                        <div className='flex flex-row content-center items-center space-x-1'>
                             <h1 className="text-sm font-semibold text-neutral-300">
                                 {user.followers?.length}
                             </h1>
                             <h1 className="text-sm text-neutral-400">Followers</h1>
                         </div>
-                        <div className='flex flex-row items-center content-center space-x-1'>
+                        <div className='flex flex-row content-center items-center space-x-1'>
                             <h1 className="text-sm font-semibold text-neutral-300">
                                 {user.following?.length}
                             </h1>

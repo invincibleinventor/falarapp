@@ -179,7 +179,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
     <div className="flex overflow-hidden relative flex-col flex-1 h-screen bg-transparent">
         {!loggedin &&
       
-      <div className="flex flex-row justify-between content-center items-center px-6 py-4 space-y-1 w-full bg-blue-600 md:border-x md:border-x-neutral-900">
+      <div className="flex flex-row justify-between content-center items-center px-6 py-4 space-y-1 w-full bg-blue-600 md:border-x md:border-x-neutral-800">
         <h1 className="text-sm font-semibold text-white">Sign up to Falar to view more such interesting quickies</h1>
         <Link href={('/login')} className="px-6 py-2 w-max text-xs font-semibold text-blue-600 bg-white rounded-full transition-all duration-200 ease-linear hover:bg-neutral-200 hover:shadow-lg">Sign Up To Falar</Link>
         </div>
@@ -205,7 +205,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
       )}
       {!error && !newblocked.includes(authorid) && !blocked.includes(authorid) && (
         <div className="hiddenscroll h-full w-[calc(100vw-68px)] mx-0 overflow-hidden pb-14 md:w-full md:max-w-full px-0">
-                        <div className="flex flex-row content-center items-center px-4 py-4 space-x-4 w-full text-white bg-black border-b border-b-neutral-900">
+                        <div className="flex flex-row content-center items-center px-4 py-4 space-x-4 w-full text-white border-b bg-primary-950 border-b-neutral-900">
                           <Back></Back>
                           <h1 className="text-lg font-medium text-white font-poppins">
                             
@@ -239,10 +239,11 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                 <div >
                   <h1
                     style={{ wordBreak: "break-word", whiteSpace: "normal" }}
-                    className="px-4 my-4 mt-2 text-base text-neutral-300 four-line-ellipsis md:text-lg"
+                    className="px-4 my-4 mt-2 text-base font-medium text-neutral-300 four-line-ellipsis md:text-lg"
                   >
                     {formatText(content)}
                   </h1>
+
 
                   {photocount > 0 && (
                     <div
@@ -255,14 +256,14 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                       }
                     >
                       {image.map((image: string) => (
-                        <Iof key={image} src={image} />
+                        <Iof key={image} length={photocount} src={image} />
                       ))}
                     </div>
                   )}
                                     <h1 className="px-4 pt-0 pb-4 text-sm font-medium text-neutral-400">{createdat}</h1>
 
 
-                  <div className="flex flex-row justify-around content-center items-center py-3 mt-0 border-y border-y-neutral-900">
+                  <div className="flex flex-row justify-around content-center items-center py-3 mt-0 border-y border-y-neutral-800">
                   <LikeComponent
             userliked={userliked}
             loggedin={loggedin}

@@ -9,7 +9,7 @@ export default function Button() {
   return (
     <div className="">
       {state && (
-        <div className="absolute w-screen z-[100000] flex items-center content-center top-0 bottom-0 h-screen bg-black/90">
+        <div className="absolute w-screen z-[100000] flex items-center content-center top-0 bottom-0 h-screen bg-gradient-to-b to-black bg-opacity-50 from-primary-950 ">
           <div className="mx-auto">
             <QuickieMakerComponent stateChanger={setState} />
           </div>
@@ -17,9 +17,9 @@ export default function Button() {
       )}
 
       {loc.includes("quickie") == false && loc.includes("hashtag") == false && (
-        <Link href="/create" className="pt-5 ">
-          <div className="mx-auto flex rounded-full md:mt-5 md:rounded-full h-[52px]  w-[52px] cursor-pointer  flex-row content-center items-center bg-primary-800 p-3 transition-all duration-100 ease-linear hover:bg-primary-700 md:mr-auto md:h-[44px] md:w-[calc(180px)] md:py-[14px]">
-            <span className={`mx-auto hidden pt-[0px] text-center text-sm font-semibold  text-white md:inline-block`}>
+        <Link href="/create" className="pt-5">
+          <div className="mx-auto flex rounded-full md:mt-5 md:rounded-full h-[52px]  w-[52px] cursor-pointer  flex-row content-center items-center bg-primary-700 p-3 transition-all duration-100 ease-linear hover:bg-primary-600 md:mr-auto md:h-[44px] md:w-[calc(180px)] md:py-[14px]">
+            <span className={`hidden mx-auto text-sm font-medium text-center text-white pt-[0px] md:inline-block`}>
               New Post
             </span>
             <svg
@@ -40,8 +40,8 @@ export default function Button() {
         onClick={() => setState(true)}
         className={`md:ml-0 md:pt-5 ml-[7px] ${loc.includes("quickie") || loc.includes("hashtag") ? "" : "hidden"}`}
       >
-        <div className="mx-auto flex rounded-full md:rounded-full h-[52px]  w-[52px] cursor-pointer  flex-row content-center items-center bg-primary-800 p-3 transition-all duration-100 ease-linear hover:bg-primary-600 md:mr-auto md:h-[44px] md:w-[calc(180px)] md:py-[14px]">
-          <span className={`mx-auto hidden pt-[0px] text-center text-sm font-semibold  text-white md:inline-block`}>
+        <div className="mx-auto flex rounded-full md:rounded-full h-[52px]  w-[52px] cursor-pointer  flex-row content-center items-center bg-primary-700 p-3 transition-all duration-100 ease-linear hover:bg-primary-600 md:mr-auto md:h-[44px] md:w-[calc(180px)] md:py-[14px]">
+          <span className={`hidden mx-auto text-sm font-medium text-center text-white pt-[0px] md:inline-block`}>
             New Quickie
           </span>
           <svg

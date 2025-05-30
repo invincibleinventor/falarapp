@@ -112,7 +112,7 @@ export default function Create() {
   }
   return (
     <div
-      className={`relative mx-auto flex h-[calc(100vh-104px)] flex-1 flex-col items-center justify-center overflow-hidden`}
+      className={`flex overflow-hidden relative flex-col flex-1 justify-center items-center mx-auto h-[calc(100vh-104px)]`}
     >
       <div className="absolute top-0 h-64 w-[calc(100%-20px)] max-w-full py-0 md:w-full md:px-4">
         <div className="relative h-64 w-[calc(100%)]">
@@ -121,13 +121,13 @@ export default function Create() {
               width={200}
               height={200}
               src={cover ? cover : "/bg.jpg"}
-              className="rounded-md h-[calc(52*4px)] w-[calc(100%)] border border-neutral-500 object-cover "
+              className="rounded-xl h-[calc(52*4px)] w-[calc(100%)] border border-neutral-500 object-cover "
               alt="cover"
             />
           </div>
           <div
             onClick={handleClick}
-            className="absolute px-6 py-3 text-xs text-white rounded-md cursor-pointer left-2 top-2 w-max bg-black/60 drop-shadow-lg backdrop-blur-lg"
+            className="absolute top-2 left-2 px-6 py-3 w-max text-xs text-white rounded-md drop-shadow-lg backdrop-blur-lg cursor-pointer bg-black/60"
           >
             {" "}
             <input id="fupload" className="hidden" />
@@ -135,7 +135,7 @@ export default function Create() {
           </div>
           <div className="absolute inset-x-0 bottom-0">
             <div className="relative">
-              <Image width={110} height={110} src={image?image:'/user.jpg'} className="w-24 h-24 mx-auto rounded-lg " alt="image" />
+              <Image width={110} height={110} src={image?image:'/user.jpg'} className="mx-auto w-24 h-24 rounded-xl" alt="image" />
               <div
                 onClick={handleProfileClick}
                 className="absolute text-xs flex items-center content-center text-white rounded-full cursor-pointer left-20 right-0 mx-auto top-[80%] w-7 h-7  bg-primary-700 shadow-lg border-[0.5px] border-neutral-400"
@@ -160,7 +160,7 @@ export default function Create() {
                     setChangedProfile(true);
                     setProfile(e.target.files[0]);
                   }}
-                  className="absolute inset-x-0 bottom-0 hidden mx-auto"
+                  className="hidden absolute inset-x-0 bottom-0 mx-auto"
                   type="file"
                   ref={hiddenProfileInput}
                 />
@@ -173,7 +173,7 @@ export default function Create() {
               setChanged(true);
               setFile(e.target.files[0]);
             }}
-            className="absolute inset-x-0 bottom-0 hidden mx-auto"
+            className="hidden absolute inset-x-0 bottom-0 mx-auto"
             type="file"
             ref={hiddenFileInput}
           />
@@ -181,7 +181,7 @@ export default function Create() {
       </div>
 
       <form
-        className="flex flex-col justify-center w-full max-w-lg gap-2 mx-auto mt-44 animate-in text-foreground md:mt-44 md:px-10"
+        className="flex flex-col gap-2 justify-center mx-auto mt-44 w-full max-w-lg animate-in text-foreground md:mt-44 md:px-10"
         action={create}
       >
         <label className="mx-6 text-sm text-neutral-300" htmlFor="name">
@@ -189,7 +189,7 @@ export default function Create() {
         </label>
         <input
           onChange={(e) => setName(e.target.value)}
-          className="px-4 py-2 mx-6 mb-4 text-sm text-white bg-black border rounded-md border-neutral-900"
+          className="px-4 py-2 mx-6 mb-4 text-sm text-white bg-black rounded-md border border-neutral-900"
           name="name"
           defaultValue={name}
           placeholder="Please Type Out Your Display Name"
@@ -204,7 +204,7 @@ export default function Create() {
         <textarea
           defaultValue={about}
           onChange={(e) => setAbout(e.target.value)}
-          className="px-4 py-2 mx-6 mb-4 text-sm text-white bg-black border rounded-md border-neutral-900"
+          className="px-4 py-2 mx-6 mb-4 text-sm text-white bg-black rounded-md border border-neutral-900"
           name="content"
           placeholder="Please Type About Yourself"
           required
@@ -212,7 +212,7 @@ export default function Create() {
           maxLength={100}
         />
 
-        <button className="px-8 py-4 mx-auto mb-2 text-xs font-medium text-white rounded-full bg-primary-800 w-max">
+        <button className="px-8 py-4 mx-auto mb-2 w-max text-xs font-medium text-white rounded-full bg-primary-800">
           Save Your Changes
         </button>
       </form>

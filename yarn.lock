@@ -3519,13 +3519,13 @@ fraction.js@^4.2.0:
   resolved "https://registry.npmjs.org/fraction.js/-/fraction.js-4.3.7.tgz"
   integrity sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==
 
-framer-motion@^11.16.4:
-  version "11.16.4"
-  resolved "https://registry.npmjs.org/framer-motion/-/framer-motion-11.16.4.tgz"
-  integrity sha512-7ncPlBjrYX6iQXcTSw1kvZcHSVjEuOAW3uWuu+/+chUS4UWBMe8kCjniE4VMc2/BMo0su0Uw9sw0aWS9anpPWA==
+framer-motion@^11.16.4, framer-motion@^11.18.2:
+  version "11.18.2"
+  resolved "https://registry.npmjs.org/framer-motion/-/framer-motion-11.18.2.tgz"
+  integrity sha512-5F5Och7wrvtLVElIpclDT0CBzMVg3dL22B64aZwHtsIY8RB4mXICLrkajK4G9R+ieSAGcgrLeae2SeUTg2pr6w==
   dependencies:
-    motion-dom "^11.16.4"
-    motion-utils "^11.16.0"
+    motion-dom "^11.18.1"
+    motion-utils "^11.18.1"
     tslib "^2.4.0"
 
 framer-motion@6.5.1:
@@ -3772,6 +3772,11 @@ graphemer@^1.4.0:
   version "1.4.0"
   resolved "https://registry.npmjs.org/graphemer/-/graphemer-1.4.0.tgz"
   integrity sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==
+
+gsap@^3.13.0:
+  version "3.13.0"
+  resolved "https://registry.npmjs.org/gsap/-/gsap-3.13.0.tgz"
+  integrity sha512-QL7MJ2WMjm1PHWsoFrAQH/J8wUeqZvMtHO58qdekHpCfhvhSL4gSiz6vJf5EeMP0LOn3ZCprL2ki/gjED8ghVw==
 
 gulp-header@^1.7.1, gulp-header@^1.8.9:
   version "1.8.12"
@@ -5990,17 +5995,17 @@ mkdirp@^1.0.3:
   resolved "https://registry.npmjs.org/mkdirp/-/mkdirp-1.0.4.tgz"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
-motion-dom@^11.16.4:
-  version "11.16.4"
-  resolved "https://registry.npmjs.org/motion-dom/-/motion-dom-11.16.4.tgz"
-  integrity sha512-2wuCie206pCiP2K23uvwJeci4pMFfyQKpWI0Vy6HrCTDzDCer4TsYtT7IVnuGbDeoIV37UuZiUr6SZMHEc1Vww==
+motion-dom@^11.18.1:
+  version "11.18.1"
+  resolved "https://registry.npmjs.org/motion-dom/-/motion-dom-11.18.1.tgz"
+  integrity sha512-g76KvA001z+atjfxczdRtw/RXOM3OMSdd1f4DL77qCTF/+avrRJiawSG4yDibEQ215sr9kpinSlX2pCTJ9zbhw==
   dependencies:
-    motion-utils "^11.16.0"
+    motion-utils "^11.18.1"
 
-motion-utils@^11.16.0:
-  version "11.16.0"
-  resolved "https://registry.npmjs.org/motion-utils/-/motion-utils-11.16.0.tgz"
-  integrity sha512-ngdWPjg31rD4WGXFi0eZ00DQQqKKu04QExyv/ymlC+3k+WIgYVFbt6gS5JsFPbJODTF/r8XiE/X+SsoT9c0ocw==
+motion-utils@^11.18.1:
+  version "11.18.1"
+  resolved "https://registry.npmjs.org/motion-utils/-/motion-utils-11.18.1.tgz"
+  integrity sha512-49Kt+HKjtbJKLtgO/LKj9Ld+6vw9BjH5d9sc40R/kVyH8GLAXgT42M2NnuPcJNuA3s9ZfZBUcwIgpmZWGEE+hA==
 
 motion@^11.16.4:
   version "11.16.4"

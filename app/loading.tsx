@@ -2,11 +2,11 @@
 import { Oval } from "react-loader-spinner";
 export default function Loading() {
   return (
-    <div className="flex h-screen w-full content-center items-center">
+    <div className="flex content-center items-center w-screen h-screen bg-gradient-to-b to-black from-primary-950">
       <Oval
         height={80}
         width={80}
-        color="#000"
+        color="#fff"
         wrapperStyle={{}}
         wrapperClass="mx-auto"
         visible={true}

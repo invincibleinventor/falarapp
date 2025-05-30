@@ -1,9 +1,8 @@
-"use client";
 import Link from "next/link";
 
 export default function Error({}) {
   return (
-    <div className="flex items-center content-center w-full h-screen px-10 sm:px-24 md:px-16 lg:px-24">
+    <div className="flex content-center items-center px-10 w-full h-screen sm:px-24 md:px-16 lg:px-24">
       <div className="flex flex-col gap-4 mx-auto max-w-max">
         <h1 className="mx-auto text-lg font-medium text-center text-neutral-300">That Content Doesn&apos;t Exist</h1>
         <h1 className="mx-auto text-center text-neutral-400 text-md">

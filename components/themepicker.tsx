@@ -10,18 +10,18 @@ export default function ColorSwitcher() {
   return (
     <div className="">
      
-      <div className="grid grid-cols-4 md:grid-cols-5 gap-y-4  w-[calc(100%-20px)]">
+      <div className="grid grid-cols-4 gap-2  w-[calc(100%-20px)]">
         {Object.keys(colorPalettes).map((color) => (
           <div
             key={color}
-            className={`relative border border-neutral-500 w-8 h-8 rounded-full`}
+            className={`relative w-full h-12 rounded-md`}
             style={{
-              backgroundColor: colorPalettes[color]["700"],
+              backgroundColor: colorPalettes[color]["800"],
             }}
             onClick={() => setColor(color)}
           >
             {currentColor === color && (
-              <div className="absolute inset-0 flex items-center justify-center">
+              <div className="flex absolute inset-0 justify-center items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-4 h-4 text-white"

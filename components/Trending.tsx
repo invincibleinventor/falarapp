@@ -60,13 +60,13 @@ export default function Trending() {
   }, []);
 
   return Object.entries(a).length > 0 ? (
-    <div className="flex flex-col w-full h-full px-2 py-0 space-y-0 text-neutral-300 lg:pr-0 lg:rounded-lg lg:border-none lg:py-2 lg:text-neutral-300 ">
+    <div className="flex flex-col px-2 py-0 space-y-0 w-full h-full text-neutral-300 lg:pr-0 lg:rounded-lg lg:border-none lg:py-2 lg:text-neutral-300">
       {Object.entries(a).map(
         (t: any, k: any): React.ReactNode => (
           <Link
             key={k}
             href={"/hashtag/" + t[0]}
-            className="flex flex-row items-center content-center w-full p-4 px-6 py-4 lg:px-2"
+            className="flex flex-row content-center items-center p-4 px-6 py-4 w-full lg:px-2"
           >
             <h1 className="text-sm font-semibold">#{t[0]}</h1>
             <h1 className="ml-auto text-xs font-medium text-neutral-300">
@@ -77,9 +77,9 @@ export default function Trending() {
       )}
     </div>
   ) : (
-    <div className="hidden lg:block">
-      <div className="flex flex-col w-full h-full px-2 py-0 space-y-0 text-neutral-300 lg:pr-0 lg:rounded-lg lg:border-none lg:py-2 lg:text-neutral-300 ">
-        <h1 className="mx-auto my-4 text-sm text-neutral-400">No Trending Hashtags</h1>
+    <div className="hidden px-5 rounded-xl lg:block lg:bg-neutral-900/50">
+      <div className="flex flex-col px-2 py-0 space-y-0 w-full h-full text-neutral-300 lg:pr-0 lg:rounded-lg lg:border-none lg:py-2 lg:text-neutral-300">
+        <h1 className="mx-auto my-4 text-base text-neutral-300">No Hashtags</h1>
       </div>
     </div>
   );

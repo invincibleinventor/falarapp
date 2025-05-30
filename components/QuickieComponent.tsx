@@ -61,9 +61,9 @@ export default function Post(props: any) {
   };
   return (
     <div className="relative w-full animate-in">
-      <div className="w-full ">
+      <div className="w-full">
         <div className="flex flex-col px-2 py-2 border-b md:pr-2 lg:pr-2 border-b-neutral-900 md:py-0">
-          <div className="flex items-center content-center bg-black rounded-md "></div>
+          <div className="flex content-center items-center bg-black rounded-md"></div>
           <div className="flex h-max flex-col gap-[8px] md:p-6 p-4 ">
             <div className="flex gap-2 mt-0">
               <Link href={"/profile/" + props.handle} className="flex  gap-[10px] mt-0">
@@ -72,12 +72,12 @@ export default function Post(props: any) {
                   id={props.userid}
                   imgclass="rounded-md object-cover min-w-[28px] max-w-[28px] h-7"
                 />
-                <div className="flex items-center content-center">
+                <div className="flex content-center items-center">
                   <h1>
                     <p className="text-base font-medium break-all text-neutral-300 line-clamp-1">{props.name}</p>
                   </h1>
                   <div className="mx-1 text-base text-neutral-400">·</div>
-                  <span className="text-base font-medium text-neutral-400 whitespace-nowrap">@{props.handle}</span>
+                  <span className="text-base font-medium whitespace-nowrap text-neutral-400">@{props.handle}</span>
                 </div>
               </Link>
               <Menu type="quickie" id={props.id} myhandle={props.myhandle} handle={props.handle} />
@@ -87,7 +87,7 @@ export default function Post(props: any) {
               <div
                 onClick={() => router.push("/quickie/" + props.id)}
                 style={{ wordBreak: "break-word", whiteSpace: "normal" }}
-                className="cursor-pointer mt-[6px] pl-0 ml-0 text-[16px] font-normal  text-neutral-300 four-line-ellipsis md:text-[16px]"
+                className="cursor-pointer mt-[6px] pl-0 ml-0 text-[16px] font-medium  text-neutral-300 four-line-ellipsis md:text-[16px]"
               >
                 {formatText(props.description)}
 
@@ -125,7 +125,7 @@ export default function Post(props: any) {
                
                 <Link
                   href={"/quickie/" + props.id+"#comments"}
-                  className="flex flex-row items-center content-center pl-6 space-x-2 text-white"
+                  className="flex flex-row content-center items-center pl-6 space-x-2 text-white"
                 >
                   <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M5 3h13a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-4.59l-3.7 3.71c-.18.18-.43.29-.71.29a1 1 0 0 1-1-1v-3H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3m13 1H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h4v4l4-4h5a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2"/></svg>{" "}
                   <h1 className="text-sm">{props.comments} <span className="hidden md:inline-block"></span></h1>

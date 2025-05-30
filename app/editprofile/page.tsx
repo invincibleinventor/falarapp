@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 export default function Create() {
   const supabase = createClient();
-
+const [access,setAccess] = useState(false);
   useEffect(() => {
     async function get() {
       const {
@@ -19,9 +19,11 @@ export default function Create() {
         if (user) {
           const { data } = await supabase.from("user").select("*").eq("id", user.id);
           if (data && data.length > 0) {
+            
             window.location.replace("/");
           } else {
             if (user.email) {
+              setAccess(true);
               setEmail(user.email);
               setImage(user.user_metadata.avatar_url);
             }
@@ -91,14 +93,14 @@ export default function Create() {
       }
     }
   }
-  return (
-    <div className={`mx-auto flex h-screen w-full max-w-lg flex-col items-center justify-center px-10 `}>
+  return access ? (
+    <div className={`flex flex-col justify-center items-center px-10 mx-auto w-full max-w-lg h-screen`}>
       <form
-        className="flex flex-col justify-center w-full gap-2 my-auto ml-auto animate-in text-foreground"
+        className="flex flex-col gap-2 justify-center my-auto ml-auto w-full animate-in text-foreground"
         action={create}
       >
         <h1 className="text-2xl font-semibold text-white">Welcome To {AppConfig.title}</h1>
-        <h1 className="pb-10 text-base font-normal text-neutral-400 ">
+        <h1 className="pb-10 text-base font-normal text-neutral-400">
           Let us setup your profile on {AppConfig.title}. Setup your profile to continue.
         </h1>
         <label className="text-sm text-neutral-300" htmlFor="name">
@@ -106,7 +108,7 @@ export default function Create() {
         </label>
         <input
           onChange={(e) => setName(e.target.value)}
-          className="px-4 py-2 mb-6 text-sm bg-black border rounded-md outline-none text-neutral-300 border-neutral-900 focus:outline-primary-800"
+          className="px-4 py-2 mb-6 text-sm bg-black rounded-md border outline-none text-neutral-300 border-neutral-900 focus:outline-primary-800"
           name="name"
           placeholder="Please Type Out Your Name"
           required
@@ -118,7 +120,7 @@ export default function Create() {
         </label>
         <input
           onChange={(e) => setHandle(e.target.value.trim().replace(" ", "_"))}
-          className="px-4 py-2 mb-6 text-sm bg-black border rounded-md outline-none text-neutral-300 border-neutral-900 focus:outline-primary-800"
+          className="px-4 py-2 mb-6 text-sm bg-black rounded-md border outline-none text-neutral-300 border-neutral-900 focus:outline-primary-800"
           name="handle"
           placeholder="Please Type Out Your Username"
           required
@@ -130,7 +132,7 @@ export default function Create() {
         </label>
         <textarea
           onChange={(e) => setAbout(e.target.value)}
-          className="px-4 py-2 mb-6 text-sm bg-black border rounded-md outline-none text-neutral-300 border-neutral-900 focus:outline-primary-800"
+          className="px-4 py-2 mb-6 text-sm bg-black rounded-md border outline-none text-neutral-300 border-neutral-900 focus:outline-primary-800"
           name="content"
           placeholder="Please Type About Yourself"
           required
@@ -138,10 +140,13 @@ export default function Create() {
           maxLength={100}
         />
 
-        <button className="px-8 py-4 mx-auto mb-2 text-xs font-medium text-white rounded-full bg-primary-800 w-max">
+        <button className="px-8 py-4 mx-auto mb-2 w-max text-xs font-medium text-white rounded-full bg-primary-800">
           Setup Your Account
         </button>
       </form>
     </div>
-  );
+  ):
+  (<></>)
+  
+  ;
 }

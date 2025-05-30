@@ -90,7 +90,7 @@ export default function CommentsComponent(props: any) {
   return (
     <>
       {props.loggedin && (
-         <div className="sticky bg-black/30 backdrop-blur-lg z-[100000] top-0 shadow-lg flex flex-col pt-6 pb-6 space-y-2">
+         <div className="sticky  z-[100000] top-0 shadow-lg flex flex-col pt-6 pb-6 space-y-2">
          <h1 className="sticky top-0 px-6 mb-4 text-lg font-bold text-neutral-300">Comments</h1>
 
 <div className="flex flex-row px-6 pt-2 pb-0 space-x-0">

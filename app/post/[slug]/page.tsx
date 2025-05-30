@@ -155,7 +155,7 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
     <div className="flex overflow-hidden relative flex-col flex-1 h-screen md:mr-4 lg:mx-0">
       {!loggedin &&
       
-      <div className="flex flex-row justify-between content-center items-center px-6 py-4 space-y-1 w-full bg-blue-600 md:border-x md:border-x-neutral-900">
+      <div className="flex flex-row justify-between content-center items-center px-6 py-4 space-y-1 w-full bg-primary-600 md:border-x md:border-x-neutral-800">
         <h1 className="text-sm font-semibold text-white">Sign up to Falar to read more such interesting articles</h1>
         <Link href={('/login')} className="px-6 py-2 w-max text-xs font-semibold text-blue-600 bg-white rounded-full transition-all duration-200 ease-linear hover:bg-neutral-200 hover:shadow-lg">Sign Up To Falar</Link>
         </div>
@@ -180,7 +180,7 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
         </div>
       )}
       {!error && !newblocked.includes(authorid) && !blocked.includes(authorid) && (
-        <div className="hiddenscroll h-full w-[calc(100vw-68px)] overflow-hidden pb-14 md:w-full md:max-w-full md:border-x md:border-x-neutral-900">
+        <div className="hiddenscroll h-full w-[calc(100vw-68px)] overflow-hidden pb-14 md:w-full md:max-w-full md:border-x md:border-x-neutral-800">
           <div className="relative aspect-video">
             <img
               alt="coveri"
@@ -218,7 +218,7 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
               </Link>
             )}
 
-            <div className="flex sticky top-0 flex-row justify-between content-center items-center py-4 mt-2 text-lg backdrop-blur-lg bg-black/50">
+            <div className="flex sticky top-0 flex-row justify-between content-center items-center py-4 mt-2 text-lg">
               <Link href={"/profile/" + author} className="flex flex-row content-center items-center">
                 <UserInformation id={authorid} image={profile} imgclass="w-7 h-7 mr-3 rounded-md"  />
                 <h1 className="text-xs font-medium text-white md:text-sm">{name}</h1>
@@ -279,7 +279,7 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
         </div>
       )}
       {loggedin && !blocked.includes(authorid) && !newblocked.includes(authorid)  && (
-        <div className="absolute bottom-0 z-[1000000] flex flex-row w-full border-t bg-[#000205]/30 backdrop-blur-lg border-x h-14 border-t-neutral-900 border-x-neutral-900">
+        <div className="absolute bottom-0 z-[1000000] flex flex-row w-full border-t bg-[#000205]/30 backdrop-blur-lg border-x h-14 border-t-neutral-800 border-x-neutral-800">
           <BookMarksComponent
             userliked={userbookmarked}
             postid={slug}

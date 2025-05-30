@@ -31,7 +31,7 @@ a.opened = true;
     <Link
       href={props.link}
       className={`mx-2  flex w-max cursor-pointer flex-row content-center items-center  px-3  py-[10px] transition-all bg-neutral-800/10 md:bg-transparent rounded-full md:rounded-full h-[calc(13*4px)] md:h-max md:border-none  duration-100 ease-linear md:mx-0 md:w-full md:space-x-[10px] md:px-[14px] md:py-[10px] md:pr-8  ${
-        a.opened ? "md:bg-neutral-900 bg-neutral-900" : ""
+        a.opened ? "bg-neutral-800/30" : ""
       }`}
     >
       <svg
@@ -44,8 +44,8 @@ a.opened = true;
         {props.url}
       </svg>
       <span
-        className={`font-inter font-medium hidden text-sm md:text-base text-black md:inline-block ${
-          a.opened ? "font-medium text-white" : "font-medium text-neutral-200"
+        className={`font-pops font-normal hidden text-sm md:text-base text-black md:inline-block ${
+          a.opened ? "font-medium text-white" : "font-medium text-white"
         } pt-[0px]`}
       >
         {props.name}
