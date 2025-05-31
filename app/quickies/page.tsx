@@ -100,8 +100,7 @@ export default function Index() {
 
   return (
     <>
-      <div className="overflow-y-scroll h-full hiddenscroll">
-        <div className="flex flex-col gap-0 mb-20 animate-in hiddenscroll">
+     
           <div className="parent-container">{/* <Stories></Stories> */}</div>
           <div className="lg:hidden">
             <Trending />
@@ -163,8 +162,7 @@ export default function Index() {
             userbookmarked={userbookmarked}
             in={l}
           ></More>
-        </div>
-      </div>
+        
     </>
   );
 }

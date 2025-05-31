@@ -100,8 +100,7 @@ export default function Index() {
 
   return (
     <>
-      <div className="overflow-y-scroll h-full hiddenscroll">
-        <div className="flex flex-col gap-0 mb-20 animate-in hiddenscroll">
+      
           <div className="lg:hidden">
             <Trending />
           </div>
@@ -155,8 +154,7 @@ export default function Index() {
             userliked={userliked}
             userbookmarked={userbookmarked}
           ></More>
-        </div>
-      </div>
+       
     </>
   );
 }
