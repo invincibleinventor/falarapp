@@ -9,7 +9,7 @@ export default function Sidebar() {
         <WhoToFollow />
         <div className="w-full flex flex-col space-y-1  pt-[14px] mt-4 md:space-y-[0px] md:mx-4 md:pt-[4px]">
           <div className="px-5 py-0 mx-10 rounded-lg">
-          <h1 className="mb-10 text-base font-medium font-pops text-neutral-300">Trending Tags</h1>
+          <h1 className="mt-5 mb-5 text-base font-medium font-pops text-neutral-300">Trending Tags</h1>
 
             <Trending />
           </div>

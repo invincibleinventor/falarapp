@@ -89,8 +89,8 @@ export default function Whouser(props: any) {
     return imfollowing;
   }
   return (
-    <div className="flex flex-row items-center content-center justify-between text-sm font-medium text-white">
-      <Link href={"/profile/" + props.handle} className="flex flex-row items-center content-center gap-3">
+    <div className="flex flex-row justify-between content-center items-center text-sm font-medium text-white">
+      <Link href={"/profile/" + props.handle} className="flex flex-row gap-3 content-center items-center">
         <UserInformation imfollowing={imfollowing}
                     {...props}
 
@@ -99,7 +99,7 @@ export default function Whouser(props: any) {
       </Link>
       <button
         onClick={() => onfollow(props.handle)}
-        className={!imfollowing?"px-4 py-[2px] font-poppins text-[12px] font-medium text-white rounded-full bg-primary-800":"px-4 py-[2px] font-poppins text-[12px] font-medium  rounded-full bg-white text-black"}
+        className={!imfollowing?"px-4 font-medium text-white rounded-full py-[2px] font-pops text-[12px] bg-primary-700":"px-4 font-medium text-black bg-white rounded-full py-[2px] font-poppins text-[12px]"}
       >
        {imfollowing?'Unfollow':'Follow'}
       </button>

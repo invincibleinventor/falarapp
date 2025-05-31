@@ -188,14 +188,14 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
               className="object-cover absolute inset-0 w-full h-full aspect-video"
             />
           </div>
-          <div className="flex flex-col flex-1 p-8 w-full max-w-full">
-            <h1 className="fix-overflow text-neutral-300 text-3xl font-extrabold md:text-5xl md:leading-[calc(14*4px)]">
+          <div className="flex flex-col flex-1 py-8 w-full max-w-full">
+            <h1 className="fix-overflow px-8 text-neutral-300 text-3xl font-extrabold md:text-5xl md:leading-[calc(14*4px)]">
               {title}
             </h1>
             {imauthor && (
               <Link
                 href={"/edit/" + slug}
-                className="my-4 ml-auto mt-6 flex cursor-pointer flex-row  content-center items-center space-x-[16px] px-1  pr-0"
+                className="my-4 ml-auto mt-6 mr-8 flex cursor-pointer flex-row  content-center items-center space-x-[16px] px-1  pr-0"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -218,7 +218,7 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
               </Link>
             )}
 
-            <div className="flex sticky top-0 flex-row justify-between content-center items-center py-4 mt-2 text-lg">
+            <div className="flex sticky top-0 flex-row flex-grow justify-between content-center items-center px-8 py-4 mt-2 w-full text-lg filter backdrop-blur-lg">
               <Link href={"/profile/" + author} className="flex flex-row content-center items-center">
                 <UserInformation id={authorid} image={profile} imgclass="w-7 h-7 mr-3 rounded-md"  />
                 <h1 className="text-xs font-medium text-white md:text-sm">{name}</h1>
@@ -235,7 +235,7 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
             <Markdown
               remarkPlugins={[remarkGfm]}
               components={components}
-              className="mt-12 prose text-neutral-300 prose-invert font-poppins fix-overflow"
+              className="px-8 mt-12 prose text-neutral-300 prose-invert font-poppins fix-overflow"
             >
               {content}
             </Markdown>
