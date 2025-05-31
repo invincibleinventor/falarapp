@@ -11,7 +11,7 @@ export default function App(props: any) {
     a.opened = true;
   } else if (props.link == "/myself" && loc.startsWith("/profile")) {
     a.opened = true;
-  } else if (props.link == "more" && loc.startsWith("/more")) {
+  } else if (props.link == "/more" && loc.startsWith("/more")) {
     a.opened = true;
   } else if (props.link == "/" && (loc == "/all" || loc == "/")) {
     a.opened = true;

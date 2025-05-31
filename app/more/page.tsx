@@ -112,7 +112,7 @@ export default function Create() {
   }
   return (
     <div
-      className={`flex overflow-hidden relative flex-col flex-1 justify-center items-center mx-auto h-[calc(100vh-104px)]`}
+      className={`flex overflow-hidden relative flex-col flex-1 justify-center items-center mx-auto sm:w-auto w-[calc(100vw-134px)] h-[calc(100vh-104px)]`}
     >
       <div className="absolute top-0 h-64 w-[calc(100%-20px)] max-w-full py-0 md:w-full md:px-4">
         <div className="relative h-64 w-[calc(100%)]">

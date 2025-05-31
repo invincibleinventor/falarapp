@@ -22,8 +22,8 @@ export default function App(props: any) {
   return (
     <Link
       href={props.link}
-      className={`flex w-max cursor-pointer  flex-row content-center items-center  px-3 py-[6px] transition-all border   h-[calc(10*4px)] md:h-max md:border-none md:rounded-full  duration-100 ease-linear md:mx-0 md:w-full md:space-x-[10px] md:pl-4 md:py-[14px] md:pr-8  ${
-        a.opened ? "bg-neutral-900 border-b border-b-primary-800" : ""
+      className={`flex w-max cursor-pointer  flex-row content-center items-center  px-3 py-[6px] transition-all border   h-[calc(11*4px)] md:h-max md:border-none md:rounded-full  duration-100 ease-linear md:mx-0 md:w-full md:space-x-[10px] md:pl-4 md:py-[14px] md:pr-8  ${
+        a.opened ? "bg-neutral-800/50 border-b border-b-primary-800" : ""
       }`}
     >
       <svg
@@ -36,7 +36,7 @@ export default function App(props: any) {
         {props.url}
       </svg>
 
-      {a.opened && <span className={"md:hidden px-2 text-xs font-pops text-white"}>{props.name}</span>}
+      {a.opened && <span className={"px-2 text-sm text-white md:hidden font-pops"}>{props.name}</span>}
       <span
         className={`font-pops hidden text-sm text-white md:inline-block ${
           a.opened ? "font-medium text-white" : "font-normal text-neutral-400"
