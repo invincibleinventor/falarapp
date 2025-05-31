@@ -66,7 +66,7 @@ export default function Index() {
   }, []);
 
   return (
-    <div className="overflow-y-scroll py-2 h-full hiddenscroll">
+    <div className="overflow-y-scroll py-2 hiddenscroll">
 
         {!loading ? (
           !empty ? (
