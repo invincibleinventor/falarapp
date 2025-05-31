@@ -66,7 +66,8 @@ export default function Index() {
   }, []);
 
   return (
-  <>
+    <div className="overflow-y-scroll py-2 h-full hiddenscroll">
+
         {!loading ? (
           !empty ? (
             posts.map((post) => (
@@ -105,6 +106,6 @@ export default function Index() {
           <div className="flex content-center items-center w-full h-screen"></div>
         )}
         <More newblocked={newblocked} myblocked={myblocked} in={following}></More>
-</>
+</div>
   );
 }

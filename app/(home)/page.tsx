@@ -104,7 +104,8 @@ export default function Index() {
   }
 
   return (
-    <>
+    <div className="overflow-y-scroll py-2 h-full hiddenscroll">
+
       {posts.map((post) => (
         <PostComponent
           id={post.id}
@@ -122,7 +123,7 @@ export default function Index() {
         />
       ))}
       <More newblocked={newblocked} myblocked={myblocked} in={l}></More>
-    </>
+    </div>
   );
 
 
