@@ -104,7 +104,12 @@ export default function Index() {
   }
 
   return (
-    <div className="overflow-y-scroll py-2 hiddenscroll">
+    <div className="overflow-hidden flex-1 p-0 py-2 h-screen">
+
+
+    <div className="overflow-y-scroll py-2 h-full hiddenscroll">
+
+    <div className="flex flex-col gap-0 mb-20 animate-in hiddenscroll">
 
       {posts.map((post) => (
         <PostComponent
@@ -123,6 +128,8 @@ export default function Index() {
         />
       ))}
       <More newblocked={newblocked} myblocked={myblocked} in={l}></More>
+    </div>
+    </div>
     </div>
   );
 
