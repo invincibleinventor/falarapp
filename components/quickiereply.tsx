@@ -322,15 +322,15 @@ export default function QuickieMakerComponent(props: any) {
                       console.log(error);
                       alert(error.message);
                     } else {
-                      window.location.replace("/quickies/"+props.to);
+                      window.location.replace("/quickie/"+props.to);
                     }
                   });
                 }
               } else {
-                window.location.replace("/quickies/"+props.to);
+                window.location.replace("/quickie/"+props.to);
               }
             } else {
-              window.location.replace("/quickies/"+props.to);
+              window.location.replace("/quickie/"+props.to);
             }
           }
         }
@@ -358,7 +358,7 @@ export default function QuickieMakerComponent(props: any) {
   };
   return (
       <div className="relative lg:min-h-[80px] min-h-[400px] flex flex-col items-start content-center">
-        <div className="flex flex-row w-full border-b border-b-neutral-800">
+        <div className="flex flex-row py-1 w-full border-b border-b-neutral-800">
           <h1 className="px-2 mx-4 my-4 text-lg font-semibold text-neutral-300">Add a reply</h1>
           <button className="mr-6 ml-auto" onClick={(e: any) => handleClick(e)}>
             <svg
@@ -374,6 +374,14 @@ export default function QuickieMakerComponent(props: any) {
               />
             </svg>
           </button>
+             
+          <button
+            disabled={disabled}
+            onClick={() => publish()}
+            className="px-6 py-2 my-auto mr-4 text-sm font-medium text-white rounded-full h-max font-pops bg-primary-800"
+          >
+            Publish
+          </button>
         </div>
         <textarea
           onChange={(e: any) => setText(e.target.value)}
@@ -381,7 +389,7 @@ export default function QuickieMakerComponent(props: any) {
           className="px-6 py-5 pr-5 mb-auto w-full h-full bg-transparent outline-none resize-none text-neutral-300 md:pr-4 hiddenscroll lg:pr-8 text-md md:text-lg placeholder:text-neutral-500 md:m-4 md:p-0 md:px-2"
           placeholder="What's on your mind?"
         ></textarea>
-        <div className="grid grid-cols-3 px-4 mb-20 w-full border-t border-t-neutral-800 sm:flex sm:flex-row">
+        <div className="grid grid-cols-3 px-4 w-full border-t border-t-neutral-800 sm:flex sm:flex-row">
           {imgsSrc.map((link, index) => (
             <div
               key={index}
@@ -393,11 +401,11 @@ export default function QuickieMakerComponent(props: any) {
               >
                 <h1 className="mx-auto">-</h1>
               </button>
-              <img className=" aspect-[16/10] w-20 object-cover" key={index} src={link} />
+              <img className=" aspect-[16/10] rounded-lg w-20 object-cover" key={index} src={link} />
             </div>
           ))}
         </div>
-        <div className="flex absolute bottom-0 z-10 flex-row flex-grow content-center items-center px-4 pl-4 w-full h-20 border-y border-y-neutral-800">
+        <div className="flex absolute bottom-0 z-10 flex-row flex-grow content-center items-center px-4 pl-4 w-full">
           <input
             ref={hiddenFileInput}
             type="file"
@@ -407,14 +415,7 @@ export default function QuickieMakerComponent(props: any) {
             name="file"
             multiple
           />
-          
-          <button
-            disabled={disabled}
-            onClick={() => publish()}
-            className="px-6 py-3 ml-auto text-xs font-medium text-white rounded-full bg-primary-900 md:mr-6 lg:mr-2"
-          >
-            Publish
-          </button>
+       
         </div>
     </div>
   );

@@ -358,10 +358,10 @@ export default function QuickieMakerComponent(props: any) {
     }
   };
   return (
-    <div className="lg:w-[544px] lg:min-h-[80px] min-w-[300px] animate-in min-h-[400px] xl:mr-[400px] shadow-lg border border-neutral-900 rounded-2xl mx-auto">
-      <div className="relative lg:min-h-[80px] min-h-[400px] flex flex-col items-start content-center rounded-2xl  bg-[#0e0e0e]">
-        <div className="flex flex-row w-full bg-black rounded-t-2xl border-b border-b-neutral-900">
-          <h1 className="px-2 mx-4 my-6 text-xl font-semibold text-neutral-300 md:font-bold md:text-xl">New Quickie</h1>
+    <div className="lg:w-[544px] lg:min-h-[80px] min-w-[300px] animate-in min-h-[400px] xl:mr-[400px] shadow-lg  rounded-2xl mx-auto">
+      <div className="relative lg:min-h-[80px] min-h-[400px] flex flex-col items-start content-center rounded-2xl  bg-primary-950/80">
+        <div className="flex flex-row w-full rounded-t-2xl border-b bg-primary-950 border-b-neutral-900">
+          <h1 className="px-2 mx-4 my-6 text-lg font-semibold text-neutral-300">New Quickie</h1>
           <button className="mr-6 ml-auto" onClick={(e: any) => handleClick(e)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -383,7 +383,7 @@ export default function QuickieMakerComponent(props: any) {
           className="px-6 py-5 pr-5 mb-auto w-full h-full bg-transparent outline-none resize-none text-neutral-300 md:pr-4 hiddenscroll lg:pr-8 text-md md:text-lg placeholder:text-neutral-600 md:m-4 md:p-0 md:px-2"
           placeholder="What's on your mind?"
         ></textarea>
-        <div className="grid grid-cols-3 px-4 mb-20 w-full border-t bg-black/40 border-t-neutral-900 sm:flex sm:flex-row">
+        <div className="grid grid-cols-3 px-4 mb-20 w-full bg-transparent sm:flex sm:flex-row">
           {imgsSrc.map((link, index) => (
             <div
               key={index}
@@ -395,11 +395,11 @@ export default function QuickieMakerComponent(props: any) {
               >
                 <h1 className="mx-auto">-</h1>
               </button>
-              <img className=" aspect-[16/10] w-20 object-cover" key={index} src={link} />
+              <img className=" aspect-[16/10] rounded-lg w-20 object-cover" key={index} src={link} />
             </div>
           ))}
         </div>
-        <div className="flex absolute bottom-0 z-10 flex-row flex-grow content-center items-center px-4 pl-4 w-full h-20 bg-black rounded-b-2xl border-t border-t-neutral-900">
+        <div className="flex absolute bottom-0 z-10 flex-row flex-grow content-center items-center px-4 pl-4 w-full h-20 rounded-b-2xl border-y border-y-neutral-900">
           <input
             ref={hiddenFileInput}
             type="file"
@@ -415,7 +415,7 @@ export default function QuickieMakerComponent(props: any) {
           <button
             disabled={disabled}
             onClick={() => publish()}
-            className="px-6 py-3 ml-auto text-xs font-medium text-white rounded-full bg-primary-900 md:mr-6 lg:mr-2"
+            className="px-6 py-3 ml-auto text-sm text-white rounded-full font-pops bg-primary-900 md:mr-6 lg:mr-2"
           >
             Publish
           </button>

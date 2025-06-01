@@ -206,7 +206,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
       )}
       {!error && !newblocked.includes(authorid) && !blocked.includes(authorid) && (
         <div className="hiddenscroll h-full w-[calc(100vw-68px)] mx-0 overflow-hidden pb-14 md:w-full md:max-w-full px-0">
-                        <div className="flex  z-[1000000]  fixed flex-row content-center items-center px-4 py-4 space-x-4 w-full text-white border-b bg-primary-950 border-b-neutral-900">
+                        <div className="flex  z-[1000000] shadow-lg fixed flex-row content-center items-center px-4 py-4 space-x-4 w-full text-white border-b bg-primary-950 border-b-primary-950">
                           <Back></Back>
                           <h1 className="text-lg font-medium text-white font-poppins">
                             
