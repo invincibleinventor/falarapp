@@ -1,6 +1,7 @@
 "use client";
 import MoreBookMarks from "@/components/MoreBookMarks";
 import PostComponent from "@/components/PostComponent";
+import Search from "@/components/SearchComponent";
 import { createClient } from "@/utils/supabase/client";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
@@ -87,42 +88,11 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
   }, [search]);
   if (isSupabaseConnected) {
     return (
-      <div className="flex-1 h-screen p-0 py-2 overflow-hidden">
+      <div className="overflow-hidden flex-1 p-0 py-2 h-screen">
         <div className="p-4 py-2 mx-1 md:mx-1">
-          <div className="relative items-center content-center">
-            <svg
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-              className="md:bottom-3 absolute inset-y-0 right-0 my-auto mr-6 h-[14px] w-[14px] text-neutral-400"
-            >
-              <g>
-                <path
-                  fill="currentColor"
-                  d="M10.25 3.75c-3.59 0-6.5 2.91-6.5 6.5s2.91 6.5 6.5 6.5c1.795 0 3.419-.726 4.596-1.904 1.178-1.177 1.904-2.801 1.904-4.596 0-3.59-2.91-6.5-6.5-6.5zm-8.5 6.5c0-4.694 3.806-8.5 8.5-8.5s8.5 3.806 8.5 8.5c0 1.986-.682 3.815-1.824 5.262l4.781 4.781-1.414 1.414-4.781-4.781c-1.447 1.142-3.276 1.824-5.262 1.824-4.694 0-8.5-3.806-8.5-8.5z"
-                ></path>
-              </g>
-            </svg>
-            <input
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  if (tempsearch != "") {
-                    setSearch(tempsearch);
-                  } else {
-                    setEmpty(true);
-                  }
-                }
-              }}
-              defaultValue={search}
-              onChange={(e) => setTempSearch(e.target.value.trim())}
-              minLength={4}
-              maxLength={50}
-              type="search"
-              className="font-inter md:mb-3 rounded-full peer h-[48px] w-full bg-neutral-700/20 focus:outline-none pl-6 pr-14 text-[14px] placeholder:text-neutral-400 text-neutral-300"
-              placeholder={"Search Posts"}
-            ></input>
-          </div>
+          <Search text="Bookmarks" page="bookmarks" search={search.replaceAll("%20", " ")} />
         </div>
-        <div className="h-full overflow-y-scroll hiddenscroll">
+        <div className="overflow-y-scroll h-full hiddenscroll">
           <div className="flex flex-col gap-2 mb-20 animate-in hiddenscroll">
             {!loading ? (
               !empty ? (
@@ -143,7 +113,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
                   />
                 ))
               ) : (
-                <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
+                <div className="flex content-center items-center px-10 mt-24 w-full sm:px-24 md:px-16 lg:px-24">
                   <div className="flex flex-col gap-4 mx-auto max-w-max">
                     <h1 className="mx-auto text-xl font-semibold text-center text-neutral-300">No Posts To View!</h1>
                     <h1 className="mx-auto text-sm text-center text-neutral-400">
@@ -162,7 +132,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
                 </div>
               )
             ) : (
-              <div className="flex items-center content-center w-full h-screen">
+              <div className="flex content-center items-center w-full h-screen">
                 <Oval
                   height={80}
                   width={80}

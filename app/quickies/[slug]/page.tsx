@@ -82,7 +82,20 @@ const slug = (await params).slug;
             if (bookmarkedlist.includes(myhandle)) {
               bookmarked = true;
             }
-
+            if(ds[index].to>0){
+              const { data } = await supabase.from("quickies").select(`*, 
+                user (
+                
+                  handle
+                
+                )`).eq("id", post.to);
+              ds[index].parentid = ds[index].to;
+  
+              if(data && data?.length>0){
+                ds[index].parentname = data[0].user.handle;
+              }
+          
+            }
             ds[index].liked = liked;
             ds[index].bookmarked = bookmarked;
             ds[index].bookmarkedlist = bookmarkedlist;
@@ -114,14 +127,14 @@ const slug = (await params).slug;
   if (isSupabaseConnected) {
     return (
       <>
-        <div className="flex-1 h-screen p-0 overflow-hidden -py-2">
+        <div className="overflow-hidden flex-1 p-0 h-screen -py-2">
           <div className="p-4 py-0 pb-2 mx-1 md:mx-1">
             <Search page="quickies" text={AppConfig.title} />
           </div>
 
-          <div className="h-full overflow-y-scroll hiddenscroll">
+          <div className="overflow-y-scroll h-full hiddenscroll">
             <div className="flex flex-col gap-0 mb-20 animate-in hiddenscroll">
-              <div className=" lg:hidden">
+              <div className="lg:hidden">
                 <Trending />
               </div>
               {!loading ? (
@@ -141,7 +154,8 @@ const slug = (await params).slug;
                       likedlist={post.likedlist}
                       myhandle={myhandle}
                       userid={post.user.id}
-
+                      parentid={post.parentid}
+                      parentname={post.parentname}
                       dp={post.user.image}
                       bookmarked={post.bookmarked}
                       liked={post.liked}
@@ -151,7 +165,7 @@ const slug = (await params).slug;
                     />
                   ))
                 ) : (
-                  <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
+                  <div className="flex content-center items-center px-10 mt-24 w-full sm:px-24 md:px-16 lg:px-24">
                     <div className="flex flex-col gap-2 mx-auto max-w-max">
                       <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">No Quickies To View!</h1>
                       <h1 className="mx-auto text-sm text-center text-neutral-400">
@@ -170,7 +184,7 @@ const slug = (await params).slug;
                   </div>
                 )
               ) : (
-                <div className="flex items-center content-center w-full h-screen"></div>
+                <div className="flex content-center items-center w-full h-screen"></div>
               )}
               {!empty && (
                 <More

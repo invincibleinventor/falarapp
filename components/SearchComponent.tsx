@@ -7,7 +7,7 @@ export default function Search(props: any) {
     window.location.replace("/search/" + props.page + "/" + value);
   }
   return (
-    <div className="relative items-center content-center lg:pr-0">
+    <div className="relative content-center items-center lg:pr-0">
       <svg
         viewBox="0 0 24 24"
         aria-hidden="true"
@@ -27,6 +27,7 @@ export default function Search(props: any) {
         onChange={(e) => setValue(e.target.value)}
         minLength={4}
         maxLength={50}
+        defaultValue = {props.search}
         type="search"
         className="font-inter md:mb-3 rounded-full peer h-[48px] w-full bg-neutral-700/20 focus:outline-none pl-6 pr-14 text-[14px] placeholder:text-neutral-400 text-neutral-300"
         placeholder={"Search " + props.text}

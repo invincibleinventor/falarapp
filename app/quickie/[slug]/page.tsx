@@ -7,11 +7,13 @@ import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
 import { cookies } from "next/headers";
 import Image from "next/image";
+import PostComponent from "@/components/QuickieComponent";
 import Link from "next/link";
 import Iof from "@/components/Iof";
 import Menu from "@/components/Menu";
 import { AppConfig } from "@/config/config";
 import Back from "@/components/back";
+import More from "@/components/MoreSingleQuickies";
 export default async function App({ params }: { params: Promise<{ slug: string }>}) {
   const cookieStore =  cookies();
   const slug = (await params).slug;
@@ -25,6 +27,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
   let naam = "";
   let time = 0;
   let loading = false;
+  let parentQuickie: any;
   let myname = "";
   let myphoto = "";
   let newblocked :any[] = [];
@@ -73,6 +76,12 @@ export default async function App({ params }: { params: Promise<{ slug: string }
       }
       likedlist = l;
       const x = data[0]["bookmarked"];
+      if (data[0].to && data[0].to !== 0) {
+        const { data: parent } = await supabase.from("quickies").select("*, user (name, handle, id, image)").eq("id", data[0].to);
+        if (parent && parent.length > 0) {
+          parentQuickie = parent[0];
+        }
+      }
       if (x.includes(myhandle)) {
         bookmarked = true;
       }
@@ -103,43 +112,34 @@ export default async function App({ params }: { params: Promise<{ slug: string }
 
   await set();
 
-  async function fetchcomments() {
-    const { data, error } = await supabase
-      .from("quickiecomments")
-      .select("*")
-      .eq("id", slug)
-      .order("likes", { ascending: false });
-    if (data && data.length != 0) {
-      comments = data;
-      for await (const [index, comment] of comments.entries()) {
-        console.log(index, comment);
-        const { data } = await supabase.from("user").select("*").eq("id", comment.poster);
-        if (data) {
-          comments[index].name = data[0]["name"];
-          comments[index].profile = data[0]["image"];
 
-          if (loggedin) {
-            if (comments[index].liked.includes(myhandle)) {
-              console.log(myhandle, index);
-              comments[index].likedbyme = true;
-            } else {
-              comments[index].likedbyme = false;
-            }
-          } else {
-            comments[index].likedbyme = false;
-          }
-          console.log(comments[index]);
-        } else {
-          comments.splice(index, 1);
-        }
-      }
-    } else if (!data || data.length == 0) {
-      comments = [];
-    } else {
-      console.log(error);
+    async function getReplies() {
+      const { data: replies } = await supabase
+        .from("quickies")
+        .select("*, user (name, handle, id, image)")
+        .eq("to", slug)
+        .not("poster", "in", `(${blocked.length > 0 ? blocked.toString() : '""'})`)
+        .not("poster", "in", `(${newblocked.length > 0 ? newblocked.toString() : '""'})`)
+        .order("id", { ascending: false })
+        .limit(5);
+
+  
+      if (!replies) return [];
+  
+      return replies.map((r) => {
+        const createdDate = new Date(r.created_at);
+        r.time = timeAgo.format(Date.now() - (date1.getTime() - createdDate.getTime()));
+        r.likedlist = r.liked
+
+        r.liked = r.liked.includes(myhandle);
+        r.bookmarkedlist = r.bookmarked
+        r.bookmarked = r.bookmarked.includes(myhandle);
+        return r;
+      });
     }
-  }
-  await fetchcomments();
+  
+     comments = await getReplies();
+ 
 
   const formatText = (text: string) => {
     console.log("text", text);
@@ -205,7 +205,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
       )}
       {!error && !newblocked.includes(authorid) && !blocked.includes(authorid) && (
         <div className="hiddenscroll h-full w-[calc(100vw-68px)] mx-0 overflow-hidden pb-14 md:w-full md:max-w-full px-0">
-                        <div className="flex flex-row content-center items-center px-4 py-4 space-x-4 w-full text-white border-b bg-primary-950 border-b-neutral-900">
+                        <div className="flex  z-[1000000]  fixed flex-row content-center items-center px-4 py-4 space-x-4 w-full text-white border-b bg-primary-950 border-b-neutral-900">
                           <Back></Back>
                           <h1 className="text-lg font-medium text-white font-poppins">
                             
@@ -213,9 +213,27 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                             </h1>
                         </div>
 
-          <div className="w-full lg:pr-2 px-2 py-[6px] pb-0">
+          <div className="w-full pt-[61px] lg:pr-2 px-2 py-[6px] pb-0">
             <div className="flex flex-col rounded-none md:gap-0">
               <div className="flex h-max flex-col gap-[8px] pt-4 ">
+              {parentQuickie && (
+            <Link
+              href={`/quickie/${parentQuickie.id}`}
+              className="flex flex-row content-center items-center px-4 mb-4 space-x-4 text-sm text-primary-600"
+            >
+               <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+                <path
+                  fill="currentColor"
+                  fillRule="evenodd"
+                  d="M19.5 6.25a.75.75 0 0 1 .75.75c0 2.244-.952 3.72-2.187 4.609c-1.196.861-2.61 1.141-3.563 1.141H6.31l3.72 3.72a.75.75 0 1 1-1.06 1.06l-5-5a.75.75 0 0 1 0-1.06l5-5a.75.75 0 1 1 1.06 1.06l-3.72 3.72h8.19c.713 0 1.8-.22 2.687-.859c.848-.61 1.563-1.635 1.563-3.391a.75.75 0 0 1 .75-.75"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+              <span className="block">
+              Replying to @{parentQuickie.user.handle}
+              </span>
+            </Link>
+          )}
                 <div className="flex flex-row gap-2 content-center items-center h-max shrink-0">
                   <Link href={"/profile/" + author} className="flex gap-[10px] px-4 mt-0">
                     <Image
@@ -318,18 +336,48 @@ export default async function App({ params }: { params: Promise<{ slug: string }
           </div>
           {loggedin && !newblocked.includes(authorid) && !blocked.includes(authorid)  && (
             <section className="px-0 lg:pr-0" id="comments">
-
-              <CommentsComponent
-                myblocked={blocked}
-                myname={myname}
-                myphoto={myphoto}
-                handle={myhandle}
-                id={user}
-                newblocked={newblocked}
+              
+ {comments && comments.length > 0 && (
+       
+          comments.map((post) => (
+         
+            <>
+              <PostComponent
+                id={post.id}
+                cover={post.cover}
+                title={post.title}
+                time={post.time}
+                key={post.id}
+                image={post.image}
+                comments={post.comments}
+                userliked={userliked}
+                userid={post.user.id}
+                userbookmarked={userbookmarked}
+                bookmarkedlist={post.bookmarkedlist}
+                likedlist={post.likedlist}
                 myhandle={myhandle}
-                slug={slug}
-                loggedin={loggedin}
+                dp={post.user.image}
+                bookmarked={post.bookmarked}
+                liked={post.liked}
+                handle={post.handle}
+                name={post.user.name}
+                description={post.content}
               />
+      
+            </>
+            
+      )))}
+              <More
+              myblocked={blocked}
+              myhandle={myhandle}
+              myname={myname}
+              myphoto={myphoto}
+              to={slug}
+              newblocked={newblocked}
+              userliked={userliked}
+              userbookmarked={userbookmarked}
+              
+            ></More>
             </section>
           )}
         </div>
@@ -340,4 +388,5 @@ export default async function App({ params }: { params: Promise<{ slug: string }
   ) : (
     <div className="flex content-center items-center w-full h-screen"></div>
   );
+
 }

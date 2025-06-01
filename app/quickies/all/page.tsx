@@ -54,7 +54,7 @@ export default function Index() {
           .from("quickies")
           .select("*,user(id,name,handle,image)")
           .order("id", { ascending: false })
-          .eq("parent", 0)
+          .eq("to", 0)
           .not("poster", "in", `(${u![0]["blocked"].toString()})`)
           .not("poster", "in", `(${u![0]["blockedby"].toString()})`)
           .limit(5);
@@ -77,6 +77,11 @@ export default function Index() {
           }
           if (bookmarkedlist.includes(h)) {
             bookmarked = true;
+          }
+          if(ds[index].to>0){
+            const { data: u } = await supabase.from("user").select("*").eq("id", post.to);
+            ds[index].parentname = u![0]["handle"];
+            ds[index].parentid = ds[index].to;
           }
           ds[index].liked = liked;
           ds[index].bookmarked = bookmarked;
@@ -119,6 +124,9 @@ export default function Index() {
                   time={timeAgo.format(Date.now() - post.diff)}
                   key={post.id}
                   image={post.image}
+                  
+                  parentid={post.parentid}
+                  parentname={post.parentname}
                   comments={post.comments}
                   userliked={userliked}
                   userbookmarked={userbookmarked}

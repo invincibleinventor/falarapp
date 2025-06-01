@@ -5,27 +5,28 @@ import en from "javascript-time-ago/locale/en";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { Oval } from "react-loader-spinner";
-import PostComponent from "./PostComponent";
+import QuickieComponent from "./QuickieComponent";
 export default function More(props: any) {
   const supabase = createClient();
-
   const [offset, setOffset] = useState(1);
   const { ref, inView } = useInView();
   const [halt, setHalt] = useState(false);
   const [posts, setPosts] = useState<any>([]);
+
   TimeAgo.locale(en);
   const PAGE_COUNT = 5;
   const timeAgo = new TimeAgo("en-US");
   const date1 = new Date();
 
   async function get(from: number, to: number) {
-    if (props.handle) {
-      const { data, error } = await supabase
-        .from("posts")
-        .select("*,user(id,name,handle,image)")
-        .eq("handle", props.handle)
-        .order("id", { ascending: false })
 
+      const { data, error } = await supabase
+        .from("quickies")
+        .select("*, user(id,name,image,handle)")
+        .order("id", { ascending: false })
+        .not("poster", "in", `(${props.newblocked.toString()})`)
+        .eq("to",props.to)
+        .not("poster", "in", `(${props.myblocked.toString()})`)
         .range(from, to);
       if (error) {
         console.log(error);
@@ -34,32 +35,23 @@ export default function More(props: any) {
           console.log(data);
           const ds = data;
           for await (const [index, post] of ds.entries()) {
-            const date2 = new Date(ds[index].created_at);
-            ds[index].diff = date1.getTime() - date2.getTime();
-          }
-          setPosts((prev: any) => [...prev, ...ds]);
-          if (ds.length < PAGE_COUNT) {
-            setHalt(true);
-          }
-        } else {
-          setHalt(true);
-        }
-      }
-    } else {
-      const { data, error } = await supabase
-        .from("posts")
-        .select("*,user(id,name,handle,image)")
-        .order("id", { ascending: false })
-        .range(from, to)
-        .not("poster", "in", `(${props.myblocked.toString()})`)
-        .not("poster", "in", `(${props.newblocked.toString()})`);
-      if (error) {
-        console.log(error);
-      } else {
-        if (data && data.length > 0) {
-          console.log(data);
-          const ds = data;
-          for await (const [index, post] of ds.entries()) {
+            let liked = false;
+            const likedlist: string | any[] = ds[index].liked;
+            let bookmarked = false;
+            const bookmarkedlist: any[] = ds[index].bookmarked;
+            if (likedlist.includes(props.myhandle)) {
+              liked = true;
+            }
+            if (bookmarkedlist.includes(props.myhandle)) {
+              bookmarked = true;
+            }
+
+            ds[index].liked = liked;
+            ds[index].bookmarked = bookmarked;
+            ds[index].bookmarkedlist = bookmarkedlist;
+            ds[index].likedlist = likedlist;
+            console.log(likedlist);
+
             const date2 = new Date(ds[index].created_at);
             ds[index].diff = date1.getTime() - date2.getTime();
           }
@@ -71,7 +63,7 @@ export default function More(props: any) {
           setHalt(true);
         }
       }
-    }
+    
   }
   useEffect(() => {
     if (!halt && inView) {
@@ -85,22 +77,29 @@ export default function More(props: any) {
   }, [inView]);
   return (
     <>
-      <div className="flex flex-col gap-2 content-center items-center pb-20">
+      <div className="flex flex-col gap-0 content-center items-center pb-20 w-full">
         {posts.map((post: any) => (
-          <PostComponent
+          <QuickieComponent
             id={post.id}
-            type="profile"
-            title={post.title}
-            userid={post.user.id}
-
             cover={post.cover}
+            title={post.title}
             time={timeAgo.format(Date.now() - post.diff)}
             key={post.id}
             image={post.image}
+            userliked={props.userliked}
+            userbookmarked={props.userbookmarked}
+            bookmarkedlist={post.bookmarkedlist}
+            likedlist={post.likedlist}
+            myhandle={props.myhandle}
             dp={post.user.image}
+            bookmarked={post.bookmarked}
+            liked={post.liked}
             handle={post.handle}
             name={post.user.name}
-            description={post.excerpt}
+            comments={post.comments}
+            description={post.content}
+            userid={post.user.id}
+
           />
         ))}
         <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>

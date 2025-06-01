@@ -64,26 +64,49 @@ export default function Index() {
         setLoading(false);
         return;
       }
+      const enrichedPosts: any[] = [];
 
-      const enrichedPosts = data.map((post: any) => {
+      for (const post of data) {
+        let parentname: any = null;
+        let parentid: any = null;
+      
+        if (post.to > 0) {
+          const { data: u } = await supabase.from("quickies").select(`*, 
+            user (
+            
+              handle
+            
+            )`).eq("id", post.to);
+
+          
+          if(u && u.length){
+          parentname = u?.[0]?.user.handle;
+          }
+          parentid = post.to;
+          
+        }
+      
         const liked = post.liked.includes(currentUser.handle);
         const bookmarked = post.bookmarked.includes(currentUser.handle);
         const date2 = new Date(post.created_at);
         const diff = date1.getTime() - date2.getTime();
-        return {
+      
+        enrichedPosts.push({
           ...post,
+          parentname,
+          parentid,
           liked,
           bookmarked,
           likedlist: post.liked,
           bookmarkedlist: post.bookmarked,
           diff,
-        };
-      });
-
+        });
+      }
+      
       setPosts(enrichedPosts);
       setEmpty(enrichedPosts.length === 0);
       setLoading(false);
-    };
+    };      
 
     getData();
   }, []);
@@ -93,7 +116,7 @@ export default function Index() {
 
       <h1 className="px-8 my-4 mt-4 text-xl font-bold text-neutral-300">My Bookmarks</h1>
 
-      <div className="overflow-y-scroll py-2 h-full hiddenscroll">
+      <div className="overflow-y-scroll py-2 pb-20 h-full hiddenscroll">
 
       <div className="flex flex-col gap-0 mb-20 animate-in hiddenscroll">
         <div className="parent-container">{/* <Stories /> */}</div>
@@ -110,6 +133,9 @@ export default function Index() {
                 image={post.image}
                 comments={post.comments}
                 userliked={userliked}
+                parentname={post.parentname}
+                parentid={post.parentid}
+              
                 userid={post.user.id}
                 userbookmarked={userbookmarked}
                 bookmarkedlist={post.bookmarkedlist}

@@ -62,7 +62,6 @@ export default function Index() {
         )
         .order("id", { ascending: false })
         .in("handle", tempL)
-        .eq("parent", 0)
         .not("poster", "in", `(${u![0]["blocked"].toString()})`)
         .not("poster", "in", `(${u![0]["blockedby"].toString()})`)
         .limit(5);
@@ -73,6 +72,20 @@ export default function Index() {
         const ds = data!;
         for await (const [index, post] of ds.entries()) {
           let liked = false;
+          if(ds[index].to>0){
+            const { data } = await supabase.from("quickies").select(`*, 
+              user (
+              
+                handle
+              
+              )`).eq("id", post.to);
+            ds[index].parentid = ds[index].to;
+
+            if(data && data?.length>0){
+              ds[index].parentname = data[0].user.handle;
+            }
+        
+          }
           const likedlist: string | any[] = ds[index].liked;
           let bookmarked = false;
           const bookmarkedlist: any[] = ds[index].bookmarked;
@@ -118,6 +131,7 @@ export default function Index() {
                   id={post.id}
                   cover={post.cover}
                   title={post.title}
+                  to={post.to}
                   time={timeAgo.format(Date.now() - post.diff)}
                   key={post.id}
                   image={post.image}
@@ -128,10 +142,13 @@ export default function Index() {
                   bookmarkedlist={post.bookmarkedlist}
                   likedlist={post.likedlist}
                   myhandle={myhandle}
+                  
                   dp={post.user.image}
                   bookmarked={post.bookmarked}
                   liked={post.liked}
                   handle={post.handle}
+                  parentid={post.parentid}
+                  parentname={post.parentname}
                   name={post.user.name}
                   description={post.content}
                 />

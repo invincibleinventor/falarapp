@@ -47,7 +47,20 @@ export default function More(props: any) {
           if (bookmarkedlist.includes(props.myhandle)) {
             bookmarked = true;
           }
+          if(ds[index].to>0){
+            const { data } = await supabase.from("quickies").select(`*, 
+              user (
+              
+                handle
+              
+              )`).eq("id", post.to);
+            ds[index].parentid = ds[index].to;
 
+            if(data && data?.length>0){
+              ds[index].parentname = data[0].user.handle;
+            }
+        
+          }
           ds[index].liked = liked;
           ds[index].bookmarked = bookmarked;
           ds[index].bookmarkedlist = bookmarkedlist;
@@ -92,7 +105,21 @@ export default function More(props: any) {
             if (bookmarkedlist.includes(props.myhandle)) {
               bookmarked = true;
             }
-
+            
+            if(ds[index].to>0){
+              const { data } = await supabase.from("quickies").select(`*, 
+                user (
+                
+                  handle
+                
+                )`).eq("id", post.to);
+              ds[index].parentid = ds[index].to;
+  
+              if(data && data?.length>0){
+                ds[index].parentname = data[0].user.handle;
+              }
+          
+            }
             ds[index].liked = liked;
             ds[index].bookmarked = bookmarked;
             ds[index].bookmarkedlist = bookmarkedlist;
@@ -143,7 +170,20 @@ export default function More(props: any) {
             ds[index].bookmarkedlist = bookmarkedlist;
             ds[index].likedlist = likedlist;
             console.log(likedlist);
-
+            if(ds[index].to>0){
+              const { data } = await supabase.from("quickies").select(`*, 
+                user (
+                
+                  handle
+                
+                )`).eq("id", post.to);
+              ds[index].parentid = ds[index].to;
+  
+              if(data && data?.length>0){
+                ds[index].parentname = data[0].user.handle;
+              }
+          
+            }
             const date2 = new Date(ds[index].created_at);
             ds[index].diff = date1.getTime() - date2.getTime();
           }
@@ -169,7 +209,7 @@ export default function More(props: any) {
   }, [inView]);
   return (
     <>
-      <div className="flex flex-col items-center content-center w-full gap-0 pb-20">
+      <div className="flex flex-col gap-0 content-center items-center pb-20 w-full">
         {posts.map((post: any) => (
           <QuickieComponent
             id={post.id}
@@ -182,6 +222,9 @@ export default function More(props: any) {
             userbookmarked={props.userbookmarked}
             bookmarkedlist={post.bookmarkedlist}
             likedlist={post.likedlist}
+            
+            parentid={post.parentid}
+            parentname={post.parentname}
             myhandle={props.myhandle}
             dp={post.user.image}
             bookmarked={post.bookmarked}

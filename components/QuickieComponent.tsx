@@ -33,7 +33,10 @@ export default function Post(props: any) {
     const regex = /^[a-zA-Z]+$/;
 
     let username;
+   
+    
     return content.map((word) => {
+      
       if (word.startsWith("#") && regex.test(word.slice(1, word.length - 1))) {
         hashtag = word.replace("#", "");
         return (
@@ -55,7 +58,10 @@ export default function Post(props: any) {
           </a>
         );
       } else {
+        
+     
         return word;
+        
       }
     });
   };
@@ -63,6 +69,24 @@ export default function Post(props: any) {
     <div className="relative w-full animate-in">
       <div className="w-full">
         <div className="flex flex-col px-2 py-2 border-b md:pr-2 lg:pr-2 border-b-neutral-900 md:py-0">
+          {props.parentid>0 &&
+(        <Link
+              href={`/quickie/${props.parentid}`}
+              className="flex flex-row content-center items-center px-4 mt-4 space-x-4 text-sm text-primary-600"
+            >
+               <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+                <path
+                  fill="currentColor"
+                  fillRule="evenodd"
+                  d="M19.5 6.25a.75.75 0 0 1 .75.75c0 2.244-.952 3.72-2.187 4.609c-1.196.861-2.61 1.141-3.563 1.141H6.31l3.72 3.72a.75.75 0 1 1-1.06 1.06l-5-5a.75.75 0 0 1 0-1.06l5-5a.75.75 0 1 1 1.06 1.06l-3.72 3.72h8.19c.713 0 1.8-.22 2.687-.859c.848-.61 1.563-1.635 1.563-3.391a.75.75 0 0 1 .75-.75"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+              <span className="block">
+              Replying to @{props.parentname}
+              </span>
+            </Link>
+)}
           <div className="flex content-center items-center bg-black rounded-md"></div>
           <div className="flex h-max flex-col gap-[8px] md:p-6 p-4 ">
             <div className="flex gap-2 mt-0">
