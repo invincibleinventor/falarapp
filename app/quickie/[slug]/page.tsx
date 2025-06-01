@@ -14,6 +14,7 @@ import Menu from "@/components/Menu";
 import { AppConfig } from "@/config/config";
 import Back from "@/components/back";
 import More from "@/components/MoreSingleQuickies";
+import QuickieMakerComponent from "@/components/quickiereply";
 export default async function App({ params }: { params: Promise<{ slug: string }>}) {
   const cookieStore =  cookies();
   const slug = (await params).slug;
@@ -336,6 +337,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
           </div>
           {loggedin && !newblocked.includes(authorid) && !blocked.includes(authorid)  && (
             <section className="px-0 lg:pr-0" id="comments">
+              <QuickieMakerComponent to={slug} />
               
  {comments && comments.length > 0 && (
        
