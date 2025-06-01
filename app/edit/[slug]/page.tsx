@@ -146,7 +146,7 @@ export default function Page({ params }: {params: Promise<{ slug: string }>}) {
                 <button
                   onClick={() => toggledeleteDialog("")}
                   disabled={deleteDialog != "hidden" ? true : false}
-                  className="flex flex-row content-center items-center px-6 py-3 mx-0 space-x-3 text-xs font-medium bg-black rounded-full transition-all duration-100 ease-linear text-neutral-300 hover:bg-red-900"
+                  className="flex flex-row content-center items-center px-6 py-3 mx-0 space-x-3 text-sm font-medium rounded-full border border-red-800 transition-all duration-100 ease-linear font-pops text-neutral-300 hover:bg-red-900/30"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256">
                     <path
@@ -166,7 +166,7 @@ export default function Page({ params }: {params: Promise<{ slug: string }>}) {
             <input
               disabled={deleteDialog != "hidden" ? true : false}
               onChange={(e) => setTitle(e.target.value)}
-              className="px-4 py-2 mr-4 mb-6 w-full text-sm text-white bg-black rounded-md border outline-none border-neutral-900"
+              className="px-4 py-2 mr-4 mb-6 w-full text-sm text-white rounded-md border outline-none bg-black/20 border-neutral-900"
               name="content"
               placeholder="Please Type Out Your Title"
               required
@@ -180,7 +180,7 @@ export default function Page({ params }: {params: Promise<{ slug: string }>}) {
             <textarea
               disabled={deleteDialog != "hidden" ? true : false}
               onChange={(e) => setExcerpt(e.target.value)}
-              className="px-4 py-2 mr-4 mb-6 w-full h-32 text-sm text-white bg-black rounded-md border outline-none border-neutral-900"
+              className="px-4 py-2 mr-4 mb-6 w-full h-32 text-sm text-white rounded-md border outline-none bg-black/20 border-neutral-900"
               name="content"
               placeholder="Please Type Out Your Excerpt"
               required

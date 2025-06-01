@@ -108,7 +108,7 @@ const [access,setAccess] = useState(false);
         </label>
         <input
           onChange={(e) => setName(e.target.value)}
-          className="px-4 py-2 mb-6 text-sm bg-black rounded-md border outline-none text-neutral-300 border-neutral-900 focus:outline-primary-800"
+          className="px-4 py-2 mb-6 text-sm rounded-md border outline-none bg-black/20 text-neutral-300 border-neutral-900 focus:outline-primary-800"
           name="name"
           placeholder="Please Type Out Your Name"
           required
@@ -120,7 +120,7 @@ const [access,setAccess] = useState(false);
         </label>
         <input
           onChange={(e) => setHandle(e.target.value.trim().replace(" ", "_"))}
-          className="px-4 py-2 mb-6 text-sm bg-black rounded-md border outline-none text-neutral-300 border-neutral-900 focus:outline-primary-800"
+          className="px-4 py-2 mb-6 text-sm rounded-md border outline-none bg-black/20 text-neutral-300 border-neutral-900 focus:outline-primary-800"
           name="handle"
           placeholder="Please Type Out Your Username"
           required
@@ -132,7 +132,7 @@ const [access,setAccess] = useState(false);
         </label>
         <textarea
           onChange={(e) => setAbout(e.target.value)}
-          className="px-4 py-2 mb-6 text-sm bg-black rounded-md border outline-none text-neutral-300 border-neutral-900 focus:outline-primary-800"
+          className="px-4 py-2 mb-6 text-sm rounded-md border outline-none bg-black/20 text-neutral-300 border-neutral-900 focus:outline-primary-800"
           name="content"
           placeholder="Please Type About Yourself"
           required

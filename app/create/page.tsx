@@ -102,7 +102,7 @@ export default function Create() {
           </label>
           <input
             onChange={(e) => setTitle(e.target.value)}
-            className="px-4 py-2 mr-3 mb-6 w-full text-sm text-white bg-black rounded-md border border-neutral-900"
+            className="px-4 py-2 mr-3 mb-6 w-full text-sm text-white rounded-md border bg-black/20 border-neutral-900"
             name="content"
             placeholder="Please Type Out Your Title"
             required
@@ -114,7 +114,7 @@ export default function Create() {
           </label>
           <textarea
             onChange={(e) => setExcerpt(e.target.value)}
-            className="px-4 py-2 mr-3 mb-6 w-full text-sm text-white bg-black rounded-md border border-neutral-900"
+            className="px-4 py-2 mr-3 mb-6 w-full text-sm text-white rounded-md border bg-black/20 border-neutral-900"
             name="content"
             placeholder="Please Type Out Your Excerpt"
             required
