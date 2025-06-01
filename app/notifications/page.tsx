@@ -33,11 +33,11 @@ export default function Page() {
     get();
   });
   return (
-    <div className="flex-1 h-screen p-0 py-2 overflow-hidden">
-      <div className="flex flex-row items-center justify-between px-8 py-4 pb-5 border-b border-b-neutral-900 h-max">
+    <div className="overflow-hidden flex-1 p-0 py-2 h-screen">
+      <div className="flex flex-row justify-between items-center px-8 py-4 pb-5 border-b border-b-neutral-800 h-max">
         <h1 className="text-xl font-semibold text-white">Notifications</h1>
       </div>
-      <div className="h-full overflow-y-scroll hiddenscroll">
+      <div className="overflow-y-scroll h-full hiddenscroll">
         <div className="flex flex-col gap-0 mb-20 animate-in hiddenscroll">
           {!loading ? (
             !empty ? (
@@ -62,7 +62,7 @@ export default function Page() {
               </div>
             )
           ) : (
-            <div className="flex items-center content-center w-full h-screen">
+            <div className="flex content-center items-center w-full h-screen">
               <Oval
                 height={80}
                 width={80}
