@@ -31,6 +31,7 @@ export const config = {
     "/notifications",
     "/settings",
     "/messages",
+    "/quote/:path*",
     "/myself",
     "/quickies",
     "/quickies/:path*",

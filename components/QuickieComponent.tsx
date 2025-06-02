@@ -8,6 +8,7 @@ import Menu from "./Menu";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import UserInformation from "./UserInformation";
+import Iof from "./Iof";
 export default function Post(props: any) {
   const [dialogopened, setDialogopened] = useState(false);
   const router = useRouter();
@@ -139,6 +140,59 @@ export default function Post(props: any) {
                   </div>
                 )}
               </div>
+              {props.quote && <div onClick={()=>window.location.replace("/quickie/"+props.quoteid)} className="flex h-max border pb-4 mb-6 cursor-pointer bg-black bg-opacity-10 border-neutral-800 rounded-2xl mx-0  flex-col gap-[8px] pt-4 mt-4 ">
+             
+             <div className="flex flex-row gap-2 content-center items-center h-max shrink-0">
+               <div className="flex gap-[10px] px-4 mt-0">
+                 <Image
+                 width={20}
+                 height={20}
+                   src={props.quotedisplay}
+                   alt="user profile"
+                   className="rounded-md object-cover min-w-[28px] max-w-[28px] h-7"
+                 />
+                 <div className="flex content-center items-center">
+                   <h1>
+                     <p className="text-sm font-medium break-all text-neutral-300 line-clamp-1">{props.quotename}</p>
+                   </h1>
+                   <div className="mx-1 text-sm text-neutral-400">·</div>
+                   <span className="text-sm font-medium whitespace-nowrap text-neutral-400">@{props.quotehandle}</span>
+                 </div>
+               </div>
+               <h1 className="px-4 ml-auto w-max text-sm font-medium text-neutral-400">{props.quotetime}</h1>
+
+             </div>
+
+             <div >
+               <h1
+                 style={{ wordBreak: "break-word", whiteSpace: "normal" }}
+                 className="px-4 mt-1 text-sm font-medium text-neutral-300 four-line-ellipsis md:text-base"
+               >
+                 {formatText(props.quotecontent)}
+               </h1>
+
+
+               {props.quotephotocount > 0 && (
+                 <div
+                   className={
+                     props.quotephotocount == 1
+                       ? "w-full px-4 border ml-0 rounded-md mt-4 aspect-video h-full"
+                       : props.quotephotocount == 3
+                         ? "mt-4 px-4  md:gap-2 gap-1 grid thrip"
+                         : "mt-4 px-4 md:gap-2 gap-1 grid-cols-2 grid"
+                   }
+                 >
+                   {props.quoteimage.map((image: string) => (
+                     <Iof key={image} length={props.quotephotocount} src={image} />
+                   ))}
+                 </div>
+               )}
+
+
+            
+             </div>
+           </div>}
+
 
               <div className="flex px-[2px] flex-row items-center content-center mt-4">
                 <LikeComponent
@@ -150,13 +204,20 @@ export default function Post(props: any) {
                   likes={props.likedlist.length}
                 />
 
-               
+
+                
                 <Link
                   href={"/quickie/" + props.id+"#comments"}
                   className="flex flex-row content-center items-center pl-6 space-x-2 text-white"
                 >
                   <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M5 3h13a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-4.59l-3.7 3.71c-.18.18-.43.29-.71.29a1 1 0 0 1-1-1v-3H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3m13 1H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h4v4l4-4h5a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2"/></svg>{" "}
                   <h1 className="text-sm">{props.comments} <span className="hidden md:inline-block"></span></h1>
+                </Link>
+                <Link
+                  href={"/quote/" + props.id}
+                  className="flex flex-row content-center items-center pr-2 pl-4 space-x-2 text-white"
+                >
+<svg width="16" height="16" className="scale-x-[-1]" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="currentColor" d="M1.5 6.5h4a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-3a1 1 0 0 0-1 1zm0 0V10A3.5 3.5 0 0 0 5 13.5m3.5-7h4a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-3a1 1 0 0 0-1 1zm0 0V10a3.5 3.5 0 0 0 3.5 3.5"/></svg>                  
                 </Link>
                 <BookMarksComponent
                   userliked={props.userbookmarked}
@@ -166,6 +227,7 @@ export default function Post(props: any) {
                   liked={props.bookmarked}
                   likes={props.bookmarkedlist.length}
                 />
+                
                 <span className="ml-auto"></span>
 
                 <h1 className="text-[12px] font-medium text-neutral-400 capitalize ">{props.time}</h1>

@@ -30,6 +30,17 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   let posts: any[] = [];
   let loading = true;
   let l: any[] = [];
+
+  let quote = false;
+  let quoteid = "";
+  let quotehandle = "";
+  let quotename = ""
+  let quotedisplay = "";
+  let quoteimage :any[] = [];
+  let quotephotocount = 0;
+  let quotecontent = "";
+  let quotetime = "";
+  
   let myname = "";
   let myphoto = "";
   let myhandle = "";
@@ -72,9 +83,28 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           if (error) {
           } else {
             ds = data;
-
-            for await (const [index, post] of ds.entries()) {
+           for await(const [index, post] of ds.entries()) {
               let liked = false;
+              if(ds[index]["quote"]){
+                post.quote = true;
+            post.quoteid = ds[index]["quoteid"];
+            const { data: q } = await supabase.from("quickies").select("*, user (name, handle, id, image)").eq("id", post.quoteid);
+            if (q) {
+              post.quotehandle = q[0]["user"]["handle"];
+              post.quotename = q[0]["user"]["name"];
+              post.quotedisplay = q[0]["user"]["image"];
+              post.quoteimage = q[0]["image"];
+              
+              if(post.quoteimage){
+                post.quotephotocount = q[0]["image"].length;
+              }
+              post.quotecontent = q[0]["content"];
+              const date2 = new Date(q[0].created_at)
+              let d = date2;
+              
+              post.quotetime = d.toLocaleTimeString().replace(/:\d+ /, ' ') + "  •  " + date2.toDateString().replace(/^\S+\s/,'');
+            }
+              }
               const likedlist: string | any[] = ds[index].liked;
               let bookmarked = false;
               const bookmarkedlist: any[] = ds[index].bookmarked;
@@ -116,11 +146,11 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   if (isSupabaseConnected) {
     return (
       <>
-        <div className="flex-1 h-screen p-0 py-2 overflow-hidden">
+        <div className="overflow-hidden flex-1 p-0 py-2 h-screen">
           <div className="p-4 py-2 mx-1 md:mx-1">
             <Search page="quickies" text={AppConfig.title} />
           </div>
-          <div className="h-full overflow-y-scroll hiddenscroll">
+          <div className="overflow-y-scroll h-full hiddenscroll">
             <div className="flex flex-col gap-0 mb-20 animate-in hiddenscroll">
               {!loading ? (
                 !empty ? (
@@ -131,6 +161,17 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                       title={post.title}
                       time={timeAgo.format(Date.now() - post.diff)}
                       key={post.id}
+                     
+
+quote={post.quote}
+quoteid={post.quoteid}
+quotehandle={post.quotehandle}
+quotename={post.quotename}
+quotedisplay={post.quotedisplay}
+quoteimage={post.quoteimage}
+quotephotocount={post.quotephotocount}
+quotecontent={post.quotecontent}
+quotetime={post.quotetime}
                       image={post.image}
                       comments={post.comments}
                       userliked={userliked}
@@ -147,7 +188,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                     />
                   ))
                 ) : (
-                  <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
+                  <div className="flex content-center items-center px-10 mt-24 w-full sm:px-24 md:px-16 lg:px-24">
                     <div className="flex flex-col gap-2 mx-auto max-w-max">
                       <h1 className="mx-auto text-lg font-semibold text-center text-white">No Quickies To View!</h1>
                       <h1 className="mx-auto text-sm text-center text-neutral-300">
@@ -165,7 +206,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                   </div>
                 )
               ) : (
-                <div className="flex items-center content-center w-full h-screen"></div>
+                <div className="flex content-center items-center w-full h-screen"></div>
               )}
               <More
                 myhandle={myhandle}

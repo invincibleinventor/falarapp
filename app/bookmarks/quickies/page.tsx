@@ -24,7 +24,18 @@ export default function Index() {
   const [l, setL] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [empty, setEmpty] = useState(true);
+ 
 
+  const [quote,setQuote] = useState<boolean>(false);
+  const [quoteid,setQuoteid] = useState<string>("");
+  const [quotehandle,setQuotehandle] = useState<string>("");
+  const [quotename,setQuotename] = useState<string>("");
+  const [quotedisplay,setQuotedisplay] = useState<string>("");
+  const [quoteimage,setQuoteimage] = useState<any[]>([]);
+  const [quotephotocount,setQuotephotocount] = useState<number>(0);
+  const [quotecontent,setQuotecontent] = useState<string>("");
+  const [quotetime,setQuotetime] = useState<string>("");
+  
   useEffect(() => {
     const supabase = createClient();
     const date1 = new Date();
@@ -65,11 +76,31 @@ export default function Index() {
         return;
       }
       const enrichedPosts: any[] = [];
+      
 
       for (const post of data) {
         let parentname: any = null;
         let parentid: any = null;
-      
+        if(post["quote"]){
+          post.quote = true;
+      post.quoteid = post["quoteid"];
+      const { data: q } = await supabase.from("quickies").select("*, user (name, handle, id, image)").eq("id", post.quoteid);
+      if (q) {
+        post.quotehandle = q[0]["user"]["handle"];
+        post.quotename = q[0]["user"]["name"];
+        post.quotedisplay = q[0]["user"]["image"];
+        post.quoteimage = q[0]["image"];
+        
+        if(post.quoteimage){
+        post.quotephotocount = q[0]["image"].length;
+        }
+        post.quotecontent = q[0]["content"];
+        const date2 = new Date(q[0].created_at)
+        let d = date2;
+        
+        post.quotetime = d.toLocaleTimeString().replace(/:\d+ /, ' ') + "  •  " + date2.toDateString().replace(/^\S+\s/,'');
+      }
+        }
         if (post.to > 0) {
           const { data: u } = await supabase.from("quickies").select(`*, 
             user (
@@ -147,6 +178,20 @@ export default function Index() {
                 handle={post.handle}
                 name={post.user.name}
                 description={post.content}
+
+                
+
+quote={post.quote}
+quoteid={post.quoteid}
+quotehandle={post.quotehandle}
+quotename={post.quotename}
+quotedisplay={post.quotedisplay}
+quoteimage={post.quoteimage}
+quotephotocount={post.quotephotocount}
+quotecontent={post.quotecontent}
+quotetime={post.quotetime}
+
+                
               />
             ))
           ) : (

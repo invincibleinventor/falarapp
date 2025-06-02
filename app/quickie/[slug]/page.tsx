@@ -21,14 +21,24 @@ export default async function App({ params }: { params: Promise<{ slug: string }
   const slug = (await params).slug;
   const supabase = createClient(cookieStore);
   let author = "";
+  
+
+  
   let content = "";
   let mentionarray: any[] = [];
-  const timeStamp = new Date().getTime();
   let image: any[] = [];
   let profile = "";
   let error = false;
   let naam = "";
-  let time = 0;
+  let quote = false;
+  let quoteid = "";
+  let quotehandle = "";
+  let quotename = ""
+  let quotedisplay = "";
+  let quoteimage :any[] = [];
+  let quotephotocount = 0;
+  let quotecontent = "";
+  let quotetime = "";
   let loading = false;
   let parentQuickie: any;
   let myname = "";
@@ -76,6 +86,26 @@ export default async function App({ params }: { params: Promise<{ slug: string }
     const { data, error: e } = await supabase.from("quickies").select("*").eq("id", slug);
     if (data && data.length > 0) {
       error = false;
+      if(data[0]["quote"]){
+        quote = true;
+        quoteid = data[0]["quoteid"];
+        const { data: q } = await supabase.from("quickies").select("*, user (name, handle, id, image)").eq("id", quoteid);
+        if (q) {
+          quotehandle = q[0]["user"]["handle"];
+          quotename = q[0]["user"]["name"];
+          quotedisplay = q[0]["user"]["image"];
+          quoteimage = q[0]["image"];
+          
+          if(quoteimage){
+          quotephotocount = q[0]["image"].length;
+          }
+          quotecontent = q[0]["content"];
+          const date2 = new Date(q[0].created_at)
+          let d = date2;
+          
+          quotetime = d.toLocaleTimeString().replace(/:\d+ /, ' ') + "  •  " + date2.toDateString().replace(/^\S+\s/,'');
+        }
+      }
     mentionarray = data[0]["involved"];
       const l = data[0]["liked"];
       if (l.includes(myhandle)) {
@@ -109,7 +139,6 @@ export default async function App({ params }: { params: Promise<{ slug: string }
       const date2 = new Date(data[0].created_at)
       let d = date2;
       createdat = d.toLocaleTimeString().replace(/:\d+ /, ' ') + "  •  " + date2.toDateString().replace(/^\S+\s/,'');
-      time = date1.getTime() - date2.getTime();
       loading = false;
     } else if (e || data.length == 0) {
       error = true;
@@ -296,6 +325,58 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                       ))}
                     </div>
                   )}
+                  {quote && <Link href={"/quickie/"+quoteid} className="flex h-max border pb-4 mb-2 bg-black bg-opacity-10 border-neutral-800 rounded-2xl mx-4  flex-col gap-[8px] pt-4 mt-4 ">
+             
+             <div className="flex flex-row gap-2 content-center items-center h-max shrink-0">
+               <div className="flex gap-[10px] px-4 mt-0">
+                 <Image
+                 width={20}
+                 height={20}
+                   src={quotedisplay}
+                   alt="user profile"
+                   className="rounded-md object-cover min-w-[28px] max-w-[28px] h-7"
+                 />
+                 <div className="flex content-center items-center">
+                   <h1>
+                     <p className="text-sm font-medium break-all text-neutral-300 line-clamp-1">{quotename}</p>
+                   </h1>
+                   <div className="mx-1 text-sm text-neutral-400">·</div>
+                   <span className="text-sm font-medium whitespace-nowrap text-neutral-400">@{quotehandle}</span>
+                 </div>
+               </div>
+               <h1 className="px-4 ml-auto w-max text-sm font-medium text-neutral-400">{quotetime}</h1>
+
+             </div>
+
+             <div >
+               <h1
+                 style={{ wordBreak: "break-word", whiteSpace: "normal" }}
+                 className="px-4 mt-1 text-sm font-medium text-neutral-300 four-line-ellipsis md:text-base"
+               >
+                 {formatText(quotecontent)}
+               </h1>
+
+
+               {quotephotocount > 0 && (
+                 <div
+                   className={
+                     quotephotocount == 1
+                       ? "w-full px-4 border ml-0 rounded-md mt-4 aspect-video h-full"
+                       : quotephotocount == 3
+                         ? "mt-4 px-4  md:gap-2 gap-1 grid thrip"
+                         : "mt-4 px-4 md:gap-2 gap-1 grid-cols-2 grid"
+                   }
+                 >
+                   {quoteimage.map((image: string) => (
+                     <Iof key={image} length={quotephotocount} src={image} />
+                   ))}
+                 </div>
+               )}
+
+
+            
+             </div>
+           </Link>}
                                     <h1 className="px-4 pt-4 pb-4 text-sm font-medium text-neutral-400">{createdat}</h1>
 
 
@@ -317,6 +398,12 @@ export default async function App({ params }: { params: Promise<{ slug: string }
 
             <h1 className="text-xs md:text-sm">{comments.length}</h1>
           </Link>
+          <Link
+                  href={"/quote/" + slug}
+                  className="flex flex-row content-center items-center text-white"
+                >
+<svg width="16" height="16" className="scale-x-[-1]" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="currentColor" d="M1.5 6.5h4a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-3a1 1 0 0 0-1 1zm0 0V10A3.5 3.5 0 0 0 5 13.5m3.5-7h4a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-3a1 1 0 0 0-1 1zm0 0V10a3.5 3.5 0 0 0 3.5 3.5"/></svg>                  
+                </Link>
           <BookMarksComponent
             userliked={userbookmarked}
             postid={slug}
