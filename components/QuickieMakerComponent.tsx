@@ -4,6 +4,7 @@
 import notification from "@/utils/notifications/notification";
 import { createClient } from "@/utils/supabase/client";
 import "@mdxeditor/editor/style.css";
+import GifPicker, {Theme} from "gif-picker-react"
 
 import { MouseEvent, useEffect, useRef, useState } from "react";
 import * as tus from "tus-js-client";
@@ -12,10 +13,22 @@ export default function QuickieMakerComponent(props: any) {
   const [disabled, setDisabled] = useState(false);
   const [date, setDate] = useState<any>();
   const [hour, setHour] = useState<any>();
-  const [text, setText] = useState("");
+  const [gifpicked, setGifPicked] = useState(false);
+  const [gifurl,setGifUrl]  = useState('')
+  const [gif,showGif] = useState<any>(true);
+    const [text, setText] = useState("");
   const hiddenFileInput = useRef<HTMLInputElement | null>(null);
   const handleClick = (event: MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
+    setGifPicked(false);
+    let arr = imgsSrc;
+    if(imgsSrc.includes(gifurl)){
+      arr = arr.filter(function(item) {
+        return item !== gifurl
+    })
+    setImgsSrc(arr)
+    
+    }
     hiddenFileInput!.current!.click();
   };
   function setarr(index: string) {
@@ -337,8 +350,21 @@ export default function QuickieMakerComponent(props: any) {
                   }
                 }
               }
+              if(gifpicked) {
+                setImgsSrc([]);
+                let arr = [];
+                arr.push(gifurl)
+                const { error } = await supabase.from("quickies").update({ image: arr}).eq("id", id);
+                if (error) {
+                  console.log(error);
+                  alert(error.message);
+                } else {
+                  window.location.replace("/quickies");
+                }
+              }
 
-              if (imgsSrc.length > 0) {
+              else if (imgsSrc.length > 0) {
+                setGifPicked(false);
                 for (let i = 0; i < imgsSrc.length; i++) {
                   console.log(imgsSrc[i]);
 
@@ -395,25 +421,36 @@ export default function QuickieMakerComponent(props: any) {
       };
     }
   };
+  function handleGif(gif:any){
+      setGifPicked(true);
+      setGifUrl(gif);
+      let arr = [];
+      arr.push(gif);
+      setImgsSrc(arr);
+  }
   return (
-    <div className="lg:w-[544px] lg:min-h-[80px] min-w-[300px] animate-in min-h-[400px] xl:mr-[400px] shadow-lg  rounded-2xl mx-auto">
-      <div className="relative lg:min-h-[80px] min-h-[400px] flex flex-col items-start content-center rounded-2xl  bg-primary-950/80">
-        <div className="flex flex-row w-full rounded-t-2xl border-b bg-primary-950 border-b-neutral-900">
-          <h1 className="px-2 mx-4 my-6 text-lg font-semibold text-neutral-300">New Quickie</h1>
-          <button className="mr-6 ml-auto" onClick={(e: any) => handleClick(e)}>
+    <div className="lg:flex-row flex flex-col lg:min-h-[80px] min-w-[300px] animate-in min-h-[400px] xl:mr-[400px] shadow-lg border border-neutral-900 rounded-2xl mx-auto ">
+     
+      <div className={`flex relative flex-col content-center items-start rounded-2xl lg:w-[544px] lg:min-h-[80px] min-h-[400px] bg-primary-950/80 ${gif?'rounded-r-none':'rounded-r-lg'}`}>
+        <div className={`flex flex-row w-full bg-opacity-20 border-b bg-primary-950 border-b-neutral-900 rounded-tl-2xl h-[70px] ${gif?'rounded-r-none rounded-tr-none':'rounded-t-2xl'}`}>
+          <h1 className="px-2 mx-4 my-auto h-[70px] flex items-center content-center text-lg font-semibold text-neutral-300">New Quickie</h1>
+          <button className="mr-2 ml-auto" onClick={(e: any) => handleClick(e)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="text-neutral-300"
-              width="1.5em"
-              height="1.5em"
-              viewBox="0 0 20 20"
+              width="2em"
+              height="2em"
+              viewBox="0 0 24 24"
             >
               <path
                 fill="currentColor"
                 d="M10 5.5a4.5 4.5 0 1 1-9 0a4.5 4.5 0 0 1 9 0m-4-2a.5.5 0 0 0-1 0V5H3.5a.5.5 0 0 0 0 1H5v1.5a.5.5 0 0 0 1 0V6h1.5a.5.5 0 0 0 0-1H6zm8 .5h-3.207a5.466 5.466 0 0 0-.393-1H14a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-3.6c.317.162.651.294 1 .393V14c0 .373.102.722.28 1.02l4.669-4.588a1.5 1.5 0 0 1 2.102 0l4.67 4.588A1.99 1.99 0 0 0 16 14V6a2 2 0 0 0-2-2m0 3.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0m-1 0a.5.5 0 1 0-1 0a.5.5 0 0 0 1 0m-8.012 8.226A1.99 1.99 0 0 0 6 16h8c.37 0 .715-.1 1.012-.274l-4.662-4.58a.5.5 0 0 0-.7 0z"
               />
             </svg>
-          </button>
+            
+         </button>
+         <svg onClick={()=>showGif(!gif)} className="my-auto mr-6 text-neutral-300" width="2em" height="2em" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M11.98 14.712q.191 0 .317-.126t.126-.317v-4.5q0-.19-.126-.316t-.316-.126t-.316.126t-.126.316v4.5q0 .19.126.317t.316.126m-4.404 0h1.385q.502 0 .847-.346q.345-.345.345-.847v-.903q0-.191-.126-.317t-.316-.126t-.317.126t-.126.317v.788q0 .173-.125.298t-.298.125H7.692q-.173 0-.298-.125t-.125-.298v-2.77q0-.172.125-.297t.298-.125h2.02q.19 0 .316-.126t.126-.317t-.126-.316t-.316-.126H7.577q-.502 0-.847.345t-.345.847v3q0 .502.345.847q.345.346.847.346m6.789 0q.19 0 .316-.126t.126-.317v-1.711h1.48q.19 0 .317-.126t.126-.316t-.126-.317t-.317-.126h-1.48v-1.461h2.48q.19 0 .317-.126t.126-.317t-.126-.316t-.317-.126h-2.922q-.191 0-.317.126t-.126.316v4.5q0 .19.126.316t.317.126M5.616 20q-.691 0-1.153-.462T4 18.384V5.616q0-.691.463-1.153T5.616 4h12.769q.69 0 1.153.463T20 5.616v12.769q0 .69-.462 1.153T18.384 20zm0-1h12.769q.23 0 .423-.192t.192-.424V5.616q0-.231-.192-.424T18.384 5H5.616q-.231 0-.424.192T5 5.616v12.769q0 .23.192.423t.423.192M5 19V5z"/></svg>
+        
         </div>
         <textarea
           onChange={(e: any) => setText(e.target.value)}
@@ -437,7 +474,7 @@ export default function QuickieMakerComponent(props: any) {
             </div>
           ))}
         </div>
-        <div className="flex absolute bottom-0 z-10 flex-row flex-grow content-center items-center px-4 pl-4 w-full h-20 rounded-b-2xl border-y border-y-neutral-900">
+        <div className="flex absolute bottom-0 z-10 flex-row flex-grow content-center items-center px-4 pl-4 w-full h-20 rounded-b-2xl border-b border-b-neutral-950">
           <input
             ref={hiddenFileInput}
             type="file"
@@ -459,6 +496,9 @@ export default function QuickieMakerComponent(props: any) {
           </button>
         </div>
       </div>
+      <div className={gif?"block":"hidden"}>
+         <GifPicker theme={Theme.DARK} onGifClick={(gif)=>handleGif(gif.url)}  tenorApiKey={'AIzaSyAjudoqhS67M8SXNrdrcGxuXnBCtnvg2Ho'}/>
+          </div>
     </div>
   );
 }

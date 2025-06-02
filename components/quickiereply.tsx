@@ -3,6 +3,7 @@
 "use client";
 import notification from "@/utils/notifications/notification";
 import { createClient } from "@/utils/supabase/client";
+import GifPicker, { Theme } from "gif-picker-react";
 import Link from "next/link";
 
 import { MouseEvent, useEffect, useRef, useState } from "react";
@@ -12,12 +13,25 @@ export default function QuickieMakerComponent(props: any) {
   const [disabled, setDisabled] = useState(false);
   const [date, setDate] = useState<any>();
   const [hour, setHour] = useState<any>();
+  const [gif,showGif] = useState(false);
+  const [gifurl, setGifUrl] = useState("");
+  const [gifpicked, setGifPicked] = useState(false);
   const [handle,setHandle] = useState(props.handle);
   const [text, setText] = useState("");
   const [mentionarray, setMentionarray] = useState<any>(props.mentionarray);
   const hiddenFileInput = useRef<HTMLInputElement | null>(null);
-  const handleClick = (event: MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      const [imgsSrc, setImgsSrc] = useState<any[]>([]);
+const handleClick = (event: MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
+    setGifPicked(false);
+    let arr = imgsSrc;
+    if(imgsSrc.includes(gifurl)){
+      arr = arr.filter(function(item) {
+        return item !== gifurl
+    })
+    setImgsSrc(arr)
+  }
+  
     hiddenFileInput!.current!.click();
   };
   function setarr(index: string) {
@@ -154,6 +168,21 @@ export default function QuickieMakerComponent(props: any) {
 
             if (data && !error) {
               const id = data[0]["id"];
+            
+                const {data:d,error:e} = await supabase.from("quickies").select("*").eq("id",props.to);
+               if(d ){
+                let commentcount = d[0]["replies"]
+                commentcount++;
+                const {error:es} = await supabase.from("quickies").update({replies: commentcount}).eq("id",props.to); 
+                if(es){
+                  console.log(es.message)
+                }
+               }
+               else{
+                if(e){
+                  console.log(e.message)
+                }
+               }
               
               const filteredMentions = Array.from(
                 new Set(mentionarray.filter((mention: any) => mention !== props.myhandle))
@@ -332,8 +361,19 @@ export default function QuickieMakerComponent(props: any) {
                   }
                 }
               }
-
-              if (imgsSrc.length > 0) {
+              if(gifpicked) {
+                setImgsSrc([]);
+                let arr = [];
+                arr.push(gifurl)
+                const { error } = await supabase.from("quickies").update({ image: arr}).eq("id", id);
+                if (error) {
+                  console.log(error);
+                  alert(error.message);
+                } else {
+                  window.location.reload();
+                }
+              }
+              else if (imgsSrc.length > 0) {
                 for (let i = 0; i < imgsSrc.length; i++) {
                   console.log(imgsSrc[i]);
 
@@ -371,7 +411,6 @@ export default function QuickieMakerComponent(props: any) {
       }
     }
   }
-  const [imgsSrc, setImgsSrc] = useState<any[]>([]);
   const onChange = (e: any) => {
     for (const file of e.target.files) {
       const reader = new FileReader();
@@ -390,11 +429,43 @@ export default function QuickieMakerComponent(props: any) {
       };
     }
   };
+  function handleGif(gif:any){
+    setGifPicked(true);
+    setGifUrl(gif);
+    let arr = [];
+    arr.push(gif);
+    setImgsSrc(arr);
+}
+const btnRef = useRef<SVGSVGElement | null>(null);
+const pickerWrapperRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as Node;
+      const isClickInsideButton = btnRef.current?.contains(target);
+      const isClickInsidePicker = pickerWrapperRef.current?.contains(target);
+  
+      if (!isClickInsideButton && !isClickInsidePicker) {
+        showGif(false);
+      }
+    };
+  
+    document.addEventListener("mousedown", handleClickOutside as any);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside as any);
+    };
+  }, []);
+  
   return (
       <div className="relative flex-col content-center items-start min-h-[100px] flex">
-        <div className="flex flex-row py-2 w-full">
-          <h1 className="px-2 mx-4 my-4 mb-0 text-lg font-semibold text-neutral-300">Add a reply</h1>
-          <button className="mr-6 ml-auto" onClick={(e: any) => handleClick(e)}>
+         <div ref={pickerWrapperRef} id="reply" className={gif?"absolute top-0 right-0 bottom-0 left-0 mx-auto my-auto w-max h-max z-[1000000]":"hidden"}>
+         <GifPicker  theme={Theme.DARK} onGifClick={(gif)=>(showGif(false),handleGif(gif.url))}  tenorApiKey={'AIzaSyAjudoqhS67M8SXNrdrcGxuXnBCtnvg2Ho'}/>
+          </div>
+        <div className="flex flex-row content-center items-center py-2 pt-4 w-full">
+          <h1 className="px-2 mx-4 my-0 mb-0 text-lg font-semibold text-neutral-300">Add a reply</h1>
+          <svg ref={btnRef} onClick={()=>showGif(!gif)} className="mt-1 ml-auto text-neutral-300" width="2em" height="2em" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M11.98 14.712q.191 0 .317-.126t.126-.317v-4.5q0-.19-.126-.316t-.316-.126t-.316.126t-.126.316v4.5q0 .19.126.317t.316.126m-4.404 0h1.385q.502 0 .847-.346q.345-.345.345-.847v-.903q0-.191-.126-.317t-.316-.126t-.317.126t-.126.317v.788q0 .173-.125.298t-.298.125H7.692q-.173 0-.298-.125t-.125-.298v-2.77q0-.172.125-.297t.298-.125h2.02q.19 0 .316-.126t.126-.317t-.126-.316t-.316-.126H7.577q-.502 0-.847.345t-.345.847v3q0 .502.345.847q.345.346.847.346m6.789 0q.19 0 .316-.126t.126-.317v-1.711h1.48q.19 0 .317-.126t.126-.316t-.126-.317t-.317-.126h-1.48v-1.461h2.48q.19 0 .317-.126t.126-.317t-.126-.316t-.317-.126h-2.922q-.191 0-.317.126t-.126.316v4.5q0 .19.126.316t.317.126M5.616 20q-.691 0-1.153-.462T4 18.384V5.616q0-.691.463-1.153T5.616 4h12.769q.69 0 1.153.463T20 5.616v12.769q0 .69-.462 1.153T18.384 20zm0-1h12.769q.23 0 .423-.192t.192-.424V5.616q0-.231-.192-.424T18.384 5H5.616q-.231 0-.424.192T5 5.616v12.769q0 .23.192.423t.423.192M5 19V5z"/></svg>
+
+          <button className="mr-4 ml-2" onClick={(e: any) => handleClick(e)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="text-neutral-300"
@@ -430,10 +501,10 @@ export default function QuickieMakerComponent(props: any) {
         <textarea
           onChange={(e: any) => setText(e.target.value)}
           maxLength={150}
-          className="px-6 py-0 pr-5 my-0 mb-auto w-full h-full bg-transparent outline-none resize-none text-neutral-300 md:pr-4 hiddenscroll lg:pr-8 text-md md:text-lg placeholder:text-neutral-500 md:m-4 md:my-0 md:p-0 md:px-2"
+          className="px-6 py-0 pr-5 my-0 mt-1 mb-auto w-full h-full bg-transparent outline-none resize-none text-neutral-300 md:pr-4 hiddenscroll lg:pr-8 text-md md:text-lg placeholder:text-neutral-500 md:m-4 md:my-0 md:p-0 md:px-2"
           placeholder="What's on your mind?"
         ></textarea>
-        <div className="grid grid-cols-3 px-4 w-full border-t border-t-neutral-800 sm:flex sm:flex-row">
+        <div className="grid grid-cols-3 px-4 w-full sm:flex sm:flex-row">
           {imgsSrc.map((link, index) => (
             <div
               key={index}
@@ -449,7 +520,7 @@ export default function QuickieMakerComponent(props: any) {
             </div>
           ))}
         </div>
-        <div className="flex absolute bottom-0 z-10 flex-row flex-grow content-center items-center px-4 pl-4 w-full">
+        <div className="flex absolute bottom-0 z-10 flex-row flex-grow content-center items-center px-4 pl-4 w-full border-b border-b-neutral-800">
           <input
             ref={hiddenFileInput}
             type="file"

@@ -27,42 +27,46 @@ export default function Post(props: any) {
     photocount = props.image.length;
   }
   const formatText = (text: string) => {
-    console.log("text", text);
-    const content = text.split(/((?:#|@|https?:\/\/[^\s]+)[a-zA-Z]+)/);
-    let hashtag;
-    const regex = /^[a-zA-Z]+$/;
-
-    let username;
-   
-    
-    return content.map((word) => {
-      
-      if (word.startsWith("#") && regex.test(word.slice(1, word.length - 1))) {
-        hashtag = word.replace("#", "");
+    // Split by spaces and mentions/hashtags/URLs as separate tokens
+    const tokens = text.split(/(\s+|(?:#|@)[a-zA-Z][\w]*|https?:\/\/[^\s]+)/);
+  
+    return tokens.map((token, idx) => {
+      if (!token || token.trim() === '') {
+        // Preserve whitespace as is
+        return token;
+      }
+  
+      // Hashtag: starts with # and next char is a letter
+      if (/^#[a-zA-Z][\w]*$/.test(token)) {
+        const hashtag = token.slice(1);
         return (
-          <Link legacyBehavior href={`/hashtag/${hashtag}`}>
-            <a className="text-primary-600 hover:text-primary-700">{word}</a>
+          <Link legacyBehavior href={`/hashtag/${hashtag}`} key={idx}>
+            <a className="text-primary-600 hover:text-primary-700">{token}</a>
           </Link>
         );
-      } else if (word.startsWith("@")) {
-        username = word.replace("@", "");
+      }
+  
+      // Mention: starts with @ and next char is a letter
+      if (/^@[a-zA-Z][\w]*$/.test(token)) {
+        const username = token.slice(1);
         return (
-          <Link legacyBehavior href={`/profile/${username}`}>
-            <a className="text-primary-600 hover:text-primary-700">{word}</a>
+          <Link legacyBehavior href={`/profile/${username}`} key={idx}>
+            <a className="text-primary-600 hover:text-primary-700">{token}</a>
           </Link>
         );
-      } else if (word.includes("http")) {
+      }
+  
+      // URL
+      if (/^https?:\/\/[^\s]+$/.test(token)) {
         return (
-          <a target="_blank" href={word} className="text-primary-600 hover:text-primary-700">
-            {word}
+          <a target="_blank" href={token} className="text-primary-600 hover:text-primary-700" key={idx} rel="noreferrer">
+            {token}
           </a>
         );
-      } else {
-        
-     
-        return word;
-        
       }
+  
+      // Plain text or ignored patterns (like #7worlds or @3chan)
+      return token;
     });
   };
   return (
@@ -128,7 +132,7 @@ export default function Post(props: any) {
                     {props.image.map((image: string) => (
                       <img
                         key={image}
-                        className={`object-cover w-full border rounded-lg h-max ${props.image.length == 2 ? "aspect-[8/10]" : props.image.length == 4 ? "aspect-video" : "aspect-video"}`}
+                        className={`object-cover w-full border border-neutral-800 rounded-xl h-max ${props.image.length == 2 ? "aspect-[8/10]" : props.image.length == 4 ? "aspect-video" : "aspect-video"}`}
                         src={image}
                       ></img>
                     ))}

@@ -80,6 +80,8 @@ export default function Create({ params }: { params: Promise<{ slug: string }>})
     });
   }
 
+
+  
   const formatText = (text: string) => {
     console.log("text", text);
     const content = text.split(/((?:#|@|https?:\/\/[^\s]+)[a-zA-Z]+)/);

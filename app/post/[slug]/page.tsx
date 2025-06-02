@@ -242,7 +242,7 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
           </div>
           {!loggedin && 
             <>
-            <div className="mb-10 h-1 border-b border-b-neutral-900"></div>
+            <div className="mb-10 h-1 border-b border-b-neutral-800"></div>
       <div className="flex flex-col gap-4 px-10 mx-auto max-w-max">
       <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">Login To View Replies</h1>
       <h1 className="mx-auto text-center text-neutral-400 text-md">
@@ -261,7 +261,7 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
       
       }
           {loggedin && !newblocked.includes(authorid) && !blocked.includes(authorid) && (
-            <section className="px-0 border-t border-t-neutral-900" id="comments">
+            <section className="px-0 border-t border-t-neutral-800" id="comments">
 
               <CommentsComponent
                 myname={myname}

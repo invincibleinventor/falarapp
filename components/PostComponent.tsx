@@ -44,7 +44,7 @@ export default function Post(props: any) {
             <div className="flex grow">
               <div className="text-neutral-400 grow">
                 <Link href={"/post/" + props.id} className="pb-2">
-                  <h2 className="font-bold text-neutral-300 md:text-[22px] leading-7 md:line-clamp-3 line-clamp-2 text-base">
+                  <h2 className="font-medium text-neutral-300 md:text-[22px] leading-7 md:line-clamp-3 line-clamp-2 text-base">
                     {a}{" "}
                   </h2>
                 </Link>

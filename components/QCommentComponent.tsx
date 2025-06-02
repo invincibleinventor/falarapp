@@ -13,58 +13,67 @@ export default function Post(props: any) {
   let photocount;
   if (props.image) {
     photocount = props.image.length;
-  }
-  const formatText = (text: string) => {
-    console.log("text", text);
-    const content = text.split(/((?:#|@|https?:\/\/[^\s]+)[a-zA-Z]+)/);
-    let hashtag;
-    const regex = /^[a-zA-Z]+$/;
-
-    let username;
-    return content.map((word) => {
-      if (word.startsWith("#") && regex.test(word.slice(1, word.length - 1))) {
-        hashtag = word.replace("#", "");
+  }const formatText = (text: string) => {
+    // Split by spaces and mentions/hashtags/URLs as separate tokens
+    const tokens = text.split(/(\s+|(?:#|@)[a-zA-Z][\w]*|https?:\/\/[^\s]+)/);
+  
+    return tokens.map((token, idx) => {
+      if (!token || token.trim() === '') {
+        // Preserve whitespace as is
+        return token;
+      }
+  
+      // Hashtag: starts with # and next char is a letter
+      if (/^#[a-zA-Z][\w]*$/.test(token)) {
+        const hashtag = token.slice(1);
         return (
-          <Link legacyBehavior href={`/hashtag/${hashtag}`}>
-            <a className="text-primary-600 hover:text-primary-700">{word}</a>
+          <Link legacyBehavior href={`/hashtag/${hashtag}`} key={idx}>
+            <a className="text-primary-600 hover:text-primary-700">{token}</a>
           </Link>
         );
-      } else if (word.startsWith("@")) {
-        username = word.replace("@", "");
+      }
+  
+      // Mention: starts with @ and next char is a letter
+      if (/^@[a-zA-Z][\w]*$/.test(token)) {
+        const username = token.slice(1);
         return (
-          <Link legacyBehavior href={`/profile/${username}`}>
-            <a className="text-primary-600 hover:text-primary-700">{word}</a>
+          <Link legacyBehavior href={`/profile/${username}`} key={idx}>
+            <a className="text-primary-600 hover:text-primary-700">{token}</a>
           </Link>
         );
-      } else if (word.includes("http")) {
+      }
+  
+      // URL
+      if (/^https?:\/\/[^\s]+$/.test(token)) {
         return (
-          <a target="_blank" href={word} className="text-primary-600 hover:text-primary-700">
-            {word}
+          <a target="_blank" href={token} className="text-primary-600 hover:text-primary-700" key={idx} rel="noreferrer">
+            {token}
           </a>
         );
-      } else {
-        return word;
       }
+  
+      // Plain text or ignored patterns (like #7worlds or @3chan)
+      return token;
     });
   };
   return (
     <div className="w-full animate-in">
       <div className="w-full px-5 py-[6px]">
-        <div className="flex flex-col border rounded-md border-neutral-300 bg-neutral-50 md:gap-0">
-          <div className="flex items-center content-center bg-black rounded-md "></div>
+        <div className="flex flex-col rounded-md border border-neutral-300 bg-neutral-50 md:gap-0">
+          <div className="flex content-center items-center bg-black rounded-md"></div>
           <div className="flex h-max flex-col gap-[8px] md:p-6 p-4 ">
-            <div className="flex flex-row items-center content-center gap-2 h-max shrink-0">
+            <div className="flex flex-row gap-2 content-center items-center h-max shrink-0">
               <Link className="w-10 h-10" href={`/profile/` + props.handle}>
                 <Image width={30} height={30} className="w-10 h-10 rounded-lg shrink-0" src={props.dp} alt="dp" />
               </Link>
               <Link href={`/profile/` + props.handle} className="flex flex-row gap-[2px]">
                 <div className="flex flex-col content-center flex-1 gap-[2px] py-0 pl-2 rounded-lg">
-                  <div className="flex flex-row items-center content-center">
-                    <h1 className="text-sm font-medium text-black ">
+                  <div className="flex flex-row content-center items-center">
+                    <h1 className="text-sm font-medium text-black">
                       <span className="inline-block md:hidden">{x}</span>
                       <span className="hidden md:inline-block">{props.name}</span>
                     </h1>
-                    <h1 className="ml-2 text-xs font-normal text-neutral-600 ">@{props.handle}</h1>
+                    <h1 className="ml-2 text-xs font-normal text-neutral-600">@{props.handle}</h1>
                   </div>
                   <h1 className="text-xs font-medium text-neutral-600">{props.time}</h1>
                 </div>
@@ -87,7 +96,7 @@ export default function Post(props: any) {
               <Link href={`/post/${props.id}`} className="my-3 mb-[6px] flex w-full flex-row justify-between ">
                 <h1
                   style={{ wordBreak: "break-word", whiteSpace: "normal" }}
-                  className="text-lg font-bold two-line-ellipsis md:text-lg md:font-semibold "
+                  className="text-lg font-bold two-line-ellipsis md:text-lg md:font-semibold"
                 >
                   {a}
                 </h1>
@@ -111,14 +120,14 @@ export default function Post(props: any) {
                   {props.image.map((image: string) => (
                     <img
                       onClick={() => window.open(image, "_blank")?.focus()}
-                      className="object-cover w-full border rounded-md h-max aspect-video"
+                      className="object-cover w-full rounded-md border h-max aspect-video"
                       src={image}
                     ></img>
                   ))}
                 </div>
               )}
 
-              <div className="flex flex-row items-center content-center mt-6">
+              <div className="flex flex-row content-center items-center mt-6">
                 <LikeComponent
                   userliked={props.userliked}
                   postid={props.id}

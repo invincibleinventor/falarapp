@@ -102,8 +102,8 @@ let localuserlist:any;
       >
         {liked ? (
           <path
-            fill="red"
-            stroke="red"
+          className="fill-primary-600 stroke-primary-600"
+
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="2"

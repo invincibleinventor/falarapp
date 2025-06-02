@@ -4,6 +4,7 @@ import CommentsComponent from "@/components/QuickieComments";
 import LikeComponent from "@/components/QuickieExpandedLikeComponent";
 import { createClient } from "@/utils/supabase/server";
 import TimeAgo from "javascript-time-ago";
+import {cache} from "react";
 import en from "javascript-time-ago/locale/en";
 import { cookies } from "next/headers";
 import Image from "next/image";
@@ -52,7 +53,8 @@ export default async function App({ params }: { params: Promise<{ slug: string }
   const timeAgo = new TimeAgo("en-US");
   const date1 = new Date();
 
-  async function set() {
+ const set = cache(async () => {
+    
     const { data: u } = await supabase.auth.getUser();
     if (u.user) {
       user = u.user.id;
@@ -114,7 +116,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
       loading = false;
     }
   }
-
+ )
   await set();
 
 
@@ -145,38 +147,49 @@ export default async function App({ params }: { params: Promise<{ slug: string }
   
      comments = await getReplies();
  
-
-  const formatText = (text: string) => {
-    console.log("text", text);
-    const content = text.split(/((?:#|@|https?:\/\/[^\s]+)[a-zA-Z]+)/);
-    let hashtag;
-    let username;
-    return content.map((word) => {
-      if (word.startsWith("#")) {
-        hashtag = word.replace("#", "");
-        return (
-          <Link legacyBehavior href={`/hashtag/${hashtag}`}>
-            <a className="text-primary-600 hover:text-primary-700">{word}</a>
-          </Link>
-        );
-      } else if (word.startsWith("@")) {
-        username = word.replace("@", "");
-        return (
-          <Link legacyBehavior href={`/profile/${username}`}>
-            <a className="text-primary-600 hover:text-primary-700">{word}</a>
-          </Link>
-        );
-      } else if (word.includes("http")) {
-        return (
-          <a target="_blank" href={word} className="text-primary-600 hover:text-primary-700">
-            {word}
-          </a>
-        );
-      } else {
-        return word;
-      }
-    });
-  };
+     const formatText = (text: string) => {
+      // Split by spaces and mentions/hashtags/URLs as separate tokens
+      const tokens = text.split(/(\s+|(?:#|@)[a-zA-Z][\w]*|https?:\/\/[^\s]+)/);
+    
+      return tokens.map((token, idx) => {
+        if (!token || token.trim() === '') {
+          // Preserve whitespace as is
+          return token;
+        }
+    
+        // Hashtag: starts with # and next char is a letter
+        if (/^#[a-zA-Z][\w]*$/.test(token)) {
+          const hashtag = token.slice(1);
+          return (
+            <Link legacyBehavior href={`/hashtag/${hashtag}`} key={idx}>
+              <a className="text-primary-600 hover:text-primary-700">{token}</a>
+            </Link>
+          );
+        }
+    
+        // Mention: starts with @ and next char is a letter
+        if (/^@[a-zA-Z][\w]*$/.test(token)) {
+          const username = token.slice(1);
+          return (
+            <Link legacyBehavior href={`/profile/${username}`} key={idx}>
+              <a className="text-primary-600 hover:text-primary-700">{token}</a>
+            </Link>
+          );
+        }
+    
+        // URL
+        if (/^https?:\/\/[^\s]+$/.test(token)) {
+          return (
+            <a target="_blank" href={token} className="text-primary-600 hover:text-primary-700" key={idx} rel="noreferrer">
+              {token}
+            </a>
+          );
+        }
+    
+        // Plain text or ignored patterns (like #7worlds or @3chan)
+        return token;
+      });
+    };
   console.log("here");
   console.log(comments);
   console.log("above");

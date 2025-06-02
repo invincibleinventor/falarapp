@@ -46,6 +46,23 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#08203E", en
     --foreground: 200 50% 3%;
   }
 }
+#reply .GifPickerReact{
+  @apply h-[400px]   font-pops rounded-2xl border-none bg-primary-950 !important;
+}
+.GifPickerReact{
+  @apply h-[200px] lg:h-[450px]  font-pops rounded-t-none lg:rounded-tr-2xl lg:rounded-l-none border-none bg-primary-950 !important;
+}
+.gpr-header{
+  @apply border-none !important;
+}
+
+.gpr-category-list{
+  @apply pt-0 pb-3 !important;
+}
+.gpr-search{
+  
+  @apply text-sm bg-neutral-900 !important;
+}
 .multiLineLabel {
   display: inline-block;
   box-sizing: border-box;
