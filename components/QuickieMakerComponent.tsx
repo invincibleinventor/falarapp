@@ -491,7 +491,7 @@ export default function QuickieMakerComponent(props: any) {
           <button
             disabled={disabled}
             onClick={() => publish()}
-            className="px-6 py-3 ml-auto text-sm text-white rounded-full font-pops bg-primary-900 md:mr-6 lg:mr-2"
+            className="px-6 py-3 ml-auto text-sm font-medium text-white rounded-full font-pops bg-primary-700 md:mr-6 lg:mr-2"
           >
             Publish
           </button>

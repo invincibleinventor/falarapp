@@ -140,7 +140,7 @@ export default function Post(props: any) {
                   </div>
                 )}
               </div>
-              {props.quote && <div onClick={()=>window.location.replace("/quickie/"+props.quoteid)} className="flex h-max border pb-4 mb-6 cursor-pointer bg-black bg-opacity-10 border-neutral-800 rounded-2xl mx-0  flex-col gap-[8px] pt-4 mt-4 ">
+              {props.quote && <div onClick={()=>window.location.replace("/quickie/"+props.quoteid)} className="flex h-max border pb-4 mb-6 cursor-pointer shadow-xl border-neutral-900  bg-black bg-opacity-10  rounded-2xl mx-0  flex-col gap-[8px] pt-4 mt-4 ">
              
              <div className="flex flex-row gap-2 content-center items-center h-max shrink-0">
                <div className="flex gap-[10px] px-4 mt-0">

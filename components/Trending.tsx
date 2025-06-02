@@ -79,7 +79,7 @@ export default function Trending() {
   ) : (
     <div className="hidden px-5 rounded-xl lg:block lg:bg-neutral-800/30">
       <div className="flex flex-col px-2 py-0 space-y-0 w-full h-full text-neutral-300 lg:pr-0 lg:rounded-lg lg:border-none lg:py-2 lg:text-neutral-300">
-        <h1 className="mx-auto my-4 text-base text-neutral-300">No Hashtags</h1>
+        <h1 className="mx-auto my-4 text-sm text-neutral-300">No Hashtags</h1>
       </div>
     </div>
   );
