@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/jsx-key */
 "use client";
+import notification from "@/utils/notifications/notification";
 import { createClient } from "@/utils/supabase/client";
+import Link from "next/link";
 
 import { MouseEvent, useEffect, useRef, useState } from "react";
 import * as tus from "tus-js-client";
@@ -10,7 +12,9 @@ export default function QuickieMakerComponent(props: any) {
   const [disabled, setDisabled] = useState(false);
   const [date, setDate] = useState<any>();
   const [hour, setHour] = useState<any>();
+  const [handle,setHandle] = useState(props.handle);
   const [text, setText] = useState("");
+  const [mentionarray, setMentionarray] = useState<any>(props.mentionarray);
   const hiddenFileInput = useRef<HTMLInputElement | null>(null);
   const handleClick = (event: MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
@@ -101,16 +105,12 @@ export default function QuickieMakerComponent(props: any) {
     const regex = /^[a-zA-Z]+$/;
     let mention;
     const tagarray: any = [];
-    const mentionarray: any = [];
     content.map((word) => {
       if (word.startsWith("#") && regex.test(word.slice(1, word.length - 1))) {
         hashtag = word.replace("#", "");
         tagarray.push(hashtag);
       }
-      if (word.startsWith("@") && regex.test(word.slice(1, word.length - 1))) {
-        mention = word.replace("@", "");
-        mentionarray.push(mention);
-      }
+      
     });
     console.log(tagarray);
     return tagarray.reduce(function (a: any, b: any) {
@@ -128,7 +128,19 @@ export default function QuickieMakerComponent(props: any) {
         const { data, error } = await supabase.from("user").select("*").eq("id", user.user.id);
         if (!error && data) {
           handle = data[0]["handle"];
-          const { error } = await supabase.from("quickies").insert({ to:props.to,handle: handle, content: text });
+          let mentions = mentionarray;
+          const arr = text.match(/(?:#|@)[a-zA-Z][a-zA-Z0-9]*|https?:\/\/[^\s]+/g) || [];
+
+          for(let i = 0; i < arr.length; i++){
+            if(arr[i].startsWith("@")){
+              mentions.push(arr[i].slice(1, arr[i].length));
+            }
+          }
+         mentions.push(handle);
+         mentions = Array.from(new Set(mentions));
+
+ setMentionarray(mentions)
+          const { error } = await supabase.from("quickies").insert({ involved: mentions, to:props.to,handle: handle, content: text });
           if (error) {
             console.log("initial");
             console.log(error);
@@ -142,7 +154,29 @@ export default function QuickieMakerComponent(props: any) {
 
             if (data && !error) {
               const id = data[0]["id"];
-              const hashtags = formatText(text);
+              
+              const filteredMentions = Array.from(
+                new Set(mentionarray.filter((mention: any) => mention !== props.myhandle))
+              );  
+              await Promise.all(
+                filteredMentions.map(async (mention: any) => {
+                  const { data: user, error } = await supabase.from("user").select("*").eq("handle", mention);
+                  if (user && user.length > 0) {
+                    return notification(
+                      [],
+                      supabase,
+                      user[0].id,
+                      "/quickie/" + id,
+                      "@" + props.myhandle + " tagged you in a quickie",
+                      "mention",
+                      props.myid,
+                      data[0]["content"],
+                      props.image
+                    );
+                  }
+                })
+              );
+               const hashtags = formatText(text);
               if (hashtags.length > 0) {
                 for (let i = 0; i < hashtags.length; i++) {
                   const { data, error } = await supabase.from("hashtags").select("*").eq("hashtag", hashtags[i]);
@@ -357,9 +391,9 @@ export default function QuickieMakerComponent(props: any) {
     }
   };
   return (
-      <div className="relative lg:min-h-[80px] min-h-[400px] flex flex-col items-start content-center">
-        <div className="flex flex-row py-1 w-full border-b border-b-neutral-800">
-          <h1 className="px-2 mx-4 my-4 text-lg font-semibold text-neutral-300">Add a reply</h1>
+      <div className="relative flex-col content-center items-start min-h-[100px] flex">
+        <div className="flex flex-row py-2 w-full">
+          <h1 className="px-2 mx-4 my-4 mb-0 text-lg font-semibold text-neutral-300">Add a reply</h1>
           <button className="mr-6 ml-auto" onClick={(e: any) => handleClick(e)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -383,10 +417,20 @@ export default function QuickieMakerComponent(props: any) {
             Publish
           </button>
         </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 py-2 pt-0 gap-y-[2px] gap-2 px-4">
+        {mentionarray.filter((mention:any) => mention !== props.myhandle).map((mention:any, index:any) => (
+  <div   className="flex flex-row content-center items-center px-3 py-1 mx-2 my-2 space-x-2 w-auto text-sm text-center rounded-full bg-primary-950 text-neutral-300" key={mention}>
+    <Link href={"/profile/"+mention}>@{mention}</Link>
+    <h1 onClick={() => {
+    setMentionarray(mentionarray.filter((_: any, i: any) => i !== index));
+  }} className="font-poppins cursor-pointer text-[10px]">x</h1>
+  </div>
+))}
+        </div>
         <textarea
           onChange={(e: any) => setText(e.target.value)}
           maxLength={150}
-          className="px-6 py-5 pr-5 mb-auto w-full h-full bg-transparent outline-none resize-none text-neutral-300 md:pr-4 hiddenscroll lg:pr-8 text-md md:text-lg placeholder:text-neutral-500 md:m-4 md:p-0 md:px-2"
+          className="px-6 py-0 pr-5 my-0 mb-auto w-full h-full bg-transparent outline-none resize-none text-neutral-300 md:pr-4 hiddenscroll lg:pr-8 text-md md:text-lg placeholder:text-neutral-500 md:m-4 md:my-0 md:p-0 md:px-2"
           placeholder="What's on your mind?"
         ></textarea>
         <div className="grid grid-cols-3 px-4 w-full border-t border-t-neutral-800 sm:flex sm:flex-row">

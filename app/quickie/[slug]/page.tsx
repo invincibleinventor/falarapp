@@ -21,6 +21,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
   const supabase = createClient(cookieStore);
   let author = "";
   let content = "";
+  let mentionarray: any[] = [];
   const timeStamp = new Date().getTime();
   let image: any[] = [];
   let profile = "";
@@ -31,6 +32,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
   let parentQuickie: any;
   let myname = "";
   let myphoto = "";
+  let myid= "";
   let newblocked :any[] = [];
   let createdat:any;
   let myhandle = "";
@@ -63,6 +65,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
         newblocked = users[0]["blockedby"]
         myname = users[0]["name"];
         myhandle = users[0]["handle"];
+        myid = user;
         userliked = users[0]["liked"];
         userbookmarked = users[0]["bookmarks"];
       }
@@ -71,6 +74,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
     const { data, error: e } = await supabase.from("quickies").select("*").eq("id", slug);
     if (data && data.length > 0) {
       error = false;
+    mentionarray = data[0]["involved"];
       const l = data[0]["liked"];
       if (l.includes(myhandle)) {
         liked = true;
@@ -337,7 +341,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
           </div>
           {loggedin && !newblocked.includes(authorid) && !blocked.includes(authorid)  && (
             <section className="px-0 lg:pr-0" id="comments">
-              <QuickieMakerComponent to={slug} />
+              <QuickieMakerComponent image={myphoto} myid={myid} myhandle={myhandle} handle={author} mentionarray={mentionarray} to={slug} />
               
  {comments && comments.length > 0 && (
        

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/jsx-key */
 "use client";
+import notification from "@/utils/notifications/notification";
 import { createClient } from "@/utils/supabase/client";
 import "@mdxeditor/editor/style.css";
 
@@ -94,15 +95,15 @@ export default function QuickieMakerComponent(props: any) {
       });
     });
   }
+  let mentionarray: any = [];
 
   const formatText = (text: string) => {
     console.log("text", text);
-    const content = text.split(/((?:#|@|https?:\/\/[^\s]+)[a-zA-Z]+)/);
+    const content = text.split(/((?:#|@)[a-zA-Z][a-zA-Z0-9]*|https?:\/\/[^\s]+)/);
     let hashtag;
     const regex = /^[a-zA-Z]+$/;
     let mention;
     const tagarray: any = [];
-    const mentionarray: any = [];
     content.map((word) => {
       if (word.startsWith("#") && regex.test(word.slice(1, word.length - 1))) {
         hashtag = word.replace("#", "");
@@ -119,17 +120,30 @@ export default function QuickieMakerComponent(props: any) {
       return a;
     }, []);
   };
-
+  
+  
   async function publish() {
     setDisabled(true);
-    let handle;
+    let handle: string;
+    let image: any;
     const { data: user } = await supabase.auth.getUser();
     if (user.user) {
       if (1 == 1) {
         const { data, error } = await supabase.from("user").select("*").eq("id", user.user.id);
         if (!error && data) {
           handle = data[0]["handle"];
-          const { error } = await supabase.from("quickies").insert({ handle: handle, content: text });
+          image = data[0]["image"];
+          
+          const arr = text.match(/(?:#|@)[a-zA-Z][a-zA-Z0-9]*|https?:\/\/[^\s]+/g) || [];
+
+          for(let i = 0; i < arr.length; i++){
+            if(arr[i].startsWith("@")){
+              mentionarray.push(arr[i].slice(1, arr[i].length));
+            }
+          }
+         mentionarray.push(handle);
+         mentionarray = Array.from(new Set(mentionarray));
+          const { error } = await supabase.from("quickies").insert({involved: mentionarray, handle: handle, content: text });
           if (error) {
             console.log("initial");
             console.log(error);
@@ -143,6 +157,30 @@ export default function QuickieMakerComponent(props: any) {
 
             if (data && !error) {
               const id = data[0]["id"];
+
+              const filteredMentions = Array.from(
+                new Set(mentionarray.filter((mention: any) => mention !== handle))
+              );
+              await Promise.all(
+                filteredMentions.map(async (mention: any) => {
+                  const { data: us, error } = await supabase.from("user").select("*").eq("handle", mention);
+                  if (us && us.length > 0) {
+                    return notification(
+                      [],
+                      supabase,
+                      us[0].id,
+                      "/quickie/" + id,
+                      "@" + handle + " tagged you in a quickie\n",
+                      "mention",
+                      user.user.id,
+                      data[0]["content"],
+                      image
+                    );
+                  }
+                })
+              );
+
+             
               const hashtags = formatText(text);
               if (hashtags.length > 0) {
                 for (let i = 0; i < hashtags.length; i++) {

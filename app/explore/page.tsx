@@ -77,12 +77,12 @@ export default async function Index() {
   if (isSupabaseConnected) {
     return (
       <>
-        <div className="flex-1 h-screen p-0 py-2 pb-20 overflow-hidden">
+        <div className="overflow-hidden flex-1 p-0 py-2 pb-20 h-screen">
           <div className="p-4 py-2 mx-1 md:mx-1">
             <Search page="people" text="Users" />
           </div>
-          <div className="h-full overflow-y-scroll hiddenscroll">
-            <div className="grid items-center content-center grid-cols-1 gap-2 px-5 xl:px-3 animate-in hiddenscroll xl:grid-cols-2">
+          <div className="overflow-y-scroll h-full hiddenscroll">
+            <div className="grid grid-cols-1 gap-2 content-center items-center px-5 xl:px-3 animate-in hiddenscroll xl:grid-cols-2">
               {!loading ? (
                 !empty ? (
                   users.map((user) => (
@@ -95,7 +95,7 @@ export default async function Index() {
                       myImage={myImage}
                       cover={user.cover}
                       name={user.name}
-                      userid={user.id}
+                      userid={userid}
                       notifications={user.notifications}
                       following={user.following.length}
                       isfollowing={user.isfollowing}
@@ -106,7 +106,7 @@ export default async function Index() {
                     />
                   ))
                 ) : (
-                  <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
+                  <div className="flex content-center items-center px-10 mt-24 w-full sm:px-24 md:px-16 lg:px-24">
                     <div className="flex flex-col gap-2 mx-auto max-w-max">
                       <h1 className="mx-auto text-lg font-semibold text-center text-black">No Users To View!</h1>
                       <h1 className="mx-auto text-sm text-center text-neutral-800">
@@ -125,7 +125,7 @@ export default async function Index() {
                   </div>
                 )
               ) : (
-                <div className="flex items-center content-center w-full h-screen"></div>
+                <div className="flex content-center items-center w-full h-screen"></div>
               )}
             </div>
             <MoreUsers newblocked={newblocked} blocked={blocked}></MoreUsers>

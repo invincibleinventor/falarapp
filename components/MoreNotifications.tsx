@@ -20,7 +20,7 @@ export default function MoreNotifications() {
     const {
       data: { user },
     } = await supabase.auth.getUser();
-    const { data, error } = await supabase.from("notifications").select("*").range(from, to).eq("to", `(${user?.id})`);
+    const { data, error } = await supabase.from("notifications").select("*").range(from, to).eq("to", `${user?.id}`);
     if (error) {
       console.log(error);
       setHalt(true)
@@ -55,7 +55,7 @@ export default function MoreNotifications() {
   }, [inView]);
   return (
     <div className="w-full">
-      <div className="grid items-center content-center grid-cols-1 gap-2 px-3 pb-20 animate-in hiddenscroll xl:grid-cols-2">
+      <div className="grid grid-cols-1 gap-2 content-center items-center px-3 pb-20 animate-in hiddenscroll xl:grid-cols-2">
         {notifications.map((notification: any) => (
           <Notification
             title={notification.title}
@@ -67,7 +67,7 @@ export default function MoreNotifications() {
           ></Notification>
         ))}
       </div>
-      <div className="flex flex-col items-center content-center w-full">      <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
+      <div className="flex flex-col content-center items-center w-full">      <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
 
         <Oval
           height={80}

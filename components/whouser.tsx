@@ -19,7 +19,7 @@ export default function Whouser(props: any) {
   }
   const myhandle = props.myhandle;
   const myid = props.myid;
-  const myuserid = props.myuserid;
+  const myuserid = props.myid;
   const supabase = createClient();
   const handle = props.handle;
   const hisid = props.hisid;
@@ -74,7 +74,7 @@ export default function Whouser(props: any) {
         notification(
           notifications,
           supabase,
-          props.id,
+          props.hisid,
           "/profile/" + myhandle,
           "New Follower",
           "follow",
