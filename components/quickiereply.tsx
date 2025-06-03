@@ -722,20 +722,17 @@ const pickerWrapperRef = useRef<HTMLDivElement | null>(null);
          <div ref={pickerWrapperRef} id="reply" className={gif?"absolute top-0 right-0 bottom-0 left-0 mx-auto my-auto w-max h-max z-[1000000]":"hidden"}>
          <GifPicker  theme={Theme.DARK} onGifClick={(gif)=>(showGif(false),handleGif(gif.url))}  tenorApiKey={'AIzaSyAjudoqhS67M8SXNrdrcGxuXnBCtnvg2Ho'}/>
           </div>
+         
         <div className={`flex flex-row content-center items-center py-2 w-full ${1==1?'pb-4':'pt-4'}`}>
           {!(1==1) && <h1 className="px-2 mx-4 my-0 mb-0 text-lg font-semibold text-white">Add a reply</h1>}
+          
           {!props.quote &&
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 py-2 pt-0 gap-y-[2px] gap-2 px-4">
-        {mentionarray.filter((mention:any) => mention !== props.myhandle).map((mention:any, index:any) => (
-  <div   className="flex flex-row content-center items-center px-3 py-1 mx-2 my-0 space-x-2 w-auto text-sm text-center rounded-full bg-primary-950 text-neutral-300" key={mention}>
-    <Link href={"/profile/"+mention}>@{mention}</Link>
-    <h1 onClick={() => {
-    setMentionarray(mentionarray.filter((_: any, i: any) => i !== index));
-  }} className="font-poppins cursor-pointer text-[10px]">x</h1>
-  </div>
-))}
+     
         </div>
+      
 }
+         
           <svg ref={btnRef} onClick={()=>showGif(!gif)} className="mt-1 ml-auto text-white" width="1.75em" height="1.75em" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M11.98 14.712q.191 0 .317-.126t.126-.317v-4.5q0-.19-.126-.316t-.316-.126t-.316.126t-.126.316v4.5q0 .19.126.317t.316.126m-4.404 0h1.385q.502 0 .847-.346q.345-.345.345-.847v-.903q0-.191-.126-.317t-.316-.126t-.317.126t-.126.317v.788q0 .173-.125.298t-.298.125H7.692q-.173 0-.298-.125t-.125-.298v-2.77q0-.172.125-.297t.298-.125h2.02q.19 0 .316-.126t.126-.317t-.126-.316t-.316-.126H7.577q-.502 0-.847.345t-.345.847v3q0 .502.345.847q.345.346.847.346m6.789 0q.19 0 .316-.126t.126-.317v-1.711h1.48q.19 0 .317-.126t.126-.316t-.126-.317t-.317-.126h-1.48v-1.461h2.48q.19 0 .317-.126t.126-.317t-.126-.316t-.317-.126h-2.922q-.191 0-.317.126t-.126.316v4.5q0 .19.126.316t.317.126M5.616 20q-.691 0-1.153-.462T4 18.384V5.616q0-.691.463-1.153T5.616 4h12.769q.69 0 1.153.463T20 5.616v12.769q0 .69-.462 1.153T18.384 20zm0-1h12.769q.23 0 .423-.192t.192-.424V5.616q0-.231-.192-.424T18.384 5H5.616q-.231 0-.424.192T5 5.616v12.769q0 .23.192.423t.423.192M5 19V5z"/></svg>
 
           <button className="mr-4 ml-2" onClick={(e: any) => handleClick(e)}>
@@ -785,6 +782,7 @@ const pickerWrapperRef = useRef<HTMLDivElement | null>(null);
             </div>
           ))}
         </div>
+        
         <div className="flex absolute bottom-0 z-10 flex-row flex-grow content-center items-center px-4 pl-4 w-full border-b border-b-neutral-800">
           <input
             ref={hiddenFileInput}
@@ -797,6 +795,18 @@ const pickerWrapperRef = useRef<HTMLDivElement | null>(null);
           />
        
         </div>
+        {!props.quote && mentionarray.filter((mention:any) => mention !== props.myhandle).length > 0 &&
+        <div className="flex flex-row gap-2 content-center items-center mx-6 mt-6 w-auto">
+        {mentionarray.filter((mention:any) => mention !== props.myhandle).map((mention:any, index:any) => (
+  <div   className="flex flex-row content-center items-center px-3 py-1 my-0 space-x-2 w-auto text-sm text-center rounded-full bg-primary-950 text-neutral-300" key={mention}>
+    <Link href={"/profile/"+mention}>@{mention}</Link>
+    <h1 onClick={() => {
+    setMentionarray(mentionarray.filter((_: any, i: any) => i !== index));
+  }} className="font-poppins cursor-pointer text-[10px]">x</h1>
+  </div>
+))}
+</div>
+}
     </div>
   );
 }

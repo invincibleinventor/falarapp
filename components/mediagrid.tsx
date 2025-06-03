@@ -8,7 +8,8 @@ import Link from "next/link";
 import { createClient } from "@/utils/supabase/client";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
-
+import { redirect } from "next/navigation";
+import MoreMediaGrid from "@/components/MoreMediaGridQuickies";
 TimeAgo.addLocale(en);
 const timeAgo = new TimeAgo("en-US");
 
@@ -24,7 +25,8 @@ export default function Index(props:any) {
   const [l, setL] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [empty, setEmpty] = useState(true);
- 
+ const [images,setImages] = useState<any[]>([]);
+  //descripti
 
   const [quote,setQuote] = useState<boolean>(false);
   const [quoteid,setQuoteid] = useState<string>("");
@@ -65,127 +67,59 @@ export default function Index(props:any) {
         .select(`*, user (name, id, handle, image)`)
         .order("id", { ascending: false })
         .eq("handle",props.handle )
+        .not('image', 'is', null)
+
         .not("poster", "in", `(${currentUser.blocked.toString()})`)
         .not("poster", "in", `(${currentUser.blockedby.toString()})`)
-        .limit(5);
+        .limit(6);
 
       if (error) {
         console.log(error);
         setLoading(false);
         return;
       }
-      const enrichedPosts: any[] = [];
-      
+     
+      else if (data && data.length>0){
+        let ss = [];
+      let ens:any={};
+        const ds = data;
+        console.log(ds)
+          for await (const [index, post] of ds.entries()) {
+            for(let i = 0;i<post.image.length;i++){
+                
+              ens = {
+                image: post.image[i],
+                url: post.id,
+              }
+              ss.push(ens);
+            }
 
-      for (const post of data) {
-        let parentname: any = null;
-        let parentid: any = null;
-        if(post["quote"]){
-          post.quote = true;
-      post.quoteid = post["quoteid"];
-      const { data: q } = await supabase.from("quickies").select("*, user (name, handle, id, image)").eq("id", post.quoteid);
-      if (q) {
-        post.quotehandle = q[0]["user"]["handle"];
-        post.quotename = q[0]["user"]["name"];
-        post.quotedisplay = q[0]["user"]["image"];
-        post.quoteimage = q[0]["image"];
-        
-        if(post.quoteimage){
-        post.quotephotocount = q[0]["image"].length;
         }
-        post.quotecontent = q[0]["content"];
-        const date2 = new Date(q[0].created_at)
-        let d = date2;
-
-        post.quotetime = timeAgo.format(Date.now() - (date1.getTime() - date2.getTime()));
-      }
-        }
-        if (post.to > 0) {
-          const { data: u } = await supabase.from("quickies").select(`*, 
-            user (
-            
-              handle
-            
-            )`).eq("id", post.to);
-
-          
-          if(u && u.length){
-          parentname = u?.[0]?.user.handle;
-          }
-          parentid = post.to;
-          
-        }
-      
-        const liked = post.liked.includes(currentUser.handle);
-        const bookmarked = post.bookmarked.includes(currentUser.handle);
-        const date2 = new Date(post.created_at);
-        const diff = date1.getTime() - date2.getTime();
-      
-        enrichedPosts.push({
-          ...post,
-          parentname,
-          parentid,
-          liked,
-          bookmarked,
-          likedlist: post.liked,
-          bookmarkedlist: post.bookmarked,
-          diff,
-        });
-      }
-      
-      setPosts(enrichedPosts);
-      setEmpty(enrichedPosts.length === 0);
+          setImages([...images,...ss]);
+      setEmpty(ds.length === 0);
       setLoading(false);
-    };      
-
+    }
+    else{
+       console.log("empty")
+        setLoading(false);
+        setEmpty(true);
+        return;
+      
+}   
+    }
+    
     getData();
   }, []);
 
   return (
-    <div className="flex flex-col gap-2 px-0 md:px-0">
+    <div>
+    <div className="grid grid-cols-3 gap-2 px-5 py-5 md:gap-4">
 
 
         {!loading ? (
           !empty ? (
-            posts.map((post) => (
-              <PostComponent
-                id={post.id}
-                cover={post.cover}
-                title={post.title}
-                time={timeAgo.format(Date.now() - post.diff)}
-                key={post.id}
-                image={post.image}
-                comments={post.comments}
-                userliked={userliked}
-                parentname={post.parentname}
-                parentid={post.parentid}
-              
-                userid={post.user.id}
-                userbookmarked={userbookmarked}
-                bookmarkedlist={post.bookmarkedlist}
-                likedlist={post.likedlist}
-                myhandle={myhandle}
-                dp={post.user.image}
-                bookmarked={post.bookmarked}
-                liked={post.liked}
-                handle={post.handle}
-                name={post.user.name}
-                description={post.content}
-
-                
-
-quote={post.quote}
-quoteid={post.quoteid}
-quotehandle={post.quotehandle}
-quotename={post.quotename}
-quotedisplay={post.quotedisplay}
-quoteimage={post.quoteimage}
-quotephotocount={post.quotephotocount}
-quotecontent={post.quotecontent}
-quotetime={post.quotetime}
-
-                
-              />
+            images.map((post) => (
+              <img className="object-cover col-span-1 rounded-xl border shadow-lg cursor-pointer border-neutral-900 aspect-square" src={post.image} onClick={()=>redirect('/quickie/'+post.url)} />
             ))
           ) : (
             <div className="flex content-center items-center px-10 mt-24 w-full sm:px-24 md:px-16 lg:px-24">
@@ -202,7 +136,9 @@ quotetime={post.quotetime}
           <div className="flex content-center items-center w-full h-screen"></div>
         )}
 
-        <More
+      
+      </div>
+      <MoreMediaGrid
           myblocked={myblocked}
           myhandle={myhandle}
           myname={myname}
@@ -213,7 +149,6 @@ quotetime={post.quotetime}
           userbookmarked={userbookmarked}
           in={l}
         />
-      </div>
-      
+        </div>
   );
 }

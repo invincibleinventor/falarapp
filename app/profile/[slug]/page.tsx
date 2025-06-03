@@ -8,6 +8,7 @@ import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
 import Image from "next/image";
 import Link from "next/link";
+import MediaGrid from '@/components/mediagrid'
 import { useRouter } from "next/navigation";
 import { use, useEffect, useState } from "react";
 import { Oval } from "react-loader-spinner";
@@ -426,16 +427,22 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
           
              {!blocked && !imblockedby &&
           (     
-    <div className="flex sticky flex-row flex-grow mt-4 w-auto text-base font-medium text-white font-pops">
+    <div className="flex sticky flex-row flex-grow mt-4 w-auto text-sm text-base font-medium text-white md:text-base font-pops">
     <div
       onClick={() => setOpened("posts")}
-      className={`w-1/2 py-4 cursor-pointer text-center ${opened == "posts" ? "border-b-2 border-b-primary-800" : ""}`}
+      className={`w-1/3 py-2 md:py-4 cursor-pointer text-center ${opened == "posts" ? "border-b-2 border-b-primary-800" : ""}`}
     >
       Posts
     </div>
     <div
+      onClick={() => setOpened("media")}
+      className={`w-1/3 py-2 md:py-4 cursor-pointer text-center ${opened == "media" ? "border-b-2 border-b-primary-800" : ""}`}
+    >
+      Media
+    </div>
+    <div
       onClick={() => setOpened("quickies")}
-      className={`w-1/2 py-4 cursor-pointer text-center ${opened == "quickies" ? "border-b-2 border-b-primary-800" : ""}`}
+      className={`w-1/3 py-2 md:py-4 cursor-pointer text-center ${opened == "quickies" ? "border-b-2 border-b-primary-800" : ""}`}
     >
       Quickies
     </div>
@@ -467,9 +474,15 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
                   ))
                 ) : (
                   <>
-                    <h1 className="px-[32px] text-sm font-medium text-neutral-500">
-                      No Posts To Display. {name} haven&apos;t posted anything yet.
-                    </h1>
+                    <div className="flex content-center items-center px-10 mt-24 w-full sm:px-24 md:px-16 lg:px-24">
+              <div className="flex flex-col gap-2 mx-auto max-w-max">
+                <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">No Posts To View!</h1>
+                <h1 className="mx-auto text-sm text-center text-neutral-400">
+                  The user you are viewing hasn't posted any articles yet.
+                </h1>
+                
+              </div>
+            </div>
                   </>
                 )
               ) : (
@@ -497,6 +510,14 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
 
 
 }
+
+{!blocked && !imblockedby && opened=="media" && 
+
+<MediaGrid handle={slug} / >
+
+
+}
+
 
           </>
 

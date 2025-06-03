@@ -46,6 +46,33 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#08203E", en
     --foreground: 200 50% 3%;
   }
 }
+
+.storycircle {
+  --n:20;   /* control the number of dashes */
+  --d:8deg; /* control the distance between dashes */
+  --t:5px;  /* control the thickness of border*/
+  --c:red;  /* control the coloration */
+  
+  width: 120px;
+  aspect-ratio: 1;
+  display: inline-grid;
+  place-content: center;
+  margin: 10px;
+  position: relative;
+}
+.storycircle::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  padding: var(--t);
+  background: var(--c);
+  mask:
+   linear-gradient(#0000 0 0) content-box intersect,
+    repeating-conic-gradient(from calc(var(--d)/2),#000 0 calc(360deg/var(--n) - var(--d)),#0000 0 calc(360deg/var(--n)));
+}
+
+
 #reply .GifPickerReact{
   @apply h-[400px]   font-pops rounded-2xl border-none bg-primary-950 !important;
 }
