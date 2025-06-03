@@ -116,19 +116,20 @@ export const colorPalettes: Record<string, Record<string, string>> = {
     950: "#0c1c3a",
   },
   yellow: {
-    DEFAULT: "#fbbf24",
-    50: "#fef3c7",
-    100: "#fde68a",
-    200: "#fcd34d",
-    300: "#fbbf24",
-    400: "#f59e0b",
-    500: "#d97706",
-    600: "#b45309",
-    700: "#92400e",
-    800: "#78350f",
-    900: "#6a3f09",
-    950: "#251600",
+    DEFAULT: "#eab308",
+    50:  "#fefce8",
+    100: "#fef9c3",
+    200: "#fef08a",
+    300: "#fde047",
+    400: "#facc15",
+    500: "#eab308",
+    600: "#ca8a04",
+    700: "#a16207",
+    800: "#854d0e",
+    900: "#713f12",
+    950: "#422006",
   },
+  
   purple: {
     DEFAULT: "#8b5cf6",
     50: "#f5f3ff",
@@ -227,6 +228,7 @@ export const colorPalettes: Record<string, Record<string, string>> = {
     900: "#581c6f",
     950: "#300738",
   },
+  
 };
 
 

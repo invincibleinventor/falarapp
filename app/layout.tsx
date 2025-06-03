@@ -40,7 +40,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <Script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></Script>
       </head>
 
-      <body className="bg-gradient-to-b to-black from-primary-950" lang="en">
+      <body className="bg-gradient-to-b from-indigo-950 to-red-950" lang="en">
         {loggedin && 
         <main>
           <section className="relative m-auto flex h-screen font-pops flex-row content-center items-center overflow-hidden sm:w-screen lg:w-[1070px] xl:w-[1200px]">
