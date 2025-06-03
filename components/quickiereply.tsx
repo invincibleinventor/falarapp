@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/jsx-key */
 "use client";
+import { AppConfig } from "@/config/config";
 import notification from "@/utils/notifications/notification";
 import { createClient } from "@/utils/supabase/client";
 import GifPicker, { Theme } from "gif-picker-react";
@@ -719,7 +720,7 @@ const pickerWrapperRef = useRef<HTMLDivElement | null>(null);
   
   return (
       <div className={`flex relative flex-col content-center items-start min-h-[100px] ${1==1?'flex-col-reverse':'flex-col'}`}>
-         <div ref={pickerWrapperRef} id="reply" className={gif?"absolute top-0 right-0 bottom-0 left-0 mx-auto my-auto w-max h-max z-[1000000]":"hidden"}>
+         <div ref={pickerWrapperRef} id="reply" className={gif?`absolute top-0 right-0 rounded-2xl border-none bottom-0 left-0 mx-auto my-auto w-max h-max z-[1000000] ${AppConfig.customtheme?AppConfig.custombg:'bg-primary-950'}`:"hidden"}>
          <GifPicker  theme={Theme.DARK} onGifClick={(gif)=>(showGif(false),handleGif(gif.url))}  tenorApiKey={'AIzaSyAjudoqhS67M8SXNrdrcGxuXnBCtnvg2Ho'}/>
           </div>
          

@@ -3,13 +3,14 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import QuickieMakerComponent from "./QuickieMakerComponent";
 import { useState } from "react";
+import { AppConfig } from "@/config/config";
 export default function Button() {
   const loc = usePathname();
   const [state, setState] = useState(false);
   return (
     <div className="">
       {state && (
-        <div className="absolute w-screen z-[100000] flex items-center content-center top-0 bottom-0 h-screen bg-gradient-to-b to-black bg-opacity-50 from-primary-950 ">
+        <div className={`flex absolute top-0 bottom-0 content-center items-center w-screen h-screen bg-opacity-50 z-[100000] ${AppConfig.customtheme?AppConfig.custombg:'bg-gradient-to-b from-primary-950 to-black'}`}>
           <div className="mx-auto">
             <QuickieMakerComponent stateChanger={setState} />
           </div>

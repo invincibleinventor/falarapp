@@ -77,10 +77,10 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#08203E", en
 
 
 #reply .GifPickerReact{
-  @apply h-[400px]   font-pops rounded-2xl border-none bg-primary-950 !important;
+  @apply h-[400px]   font-pops rounded-2xl border-none bg-transparent !important;
 }
 .GifPickerReact{
-  @apply h-[200px]    lg:h-[450px]  font-pops rounded-t-none lg:rounded-tr-2xl lg:rounded-l-none border-none !important;
+  @apply h-[200px]    lg:h-[450px] bg-transparent font-pops rounded-t-none lg:rounded-tr-2xl lg:rounded-l-none border-none !important;
 }
 .gpr-header{
   @apply border-none !important;

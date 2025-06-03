@@ -9,9 +9,8 @@ module.exports = withMT({
   ],
   safelist: [
     'bg-gradient-to-b',
-    'from-red-950',
-    'to-indigo-950',
-    // Add any other dynamic classes you plan to use
+    'from-indigo-950',
+    'to-red-950',
   ],
   theme: {
     extend: {
