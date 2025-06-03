@@ -230,8 +230,8 @@ export default async function App({ params }: { params: Promise<{ slug: string }
       )}
       {!error && !newblocked.includes(authorid) && !blocked.includes(authorid) && (
         <div className="hiddenscroll h-full w-[calc(100vw-68px)] mx-0 overflow-hidden pb-14 md:w-full md:max-w-full px-0">
-                        <div className="flex  z-[1000000] shadow-lg fixed flex-row content-center items-center px-4 py-4 space-x-4 w-full text-white border-b bg-primary-950 border-b-primary-950">
-                          <Back></Back>
+                        <div className={`flex fixed flex-row content-center items-center px-4 py-4 space-x-4 w-full text-white border-b shadow-lg z-[1000000]   ${AppConfig.customtheme?`bg-${AppConfig.customcolor} border-b=${AppConfig.customcolor}`:'border-b-primary-950 bg-primary-950'}`}>
+                        <Back></Back>
                           <h1 className="text-lg font-medium text-white font-poppins">
                             
                             Quickie
@@ -376,7 +376,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
           />
            <Link
             href="#comments"
-            className="flex flex-row content-center items-center px-6 pr-0 space-x-2 text-white lg:mr-0"
+            className="flex flex-row content-center items-center px-6 pr-0 pl-0 space-x-2 text-white lg:mr-0"
           >
                               <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M5 3h13a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-4.59l-3.7 3.71c-.18.18-.43.29-.71.29a1 1 0 0 1-1-1v-3H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3m13 1H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h4v4l4-4h5a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2"/></svg>{" "}
 

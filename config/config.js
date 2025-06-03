@@ -1,7 +1,7 @@
 export const AppConfig = {
   title: "Falar",
   customtheme:true,
-  customcolor:'bg-indigo-950',
+  customcolor:'indigo-950',
   customprimary: 'yellow',
   custombg:'bg-gradient-to-b from-indigo-950 to-red-950',
   subtitle: "A Modern Social Network",

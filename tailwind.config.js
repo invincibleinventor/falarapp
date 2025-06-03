@@ -11,6 +11,7 @@ module.exports = withMT({
     'bg-gradient-to-b',
     'from-indigo-950',
     'to-red-950',
+    'bg-indigo-950',
   ],
   theme: {
     extend: {

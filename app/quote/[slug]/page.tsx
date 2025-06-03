@@ -10,6 +10,7 @@ import Link from "next/link";
 import Iof from "@/components/Iof";
 import Back from "@/components/back";
 import QuickieMakerComponent from "@/components/quickiereply";
+import { AppConfig } from "@/config/config";
 export default async function App({ params }: { params: Promise<{ slug: string }>}) {
   const cookieStore =  cookies();
   const slug = (await params).slug;
@@ -186,7 +187,8 @@ export default async function App({ params }: { params: Promise<{ slug: string }
       )}
       {!error && !newblocked.includes(authorid) && !blocked.includes(authorid) && (
         <div className="hiddenscroll h-full w-[calc(100vw-68px)] mx-0 overflow-hidden pb-14 md:w-full md:max-w-full px-0">
-                        <div className="flex  z-[1000000] shadow-lg fixed flex-row content-center items-center px-4 py-4 space-x-4 w-full text-white border-b bg-primary-950 border-b-primary-950">
+                        <div className={`flex fixed flex-row content-center items-center px-4 py-4 space-x-4 w-full text-white border-b shadow-lg z-[1000000]   ${AppConfig.customtheme?`bg-${AppConfig.customcolor} border-b=${AppConfig.customcolor}`:'border-b-primary-950 bg-primary-950'}`}>
+
                           <Back></Back>
                           <h1 className="text-lg font-medium text-white font-poppins">
                             

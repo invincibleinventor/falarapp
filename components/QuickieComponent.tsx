@@ -230,7 +230,7 @@ export default function Post(props: any) {
                 </Link>
                 <Link
                   href={"/quote/" + props.id}
-                  className="flex flex-row content-center items-center pl-5 space-x-2 text-white"
+                  className="flex flex-row content-center items-center pr-5 pl-5 space-x-2 text-white"
                 >
                   <svg width="22" height="22" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m13.5 13.5l3 3l3-3"/><path d="M9.5 4.5h3a4 4 0 0 1 4 4v8m-9-9l-3-3l-3 3"/><path d="M11.5 16.5h-3a4 4 0 0 1-4-4v-8"/></g></svg>
                   </Link>
