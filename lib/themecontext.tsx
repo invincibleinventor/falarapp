@@ -1,4 +1,5 @@
 'use client'
+import { AppConfig } from "@/config/config";
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 
 
@@ -244,8 +245,18 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const savedColor = localStorage.getItem("selectedColor") || "pink";
-    setCurrentColor(savedColor);
-    updateCSSVariables(savedColor);
+    if(AppConfig.customtheme==true)
+      {
+        setCurrentColor(AppConfig.customprimary)
+      
+    updateCSSVariables(AppConfig.customprimary);
+      }
+      else{
+      setCurrentColor(savedColor);
+
+      updateCSSVariables(savedColor);
+      }
+
   }, []);
 
   const updateCSSVariables = (color: string) => {
@@ -258,7 +269,9 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const setColor = (color: string) => {
+    
     setCurrentColor(color);
+    
     localStorage.setItem("selectedColor", color);
     updateCSSVariables(color);
   };
