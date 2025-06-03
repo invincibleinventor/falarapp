@@ -113,20 +113,23 @@ export default function Index(props:any) {
 
   return (
     <div>
-    <div className="grid grid-cols-3 gap-2 px-5 py-5 md:gap-4">
+    <div >
 
 
         {!loading ? (
           !empty ? (
-            images.map((post) => (
+            <div className="grid grid-cols-3 gap-2 px-5 py-5 md:gap-4">
+            {images.map((post) => (
               <img className="object-cover col-span-1 rounded-xl border shadow-lg cursor-pointer border-neutral-900 aspect-square" src={post.image} onClick={()=>redirect('/quickie/'+post.url)} />
             ))
+          }
+            </div>
           ) : (
             <div className="flex content-center items-center px-10 mt-24 w-full sm:px-24 md:px-16 lg:px-24">
               <div className="flex flex-col gap-2 mx-auto max-w-max">
-                <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">No Quickies To View!</h1>
+                <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">No Media To View!</h1>
                 <h1 className="mx-auto text-sm text-center text-neutral-400">
-                  The user you are viewing hasn't posted any quickies yet.
+                  The user you are viewing hasn't posted any media yet.
                 </h1>
                 
               </div>
