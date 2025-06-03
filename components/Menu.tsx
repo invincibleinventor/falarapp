@@ -28,17 +28,16 @@ export default function Menu(props: any) {
     toggledeleteDialog(false);
     const supabase = createClient();
     const { error } = await supabase.from("quickies").delete().eq("id", props.id);
-     
-   
+    
     if (error) {
       alert(error);
     } else {
-      window.location.replace("/quickies");
-    }
+      
     if(props.type == "qreply"){
       const {data, error:es} = await supabase.from("quickies").select("*").eq("id",props.quickieid);
       if(data){
-      const {error} = await supabase.from("quickies").update({comments:data[0]["comments"].comments-1}).eq("id",props.quickieid);
+  
+      const {error} = await supabase.from("quickies").update({comments:data[0]["comments"]-1}).eq("id",props.quickieid);
       if (error) {
         alert(error);
       }
@@ -48,6 +47,10 @@ export default function Menu(props: any) {
       else {
         window.location.replace("/quickies");
       }
+    }
+  }
+  else{
+  window.location.replace("/quickies");
     }
   }
   }

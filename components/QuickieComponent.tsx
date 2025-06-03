@@ -15,6 +15,7 @@ export default function Post(props: any) {
   const [imgdp, setimgdp] = useState(props.dp);
 
   useEffect(() => {
+   
     setimgdp(imgdp + "?" + new Date().getTime());
   }, []);
   const timeStamp = new Date().getTime();
@@ -109,13 +110,19 @@ export default function Post(props: any) {
                   <span className="text-base font-medium whitespace-nowrap text-neutral-400">@{props.handle}</span>
                 </div>
               </Link>
-              {(props.parentid>0 || props.loadedreply) &&
-              <>
+              {(props.parentid) &&
+            
               
               <Menu type="qreply" quickieid={props.parentid} id={props.id} myhandle={props.myhandle} handle={props.handle} />
-              </>
+              
               }
-              {!(props.parentid  > 0) && 
+              {(props.loadedreply) &&
+            
+              
+            <Menu type="qreply" quickieid={props.pid} id={props.id} myhandle={props.myhandle} handle={props.handle} />
+            
+            }
+              {(!(props.parentid>0) && !(props.loadedreply)) && 
               <Menu type="quickie" id={props.id} myhandle={props.myhandle} handle={props.handle} />
               }
               </div>

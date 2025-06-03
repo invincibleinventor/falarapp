@@ -18,9 +18,7 @@ const [loading, setLoading] = useState<boolean>(true);
   const timeAgo = new TimeAgo("en-US");
   const date1 = new Date();
 
-  async function get() {
-
-    }
+  
 
 
 
@@ -100,11 +98,12 @@ async function get() {
         {posts.map((post: any) => (
           <QuickieComponent
             id={post.id}
-            loadedereply = {true}
+            loadedreply = {true}
             cover={post.cover}
             title={post.title}
             time={timeAgo.format(Date.now() - post.diff)}
             key={post.id}
+            pid={props.to}
             image={post.image}
             userliked={props.userliked}
             userbookmarked={props.userbookmarked}

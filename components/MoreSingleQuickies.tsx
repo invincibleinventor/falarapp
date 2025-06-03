@@ -106,7 +106,7 @@ export default function More(props: any) {
         {posts.map((post: any) => (
           <QuickieComponent
             id={post.id}
-            loadedereply = {true}
+            loadedreply = {true}
             cover={post.cover}
             title={post.title}
             time={timeAgo.format(Date.now() - post.diff)}
@@ -122,6 +122,7 @@ export default function More(props: any) {
             liked={post.liked}
             handle={post.handle}
            
+            pid={props.to}
 
 quote={post.quote}
 quoteid={post.quoteid}
