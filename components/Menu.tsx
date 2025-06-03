@@ -24,14 +24,32 @@ export default function Menu(props: any) {
   
   async function del() {
     console.log("ok");
+    
     toggledeleteDialog(false);
     const supabase = createClient();
     const { error } = await supabase.from("quickies").delete().eq("id", props.id);
+     
+   
     if (error) {
       alert(error);
     } else {
       window.location.replace("/quickies");
     }
+    if(props.type == "qreply"){
+      const {data, error:es} = await supabase.from("quickies").select("*").eq("id",props.quickieid);
+      if(data){
+      const {error} = await supabase.from("quickies").update({comments:data[0]["comments"].comments-1}).eq("id",props.quickieid);
+      if (error) {
+        alert(error);
+      }
+      else if(es){
+        alert(es);
+      }
+      else {
+        window.location.replace("/quickies");
+      }
+    }
+  }
   }
   async function deleteComment(){
     console.log("ok");
@@ -82,7 +100,7 @@ export default function Menu(props: any) {
             Cancel
           </button>
           <button
-            onClick={() => props.type == "quickie" ? del() : deleteComment()}
+            onClick={() => (props.type == "quickie" || props.type == "qreply") ? del() : deleteComment()}
             className="px-6 py-2 mt-auto mr-4 mb-1 ml-auto text-xs font-medium text-white rounded-lg bg-primary-800"
           >
             Delete It
@@ -122,7 +140,7 @@ export default function Menu(props: any) {
             </svg>
             <h1 className="text-sm font-medium">Report</h1>
           </div>
-          {(props.type == "comment" || props.type == "quickie") && props.myhandle == props.handle && (
+          {(props.type == "comment" || props.type=="qreply" || props.type == "quickie") && props.myhandle == props.handle && (
             <div
               onClick={() => toggledeleteDialog(!deleteDialog)}
               className="flex flex-row content-center items-center px-4 py-3 space-x-3 text-red-400 cursor-pointer"

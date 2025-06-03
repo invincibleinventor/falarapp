@@ -176,9 +176,9 @@ const handleClick = (event: MouseEvent<HTMLButtonElement, MouseEvent>) => {
             
                 const {data:d,error:e} = await supabase.from("quickies").select("*").eq("id",props.to);
                if(d ){
-                let commentcount = d[0]["replies"]
+                let commentcount = d[0]["comments"]
                 commentcount++;
-                const {error:es} = await supabase.from("quickies").update({replies: commentcount}).eq("id",props.to); 
+                const {error:es} = await supabase.from("quickies").update({comments: commentcount}).eq("id",props.to); 
                 if(es){
                   console.log(es.message)
                 }
@@ -431,9 +431,9 @@ const handleClick = (event: MouseEvent<HTMLButtonElement, MouseEvent>) => {
             
                 const {data:d,error:e} = await supabase.from("quickies").select("*").eq("id",props.to);
                if(d ){
-                let commentcount = d[0]["replies"]
+                let commentcount = d[0]["comments"]
                 commentcount++;
-                const {error:es} = await supabase.from("quickies").update({replies: commentcount}).eq("id",props.to); 
+                const {error:es} = await supabase.from("quickies").update({comments: commentcount}).eq("id",props.to); 
                 if(es){
                   console.log(es.message)
                 }

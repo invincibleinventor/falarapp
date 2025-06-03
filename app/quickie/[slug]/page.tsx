@@ -15,7 +15,11 @@ import Menu from "@/components/Menu";
 import { AppConfig } from "@/config/config";
 import Back from "@/components/back";
 import More from "@/components/MoreSingleQuickies";
+
 import QuickieMakerComponent from "@/components/quickiereply";
+import LoadReplies from "@/components/LoadReplies";
+export const dynamic = "force-dynamic";
+
 export default async function App({ params }: { params: Promise<{ slug: string }>}) {
   const cookieStore =  cookies();
   const slug = (await params).slug;
@@ -23,7 +27,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
   let author = "";
   
 
-  
+  let comments = 0;
   let content = "";
   let mentionarray: any[] = [];
   let image: any[] = [];
@@ -56,7 +60,6 @@ export default async function App({ params }: { params: Promise<{ slug: string }
   let userliked: any[] = [];
   let blocked: any[] = [];
   let userbookmarked: any[] = [];
-  let comments: any[] = [];
   TimeAgo.locale(en);
   let authorid;
   let user = "";
@@ -82,7 +85,6 @@ export default async function App({ params }: { params: Promise<{ slug: string }
         userbookmarked = users[0]["bookmarks"];
       }
     }
-    const blockedpostgres = blocked.toString();
     const { data, error: e } = await supabase.from("quickies").select("*").eq("id", slug);
     if (data && data.length > 0) {
       error = false;
@@ -116,6 +118,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
         const { data: parent } = await supabase.from("quickies").select("*, user (name, handle, id, image)").eq("id", data[0].to);
         if (parent && parent.length > 0) {
           parentQuickie = parent[0];
+
         }
       }
       if (x.includes(myhandle)) {
@@ -131,6 +134,8 @@ export default async function App({ params }: { params: Promise<{ slug: string }
         profile = u[0].image;
         content = data[0]["content"];
         image = data[0]["image"];
+        comments = data[0].comments;
+
         if (image) {
           photocount = data[0]["image"].length;
         }
@@ -148,33 +153,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
   await set();
 
 
-    async function getReplies() {
-      const { data: replies } = await supabase
-        .from("quickies")
-        .select("*, user (name, handle, id, image)")
-        .eq("to", slug)
-        .not("poster", "in", `(${blocked.length > 0 ? blocked.toString() : '""'})`)
-        .not("poster", "in", `(${newblocked.length > 0 ? newblocked.toString() : '""'})`)
-        .order("id", { ascending: false })
-        .limit(5);
-
-  
-      if (!replies) return [];
-  
-      return replies.map((r) => {
-        const createdDate = new Date(r.created_at);
-        r.time = timeAgo.format(Date.now() - (date1.getTime() - createdDate.getTime()));
-        r.likedlist = r.liked
-
-        r.liked = r.liked.includes(myhandle);
-        r.bookmarkedlist = r.bookmarked
-        r.bookmarked = r.bookmarked.includes(myhandle);
-        return r;
-      });
-    }
-  
-     comments = await getReplies();
- 
+    
      const formatText = (text: string) => {
       // Split by spaces and mentions/hashtags/URLs as separate tokens
       const tokens = text.split(/(\s+|(?:#|@)[a-zA-Z][\w]*|https?:\/\/[^\s]+)/);
@@ -297,8 +276,14 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                       <span className="text-base font-medium whitespace-nowrap text-neutral-400">@{author}</span>
                     </div>
                   </Link>
-                  <Menu type="quickie" id={slug} myhandle={myhandle} handle={author} />
-                </div>
+                  {parentQuickie &&
+                  <Menu type="qreply" quickieid={parentQuickie.id} id={slug} myhandle={myhandle} handle={author} />
+               
+                     }
+                     {!parentQuickie &&
+                                       <Menu type="quickie"  id={slug} myhandle={myhandle} handle={author} />
+
+      }   </div>
 
                 <div >
                   <h1
@@ -395,7 +380,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
           >
                               <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M5 3h13a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-4.59l-3.7 3.71c-.18.18-.43.29-.71.29a1 1 0 0 1-1-1v-3H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3m13 1H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h4v4l4-4h5a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2"/></svg>{" "}
 
-            <h1 className="text-xs md:text-sm">{comments.length}</h1>
+            <h1 className="text-xs md:text-sm">{comments}</h1>
           </Link>
           <Link
                   href={"/quote/" + slug}
@@ -441,37 +426,16 @@ export default async function App({ params }: { params: Promise<{ slug: string }
           {loggedin && !newblocked.includes(authorid) && !blocked.includes(authorid)  && (
             <section className="px-0 lg:pr-0" id="comments">
               <QuickieMakerComponent image={myphoto} myid={myid} myhandle={myhandle} handle={author} mentionarray={mentionarray} to={slug} />
-              
- {comments && comments.length > 0 && (
-       
-          comments.map((post) => (
-         
-            <>
-              <PostComponent
-                id={post.id}
-                cover={post.cover}
-                title={post.title}
-                time={post.time}
-                key={post.id}
-                image={post.image}
-                comments={post.comments}
-                userliked={userliked}
-                userid={post.user.id}
-                userbookmarked={userbookmarked}
-                bookmarkedlist={post.bookmarkedlist}
-                likedlist={post.likedlist}
-                myhandle={myhandle}
-                dp={post.user.image}
-                bookmarked={post.bookmarked}
-                liked={post.liked}
-                handle={post.handle}
-                name={post.user.name}
-                description={post.content}
-              />
-      
-            </>
-            
-      )))}
+   
+
+      <LoadReplies   myblocked={blocked}
+              myhandle={myhandle}
+              myname={myname}
+              myphoto={myphoto}
+              to={slug}
+              newblocked={newblocked}
+              userliked={userliked}
+              userbookmarked={userbookmarked}></LoadReplies>
               <More
               myblocked={blocked}
               myhandle={myhandle}

@@ -109,8 +109,16 @@ export default function Post(props: any) {
                   <span className="text-base font-medium whitespace-nowrap text-neutral-400">@{props.handle}</span>
                 </div>
               </Link>
+              {(props.parentid>0 || props.loadedreply) &&
+              <>
+              
+              <Menu type="qreply" quickieid={props.parentid} id={props.id} myhandle={props.myhandle} handle={props.handle} />
+              </>
+              }
+              {!(props.parentid  > 0) && 
               <Menu type="quickie" id={props.id} myhandle={props.myhandle} handle={props.handle} />
-            </div>
+              }
+              </div>
 
             <div>
               <div
