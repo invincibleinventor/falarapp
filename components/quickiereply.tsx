@@ -724,7 +724,7 @@ const pickerWrapperRef = useRef<HTMLDivElement | null>(null);
           </div>
          
         <div className={`flex flex-row content-center items-center py-2 w-full ${1==1?'pb-4':'pt-4'}`}>
-          {!(1==1) && <h1 className="px-2 mx-4 my-0 mb-0 text-lg font-semibold text-white">Add a reply</h1>}
+          {!(1==1) && <h1 className="px-2 mx-4 my-0 mb-0 text-lg font-semibold text-white">{props.quote ?"What's on your mind?":"Add a reply?"}</h1>}
           
           {!props.quote &&
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 py-2 pt-0 gap-y-[2px] gap-2 px-4">
@@ -764,7 +764,7 @@ const pickerWrapperRef = useRef<HTMLDivElement | null>(null);
           onChange={(e: any) => setText(e.target.value)}
           maxLength={150}
           className={`px-6 py-0 pr-5 my-0 md:mt-6  mb-auto w-full h-full bg-transparent outline-none resize-none text-neutral-300 md:pr-4 hiddenscroll lg:pr-8 text-md md:text-lg placeholder:text-neutral-500 md:m-4 md:p-0 md:px-3 ${props.quote?'md:mt-0 ':'md:mt-2 mt-4'}`}
-          placeholder="Add a reply?"
+          placeholder={props.quote ?"What's on your mind?":"Add a reply?"}
         ></textarea>
         <div className="grid grid-cols-3 px-4 w-full sm:flex sm:flex-row">
           {imgsSrc.map((link, index) => (
