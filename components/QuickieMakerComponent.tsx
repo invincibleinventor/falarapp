@@ -433,7 +433,7 @@ export default function QuickieMakerComponent(props: any) {
     <div className="lg:flex-row flex flex-col lg:min-h-[80px] bg-white/10 min-w-[300px] animate-in min-h-[400px] xl:mr-[400px] shadow-lg border border-neutral-900 rounded-2xl mx-auto ">
      
       <div className={`flex relative flex-col content-center items-start rounded-2xl lg:w-[544px] lg:min-h-[80px] min-h-[400px] bg-primary-950/80 ${gif?'rounded-r-none':'rounded-r-lg'}`}>
-        <div className={`flex flex-row w-full bg-opacity-20 bg-white/20  rounded-tl-2xl h-[70px] ${gif?'rounded-r-none rounded-tr-none':'rounded-t-2xl'}`}>
+        <div className={`flex flex-row w-full bg-opacity-20 bg-white/20  rounded-tl-2xl h-[70px] ${gif?'rounded-tr-2xl md:rounded-r-none md:rounded-tr-none':'rounded-t-2xl'}`}>
           <h1 className="px-2 mx-4 my-auto h-[70px] flex items-center content-center text-lg font-semibold text-neutral-300">New Quickie</h1>
           <button className="mr-2 ml-auto" onClick={(e: any) => handleClick(e)}>
             <svg
@@ -475,7 +475,7 @@ export default function QuickieMakerComponent(props: any) {
             </div>
           ))}
         </div>
-        <div className="flex absolute bottom-0 z-10 flex-row flex-grow content-center items-center px-4 pl-4 w-full h-20 rounded-b-2xl border-b border-b-neutral-950">
+        <div className="flex absolute bottom-0 z-10 flex-row flex-grow content-center items-center px-4 pl-4 w-full h-20 rounded-b-none border-b md:rounded-br-none border-b-neutral-950">
           <input
             ref={hiddenFileInput}
             type="file"
