@@ -127,7 +127,7 @@ export default function Create() {
           </div>
           <div
             onClick={handleClick}
-            className="absolute top-2 left-2 px-6 py-3 w-max text-xs text-white rounded-md drop-shadow-lg backdrop-blur-lg cursor-pointer bg-black/60"
+            className="absolute top-2 left-2 px-6 py-3 w-max text-xs text-white rounded-xl drop-shadow-lg backdrop-blur-lg cursor-pointer bg-black/60"
           >
             {" "}
             <input id="fupload" className="hidden" />
@@ -135,7 +135,7 @@ export default function Create() {
           </div>
           <div className="absolute inset-x-0 bottom-0">
             <div className="relative">
-              <Image width={110} height={110} src={image?image:'/user.jpg'} className="mx-auto w-24 h-24 rounded-xl" alt="image" />
+              <Image width={110} height={110} src={image?image:'/user.jpg'} className="mx-auto w-24 h-24 rounded-2xl" alt="image" />
               <div
                 onClick={handleProfileClick}
                 className="absolute text-xs flex items-center content-center text-white rounded-full cursor-pointer left-20 right-0 mx-auto top-[80%] w-7 h-7  bg-primary-700 shadow-lg border-[0.5px] border-neutral-400"
