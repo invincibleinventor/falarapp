@@ -207,7 +207,7 @@ else{
                 pointerEvents: isVisible ? 'auto' : 'none',
                 visibility: isPositioned ? 'visible' : 'hidden'
             }}
-            className='p-2 pb-4 w-64 h-auto bg-gradient-to-t to-black rounded-lg border shadow-lg from-primary-950 border-neutral-900 shadow-neutral-900'
+            className='p-2 pb-4 w-64 h-auto bg-gradient-to-b rounded-lg border shadow-lg to-neutral-900 from-primary-950 border-neutral-900 shadow-neutral-900'
         >
             <div className='relative w-full h-full'>
                 <img src={user.cover} className='w-full h-20 bg-black rounded-t-lg aspect-cover'></img>

@@ -96,7 +96,7 @@ console.log(props.postid)
   return (
     <div
       onClick={() => (!disabled ? ( setLiked(!liked)) : console.log("holdup"))}
-      className="flex flex-row content-center items-center px-4 text-white cursor-pointer"
+      className="flex flex-row content-center items-center px-4 pr-0 pl-6 text-white cursor-pointer"
     >
 
 

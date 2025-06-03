@@ -93,7 +93,7 @@ export default function Post(props: any) {
             </Link>
 )}
           <div className="flex content-center items-center bg-black rounded-md"></div>
-          <div className="flex h-max flex-col gap-[8px] md:p-6 p-4 ">
+          <div className="flex h-max flex-col gap-[8px] md:p-6 p-4 pr-4">
             <div className="flex gap-2 mt-0">
               <Link href={"/profile/" + props.handle} className="flex  gap-[10px] mt-0">
                <UserInformation
@@ -159,7 +159,7 @@ export default function Post(props: any) {
                    <span className="text-sm font-medium whitespace-nowrap text-neutral-400">@{props.quotehandle}</span>
                  </div>
                </div>
-               <h1 className="px-4 ml-auto w-max text-sm font-medium text-neutral-400">{props.quotetime}</h1>
+               <h1 className="px-4 ml-auto w-max text-xs font-medium text-neutral-400">{props.quotetime}</h1>
 
              </div>
 
@@ -215,9 +215,10 @@ export default function Post(props: any) {
                 </Link>
                 <Link
                   href={"/quote/" + props.id}
-                  className="flex flex-row content-center items-center pr-2 pl-4 space-x-2 text-white"
+                  className="flex flex-row content-center items-center pl-6 space-x-2 text-white"
                 >
-<svg width="24" height="24"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeWidth={"1"} fill="currentColor" d="M19 7a1 1 0 0 0-1-1h-8v2h7v5h-3l3.969 5L22 13h-3zM5 17a1 1 0 0 0 1 1h8v-2H7v-5h3L6 6l-4 5h3z"/></svg>                </Link>
+                  <svg width="22" height="22" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m13.5 13.5l3 3l3-3"/><path d="M9.5 4.5h3a4 4 0 0 1 4 4v8m-9-9l-3-3l-3 3"/><path d="M11.5 16.5h-3a4 4 0 0 1-4-4v-8"/></g></svg>
+                  </Link>
                 <BookMarksComponent
                   userliked={props.userbookmarked}
                   postid={props.id}

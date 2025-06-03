@@ -1,4 +1,5 @@
 "use client";
+import InduvidualQuickies from "@/components/InduvidualQuickies";
 import More from "@/components/More";
 import PostComponent from "@/components/PostComponent";
 import notification from "@/utils/notifications/notification";
@@ -13,6 +14,7 @@ import { Oval } from "react-loader-spinner";
 export default function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
   const router = useRouter();
+  const [opened,setOpened] =useState('posts')
   const supabase = createClient();
   const [image, setImage] = useState("");
   const [posts, setPosts] = useState<any>([]);
@@ -393,7 +395,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
           <div className="flex flex-col gap-2 justify-between sm:gap-0 sm:flex-row">
             <h1
               style={{ wordBreak: "break-word", whiteSpace: "normal" }}
-              className="mt-1 mr-12 text-sm font-normal leading-relaxed text-neutral-500 two-line-elipsis sm:text-neutral-500"
+              className="mt-1 mr-12 text-base font-normal leading-relaxed text-neutral-400 two-line-elipsis sm:text-neutral-400"
             >
               {blocked && "You have blocked this user. Unblock them to view their posts."}
               {imblockedby && !blocked && "This user has blocked you. You can no longer view their posts or quickies."}
@@ -412,26 +414,36 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
             <div className="flex flex-row gap-6 content-center items-center p-4 mx-8 my-4 mb-1 rounded-md bg-neutral-800/30 md:mx-14">
               <div className="flex flex-row w-full md:mx-auto">
                 <div className="flex flex-col gap-1 content-center items-center mx-auto w-max">
-                  <h1 className="text-xs font-semibold text-neutral-300">Followers</h1>
-                  <h1 className="text-sm font-medium text-neutral-500">{followers} Followers</h1>
+                  <h1 className="text-sm font-semibold text-neutral-300">Followers</h1>
+                  <h1 className="text-base font-medium text-neutral-500">{followers} Followers</h1>
                 </div>
                 <div className="flex flex-col gap-1 content-center items-center mx-auto w-max">
-                  <h1 className="text-xs font-semibold text-neutral-300">Following</h1>
-                  <h1 className="text-sm font-medium text-neutral-500">{following} Following</h1>
+                  <h1 className="text-sm font-semibold text-neutral-300">Following</h1>
+                  <h1 className="text-base font-medium text-neutral-500">{following} Following</h1>
                 </div>
               </div>
             </div>
-            <div className="flex justify-between items-center px-8 mt-8 mb-4 lex-row md:mb-4 md:mt-10">
-              <h1 className="text-lg font-bold text-white">{name}&apos;s Posts</h1>
+          
              {!blocked && !imblockedby &&
-              <Link
-                href={"/quickies/" + slug}
-                className="py-2 ml-2 text-sm font-medium text-white rounded-full cursor-pointer md:px-6 md:bg-neutral-900/50"
-              >
-                View Quickies
-              </Link>
-}
-            </div>
+          (     
+    <div className="flex sticky flex-row flex-grow mt-4 w-auto text-base font-medium text-white font-pops">
+    <div
+      onClick={() => setOpened("posts")}
+      className={`w-1/2 py-4 cursor-pointer text-center ${opened == "posts" ? "border-b-2 border-b-primary-800" : ""}`}
+    >
+      Posts
+    </div>
+    <div
+      onClick={() => setOpened("quickies")}
+      className={`w-1/2 py-4 cursor-pointer text-center ${opened == "quickies" ? "border-b-2 border-b-primary-800" : ""}`}
+    >
+      Quickies
+    </div>
+            
+  </div>
+          )}
+
+{!blocked && !imblockedby && opened=="posts" &&
             <div className="flex flex-col gap-2 px-0 md:px-0">
               {!loading ? (
                 posts.length > 0 ? (
@@ -478,7 +490,17 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
               )}
               <More myblocked={blocked} handle={slug} />
             </div>
+}
+{!blocked && !imblockedby && opened=="quickies" && 
+
+<InduvidualQuickies handle={slug} / >
+
+
+}
+
           </>
+
+          
         )}
       </div>
     </div>
