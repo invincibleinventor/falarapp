@@ -795,9 +795,9 @@ const pickerWrapperRef = useRef<HTMLDivElement | null>(null);
           />
        
         </div>
-        {!props.quote && mentionarray.filter((mention:any) => mention !== props.myhandle).length > 0 &&
+        {!props.quote && mentionarray.filter((mention:any) => mention !== props.myhandle).filter((mention:any) => mention !== props.handle).length > 0 &&
         <div className="flex flex-row gap-2 content-center items-center mx-6 mt-6 w-auto">
-        {mentionarray.filter((mention:any) => mention !== props.myhandle).map((mention:any, index:any) => (
+        {mentionarray.filter((mention:any) => mention !== props.myhandle).filter((mention:any) => mention !== props.handle).map((mention:any, index:any) => (
   <div   className="flex flex-row content-center items-center px-3 py-1 my-0 space-x-2 w-auto text-sm text-center rounded-full bg-primary-950 text-neutral-300" key={mention}>
     <Link href={"/profile/"+mention}>@{mention}</Link>
     <h1 onClick={() => {

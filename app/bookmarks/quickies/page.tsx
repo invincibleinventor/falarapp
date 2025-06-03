@@ -65,7 +65,6 @@ export default function Index() {
         .select(`*, user (name, id, handle, image)`)
         .order("id", { ascending: false })
         .in("id", currentUser.quickiebookmarks)
-        .eq("parent", 0)
         .not("poster", "in", `(${currentUser.blocked.toString()})`)
         .not("poster", "in", `(${currentUser.blockedby.toString()})`)
         .limit(5);
