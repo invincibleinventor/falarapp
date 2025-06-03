@@ -4,6 +4,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@source inline("{hover:,}bg-red-{50,{100..900..100},950}");
+@source inline("{hover:,}bg-indigo-{50,{100..900..100},950}");
+
 :root {
   --color-primary: #06b6d4; /* primary (default) */
   --color-primary-50: #ecfeff;

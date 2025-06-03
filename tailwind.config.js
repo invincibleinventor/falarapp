@@ -5,7 +5,14 @@ const { themeVariants, prefersLight, prefersDark } = require('tailwindcss-theme-
 
 
 module.exports = withMT({
-  content: ["./app/**/*.{js,ts,jsx,tsx,mdx}", "./components/**/*.{js,ts,jsx,tsx,mdx}"],
+  content: ["./app/**/*.{js,ts,jsx,tsx,mdx}", "./components/**/*.{js,ts,jsx,tsx,mdx}", './config.js', // include your config file!
+  ],
+  safelist: [
+    'bg-gradient-to-b',
+    'from-red-950',
+    'to-indigo-950',
+    // Add any other dynamic classes you plan to use
+  ],
   theme: {
     extend: {
       colors: {
@@ -38,6 +45,7 @@ module.exports = withMT({
   darkMode: 'class',
   plugins: [
     require("@tailwindcss/typography"),
+    
     // ...
     themeVariants({
       themes: {
