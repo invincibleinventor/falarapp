@@ -73,7 +73,7 @@ export default function Post(props: any) {
   return (
     <div className="relative w-full animate-in">
       <div className="w-full">
-        <div className="flex flex-col px-2 py-2 border-b md:pr-2 lg:pr-2 border-b-neutral-900 md:py-0">
+        <div className="flex flex-col px-2 py-2 border-b md:pr-2 lg:pr-2 border-b-neutral-800 md:py-0">
           {props.parentid>0 &&
 (        <Link
               href={`/quickie/${props.parentid}`}
@@ -87,7 +87,7 @@ export default function Post(props: any) {
                   clipRule="evenodd"
                 ></path>
               </svg>
-              <span className="block">
+              <span className="block font-medium">
               Replying to @{props.parentname}
               </span>
             </Link>
@@ -217,8 +217,7 @@ export default function Post(props: any) {
                   href={"/quote/" + props.id}
                   className="flex flex-row content-center items-center pr-2 pl-4 space-x-2 text-white"
                 >
-<svg width="16" height="16" className="scale-x-[-1]" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="currentColor" d="M1.5 6.5h4a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-3a1 1 0 0 0-1 1zm0 0V10A3.5 3.5 0 0 0 5 13.5m3.5-7h4a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-3a1 1 0 0 0-1 1zm0 0V10a3.5 3.5 0 0 0 3.5 3.5"/></svg>                  
-                </Link>
+<svg width="24" height="24"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeWidth={"1"} fill="currentColor" d="M19 7a1 1 0 0 0-1-1h-8v2h7v5h-3l3.969 5L22 13h-3zM5 17a1 1 0 0 0 1 1h8v-2H7v-5h3L6 6l-4 5h3z"/></svg>                </Link>
                 <BookMarksComponent
                   userliked={props.userbookmarked}
                   postid={props.id}

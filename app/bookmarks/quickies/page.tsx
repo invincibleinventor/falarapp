@@ -97,8 +97,8 @@ export default function Index() {
         post.quotecontent = q[0]["content"];
         const date2 = new Date(q[0].created_at)
         let d = date2;
-        
-        post.quotetime = d.toLocaleTimeString().replace(/:\d+ /, ' ') + "  •  " + date2.toDateString().replace(/^\S+\s/,'');
+
+        post.quotetime = timeAgo.format(Date.now() - (date1.getTime() - date2.getTime()));
       }
         }
         if (post.to > 0) {

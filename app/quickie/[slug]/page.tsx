@@ -102,8 +102,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
           quotecontent = q[0]["content"];
           const date2 = new Date(q[0].created_at)
           let d = date2;
-          
-          quotetime = d.toLocaleTimeString().replace(/:\d+ /, ' ') + "  •  " + date2.toDateString().replace(/^\S+\s/,'');
+          quotetime = timeAgo.format(Date.now() - (date1.getTime() - new Date(q[0]["created_at"]).getTime()));
         }
       }
     mentionarray = data[0]["involved"];
