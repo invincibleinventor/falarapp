@@ -20,6 +20,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
       }
      </div>
+     <h1 className="px-8 my-4 mt-4 text-xl font-medium text-neutral-300">My Bookmarks</h1>
+
       <div className="flex flex-row flex-grow w-auto text-base font-medium text-white font-pops">
         <Link href="/bookmarks" className={`w-1/2 py-4 text-center ${pathname == "/bookmarks" ? "border-b-2 border-b-primary-800" : ""}`}>
           Posts

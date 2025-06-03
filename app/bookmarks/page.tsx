@@ -68,7 +68,6 @@ export default function Index() {
   return (
     <>
       <div className="overflow-hidden flex-1 p-0 py-2 h-screen">
-        <h1 className="px-8 my-4 mt-4 text-xl font-bold text-neutral-300">My Bookmarks</h1>
         <div className="overflow-y-scroll h-full hiddenscroll">
           <div className="flex flex-col gap-2 mb-20 animate-in hiddenscroll">
             {!loading ? (
