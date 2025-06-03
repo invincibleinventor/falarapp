@@ -766,8 +766,8 @@ const pickerWrapperRef = useRef<HTMLDivElement | null>(null);
         <textarea
           onChange={(e: any) => setText(e.target.value)}
           maxLength={150}
-          className={`px-6 py-0 pr-5 my-0 md:mt-4  mb-auto w-full h-full bg-transparent outline-none resize-none text-neutral-300 md:pr-4 hiddenscroll lg:pr-8 text-md md:text-lg placeholder:text-neutral-500 md:m-4 md:p-0 md:px-3 ${props.quote?'md:mt-0':'md:mt-2'}`}
-          placeholder="What's on your mind?"
+          className={`px-6 py-0 pr-5 my-0 md:mt-6  mb-auto w-full h-full bg-transparent outline-none resize-none text-neutral-300 md:pr-4 hiddenscroll lg:pr-8 text-md md:text-lg placeholder:text-neutral-500 md:m-4 md:p-0 md:px-3 ${props.quote?'md:mt-0 ':'md:mt-2 mt-4'}`}
+          placeholder="Add a reply?"
         ></textarea>
         <div className="grid grid-cols-3 px-4 w-full sm:flex sm:flex-row">
           {imgsSrc.map((link, index) => (

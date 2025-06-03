@@ -275,7 +275,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                   clipRule="evenodd"
                 ></path>
               </svg>
-              <span className="block">
+              <span className="block font-medium text-primary-500">
               Replying to @{parentQuickie.user.handle}
               </span>
             </Link>
@@ -324,7 +324,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                       ))}
                     </div>
                   )}
-                  {quote && <Link href={"/quickie/"+quoteid} className="flex h-max border pb-4 mb-2 bg-black bg-opacity-10 border-neutral-800 rounded-2xl mx-4  flex-col gap-[8px] pt-4 mt-4 ">
+                  {quote && <Link href={"/quickie/"+quoteid} className="flex h-max border pb-4 mb-2 bg-black bg-opacity-10 border-neutral-900 shadow-xl rounded-2xl mx-4  flex-col gap-[8px] pt-4 mt-4 ">
              
              <div className="flex flex-row gap-2 content-center items-center h-max shrink-0">
                <div className="flex gap-[10px] px-4 mt-0">

@@ -102,7 +102,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
       }
       const date2 = new Date(data[0].created_at)
       let d = date2;
-      createdat = d.toLocaleTimeString().replace(/:\d+ /, ' ') + "  •  " + date2.toDateString().replace(/^\S+\s/,'');
+      createdat = timeAgo.format(Date.now() - (date1.getTime() - date2.getTime()));
       time = date1.getTime() - date2.getTime();
       loading = false;
     } else if (e || data.length == 0) {
@@ -114,32 +114,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
   await set();
 
 
-    async function getReplies() {
-      const { data: replies } = await supabase
-        .from("quickies")
-        .select("*, user (name, handle, id, image)")
-        .eq("to", slug)
-        .not("poster", "in", `(${blocked.length > 0 ? blocked.toString() : '""'})`)
-        .not("poster", "in", `(${newblocked.length > 0 ? newblocked.toString() : '""'})`)
-        .order("id", { ascending: false })
-        .limit(5);
-
   
-      if (!replies) return [];
-  
-      return replies.map((r) => {
-        const createdDate = new Date(r.created_at);
-        r.time = timeAgo.format(Date.now() - (date1.getTime() - createdDate.getTime()));
-        r.likedlist = r.liked
-
-        r.liked = r.liked.includes(myhandle);
-        r.bookmarkedlist = r.bookmarked
-        r.bookmarked = r.bookmarked.includes(myhandle);
-        return r;
-      });
-    }
-  
-     comments = await getReplies();
  
      const formatText = (text: string) => {
       // Split by spaces and mentions/hashtags/URLs as separate tokens
@@ -240,7 +215,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                       <span className="text-sm font-medium whitespace-nowrap text-neutral-400">@{author}</span>
                     </div>
                   </div>
-                  <h1 className="px-4 ml-auto w-max text-sm font-medium text-neutral-400">{createdat}</h1>
+                  <h1 className="px-4 ml-auto w-max text-xs font-medium text-neutral-400">{createdat}</h1>
 
                 </div>
 

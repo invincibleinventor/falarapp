@@ -50,7 +50,7 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#08203E", en
   @apply h-[400px]   font-pops rounded-2xl border-none bg-primary-950 !important;
 }
 .GifPickerReact{
-  @apply h-[200px] lg:h-[450px]  font-pops rounded-t-none lg:rounded-tr-2xl lg:rounded-l-none border-none bg-primary-950 !important;
+  @apply h-[200px]  bg-opacity-20  lg:h-[450px]  font-pops rounded-t-none lg:rounded-tr-2xl lg:rounded-l-none border-none bg-white !important;
 }
 .gpr-header{
   @apply border-none !important;

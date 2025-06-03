@@ -430,10 +430,10 @@ export default function QuickieMakerComponent(props: any) {
       setImgsSrc(arr);
   }
   return (
-    <div className="lg:flex-row flex flex-col lg:min-h-[80px] min-w-[300px] animate-in min-h-[400px] xl:mr-[400px] shadow-lg border border-neutral-900 rounded-2xl mx-auto ">
+    <div className="lg:flex-row flex flex-col lg:min-h-[80px] bg-white/10 min-w-[300px] animate-in min-h-[400px] xl:mr-[400px] shadow-lg border border-neutral-900 rounded-2xl mx-auto ">
      
       <div className={`flex relative flex-col content-center items-start rounded-2xl lg:w-[544px] lg:min-h-[80px] min-h-[400px] bg-primary-950/80 ${gif?'rounded-r-none':'rounded-r-lg'}`}>
-        <div className={`flex flex-row w-full bg-opacity-20 border-b bg-primary-950 border-b-neutral-900 rounded-tl-2xl h-[70px] ${gif?'rounded-r-none rounded-tr-none':'rounded-t-2xl'}`}>
+        <div className={`flex flex-row w-full bg-opacity-20 bg-white/20  rounded-tl-2xl h-[70px] ${gif?'rounded-r-none rounded-tr-none':'rounded-t-2xl'}`}>
           <h1 className="px-2 mx-4 my-auto h-[70px] flex items-center content-center text-lg font-semibold text-neutral-300">New Quickie</h1>
           <button className="mr-2 ml-auto" onClick={(e: any) => handleClick(e)}>
             <svg
@@ -456,7 +456,7 @@ export default function QuickieMakerComponent(props: any) {
         <textarea
           onChange={(e: any) => setText(e.target.value)}
           maxLength={150}
-          className="px-6 py-5 pr-5 mb-auto w-full h-full bg-transparent outline-none resize-none text-neutral-300 md:pr-4 hiddenscroll lg:pr-8 text-md md:text-lg placeholder:text-neutral-600 md:m-4 md:p-0 md:px-2"
+          className="px-6 py-5 pr-5 mb-auto w-full h-full bg-transparent outline-none resize-none text-neutral-300 md:pr-6 hiddenscroll lg:pr-10 text-md md:text-lg placeholder:text-neutral-500 md:m-4 md:p-0 md:px-2"
           placeholder="What's on your mind?"
         ></textarea>
         <div className="grid grid-cols-3 px-4 mb-20 w-full bg-transparent sm:flex sm:flex-row">

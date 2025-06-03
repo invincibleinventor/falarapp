@@ -238,10 +238,10 @@ type ThemeContextType = {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [currentColor, setCurrentColor] = useState<string>("amber");
+  const [currentColor, setCurrentColor] = useState<string>("pink");
 
   useEffect(() => {
-    const savedColor = localStorage.getItem("selectedColor") || "amber";
+    const savedColor = localStorage.getItem("selectedColor") || "pink";
     setCurrentColor(savedColor);
     updateCSSVariables(savedColor);
   }, []);

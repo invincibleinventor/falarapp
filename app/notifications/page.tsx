@@ -44,7 +44,7 @@ export default function Page() {
               notifications.map((post: { [x: string]: any }) => (
                 <Notification
                   id={post["id"]}
-                  userid={post["userid"]}
+                  userid={post["to"]}
                   title={post["title"]}
                   notifications={notifications.length}
                   key={post["id"]}

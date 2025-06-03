@@ -1,113 +1,40 @@
-"use client";
 import { AppConfig } from "@/config/config";
-import { createClient } from "@/utils/supabase/client";
+import { createClient } from "@/utils/supabase/server";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { createUser } from "./actions";
 
-import { useEffect, useState } from "react";
-export default function Create() {
-  const supabase = createClient();
-const [access,setAccess] = useState(false);
-  useEffect(() => {
-    async function get() {
-      const {
-        data: { user },
-        error,
-      } = await supabase.auth.getUser();
-      if (error) {
-        window.location.replace("/login");
-      } else {
-        if (user) {
-          const { data } = await supabase.from("user").select("*").eq("id", user.id);
-          if (data && data.length > 0) {
-            
-            window.location.replace("/");
-          } else {
-            if (user.email) {
-              setAccess(true);
-              setEmail(user.email);
-              setImage(user.user_metadata.avatar_url);
-            }
-          }
-        }
-      }
-    }
-    get();
-  });
+export default async function CreatePage() {
+  const supabase = createClient(cookies());
 
-  const [handle, setHandle] = useState("");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [about, setAbout] = useState("");
-  const [image, setImage] = useState("");
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  async function create() {
-    const checkHandleExists = async (handle: string) => {
-      try {
-        const { data, error } = await supabase.rpc("check_handle_existence", { p_handle: handle });
+  if (!user) redirect("/login");
 
-        if (error) {
-          throw error;
-        }
+  const { data } = await supabase.from("user").select("*").eq("id", user.id);
+  if (data && data.length > 0) redirect("/");
 
-        return data.length > 0;
-      } catch (error) {
-        console.error("Error checking handle existence:", error);
-        throw error;
-      }
-    };
-    const exists = await checkHandleExists(handle);
+  const email = user.email!;
+  const image = user.user_metadata.avatar_url;
 
-    if (exists) {
-      alert("This username cannot be used. Please try a different username.");
-    } else {
-      const { error } = await supabase.from("user").insert({
-        email: email,
-        name: name,
-        cover: "/bgcover.jpg",
-        handle: handle.toLowerCase(),
-        about: about,
-        image: image,
-        followers: [],
-        following: [AppConfig.officialaccount],
-        bookmarks: [],
-        liked: [],
-        private: false,
-      });
-      if (error) {
-        console.log(error);
-      } else {
-        const { data: d } = await supabase.from("user").select("*").eq("handle", AppConfig.officialaccount);
-        if (d && d.length > 0) {
-          const ls = d[0]["followers"];
-          ls.push(handle.toLowerCase());
-          const { error: es } = await supabase
-            .from("user")
-            .update({ followers: ls })
-            .eq("handle", AppConfig.officialaccount);
-          if (es) {
-            console.log(es);
-          } else {
-            window.location.replace("/");
-          }
-        }
-      }
-    }
-  }
-  return access ? (
-    <div className={`flex flex-col justify-center items-center px-10 mx-auto w-full max-w-lg h-screen`}>
+  return (
+    <div className="flex flex-col justify-center items-center px-10 mx-auto w-full max-w-lg h-screen">
       <form
         className="flex flex-col gap-2 justify-center my-auto ml-auto w-full animate-in text-foreground"
-        action={create}
+        action={createUser}
       >
+        <input type="hidden" name="email" value={email} />
+        <input type="hidden" name="image" value={image} />
+
         <h1 className="text-2xl font-semibold text-white">Welcome To {AppConfig.title}</h1>
         <h1 className="pb-10 text-base font-normal text-neutral-400">
           Let us setup your profile on {AppConfig.title}. Setup your profile to continue.
         </h1>
-        <label className="text-sm text-neutral-300" htmlFor="name">
-          Name
-        </label>
+
+        <label className="text-sm text-neutral-300" htmlFor="name">Name</label>
         <input
-          onChange={(e) => setName(e.target.value)}
           className="px-4 py-2 mb-6 text-sm rounded-md border outline-none bg-black/20 text-neutral-300 border-neutral-900 focus:outline-primary-800"
           name="name"
           placeholder="Please Type Out Your Name"
@@ -115,11 +42,9 @@ const [access,setAccess] = useState(false);
           minLength={4}
           maxLength={20}
         />
-        <label className="text-sm text-neutral-300" htmlFor="name">
-          Username - You cannot change this later
-        </label>
+
+        <label className="text-sm text-neutral-300" htmlFor="handle">Username - You cannot change this later</label>
         <input
-          onChange={(e) => setHandle(e.target.value.trim().replace(" ", "_"))}
           className="px-4 py-2 mb-6 text-sm rounded-md border outline-none bg-black/20 text-neutral-300 border-neutral-900 focus:outline-primary-800"
           name="handle"
           placeholder="Please Type Out Your Username"
@@ -127,13 +52,11 @@ const [access,setAccess] = useState(false);
           minLength={4}
           maxLength={12}
         />
-        <label className="text-sm text-neutral-300" htmlFor="content">
-          About
-        </label>
+
+        <label className="text-sm text-neutral-300" htmlFor="about">About</label>
         <textarea
-          onChange={(e) => setAbout(e.target.value)}
           className="px-4 py-2 mb-6 text-sm rounded-md border outline-none bg-black/20 text-neutral-300 border-neutral-900 focus:outline-primary-800"
-          name="content"
+          name="about"
           placeholder="Please Type About Yourself"
           required
           minLength={4}
@@ -145,8 +68,5 @@ const [access,setAccess] = useState(false);
         </button>
       </form>
     </div>
-  ):
-  (<></>)
-  
-  ;
+  );
 }
