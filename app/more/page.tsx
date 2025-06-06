@@ -212,7 +212,7 @@ export default function Create() {
           name="content"
           placeholder="Please Type About Yourself"
           required
-          minLength={24}
+          minLength={10}
           maxLength={100}
         />
 
