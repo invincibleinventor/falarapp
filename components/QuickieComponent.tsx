@@ -155,7 +155,7 @@ export default function Post(props: any) {
                   </div>
                 )}
               </div>
-              {props.quote && <div onClick={()=>window.location.replace("/quickie/"+props.quoteid)} className="flex h-max border pb-4 mb-6 cursor-pointer shadow-xl border-neutral-900  bg-black bg-opacity-10  rounded-2xl mx-0  flex-col gap-[8px] pt-4 mt-4 ">
+              {props.quote && <div onClick={()=>window.location.replace("/quickie/"+props.quoteid)} className="flex h-max border pb-4 mb-6 cursor-pointer  border-neutral-800  bg-neutral-950/10 rounded-xl mx-0  flex-col gap-[8px] pt-4 mt-4 ">
              
              <div className="flex flex-row gap-2 content-center items-center h-max shrink-0">
                <div className="flex gap-[10px] px-4 mt-0">
@@ -164,7 +164,7 @@ export default function Post(props: any) {
                  height={20}
                    src={props.quotedisplay}
                    alt="user profile"
-                   className="rounded-md object-cover min-w-[28px] max-w-[28px] h-7"
+                   className="rounded-md object-cover min-w-[24px] max-w-[24px] h-6 max-h-6"
                  />
                  <div className="flex content-center items-center">
                    <h1>
@@ -232,7 +232,7 @@ export default function Post(props: any) {
                   href={"/quote/" + props.id}
                   className="flex flex-row content-center items-center pr-5 pl-5 space-x-2 text-white"
                 >
-                  <svg width="22" height="22" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m13.5 13.5l3 3l3-3"/><path d="M9.5 4.5h3a4 4 0 0 1 4 4v8m-9-9l-3-3l-3 3"/><path d="M11.5 16.5h-3a4 4 0 0 1-4-4v-8"/></g></svg>
+                  <svg width="22" height="22" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg"><g fill="none" fillRule="evenodd" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"><path d="m13.5 13.5l3 3l3-3"/><path d="M9.5 4.5h3a4 4 0 0 1 4 4v8m-9-9l-3-3l-3 3"/><path d="M11.5 16.5h-3a4 4 0 0 1-4-4v-8"/></g></svg>
                   </Link>
                 <BookMarksComponent
                   userliked={props.userbookmarked}

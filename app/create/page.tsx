@@ -154,7 +154,7 @@ export default function Create() {
             />
           </div>
 
-          <button disabled={disabled} className="px-8 py-4 mb-2 w-max text-xs font-semibold text-white rounded-full bg-primary-800">
+          <button disabled={disabled} className="px-8 py-4 mb-2 w-max text-xs font-semibold text-white rounded-full bg-primary-700">
             Publish This Post
           </button>
         </form>

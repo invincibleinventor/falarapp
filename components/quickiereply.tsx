@@ -720,7 +720,7 @@ const pickerWrapperRef = useRef<HTMLDivElement | null>(null);
   
   return (
       <div className={`flex relative flex-col content-center items-start min-h-[100px] ${1==1?'flex-col-reverse':'flex-col'}`}>
-         <div ref={pickerWrapperRef} id="reply" className={gif?`absolute top-0 right-0 rounded-2xl border-none bottom-0 left-0 mx-auto my-auto w-max h-max z-[1000000] ${AppConfig.customtheme?AppConfig.custombg:'bg-primary-950'}`:"hidden"}>
+         <div ref={pickerWrapperRef} id="reply" className={gif?`absolute top-0 right-0 rounded-2xl border border-neutral-800 bottom-0 left-0 mx-auto my-auto w-max h-max z-[1000000] ${AppConfig.customtheme?AppConfig.custombg:'bg-primary-950'}`:"hidden"}>
          <GifPicker  theme={Theme.DARK} onGifClick={(gif)=>(showGif(false),handleGif(gif.url))}  tenorApiKey={'AIzaSyAjudoqhS67M8SXNrdrcGxuXnBCtnvg2Ho'}/>
           </div>
          
@@ -754,7 +754,7 @@ const pickerWrapperRef = useRef<HTMLDivElement | null>(null);
           <button
             disabled={disabled}
             onClick={() => publish()}
-            className="px-6 py-2 my-auto mr-4 text-sm font-medium text-white rounded-full h-max font-pops bg-primary-800"
+            className="px-6 py-2 my-auto mr-4 text-sm font-medium text-white rounded-full h-max font-pops bg-primary-700"
           >
             Publish
           </button>

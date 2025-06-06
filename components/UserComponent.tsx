@@ -78,19 +78,19 @@ export default function UserComponent(props: any) {
       href={"/profile/" + props.handle}
       className="mx-auto my-2 flex md:h-[270.29px] w-[calc(303.86px)] rounded-md flex-col md:pb-4 pb-5 p-4 xl:mx-2 xl:w-auto"
     >
-      <div className="flex flex-row items-center content-center justify-between">
-        <div className="flex flex-row items-center content-center space-x-3">
+      <div className="flex flex-row justify-between content-center items-center">
+        <div className="flex flex-row content-center items-center space-x-3">
           <UserInformation
             {...props}
             imfollowing={imfollowing}
             onfollow={onfollow}
-            id={props.userid}
+            id={props.id}
             image={props.image}
             imgclass="object-cover w-10 h-10 rounded-lg"
             alt="profile-pic"
           />
           <div className="flex flex-col">
-            <h1 className="text-base font-bold text-neutral-300">{a}</h1>
+            <h1 className="text-base font-semibold text-neutral-300">{a}</h1>
             <h1 className="text-xs font-normal text-neutral-400">@{props.handle}</h1>
           </div>
         </div>
@@ -98,20 +98,20 @@ export default function UserComponent(props: any) {
           onClick={(e) => (e.stopPropagation(), e.preventDefault(), onfollow(props.handle))}
           className={
             imfollowing
-              ? "h-max border border-black bg-white px-4 py-1 text-xs rounded-full text-black"
-              : "h-max border border-black bg-primary-800 px-4 py-1 text-xs rounded-full text-white"
+              ? "px-4 py-1 text-xs text-black bg-white rounded-full border border-black h-max"
+              : "px-4 py-1 text-xs text-white rounded-full border border-black h-max bg-primary-700"
           }
         >
           {imfollowing ? "Unfollow" : "Follow"}
         </button>
       </div>
-      <div className="flex flex-row items-center content-center gap-6 p-4 mx-0 my-6 mb-4 border rounded-md bg-neutral-900/40 ">
+      <div className="flex flex-row gap-6 content-center items-center p-4 mx-0 my-6 mb-4 rounded-lg bg-neutral-800/40">
         <div className="flex flex-row w-full md:mx-auto">
-          <div className="flex flex-col items-center content-center gap-1 mx-auto w-max">
+          <div className="flex flex-col gap-1 content-center items-center mx-auto w-max">
             <h1 className="text-xs font-semibold text-neutral-300">Followers</h1>
             <h1 className="text-sm font-medium text-neutral-400">{props.followers} Followers</h1>
           </div>
-          <div className="flex flex-col items-center content-center gap-1 mx-auto w-max">
+          <div className="flex flex-col gap-1 content-center items-center mx-auto w-max">
             <h1 className="text-xs font-semibold text-neutral-300">Following</h1>
             <h1 className="text-sm font-medium text-neutral-400">{props.following} Following</h1>
           </div>

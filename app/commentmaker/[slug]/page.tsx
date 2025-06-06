@@ -350,7 +350,7 @@ export default function Create({ params }: { params: Promise<{ slug: string }>})
   return (
     <div className="flex  h-screen w-[calc(100vw-68px)]  flex-col content-center items-start md:w-full">
       <div className="flex flex-row w-full bg-black border-b border-b-neutral-900">
-        <h1 className="px-2 mx-4 my-6 text-xl font-semibold text-neutral-300 md:font-bold md:text-xl">New Comment</h1>
+        <h1 className="px-2 mx-4 my-6 text-xl font-semibold text-neutral-300 md:font-semibold md:text-xl">New Comment</h1>
         <button className="mr-6 ml-auto" onClick={(e: any) => handleClick(e)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"

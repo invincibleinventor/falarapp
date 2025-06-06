@@ -74,7 +74,7 @@ export default function Create() {
           className="flex flex-col justify-center w-full gap-2 my-auto ml-auto md:pr-10 hiddenscroll animate-in text-foreground"
           action={create}
         >
-          <h1 className="mt-8 mb-4 text-2xl font-bold text-black md:text-3xl">Edit Resume</h1>
+          <h1 className="mt-8 mb-4 text-2xl font-semibold text-black md:text-3xl">Edit Resume</h1>
           <label className="text-base" htmlFor="name">
             First Name
           </label>

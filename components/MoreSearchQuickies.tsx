@@ -12,15 +12,7 @@ export default function More(props: any) {
   const { ref, inView } = useInView();
   const [halt, setHalt] = useState(false);
   const [posts, setPosts] = useState<any>([]);
-  const [quote,setQuote] = useState<boolean>(false);
-  const [quoteid,setQuoteid] = useState<string>("");
-  const [quotehandle,setQuotehandle] = useState<string>("");
-  const [quotename,setQuotename] = useState<string>("");
-  const [quotedisplay,setQuotedisplay] = useState<string>("");
-  const [quoteimage,setQuoteimage] = useState<any[]>([]);
-  const [quotephotocount,setQuotephotocount] = useState<number>(0);
-  const [quotecontent,setQuotecontent] = useState<string>("");
-  const [quotetime,setQuotetime] = useState<string>("");
+
 
   TimeAgo.locale(en);
   const PAGE_COUNT = 5;

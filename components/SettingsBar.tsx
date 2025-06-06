@@ -16,9 +16,9 @@ url={
   return (
     <div className="">
       <div
-        className={`absolute md:static left-0 top-0 lg:static  flex w-max  flex-col items-start md:p-0 ${loc.startsWith("/post/") ? "md:flex" : ""}`}
+        className={` p-4 pt-0   flex w-max  md:p-0 ${loc.startsWith("/post/") ? "md:flex" : ""}`}
       >
-        <div className="flex flex-row md:flex-col space-x-1 md:space-x-0 md:py-4 md:mt-[calc(17*4px)] md:space-y-[0px] md:px-4 md:pt-[4px]">
+        <div className="flex flex-row  space-x-1 md:space-x-0 md:py-4 md:space-y-[0px] md:px-4 md:pt-[4px]">
           <Headeritem
             link="/more"
             url={

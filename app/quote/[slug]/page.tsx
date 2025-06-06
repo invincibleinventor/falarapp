@@ -176,8 +176,8 @@ export default async function App({ params }: { params: Promise<{ slug: string }
             </h1>
             <Link
               href="/quickies"
-              className={`mx-auto mt-3 w-max rounded-full px-8 py-3 text-xs font-bold ${
-                1 == 1 ? "bg-primary-800 text-white" : "border-2  bg-white "
+              className={`mx-auto mt-3 w-max rounded-full px-8 py-3 text-xs font-semibold ${
+                1 == 1 ? "bg-primary-700 text-white" : "border-2  bg-white "
               }`}
             >
               Return Back
@@ -198,7 +198,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
 
           <div className="w-full pt-[61px] lg:pr-2 px-2 py-[6px] pb-0">
             <div className="flex flex-col rounded-none md:gap-0">
-              <Link href={"/quickie/"+slug} className="flex h-max shadow-xl border border-neutral-900 pb-4 mb-2 bg-black bg-opacity-10  rounded-2xl mx-4  flex-col gap-[8px] pt-4 mt-4 ">
+              <Link href={"/quickie/"+slug} className="flex h-max border border-neutral-800 pb-4 mb-2 bg-neutral-950 bg-opacity-10  rounded-xl mx-4  flex-col gap-[8px] pt-4 mt-4 ">
              
                 <div className="flex flex-row gap-2 content-center items-center h-max shrink-0">
                   <div className="flex gap-[10px] px-4 mt-0">
@@ -207,7 +207,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                     height={20}
                       src={profile}
                       alt="user profile"
-                      className="rounded-md object-cover min-w-[28px] max-w-[28px] h-7"
+                      className="rounded-md object-cover min-w-[24px] max-w-[24px] max-h-6"
                     />
                     <div className="flex content-center items-center">
                       <h1>

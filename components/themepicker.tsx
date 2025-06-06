@@ -14,7 +14,7 @@ export default function ColorSwitcher() {
         {Object.keys(colorPalettes).map((color) => (
           <div
             key={color}
-            className={`relative w-full h-12 rounded-md`}
+            className={`relative w-full h-12 rounded-md aspect-video`}
             style={{
               backgroundColor: colorPalettes[color]["800"],
             }}

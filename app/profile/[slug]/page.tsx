@@ -322,7 +322,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
     }
   }
   return !loading ? (
-    <div className="overflow-hidden flex-1 p-0 h-screen">
+    <div className={`overflow-hidden flex-1 p-0 h-screen ${!loggedin?'lg:mx-96 border-x border-x-neutral-800':''}`}>
         {!loggedin &&
       
       <div className="flex flex-row justify-between content-center items-center px-6 py-4 space-y-1 w-full bg-blue-600">
@@ -330,7 +330,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
         <Link href={('/login')} className="px-6 py-2 w-max text-xs font-semibold text-blue-600 bg-white rounded-full transition-all duration-200 ease-linear hover:bg-neutral-200 hover:shadow-lg">Sign Up To Falar</Link>
         </div>
 }
-      <div className="overflow-y-scroll pb-10 h-full hiddenscroll">
+      <div className={`overflow-y-scroll pb-10 h-full hiddenscroll`}>
         <div className="relative h-64">
           <div className="m-0 h-48 w-[calc(100%)] rounded-none  bg-neutral-200 ">
             {cover && (
@@ -358,7 +358,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
             <button
               onClick={() => onfollow()}
               className={`absolute rounded-full bottom-10 right-7 px-8 py-3 text-xs font-semibold md:right-12  ${
-                !(imfollowing || myself) ? "border-[1px] bg-primary-800 text-white" : "border-[1px] bg-white text-black"
+                !(imfollowing || myself) ? "border-[1px] bg-primary-700 text-white" : "border-[1px] bg-white text-black"
               }`}
             >
               {myself ? "Edit Profile" : imfollowing ? "Unfollow" : "Follow"}
@@ -427,22 +427,22 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
           
              {!blocked && !imblockedby &&
           (     
-    <div className="flex sticky flex-row flex-grow mt-4 w-auto text-sm text-base font-medium text-white md:text-base font-pops">
+    <div className="flex sticky flex-row flex-grow mx-4 mt-4 w-auto text-sm font-medium text-white md:text-base font-pops">
     <div
       onClick={() => setOpened("posts")}
-      className={`w-1/3 py-2 md:py-4 cursor-pointer text-center ${opened == "posts" ? "border-b-2 border-b-primary-800" : ""}`}
+      className={`w-1/3 py-2 m-2 cursor-pointer rounded-lg text-center ${opened == "posts" ? "bg-neutral-700/30" : ""}`}
     >
       Posts
     </div>
     <div
       onClick={() => setOpened("media")}
-      className={`w-1/3 py-2 md:py-4 cursor-pointer text-center ${opened == "media" ? "border-b-2 border-b-primary-800" : ""}`}
+      className={`w-1/3 py-2 m-2 cursor-pointer rounded-lg text-center ${opened == "media" ? "bg-neutral-700/30" : ""}`}
     >
       Media
     </div>
     <div
       onClick={() => setOpened("quickies")}
-      className={`w-1/3 py-2 md:py-4 cursor-pointer text-center ${opened == "quickies" ? "border-b-2 border-b-primary-800" : ""}`}
+      className={`w-1/3 py-2 m-2 cursor-pointer rounded-lg text-center ${opened == "quickies" ? "bg-neutral-700/30" : ""}`}
     >
       Quickies
     </div>

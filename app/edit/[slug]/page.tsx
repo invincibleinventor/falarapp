@@ -139,7 +139,7 @@ export default function Page({ params }: {params: Promise<{ slug: string }>}) {
             action={create}
           >
             <div className="flex flex-row justify-between content-center items-center">
-              <h1 className="mb-6 text-2xl font-bold text-neutral-300 md:text-3xl">
+              <h1 className="mb-6 text-2xl font-semibold text-neutral-300 md:text-3xl">
                 Edit <span className="hidden md:inline-block">The</span> Post
               </h1>
               <div className="flex flex-row content-center items-center pb-5">
@@ -230,7 +230,7 @@ export default function Page({ params }: {params: Promise<{ slug: string }>}) {
 
             <button
               disabled={deleteDialog != "hidden" ? true : false}
-              className="px-8 py-4 mb-2 w-max text-xs font-semibold text-white rounded-full bg-primary-800"
+              className="px-8 py-4 mb-2 w-max text-xs font-semibold text-white rounded-full bg-primary-700"
             >
               Publish This Post
             </button>
@@ -249,7 +249,7 @@ export default function Page({ params }: {params: Promise<{ slug: string }>}) {
           <Link
             href="/"
             className={`mx-auto mt-3 rounded-md w-max px-8 py-3 text-xs font-medium  ${
-              1 == 1 ? "bg-primary-800 text-white" : "border-2 bg-white"
+              1 == 1 ? "bg-primary-700 text-white" : "border-2 bg-white"
             }`}
           >
             Return To Home

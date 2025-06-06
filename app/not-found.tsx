@@ -11,7 +11,7 @@ export default function Error({}) {
         <Link
           href="/"
           className={`mx-auto mt-3  w-max px-8 py-3 rounded-full text-xs font-medium ${
-            1 == 1 ? "bg-primary-800 text-white" : "bg-white text-white"
+            1 == 1 ? "bg-primary-700 text-white" : "bg-white text-white"
           }`}
         >
           Return Back

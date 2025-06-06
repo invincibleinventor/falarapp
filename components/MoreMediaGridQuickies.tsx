@@ -35,10 +35,8 @@ const [images,setImages] = useState<any>([]);
         .from("quickies")
         .select("*, user(id,name,image,handle)")
         .order("id", { ascending: false })
-        .not("poster", "in", `(${props.newblocked.toString()})`)
         .eq("handle",props.handle)
         .not('image', 'is', null)
-                .not("poster", "in", `(${props.myblocked.toString()})`)
         .range(from, to);
       if (error) {
         console.log(error);

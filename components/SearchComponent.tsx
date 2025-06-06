@@ -22,7 +22,8 @@ export default function Search(props: any) {
       </svg>
       <input
         onKeyDown={(e) => {
-          if (e.key === "Enter") search();
+          
+          if (e.key === "Enter") (e.preventDefault(),search());
         }}
         onChange={(e) => setValue(e.target.value)}
         minLength={4}

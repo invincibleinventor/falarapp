@@ -21,8 +21,15 @@ async function getuser() {
     data: { user },
   } = await supabase.auth.getUser();
   if(user){
-  return true;
+    const {data} = await supabase.from('user').select('*').eq('id',user.id);
+    if(data && data.length > 0) {
+      return true;
+    }
+    else{
+      return false;
+    }
   }
+  
   
   else{ return false};
 }
@@ -56,7 +63,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         </main>
         }
        {!loggedin && (
-  <main className="">
+  <main className="font-pops">
     {children}
   </main>
 )}

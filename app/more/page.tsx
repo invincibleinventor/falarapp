@@ -212,7 +212,7 @@ export default function Create() {
           maxLength={100}
         />
 
-        <button className="px-8 py-4 mx-auto mb-2 w-max text-xs font-medium text-white rounded-full bg-primary-800">
+        <button className="px-8 py-4 mx-auto mb-2 w-max text-xs font-medium text-white rounded-full bg-primary-700">
           Save Your Changes
         </button>
       </form>

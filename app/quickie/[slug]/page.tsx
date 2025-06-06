@@ -201,7 +201,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
   console.log(comments);
   console.log("above");
   return !loading ? (
-    <div className="flex overflow-hidden relative flex-col flex-1 h-screen bg-transparent">
+    <div className={`flex overflow-hidden relative flex-col flex-1 h-screen bg-transparent ${!loggedin?'lg:mx-96 border-x border-x-neutral-800':''}`}>
         {!loggedin &&
       
       <div className="flex flex-row justify-between content-center items-center px-6 py-4 space-y-1 w-full bg-blue-600 md:border-x md:border-x-neutral-800">
@@ -219,8 +219,8 @@ export default async function App({ params }: { params: Promise<{ slug: string }
             </h1>
             <Link
               href="/quickies"
-              className={`mx-auto mt-3 w-max rounded-full px-8 py-3 text-xs font-bold ${
-                1 == 1 ? "bg-primary-800 text-white" : "border-2  bg-white "
+              className={`mx-auto mt-3 w-max rounded-full px-8 py-3 text-xs font-semibold ${
+                1 == 1 ? "bg-primary-700 text-white" : "border-2  bg-white "
               }`}
             >
               Return Back
@@ -309,7 +309,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                       ))}
                     </div>
                   )}
-                  {quote && <Link href={"/quickie/"+quoteid} className="flex h-max border pb-4 mb-2 bg-black bg-opacity-10 border-neutral-900 shadow-xl rounded-2xl mx-4  flex-col gap-[8px] pt-4 mt-4 ">
+                  {quote && <Link href={"/quickie/"+quoteid} className="flex h-max border pb-4 mb-2 bg-neutral-950/10 border-neutral-800 rounded-xl mx-4  flex-col gap-[8px] pt-4 mt-4 ">
              
              <div className="flex flex-row gap-2 content-center items-center h-max shrink-0">
                <div className="flex gap-[10px] px-4 mt-0">
@@ -318,7 +318,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                  height={20}
                    src={quotedisplay}
                    alt="user profile"
-                   className="rounded-md object-cover min-w-[28px] max-w-[28px] h-7"
+                   className="rounded-md object-cover min-w-[24px] max-w-[24px] max-h-6"
                  />
                  <div className="flex content-center items-center">
                    <h1>
@@ -412,8 +412,8 @@ export default async function App({ params }: { params: Promise<{ slug: string }
       </h1>
       <Link
         href="/"
-        className={`mx-auto mt-3 w-max rounded-full px-8 py-3 text-xs font-bold ${
-          1 == 1 ? "bg-primary-800 text-white" : "border-2  bg-white "
+        className={`mx-auto mt-3 w-max rounded-full px-8 py-3 text-xs font-semibold ${
+          1 == 1 ? "bg-primary-700 text-white" : "border-2  bg-white "
         }`}
       >
         Login Now

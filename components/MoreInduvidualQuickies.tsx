@@ -34,10 +34,8 @@ export default function More(props: any) {
         .from("quickies")
         .select("*, user(id,name,image,handle)")
         .order("id", { ascending: false })
-        .not("poster", "in", `(${props.newblocked.toString()})`)
         .eq("handle",props.handle)
         
-        .not("poster", "in", `(${props.myblocked.toString()})`)
         .range(from, to);
       if (error) {
         console.log(error);
@@ -47,7 +45,6 @@ export default function More(props: any) {
           const ds = data;
           
           for await (const [index, post] of ds.entries()) {
-            let liked = false;
             if(ds[index]["quote"]){
               post.quote = true;
           post.quoteid = ds[index]["quoteid"];
@@ -70,21 +67,17 @@ export default function More(props: any) {
             }
            
   
-            const likedlist: string | any[] = ds[index].liked;
-            let bookmarked = false;
-            const bookmarkedlist: any[] = ds[index].bookmarked;
-            if (likedlist.includes(props.myhandle)) {
-              liked = true;
-            }
-            if (bookmarkedlist.includes(props.myhandle)) {
-              bookmarked = true;
-            }
+           
+              const liked = false;
+            
+             const bookmarked = false;
+          post.bookmarkedlist = ds[index]["liked"];
+            post.likedlist = ds[index]["bookmarked"];
 
             ds[index].liked = liked;
             ds[index].bookmarked = bookmarked;
-            ds[index].bookmarkedlist = bookmarkedlist;
-            ds[index].likedlist = likedlist;
-            console.log(likedlist);
+            
+       
 
             const date2 = new Date(ds[index].created_at);
             ds[index].diff = date1.getTime() - date2.getTime();

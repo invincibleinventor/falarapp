@@ -26,41 +26,15 @@ export default function Index(props:any) {
   const [loading, setLoading] = useState(true);
   const [empty, setEmpty] = useState(true);
  const [images,setImages] = useState<any[]>([]);
-  //descripti
 
-  const [quote,setQuote] = useState<boolean>(false);
-  const [quoteid,setQuoteid] = useState<string>("");
-  const [quotehandle,setQuotehandle] = useState<string>("");
-  const [quotename,setQuotename] = useState<string>("");
-  const [quotedisplay,setQuotedisplay] = useState<string>("");
-  const [quoteimage,setQuoteimage] = useState<any[]>([]);
-  const [quotephotocount,setQuotephotocount] = useState<number>(0);
-  const [quotecontent,setQuotecontent] = useState<string>("");
-  const [quotetime,setQuotetime] = useState<string>("");
   
   useEffect(() => {
     const supabase = createClient();
     const date1 = new Date();
 
     const getData = async () => {
-      const { data: userData } = await supabase.auth.getUser();
-      if (!userData.user) return;
+      
 
-      const s = userData.user.id;
-      const { data: userDetails } = await supabase.from("user").select("*").eq("id", s);
-
-      if (!userDetails || userDetails.length === 0) return;
-      const currentUser = userDetails[0];
-
-      const following = currentUser.following;
-      setL(currentUser.quickiebookmarks);
-      setUserBookmarked(currentUser.quickiebookmarks);
-      setUserLiked(currentUser.quickieliked);
-      setMyBlocked(currentUser.blocked);
-      setNewBlocked(currentUser.blockedby);
-      setMyHandle(currentUser.handle);
-      setMyName(currentUser.name);
-      setMyPhoto(currentUser.image);
 
       const { data, error } = await supabase
         .from("quickies")
@@ -69,8 +43,7 @@ export default function Index(props:any) {
         .eq("handle",props.handle )
         .not('image', 'is', null)
 
-        .not("poster", "in", `(${currentUser.blocked.toString()})`)
-        .not("poster", "in", `(${currentUser.blockedby.toString()})`)
+     
         .limit(6);
 
       if (error) {

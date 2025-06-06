@@ -99,7 +99,7 @@ export default function Index() {
                 </h1>
                 <Link
                   href="/explore"
-                  className={`px-8 py-3 mx-auto mt-3 w-max text-xs font-medium text-white rounded-full bg-primary-800`}
+                  className={`px-8 py-3 mx-auto mt-3 w-max text-xs font-medium text-white rounded-full bg-primary-700`}
                 >
                   Explore People
                 </Link>

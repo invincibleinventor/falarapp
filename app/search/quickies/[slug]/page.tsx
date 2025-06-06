@@ -195,18 +195,19 @@ quotetime={post.quotetime}
                       name={post.user.name}
                       description={post.content}
                     />
+                    
                   ))
                 ) : (
                   <div className="flex content-center items-center px-10 mt-24 w-full sm:px-24 md:px-16 lg:px-24">
                     <div className="flex flex-col gap-2 mx-auto max-w-max">
                       <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">No Quickies To View!</h1>
-                      <h1 className="mx-auto text-sm text-center text-neutral-600">
+                      <h1 className="mx-auto text-sm text-center text-neutral-500">
                         There are no quickies that match your search. Maybe try exploring other quickies?
                       </h1>
                       <Link
                         href="/quickies/all"
                         className={`mx-auto mt-3 rounded-full w-max px-8 py-3 text-xs font-medium  ${
-                          1 == 1 ? "bg-primary-800 text-white" : "border-2 bg-white"
+                          1 == 1 ? "bg-primary-700 text-white" : "border-2 bg-white"
                         }`}
                       >
                         Explore Quickies

@@ -17,10 +17,10 @@ export default async function Page() {
   }
   return (
     <div className="">
-      <div className={`h-screen flex-1 gap-2 overflow-hidden px-8`}>
-        <div className="h-full overflow-y-scroll hiddenscroll">
-          <form className="flex flex-col justify-center w-full gap-2 py-10 pr-5 my-auto overflow-x-hidden animate-in text-foreground">
-            <button className="px-8 py-4 mb-2 text-xs font-medium text-white rounded-md bg-primary-800 w-max">
+      <div className={`overflow-hidden flex-1 gap-2 px-8 h-screen`}>
+        <div className="overflow-y-scroll h-full hiddenscroll">
+          <form className="flex overflow-x-hidden flex-col gap-2 justify-center py-10 pr-5 my-auto w-full animate-in text-foreground">
+            <button className="px-8 py-4 mb-2 w-max text-xs font-medium text-white rounded-md bg-primary-700">
               Publish This Post
             </button>
           </form>

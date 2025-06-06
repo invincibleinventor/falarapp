@@ -152,7 +152,7 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
   console.log(comments);
   console.log("above");
   return !loading ? (
-    <div className="flex overflow-hidden relative flex-col flex-1 h-screen md:mr-4 lg:mx-0">
+    <div className={`flex overflow-hidden relative flex-col flex-1 h-screen md:mr-4 lg:mx-0 ${!loggedin?'lg:mx-96 border-x border-x-neutral-800':''}`}>
       {!loggedin &&
       
       <div className="flex flex-row justify-between content-center items-center px-6 py-4 space-y-1 w-full bg-primary-600 md:border-x md:border-x-neutral-800">
@@ -170,7 +170,7 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
             </h1>
             <Link
               href="/"
-              className={`mx-auto mt-4 rounded-full w-max px-8 py-3 text-xs font-bold ${
+              className={`mx-auto mt-4 rounded-full w-max px-8 py-3 text-xs font-semibold ${
                 1 == 1 ? "bg-primary-700 text-white" : "border-2  bg-white "
               }`}
             >
@@ -250,8 +250,8 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
       </h1>
       <Link
         href="/"
-        className={`mx-auto mt-3 w-max rounded-full px-8 py-3 text-xs font-bold ${
-          1 == 1 ? "bg-primary-800 text-white" : "border-2  bg-white "
+        className={`mx-auto mt-3 w-max rounded-full px-8 py-3 text-xs font-semibold ${
+          1 == 1 ? "bg-primary-700 text-white" : "border-2  bg-white "
         }`}
       >
         Login Now
@@ -279,7 +279,7 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
         </div>
       )}
       {loggedin && !blocked.includes(authorid) && !newblocked.includes(authorid)  && (
-        <div className="absolute bottom-0 z-[1000000] flex flex-row w-full border-t bg-[#000205]/30 backdrop-blur-lg border-x h-14 border-t-neutral-800 border-x-neutral-800">
+        <div className="absolute bottom-0 z-[1000000] flex flex-row w-full border-t  backdrop-blur-lg border-x h-14">
           <BookMarksComponent
             userliked={userbookmarked}
             postid={slug}

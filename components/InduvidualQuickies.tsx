@@ -41,32 +41,15 @@ export default function Index(props:any) {
     const date1 = new Date();
 
     const getData = async () => {
-      const { data: userData } = await supabase.auth.getUser();
-      if (!userData.user) return;
-
-      const s = userData.user.id;
-      const { data: userDetails } = await supabase.from("user").select("*").eq("id", s);
-
-      if (!userDetails || userDetails.length === 0) return;
-      const currentUser = userDetails[0];
-
-      const following = currentUser.following;
-      setL(currentUser.quickiebookmarks);
-      setUserBookmarked(currentUser.quickiebookmarks);
-      setUserLiked(currentUser.quickieliked);
-      setMyBlocked(currentUser.blocked);
-      setNewBlocked(currentUser.blockedby);
-      setMyHandle(currentUser.handle);
-      setMyName(currentUser.name);
-      setMyPhoto(currentUser.image);
+      
+     
 
       const { data, error } = await supabase
         .from("quickies")
         .select(`*, user (name, id, handle, image)`)
         .order("id", { ascending: false })
         .eq("handle",props.handle )
-        .not("poster", "in", `(${currentUser.blocked.toString()})`)
-        .not("poster", "in", `(${currentUser.blockedby.toString()})`)
+       
         .limit(5);
 
       if (error) {
@@ -115,9 +98,9 @@ export default function Index(props:any) {
           parentid = post.to;
           
         }
+        const liked = false;
+        const bookmarked = false;
       
-        const liked = post.liked.includes(currentUser.handle);
-        const bookmarked = post.bookmarked.includes(currentUser.handle);
         const date2 = new Date(post.created_at);
         const diff = date1.getTime() - date2.getTime();
       

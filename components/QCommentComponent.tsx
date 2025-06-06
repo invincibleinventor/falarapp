@@ -96,7 +96,7 @@ export default function Post(props: any) {
               <Link href={`/post/${props.id}`} className="my-3 mb-[6px] flex w-full flex-row justify-between ">
                 <h1
                   style={{ wordBreak: "break-word", whiteSpace: "normal" }}
-                  className="text-lg font-bold two-line-ellipsis md:text-lg md:font-semibold"
+                  className="text-lg font-semibold two-line-ellipsis md:text-lg md:font-semibold"
                 >
                   {a}
                 </h1>

@@ -63,7 +63,7 @@ export default async function CreatePage() {
           maxLength={100}
         />
 
-        <button className="px-8 py-4 mx-auto mb-2 w-max text-xs font-medium text-white rounded-full bg-primary-800">
+        <button className="px-8 py-4 mx-auto mb-2 w-max text-sm font-medium text-white rounded-full bg-primary-700">
           Setup Your Account
         </button>
       </form>

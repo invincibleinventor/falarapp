@@ -1,7 +1,6 @@
 /* eslint-disable tailwindcss/classnames-order */
 "use client";
 import { createClient } from "@/utils/supabase/client";
-import Image from "next/image";
 import { redirect, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 export default function Login() {
@@ -14,7 +13,7 @@ export default function Login() {
       console.log(error);
       alert(error.message);
     } else {
-      window.location.replace("/editprofile");
+      return redirect("/editprofile");
     }
   }
   async function register() {
@@ -27,7 +26,7 @@ export default function Login() {
       console.log(error);
       alert(error.message);
     } else {
-      window.location.replace("/editprofile");
+      return redirect("/editprofile");
     }
   }
 
@@ -43,7 +42,7 @@ export default function Login() {
           return window.location.replace('/')
         }else{
           
-          return window.location.replace("/editprofile");
+          return redirect("/editprofile");
       }
     }
     }
@@ -97,7 +96,7 @@ export default function Login() {
           ></input>
           <button
             onClick={(e) => (e.preventDefault(), console.log("login"), login())}
-            className="px-5 py-3 mt-4 mb-2 text-sm font-medium text-white rounded-full bg-primary-800"
+            className="px-5 py-3 mt-4 mb-2 text-sm font-medium text-white rounded-full bg-primary-700"
           >
             Sign In To Your Account
           </button>

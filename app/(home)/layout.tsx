@@ -15,7 +15,18 @@ const cookieStore = cookies();
   const {
     data: {user}
   } = await supabase.auth.getUser();
-  if (!user) return (<Landing></Landing>);
+  if(user){
+    const {data} = await supabase.from('user').select('*').eq('id',user.id);
+    if(data && data.length > 0) {
+      
+    }
+    else{
+      return (<Landing></Landing>);
+    }
+  }
+  
+  
+  else{ return <Landing></Landing>};
   //@ts-ignore
   const { data: profile } = supabase
     .from("profiles")

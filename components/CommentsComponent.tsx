@@ -83,7 +83,7 @@ export default function CommentsComponent(props: any) {
     <>
       {props.loggedin && (
         <div className="sticky  z-[100000] top-0 flex flex-col pt-6 space-y-2">
-                        <h1 className="sticky top-0 px-6 mb-4 text-xl font-bold text-neutral-300">Comments</h1>
+                        <h1 className="sticky top-0 px-6 mb-4 text-xl font-semibold text-neutral-300">Comments</h1>
 
           <div className="flex flex-row px-6 pt-2 pb-0 space-x-0">
             <Image alt={""} src={props.myphoto} width={32} height={32} className="w-7 h-7 rounded-md shrink-0" />
@@ -100,7 +100,7 @@ export default function CommentsComponent(props: any) {
               className="w-full  px-6  pt-[2px] pl-4 mb-0 text-sm font-medium text-neutral-300 bg-transparent outline-none resize-none placeholder:font-medium md:text-base h-max text-md"
               placeholder={"Post a comment publicly as " + props.myname}
             ></textarea>
-            <button onClick={()=>post()} className="px-6 py-2 text-sm text-white rounded-full transition-all duration-100 ease-linear bg-primary-800 hover:bg-primary-700 h-max">Post</button>
+            <button onClick={()=>post()} className="px-6 py-2 text-sm text-white rounded-full transition-all duration-100 ease-linear bg-primary-700 hover:bg-primary-700 h-max">Post</button>
           </div>
           <div className={!posted ? "hidden" : "py-6 mx-auto text-xs text-neutral-300"}>
             <h1>Posted</h1>
