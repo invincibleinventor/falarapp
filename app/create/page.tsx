@@ -9,7 +9,6 @@ import rehypeSanitize from "rehype-sanitize";
 
 export default function Create() {
   async function coverChange(id: string) {
-    console.log("here here");
     const bucket = "posts";
 
     const { error } = await supabase.storage.from(bucket).upload("/covers/" + id + ".jpg", file, { upsert: true });
@@ -17,9 +16,6 @@ export default function Create() {
     if (error) {
       alert("Error uploading file.");
     } else {
-      console.log(id);
-
-      console.log("updazted");
       return "https://xiexuntwvmedvyxokvvf.supabase.co/storage/v1/object/public/posts/covers/" + id + ".jpg";
     }
   }
@@ -35,9 +31,9 @@ export default function Create() {
   const [file, setFile] = useState<any>();
   const [changed, setChanged] = useState(false);
   const [title, setTitle] = useState("");
-  const [disabled, setDisabled] = useState(false)
+  const [disabled, setDisabled] = useState(false);
   async function create() {
-    setDisabled(true)
+    setDisabled(true);
     const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -154,7 +150,10 @@ export default function Create() {
             />
           </div>
 
-          <button disabled={disabled} className="px-8 py-4 mb-2 w-max text-xs font-semibold text-white rounded-full bg-primary-700">
+          <button
+            disabled={disabled}
+            className="px-8 py-4 mb-2 w-max text-xs font-semibold text-white rounded-full bg-primary-700"
+          >
             Publish This Post
           </button>
         </form>

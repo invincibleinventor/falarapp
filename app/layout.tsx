@@ -20,55 +20,49 @@ async function getuser() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if(user){
-    const {data} = await supabase.from('user').select('*').eq('id',user.id);
-    if(data && data.length > 0) {
+  if (user) {
+    const { data } = await supabase.from("user").select("*").eq("id", user.id);
+    if (data && data.length > 0) {
       return true;
-    }
-    else{
+    } else {
       return false;
     }
+  } else {
+    return false;
   }
-  
-  
-  else{ return false};
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-
-
   const loggedin = await getuser();
 
   return (
     <ThemeProvider>
+      <html lang="en" className="noSelect font-sohne">
+        <head>
+          <Script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></Script>
+        </head>
 
-    <html lang="en" className="noSelect font-sohne">
-      <head>
-        <Script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></Script>
-      </head>
+        <body
+          className={AppConfig.customtheme ? AppConfig.custombg : "bg-gradient-to-b to-black from-primary-950"}
+          lang="en"
+        >
+          {loggedin && (
+            <main>
+              <section className="relative m-auto flex h-screen font-pops flex-row content-center items-center overflow-hidden sm:w-screen lg:w-[1070px] xl:w-[1200px]">
+                <NavBar></NavBar>
+                <div className="w-full">
+                  <div className="flex-1 content-center items-center px-0 w-full h-screen border-l md:mx-0 border-l-neutral-800 md:border-x md:border-x-neutral-800">
+                    {children}
+                  </div>
+                </div>
 
-      <body className={AppConfig.customtheme?AppConfig.custombg:"bg-gradient-to-b to-black from-primary-950"} lang="en">
-        {loggedin && 
-        <main>
-          <section className="relative m-auto flex h-screen font-pops flex-row content-center items-center overflow-hidden sm:w-screen lg:w-[1070px] xl:w-[1200px]">
-            <NavBar></NavBar>
-            <div className="w-full">
-              <div className="flex-1 content-center items-center px-0 w-full h-screen border-l md:mx-0 border-l-neutral-800 md:border-x md:border-x-neutral-800">
-                {children}
-              </div>
-            </div>
-
-            <Sidebar></Sidebar>
-          </section>
-        </main>
-        }
-       {!loggedin && (
-  <main className="font-pops">
-    {children}
-  </main>
-)}
-      </body>
-    </html>
+                <Sidebar></Sidebar>
+              </section>
+            </main>
+          )}
+          {!loggedin && <main className="font-pops">{children}</main>}
+        </body>
+      </html>
     </ThemeProvider>
   );
 }

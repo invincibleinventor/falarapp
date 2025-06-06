@@ -10,8 +10,8 @@ import Link from "next/link";
 import { use, useEffect, useState } from "react";
 import { Oval } from "react-loader-spinner";
 
-export default function Page({ params }: { params: Promise<{ slug: string }>}) {
-  const {slug} = use(params);
+export default function Page({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params);
   const supabase = createClient();
 
   TimeAgo.locale(en);
@@ -24,7 +24,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }>}) {
   const [posts, setPosts] = useState<Record<string, unknown>[]>([]);
   const [loading, setLoading] = useState(true);
   const [blocked, setblocked] = useState([]);
-const [newblocked,setnewblocked]  = useState([])
+  const [newblocked, setnewblocked] = useState([]);
   useEffect(() => {
     async function get() {
       setLoading(true);
@@ -37,12 +37,11 @@ const [newblocked,setnewblocked]  = useState([])
         const { data, error } = await supabase.from("user").select("*").eq("id", id);
         if (data && data.length > 0) {
           setblocked(data[0]["blocked"]);
-          setnewblocked(data[0]["blockedby"])
+          setnewblocked(data[0]["blockedby"]);
           blocked = data[0]["blocked"];
-          newblocked = data[0]["blockedby"]
+          newblocked = data[0]["blockedby"];
         } else {
           if (error) {
-            console.log(error.message);
           }
         }
       }
@@ -57,7 +56,6 @@ const [newblocked,setnewblocked]  = useState([])
       if (error) {
         console.log(error);
       } else {
-        console.log("SUPADATA: ", data);
         const ds = data;
 
         for await (const [index, post] of ds.entries()) {
@@ -71,9 +69,6 @@ const [newblocked,setnewblocked]  = useState([])
         }
         setPosts(ds);
         setLoading(false);
-
-        // console.log(ds);
-        // console.log(posts);
       }
     }
     get();
@@ -82,7 +77,7 @@ const [newblocked,setnewblocked]  = useState([])
   return (
     <div className="overflow-hidden flex-1 p-0 py-2 h-screen">
       <div className="p-4 py-2 mx-1 md:mx-1">
-       <Search text="Posts" page="posts" value={search.replaceAll('%20',' ')}/>
+        <Search text="Posts" page="posts" value={search.replaceAll("%20", " ")} />
       </div>
       <div className="overflow-y-scroll h-full hiddenscroll">
         <div className="flex flex-col gap-2 mb-20 animate-in hiddenscroll">
@@ -94,7 +89,6 @@ const [newblocked,setnewblocked]  = useState([])
                   id={post.id}
                   title={post.title}
                   userid={post.user.id}
-
                   time={timeAgo.format(Date.now() - post.diff)}
                   key={post.id}
                   image={post.user.image}
@@ -110,7 +104,8 @@ const [newblocked,setnewblocked]  = useState([])
                 <div className="flex flex-col gap-4 mx-auto max-w-max">
                   <h1 className="mx-auto text-xl font-semibold text-center text-neutral-300">No Posts To View!</h1>
                   <h1 className="mx-auto text-sm text-center text-neutral-400">
-                    Your search results appear here. Seems like there are no posts related to your search term. Explore other posts maybe?
+                    Your search results appear here. Seems like there are no posts related to your search term. Explore
+                    other posts maybe?
                   </h1>
                   <Link
                     href="/all"

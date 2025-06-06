@@ -59,13 +59,10 @@ export default function CommentsComponent(props: any) {
         let l = [];
         l = data;
         for await (const [index, comment] of l.entries()) {
-          console.log(index, comment);
-
           const date2 = new Date(l[index].time);
           l[index].newtime = date1.getTime() - date2.getTime();
           if (props.loggedin) {
             if (l[index].liked.includes(props.myhandle)) {
-              console.log(props.myhandle, index);
               l[index].likedbyme = true;
             } else {
               l[index].likedbyme = false;
@@ -73,7 +70,6 @@ export default function CommentsComponent(props: any) {
           } else {
             l[index].likedbyme = false;
           }
-          console.log(l[index]);
         }
         setComments(l);
         setLoading(false);
@@ -90,10 +86,10 @@ export default function CommentsComponent(props: any) {
   return (
     <>
       {props.loggedin && (
-         <div className="sticky  z-[100000] top-0 shadow-lg flex flex-col pt-6 pb-6 space-y-2">
-         <h1 className="sticky top-0 px-6 mb-4 text-lg font-semibold text-neutral-300">Comments</h1>
+        <div className="sticky  z-[100000] top-0 shadow-lg flex flex-col pt-6 pb-6 space-y-2">
+          <h1 className="sticky top-0 px-6 mb-4 text-lg font-semibold text-neutral-300">Comments</h1>
 
-<div className="flex flex-row px-6 pt-2 pb-0 space-x-0">
+          <div className="flex flex-row px-6 pt-2 pb-0 space-x-0">
             <Image alt={""} src={props.myphoto} width={32} height={32} className="w-7 h-7 rounded-md shrink-0" />
             <textarea
               required
@@ -108,8 +104,12 @@ export default function CommentsComponent(props: any) {
               className="w-full px-6  pt-[2px] pl-4 mb-0 text-sm font-medium text-neutral-300 bg-transparent outline-none resize-none placeholder:font-medium md:text-base h-max text-md"
               placeholder={"Post a comment publicly as " + props.myname}
             ></textarea>
-                        <button onClick={()=>post()} className="px-6 py-2 text-sm text-white rounded-full transition-all duration-100 ease-linear bg-neutral-900 hover:bg-neutral-800 h-max">Post</button>
-
+            <button
+              onClick={() => post()}
+              className="px-6 py-2 text-sm text-white rounded-full transition-all duration-100 ease-linear bg-neutral-900 hover:bg-neutral-800 h-max"
+            >
+              Post
+            </button>
           </div>
           <div className={!posted ? "hidden" : "pb-6 mx-auto text-xs text-neutral-300"}>
             <h1>Posted</h1>
@@ -138,23 +138,28 @@ export default function CommentsComponent(props: any) {
                 loggedin={props.loggedin}
               />
             ))}
-            <MoreComments setState={setState} myhandle={props.myhandle} myblocked={props.myblocked} newblocked={props.newblocked} loggedin={props.loggedin} slug={props.slug} />
+            <MoreComments
+              setState={setState}
+              myhandle={props.myhandle}
+              myblocked={props.myblocked}
+              newblocked={props.newblocked}
+              loggedin={props.loggedin}
+              slug={props.slug}
+            />
           </>
         ) : (
-          
-            <Oval
-              height={40}
-              width={40}
-              color="#000000"
-              wrapperStyle={{}}
-              wrapperClass="mx-auto mt-5"
-              visible={loading ? true : false}
-              ariaLabel="oval-loading"
-              secondaryColor="#808080"
-              strokeWidth={2}
-              strokeWidthSecondary={2}
-            />
-          
+          <Oval
+            height={40}
+            width={40}
+            color="#000000"
+            wrapperStyle={{}}
+            wrapperClass="mx-auto mt-5"
+            visible={loading ? true : false}
+            ariaLabel="oval-loading"
+            secondaryColor="#808080"
+            strokeWidth={2}
+            strokeWidthSecondary={2}
+          />
         )}
       </div>
     </>

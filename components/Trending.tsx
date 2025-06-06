@@ -10,7 +10,6 @@ export default function Trending() {
   const [a, setA] = useState<any>({});
   useEffect(() => {
     const d = new Date().toLocaleDateString("en-IN");
-    console.log(d);
     const s = d.split("/");
 
     const year = s[2];
@@ -38,18 +37,14 @@ export default function Trending() {
     } else {
       h = 21;
     }
-    console.log(h);
     async function fetch() {
       const { data, error } = await supabase.from("trending").select(h.toString()).eq("date", sa);
       if (data && data.length > 0) {
         let j: any = data[0][h];
-        console.log(j);
         const sortedArray = Object.entries(j).sort(([, valueA]: [any, any], [, valueB]: [any, any]) => valueB - valueA);
         j = Object.fromEntries(sortedArray);
         j = Object.fromEntries(Object.entries(j).slice(0, 5));
         setA(j);
-        console.log(j);
-        console.log(a);
       } else {
         if (error) {
           console.log(error);

@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
 export async function GET(request: Request) {
- 
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
 
@@ -12,9 +11,8 @@ export async function GET(request: Request) {
     const supabase = createClient(cookieStore);
     await supabase.auth.exchangeCodeForSession(code);
 
-    return NextResponse.redirect(requestUrl.origin+'/editprofile');
+    return NextResponse.redirect(requestUrl.origin + "/editprofile");
   } else {
-    return NextResponse.redirect(requestUrl.origin+'/');
+    return NextResponse.redirect(requestUrl.origin + "/");
   }
-
 }

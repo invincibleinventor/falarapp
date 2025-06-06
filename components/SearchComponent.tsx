@@ -3,7 +3,6 @@ import { useState } from "react";
 export default function Search(props: any) {
   const [value, setValue] = useState("");
   function search() {
-    console.log("ok");
     window.location.replace("/search/" + props.page + "/" + value);
   }
   return (
@@ -22,13 +21,12 @@ export default function Search(props: any) {
       </svg>
       <input
         onKeyDown={(e) => {
-          
-          if (e.key === "Enter") (e.preventDefault(),search());
+          if (e.key === "Enter") e.preventDefault(), search();
         }}
         onChange={(e) => setValue(e.target.value)}
         minLength={4}
         maxLength={50}
-        defaultValue = {props.search}
+        defaultValue={props.search}
         type="search"
         className="font-pops text-sm md:mb-3 rounded-full peer h-[48px] w-full bg-neutral-700/20 focus:outline-none focus:outline-primary-600 pl-6 pr-14  placeholder:text-neutral-400 text-neutral-300"
         placeholder={"Search " + props.text}

@@ -23,25 +23,21 @@ export default function MoreNotifications() {
     const { data, error } = await supabase.from("notifications").select("*").range(from, to).eq("to", `${user?.id}`);
     if (error) {
       console.log(error);
-      setHalt(true)
+      setHalt(true);
     } else {
       if (data && data.length > 0) {
-        console.log(data);
         const ds = data;
 
         setNotifications([...notifications, ...ds]);
         if (ds.length < PAGE_COUNT) {
           setHalt(true);
+        } else {
+          setHalt(true);
         }
-       else {
+      } else {
         setHalt(true);
       }
     }
-    else{
-      setHalt(true)
-    }
-    }
-    
   }
   useEffect(() => {
     if (!halt && inView) {
@@ -67,8 +63,9 @@ export default function MoreNotifications() {
           ></Notification>
         ))}
       </div>
-      <div className="flex flex-col content-center items-center w-full">      <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
-
+      <div className="flex flex-col content-center items-center w-full">
+        {" "}
+        <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
         <Oval
           height={80}
           width={80}

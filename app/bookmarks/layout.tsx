@@ -9,26 +9,22 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   return (
     <div className="overflow-hidden flex-1 p-0 py-2 h-screen">
-            <div className="p-4 py-2 pb-2 mx-1 md:mx-1">
-
-      {pathname=='/bookmarks' &&
-                  <Search page="bookmarks" text="Bookmarked Posts" />
-
-      }
-      {pathname=="/bookmarks/quickies" &&
-                      <Search page="quickiebookmarks" text="Bookmarked Quickies" />
-
-      }
-     </div>
-     <h1 className="px-8 my-4 mt-4 text-xl font-medium text-neutral-300">My Bookmarks</h1>
+      <div className="p-4 py-2 pb-2 mx-1 md:mx-1">
+        {pathname == "/bookmarks" && <Search page="bookmarks" text="Bookmarked Posts" />}
+        {pathname == "/bookmarks/quickies" && <Search page="quickiebookmarks" text="Bookmarked Quickies" />}
+      </div>
+      <h1 className="px-8 my-4 mt-4 text-xl font-medium text-neutral-300">My Bookmarks</h1>
 
       <div className="flex flex-row flex-grow px-4 w-auto text-base font-medium text-white font-pops">
-        <Link href="/bookmarks" className={`w-1/2 py-2 m-2 text-center ${pathname == "/bookmarks" ? "bg-neutral-700/30" : ""}`}>
+        <Link
+          href="/bookmarks"
+          className={`w-1/2 py-2 m-2 rounded-lg text-center ${pathname == "/bookmarks" ? "bg-neutral-700/30" : ""}`}
+        >
           Posts
         </Link>
         <Link
           href="/bookmarks/quickies"
-          className={`w-1/2 py-2 m-2 text-center ${pathname == "/bookmarks/quickies" ? "bg-neutral-700/30" : ""}`}
+          className={`w-1/2 py-2 m-2 text-center rounded-lg ${pathname == "/bookmarks/quickies" ? "bg-neutral-700/30" : ""}`}
         >
           Quickies
         </Link>

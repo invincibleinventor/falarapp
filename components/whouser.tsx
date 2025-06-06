@@ -40,12 +40,12 @@ export default function Whouser(props: any) {
     }
   }
   },[])*/
-  const [imfollowing,setImFollowing] = useState<any>(false);
+  const [imfollowing, setImFollowing] = useState<any>(false);
   async function onfollow(handle: any) {
-    let localfollowerlist,localfollowinglist;
-    const {data:his} = await supabase.from('user').select('*').eq('handle',handle);
-    const {data:mine} = await supabase.from('user').select('*').eq('handle',myhandle);
-    if(his && mine){
+    let localfollowerlist, localfollowinglist;
+    const { data: his } = await supabase.from("user").select("*").eq("handle", handle);
+    const { data: mine } = await supabase.from("user").select("*").eq("handle", myhandle);
+    if (his && mine) {
       localfollowerlist = his[0]["followers"];
       localfollowinglist = mine[0]["following"];
     }
@@ -56,10 +56,13 @@ export default function Whouser(props: any) {
       arr2 = arr2.filter((item: any) => item !== handle);
 
       const { data, error } = await supabase.from("user").update({ followers: arr }).eq("handle", handle).select();
-      const { data: d, error: e } = await supabase.from("user").update({ following: arr2 }).eq("handle", myhandle).select();
-      
+      const { data: d, error: e } = await supabase
+        .from("user")
+        .update({ following: arr2 })
+        .eq("handle", myhandle)
+        .select();
+
       if (!error && !e) {
-     
         setImFollowing(false);
       }
     } else {
@@ -68,7 +71,11 @@ export default function Whouser(props: any) {
       const arr2 = localfollowinglist;
       arr2.push(handle);
       const { data, error } = await supabase.from("user").update({ followers: arr }).eq("handle", handle).select();
-      const { data: d, error: e } = await supabase.from("user").update({ following: arr2 }).eq("handle", myhandle).select();
+      const { data: d, error: e } = await supabase
+        .from("user")
+        .update({ following: arr2 })
+        .eq("handle", myhandle)
+        .select();
 
       if (!error && !e) {
         notification(
@@ -83,7 +90,6 @@ export default function Whouser(props: any) {
           props.myImage
         );
         setImFollowing(true);
-        
       }
     }
     return imfollowing;
@@ -91,17 +97,25 @@ export default function Whouser(props: any) {
   return (
     <div className="flex flex-row justify-between content-center items-center text-sm font-medium text-white">
       <Link href={"/profile/" + props.handle} className="flex flex-row gap-3 content-center items-center">
-        <UserInformation imfollowing={imfollowing}
-                    {...props}
-
-            onfollow={onfollow} id={hisid} imgclass="flex-shrink-0 w-6 h-6 rounded-md shrink-0" image={props.profile} />
+        <UserInformation
+          imfollowing={imfollowing}
+          {...props}
+          onfollow={onfollow}
+          id={hisid}
+          imgclass="flex-shrink-0 w-6 h-6 rounded-md shrink-0"
+          image={props.profile}
+        />
         <h1 className="text-sm font-medium text-white">{modify(props.name)}</h1>
       </Link>
       <button
         onClick={() => onfollow(props.handle)}
-        className={!imfollowing?"px-4 font-medium text-white rounded-full py-[2px] font-pops text-[12px] bg-primary-700":"px-4 font-medium text-black bg-white rounded-full py-[2px] font-poppins text-[12px]"}
+        className={
+          !imfollowing
+            ? "px-4 font-medium text-white rounded-full py-[2px] font-pops text-[12px] bg-primary-700"
+            : "px-4 font-medium text-black bg-white rounded-full py-[2px] font-poppins text-[12px]"
+        }
       >
-       {imfollowing?'Unfollow':'Follow'}
+        {imfollowing ? "Unfollow" : "Follow"}
       </button>
     </div>
   );

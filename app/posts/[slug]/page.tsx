@@ -7,9 +7,8 @@ import { use, useEffect, useState } from "react";
 import { Oval } from "react-loader-spinner";
 export default function Page({ params }: { params: Promise<{ slug: string }> }) {
   const supabase = createClient();
-  const {slug} = use(params);
+  const { slug } = use(params);
   const canInitSupabaseClient = () => {
-
     try {
       createClient();
       return true;
@@ -36,7 +35,6 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
       if (error) {
         console.log(error);
       } else {
-        console.log(data);
         const ds = data;
         for await (const [index, post] of ds.entries()) {
           const { data } = await supabase.from("user").select("*").eq("id", post.poster);
@@ -60,9 +58,9 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
   }, []);
   if (isSupabaseConnected) {
     return (
-      <div className="flex-1 h-screen p-0 py-2 overflow-hidden">
+      <div className="overflow-hidden flex-1 p-0 py-2 h-screen">
         <div className="p-4 py-2 mx-1 md:mx-1">
-          <div className="relative items-center content-center lg:pr-0">
+          <div className="relative content-center items-center lg:pr-0">
             <svg
               viewBox="0 0 24 24"
               aria-hidden="true"
@@ -84,7 +82,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
             ></input>
           </div>
         </div>
-        <div className="h-full overflow-y-scroll hiddenscroll">
+        <div className="overflow-y-scroll h-full hiddenscroll">
           <div className="flex flex-col gap-2 mb-20 animate-in hiddenscroll">
             {!loading ? (
               posts.map((post: any) => (
@@ -102,7 +100,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
                 />
               ))()
             ) : (
-              <div className="flex items-center content-center w-full h-screen">
+              <div className="flex content-center items-center w-full h-screen">
                 <Oval
                   height={80}
                   width={80}

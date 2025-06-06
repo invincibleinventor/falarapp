@@ -34,7 +34,6 @@ export default function MoreSearchPosts(props: any) {
       console.log(error);
     } else {
       if (data && data.length > 0) {
-        console.log(data);
         const ds = data;
         for await (const [index, post] of ds.entries()) {
           const date2 = new Date(ds[index].created_at);
@@ -61,7 +60,7 @@ export default function MoreSearchPosts(props: any) {
   }, [inView]);
   return (
     <>
-      <div className="flex flex-col items-center content-center gap-2 pb-20">
+      <div className="flex flex-col gap-2 content-center items-center pb-20">
         {posts.map((post: any) => (
           <PostComponent
             id={post.id}
@@ -75,11 +74,10 @@ export default function MoreSearchPosts(props: any) {
             handle={post.handle}
             name={post.user.name}
             userid={post.user.id}
-
             description={post.excerpt}
           />
         ))}
-                <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
+        <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
 
         <Oval
           height={80}

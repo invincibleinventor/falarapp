@@ -29,7 +29,9 @@ export default function Post(props: any) {
       <div className="w-full px-6 py-[6px] border-b border-neutral-800">
         <article className="px-2 py-6 pt-0">
           <Link href={"/profile/" + props.handle} className="flex gap-2 mt-4">
-           <UserInformation id={props.userid} image={props.dp}
+            <UserInformation
+              id={props.userid}
+              image={props.dp}
               imgclass="rounded-md object-cover min-w-[24px] max-w-[24px] h-6"
             />
             <div className="flex content-center items-center">
@@ -53,16 +55,16 @@ export default function Post(props: any) {
               <div className="md:ml-[60px] ml-6">
                 <h1 className="block md:w-[112px] md:h-[112px] w-[80px h-[56px]">
                   <div className="relative rounded-xl aspect-[4/4] min-h-[64px] min-w-[64px] max-w-full max-h-full shrink-0">
-                  <Image
-                    alt="cover"
-                    width={0}
-                    layout='fill'
-                    unoptimized={true}
-                    height={0}
-                    objectFit="cover"
-                    src={props.cover}
-                    className="object-cover rounded-xl aspect-[4/4] min-h-[64px] min-w-[64px] max-w-full max-h-full shrink-0"
-                  />
+                    <Image
+                      alt="cover"
+                      width={0}
+                      layout="fill"
+                      unoptimized={true}
+                      height={0}
+                      objectFit="cover"
+                      src={props.cover}
+                      className="object-cover rounded-xl aspect-[4/4] min-h-[64px] min-w-[64px] max-w-full max-h-full shrink-0"
+                    />
                   </div>
                 </h1>
               </div>

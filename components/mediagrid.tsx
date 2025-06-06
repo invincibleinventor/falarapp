@@ -1,4 +1,4 @@
-'use client'
+"use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useEffect, useState } from "react";
@@ -13,7 +13,7 @@ import MoreMediaGrid from "@/components/MoreMediaGridQuickies";
 TimeAgo.addLocale(en);
 const timeAgo = new TimeAgo("en-US");
 
-export default function Index(props:any) {
+export default function Index(props: any) {
   const [posts, setPosts] = useState<any[]>([]);
   const [userliked, setUserLiked] = useState<any[]>([]);
   const [userbookmarked, setUserBookmarked] = useState<any[]>([]);
@@ -25,77 +25,65 @@ export default function Index(props:any) {
   const [l, setL] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [empty, setEmpty] = useState(true);
- const [images,setImages] = useState<any[]>([]);
+  const [images, setImages] = useState<any[]>([]);
 
-  
   useEffect(() => {
     const supabase = createClient();
     const date1 = new Date();
 
     const getData = async () => {
-      
-
-
       const { data, error } = await supabase
         .from("quickies")
         .select(`*, user (name, id, handle, image)`)
         .order("id", { ascending: false })
-        .eq("handle",props.handle )
-        .not('image', 'is', null)
+        .eq("handle", props.handle)
+        .not("image", "is", null)
 
-     
         .limit(6);
 
       if (error) {
         console.log(error);
         setLoading(false);
         return;
-      }
-     
-      else if (data && data.length>0){
+      } else if (data && data.length > 0) {
         let ss = [];
-      let ens:any={};
+        let ens: any = {};
         const ds = data;
-        console.log(ds)
-          for await (const [index, post] of ds.entries()) {
-            for(let i = 0;i<post.image.length;i++){
-                
-              ens = {
-                image: post.image[i],
-                url: post.id,
-              }
-              ss.push(ens);
-            }
-
+        for await (const [index, post] of ds.entries()) {
+          for (let i = 0; i < post.image.length; i++) {
+            ens = {
+              image: post.image[i],
+              url: post.id,
+            };
+            ss.push(ens);
+          }
         }
-          setImages([...images,...ss]);
-      setEmpty(ds.length === 0);
-      setLoading(false);
-    }
-    else{
-       console.log("empty")
+        setImages([...images, ...ss]);
+        setEmpty(ds.length === 0);
+        setLoading(false);
+      } else {
         setLoading(false);
         setEmpty(true);
         return;
-      
-}   
-    }
-    
+      }
+    };
+
     getData();
   }, []);
 
   return (
     <div>
-    <div >
-
-
+      <div>
         {!loading ? (
           !empty ? (
             <div className="grid grid-cols-3 gap-2 px-5 py-5 md:gap-4">
-            {images.map((post) => (
-              <img className="object-cover col-span-1 rounded-xl border shadow-lg cursor-pointer border-neutral-900 aspect-square" src={post.image} onClick={()=>redirect('/quickie/'+post.url)} />
-            ))
-          }
+              {images.map((post) => (
+                <img
+                  className="object-cover col-span-1 rounded-xl border shadow-lg cursor-pointer border-neutral-900 aspect-square"
+                  src={post.image}
+                  onClick={() => redirect("/quickie/" + post.url)}
+                />
+              ))}
             </div>
           ) : (
             <div className="flex content-center items-center px-10 mt-24 w-full sm:px-24 md:px-16 lg:px-24">
@@ -104,27 +92,24 @@ export default function Index(props:any) {
                 <h1 className="mx-auto text-sm text-center text-neutral-400">
                   The user you are viewing hasn't posted any media yet.
                 </h1>
-                
               </div>
             </div>
           )
         ) : (
           <div className="flex content-center items-center w-full h-screen"></div>
         )}
-
-      
       </div>
       <MoreMediaGrid
-          myblocked={myblocked}
-          myhandle={myhandle}
-          myname={myname}
-          myphoto={myphoto}
-          handle={props.handle}
-          newblocked={newblocked}
-          userliked={userliked}
-          userbookmarked={userbookmarked}
-          in={l}
-        />
-        </div>
+        myblocked={myblocked}
+        myhandle={myhandle}
+        myname={myname}
+        myphoto={myphoto}
+        handle={props.handle}
+        newblocked={newblocked}
+        userliked={userliked}
+        userbookmarked={userbookmarked}
+        in={l}
+      />
+    </div>
   );
 }

@@ -16,14 +16,9 @@ export default function App(props: any) {
   }
   supabase
     .channel("notification_update")
-    .on(
-      "postgres_changes",
-      { event: "UPDATE", schema: "public", table: "user" },
-      (payload: any) => (console.log("beloww"), console.log(payload), deploy(payload))
-    )
+    .on("postgres_changes", { event: "UPDATE", schema: "public", table: "user" }, (payload: any) => deploy(payload))
     .subscribe();
   if (loc == props.link) {
-    console.log(props.link);
     a.opened = true;
   } else if (props.link == "/myself" && loc.startsWith("/profile")) {
     a.opened = true;
@@ -32,7 +27,6 @@ export default function App(props: any) {
   } else if (props.link == "/myself" && loc == "/customize") {
     a.opened = true;
   } else {
-    console.log("");
   }
 
   return (
@@ -43,13 +37,13 @@ export default function App(props: any) {
         </div>
       )}
       <Link
-      href={props.link}
-      className={`mx-2  flex cursor-pointer flex-row content-center items-center  h-[52px] w-[52px] transition-all   rounded-full md:rounded-full  md:h-max md:border-none  duration-100 ease-linear md:mx-0 md:w-full md:space-x-[10px] md:px-[14px] md:py-[10px] md:pr-8  ${
-        a.opened ? "bg-neutral-700/30" : ""
-      }`}
-    >
+        href={props.link}
+        className={`mx-2  flex cursor-pointer flex-row content-center items-center  h-[52px] w-[52px] transition-all   rounded-full md:rounded-full  md:h-max md:border-none  duration-100 ease-linear md:mx-0 md:w-full md:space-x-[10px] md:px-[14px] md:py-[10px] md:pr-8  ${
+          a.opened ? "bg-neutral-700/30" : ""
+        }`}
+      >
         <svg
-          className={`h-6 w-6 stroke-[2px]  text-neutral-400 ${a.opened ? "text-neutral-400 md:text-neutral-200" : "md:text-neutral-200"}`}
+          className={`w-6 h-6 stroke-[2px]" text-white lg:mx-0 mx-auto`}
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"

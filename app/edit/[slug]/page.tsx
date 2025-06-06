@@ -5,18 +5,17 @@ import "@mdxeditor/editor/style.css";
 import MDEditor from "@uiw/react-md-editor";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState ,use} from "react";
+import { useEffect, useRef, useState, use } from "react";
 import { Oval } from "react-loader-spinner";
 import rehypeSanitize from "rehype-sanitize";
 
-export default function Page({ params }: {params: Promise<{ slug: string }>}) {
-  const {slug } = use(params);
+export default function Page({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params);
   const supabase = createClient();
 
   const hiddenFileInput = useRef<HTMLInputElement | null>(null);
 
   async function coverChange(id: string) {
-    console.log("here here");
     const bucket = "posts";
 
     const { error } = await supabase.storage.from(bucket).upload("/covers/" + id + ".jpg", file, { upsert: true });
@@ -24,9 +23,6 @@ export default function Page({ params }: {params: Promise<{ slug: string }>}) {
     if (error) {
       alert("Error uploading file.");
     } else {
-      console.log(id);
-
-      console.log("updazted");
       return "https://xiexuntwvmedvyxokvvf.supabase.co/storage/v1/object/public/posts/covers/" + id + ".jpg";
     }
   }

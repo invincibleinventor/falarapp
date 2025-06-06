@@ -12,15 +12,15 @@ export default function More(props: any) {
   const { ref, inView } = useInView();
   const [halt, setHalt] = useState(false);
   const [posts, setPosts] = useState<any>([]);
-  const [quote,setQuote] = useState<boolean>(false);
-  const [quoteid,setQuoteid] = useState<string>("");
-  const [quotehandle,setQuotehandle] = useState<string>("");
-  const [quotename,setQuotename] = useState<string>("");
-  const [quotedisplay,setQuotedisplay] = useState<string>("");
-  const [quoteimage,setQuoteimage] = useState<any[]>([]);
-  const [quotephotocount,setQuotephotocount] = useState<number>(0);
-  const [quotecontent,setQuotecontent] = useState<string>("");
-  const [quotetime,setQuotetime] = useState<string>("");
+  const [quote, setQuote] = useState<boolean>(false);
+  const [quoteid, setQuoteid] = useState<string>("");
+  const [quotehandle, setQuotehandle] = useState<string>("");
+  const [quotename, setQuotename] = useState<string>("");
+  const [quotedisplay, setQuotedisplay] = useState<string>("");
+  const [quoteimage, setQuoteimage] = useState<any[]>([]);
+  const [quotephotocount, setQuotephotocount] = useState<number>(0);
+  const [quotecontent, setQuotecontent] = useState<string>("");
+  const [quotetime, setQuotetime] = useState<string>("");
 
   TimeAgo.locale(en);
   const PAGE_COUNT = 5;
@@ -41,30 +41,32 @@ export default function More(props: any) {
         console.log(error);
       } else {
         if (data && data.length > 0) {
-          console.log(data);
           const ds = data;
 
           for await (const [index, post] of ds.entries()) {
             let liked = false;
-            if(ds[index]["quote"]){
+            if (ds[index]["quote"]) {
               post.quote = true;
-          post.quoteid = ds[index]["quoteid"];
-          const { data: q } = await supabase.from("quickies").select("*, user (name, handle, id, image)").eq("id", post.quoteid);
-          if (q) {
-            post.quotehandle = q[0]["user"]["handle"];
-            post.quotename = q[0]["user"]["name"];
-            post.quotedisplay = q[0]["user"]["image"];
-            post.quoteimage = q[0]["image"];
-            
-            if(post.quoteimage){
-              post.quotephotocount = q[0]["image"].length;
-            }
-            post.quotecontent = q[0]["content"];
-            const date2 = new Date(q[0].created_at)
-            let d = date2;
-            
-            post.quotetime = timeAgo.format(Date.now() - (date1.getTime() - date2.getTime()));
-          }
+              post.quoteid = ds[index]["quoteid"];
+              const { data: q } = await supabase
+                .from("quickies")
+                .select("*, user (name, handle, id, image)")
+                .eq("id", post.quoteid);
+              if (q) {
+                post.quotehandle = q[0]["user"]["handle"];
+                post.quotename = q[0]["user"]["name"];
+                post.quotedisplay = q[0]["user"]["image"];
+                post.quoteimage = q[0]["image"];
+
+                if (post.quoteimage) {
+                  post.quotephotocount = q[0]["image"].length;
+                }
+                post.quotecontent = q[0]["content"];
+                const date2 = new Date(q[0].created_at);
+                let d = date2;
+
+                post.quotetime = timeAgo.format(Date.now() - (date1.getTime() - date2.getTime()));
+              }
             }
             const likedlist: string | any[] = ds[index].liked;
             let bookmarked = false;
@@ -75,25 +77,28 @@ export default function More(props: any) {
             if (bookmarkedlist.includes(props.myhandle)) {
               bookmarked = true;
             }
-            if(ds[index].to>0){
-              const { data } = await supabase.from("quickies").select(`*, 
+            if (ds[index].to > 0) {
+              const { data } = await supabase
+                .from("quickies")
+                .select(
+                  `*, 
                 user (
                 
                   handle
                 
-                )`).eq("id", post.to);
+                )`
+                )
+                .eq("id", post.to);
               ds[index].parentid = ds[index].to;
-  
-              if(data && data?.length>0){
+
+              if (data && data?.length > 0) {
                 ds[index].parentname = data[0].user.handle;
               }
-          
             }
             ds[index].liked = liked;
             ds[index].bookmarked = bookmarked;
             ds[index].bookmarkedlist = bookmarkedlist;
             ds[index].likedlist = likedlist;
-            console.log(likedlist);
 
             const date2 = new Date(ds[index].created_at);
             ds[index].diff = date1.getTime() - date2.getTime();
@@ -112,7 +117,7 @@ export default function More(props: any) {
         .from("quickies")
         .select("*,user(id,handle,name,image)")
         .order("id", { ascending: false })
-        .eq('to',0)
+        .eq("to", 0)
 
         .not("poster", "in", `(${props.myblocked.toString()})`)
         .not("poster", "in", `(${props.newblocked.toString()})`)
@@ -121,30 +126,32 @@ export default function More(props: any) {
         console.log(error);
       } else {
         if (data && data.length > 0) {
-          console.log(data);
           const ds = data;
 
           for await (const [index, post] of ds.entries()) {
             let liked = false;
-            if(ds[index]["quote"]){
+            if (ds[index]["quote"]) {
               post.quote = true;
-          post.quoteid = ds[index]["quoteid"];
-          const { data: q } = await supabase.from("quickies").select("*, user (name, handle, id, image)").eq("id", post.quoteid);
-          if (q) {
-            post.quotehandle = q[0]["user"]["handle"];
-            post.quotename = q[0]["user"]["name"];
-            post.quotedisplay = q[0]["user"]["image"];
-            post.quoteimage = q[0]["image"];
-            
-            if(post.quoteimage){
-              post.quotephotocount = q[0]["image"].length;
-            }
-            post.quotecontent = q[0]["content"];
-            const date2 = new Date(q[0].created_at)
-            let d = date2;
-            
-            post.quotetime = timeAgo.format(Date.now() - (date1.getTime() - date2.getTime()));
-          }
+              post.quoteid = ds[index]["quoteid"];
+              const { data: q } = await supabase
+                .from("quickies")
+                .select("*, user (name, handle, id, image)")
+                .eq("id", post.quoteid);
+              if (q) {
+                post.quotehandle = q[0]["user"]["handle"];
+                post.quotename = q[0]["user"]["name"];
+                post.quotedisplay = q[0]["user"]["image"];
+                post.quoteimage = q[0]["image"];
+
+                if (post.quoteimage) {
+                  post.quotephotocount = q[0]["image"].length;
+                }
+                post.quotecontent = q[0]["content"];
+                const date2 = new Date(q[0].created_at);
+                let d = date2;
+
+                post.quotetime = timeAgo.format(Date.now() - (date1.getTime() - date2.getTime()));
+              }
             }
             const likedlist: string | any[] = ds[index].liked;
             let bookmarked = false;
@@ -155,25 +162,28 @@ export default function More(props: any) {
             if (bookmarkedlist.includes(props.myhandle)) {
               bookmarked = true;
             }
-            if(ds[index].to>0){
-              const { data } = await supabase.from("quickies").select(`*, 
+            if (ds[index].to > 0) {
+              const { data } = await supabase
+                .from("quickies")
+                .select(
+                  `*, 
                 user (
                 
                   handle
                 
-                )`).eq("id", post.to);
+                )`
+                )
+                .eq("id", post.to);
               ds[index].parentid = ds[index].to;
-  
-              if(data && data?.length>0){
+
+              if (data && data?.length > 0) {
                 ds[index].parentname = data[0].user.handle;
               }
-          
             }
             ds[index].liked = liked;
             ds[index].bookmarked = bookmarked;
             ds[index].bookmarkedlist = bookmarkedlist;
             ds[index].likedlist = likedlist;
-            console.log(likedlist);
 
             const date2 = new Date(ds[index].created_at);
             ds[index].diff = date1.getTime() - date2.getTime();
@@ -215,17 +225,15 @@ export default function More(props: any) {
             bookmarkedlist={post.bookmarkedlist}
             likedlist={post.likedlist}
             myhandle={props.myhandle}
-          
-
-quote={post.quote}
-quoteid={post.quoteid}
-quotehandle={post.quotehandle}
-quotename={post.quotename}
-quotedisplay={post.quotedisplay}
-quoteimage={post.quoteimage}
-quotephotocount={post.quotephotocount}
-quotecontent={post.quotecontent}
-quotetime={post.quotetime}
+            quote={post.quote}
+            quoteid={post.quoteid}
+            quotehandle={post.quotehandle}
+            quotename={post.quotename}
+            quotedisplay={post.quotedisplay}
+            quoteimage={post.quoteimage}
+            quotephotocount={post.quotephotocount}
+            quotecontent={post.quotecontent}
+            quotetime={post.quotetime}
             userid={post.user.id}
             parentid={post.parentid}
             parentname={post.parentname}
@@ -252,7 +260,6 @@ quotetime={post.quotetime}
           strokeWidth={2}
           strokeWidthSecondary={2}
         />
-
       </div>
     </>
   );

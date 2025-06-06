@@ -14,8 +14,8 @@ import { ClassAttributes, ImgHTMLAttributes, JSX } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 export const revalidate = 60;
-export default async function App({ params }: {params: Promise<{ slug: string }> }) {
-  const slug = (await params).slug
+export default async function App({ params }: { params: Promise<{ slug: string }> }) {
+  const slug = (await params).slug;
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
   let author = "";
@@ -43,7 +43,7 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
   let userbookmarked: never[] = [];
   let comments: any[] = [];
   TimeAgo.locale(en);
-  let newblocked :any[] = []
+  let newblocked: any[] = [];
   let user = "";
   const timeAgo = new TimeAgo("en-US");
   const date1 = new Date();
@@ -111,7 +111,6 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
     if (data && data.length != 0) {
       comments = data;
       for await (const [index, comment] of comments.entries()) {
-        console.log(index, comment);
         const { data } = await supabase.from("user").select("*").eq("id", comment.poster);
         if (data) {
           comments[index].name = data[0]["name"];
@@ -119,7 +118,6 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
 
           if (loggedin) {
             if (comments[index].liked.includes(myhandle)) {
-              console.log(myhandle, index);
               comments[index].likedbyme = true;
             } else {
               comments[index].likedbyme = false;
@@ -127,7 +125,6 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
           } else {
             comments[index].likedbyme = false;
           }
-          console.log(comments[index]);
         } else {
           comments.splice(index, 1);
         }
@@ -148,25 +145,29 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
   const components = {
     img: ClickableImage,
   };
-  console.log("here");
-  console.log(comments);
-  console.log("above");
+
   return !loading ? (
-    <div className={`flex overflow-hidden relative flex-col flex-1 h-screen md:mr-4 lg:mx-0 ${!loggedin?'lg:mx-96 border-x border-x-neutral-800':''}`}>
-      {!loggedin &&
-      
-      <div className="flex flex-row justify-between content-center items-center px-6 py-4 space-y-1 w-full bg-primary-600 md:border-x md:border-x-neutral-800">
-        <h1 className="text-sm font-semibold text-white">Sign up to Falar to read more such interesting articles</h1>
-        <Link href={('/login')} className="px-6 py-2 w-max text-xs font-semibold text-blue-600 bg-white rounded-full transition-all duration-200 ease-linear hover:bg-neutral-200 hover:shadow-lg">Sign Up To Falar</Link>
+    <div
+      className={`flex overflow-hidden relative flex-col flex-1 h-screen md:mr-4 lg:mx-0 ${!loggedin ? "lg:mx-96 border-x border-x-neutral-800" : ""}`}
+    >
+      {!loggedin && (
+        <div className="flex flex-row justify-between content-center items-center px-6 py-4 space-y-1 w-full bg-primary-600 md:border-x md:border-x-neutral-800">
+          <h1 className="text-sm font-semibold text-white">Sign up to Falar to read more such interesting articles</h1>
+          <Link
+            href={"/login"}
+            className="px-6 py-2 w-max text-xs font-semibold text-blue-600 bg-white rounded-full transition-all duration-200 ease-linear hover:bg-neutral-200 hover:shadow-lg"
+          >
+            Sign Up To Falar
+          </Link>
         </div>
-}
+      )}
       {(error || newblocked.includes(authorid) || blocked.includes(authorid)) && (
         <div className="flex content-center items-center px-10 w-full h-screen sm:px-24 md:px-16 lg:px-24">
           <div className="flex flex-col gap-4 mx-auto max-w-max">
             <h1 className="mx-auto text-xl font-semibold text-center text-neutral-300">That Post Doesn&apos;t Exist</h1>
             <h1 className="mx-auto text-sm text-center text-neutral-400">
-              That post does not exist or you do not have permission to view it. It must have been removed or you must have been blocked by the author. Please refresh if you think
-              that is not the case
+              That post does not exist or you do not have permission to view it. It must have been removed or you must
+              have been blocked by the author. Please refresh if you think that is not the case
             </h1>
             <Link
               href="/"
@@ -218,11 +219,10 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
               </Link>
             )}
 
-            <div className="flex sticky top-0 flex-row flex-grow justify-between content-center items-center px-8 py-4 mt-2 w-full text-lg filter backdrop-blur-lg">
+            <div className={`flex sticky top-0 flex-row flex-grow justify-between content-center items-center px-8 py-4 mt-2 w-full text-lg filter ${AppConfig.customtheme?'bg-neutral-900':'backdrop-blur-lg'}`}>
               <Link href={"/profile/" + author} className="flex flex-row content-center items-center">
-                <UserInformation id={authorid} image={profile} imgclass="w-7 h-7 mr-3 rounded-md"  />
+                <UserInformation id={authorid} image={profile} imgclass="w-7 h-7 mr-3 rounded-md" />
                 <h1 className="text-xs font-medium text-white md:text-sm">{name}</h1>
-                
               </Link>
 
               <div className="flex flex-row">
@@ -240,29 +240,27 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
               {content}
             </Markdown>
           </div>
-          {!loggedin && 
+          {!loggedin && (
             <>
-            <div className="mb-10 h-1 border-b border-b-neutral-800"></div>
-      <div className="flex flex-col gap-4 px-10 mx-auto max-w-max">
-      <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">Login To View Replies</h1>
-      <h1 className="mx-auto text-center text-neutral-400 text-md">
-        Login to {AppConfig.title} to view the replies for this post
-      </h1>
-      <Link
-        href="/"
-        className={`mx-auto mt-3 w-max rounded-full px-8 py-3 text-xs font-semibold ${
-          1 == 1 ? "bg-primary-700 text-white" : "border-2  bg-white "
-        }`}
-      >
-        Login Now
-      </Link>
-    </div>
-    </>
-      
-      }
+              <div className="mb-10 h-1 border-b border-b-neutral-800"></div>
+              <div className="flex flex-col gap-4 px-10 mx-auto max-w-max">
+                <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">Login To View Replies</h1>
+                <h1 className="mx-auto text-center text-neutral-400 text-md">
+                  Login to {AppConfig.title} to view the replies for this post
+                </h1>
+                <Link
+                  href="/"
+                  className={`mx-auto mt-3 w-max rounded-full px-8 py-3 text-xs font-semibold ${
+                    1 == 1 ? "bg-primary-700 text-white" : "border-2  bg-white "
+                  }`}
+                >
+                  Login Now
+                </Link>
+              </div>
+            </>
+          )}
           {loggedin && !newblocked.includes(authorid) && !blocked.includes(authorid) && (
             <section className="px-0 border-t border-t-neutral-800" id="comments">
-
               <CommentsComponent
                 myname={myname}
                 myphoto={myphoto}
@@ -278,8 +276,8 @@ export default async function App({ params }: {params: Promise<{ slug: string }>
           )}
         </div>
       )}
-      {loggedin && !blocked.includes(authorid) && !newblocked.includes(authorid)  && (
-        <div className="absolute bottom-0 z-[1000000] flex flex-row w-full border-t  backdrop-blur-lg border-x h-14">
+      {loggedin && !blocked.includes(authorid) && !newblocked.includes(authorid) && (
+        <div className={`flex absolute bottom-0 flex-row w-full h-14  ${AppConfig.customtheme?'bg-neutral-900':'backdrop-blur-lg'} z-[1000000] border-x`}>
           <BookMarksComponent
             userliked={userbookmarked}
             postid={slug}

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
@@ -12,7 +12,6 @@ import en from "javascript-time-ago/locale/en";
 TimeAgo.addLocale(en);
 
 export default function Index() {
-
   const [posts, setPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [empty, setEmpty] = useState(true);
@@ -89,8 +88,7 @@ export default function Index() {
         <div className="flex flex-col gap-2 mx-auto max-w-max">
           <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">No Posts To View!</h1>
           <h1 className="mx-auto text-sm text-center text-neutral-400">
-            Follow people to view their posts on your home feed. The more people you follow, the more posts on
-            your feed
+            Follow people to view their posts on your home feed. The more people you follow, the more posts on your feed
           </h1>
           <Link
             href="/explore"
@@ -105,33 +103,27 @@ export default function Index() {
 
   return (
     <div className="overflow-hidden flex-1 p-0 py-2 h-screen">
-
-
-    <div className="overflow-y-scroll py-2 h-full hiddenscroll">
-
-    <div className="flex flex-col gap-0 mb-20 animate-in hiddenscroll">
-
-      {posts.map((post) => (
-        <PostComponent
-          id={post.id}
-          cover={post.cover}
-          title={post.title}
-          time={timeAgo.format(Date.now() - post.diff)}
-          key={post.id}
-          image={post.image}
-          dp={post.user.image}
-          handle={post.handle}
-          likes={post.likes}
-          userid={post.user.id}
-          name={post.user.name}
-          description={post.excerpt}
-        />
-      ))}
-      <More newblocked={newblocked} myblocked={myblocked} in={l}></More>
-    </div>
-    </div>
+      <div className="overflow-y-scroll py-2 h-full hiddenscroll">
+        <div className="flex flex-col gap-0 mb-20 animate-in hiddenscroll">
+          {posts.map((post) => (
+            <PostComponent
+              id={post.id}
+              cover={post.cover}
+              title={post.title}
+              time={timeAgo.format(Date.now() - post.diff)}
+              key={post.id}
+              image={post.image}
+              dp={post.user.image}
+              handle={post.handle}
+              likes={post.likes}
+              userid={post.user.id}
+              name={post.user.name}
+              description={post.excerpt}
+            />
+          ))}
+          <More newblocked={newblocked} myblocked={myblocked} in={l}></More>
+        </div>
+      </div>
     </div>
   );
-
-
 }

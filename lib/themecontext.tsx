@@ -1,7 +1,6 @@
-'use client'
+"use client";
 import { AppConfig } from "@/config/config";
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-
 
 export const colorPalettes: Record<string, Record<string, string>> = {
   cyan: {
@@ -118,7 +117,7 @@ export const colorPalettes: Record<string, Record<string, string>> = {
   },
   yellow: {
     DEFAULT: "#eab308",
-    50:  "#fefce8",
+    50: "#fefce8",
     100: "#fef9c3",
     200: "#fef08a",
     300: "#fde047",
@@ -130,7 +129,7 @@ export const colorPalettes: Record<string, Record<string, string>> = {
     900: "#713f12",
     950: "#422006",
   },
-  
+
   purple: {
     DEFAULT: "#8b5cf6",
     50: "#f5f3ff",
@@ -229,9 +228,7 @@ export const colorPalettes: Record<string, Record<string, string>> = {
     900: "#581c6f",
     950: "#300738",
   },
-  
 };
-
 
 type ThemeContextType = {
   currentColor: string;
@@ -245,18 +242,15 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const savedColor = localStorage.getItem("selectedColor") || "pink";
-    if(AppConfig.customtheme==true)
-      {
-        setCurrentColor(AppConfig.customprimary)
-      
-    updateCSSVariables(AppConfig.customprimary);
-      }
-      else{
+    if (AppConfig.customtheme == true) {
+      setCurrentColor(AppConfig.customprimary);
+
+      updateCSSVariables(AppConfig.customprimary);
+    } else {
       setCurrentColor(savedColor);
 
       updateCSSVariables(savedColor);
-      }
-
+    }
   }, []);
 
   const updateCSSVariables = (color: string) => {
@@ -269,19 +263,13 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const setColor = (color: string) => {
-    
     setCurrentColor(color);
-    
+
     localStorage.setItem("selectedColor", color);
     updateCSSVariables(color);
   };
 
-  
-  return (
-    <ThemeContext.Provider value={{ currentColor, setColor }}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={{ currentColor, setColor }}>{children}</ThemeContext.Provider>;
 };
 
 export const useTheme = () => {

@@ -10,7 +10,9 @@ export default function Button() {
   return (
     <div className="">
       {state && (
-        <div className={`flex absolute top-0 bottom-0 content-center items-center w-screen h-screen bg-opacity-50 z-[100000] ${AppConfig.customtheme?AppConfig.custombg:'bg-gradient-to-b from-primary-950 to-black'}`}>
+        <div
+          className={`flex absolute top-0 bottom-0 content-center items-center w-screen h-screen bg-opacity-50 z-[100000] ${AppConfig.customtheme ? AppConfig.custombg : "bg-gradient-to-b from-primary-950 to-black"}`}
+        >
           <div className="mx-auto">
             <QuickieMakerComponent stateChanger={setState} />
           </div>

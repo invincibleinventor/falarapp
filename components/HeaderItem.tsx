@@ -4,10 +4,9 @@ import { usePathname } from "next/navigation";
 
 export default function App(props: any) {
   const loc = usePathname();
-    const a = { opened: false };
-  
+  const a = { opened: false };
+
   if (loc == props.link) {
-    console.log(props.link);
     a.opened = true;
   } else if (props.link == "/myself" && loc.startsWith("/profile")) {
     a.opened = true;
@@ -17,14 +16,11 @@ export default function App(props: any) {
     a.opened = true;
   } else if (props.link == "/quickies" && (loc == "/quickies/all" || loc == "/quickies")) {
     a.opened = true;
-  }
- else if (props.link == "/bookmarks" && (loc == "/bookmarks/quickies" || loc == "/bookmarks")) {
-a.opened = true;
-}
-   else if (props.link == "/myself" && loc == "/customize") {
+  } else if (props.link == "/bookmarks" && (loc == "/bookmarks/quickies" || loc == "/bookmarks")) {
+    a.opened = true;
+  } else if (props.link == "/myself" && loc == "/customize") {
     a.opened = true;
   } else {
-    console.log("");
   }
 
   return (

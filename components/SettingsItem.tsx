@@ -7,7 +7,6 @@ export default function App(props: any) {
   const a = { opened: false };
 
   if (loc == props.link) {
-    console.log(props.link);
     a.opened = true;
   } else if (props.link == "/myself" && loc.startsWith("/profile")) {
     a.opened = true;
@@ -16,7 +15,6 @@ export default function App(props: any) {
   } else if (props.link == "/myself" && loc == "/customize") {
     a.opened = true;
   } else {
-    console.log("");
   }
 
   return (

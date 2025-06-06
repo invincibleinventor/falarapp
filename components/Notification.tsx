@@ -34,7 +34,11 @@ export default function Notification(props: any) {
       className={`flex cursor-pointer  flex-row px-8 py-5 space-x-5 border-b border-b-neutral-800 ${props.seen ? "bg-primary-500/10" : "bg-black"}`}
     >
       <div className="flex relative flex-col content-center items-center hrink-0">
-        <UserInformation image = {props.image} imgclass="w-8 h-8 rounded-lg lg:h-10 lg:w-10" id={props.userid}></UserInformation>
+        <UserInformation
+          image={props.image}
+          imgclass="w-8 h-8 rounded-lg lg:h-10 lg:w-10"
+          id={props.userid}
+        ></UserInformation>
       </div>
       <div className="flex flex-col space-y-[2px]">
         <h1 className="text-base font-medium text-white lg:text-lg">{props.title}</h1>

@@ -18,10 +18,10 @@ export default function UserComponent(props: any) {
   const [notifications, setNotifications] = useState(props.notifications);
 
   async function onfollow(handle: any) {
-    let localfollowerlist,localfollowinglist;
-    const {data:his} = await supabase.from('user').select('*').eq('handle',handle);
-    const {data:mine} = await supabase.from('user').select('*').eq('handle',props.myID);
-    if(his && mine){
+    let localfollowerlist, localfollowinglist;
+    const { data: his } = await supabase.from("user").select("*").eq("handle", handle);
+    const { data: mine } = await supabase.from("user").select("*").eq("handle", props.myID);
+    if (his && mine) {
       localfollowerlist = his[0]["followers"];
       localfollowinglist = mine[0]["following"];
     }
@@ -33,7 +33,7 @@ export default function UserComponent(props: any) {
 
       const { data, error } = await supabase.from("user").update({ followers: arr }).eq("handle", handle).select();
       const { data: d, error: e } = await supabase.from("user").update({ following: arr2 }).eq("handle", myId).select();
-      
+
       if (!error && !e) {
         setFollowerList(arr);
         setFollowingList(arr2);

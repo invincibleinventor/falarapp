@@ -57,7 +57,6 @@ export default function More(props: any) {
         console.log(error);
       } else {
         if (data && data.length > 0) {
-          console.log(data);
           const ds = data;
           for await (const [index, post] of ds.entries()) {
             const date2 = new Date(ds[index].created_at);
@@ -92,7 +91,6 @@ export default function More(props: any) {
             type="profile"
             title={post.title}
             userid={post.user.id}
-
             cover={post.cover}
             time={timeAgo.format(Date.now() - post.diff)}
             key={post.id}
@@ -117,7 +115,6 @@ export default function More(props: any) {
           strokeWidth={2}
           strokeWidthSecondary={2}
         />
-
       </div>
     </>
   );

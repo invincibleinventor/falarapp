@@ -13,17 +13,15 @@ export default function Post(props: any) {
   let photocount;
   if (props.image) {
     photocount = props.image.length;
-  }const formatText = (text: string) => {
-    // Split by spaces and mentions/hashtags/URLs as separate tokens
+  }
+  const formatText = (text: string) => {
     const tokens = text.split(/(\s+|(?:#|@)[a-zA-Z][\w]*|https?:\/\/[^\s]+)/);
-  
+
     return tokens.map((token, idx) => {
-      if (!token || token.trim() === '') {
-        // Preserve whitespace as is
+      if (!token || token.trim() === "") {
         return token;
       }
-  
-      // Hashtag: starts with # and next char is a letter
+
       if (/^#[a-zA-Z][\w]*$/.test(token)) {
         const hashtag = token.slice(1);
         return (
@@ -32,8 +30,7 @@ export default function Post(props: any) {
           </Link>
         );
       }
-  
-      // Mention: starts with @ and next char is a letter
+
       if (/^@[a-zA-Z][\w]*$/.test(token)) {
         const username = token.slice(1);
         return (
@@ -42,17 +39,21 @@ export default function Post(props: any) {
           </Link>
         );
       }
-  
-      // URL
+
       if (/^https?:\/\/[^\s]+$/.test(token)) {
         return (
-          <a target="_blank" href={token} className="text-primary-600 hover:text-primary-700" key={idx} rel="noreferrer">
+          <a
+            target="_blank"
+            href={token}
+            className="text-primary-600 hover:text-primary-700"
+            key={idx}
+            rel="noreferrer"
+          >
             {token}
           </a>
         );
       }
-  
-      // Plain text or ignored patterns (like #7worlds or @3chan)
+
       return token;
     });
   };

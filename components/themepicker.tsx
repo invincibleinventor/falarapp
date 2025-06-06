@@ -1,15 +1,11 @@
-'use client';
+"use client";
 import { colorPalettes, useTheme } from "@/lib/themecontext";
 
-  
-  
 export default function ColorSwitcher() {
-    const { currentColor, setColor } = useTheme();
+  const { currentColor, setColor } = useTheme();
 
-  
   return (
     <div className="">
-     
       <div className="grid grid-cols-4 gap-2  w-[calc(100%-20px)]">
         {Object.keys(colorPalettes).map((color) => (
           <div
@@ -39,7 +35,6 @@ export default function ColorSwitcher() {
           </div>
         ))}
       </div>
-     
     </div>
   );
 }

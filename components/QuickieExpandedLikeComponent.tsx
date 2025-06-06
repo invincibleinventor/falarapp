@@ -9,25 +9,24 @@ export default function LikeComponent(props: any) {
   const [ulikedlist, setuLikedList] = useState(props.userliked);
   const [disabled, setDisabled] = useState(false);
   const [likes, setLikes] = useState(props.likes);
-  let locallikedlist:any;
-    let locallikes:any;
-    let localuserlist:any
+  let locallikedlist: any;
+  let locallikes: any;
+  let localuserlist: any;
   async function setLiked(like: boolean) {
-    const {data} = await supabase.auth.getUser();
-    if(!data.user){
-     setDisabled(true);
-       return;
+    const { data } = await supabase.auth.getUser();
+    if (!data.user) {
+      setDisabled(true);
+      return;
     }
-    toggleLiked(!liked)
-      const {data:d,error:e}  = await supabase.from('quickies').select('*').eq('id',props.postid);
+    toggleLiked(!liked);
+    const { data: d, error: e } = await supabase.from("quickies").select("*").eq("id", props.postid);
 
-      if(!e && d){
-        locallikedlist = d[0]["liked"]
-        locallikes = d[0]["likes"]
-        localuserlist = ulikedlist
-      
-      }
-    
+    if (!e && d) {
+      locallikedlist = d[0]["liked"];
+      locallikes = d[0]["likes"];
+      localuserlist = ulikedlist;
+    }
+
     if (like == false) {
       let l = locallikedlist;
       setDisabled(true);
@@ -72,7 +71,6 @@ export default function LikeComponent(props: any) {
       const u = localuserlist;
       setLikes(locallikes + 1);
       u.push(props.postid);
-      console.log(l);
       const { error: e } = await supabase.from("user").update({ quickieliked: u }).eq("handle", props.handle);
       const { error } = await supabase
         .from("quickies")
@@ -101,29 +99,29 @@ export default function LikeComponent(props: any) {
   return (
     <div className="flex cursor-pointer text-white flex-row content-center items-center  space-x-[8px]  ">
       <svg
-        onClick={() => (!disabled ? ( setLiked(!liked)) : console.log("holdup"))}
+        onClick={() => (!disabled ? setLiked(!liked) : null)}
         xmlns="http://www.w3.org/2000/svg"
         width="20"
         height="20"
         viewBox="0 0 48 48"
       >
         {liked ? (
-           <path
-           className="fill-primary-600 stroke-primary-600"
-           strokeLinecap="round"
-           strokeLinejoin="round"
-           strokeWidth="2"
-           d="M15 8C8.925 8 4 12.925 4 19c0 11 13 21 20 23.326C31 40 44 30 44 19c0-6.075-4.925-11-11-11c-3.72 0-7.01 1.847-9 4.674A10.987 10.987 0 0 0 15 8"
-         />
+          <path
+            className="fill-primary-600 stroke-primary-600"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M15 8C8.925 8 4 12.925 4 19c0 11 13 21 20 23.326C31 40 44 30 44 19c0-6.075-4.925-11-11-11c-3.72 0-7.01 1.847-9 4.674A10.987 10.987 0 0 0 15 8"
+          />
         ) : (
           <path
-          fill="none"
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M15 8C8.925 8 4 12.925 4 19c0 11 13 21 20 23.326C31 40 44 30 44 19c0-6.075-4.925-11-11-11c-3.72 0-7.01 1.847-9 4.674A10.987 10.987 0 0 0 15 8"
-        />
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M15 8C8.925 8 4 12.925 4 19c0 11 13 21 20 23.326C31 40 44 30 44 19c0-6.075-4.925-11-11-11c-3.72 0-7.01 1.847-9 4.674A10.987 10.987 0 0 0 15 8"
+          />
         )}
       </svg>
 

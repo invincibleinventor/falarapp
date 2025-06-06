@@ -35,19 +35,13 @@ export async function createUser(formData: FormData) {
 
   if (error) throw new Error(error.message);
 
-  const { data: officialData } = await supabase
-    .from("user")
-    .select("*")
-    .eq("handle", AppConfig.officialaccount);
+  const { data: officialData } = await supabase.from("user").select("*").eq("handle", AppConfig.officialaccount);
 
   if (officialData && officialData.length > 0) {
     const followers = officialData[0].followers || [];
     followers.push(handle);
 
-    await supabase
-      .from("user")
-      .update({ followers })
-      .eq("handle", AppConfig.officialaccount);
+    await supabase.from("user").update({ followers }).eq("handle", AppConfig.officialaccount);
   }
 
   redirect("/");

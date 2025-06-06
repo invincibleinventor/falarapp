@@ -1,6 +1,5 @@
 "use client";
 export default function Iof(props: any) {
-  
   return (
     <img
       onClick={() => window.open(props.src, "_blank")?.focus()}

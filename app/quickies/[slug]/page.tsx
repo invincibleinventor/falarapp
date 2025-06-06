@@ -13,7 +13,6 @@ export default async function Index({ params }: { params: Promise<{ slug: string
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
   const canInitSupabaseClient = () => {
-
     try {
       createClient(cookieStore);
       return true;
@@ -22,7 +21,7 @@ export default async function Index({ params }: { params: Promise<{ slug: string
     }
   };
   TimeAgo.locale(en);
-const slug = (await params).slug;
+  const slug = (await params).slug;
   const timeAgo = new TimeAgo("en-US");
   const date1 = new Date();
   const isSupabaseConnected = canInitSupabaseClient();
@@ -36,13 +35,13 @@ const slug = (await params).slug;
   let userliked: any[] = [];
   let userbookmarked: any[] = [];
   let myblocked = "";
-  let newblocked: any[] = []
+  let newblocked: any[] = [];
   let quote = false;
   let quoteid = "";
   let quotehandle = "";
-  let quotename = ""
+  let quotename = "";
   let quotedisplay = "";
-  let quoteimage :any[] = [];
+  let quoteimage: any[] = [];
   let quotephotocount = 0;
   let quotecontent = "";
   let quotetime = "";
@@ -52,15 +51,14 @@ const slug = (await params).slug;
     const s = user.user!.id;
     const { data: u } = await supabase.from("user").select("*").eq("id", s);
     myblocked = u![0]["blocked"];
-    newblocked = u![0]["blockedby"]
+    newblocked = u![0]["blockedby"];
     const { data: hs } = await supabase.from("user").select("*").eq("handle", slug);
     if (hs && hs.length > 0) {
       if (!newblocked.includes(hs[0]["id"]) && !myblocked.includes(hs[0]["id"])) {
-        console.log(myblocked, hs[0]["id"]);
         l = u![0]["following"];
         const h = u![0]["handle"];
         myname = u![0]["name"];
-        
+
         myphoto = u![0]["image"];
         myhandle = u![0]["handle"];
         userbookmarked = u![0]["quickiebookmarks"];
@@ -79,29 +77,30 @@ const slug = (await params).slug;
         } else {
           ds = data;
 
-         
-    
           for await (const [index, post] of ds.entries()) {
             let liked = false;
-            if(ds[index]["quote"]){
+            if (ds[index]["quote"]) {
               post.quote = true;
-          post.quoteid = ds[index]["quoteid"];
-          const { data: q } = await supabase.from("quickies").select("*, user (name, handle, id, image)").eq("id", post.quoteid);
-          if (q) {
-            post.quotehandle = q[0]["user"]["handle"];
-            post.quotename = q[0]["user"]["name"];
-            post.quotedisplay = q[0]["user"]["image"];
-            post.quoteimage = q[0]["image"];
-            
-            if(post.quoteimage){
-              post.quotephotocount = q[0]["image"].length;
-            }
-            post.quotecontent = q[0]["content"];
-            const date2 = new Date(q[0].created_at)
-            let d = date2;
-            
-            post.quotetime = timeAgo.format(Date.now() - (date1.getTime() - date2.getTime()));
-          }
+              post.quoteid = ds[index]["quoteid"];
+              const { data: q } = await supabase
+                .from("quickies")
+                .select("*, user (name, handle, id, image)")
+                .eq("id", post.quoteid);
+              if (q) {
+                post.quotehandle = q[0]["user"]["handle"];
+                post.quotename = q[0]["user"]["name"];
+                post.quotedisplay = q[0]["user"]["image"];
+                post.quoteimage = q[0]["image"];
+
+                if (post.quoteimage) {
+                  post.quotephotocount = q[0]["image"].length;
+                }
+                post.quotecontent = q[0]["content"];
+                const date2 = new Date(q[0].created_at);
+                let d = date2;
+
+                post.quotetime = timeAgo.format(Date.now() - (date1.getTime() - date2.getTime()));
+              }
             }
             const likedlist: string | any[] = ds[index].liked;
             let bookmarked = false;
@@ -112,19 +111,23 @@ const slug = (await params).slug;
             if (bookmarkedlist.includes(myhandle)) {
               bookmarked = true;
             }
-            if(ds[index].to>0){
-              const { data } = await supabase.from("quickies").select(`*, 
+            if (ds[index].to > 0) {
+              const { data } = await supabase
+                .from("quickies")
+                .select(
+                  `*, 
                 user (
                 
                   handle
                 
-                )`).eq("id", post.to);
+                )`
+                )
+                .eq("id", post.to);
               ds[index].parentid = ds[index].to;
-  
-              if(data && data?.length>0){
+
+              if (data && data?.length > 0) {
                 ds[index].parentname = data[0].user.handle;
               }
-          
             }
             ds[index].liked = liked;
             ds[index].bookmarked = bookmarked;
@@ -190,19 +193,15 @@ const slug = (await params).slug;
                       bookmarked={post.bookmarked}
                       liked={post.liked}
                       handle={post.handle}
-                     
-
-quote={post.quote}
-quoteid={post.quoteid}
-quotehandle={post.quotehandle}
-quotename={post.quotename}
-quotedisplay={post.quotedisplay}
-quoteimage={post.quoteimage}
-quotephotocount={post.quotephotocount}
-quotecontent={post.quotecontent}
-quotetime={post.quotetime}
-                
-                
+                      quote={post.quote}
+                      quoteid={post.quoteid}
+                      quotehandle={post.quotehandle}
+                      quotename={post.quotename}
+                      quotedisplay={post.quotedisplay}
+                      quoteimage={post.quoteimage}
+                      quotephotocount={post.quotephotocount}
+                      quotecontent={post.quotecontent}
+                      quotetime={post.quotetime}
                       name={post.user.name}
                       description={post.content}
                     />
@@ -210,7 +209,9 @@ quotetime={post.quotetime}
                 ) : (
                   <div className="flex content-center items-center px-10 mt-24 w-full sm:px-24 md:px-16 lg:px-24">
                     <div className="flex flex-col gap-2 mx-auto max-w-max">
-                      <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">No Quickies To View!</h1>
+                      <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">
+                        No Quickies To View!
+                      </h1>
                       <h1 className="mx-auto text-sm text-center text-neutral-400">
                         The user you searched haven&apos;t posted yet or they have blocked you. But fret not! There are
                         several great quickies from other users on the app.

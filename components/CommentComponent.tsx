@@ -11,30 +11,28 @@ export default function CommentComponent(props: any) {
   const supabase = createClient();
   const [liked, toggleLiked] = useState(props.likedbyme);
   const [likes, setLikes] = useState(props.likes);
-  const [likedbypeople,setLikedbypeople] = useState(props.likedbypeople)
-  let locallikes:any;
-  let locallikedlist:any;
+  const [likedbypeople, setLikedbypeople] = useState(props.likedbypeople);
+  let locallikes: any;
+  let locallikedlist: any;
   const [disabled, setDisabled] = useState(false);
   async function setLiked(like: boolean) {
-      const {data,error} = await supabase.from('comments').select('*').eq('comment_id',props.comment_id);
+    const { data, error } = await supabase.from("comments").select("*").eq("comment_id", props.comment_id);
 
-      if(data){
-        
-      locallikes = data[0]["likes"]
-      locallikedlist = data[0]["liked"]
-    }
-      else{
-        if(error){alert(error.message)}
+    if (data) {
+      locallikes = data[0]["likes"];
+      locallikedlist = data[0]["liked"];
+    } else {
+      if (error) {
+        alert(error.message);
       }
-    
+    }
+
     setDisabled(true);
     if (like == false) {
       let l = locallikedlist;
-      console.log(l);
       l = l.filter(function (item: any) {
         return item !== props.myhandle;
       });
-      console.log(l);
       const { error } = await supabase
         .from("comments")
         .update({ liked: l, likes: locallikes - 1 })
@@ -50,7 +48,6 @@ export default function CommentComponent(props: any) {
       const l = locallikedlist;
 
       l.push(props.myhandle);
-      console.log(l);
       const { error } = await supabase
         .from("comments")
         .update({ liked: l, likes: locallikes + 1 })
@@ -66,16 +63,13 @@ export default function CommentComponent(props: any) {
     }
   }
   const formatText = (text: string) => {
-    // Split by spaces and mentions/hashtags/URLs as separate tokens
     const tokens = text.split(/(\s+|(?:#|@)[a-zA-Z][\w]*|https?:\/\/[^\s]+)/);
-  
+
     return tokens.map((token, idx) => {
-      if (!token || token.trim() === '') {
-        // Preserve whitespace as is
+      if (!token || token.trim() === "") {
         return token;
       }
-  
-      // Hashtag: starts with # and next char is a letter
+
       if (/^#[a-zA-Z][\w]*$/.test(token)) {
         const hashtag = token.slice(1);
         return (
@@ -84,8 +78,7 @@ export default function CommentComponent(props: any) {
           </Link>
         );
       }
-  
-      // Mention: starts with @ and next char is a letter
+
       if (/^@[a-zA-Z][\w]*$/.test(token)) {
         const username = token.slice(1);
         return (
@@ -94,17 +87,21 @@ export default function CommentComponent(props: any) {
           </Link>
         );
       }
-  
-      // URL
+
       if (/^https?:\/\/[^\s]+$/.test(token)) {
         return (
-          <a target="_blank" href={token} className="text-primary-600 hover:text-primary-700" key={idx} rel="noreferrer">
+          <a
+            target="_blank"
+            href={token}
+            className="text-primary-600 hover:text-primary-700"
+            key={idx}
+            rel="noreferrer"
+          >
             {token}
           </a>
         );
       }
-  
-      // Plain text or ignored patterns (like #7worlds or @3chan)
+
       return token;
     });
   };
@@ -129,8 +126,14 @@ export default function CommentComponent(props: any) {
               <span className="ml-auto text-xs font-normal whitespace-nowrap text-neutral-400">{props.time}</span>
             </div>
           </Link>
-          <Menu type="comment" alt="comments" id={props.comment_id} postid={props.postid} myhandle={props.myhandle} handle={props.handle} />
-
+          <Menu
+            type="comment"
+            alt="comments"
+            id={props.comment_id}
+            postid={props.postid}
+            myhandle={props.myhandle}
+            handle={props.handle}
+          />
         </div>
 
         <h1 className="mt-[2px] mb-2 ml-10 text-[15px] font-normal text-neutral-300/90">{formatText(props.content)}</h1>
@@ -138,7 +141,7 @@ export default function CommentComponent(props: any) {
           <div className=" w-full   flex flex-row content-center items-center space-x-[8px]">
             {props.loggedin && (
               <svg
-                onClick={() => (!disabled ? (toggleLiked(!liked), setLiked(!liked)) : console.log("hold up!"))}
+                onClick={() => (!disabled ? (toggleLiked(!liked), setLiked(!liked)) : null)}
                 xmlns="http://www.w3.org/2000/svg"
                 width="14"
                 height="14"

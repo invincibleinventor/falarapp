@@ -9,10 +9,9 @@ import Link from "next/link";
 import { use, useEffect, useState } from "react";
 
 export default function Page({ params }: { params: Promise<{ slug: string }> }) {
-  const {slug } = use(params)
+  const { slug } = use(params);
   const supabase = createClient();
   const canInitSupabaseClient = () => {
-
     try {
       createClient();
       return true;
@@ -30,22 +29,22 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
   const [posts, setPosts] = useState<any>([]);
   const [loading, setLoading] = useState(false);
   const [l, setL] = useState([]);
-  const [quote,setQuote] = useState<boolean>(false);
-  const [quoteid,setQuoteid] = useState<string>("");
-  const [quotehandle,setQuotehandle] = useState<string>("");
-  const [quotename,setQuotename] = useState<string>("");
-  const [quotedisplay,setQuotedisplay] = useState<string>("");
-  const [quoteimage,setQuoteimage] = useState<any[]>([]);
-  const [quotephotocount,setQuotephotocount] = useState<number>(0);
-  const [quotecontent,setQuotecontent] = useState<string>("");
-  const [quotetime,setQuotetime] = useState<string>("");
+  const [quote, setQuote] = useState<boolean>(false);
+  const [quoteid, setQuoteid] = useState<string>("");
+  const [quotehandle, setQuotehandle] = useState<string>("");
+  const [quotename, setQuotename] = useState<string>("");
+  const [quotedisplay, setQuotedisplay] = useState<string>("");
+  const [quoteimage, setQuoteimage] = useState<any[]>([]);
+  const [quotephotocount, setQuotephotocount] = useState<number>(0);
+  const [quotecontent, setQuotecontent] = useState<string>("");
+  const [quotetime, setQuotetime] = useState<string>("");
   const [myname, setMyname] = useState("");
   const [myphoto, setMyphoto] = useState("");
   const [myhandle, setMyhandle] = useState("");
   const [userliked, setUserliked] = useState([]);
   const [search, setSearch] = useState(slug);
   const [tempsearch, setTempSearch] = useState("");
-const [newblocked,setnewblocked] = useState([])
+  const [newblocked, setnewblocked] = useState([]);
   const [userbookmarked, setUserBookmarked] = useState([]);
   useEffect(() => {
     async function get() {
@@ -59,10 +58,10 @@ const [newblocked,setnewblocked] = useState([])
       setUserBookmarked(u![0]["quickiebookmarks"]);
       setUserliked(u![0]["quickieliked"]);
       setBlocked(u![0]["blocked"]);
-      setnewblocked(u![0]["blockedby"])
-      setL(u![0]["quickiebookmarks"])
+      setnewblocked(u![0]["blockedby"]);
+      setL(u![0]["quickiebookmarks"]);
       let ds = [];
-     
+
       const { data, error } = await supabase
         .from("quickies")
         .select("*,user(id,name,handle,image)")
@@ -77,28 +76,30 @@ const [newblocked,setnewblocked] = useState([])
       } else {
         ds = data;
 
-      
         for await (const [index, post] of ds.entries()) {
           let liked = false;
-          if(ds[index]["quote"]){
+          if (ds[index]["quote"]) {
             post.quote = true;
-        post.quoteid = ds[index]["quoteid"];
-        const { data: q } = await supabase.from("quickies").select("*, user (name, handle, id, image)").eq("id", post.quoteid);
-        if (q) {
-          post.quotehandle = q[0]["user"]["handle"];
-          post.quotename = q[0]["user"]["name"];
-          post.quotedisplay = q[0]["user"]["image"];
-          post.quoteimage = q[0]["image"];
-          
-          if(post.quoteimage){
-            post.quotephotocount = q[0]["image"].length;
-          }
-          post.quotecontent = q[0]["content"];
-          const date2 = new Date(q[0].created_at)
-          let d = date2;
-          
-          post.quotetime = timeAgo.format(Date.now() - (date1.getTime() - date2.getTime()));
-        }
+            post.quoteid = ds[index]["quoteid"];
+            const { data: q } = await supabase
+              .from("quickies")
+              .select("*, user (name, handle, id, image)")
+              .eq("id", post.quoteid);
+            if (q) {
+              post.quotehandle = q[0]["user"]["handle"];
+              post.quotename = q[0]["user"]["name"];
+              post.quotedisplay = q[0]["user"]["image"];
+              post.quoteimage = q[0]["image"];
+
+              if (post.quoteimage) {
+                post.quotephotocount = q[0]["image"].length;
+              }
+              post.quotecontent = q[0]["content"];
+              const date2 = new Date(q[0].created_at);
+              let d = date2;
+
+              post.quotetime = timeAgo.format(Date.now() - (date1.getTime() - date2.getTime()));
+            }
           }
           const likedlist: string | any[] = ds[index].liked;
           let bookmarked = false;
@@ -114,19 +115,23 @@ const [newblocked,setnewblocked] = useState([])
           ds[index].bookmarked = bookmarked;
           ds[index].bookmarkedlist = bookmarkedlist;
           ds[index].likedlist = likedlist;
-          if(ds[index].to>0){
-            const { data } = await supabase.from("quickies").select(`*, 
+          if (ds[index].to > 0) {
+            const { data } = await supabase
+              .from("quickies")
+              .select(
+                `*, 
               user (
               
                 handle
               
-              )`).eq("id", post.to);
+              )`
+              )
+              .eq("id", post.to);
             ds[index].parentid = ds[index].to;
 
-            if(data && data?.length>0){
+            if (data && data?.length > 0) {
               ds[index].parentname = data[0].user.handle;
             }
-        
           }
           const date2 = new Date(ds[index].created_at);
           ds[index].diff = date1.getTime() - date2.getTime();
@@ -148,9 +153,8 @@ const [newblocked,setnewblocked] = useState([])
     return (
       <>
         <div className="overflow-hidden flex-1 p-0 py-2 h-screen">
-        <div className="p-4 py-2 mx-1 md:mx-1">
-
-         <Search text="Bookmarked Quickies" page="quickiebookmarks" search={search.replaceAll("%20"," ")} />
+          <div className="p-4 py-2 mx-1 md:mx-1">
+            <Search text="Bookmarked Quickies" page="quickiebookmarks" search={search.replaceAll("%20", " ")} />
           </div>
           <div className="overflow-y-scroll h-full hiddenscroll">
             <div className="flex flex-col gap-0 mb-20 animate-in hiddenscroll">
@@ -177,17 +181,15 @@ const [newblocked,setnewblocked] = useState([])
                       bookmarked={post.bookmarked}
                       liked={post.liked}
                       handle={post.handle}
-                     
-
-quote={post.quote}
-quoteid={post.quoteid}
-quotehandle={post.quotehandle}
-quotename={post.quotename}
-quotedisplay={post.quotedisplay}
-quoteimage={post.quoteimage}
-quotephotocount={post.quotephotocount}
-quotecontent={post.quotecontent}
-quotetime={post.quotetime}
+                      quote={post.quote}
+                      quoteid={post.quoteid}
+                      quotehandle={post.quotehandle}
+                      quotename={post.quotename}
+                      quotedisplay={post.quotedisplay}
+                      quoteimage={post.quoteimage}
+                      quotephotocount={post.quotephotocount}
+                      quotecontent={post.quotecontent}
+                      quotetime={post.quotetime}
                       name={post.user.name}
                       description={post.content}
                     />
@@ -195,7 +197,9 @@ quotetime={post.quotetime}
                 ) : (
                   <div className="flex content-center items-center px-10 mt-24 w-full sm:px-24 md:px-16 lg:px-24">
                     <div className="flex flex-col gap-2 mx-auto max-w-max">
-                      <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">No Quickies To View!</h1>
+                      <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">
+                        No Quickies To View!
+                      </h1>
                       <h1 className="mx-auto text-sm text-center text-neutral-400">
                         Bookmark more quickies to see them in the search results. Explore more quickies to bookmark
                       </h1>

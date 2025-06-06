@@ -48,8 +48,6 @@ export default function Toggle(props: any) {
           window.location.replace("/");
         }
       }
-
-      console.log("Record moved successfully!");
     }
     if (user.user) {
       const { data: handle } = await supabase.from("user").select("*").eq("id", user.user.id);
@@ -61,7 +59,7 @@ export default function Toggle(props: any) {
     <button
       disabled={disabled}
       onClick={() => deactivate()}
-      className="px-6 py-3 text-xs font-medium text-white bg-red-800 rounded-full w-max"
+      className="px-6 py-3 w-max text-xs font-medium text-white bg-red-800 rounded-full"
     >
       Delete Account
     </button>

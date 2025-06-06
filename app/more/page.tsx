@@ -19,7 +19,6 @@ export default function Create() {
   const [file, setFile] = useState<any>();
   const [profile, setProfile] = useState<any>();
   async function coverChange() {
-    console.log("here here");
     const bucket = "covers";
 
     const { error } = await supabase.storage.from(bucket).upload("/public/" + handle + ".jpg", file, { upsert: true });
@@ -42,7 +41,6 @@ export default function Create() {
   }
 
   async function profileChange() {
-    console.log("here here");
     const bucket = "profile";
 
     const { error } = await supabase.storage
@@ -135,7 +133,13 @@ export default function Create() {
           </div>
           <div className="absolute inset-x-0 bottom-0">
             <div className="relative">
-              <Image width={110} height={110} src={image?image:'/user.jpg'} className="mx-auto w-24 h-24 rounded-2xl" alt="image" />
+              <Image
+                width={110}
+                height={110}
+                src={image ? image : "/user.jpg"}
+                className="mx-auto w-24 h-24 rounded-2xl"
+                alt="image"
+              />
               <div
                 onClick={handleProfileClick}
                 className="absolute text-xs flex items-center content-center text-white rounded-full cursor-pointer left-20 right-0 mx-auto top-[80%] w-7 h-7  bg-primary-700 shadow-lg border-[0.5px] border-neutral-400"

@@ -33,7 +33,9 @@ export default async function CreatePage() {
           Let us setup your profile on {AppConfig.title}. Setup your profile to continue.
         </h1>
 
-        <label className="text-sm text-neutral-300" htmlFor="name">Name</label>
+        <label className="text-sm text-neutral-300" htmlFor="name">
+          Name
+        </label>
         <input
           className="px-4 py-2 mb-6 text-sm rounded-md border outline-none bg-black/20 text-neutral-300 border-neutral-900 focus:outline-primary-800"
           name="name"
@@ -43,7 +45,9 @@ export default async function CreatePage() {
           maxLength={20}
         />
 
-        <label className="text-sm text-neutral-300" htmlFor="handle">Username - You cannot change this later</label>
+        <label className="text-sm text-neutral-300" htmlFor="handle">
+          Username - You cannot change this later
+        </label>
         <input
           className="px-4 py-2 mb-6 text-sm rounded-md border outline-none bg-black/20 text-neutral-300 border-neutral-900 focus:outline-primary-800"
           name="handle"
@@ -53,7 +57,9 @@ export default async function CreatePage() {
           maxLength={12}
         />
 
-        <label className="text-sm text-neutral-300" htmlFor="about">About</label>
+        <label className="text-sm text-neutral-300" htmlFor="about">
+          About
+        </label>
         <textarea
           className="px-4 py-2 mb-6 text-sm rounded-md border outline-none bg-black/20 text-neutral-300 border-neutral-900 focus:outline-primary-800"
           name="about"

@@ -1,69 +1,69 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use client'
+"use client";
 
-import More from '@/components/BookMarksMore'
-import PostComponent from '@/components/PostComponent'
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import { createClient } from '@/utils/supabase/client'
-import TimeAgo from 'javascript-time-ago'
-import en from 'javascript-time-ago/locale/en'
+import More from "@/components/BookMarksMore";
+import PostComponent from "@/components/PostComponent";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { createClient } from "@/utils/supabase/client";
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en";
 
-TimeAgo.addLocale(en)
-const timeAgo = new TimeAgo('en-US')
+TimeAgo.addLocale(en);
+const timeAgo = new TimeAgo("en-US");
 
 export default function Index() {
-  const [loading, setLoading] = useState(true)
-  const [posts, setPosts] = useState<any[]>([])
-  const [empty, setEmpty] = useState(true)
-  const [l, setL] = useState<any[]>([])
-  const [myblocked, setMyBlocked] = useState<any[]>([])
-  const [newblocked, setNewBlocked] = useState<any[]>([])
+  const [loading, setLoading] = useState(true);
+  const [posts, setPosts] = useState<any[]>([]);
+  const [empty, setEmpty] = useState(true);
+  const [l, setL] = useState<any[]>([]);
+  const [myblocked, setMyBlocked] = useState<any[]>([]);
+  const [newblocked, setNewBlocked] = useState<any[]>([]);
 
-  const supabase = createClient()
+  const supabase = createClient();
 
   useEffect(() => {
     async function get() {
-      const date1 = new Date()
+      const date1 = new Date();
 
-      const { data: user } = await supabase.auth.getUser()
-      const s = user?.user?.id
+      const { data: user } = await supabase.auth.getUser();
+      const s = user?.user?.id;
 
-      const { data: u } = await supabase.from('user').select('*').eq('id', s)
+      const { data: u } = await supabase.from("user").select("*").eq("id", s);
       if (u && u.length > 0) {
-        const bookmarks = u[0]['bookmarks'] || []
-        const blocked = u[0]['blocked'] || []
-        const blockedby = u[0]['blockedby'] || []
+        const bookmarks = u[0]["bookmarks"] || [];
+        const blocked = u[0]["blocked"] || [];
+        const blockedby = u[0]["blockedby"] || [];
 
-        setL(bookmarks)
-        setMyBlocked(blocked)
-        setNewBlocked(blockedby)
+        setL(bookmarks);
+        setMyBlocked(blocked);
+        setNewBlocked(blockedby);
 
         const { data, error } = await supabase
-          .from('posts')
-          .select('*,user(id,name,handle,image)')
-          .order('id', { ascending: false })
-          .in('id', bookmarks)
-          .not('poster', 'in', `(${blocked.toString()})`)
-          .not('poster', 'in', `(${blockedby.toString()})`)
-          .limit(5)
+          .from("posts")
+          .select("*,user(id,name,handle,image)")
+          .order("id", { ascending: false })
+          .in("id", bookmarks)
+          .not("poster", "in", `(${blocked.toString()})`)
+          .not("poster", "in", `(${blockedby.toString()})`)
+          .limit(5);
 
         if (!error && data) {
           for (let i = 0; i < data.length; i++) {
-            const date2 = new Date(data[i].created_at)
-            data[i].diff = date1.getTime() - date2.getTime()
+            const date2 = new Date(data[i].created_at);
+            data[i].diff = date1.getTime() - date2.getTime();
           }
 
-          setPosts(data)
-          setEmpty(data.length === 0)
+          setPosts(data);
+          setEmpty(data.length === 0);
         }
       }
 
-      setLoading(false)
+      setLoading(false);
     }
 
-    get()
-  }, [])
+    get();
+  }, []);
 
   return (
     <>
@@ -98,7 +98,7 @@ export default function Index() {
                     <Link
                       href="/"
                       className={`mx-auto mt-3 rounded-full w-max px-8 py-3 text-xs font-medium  ${
-                        1 == 1 ? 'bg-primary-700 text-white' : 'border-2 bg-white'
+                        1 == 1 ? "bg-primary-700 text-white" : "border-2 bg-white"
                       }`}
                     >
                       Return To Home
@@ -114,5 +114,5 @@ export default function Index() {
         </div>
       </div>
     </>
-  )
+  );
 }

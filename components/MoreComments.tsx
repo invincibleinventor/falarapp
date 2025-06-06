@@ -31,16 +31,12 @@ export default function CommentsComponent(props: any) {
       console.log(error);
     } else {
       if (data && data.length > 0) {
-        console.log(data);
         const l = data;
         for await (const [index, comment] of l.entries()) {
-          console.log(index, comment);
-
           const date2 = new Date(l[index].time);
           l[index].newtime = date1.getTime() - date2.getTime();
           if (props.loggedin) {
             if (l[index].liked.includes(props.myhandle)) {
-              console.log(props.myhandle, index);
               l[index].likedbyme = true;
             } else {
               l[index].likedbyme = false;
@@ -48,7 +44,6 @@ export default function CommentsComponent(props: any) {
           } else {
             l[index].likedbyme = false;
           }
-          console.log(l[index]);
         }
         setComments([...comments, ...l]);
         setLoading(false);
@@ -62,7 +57,7 @@ export default function CommentsComponent(props: any) {
   }
   useEffect(() => {
     if (!halt && inView) {
-      setOffset((prev:any) => prev + 1);
+      setOffset((prev: any) => prev + 1);
       const from = offset * PAGE_COUNT;
       const to = from + PAGE_COUNT - 1;
 
@@ -72,43 +67,41 @@ export default function CommentsComponent(props: any) {
   return (
     <>
       <div className="flex flex-col pb-20">
-        
-        {comments.map((comment: any) => (<>
-              <CommentComponent
-                time={timeAgo.format(Date.now() - comment.newtime)}
-                myhandle={props.myhandle}
-                likedbypeople={comment.liked}
-                comment_id={comment.comment_id}
-                key={comment.comment_id}
-                handle={comment.handle}
-                likes={comment.likes}
-                likedbyme={comment.likedbyme}
-                userid={comment.user.id}
-                stateChanger={props.setState}
-                name={comment.user.name}
-                profile={comment.user.image}
-                content={comment.content}
-                postid={props.slug}
-                loggedin={props.loggedin}
-              />
-              </>
+        {comments.map((comment: any) => (
+          <>
+            <CommentComponent
+              time={timeAgo.format(Date.now() - comment.newtime)}
+              myhandle={props.myhandle}
+              likedbypeople={comment.liked}
+              comment_id={comment.comment_id}
+              key={comment.comment_id}
+              handle={comment.handle}
+              likes={comment.likes}
+              likedbyme={comment.likedbyme}
+              userid={comment.user.id}
+              stateChanger={props.setState}
+              name={comment.user.name}
+              profile={comment.user.image}
+              content={comment.content}
+              postid={props.slug}
+              loggedin={props.loggedin}
+            />
+          </>
         ))}
-            <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
+        <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
 
-                <Oval
-                  height={40}
-                  width={40}
-                  color="#000000"
-                  wrapperStyle={{}}
-                  wrapperClass="mx-auto mt-5"
-                  visible={!halt ? true : false}
-                  ariaLabel="oval-loading"
-                  secondaryColor="#808080"
-                  strokeWidth={2}
-                  strokeWidthSecondary={2}
-                />
-              
-            
+        <Oval
+          height={40}
+          width={40}
+          color="#000000"
+          wrapperStyle={{}}
+          wrapperClass="mx-auto mt-5"
+          visible={!halt ? true : false}
+          ariaLabel="oval-loading"
+          secondaryColor="#808080"
+          strokeWidth={2}
+          strokeWidthSecondary={2}
+        />
       </div>
     </>
   );

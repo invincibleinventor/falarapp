@@ -11,7 +11,6 @@ export default async function Index() {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
   const canInitSupabaseClient = () => {
-  
     try {
       createClient(cookieStore);
       return true;
@@ -31,19 +30,23 @@ export default async function Index() {
   const userid = user?.id;
   let myhandle = "";
   let myImage = "";
-  let newblocked : any[] = []
+  let newblocked: any[] = [];
   let blocked: any[] = [];
   let followinglist: any[] = [];
   async function get() {
     const { data: us } = await supabase.from("user").select("*").eq("id", userid);
     if (us) {
       blocked = us[0]["blocked"];
-      newblocked = us[0]["blockedby"]
-
+      newblocked = us[0]["blockedby"];
     }
     blocked.push(userid);
 
-    const { data, error } = await supabase.from("user").select("*").not("id", "in", `(${newblocked.toString()})`).not("id", "in", `(${blocked.toString()})`).limit(8);
+    const { data, error } = await supabase
+      .from("user")
+      .select("*")
+      .not("id", "in", `(${newblocked.toString()})`)
+      .not("id", "in", `(${blocked.toString()})`)
+      .limit(8);
     if (error) {
       console.log(error);
     } else {
@@ -60,15 +63,11 @@ export default async function Index() {
       for await (const [index, user] of ds.entries()) {
         if (ifollow.includes(user.handle)) {
           ds[index]["isfollowing"] = true;
-          console.log(user.handle, ifollow);
         } else {
-          console.log(user.handle, ifollow);
-
           ds[index]["isfollowing"] = false;
         }
       }
       users = ds;
-      console.log(users);
       loading = false;
     }
   }

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { Oval } from "react-loader-spinner";
 import PostComponent from "./PostComponent";
-export default function MoreBookMarks(props: { slug: string, myblocked:any, newblocked:any }) {
+export default function MoreBookMarks(props: { slug: string; myblocked: any; newblocked: any }) {
   const supabase = createClient();
   const [offset, setOffset] = useState(1);
   const { ref, inView } = useInView();
@@ -30,8 +30,8 @@ export default function MoreBookMarks(props: { slug: string, myblocked:any, newb
       .select("*,user(id,name,handle,image)")
       .order("id", { ascending: false })
       .in("id", l)
-      .not("poster","in",`(${props.myblocked.toString()})`)
-      .not("poster","in",`(${props.newblocked.toString()})`)
+      .not("poster", "in", `(${props.myblocked.toString()})`)
+      .not("poster", "in", `(${props.newblocked.toString()})`)
       .textSearch(
         "title_excerpt_content",
         `'${props.slug}' | '${props.slug.toLowerCase()}' | '${props.slug.toUpperCase()}'`
@@ -41,7 +41,6 @@ export default function MoreBookMarks(props: { slug: string, myblocked:any, newb
       console.log(error);
     } else {
       if (data && data.length > 0) {
-        console.log(data);
         const ds = data;
         for await (const [index, post] of ds.entries()) {
           const date2 = new Date(ds[index].created_at);
@@ -69,7 +68,7 @@ export default function MoreBookMarks(props: { slug: string, myblocked:any, newb
   }, [inView]);
   return (
     <>
-      <div className="flex flex-col items-center content-center gap-2 pb-20">
+      <div className="flex flex-col gap-2 content-center items-center pb-20">
         {posts.map((post: any) => (
           <PostComponent
             id={post.id}
@@ -81,13 +80,12 @@ export default function MoreBookMarks(props: { slug: string, myblocked:any, newb
             image={post.image}
             dp={post.user.image}
             userid={post.user.id}
-
             handle={post.handle}
             name={post.user.name}
             description={post.excerpt}
           />
-        ))}        <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
-
+        ))}{" "}
+        <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
         <Oval
           height={80}
           width={80}

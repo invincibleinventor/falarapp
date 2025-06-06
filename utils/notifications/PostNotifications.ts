@@ -5,7 +5,7 @@ export default async function PostNotifications(
   url: any,
   title: any,
   type: any,
-  userid:any,
+  userid: any,
   postid: any,
   description: any,
   image: any
@@ -24,18 +24,16 @@ export default async function PostNotifications(
     } else {
       const { data: s, error: f } = await supabase.from("user").select("notifications").eq("id", to);
       if (s && s.length > 0) {
-        const { error: e } = await supabase
-          .from("notifications")
-          .insert({
-            type: type,
-            to: to,
-            description: description,
-            postid: postid,
-            url: url,
-            userid:userid,
-            title: title,
-            image: image,
-          });
+        const { error: e } = await supabase.from("notifications").insert({
+          type: type,
+          to: to,
+          description: description,
+          postid: postid,
+          url: url,
+          userid: userid,
+          title: title,
+          image: image,
+        });
         const notify = s[0]["notifications"] + 1;
         const { error: es } = await supabase.from("user").update({ notifications: notify }).eq("id", to);
 

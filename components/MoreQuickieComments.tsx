@@ -67,29 +67,37 @@ export default function MoreQuickieComments(props: any) {
   return (
     <div className="flex flex-col pb-20 ">
       {comments.map((comment: any) => (
-            <CommentComponent
-              time={timeAgo.format(Date.now() - comment.newtime)}
-              myhandle={props.myhandle}
-              likedbypeople={comment.liked}
-              comment_id={comment.comment_id}
-              key={comment.comment_id}
-              handle={comment.handle}
-              postid={props.slug}
-              userid={comment.user.id}
-              stateChanger={props.setState}
+        <CommentComponent
+          time={timeAgo.format(Date.now() - comment.newtime)}
+          myhandle={props.myhandle}
+          likedbypeople={comment.liked}
+          comment_id={comment.comment_id}
+          key={comment.comment_id}
+          handle={comment.handle}
+          postid={props.slug}
+          userid={comment.user.id}
+          stateChanger={props.setState}
+          likes={comment.likes}
+          likedbyme={comment.likedbyme}
+          name={comment.user.name}
+          profile={comment.user.image}
+          content={comment.content}
+          loggedin={props.loggedin}
+        />
+      ))}
+      <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
 
-              likes={comment.likes}
-              likedbyme={comment.likedbyme}
-              name={comment.user.name}
-              profile={comment.user.image}
-              content={comment.content}
-              loggedin={props.loggedin}
-            />
-          ))}
-            <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
-
-      <Oval height={80} width={80} color="#000000" wrapperClass="mx-auto"                   visible={!halt ? true : false}
- ariaLabel="loading-indicator" secondaryColor="#808080" strokeWidth={2} strokeWidthSecondary={2} />
+      <Oval
+        height={80}
+        width={80}
+        color="#000000"
+        wrapperClass="mx-auto"
+        visible={!halt ? true : false}
+        ariaLabel="loading-indicator"
+        secondaryColor="#808080"
+        strokeWidth={2}
+        strokeWidthSecondary={2}
+      />
     </div>
   );
 }

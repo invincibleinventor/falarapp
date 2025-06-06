@@ -2,13 +2,12 @@
 
 import { AppConfig } from "@/config/config";
 import { createClient } from "@/utils/supabase/client";
-import {  useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Menu(props: any) {
   const [dialogopened, setDialogopened] = useState(false);
   const [deleteDialog, toggledeleteDialog] = useState(false);
 
-  
   const btnRef = useRef<SVGSVGElement | null>(null);
   useEffect(() => {
     const closeDropdown = (e: MouseEvent) => {
@@ -16,75 +15,75 @@ export default function Menu(props: any) {
         setDialogopened(false);
       }
     };
-  
-    document.body.addEventListener('click', closeDropdown);
+
+    document.body.addEventListener("click", closeDropdown);
     return () => {
-      document.body.removeEventListener('click', closeDropdown);
+      document.body.removeEventListener("click", closeDropdown);
     };
   }, []);
-  
+
   async function del() {
-    console.log("ok");
-    
     toggledeleteDialog(false);
     const supabase = createClient();
     const { error } = await supabase.from("quickies").delete().eq("id", props.id);
-    
+
     if (error) {
       alert(error);
     } else {
-      
-    if(props.type == "qreply"){
-      const {data, error:es} = await supabase.from("quickies").select("*").eq("id",props.quickieid);
-      if(data){
-  
-      const {error} = await supabase.from("quickies").update({comments:data[0]["comments"]-1}).eq("id",props.quickieid);
-      if (error) {
-        alert(error);
-      }
-      else if(es){
-        alert(es);
-      }
-      else {
+      if (props.type == "qreply") {
+        const { data, error: es } = await supabase.from("quickies").select("*").eq("id", props.quickieid);
+        if (data) {
+          const { error } = await supabase
+            .from("quickies")
+            .update({ comments: data[0]["comments"] - 1 })
+            .eq("id", props.quickieid);
+          if (error) {
+            alert(error);
+          } else if (es) {
+            alert(es);
+          } else {
+            window.location.replace("/quickies");
+          }
+        }
+      } else {
         window.location.replace("/quickies");
       }
     }
   }
-  else{
-  window.location.replace("/quickies");
-    }
-  }
-  }
-  async function deleteComment(){
-    console.log("ok");
+  async function deleteComment() {
     toggledeleteDialog(false);
 
     const supabase = createClient();
     const { error } = await supabase.from(props.alt).delete().eq("comment_id", props.id);
-    if (props.alt == "quickiecomments"){
-    const { data } = await supabase.from('quickies').select('*').eq('id',props.postid);
-    if(data){
-      const { error } = await supabase.from('quickies').update({comments:data[0]["comments"]-1}).eq('id',props.postid);
-      if(error){
-        alert(error.message);
+    if (props.alt == "quickiecomments") {
+      const { data } = await supabase.from("quickies").select("*").eq("id", props.postid);
+      if (data) {
+        const { error } = await supabase
+          .from("quickies")
+          .update({ comments: data[0]["comments"] - 1 })
+          .eq("id", props.postid);
+        if (error) {
+          alert(error.message);
+        }
+      }
+    } else {
+      const { data } = await supabase.from("posts").select("*").eq("id", props.postid);
+      if (data) {
+        const { error } = await supabase
+          .from("posts")
+          .update({ replies: data[0]["comments"] - 1 })
+          .eq("id", props.postid);
+        if (error) {
+          alert(error.message);
+        }
       }
     }
-  }
-  else{
-    const { data } = await supabase.from('posts').select('*').eq('id',props.postid);
-    if(data){
-      const { error } = await supabase.from('posts').update({replies:data[0]["comments"]-1}).eq('id',props.postid);
-      if(error){
-        alert(error.message);
-      }
-    }
-  }
     if (error) {
       alert(error.message);
     } else {
-      if(props.alt == "quickiecomments"){
+      if (props.alt == "quickiecomments") {
         window.location.replace("/quickie/" + props.postid);
-      }else{
+      } else {
         window.location.replace("/post/" + props.postid);
       }
     }
@@ -93,9 +92,11 @@ export default function Menu(props: any) {
     <div className="ml-auto">
       <div
         style={{ zIndex: 1000000 }}
-        className={`${props.type=="comment"?'fixed':'absolute'} py-4 px-2 flex flex-col content-center top-[50%] bottom-[50%] left-0 right-0 w-64 h-28 mx-auto my-auto ${AppConfig.customtheme?'bg-neutral-900 border border-neutral-800':'bg-black/20'}  will-change-transform transform-gpu backdrop-blur-lg rounded-xl animate-in  shadow-md  md:w-84 lg:w-96 ${deleteDialog ? "" : "hidden"}`}
+        className={`${props.type == "comment" ? "fixed" : "absolute"} py-4 px-2 flex flex-col content-center top-[50%] bottom-[50%] left-0 right-0 w-64 h-28 mx-auto my-auto ${AppConfig.customtheme ? "bg-neutral-900 border border-neutral-800" : "bg-black/20"}  will-change-transform transform-gpu backdrop-blur-lg rounded-xl animate-in  shadow-md  md:w-84 lg:w-96 ${deleteDialog ? "" : "hidden"}`}
       >
-        <h1 className="mx-4 mb-4 text-lg font-medium text-white">Delete this {props.type=="comment"?"comment":"quickie"}?</h1>
+        <h1 className="mx-4 mb-4 text-lg font-medium text-white">
+          Delete this {props.type == "comment" ? "comment" : "quickie"}?
+        </h1>
         <div className="flex flex-row content-center items-center pt-0 mt-auto ml-auto w-full">
           <button
             onClick={() => toggledeleteDialog(false)}
@@ -104,7 +105,7 @@ export default function Menu(props: any) {
             Cancel
           </button>
           <button
-            onClick={() => (props.type == "quickie" || props.type == "qreply") ? del() : deleteComment()}
+            onClick={() => (props.type == "quickie" || props.type == "qreply" ? del() : deleteComment())}
             className="px-6 py-2 mt-auto mr-4 mb-1 ml-auto text-xs font-medium text-white rounded-lg bg-primary-700"
           >
             Delete It
@@ -131,7 +132,7 @@ export default function Menu(props: any) {
         </svg>
 
         <div
-          className={`absolute w-40 ${AppConfig.customtheme?'bg-neutral-900 border border-neutral-800':'bg-black/20'}  backdrop-blur-lg will-change-transform transform-gpu shadow-md rounded-xl -left-[calc(34*4px)] top-8 flex flex-col ${dialogopened ? "" : "hidden"}`}
+          className={`absolute w-40 ${AppConfig.customtheme ? "bg-neutral-900 border border-neutral-800" : "bg-black/20"}  backdrop-blur-lg will-change-transform transform-gpu shadow-md rounded-xl -left-[calc(34*4px)] top-8 flex flex-col ${dialogopened ? "" : "hidden"}`}
         >
           <div className="flex flex-row content-center items-center px-4 py-3 space-x-3 rounded-lg cursor-pointer text-neutral-300">
             <svg xmlns="http://www.w3.org/2000/svg" width="1.1em" height="1.1em" viewBox="0 0 24 24">
@@ -144,20 +145,21 @@ export default function Menu(props: any) {
             </svg>
             <h1 className="text-sm font-medium">Report</h1>
           </div>
-          {(props.type == "comment" || props.type=="qreply" || props.type == "quickie") && props.myhandle == props.handle && (
-            <div
-              onClick={() => toggledeleteDialog(!deleteDialog)}
-              className="flex flex-row content-center items-center px-4 py-3 space-x-3 text-red-400 cursor-pointer"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="1.1em" height="1.1em" viewBox="0 0 24 24">
-                <path
-                  fill="currentColor"
-                  d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6zM8 9h8v10H8zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"
-                />
-              </svg>
-              <h1 className="text-sm font-medium text-red-400">Delete</h1>
-            </div>
-          )}
+          {(props.type == "comment" || props.type == "qreply" || props.type == "quickie") &&
+            props.myhandle == props.handle && (
+              <div
+                onClick={() => toggledeleteDialog(!deleteDialog)}
+                className="flex flex-row content-center items-center px-4 py-3 space-x-3 text-red-400 cursor-pointer"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.1em" height="1.1em" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6zM8 9h8v10H8zm7.5-5l-1-1h-5l-1 1H5v2h14V4z"
+                  />
+                </svg>
+                <h1 className="text-sm font-medium text-red-400">Delete</h1>
+              </div>
+            )}
         </div>
       </div>
     </div>

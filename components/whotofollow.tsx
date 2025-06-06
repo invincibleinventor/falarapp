@@ -25,7 +25,6 @@ export default async function WhoToFollow() {
       const l = following;
       myImage = data[0]["image"];
       l.push(myhandle);
-      console.log(l);
       const { data: d, error: e } = await supabase
         .from("user")
         .select("*")
@@ -38,8 +37,6 @@ export default async function WhoToFollow() {
         userlist = shuffled.slice(0, 3);
 
         empty = false;
-        console.log('belowwwww')
-        console.log(userlist)
       } else {
         empty = true;
       }

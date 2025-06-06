@@ -20,16 +20,16 @@
   --color-primary-800: #155e75;
   --color-primary-900: #164e63;
 }
-.gradient-background{
-background: hsla(213, 77%, 14%, 1);
+.gradient-background {
+  background: hsla(213, 77%, 14%, 1);
 
-background: linear-gradient(90deg, hsla(213, 77%, 14%, 1) 0%, hsla(202, 27%, 45%, 1) 100%);
+  background: linear-gradient(90deg, hsla(213, 77%, 14%, 1) 0%, hsla(202, 27%, 45%, 1) 100%);
 
-background: -moz-linear-gradient(90deg, hsla(213, 77%, 14%, 1) 0%, hsla(202, 27%, 45%, 1) 100%);
+  background: -moz-linear-gradient(90deg, hsla(213, 77%, 14%, 1) 0%, hsla(202, 27%, 45%, 1) 100%);
 
-background: -webkit-linear-gradient(90deg, hsla(213, 77%, 14%, 1) 0%, hsla(202, 27%, 45%, 1) 100%);
+  background: -webkit-linear-gradient(90deg, hsla(213, 77%, 14%, 1) 0%, hsla(202, 27%, 45%, 1) 100%);
 
-filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#08203E", endColorstr="#557C93", GradientType=1 );
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#08203E", endColorstr="#557C93", GradientType=1 );
 }
 .font-pops {
   font-family: "Poppins", sans-serif;
@@ -51,11 +51,11 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#08203E", en
 }
 
 .storycircle {
-  --n:20;   /* control the number of dashes */
-  --d:8deg; /* control the distance between dashes */
-  --t:5px;  /* control the thickness of border*/
-  --c:red;  /* control the coloration */
-  
+  --n: 20; /* control the number of dashes */
+  --d: 8deg; /* control the distance between dashes */
+  --t: 5px; /* control the thickness of border*/
+  --c: red; /* control the coloration */
+
   width: 120px;
   aspect-ratio: 1;
   display: inline-grid;
@@ -64,33 +64,35 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#08203E", en
   position: relative;
 }
 .storycircle::after {
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:50%;
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
   padding: var(--t);
   background: var(--c);
   mask:
-   linear-gradient(#0000 0 0) content-box intersect,
-    repeating-conic-gradient(from calc(var(--d)/2),#000 0 calc(360deg/var(--n) - var(--d)),#0000 0 calc(360deg/var(--n)));
+    linear-gradient(#0000 0 0) content-box intersect,
+    repeating-conic-gradient(
+      from calc(var(--d) / 2),
+      #000 0 calc(360deg / var(--n) - var(--d)),
+      #0000 0 calc(360deg / var(--n))
+    );
 }
 
-
-#reply .GifPickerReact{
+#reply .GifPickerReact {
   @apply h-[400px]   font-pops rounded-2xl border-none bg-transparent !important;
 }
-.GifPickerReact{
+.GifPickerReact {
   @apply h-[350px]    lg:h-[450px] bg-transparent font-pops rounded-t-none lg:rounded-tr-2xl lg:rounded-l-none border-none !important;
 }
-.gpr-header{
+.gpr-header {
   @apply border-none !important;
 }
 
-.gpr-category-list{
+.gpr-category-list {
   @apply pt-0 pb-3 !important;
 }
-.gpr-search{
-  
+.gpr-search {
   @apply text-sm bg-neutral-900 !important;
 }
 .multiLineLabel {

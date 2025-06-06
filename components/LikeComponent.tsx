@@ -10,22 +10,18 @@ export default function LikeComponent(props: any) {
   const [ulikedlist, setuLikedList] = useState(props.userliked);
   const [disabled, setDisabled] = useState(false);
   const [likes, setLikes] = useState(props.likes);
-  let locallikedlist:any;
-  let locallikes:any;
- let localuserlist:any;
+  let locallikedlist: any;
+  let locallikes: any;
+  let localuserlist: any;
   async function setLiked(like: boolean) {
-     
-    const {data:d,error:e}  = await supabase.from('posts').select('*').eq('id',props.postid);
+    const { data: d, error: e } = await supabase.from("posts").select("*").eq("id", props.postid);
 
-    if(!e && d ){
-      localuserlist = ulikedlist
-      locallikedlist = d[0]["liked"]
-    locallikes = d[0]["likes"]
-      
-    
+    if (!e && d) {
+      localuserlist = ulikedlist;
+      locallikedlist = d[0]["liked"];
+      locallikes = d[0]["likes"];
     }
-  
-  
+
     if (like == false) {
       // let l = likedlist;
       setDisabled(true);
@@ -74,7 +70,6 @@ export default function LikeComponent(props: any) {
       l.push(props.handle);
       const u = localuserlist;
       u.push(props.postid);
-      console.log(l);
       const { error: e } = await supabase.from("user").update({ liked: u }).eq("handle", props.handle);
       const { error } = await supabase
         .from("posts")
@@ -103,7 +98,7 @@ export default function LikeComponent(props: any) {
   return (
     <div className="flex text-white flex-row content-center items-center  space-x-[8px]  px-6">
       <svg
-        onClick={() => (!disabled ? (toggleLiked(!liked), setLiked(!liked)) : console.log("holdup"))}
+        onClick={() => (!disabled ? (toggleLiked(!liked), setLiked(!liked)) : null)}
         xmlns="http://www.w3.org/2000/svg"
         width="22"
         height="22"

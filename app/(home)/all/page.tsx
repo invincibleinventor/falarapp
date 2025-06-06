@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use client'
+"use client";
 
 import Landing from "@/components/landing";
 import More from "@/components/MoreAll";
@@ -65,52 +65,50 @@ export default function Index() {
   }, []);
 
   return (
-<div className="overflow-hidden flex-1 p-0 py-2 h-screen">
-
-
-<div className="overflow-y-scroll py-2 h-full hiddenscroll">
-
-<div className="flex flex-col gap-0 mb-20 animate-in hiddenscroll">
-        {!loading ? (
-          !empty ? (
-            posts.map((post) => (
-              <PostComponent
-                key={post.id}
-                id={post.id}
-                cover={post.cover}
-                title={post.title}
-                time={timeAgo.format(Date.now() - post.diff)}
-                image={post.image}
-                dp={post.user.image}
-                handle={post.handle}
-                likes={post.likes}
-                userid={post.user.id}
-                name={post.user.name}
-                description={post.excerpt}
-              />
-            ))
-          ) : (
-            <div className="flex content-center items-center px-10 mt-24 w-full sm:px-24 md:px-16 lg:px-24">
-              <div className="flex flex-col gap-2 mx-auto max-w-max">
-                <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">No Posts To View!</h1>
-                <h1 className="mx-auto text-sm text-center text-neutral-400">
-                  Follow people to view their posts on your home feed. The more people you follow, the more posts on your feed
-                </h1>
-                <Link
-                  href="/explore"
-                  className={`px-8 py-3 mx-auto mt-3 w-max text-xs font-medium text-white rounded-full bg-primary-700`}
-                >
-                  Explore People
-                </Link>
+    <div className="overflow-hidden flex-1 p-0 py-2 h-screen">
+      <div className="overflow-y-scroll py-2 h-full hiddenscroll">
+        <div className="flex flex-col gap-0 mb-20 animate-in hiddenscroll">
+          {!loading ? (
+            !empty ? (
+              posts.map((post) => (
+                <PostComponent
+                  key={post.id}
+                  id={post.id}
+                  cover={post.cover}
+                  title={post.title}
+                  time={timeAgo.format(Date.now() - post.diff)}
+                  image={post.image}
+                  dp={post.user.image}
+                  handle={post.handle}
+                  likes={post.likes}
+                  userid={post.user.id}
+                  name={post.user.name}
+                  description={post.excerpt}
+                />
+              ))
+            ) : (
+              <div className="flex content-center items-center px-10 mt-24 w-full sm:px-24 md:px-16 lg:px-24">
+                <div className="flex flex-col gap-2 mx-auto max-w-max">
+                  <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">No Posts To View!</h1>
+                  <h1 className="mx-auto text-sm text-center text-neutral-400">
+                    Follow people to view their posts on your home feed. The more people you follow, the more posts on
+                    your feed
+                  </h1>
+                  <Link
+                    href="/explore"
+                    className={`px-8 py-3 mx-auto mt-3 w-max text-xs font-medium text-white rounded-full bg-primary-700`}
+                  >
+                    Explore People
+                  </Link>
+                </div>
               </div>
-            </div>
-          )
-        ) : (
-          <div className="flex content-center items-center w-full h-screen"></div>
-        )}
-        <More newblocked={newblocked} myblocked={myblocked} ></More>
+            )
+          ) : (
+            <div className="flex content-center items-center w-full h-screen"></div>
+          )}
+          <More newblocked={newblocked} myblocked={myblocked}></More>
         </div>
-        </div>
-        </div>
-      );
+      </div>
+    </div>
+  );
 }

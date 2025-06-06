@@ -13,7 +13,6 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
   const canInitSupabaseClient = () => {
-
     try {
       createClient(cookieStore);
       return true;
@@ -34,18 +33,18 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   let quote = false;
   let quoteid = "";
   let quotehandle = "";
-  let quotename = ""
+  let quotename = "";
   let quotedisplay = "";
-  let quoteimage :any[] = [];
+  let quoteimage: any[] = [];
   let quotephotocount = 0;
   let quotecontent = "";
   let quotetime = "";
-  
+
   let myname = "";
   let myphoto = "";
   let myhandle = "";
   let blocked: any[] = [];
-  let newblocked:any[] = [];
+  let newblocked: any[] = [];
   let userliked: any[] = [];
   let userbookmarked: any[] = [];
   let tagarray: any[] = [];
@@ -57,8 +56,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     l = u![0]["following"];
     const h = u![0]["handle"];
     myname = u![0]["name"];
-    blocked = u![0]['blocked']
-    newblocked = u![0]["blockedby"]
+    blocked = u![0]["blocked"];
+    newblocked = u![0]["blockedby"];
     myphoto = u![0]["image"];
     myhandle = u![0]["handle"];
     userbookmarked = u![0]["bookmarks"];
@@ -83,27 +82,30 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           if (error) {
           } else {
             ds = data;
-           for await(const [index, post] of ds.entries()) {
+            for await (const [index, post] of ds.entries()) {
               let liked = false;
-              if(ds[index]["quote"]){
+              if (ds[index]["quote"]) {
                 post.quote = true;
-            post.quoteid = ds[index]["quoteid"];
-            const { data: q } = await supabase.from("quickies").select("*, user (name, handle, id, image)").eq("id", post.quoteid);
-            if (q) {
-              post.quotehandle = q[0]["user"]["handle"];
-              post.quotename = q[0]["user"]["name"];
-              post.quotedisplay = q[0]["user"]["image"];
-              post.quoteimage = q[0]["image"];
-              
-              if(post.quoteimage){
-                post.quotephotocount = q[0]["image"].length;
-              }
-              post.quotecontent = q[0]["content"];
-              const date2 = new Date(q[0].created_at)
-              let d = date2;
-              
-              post.quotetime = timeAgo.format(Date.now() - (date1.getTime() - date2.getTime()));
-            }
+                post.quoteid = ds[index]["quoteid"];
+                const { data: q } = await supabase
+                  .from("quickies")
+                  .select("*, user (name, handle, id, image)")
+                  .eq("id", post.quoteid);
+                if (q) {
+                  post.quotehandle = q[0]["user"]["handle"];
+                  post.quotename = q[0]["user"]["name"];
+                  post.quotedisplay = q[0]["user"]["image"];
+                  post.quoteimage = q[0]["image"];
+
+                  if (post.quoteimage) {
+                    post.quotephotocount = q[0]["image"].length;
+                  }
+                  post.quotecontent = q[0]["content"];
+                  const date2 = new Date(q[0].created_at);
+                  let d = date2;
+
+                  post.quotetime = timeAgo.format(Date.now() - (date1.getTime() - date2.getTime()));
+                }
               }
               const likedlist: string | any[] = ds[index].liked;
               let bookmarked = false;
@@ -119,10 +121,9 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
               ds[index].bookmarked = bookmarked;
               ds[index].bookmarkedlist = bookmarkedlist;
               ds[index].likedlist = likedlist;
-             
-                const date2 = new Date(ds[index].created_at);
-                ds[index].diff = date1.getTime() - date2.getTime();
-              
+
+              const date2 = new Date(ds[index].created_at);
+              ds[index].diff = date1.getTime() - date2.getTime();
             }
 
             if (ds.length > 0) {
@@ -161,17 +162,15 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                       title={post.title}
                       time={timeAgo.format(Date.now() - post.diff)}
                       key={post.id}
-                     
-
-quote={post.quote}
-quoteid={post.quoteid}
-quotehandle={post.quotehandle}
-quotename={post.quotename}
-quotedisplay={post.quotedisplay}
-quoteimage={post.quoteimage}
-quotephotocount={post.quotephotocount}
-quotecontent={post.quotecontent}
-quotetime={post.quotetime}
+                      quote={post.quote}
+                      quoteid={post.quoteid}
+                      quotehandle={post.quotehandle}
+                      quotename={post.quotename}
+                      quotedisplay={post.quotedisplay}
+                      quoteimage={post.quoteimage}
+                      quotephotocount={post.quotephotocount}
+                      quotecontent={post.quotecontent}
+                      quotetime={post.quotetime}
                       image={post.image}
                       comments={post.comments}
                       userliked={userliked}

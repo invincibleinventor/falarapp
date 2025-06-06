@@ -8,16 +8,16 @@ import { Oval } from "react-loader-spinner";
 import QuickieComponent from "./QuickieComponent";
 import { redirect } from "next/navigation";
 export default function More(props: any) {
-  const [quote,setQuote] = useState<boolean>(false);
-  const [quoteid,setQuoteid] = useState<string>("");
-  const [quotehandle,setQuotehandle] = useState<string>("");
-  const [quotename,setQuotename] = useState<string>("");
-  const [quotedisplay,setQuotedisplay] = useState<string>("");
-  const [quoteimage,setQuoteimage] = useState<any[]>([]);
-  const [quotephotocount,setQuotephotocount] = useState<number>(0);
-  const [quotecontent,setQuotecontent] = useState<string>("");
-  const [quotetime,setQuotetime] = useState<string>("");
-const [images,setImages] = useState<any>([]);
+  const [quote, setQuote] = useState<boolean>(false);
+  const [quoteid, setQuoteid] = useState<string>("");
+  const [quotehandle, setQuotehandle] = useState<string>("");
+  const [quotename, setQuotename] = useState<string>("");
+  const [quotedisplay, setQuotedisplay] = useState<string>("");
+  const [quoteimage, setQuoteimage] = useState<any[]>([]);
+  const [quotephotocount, setQuotephotocount] = useState<number>(0);
+  const [quotecontent, setQuotecontent] = useState<string>("");
+  const [quotetime, setQuotetime] = useState<string>("");
+  const [images, setImages] = useState<any>([]);
   const supabase = createClient();
   const [offset, setOffset] = useState(1);
   const { ref, inView } = useInView();
@@ -30,50 +30,38 @@ const [images,setImages] = useState<any>([]);
   const date1 = new Date();
 
   async function get(from: number, to: number) {
-
-      const { data, error } = await supabase
-        .from("quickies")
-        .select("*, user(id,name,image,handle)")
-        .order("id", { ascending: false })
-        .eq("handle",props.handle)
-        .not('image', 'is', null)
-        .range(from, to);
-      if (error) {
-        console.log(error);
-      } else {
-
-
-
-
-     
-
-    
-        if (data && data.length > 0) {
-            let ss = [];
-            let ens:any={};
-              const ds = data;
-              console.log(ds)
-                for await (const [index, post] of ds.entries()) {
-                  for(let i = 0;i<post.image.length;i++){
-                      
-                    ens = {
-                      image: post.image[i],
-                      url: post.id,
-                    }
-                    ss.push(ens);
-                  }
-      
-              }
-             
-              setImages([...images,...ss]);
-              if (ds.length < PAGE_COUNT) {
-            setHalt(true);
+    const { data, error } = await supabase
+      .from("quickies")
+      .select("*, user(id,name,image,handle)")
+      .order("id", { ascending: false })
+      .eq("handle", props.handle)
+      .not("image", "is", null)
+      .range(from, to);
+    if (error) {
+      console.log(error);
+    } else {
+      if (data && data.length > 0) {
+        let ss = [];
+        let ens: any = {};
+        const ds = data;
+        for await (const [index, post] of ds.entries()) {
+          for (let i = 0; i < post.image.length; i++) {
+            ens = {
+              image: post.image[i],
+              url: post.id,
+            };
+            ss.push(ens);
           }
-        } else {
+        }
+
+        setImages([...images, ...ss]);
+        if (ds.length < PAGE_COUNT) {
           setHalt(true);
         }
+      } else {
+        setHalt(true);
       }
-    
+    }
   }
   useEffect(() => {
     if (!halt && inView) {
@@ -88,11 +76,13 @@ const [images,setImages] = useState<any>([]);
   return (
     <>
       <div className="grid grid-cols-3 gap-2 content-center items-center px-5 pb-20 w-full md:gap-4">
-        
-        
-      {images.map((post:any) => (
-              <img className="object-cover col-span-1 rounded-xl border shadow-lg cursor-pointer border-neutral-900 aspect-square" src={post.image} onClick={()=>redirect('/quickie/'+post.url)} />
-            ))}
+        {images.map((post: any) => (
+          <img
+            className="object-cover col-span-1 rounded-xl border shadow-lg cursor-pointer border-neutral-900 aspect-square"
+            src={post.image}
+            onClick={() => redirect("/quickie/" + post.url)}
+          />
+        ))}
         <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
 
         <Oval
@@ -107,7 +97,6 @@ const [images,setImages] = useState<any>([]);
           strokeWidth={2}
           strokeWidthSecondary={2}
         />
-
       </div>
     </>
   );

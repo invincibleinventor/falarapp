@@ -9,10 +9,9 @@ import Link from "next/link";
 import { use, useEffect, useState } from "react";
 import { Oval } from "react-loader-spinner";
 export default function Page({ params }: { params: Promise<{ slug: string }> }) {
-  const {slug} = use(params);
+  const { slug } = use(params);
   const supabase = createClient();
   const canInitSupabaseClient = () => {
-
     try {
       createClient();
       return true;
@@ -31,7 +30,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
   const [posts, setPosts] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   const [blocked, setBlocked] = useState([]);
-  const [newblocked,setnewblocked] = useState([])
+  const [newblocked, setnewblocked] = useState([]);
   useEffect(() => {
     async function get() {
       setLoading(true);
@@ -44,14 +43,13 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
       let newblocked = [];
       if (u) {
         blocked = u[0]["blocked"];
-        newblocked = u[0]["blockedby"]
+        newblocked = u[0]["blockedby"];
         l = u[0]["bookmarks"];
       }
-      console.log("below");
-      console.log(l);
+
       let ds = [];
       setBlocked(blocked);
-      setnewblocked(newblocked)
+      setnewblocked(newblocked);
       const { data, error } = await supabase
         .from("posts")
         .select("*,user(id,name,handle,image)")
@@ -64,7 +62,6 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
       if (error) {
         console.log(error);
       } else {
-        console.log(data);
         ds = data;
 
         for await (const [index, post] of ds.entries()) {
@@ -79,9 +76,6 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
         }
         setPosts(ds);
         setLoading(false);
-
-        console.log(ds);
-        console.log(posts);
       }
     }
     get();
@@ -106,7 +100,6 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
                     dp={post.user.image}
                     handle={post.handle}
                     userid={post.user.id}
-
                     cover={post.cover}
                     name={post.user.name}
                     description={post.excerpt}

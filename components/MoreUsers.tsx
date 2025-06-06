@@ -41,14 +41,13 @@ export default function MoreUsers(props: any) {
       .select("*")
       .range(from, to)
       .not("id", "in", `(${props.blocked.toString()})`)
-      .not("id", "in", `(${props.newblocked.toString()})`)
+      .not("id", "in", `(${props.newblocked.toString()})`);
 
     if (error) {
       console.log(error);
     } else {
       if (data && data.length > 0) {
-        console.log(data);
-        const ds = data
+        const ds = data;
         const {
           data: { user },
         } = await supabase.auth.getUser();
@@ -83,7 +82,7 @@ export default function MoreUsers(props: any) {
   }, [inView]);
   return (
     <div className="w-full">
-      <div className="grid items-center content-center grid-cols-1 gap-2 px-3 animate-in hiddenscroll xl:grid-cols-2">
+      <div className="grid grid-cols-1 gap-2 content-center items-center px-3 animate-in hiddenscroll xl:grid-cols-2">
         {users.map((user: any) => (
           <UserComponent
             myID={myhandle}
@@ -96,7 +95,6 @@ export default function MoreUsers(props: any) {
             isfollowing={user.isfollowing}
             handle={user.handle}
             userid={user.id}
-
             about={user.about}
             followers={user.followers.length}
             image={user.image}
@@ -105,8 +103,8 @@ export default function MoreUsers(props: any) {
           />
         ))}
       </div>
-      <div className="flex flex-col items-center content-center w-full">
-      <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
+      <div className="flex flex-col content-center items-center w-full">
+        <div className={!halt ? "min-h-[1px]" : "hidden"} ref={ref}></div>
 
         <Oval
           height={80}

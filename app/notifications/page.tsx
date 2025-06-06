@@ -18,8 +18,11 @@ export default function Page() {
         if (user.user) {
           setUserid(user.user.id);
         }
-        const { data: d, error: e } = await supabase.from("notifications").select("*").eq("to", user.user?.id).order("id", { ascending: false })
-
+        const { data: d, error: e } = await supabase
+          .from("notifications")
+          .select("*")
+          .eq("to", user.user?.id)
+          .order("id", { ascending: false });
 
         if (d && d.length > 0) {
           setNotifications(d);

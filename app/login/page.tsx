@@ -37,14 +37,13 @@ export default function Login() {
         data: { user },
       } = await supabase.auth.getUser();
       if (user) {
-        const {data,error} = await supabase.from('user').select('*').eq('id',user.id);
-        if(data && !error){
-          return window.location.replace('/')
-        }else{
-          
+        const { data, error } = await supabase.from("user").select("*").eq("id", user.id);
+        if (data && !error) {
+          return window.location.replace("/");
+        } else {
           return redirect("/editprofile");
+        }
       }
-    }
     }
 
     check();
@@ -68,14 +67,15 @@ export default function Login() {
 
   return (
     <div className="flex flex-col w-full h-full">
-                <h1 className="pt-2 mx-auto mt-20 text-2xl font-semibold text-left font-pops w-3xl text-neutral-300">Welcome To Falar </h1>
-                <h1 className="pt-2 mx-10 mb-16 text-sm font-normal text-center lg:mx-auto font-pops max-w-96 text-neutral-400">Login to your account or create a new account to continue</h1>
-
+      <h1 className="pt-2 mx-auto mt-20 text-2xl font-semibold text-left font-pops w-3xl text-neutral-300">
+        Welcome To Falar{" "}
+      </h1>
+      <h1 className="pt-2 mx-10 mb-16 text-sm font-normal text-center lg:mx-auto font-pops max-w-96 text-neutral-400">
+        Login to your account or create a new account to continue
+      </h1>
 
       <div className="flex flex-col my-auto items-center content-center mx-auto min-w-[250px] max-w-[300px]">
-        
         <form className="flex flex-col gap-2 content-center p-2 my-auto w-full text-xs font-pops">
-          
           <h1 className="mt-3 pl-[1px] text-sm font-medium text-white">Email Address</h1>
           <input
             onChange={(e) => {
@@ -95,20 +95,20 @@ export default function Login() {
             placeholder="Your Password"
           ></input>
           <button
-            onClick={(e) => (e.preventDefault(), console.log("login"), login())}
+            onClick={(e) => (e.preventDefault(), login())}
             className="px-5 py-3 mt-4 mb-2 text-sm font-medium text-white rounded-full bg-primary-700"
           >
             Sign In To Your Account
           </button>
           <button
-            onClick={(e) => (e.preventDefault(), console.log("register"), register())}
+            onClick={(e) => (e.preventDefault(), register())}
             className="px-5 py-3 text-sm font-medium bg-black rounded-full border text-neutral-300 border-neutral-800"
           >
             Register Your Account
           </button>
           <button
             className="flex gap-4 justify-center px-5 py-3 mt-6 text-sm font-medium bg-black rounded-full border text-neutral-300 border-neutral-800"
-            onClick={() => (console.log("google"), signWithGoogle())}
+            onClick={() => signWithGoogle()}
           >
             <svg width="16" height="16" viewBox="0 0 775 794" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path

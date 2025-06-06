@@ -10,16 +10,12 @@ export const createClient = (cookieStore: ReturnType<typeof cookies>) => {
       async set(name: string, value: string, options: CookieOptions) {
         try {
           (await cookieStore).set({ name, value, ...options });
-        } catch (error) {
-          
-        }
+        } catch (error) {}
       },
       async remove(name: string, options: CookieOptions) {
         try {
           (await cookieStore).set({ name, value: "", ...options });
-        } catch (error) {
-       
-        }
+        } catch (error) {}
       },
     },
   });

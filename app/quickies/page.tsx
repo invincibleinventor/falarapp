@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import More from "@/components/MoreQuickies";
 import PostComponent from "@/components/QuickieComponent";
@@ -19,18 +19,15 @@ export default function Index() {
   const timeAgo = new TimeAgo("en-US");
   const date1 = new Date();
 
-  
-  const [quote,setQuote] = useState<boolean>(false);
-  const [quoteid,setQuoteid] = useState<string>("");
-  const [quotehandle,setQuotehandle] = useState<string>("");
-  const [quotename,setQuotename] = useState<string>("");
-  const [quotedisplay,setQuotedisplay] = useState<string>("");
-  const [quoteimage,setQuoteimage] = useState<any[]>([]);
-  const [quotephotocount,setQuotephotocount] = useState<number>(0);
-  const [quotecontent,setQuotecontent] = useState<string>("");
-  const [quotetime,setQuotetime] = useState<string>("");
-
-
+  const [quote, setQuote] = useState<boolean>(false);
+  const [quoteid, setQuoteid] = useState<string>("");
+  const [quotehandle, setQuotehandle] = useState<string>("");
+  const [quotename, setQuotename] = useState<string>("");
+  const [quotedisplay, setQuotedisplay] = useState<string>("");
+  const [quoteimage, setQuoteimage] = useState<any[]>([]);
+  const [quotephotocount, setQuotephotocount] = useState<number>(0);
+  const [quotecontent, setQuotecontent] = useState<string>("");
+  const [quotetime, setQuotetime] = useState<string>("");
 
   const [empty, setempty] = useState(true);
   const [posts, setposts] = useState<any[]>([]);
@@ -82,43 +79,49 @@ export default function Index() {
       if (error) {
         console.log(error);
       } else {
-       
         const ds = data!;
         for await (const [index, post] of ds.entries()) {
-          if(ds[index]["quote"]){
+          if (ds[index]["quote"]) {
             post.quote = true;
-        post.quoteid = ds[index]["quoteid"];
-        const { data: q } = await supabase.from("quickies").select("*, user (name, handle, id, image)").eq("id", post.quoteid);
-        if (q) {
-          post.quotehandle = q[0]["user"]["handle"];
-          post.quotename = q[0]["user"]["name"];
-          post.quotedisplay = q[0]["user"]["image"];
-          post.quoteimage = q[0]["image"];
-          
-          if(post.quoteimage){
-            post.quotephotocount = q[0]["image"].length;
-          }
-          post.quotecontent = q[0]["content"];
-          const date2 = new Date(q[0].created_at)
-          let d = date2;
-          
-          post.quotetime = timeAgo.format(Date.now() - (date1.getTime() - date2.getTime()));
-        }
+            post.quoteid = ds[index]["quoteid"];
+            const { data: q } = await supabase
+              .from("quickies")
+              .select("*, user (name, handle, id, image)")
+              .eq("id", post.quoteid);
+            if (q) {
+              post.quotehandle = q[0]["user"]["handle"];
+              post.quotename = q[0]["user"]["name"];
+              post.quotedisplay = q[0]["user"]["image"];
+              post.quoteimage = q[0]["image"];
+
+              if (post.quoteimage) {
+                post.quotephotocount = q[0]["image"].length;
+              }
+              post.quotecontent = q[0]["content"];
+              const date2 = new Date(q[0].created_at);
+              let d = date2;
+
+              post.quotetime = timeAgo.format(Date.now() - (date1.getTime() - date2.getTime()));
+            }
           }
           let liked = false;
-          if(ds[index].to>0){
-            const { data } = await supabase.from("quickies").select(`*, 
+          if (ds[index].to > 0) {
+            const { data } = await supabase
+              .from("quickies")
+              .select(
+                `*, 
               user (
               
                 handle
               
-              )`).eq("id", post.to);
+              )`
+              )
+              .eq("id", post.to);
             ds[index].parentid = ds[index].to;
 
-            if(data && data?.length>0){
+            if (data && data?.length > 0) {
               ds[index].parentname = data[0].user.handle;
             }
-        
           }
           const likedlist: string | any[] = ds[index].liked;
           let bookmarked = false;
@@ -148,90 +151,84 @@ export default function Index() {
   return (
     <>
       <div className="overflow-hidden flex-1 p-0 py-2 h-screen">
-
-
-<div className="overflow-y-scroll py-2 h-full hiddenscroll">
-
-<div className="flex flex-col gap-0 mb-20 animate-in hiddenscroll">
-     
-          <div className="parent-container">{/* <Stories></Stories> */}</div>
-          <div className="lg:hidden">
-            <Trending />
-          </div>
-          {!loading ? (
-            !empty ? (
-              posts.map((post) => (
-                <PostComponent
-                  id={post.id}
-                  cover={post.cover}
-                  title={post.title}
-                  to={post.to}
-                  time={timeAgo.format(Date.now() - post.diff)}
-                  key={post.id}
-                  image={post.image}
-                  comments={post.comments}
-                  userliked={userliked}
-                  userid={post.user.id}
-                  userbookmarked={userbookmarked}
-                  bookmarkedlist={post.bookmarkedlist}
-                  likedlist={post.likedlist}
-                  myhandle={myhandle}
-                  
-      quote={post.quote}
-      quoteid={post.quoteid}
-      quotehandle={post.quotehandle}
-      quotename={post.quotename}
-      quotedisplay={post.quotedisplay}
-      quoteimage={post.quoteimage}
-      quotephotocount={post.quotephotocount}
-      quotecontent={post.quotecontent}
-      quotetime={post.quotetime}
-      
-                  dp={post.user.image}
-                  bookmarked={post.bookmarked}
-                  liked={post.liked}
-                  handle={post.handle}
-                  parentid={post.parentid}
-                  parentname={post.parentname}
-                  name={post.user.name}
-                  description={post.content}
-                />
-              ))
-            ) : (
-              <div className="flex content-center items-center px-10 mt-24 w-full sm:px-24 md:px-16 lg:px-24">
-                <div className="flex flex-col gap-2 mx-auto max-w-max">
-                  <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">No Quickies To View!</h1>
-                  <h1 className="mx-auto text-sm text-center text-neutral-400">
-                    Follow people to view their quickies on your feed. The more people you follow, the more quickies
-                    on your feed
-                  </h1>
-                  <Link
-                    href="/explore"
-                    className={`mx-auto mt-3 rounded-full w-max px-8 py-3 text-xs font-medium  ${
-                      1 == 1 ? "bg-primary-700 text-white" : "border-2 bg-white"
-                    }`}
-                  >
-                    Explore People
-                  </Link>
+        <div className="overflow-y-scroll py-2 h-full hiddenscroll">
+          <div className="flex flex-col gap-0 mb-20 animate-in hiddenscroll">
+            <div className="parent-container">{/* <Stories></Stories> */}</div>
+            <div className="lg:hidden">
+              <Trending />
+            </div>
+            {!loading ? (
+              !empty ? (
+                posts.map((post) => (
+                  <PostComponent
+                    id={post.id}
+                    cover={post.cover}
+                    title={post.title}
+                    to={post.to}
+                    time={timeAgo.format(Date.now() - post.diff)}
+                    key={post.id}
+                    image={post.image}
+                    comments={post.comments}
+                    userliked={userliked}
+                    userid={post.user.id}
+                    userbookmarked={userbookmarked}
+                    bookmarkedlist={post.bookmarkedlist}
+                    likedlist={post.likedlist}
+                    myhandle={myhandle}
+                    quote={post.quote}
+                    quoteid={post.quoteid}
+                    quotehandle={post.quotehandle}
+                    quotename={post.quotename}
+                    quotedisplay={post.quotedisplay}
+                    quoteimage={post.quoteimage}
+                    quotephotocount={post.quotephotocount}
+                    quotecontent={post.quotecontent}
+                    quotetime={post.quotetime}
+                    dp={post.user.image}
+                    bookmarked={post.bookmarked}
+                    liked={post.liked}
+                    handle={post.handle}
+                    parentid={post.parentid}
+                    parentname={post.parentname}
+                    name={post.user.name}
+                    description={post.content}
+                  />
+                ))
+              ) : (
+                <div className="flex content-center items-center px-10 mt-24 w-full sm:px-24 md:px-16 lg:px-24">
+                  <div className="flex flex-col gap-2 mx-auto max-w-max">
+                    <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">No Quickies To View!</h1>
+                    <h1 className="mx-auto text-sm text-center text-neutral-400">
+                      Follow people to view their quickies on your feed. The more people you follow, the more quickies
+                      on your feed
+                    </h1>
+                    <Link
+                      href="/explore"
+                      className={`mx-auto mt-3 rounded-full w-max px-8 py-3 text-xs font-medium  ${
+                        1 == 1 ? "bg-primary-700 text-white" : "border-2 bg-white"
+                      }`}
+                    >
+                      Explore People
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            )
-          ) : (
-            <div className="flex content-center items-center w-full h-screen"></div>
-          )}
-          <More
-            myblocked={myblocked}
-            myhandle={myhandle}
-            myname={myname}
-            myphoto={myphoto}
-            newblocked={newblocked}
-            userliked={userliked}
-            userbookmarked={userbookmarked}
-            in={l}
-          ></More>
+              )
+            ) : (
+              <div className="flex content-center items-center w-full h-screen"></div>
+            )}
+            <More
+              myblocked={myblocked}
+              myhandle={myhandle}
+              myname={myname}
+              myphoto={myphoto}
+              newblocked={newblocked}
+              userliked={userliked}
+              userbookmarked={userbookmarked}
+              in={l}
+            ></More>
+          </div>
         </div>
-        </div>
-        </div>
+      </div>
     </>
   );
 }

@@ -8,11 +8,10 @@ import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
 import Link from "next/link";
 import { use, useEffect, useState } from "react";
-export default function Index({ params }: { params: Promise<{ slug: string }>}) {
-  const {slug} = use(params);
+export default function Index({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params);
   const supabase = createClient();
   const canInitSupabaseClient = () => {
-
     try {
       createClient();
       return true;
@@ -31,7 +30,7 @@ export default function Index({ params }: { params: Promise<{ slug: string }>}) 
   const [myhandle, setMyhandle] = useState("");
   const [followinglist, setFollowinglist] = useState([]);
   const [blocked, setBlocked] = useState([]);
-  const [newblocked,setnewblocked ] = useState([])
+  const [newblocked, setnewblocked] = useState([]);
   useEffect(() => {
     async function get() {
       let usersid;
@@ -46,10 +45,11 @@ export default function Index({ params }: { params: Promise<{ slug: string }>}) 
       const { data: us } = await supabase.from("user").select("*").eq("id", usersid);
       if (us && us.length > 0) {
         blocked = us[0]["blocked"];
-        newblocked = us[0]["blockedby"]
+        newblocked = us[0]["blockedby"];
       }
       blocked.push(usersid);
-      setBlocked(blocked);      setnewblocked(newblocked);
+      setBlocked(blocked);
+      setnewblocked(newblocked);
 
       const { data, error } = await supabase
         .from("user")
@@ -77,7 +77,6 @@ export default function Index({ params }: { params: Promise<{ slug: string }>}) 
             }
           }
           setUsers(ds);
-          console.log(users);
           setLoading(false);
         }
       }
@@ -89,8 +88,7 @@ export default function Index({ params }: { params: Promise<{ slug: string }>}) 
       <>
         <div className="overflow-hidden flex-1 p-0 py-2 pb-20 h-screen">
           <div className="p-4 py-2 mx-1 md:mx-1">
-            <Search text='People' page="people" value={search.replaceAll("%20", " ")}></Search>
-            
+            <Search text="People" page="people" value={search.replaceAll("%20", " ")}></Search>
           </div>
           <div className="overflow-y-scroll h-full hiddenscroll">
             <div className="grid grid-cols-1 gap-2 content-center items-center px-5 animate-in hiddenscroll xl:grid-cols-2">
@@ -118,7 +116,8 @@ export default function Index({ params }: { params: Promise<{ slug: string }>}) 
                     <div className="flex flex-col gap-2 ml-auto max-w-auto">
                       <h1 className="mx-auto text-lg font-semibold text-center text-white">No Users To View!</h1>
                       <h1 className="mx-auto text-sm text-center text-neutral-500">
-                        The user you are searching for does not exist or may have blocked you. But fret not! There are several more interesting people on Falar
+                        The user you are searching for does not exist or may have blocked you. But fret not! There are
+                        several more interesting people on Falar
                       </h1>
 
                       <Link

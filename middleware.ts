@@ -2,7 +2,6 @@ import { NextResponse, type NextRequest } from "next/server";
 import { createClient } from "@/utils/supabase/middleware";
 
 export async function middleware(request: NextRequest) {
-
   const { supabase, response } = createClient(request);
 
   const {
@@ -35,8 +34,7 @@ export const config = {
     "/myself",
     "/quickies",
     "/quickies/:path*",
-    "/setupresume",
-    "/editresume",
+    
     "/more/:path*",
     "/hashtag/:path*",
     "/bookmarks",
