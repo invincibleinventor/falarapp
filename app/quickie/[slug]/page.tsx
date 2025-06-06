@@ -386,8 +386,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                   href={"/quote/" + slug}
                   className="flex flex-row content-center items-center text-white"
                 >
-<svg width="16" height="16" className="scale-x-[-1]" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="currentColor" d="M1.5 6.5h4a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-3a1 1 0 0 0-1 1zm0 0V10A3.5 3.5 0 0 0 5 13.5m3.5-7h4a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-3a1 1 0 0 0-1 1zm0 0V10a3.5 3.5 0 0 0 3.5 3.5"/></svg>                  
-                </Link>
+   <svg width="22" height="22" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m13.5 13.5l3 3l3-3"/><path d="M9.5 4.5h3a4 4 0 0 1 4 4v8m-9-9l-3-3l-3 3"/><path d="M11.5 16.5h-3a4 4 0 0 1-4-4v-8"/></g></svg>                </Link>
           <BookMarksComponent
             userliked={userbookmarked}
             postid={slug}
