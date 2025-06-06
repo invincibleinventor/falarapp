@@ -155,17 +155,13 @@ export default async function App({ params }: { params: Promise<{ slug: string }
 
     
      const formatText = (text: string) => {
-      // Split by spaces and mentions/hashtags/URLs as separate tokens
       const tokens = text.split(/(\s+|(?:#|@)[a-zA-Z][\w]*|https?:\/\/[^\s]+)/);
     
       return tokens.map((token, idx) => {
         if (!token || token.trim() === '') {
-          // Preserve whitespace as is
           return token;
         }
-    
-        // Hashtag: starts with # and next char is a letter
-        if (/^#[a-zA-Z][\w]*$/.test(token)) {
+          if (/^#[a-zA-Z][\w]*$/.test(token)) {
           const hashtag = token.slice(1);
           return (
             <Link legacyBehavior href={`/hashtag/${hashtag}`} key={idx}>
@@ -173,9 +169,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
             </Link>
           );
         }
-    
-        // Mention: starts with @ and next char is a letter
-        if (/^@[a-zA-Z][\w]*$/.test(token)) {
+          if (/^@[a-zA-Z][\w]*$/.test(token)) {
           const username = token.slice(1);
           return (
             <Link legacyBehavior href={`/profile/${username}`} key={idx}>
@@ -183,18 +177,14 @@ export default async function App({ params }: { params: Promise<{ slug: string }
             </Link>
           );
         }
-    
-        // URL
-        if (/^https?:\/\/[^\s]+$/.test(token)) {
+          if (/^https?:\/\/[^\s]+$/.test(token)) {
           return (
             <a target="_blank" href={token} className="text-primary-600 hover:text-primary-700" key={idx} rel="noreferrer">
               {token}
             </a>
           );
         }
-    
-        // Plain text or ignored patterns (like #7worlds or @3chan)
-        return token;
+          return token;
       });
     };
   console.log("here");

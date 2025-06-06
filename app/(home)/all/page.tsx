@@ -2,7 +2,7 @@
 'use client'
 
 import Landing from "@/components/landing";
-import More from "@/components/More";
+import More from "@/components/MoreAll";
 import PostComponent from "@/components/PostComponent";
 import { createClient } from "@/utils/supabase/client";
 import TimeAgo from "javascript-time-ago";
@@ -43,7 +43,6 @@ export default function Index() {
         .from("posts")
         .select("*,user(id,name,handle,image)")
         .order("id", { ascending: false })
-        .in("handle", l)
         .not("poster", "in", `(${userData.blocked.toString()})`)
         .not("poster", "in", `(${userData.blockedby.toString()})`)
         .limit(5);
@@ -109,7 +108,7 @@ export default function Index() {
         ) : (
           <div className="flex content-center items-center w-full h-screen"></div>
         )}
-        <More newblocked={newblocked} myblocked={myblocked} in={following}></More>
+        <More newblocked={newblocked} myblocked={myblocked} ></More>
         </div>
         </div>
         </div>
