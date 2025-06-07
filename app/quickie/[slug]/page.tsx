@@ -378,7 +378,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                           d="M5 3h13a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-4.59l-3.7 3.71c-.18.18-.43.29-.71.29a1 1 0 0 1-1-1v-3H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3m13 1H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h4v4l4-4h5a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2"
                         />
                       </svg>{" "}
-                      <h1 className="text-xs md:text-sm">{comments}</h1>
+                      <h1 className="text-sm">{comments}</h1>
                     </Link>
                     <Link href={"/quote/" + slug} className="flex flex-row content-center items-center text-white">
                       <svg width="22" height="22" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
