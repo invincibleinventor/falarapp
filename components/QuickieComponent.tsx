@@ -160,7 +160,7 @@ export default function Post(props: any) {
               </div>
               {props.quote && (
                 <div
-                  onClick={() => return redirect("/quickie/" + props.quoteid)}
+                  onClick={() => redirect("/quickie/" + props.quoteid)}
                   className="flex h-max border pb-4 mb-6 cursor-pointer  border-neutral-800  bg-neutral-950/10 rounded-xl mx-0  flex-col gap-[8px] pt-4 mt-4 "
                 >
                   <div className="flex flex-row gap-2 content-center items-center h-max shrink-0">
