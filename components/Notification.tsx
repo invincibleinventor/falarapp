@@ -6,6 +6,9 @@ import UserInformation from "./UserInformation";
 export default function Notification(props: any) {
   const supabase = createClient();
   async function notify() {
+    const {data:d} = await supabase.from("notifications").select("*").eq("id",props.id);
+    if(d && d.length>0){
+      if(d[0]["seen"]!=true){
     const { error } = await supabase.from("notifications").update({ seen: true }).eq("id", props.id);
     const { data: s, error: ss } = await supabase.from("user").select("notifications").eq("id", props.userid);
     if (ss) {
@@ -25,6 +28,8 @@ export default function Notification(props: any) {
           alert(es.message);
           console.log(es);
         }
+      }
+    }
       }
     }
   }
