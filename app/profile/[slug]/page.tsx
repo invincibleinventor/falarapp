@@ -19,7 +19,6 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
   const supabase = createClient();
   const [image, setImage] = useState("");
   const [posts, setPosts] = useState<any>([]);
-  const [resume, setIsResume] = useState(false);
   const [myImage, setMyImage] = useState("");
   const [hisId, setHisId] = useState("");
   const [loggedin, setloggedin] = useState(false);
@@ -64,7 +63,6 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
             setAbout(pd[0].about);
             setNotifications(pd[0].notifications);
             setImage(pd[0].image);
-            setIsResume(pd[0].isresume);
             setFollowers(pd[0].followers.length);
             setFollowing(pd[0].following.length);
 
@@ -369,11 +367,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
               {!blocked && !imblockedby && about}
             </h1>
 
-            <div className={resume ? "flex flex-row mr-16" : "flex flex-row mr-16"}>
-              <Link href={"/resume/" + slug} className={resume ? "text-sm font-medium text-blue-600" : "hidden"}>
-                View Resume
-              </Link>
-            </div>
+          
           </div>
         </div>
         {found && !blocked && !imblockedby && (

@@ -34,7 +34,7 @@ export const config = {
     "/myself",
     "/quickies",
     "/quickies/:path*",
-    
+
     "/more/:path*",
     "/hashtag/:path*",
     "/bookmarks",

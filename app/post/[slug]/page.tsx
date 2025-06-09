@@ -219,7 +219,9 @@ export default async function App({ params }: { params: Promise<{ slug: string }
               </Link>
             )}
 
-            <div className={`flex sticky top-0 flex-row flex-grow justify-between content-center items-center px-8 py-4 mt-2 w-full text-lg filter ${AppConfig.customtheme?'bg-neutral-900':'backdrop-blur-lg'}`}>
+            <div
+              className={`flex sticky top-0 flex-row flex-grow justify-between content-center items-center px-8 py-4 mt-2 w-full text-lg filter ${AppConfig.customtheme ? "bg-neutral-900" : "backdrop-blur-lg"}`}
+            >
               <Link href={"/profile/" + author} className="flex flex-row content-center items-center">
                 <UserInformation id={authorid} image={profile} imgclass="w-7 h-7 mr-3 rounded-md" />
                 <h1 className="text-xs font-medium text-white md:text-sm">{name}</h1>
@@ -277,7 +279,9 @@ export default async function App({ params }: { params: Promise<{ slug: string }
         </div>
       )}
       {loggedin && !blocked.includes(authorid) && !newblocked.includes(authorid) && (
-        <div className={`flex absolute bottom-0 flex-row w-full h-14  ${AppConfig.customtheme?'bg-neutral-900':'backdrop-blur-lg'} z-[1000000] border-x`}>
+        <div
+          className={`flex absolute bottom-0 flex-row w-full h-14  ${AppConfig.customtheme ? "bg-neutral-900" : "backdrop-blur-lg"} z-[1000000] border-x`}
+        >
           <BookMarksComponent
             userliked={userbookmarked}
             postid={slug}

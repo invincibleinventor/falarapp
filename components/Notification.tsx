@@ -6,30 +6,30 @@ import UserInformation from "./UserInformation";
 export default function Notification(props: any) {
   const supabase = createClient();
   async function notify() {
-    const {data:d} = await supabase.from("notifications").select("*").eq("id",props.id);
-    if(d && d.length>0){
-      if(d[0]["seen"]!=true){
-    const { error } = await supabase.from("notifications").update({ seen: true }).eq("id", props.id);
-    const { data: s, error: ss } = await supabase.from("user").select("notifications").eq("id", props.userid);
-    if (ss) {
-      alert(ss.message);
-    } else {
-      if (s && s.length > 0) {
-        const notify = s[0]["notifications"] - 1;
-        const { error: es } = await supabase.from("user").update({ notifications: notify }).eq("id", props.userid);
-
-        if (error) {
-          console.log(error);
+    const { data: d } = await supabase.from("notifications").select("*").eq("id", props.id);
+    if (d && d.length > 0) {
+      if (d[0]["seen"] != true) {
+        const { error } = await supabase.from("notifications").update({ seen: true }).eq("id", props.id);
+        const { data: s, error: ss } = await supabase.from("user").select("notifications").eq("id", props.userid);
+        if (ss) {
+          alert(ss.message);
         } else {
-          window.location.replace(props.url);
-        }
+          if (s && s.length > 0) {
+            const notify = s[0]["notifications"] - 1;
+            const { error: es } = await supabase.from("user").update({ notifications: notify }).eq("id", props.userid);
 
-        if (es) {
-          alert(es.message);
-          console.log(es);
+            if (error) {
+              console.log(error);
+            } else {
+              window.location.replace(props.url);
+            }
+
+            if (es) {
+              alert(es.message);
+              console.log(es);
+            }
+          }
         }
-      }
-    }
       }
     }
   }
