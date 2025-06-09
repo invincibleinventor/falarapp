@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-key */
 import BookMarksComponent from "@/components/QuickieBookMarksComponent";
-import CommentsComponent from "@/components/QuickieComments";
 import LikeComponent from "@/components/QuickieExpandedLikeComponent";
 import { createClient } from "@/utils/supabase/server";
 import TimeAgo from "javascript-time-ago";
