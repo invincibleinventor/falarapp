@@ -66,15 +66,17 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col w-full h-full">
-      <h1 className="pt-2 mx-auto mt-20 text-2xl font-semibold text-left font-pops w-3xl text-neutral-300">
+    <div className="lg:grid lg:grid-cols-2">
+
+    <div className="flex flex-col px-10 h-screen lg:px-24">
+      <h1 className="pt-2 mt-20 text-2xl font-semibold text-left lg:text-3xl font-poppins w-3xl text-neutral-300">
         Welcome To Falar{" "}
       </h1>
-      <h1 className="pt-2 mx-10 mb-16 text-sm font-normal text-center lg:mx-auto font-pops max-w-96 text-neutral-400">
+      <h1 className="pt-2 mb-4 w-96 text-base font-normal text-left lg:text-lg font-poppins text-neutral-400">
         Login to your account or create a new account to continue
       </h1>
 
-      <div className="flex flex-col my-auto items-center content-center mx-auto min-w-[250px] max-w-[300px]">
+      <div className="flex flex-col my-auto items-center content-center  min-w-[250px] max-w-[300px]">
         <form className="flex flex-col gap-2 content-center p-2 my-auto w-full text-xs font-pops">
           <h1 className="mt-3 pl-[1px] text-sm font-medium text-white">Email Address</h1>
           <input
@@ -132,6 +134,9 @@ export default function Login() {
           </button>
         </form>
       </div>
+    </div>
+    <div className="hidden h-full bg-gradient-to-b to-blue-800 rounded-lg lg:block from-blue-950">ijij</div>
+
     </div>
   );
 }

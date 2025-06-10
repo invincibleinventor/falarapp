@@ -7,7 +7,6 @@ import { cache } from "react";
 import en from "javascript-time-ago/locale/en";
 import { cookies } from "next/headers";
 import Image from "next/image";
-import PostComponent from "@/components/QuickieComponent";
 import Link from "next/link";
 import Iof from "@/components/Iof";
 import Menu from "@/components/Menu";
