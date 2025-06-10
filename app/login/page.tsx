@@ -109,7 +109,7 @@ export default function Login() {
             Register Your Account
           </button>
           <button
-            className="flex gap-4 justify-center px-5 py-3 mt-6 text-sm font-medium text-white rounded-full border-[0.5px] border-neutral-900 bg-black/40"
+            className="flex gap-4 justify-center px-5 py-3 mt-6 text-sm font-medium text-white rounded-full border-[0.5px] border-neutral-900 bg-black/60"
             onClick={() => signWithGoogle()}
           >
             <svg width="16" height="16" viewBox="0 0 775 794" fill="none" xmlns="http://www.w3.org/2000/svg">
