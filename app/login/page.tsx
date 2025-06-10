@@ -66,17 +66,17 @@ export default function Login() {
   };
 
   return (
-    <div className="lg:grid lg:grid-cols-2">
+    <div className="w-screen bg-[url('/gradientbg.png')]  bg-no-repeat bg-cover p-4 h-screen lg:grid lg:grid-cols-2">
 
-    <div className="flex flex-col px-10 h-screen lg:px-24">
-      <h1 className="pt-2 mt-20 text-2xl font-semibold text-left lg:text-3xl font-poppins w-3xl text-neutral-300">
-        Welcome To Falar{" "}
+    <div className="flex flex-col flex-grow py-16 h-full rounded-3xl border-[0.1] shadow-lg filter backdrop-blur-lg border-neutral-400 bg-black/20 lg:px-32">
+      <h1 className="pt-2 mx-auto text-3xl font-semibold text-center text-white lg:text-left lg:mx-0 lg:text-5xl font-pops w-3xl">
+        Hola!<br></br>Welcome Back!{" "}
       </h1>
-      <h1 className="pt-2 mb-4 w-96 text-base font-normal text-left lg:text-lg font-poppins text-neutral-400">
+      <h1 className="pt-2 mx-auto mt-5 mb-4 w-64 text-base font-normal text-center text-white lg:w-96 lg:text-left lg:mx-0 lg:text-lg font-poppins">
         Login to your account or create a new account to continue
       </h1>
 
-      <div className="flex flex-col my-auto items-center content-center  min-w-[250px] max-w-[300px]">
+      <div className="flex flex-col my-auto items-center lg:mx-0 mx-auto content-center  min-w-[250px] max-w-[300px]">
         <form className="flex flex-col gap-2 content-center p-2 my-auto w-full text-xs font-pops">
           <h1 className="mt-3 pl-[1px] text-sm font-medium text-white">Email Address</h1>
           <input
@@ -84,7 +84,7 @@ export default function Login() {
               setEmail(e.target.value);
             }}
             type="email"
-            className="px-5 py-3 mt-1 w-full text-sm bg-black rounded-full border outline-none text-neutral-300 border-neutral-900 focus:outline-primary-800 placeholder:text-neutral-400"
+            className="px-5 py-3 mt-1 w-full text-sm text-white rounded-full outline-none bg-black/20 placeholder:text-neutral-300"
             placeholder="Your Email Address"
           ></input>
           <h1 className="pl-[1px] mt-4 text-sm font-medium text-white">Password</h1>
@@ -93,23 +93,23 @@ export default function Login() {
               setPassword(e.target.value);
             }}
             type="password"
-            className="px-5 py-3 mt-1 w-full text-sm bg-black rounded-full border outline-none text-neutral-300 border-neutral-900 focus:outline-primary-800 placeholder:text-neutral-400"
+            className="px-5 py-3 mt-1 w-full text-sm text-white rounded-full outline-none bg-black/20 placeholder:text-neutral-300"
             placeholder="Your Password"
           ></input>
           <button
             onClick={(e) => (e.preventDefault(), login())}
-            className="px-5 py-3 mt-4 mb-2 text-sm font-medium text-white rounded-full bg-primary-700"
+            className="px-5 py-3 mt-4 mb-2 text-sm font-medium text-white bg-gradient-to-b rounded-full from-primary-700 to-primary-900"
           >
             Sign In To Your Account
           </button>
           <button
             onClick={(e) => (e.preventDefault(), register())}
-            className="px-5 py-3 text-sm font-medium bg-black rounded-full border text-neutral-300 border-neutral-800"
+            className="px-5 py-3 text-sm font-medium text-white rounded-full bg-white/10"
           >
             Register Your Account
           </button>
           <button
-            className="flex gap-4 justify-center px-5 py-3 mt-6 text-sm font-medium bg-black rounded-full border text-neutral-300 border-neutral-800"
+            className="flex gap-4 justify-center px-5 py-3 mt-6 text-sm font-medium text-white rounded-full border-[0.5px] border-neutral-900 bg-black/40"
             onClick={() => signWithGoogle()}
           >
             <svg width="16" height="16" viewBox="0 0 775 794" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -135,7 +135,7 @@ export default function Login() {
         </form>
       </div>
     </div>
-    <div className="hidden h-full bg-gradient-to-b to-blue-800 rounded-lg lg:block from-blue-950">ijij</div>
+    <div className="hidden flex-grow m-6 h-auto lg:flex"></div>
 
     </div>
   );
