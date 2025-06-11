@@ -74,7 +74,7 @@ export default function CommentComponent(props: any) {
         const hashtag = token.slice(1);
         return (
           <Link legacyBehavior href={`/hashtag/${hashtag}`} key={idx}>
-            <a className="text-primary-600 hover:text-primary-700">{token}</a>
+            <a className="text-primary-300 hover:text-primary-300">{token}</a>
           </Link>
         );
       }
@@ -83,7 +83,7 @@ export default function CommentComponent(props: any) {
         const username = token.slice(1);
         return (
           <Link legacyBehavior href={`/profile/${username}`} key={idx}>
-            <a className="text-primary-600 hover:text-primary-700">{token}</a>
+            <a className="text-primary-300 hover:text-primary-300">{token}</a>
           </Link>
         );
       }
@@ -93,7 +93,7 @@ export default function CommentComponent(props: any) {
           <a
             target="_blank"
             href={token}
-            className="text-primary-600 hover:text-primary-700"
+            className="text-primary-300 hover:text-primary-300"
             key={idx}
             rel="noreferrer"
           >
@@ -113,7 +113,7 @@ export default function CommentComponent(props: any) {
             <UserInformation
               image={props.profile}
               id={props.userid}
-              imgclass="rounded-md object-cover min-w-[24px] max-w-[24px] h-6"
+              imgclass="rounded-none object-cover min-w-[24px] max-w-[24px] h-6"
             />
             <div className="flex content-center items-center ml-2 w-full">
               <h1>

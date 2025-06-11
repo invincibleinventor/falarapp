@@ -9,13 +9,13 @@ export default function StoriesView(props: any) {
       <div
         onClick={() => setVisible(!visible)}
         style={{ background: `url('${props.image}')` }}
-        className="relative w-24 h-32 rounded-md bg-gradient-to-b from-black to-current"
+        className="relative w-24 h-32 rounded-none bg-gradient-to-b from-black to-current"
       >
         <h1 className="absolute text-xs font-medium text-white bottom-2 left-3">{props.name}</h1>
         <Image
           width={32}
           height={32}
-          className="absolute w-8 h-8 bg-purple-500 border border-white rounded-lg left-3 top-2"
+          className="absolute w-8 h-8 bg-purple-500 border border-white rounded-none left-3 top-2"
           src={props.profile}
           alt="story"
         />

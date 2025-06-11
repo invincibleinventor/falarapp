@@ -59,7 +59,7 @@ export default function Toggle(props: any) {
     <button
       disabled={disabled}
       onClick={() => deactivate()}
-      className="px-6 py-3 w-max text-xs font-medium text-white bg-red-800 rounded-full"
+      className="px-6 py-3 w-max text-xs font-medium text-white bg-red-800 rounded-none"
     >
       Delete Account
     </button>

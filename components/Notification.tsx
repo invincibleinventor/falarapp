@@ -41,7 +41,7 @@ export default function Notification(props: any) {
       <div className="flex relative flex-col content-center items-center hrink-0">
         <UserInformation
           image={props.image}
-          imgclass="w-8 h-8 rounded-lg lg:h-10 lg:w-10"
+          imgclass="w-8 h-8 rounded-none lg:h-10 lg:w-10"
           id={props.userid}
         ></UserInformation>
       </div>

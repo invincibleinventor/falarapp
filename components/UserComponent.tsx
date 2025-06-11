@@ -76,7 +76,7 @@ export default function UserComponent(props: any) {
   return (
     <Link
       href={"/profile/" + props.handle}
-      className="mx-auto my-2 flex md:h-[270.29px] w-[calc(303.86px)] rounded-md flex-col md:pb-4 pb-5 p-4 xl:mx-2 xl:w-auto"
+      className="mx-auto my-2 flex md:h-[270.29px] w-[calc(303.86px)] rounded-none flex-col md:pb-4 pb-5 p-4 xl:mx-2 xl:w-auto"
     >
       <div className="flex flex-row justify-between content-center items-center">
         <div className="flex flex-row content-center items-center space-x-3">
@@ -86,7 +86,7 @@ export default function UserComponent(props: any) {
             onfollow={onfollow}
             id={props.id}
             image={props.image}
-            imgclass="object-cover w-10 h-10 rounded-lg"
+            imgclass="object-cover w-10 h-10 rounded-none"
             alt="profile-pic"
           />
           <div className="flex flex-col">
@@ -98,14 +98,14 @@ export default function UserComponent(props: any) {
           onClick={(e) => (e.stopPropagation(), e.preventDefault(), onfollow(props.handle))}
           className={
             imfollowing
-              ? "px-4 py-1 text-xs text-black bg-white rounded-full border border-black h-max"
-              : "px-4 py-1 text-xs text-white rounded-full border border-black h-max bg-primary-700"
+              ? "px-4 py-1 text-xs font-medium text-black bg-white rounded-none border border-black h-max"
+              : "px-4 py-1 text-xs font-medium text-black rounded-none border border-black h-max bg-primary-300"
           }
         >
           {imfollowing ? "Unfollow" : "Follow"}
         </button>
       </div>
-      <div className="flex flex-row gap-6 content-center items-center p-4 mx-0 my-6 mb-4 rounded-lg bg-neutral-800/40">
+      <div className="flex flex-row gap-6 content-center items-center p-4 mx-0 my-6 mb-4 rounded-none bg-neutral-800/40">
         <div className="flex flex-row w-full md:mx-auto">
           <div className="flex flex-col gap-1 content-center items-center mx-auto w-max">
             <h1 className="text-xs font-semibold text-neutral-300">Followers</h1>

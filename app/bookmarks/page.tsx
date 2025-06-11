@@ -91,14 +91,14 @@ export default function Index() {
                 <div className="flex content-center items-center px-10 mt-24 w-full sm:px-24 md:px-16 lg:px-24">
                   <div className="flex flex-col gap-4 mx-auto max-w-max">
                     <h1 className="mx-auto text-lg font-semibold text-center text-neutral-300">No Posts To View!</h1>
-                    <h1 className="mx-auto text-center rounded-md text-neutral-400 text-md">
+                    <h1 className="mx-auto text-center rounded-none text-neutral-400 text-md">
                       Your bookmarked posts appear in here. Seems like you have not bookmarked anything yet. Bookmark
                       posts to view them here.
                     </h1>
                     <Link
                       href="/"
-                      className={`mx-auto mt-3 rounded-full w-max px-8 py-3 text-xs font-medium  ${
-                        1 == 1 ? "bg-primary-700 text-white" : "border-2 bg-white"
+                      className={`mx-auto mt-3 rounded-none w-max px-8 py-3 text-xs font-medium  ${
+                        1 == 1 ? "bg-primary-300 text-black" : "border-2 bg-white"
                       }`}
                     >
                       Return To Home

@@ -85,7 +85,7 @@ export default function CommentsComponent(props: any) {
           <h1 className="sticky top-0 px-6 mb-4 text-xl font-semibold text-neutral-300">Comments</h1>
 
           <div className="flex flex-row px-6 pt-2 pb-0 space-x-0">
-            <Image alt={""} src={props.myphoto} width={32} height={32} className="w-7 h-7 rounded-md shrink-0" />
+            <Image alt={""} src={props.myphoto} width={32} height={32} className="w-7 h-7 rounded-none shrink-0" />
             <textarea
               required
               minLength={5}
@@ -101,7 +101,7 @@ export default function CommentsComponent(props: any) {
             ></textarea>
             <button
               onClick={() => post()}
-              className="px-6 py-2 text-sm text-white rounded-full transition-all duration-100 ease-linear bg-primary-700 hover:bg-primary-700 h-max"
+              className="px-6 py-2 text-sm font-medium text-black rounded-none transition-all duration-100 ease-linear bg-primary-300 hover:bg-primary-300 h-max"
             >
               Post
             </button>

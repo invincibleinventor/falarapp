@@ -32,13 +32,13 @@ export default function App(props: any) {
   return (
     <div className="relative">
       {notifications > 0 && (
-        <div className="absolute top-0 font-medium left-1 flex items-center content-center px-2 py-1 text-[10px] text-white rounded-full min-w-6 bg-primary-700 aspect-video">
+        <div className="absolute top-0 font-medium left-1 flex items-center content-center px-2 py-1 text-[10px] text-black rounded-none min-w-6 bg-primary-300 aspect-video">
           <h1 className="mx-auto">{notifications}</h1>
         </div>
       )}
       <Link
         href={props.link}
-        className={`mx-2  flex cursor-pointer flex-row content-center items-center  h-[52px] w-[52px] transition-all   rounded-full md:rounded-full  md:h-max md:border-none  duration-100 ease-linear md:mx-0 md:w-full md:space-x-[10px] md:px-[14px] md:py-[10px] md:pr-8  ${
+        className={`mx-2  flex cursor-pointer flex-row content-center items-center  h-[52px] w-[52px] transition-all   rounded-none md:rounded-none  md:h-max md:border-none  duration-100 ease-linear md:mx-0 md:w-full md:space-x-[10px] md:px-[14px] md:py-[10px] md:pr-8  ${
           a.opened ? "bg-neutral-700/30" : ""
         }`}
       >

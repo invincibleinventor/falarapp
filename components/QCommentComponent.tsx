@@ -26,7 +26,7 @@ export default function Post(props: any) {
         const hashtag = token.slice(1);
         return (
           <Link legacyBehavior href={`/hashtag/${hashtag}`} key={idx}>
-            <a className="text-primary-600 hover:text-primary-700">{token}</a>
+            <a className="text-primary-300 hover:text-primary-300">{token}</a>
           </Link>
         );
       }
@@ -35,7 +35,7 @@ export default function Post(props: any) {
         const username = token.slice(1);
         return (
           <Link legacyBehavior href={`/profile/${username}`} key={idx}>
-            <a className="text-primary-600 hover:text-primary-700">{token}</a>
+            <a className="text-primary-300 hover:text-primary-300">{token}</a>
           </Link>
         );
       }
@@ -45,7 +45,7 @@ export default function Post(props: any) {
           <a
             target="_blank"
             href={token}
-            className="text-primary-600 hover:text-primary-700"
+            className="text-primary-300 hover:text-primary-300"
             key={idx}
             rel="noreferrer"
           >
@@ -60,15 +60,15 @@ export default function Post(props: any) {
   return (
     <div className="w-full animate-in">
       <div className="w-full px-5 py-[6px]">
-        <div className="flex flex-col rounded-md border border-neutral-300 bg-neutral-50 md:gap-0">
-          <div className="flex content-center items-center bg-black rounded-md"></div>
+        <div className="flex flex-col rounded-none border border-neutral-300 bg-neutral-50 md:gap-0">
+          <div className="flex content-center items-center bg-black rounded-none"></div>
           <div className="flex h-max flex-col gap-[8px] md:p-6 p-4 ">
             <div className="flex flex-row gap-2 content-center items-center h-max shrink-0">
               <Link className="w-10 h-10" href={`/profile/` + props.handle}>
-                <Image width={30} height={30} className="w-10 h-10 rounded-lg shrink-0" src={props.dp} alt="dp" />
+                <Image width={30} height={30} className="w-10 h-10 rounded-none shrink-0" src={props.dp} alt="dp" />
               </Link>
               <Link href={`/profile/` + props.handle} className="flex flex-row gap-[2px]">
-                <div className="flex flex-col content-center flex-1 gap-[2px] py-0 pl-2 rounded-lg">
+                <div className="flex flex-col content-center flex-1 gap-[2px] py-0 pl-2 rounded-none">
                   <div className="flex flex-row content-center items-center">
                     <h1 className="text-sm font-medium text-black">
                       <span className="inline-block md:hidden">{x}</span>
@@ -114,14 +114,14 @@ export default function Post(props: any) {
                 <div
                   className={
                     photocount == 1
-                      ? "w-full border rounded-md mt-4 aspect-video h-full"
+                      ? "w-full border rounded-none mt-4 aspect-video h-full"
                       : "mt-4 md:gap-2 gap-1 grid-cols-2 grid"
                   }
                 >
                   {props.image.map((image: string) => (
                     <img
                       onClick={() => window.open(image, "_blank")?.focus()}
-                      className="object-cover w-full rounded-md border h-max aspect-video"
+                      className="object-cover w-full rounded-none border h-max aspect-video"
                       src={image}
                     ></img>
                   ))}

@@ -18,13 +18,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <div className="flex flex-row flex-grow px-4 w-auto text-base font-medium text-white font-pops">
         <Link
           href="/bookmarks"
-          className={`w-1/2 py-2 m-2 rounded-lg text-center ${pathname == "/bookmarks" ? "bg-neutral-700/30" : ""}`}
+          className={`w-1/2 py-2 m-2 rounded-none text-center ${pathname == "/bookmarks" ? "bg-neutral-700/30" : ""}`}
         >
           Posts
         </Link>
         <Link
           href="/bookmarks/quickies"
-          className={`w-1/2 py-2 m-2 text-center rounded-lg ${pathname == "/bookmarks/quickies" ? "bg-neutral-700/30" : ""}`}
+          className={`w-1/2 py-2 m-2 text-center rounded-none ${pathname == "/bookmarks/quickies" ? "bg-neutral-700/30" : ""}`}
         >
           Quickies
         </Link>

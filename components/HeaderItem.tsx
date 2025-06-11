@@ -26,7 +26,7 @@ export default function App(props: any) {
   return (
     <Link
       href={props.link}
-      className={`mx-2  flex cursor-pointer flex-row content-center items-center  h-[52px] w-[52px] transition-all   rounded-full md:rounded-full  md:h-max md:border-none  duration-100 ease-linear md:mx-0 md:w-full md:space-x-[10px] md:px-[14px] md:py-[10px] md:pr-8  ${
+      className={`mx-2  flex cursor-pointer flex-row content-center items-center  h-[52px] w-[52px] transition-all   rounded-none md:rounded-none  md:h-max md:border-none  duration-100 ease-linear md:mx-0 md:w-full md:space-x-[10px] md:px-[14px] md:py-[10px] md:pr-8  ${
         a.opened ? "bg-neutral-700/30" : ""
       }`}
     >

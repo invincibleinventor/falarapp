@@ -164,7 +164,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
         const hashtag = token.slice(1);
         return (
           <Link legacyBehavior href={`/hashtag/${hashtag}`} key={idx}>
-            <a className="text-primary-600 hover:text-primary-700">{token}</a>
+            <a className="text-primary-300 hover:text-primary-300">{token}</a>
           </Link>
         );
       }
@@ -172,7 +172,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
         const username = token.slice(1);
         return (
           <Link legacyBehavior href={`/profile/${username}`} key={idx}>
-            <a className="text-primary-600 hover:text-primary-700">{token}</a>
+            <a className="text-primary-300 hover:text-primary-300">{token}</a>
           </Link>
         );
       }
@@ -181,7 +181,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
           <a
             target="_blank"
             href={token}
-            className="text-primary-600 hover:text-primary-700"
+            className="text-primary-300 hover:text-primary-300"
             key={idx}
             rel="noreferrer"
           >
@@ -201,7 +201,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
           <h1 className="text-sm font-semibold text-white">Sign up to Falar to view more such interesting quickies</h1>
           <Link
             href={"/login"}
-            className="px-6 py-2 w-max text-xs font-semibold text-blue-600 bg-white rounded-full transition-all duration-200 ease-linear hover:bg-neutral-200 hover:shadow-lg"
+            className="px-6 py-2 w-max text-xs font-semibold text-blue-600 bg-white rounded-none transition-all duration-200 ease-linear hover:bg-neutral-200 hover:shadow-lg"
           >
             Sign Up To Falar
           </Link>
@@ -219,8 +219,8 @@ export default async function App({ params }: { params: Promise<{ slug: string }
             </h1>
             <Link
               href="/quickies"
-              className={`mx-auto mt-3 w-max rounded-full px-8 py-3 text-xs font-semibold ${
-                1 == 1 ? "bg-primary-700 text-white" : "border-2  bg-white "
+              className={`mx-auto mt-3 w-max rounded-none px-8 py-3 text-xs font-semibold ${
+                1 == 1 ? "bg-primary-300 text-white" : "border-2  bg-white "
               }`}
             >
               Return Back
@@ -243,7 +243,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                 {parentQuickie && (
                   <Link
                     href={`/quickie/${parentQuickie.id}`}
-                    className="flex flex-row content-center items-center px-4 mb-4 space-x-4 text-sm text-primary-600"
+                    className="flex flex-row content-center items-center px-4 mb-4 space-x-4 text-sm text-primary-300"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
                       <path
@@ -263,7 +263,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                       height={28}
                       src={profile}
                       alt="user profile"
-                      className="rounded-md object-cover min-w-[28px] max-w-[28px] h-7"
+                      className="rounded-none object-cover min-w-[28px] max-w-[28px] h-7"
                     />
                     <div className="flex content-center items-center">
                       <h1>
@@ -291,7 +291,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                     <div
                       className={
                         photocount == 1
-                          ? "w-full px-4 border ml-0 rounded-md mt-4 aspect-video h-full"
+                          ? "w-full px-4 border ml-0 rounded-none mt-4 aspect-video h-full"
                           : photocount == 3
                             ? "mt-4 px-4  md:gap-2 gap-1 grid thrip"
                             : "mt-4 px-4 md:gap-2 gap-1 grid-cols-2 grid"
@@ -305,7 +305,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                   {quote && (
                     <Link
                       href={"/quickie/" + quoteid}
-                      className="flex h-max border pb-4 mb-2 bg-neutral-950/10 border-neutral-800 rounded-xl mx-4  flex-col gap-[8px] pt-4 mt-4 "
+                      className="flex h-max border pb-4 mb-2 bg-neutral-950/10 border-neutral-800 rounded-none mx-4  flex-col gap-[8px] pt-4 mt-4 "
                     >
                       <div className="flex flex-row gap-2 content-center items-center h-max shrink-0">
                         <div className="flex gap-[10px] px-4 mt-0">
@@ -314,7 +314,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                             height={20}
                             src={quotedisplay}
                             alt="user profile"
-                            className="rounded-md object-cover min-w-[24px] max-w-[24px] max-h-6"
+                            className="rounded-none object-cover min-w-[24px] max-w-[24px] max-h-6"
                           />
                           <div className="flex content-center items-center">
                             <h1>
@@ -341,7 +341,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                           <div
                             className={
                               quotephotocount == 1
-                                ? "w-full px-4 border ml-0 rounded-md mt-4 aspect-video h-full"
+                                ? "w-full px-4 border ml-0 rounded-none mt-4 aspect-video h-full"
                                 : quotephotocount == 3
                                   ? "mt-4 px-4  md:gap-2 gap-1 grid thrip"
                                   : "mt-4 px-4 md:gap-2 gap-1 grid-cols-2 grid"
@@ -417,8 +417,8 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                   </h1>
                   <Link
                     href="/"
-                    className={`mx-auto mt-3 w-max rounded-full px-8 py-3 text-xs font-semibold ${
-                      1 == 1 ? "bg-primary-700 text-white" : "border-2  bg-white "
+                    className={`mx-auto mt-3 w-max rounded-none px-8 py-3 text-xs font-semibold ${
+                      1 == 1 ? "bg-primary-300 text-black" : "border-2  bg-white "
                     }`}
                   >
                     Login Now

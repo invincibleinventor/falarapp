@@ -140,7 +140,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
     props: JSX.IntrinsicAttributes & ClassAttributes<HTMLImageElement> & ImgHTMLAttributes<HTMLImageElement>
   ) {
     // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-    return <img {...props} className="w-full max-w-full rounded-lg" />;
+    return <img {...props} className="w-full max-w-full rounded-none" />;
   }
   const components = {
     img: ClickableImage,
@@ -155,7 +155,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
           <h1 className="text-sm font-semibold text-white">Sign up to Falar to read more such interesting articles</h1>
           <Link
             href={"/login"}
-            className="px-6 py-2 w-max text-xs font-semibold text-blue-600 bg-white rounded-full transition-all duration-200 ease-linear hover:bg-neutral-200 hover:shadow-lg"
+            className="px-6 py-2 w-max text-xs font-semibold text-blue-600 bg-white rounded-none transition-all duration-200 ease-linear hover:bg-neutral-200 hover:shadow-lg"
           >
             Sign Up To Falar
           </Link>
@@ -171,8 +171,8 @@ export default async function App({ params }: { params: Promise<{ slug: string }
             </h1>
             <Link
               href="/"
-              className={`mx-auto mt-4 rounded-full w-max px-8 py-3 text-xs font-semibold ${
-                1 == 1 ? "bg-primary-700 text-white" : "border-2  bg-white "
+              className={`mx-auto mt-4 rounded-none w-max px-8 py-3 text-xs font-semibold ${
+                1 == 1 ? "bg-primary-300 text-white" : "border-2  bg-white "
               }`}
             >
               Return Back
@@ -223,7 +223,7 @@ export default async function App({ params }: { params: Promise<{ slug: string }
               className={`flex sticky top-0 flex-row flex-grow justify-between content-center items-center px-8 py-4 mt-2 w-full text-lg filter ${AppConfig.customtheme ? "bg-neutral-900" : "backdrop-blur-lg"}`}
             >
               <Link href={"/profile/" + author} className="flex flex-row content-center items-center">
-                <UserInformation id={authorid} image={profile} imgclass="w-7 h-7 mr-3 rounded-md" />
+                <UserInformation id={authorid} image={profile} imgclass="w-7 h-7 mr-3 rounded-none" />
                 <h1 className="text-xs font-medium text-white md:text-sm">{name}</h1>
               </Link>
 
@@ -252,8 +252,8 @@ export default async function App({ params }: { params: Promise<{ slug: string }
                 </h1>
                 <Link
                   href="/"
-                  className={`mx-auto mt-3 w-max rounded-full px-8 py-3 text-xs font-semibold ${
-                    1 == 1 ? "bg-primary-700 text-white" : "border-2  bg-white "
+                  className={`mx-auto mt-3 w-max rounded-none px-8 py-3 text-xs font-semibold ${
+                    1 == 1 ? "bg-primary-300 text-black" : "border-2  bg-white "
                   }`}
                 >
                   Login Now

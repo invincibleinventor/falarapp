@@ -107,7 +107,7 @@ export default function LikeComponent(props: any) {
       >
         {liked ? (
           <path
-            className="fill-primary-600 stroke-primary-600"
+            className="fill-primary-300 fill-primary-300"
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="2"

@@ -77,7 +77,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
               minLength={4}
               maxLength={50}
               type="search"
-              className="font-inter md:mb-3 rounded-full peer h-[48px] w-full bg-neutral-700/20 focus:outline-none pl-6 pr-14 text-[14px] placeholder:text-neutral-400 text-neutral-300"
+              className="font-inter md:mb-3 rounded-none peer h-[48px] w-full bg-neutral-700/20 focus:outline-none pl-6 pr-14 text-[14px] placeholder:text-neutral-400 text-neutral-300"
               placeholder={"Search " + slug + "'s posts"}
             ></input>
           </div>

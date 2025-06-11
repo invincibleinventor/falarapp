@@ -10,8 +10,8 @@ export default function Error({}) {
         </h1>
         <Link
           href="/"
-          className={`mx-auto mt-3  w-max px-8 py-3 rounded-full text-xs font-medium ${
-            1 == 1 ? "bg-primary-700 text-white" : "bg-white text-white"
+          className={`mx-auto mt-3  w-max px-8 py-3 rounded-none text-xs font-medium ${
+            1 == 1 ? "bg-primary-300 text-black" : "bg-white text-white"
           }`}
         >
           Return Back

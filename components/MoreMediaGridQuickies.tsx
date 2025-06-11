@@ -78,7 +78,7 @@ export default function More(props: any) {
       <div className="grid grid-cols-3 gap-2 content-center items-center px-5 pb-20 w-full md:gap-4">
         {images.map((post: any) => (
           <img
-            className="object-cover col-span-1 rounded-xl border shadow-lg cursor-pointer border-neutral-900 aspect-square"
+            className="object-cover col-span-1 rounded-none border shadow-lg cursor-pointer border-neutral-900 aspect-square"
             src={post.image}
             onClick={() => redirect("/quickie/" + post.url)}
           />

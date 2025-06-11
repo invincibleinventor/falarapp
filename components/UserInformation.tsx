@@ -210,11 +210,11 @@ export default function UserInformation(props: any) {
           pointerEvents: isVisible ? "auto" : "none",
           visibility: isPositioned ? "visible" : "hidden",
         }}
-        className="p-2 pb-4 w-64 h-auto bg-gradient-to-b rounded-xl border shadow-lg bg-neutral-900 border-neutral-800"
+        className="p-2 pb-4 w-64 h-auto bg-gradient-to-b rounded-none border shadow-lg bg-neutral-900 border-neutral-800"
       >
         <div className="relative w-full h-full">
-          <img src={user.cover} className="w-full h-20 bg-black rounded-t-xl aspect-cover"></img>
-          <img className="absolute left-2 top-12 w-14 h-14 rounded-lg" src={user.image}></img>
+          <img src={user.cover} className="w-full h-20 bg-black rounded-none aspect-cover"></img>
+          <img className="absolute left-2 top-12 w-14 h-14 rounded-none" src={user.image}></img>
           <div className="flex flex-col mx-2 mt-8 space-y-2">
             <div className="flex flex-row justify-between content-center items-center">
               <div className="flex flex-col">
@@ -227,8 +227,8 @@ export default function UserInformation(props: any) {
                     onClick={handleFollow}
                     className={
                       imfollowing
-                        ? "px-4 py-1 text-xs text-black bg-white rounded-full border border-black h-max"
-                        : "px-4 py-1 text-xs text-white rounded-full border border-black h-max bg-primary-700"
+                        ? "px-4 py-1 text-xs font-medium text-black bg-white rounded-none border border-black h-max"
+                        : "px-4 py-1 text-xs font-medium text-black rounded-none border border-black h-max bg-primary-300"
                     }
                   >
                     {imfollowing ? "Unfollow" : "Follow"}

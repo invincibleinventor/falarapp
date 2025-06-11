@@ -204,8 +204,8 @@ export default function Index() {
                     </h1>
                     <Link
                       href="/explore"
-                      className={`mx-auto mt-3 rounded-full w-max px-8 py-3 text-xs font-medium  ${
-                        1 == 1 ? "bg-primary-700 text-white" : "border-2 bg-white"
+                      className={`mx-auto mt-3 rounded-none w-max px-8 py-3 text-xs font-medium  ${
+                        1 == 1 ? "bg-primary-300 text-black" : "border-2 bg-white"
                       }`}
                     >
                       Explore People

@@ -16,13 +16,13 @@ export default function Tabbed() {
           <div className="flex flex-row flex-grow px-4 w-auto text-base font-medium text-white font-pops">
             <Link
               href="/quickies"
-              className={`w-1/2 py-2 m-2 rounded-lg text-center ${pathname == "/quickies" ? "bg-neutral-700/30" : ""}`}
+              className={`w-1/2 py-2 m-2 rounded-none text-center ${pathname == "/quickies" ? "bg-neutral-700/30" : ""}`}
             >
               Following
             </Link>
             <Link
               href="/quickies/all"
-              className={`w-1/2 py-2 m-2 rounded-lg text-center ${pathname == "/quickies/all" ? "bg-neutral-700/30" : ""}`}
+              className={`w-1/2 py-2 m-2 rounded-none text-center ${pathname == "/quickies/all" ? "bg-neutral-700/30" : ""}`}
             >
               Explore
             </Link>

@@ -119,13 +119,13 @@ export default function Create() {
               width={200}
               height={200}
               src={cover ? cover : "/bg.jpg"}
-              className="rounded-xl h-[calc(52*4px)] w-[calc(100%)] border border-neutral-500 object-cover "
+              className="rounded-none h-[calc(52*4px)] w-[calc(100%)] border border-neutral-500 object-cover "
               alt="cover"
             />
           </div>
           <div
             onClick={handleClick}
-            className="absolute top-2 left-2 px-6 py-3 w-max text-xs text-white rounded-xl drop-shadow-lg backdrop-blur-lg cursor-pointer bg-black/60"
+            className="absolute top-2 left-2 px-6 py-3 w-max text-xs text-white rounded-none drop-shadow-lg backdrop-blur-lg cursor-pointer bg-black/60"
           >
             {" "}
             <input id="fupload" className="hidden" />
@@ -137,12 +137,12 @@ export default function Create() {
                 width={110}
                 height={110}
                 src={image ? image : "/user.jpg"}
-                className="mx-auto w-24 h-24 rounded-2xl"
+                className="mx-auto w-24 h-24 rounded-none"
                 alt="image"
               />
               <div
                 onClick={handleProfileClick}
-                className="absolute text-xs flex items-center content-center text-white rounded-full cursor-pointer left-20 right-0 mx-auto top-[80%] w-7 h-7  bg-primary-700 shadow-lg border-[0.5px] border-neutral-400"
+                className="absolute text-xs flex items-center content-center text-black rounded-none cursor-pointer left-20 right-0 mx-auto top-[80%] w-7 h-7  bg-primary-300 shadow-lg border-[0.5px] border-neutral-400"
               >
                 {" "}
                 <svg
@@ -193,7 +193,7 @@ export default function Create() {
         </label>
         <input
           onChange={(e) => setName(e.target.value)}
-          className="px-4 py-2 mx-6 mb-4 text-sm text-white rounded-md border bg-black/20 border-neutral-900"
+          className="px-4 py-2 mx-6 mb-4 text-sm text-white rounded-none border bg-black/20 border-neutral-900"
           name="name"
           defaultValue={name}
           placeholder="Please Type Out Your Display Name"
@@ -208,7 +208,7 @@ export default function Create() {
         <textarea
           defaultValue={about}
           onChange={(e) => setAbout(e.target.value)}
-          className="px-4 py-2 mx-6 mb-4 text-sm text-white rounded-md border bg-black/20 border-neutral-900"
+          className="px-4 py-2 mx-6 mb-4 text-sm text-white rounded-none border bg-black/20 border-neutral-900"
           name="content"
           placeholder="Please Type About Yourself"
           required
@@ -216,7 +216,7 @@ export default function Create() {
           maxLength={100}
         />
 
-        <button className="px-8 py-4 mx-auto mb-2 w-max text-xs font-medium text-white rounded-full bg-primary-700">
+        <button className="px-8 py-4 mx-auto mb-2 w-max text-xs font-medium text-black rounded-none bg-primary-300">
           Save Your Changes
         </button>
       </form>

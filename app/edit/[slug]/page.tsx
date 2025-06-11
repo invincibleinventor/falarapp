@@ -107,7 +107,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
         <div
           style={{ zIndex: 1000 }}
           className={
-            "absolute py-6 flex flex-col content-center text-white top-0 bottom-0 left-0 right-0 w-64 h-48 mx-auto my-auto bg-black rounded-xl px-4 border animate-in border-neutral-900 shadow-md md:w-84 lg:w-96 " +
+            "absolute py-6 flex flex-col content-center text-white top-0 bottom-0 left-0 right-0 w-64 h-48 mx-auto my-auto bg-black rounded-none px-4 border animate-in border-neutral-900 shadow-md md:w-84 lg:w-96 " +
             deleteDialog
           }
         >
@@ -122,7 +122,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
             </button>
             <button
               onClick={() => del()}
-              className="px-6 py-3 mt-auto mr-4 ml-auto text-sm font-medium text-white bg-red-800 rounded-lg"
+              className="px-6 py-3 mt-auto mr-4 ml-auto text-sm font-medium text-white bg-red-800 rounded-none"
             >
               Delete It
             </button>
@@ -142,7 +142,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
                 <button
                   onClick={() => toggledeleteDialog("")}
                   disabled={deleteDialog != "hidden" ? true : false}
-                  className="flex flex-row content-center items-center px-6 py-3 mx-0 space-x-3 text-sm font-medium rounded-full border border-red-800 transition-all duration-100 ease-linear font-pops text-neutral-300 hover:bg-red-900/30"
+                  className="flex flex-row content-center items-center px-6 py-3 mx-0 space-x-3 text-sm font-medium rounded-none border border-red-800 transition-all duration-100 ease-linear font-pops text-neutral-300 hover:bg-red-900/30"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256">
                     <path
@@ -162,7 +162,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
             <input
               disabled={deleteDialog != "hidden" ? true : false}
               onChange={(e) => setTitle(e.target.value)}
-              className="px-4 py-2 mr-4 mb-6 w-full text-sm text-white rounded-md border outline-none bg-black/20 border-neutral-900"
+              className="px-4 py-2 mr-4 mb-6 w-full text-sm text-white rounded-none border outline-none bg-black/20 border-neutral-900"
               name="content"
               placeholder="Please Type Out Your Title"
               required
@@ -176,7 +176,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
             <textarea
               disabled={deleteDialog != "hidden" ? true : false}
               onChange={(e) => setExcerpt(e.target.value)}
-              className="px-4 py-2 mr-4 mb-6 w-full h-32 text-sm text-white rounded-md border outline-none bg-black/20 border-neutral-900"
+              className="px-4 py-2 mr-4 mb-6 w-full h-32 text-sm text-white rounded-none border outline-none bg-black/20 border-neutral-900"
               name="content"
               placeholder="Please Type Out Your Excerpt"
               required
@@ -189,22 +189,22 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
                 setCover(URL.createObjectURL(e.target.files[0]));
                 setFile(e.target.files[0]);
               }}
-              className="hidden inset-x-0 bottom-0 mx-auto rounded-md border border-neutral-900 bg-neutral-900/40"
+              className="hidden inset-x-0 bottom-0 mx-auto rounded-none border border-neutral-900 bg-neutral-900/40"
               type="file"
               ref={hiddenFileInput}
             />
             <label className="mb-1 text-base text-neutral-300" htmlFor="content">
               Cover Image
             </label>
-            <div className="relative px-4 py-2 mb-6 rounded-md border aspect-video shrink-0">
-              <img src={cover} className="object-cover absolute inset-0 rounded-md aspect-video shrink-0" alt="cover" />
+            <div className="relative px-4 py-2 mb-6 rounded-none border aspect-video shrink-0">
+              <img src={cover} className="object-cover absolute inset-0 rounded-none aspect-video shrink-0" alt="cover" />
               <button
                 disabled={deleteDialog != "hidden" ? true : false}
                 onClick={(e) => {
                   setChanged(true);
                   handleClick(e);
                 }}
-                className="absolute inset-0 px-6 py-3 m-auto w-max text-xs text-white rounded-md backdrop-blur-sm h-max bg-black/60"
+                className="absolute inset-0 px-6 py-3 m-auto w-max text-xs text-white rounded-none backdrop-blur-sm h-max bg-black/60"
               >
                 Change Cover
               </button>
@@ -214,7 +214,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
             </label>
             <div data-color-mode="dark">
               <MDEditor
-                className="mx-[2px] mb-6 shrink rounded-md"
+                className="mx-[2px] mb-6 shrink rounded-none"
                 style={{ borderRadius: "0px", height: "100px !important" }}
                 value={content}
                 onChange={(e) => setContent(e!)}
@@ -226,7 +226,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
 
             <button
               disabled={deleteDialog != "hidden" ? true : false}
-              className="px-8 py-4 mb-2 w-max text-xs font-semibold text-white rounded-full bg-primary-700"
+              className="px-8 py-4 mb-2 w-max text-xs font-semibold text-black rounded-none bg-primary-300"
             >
               Publish This Post
             </button>
@@ -244,8 +244,8 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
           </h1>
           <Link
             href="/"
-            className={`mx-auto mt-3 rounded-md w-max px-8 py-3 text-xs font-medium  ${
-              1 == 1 ? "bg-primary-700 text-white" : "border-2 bg-white"
+            className={`mx-auto mt-3 rounded-none w-max px-8 py-3 text-xs font-medium  ${
+              1 == 1 ? "bg-primary-300 text-black" : "border-2 bg-white"
             }`}
           >
             Return To Home

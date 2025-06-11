@@ -32,7 +32,7 @@ export default function Post(props: any) {
             <UserInformation
               id={props.userid}
               image={props.dp}
-              imgclass="rounded-md object-cover min-w-[24px] max-w-[24px] h-6"
+              imgclass="rounded-none object-cover min-w-[24px] max-w-[24px] h-6"
             />
             <div className="flex content-center items-center">
               <h1>
@@ -54,7 +54,7 @@ export default function Post(props: any) {
               </div>
               <div className="md:ml-[60px] ml-6">
                 <h1 className="block md:w-[112px] md:h-[112px] w-[80px h-[56px]">
-                  <div className="relative rounded-xl aspect-[4/4] min-h-[64px] min-w-[64px] max-w-full max-h-full shrink-0">
+                  <div className="relative rounded-none aspect-[4/4] min-h-[64px] min-w-[64px] max-w-full max-h-full shrink-0">
                     <Image
                       alt="cover"
                       width={0}
@@ -63,7 +63,7 @@ export default function Post(props: any) {
                       height={0}
                       objectFit="cover"
                       src={props.cover}
-                      className="object-cover rounded-xl aspect-[4/4] min-h-[64px] min-w-[64px] max-w-full max-h-full shrink-0"
+                      className="object-cover rounded-none aspect-[4/4] min-h-[64px] min-w-[64px] max-w-full max-h-full shrink-0"
                     />
                   </div>
                 </h1>
@@ -71,7 +71,7 @@ export default function Post(props: any) {
             </div>
             <div className="flex flex-row items-center mt-2">
               <div className="grow flex flex-row items-center text-[13px]">
-                <h1 className="text-neutral-300 bg-subtle-white rounded-full hover:bg-neutral-200 transition-colors duration-300 px-0 pl-0 py-[2px] mr-2">
+                <h1 className="text-neutral-300 bg-subtle-white rounded-none hover:bg-neutral-200 transition-colors duration-300 px-0 pl-0 py-[2px] mr-2">
                   {props.likes} Likes
                 </h1>
                 <div className="inline-block pr-2 text-sm text-neutral-300">·</div>

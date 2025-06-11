@@ -12,7 +12,7 @@ export default function Landing() {
           <nav>
             <Link
               href="/login"
-              className="px-8 py-3 text-sm font-medium text-black bg-white rounded-full md:text-base font-pops"
+              className="px-8 py-3 text-sm font-medium text-black bg-white rounded-none md:text-base font-pops"
             >
               Sign Up
             </Link>
@@ -34,13 +34,13 @@ export default function Landing() {
           <div className="flex flex-col gap-4 sm:flex-row">
             <Link
               href="/login"
-              className="px-10 py-3 text-lg font-medium text-center text-white rounded-full transition-all lg:text-left bg-primary-700 hover:bg-primary-600"
+              className="px-10 py-3 text-lg font-medium text-center text-black rounded-none transition-all lg:text-left bg-primary-300 hover:bg-primary-600"
             >
               Sign Up
             </Link>
             <Link
               href="/documentation.pdf"
-              className="px-10 py-3 text-lg font-medium text-center text-white rounded-full border border-green-700 transition-all lg:text-left hover:bg-green-800"
+              className="px-10 py-3 text-lg font-medium text-center text-white rounded-none border border-green-700 transition-all lg:text-left hover:bg-green-800"
             >
               View Documentation
             </Link>
@@ -48,7 +48,7 @@ export default function Landing() {
         </div>
         </div>
         <div className="order-1 pb-16 lg:order-2 lg:pb-0">
-          <img src="/landing.png" className="rounded-xl border shadow-xl border-neutral-800"></img>
+          <img src="/landing.png" className="rounded-none border shadow-xl border-neutral-800"></img>
         </div>
         </div>
       </main>

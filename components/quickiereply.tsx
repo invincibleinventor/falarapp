@@ -697,7 +697,7 @@ export default function QuickieMakerComponent(props: any) {
         id="reply"
         className={
           gif
-            ? `absolute top-0 right-0 rounded-2xl border border-neutral-800 bottom-0 left-0 mx-auto my-auto w-max h-max z-[1000000] ${AppConfig.customtheme ? AppConfig.custombg : "bg-primary-950"}`
+            ? `absolute top-0 right-0 rounded-none border border-neutral-800 bottom-0 left-0 mx-auto my-auto w-max h-max z-[1000000] ${AppConfig.customtheme ? AppConfig.custombg : "bg-primary-950"}`
             : "hidden"
         }
       >
@@ -752,7 +752,7 @@ export default function QuickieMakerComponent(props: any) {
         <button
           disabled={disabled}
           onClick={() => publish()}
-          className="px-6 py-2 my-auto mr-4 text-sm font-medium text-white rounded-full h-max font-pops bg-primary-700"
+          className="px-6 py-2 my-auto mr-4 text-sm font-medium text-black rounded-none h-max font-pops bg-primary-300"
         >
           Publish
         </button>
@@ -772,11 +772,11 @@ export default function QuickieMakerComponent(props: any) {
           >
             <button
               onClick={() => setarr(link)}
-              className="flex absolute top-0 right-2 content-center items-center w-4 h-4 font-medium text-white bg-red-700 rounded-full shadow-md"
+              className="flex absolute top-0 right-2 content-center items-center w-4 h-4 font-medium text-white bg-red-700 rounded-none shadow-md"
             >
               <h1 className="mx-auto">-</h1>
             </button>
-            <img className=" aspect-[16/10] rounded-lg w-20 object-cover" key={index} src={link} />
+            <img className=" aspect-[16/10] rounded-none w-20 object-cover" key={index} src={link} />
           </div>
         ))}
       </div>
@@ -802,7 +802,7 @@ export default function QuickieMakerComponent(props: any) {
               .filter((mention: any) => mention !== props.handle)
               .map((mention: any, index: any) => (
                 <div
-                  className="flex flex-row content-center items-center px-3 py-1 my-0 space-x-2 w-auto text-sm text-center rounded-full bg-primary-950 text-neutral-300"
+                  className="flex flex-row content-center items-center px-3 py-1 my-0 space-x-2 w-auto text-sm text-center rounded-none bg-primary-950 text-neutral-300"
                   key={mention}
                 >
                   <Link href={"/profile/" + mention}>@{mention}</Link>

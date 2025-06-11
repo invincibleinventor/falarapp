@@ -32,7 +32,7 @@ export default async function App$() {
       <div className={`flex flex-col items-start p-0 w-max md:pr-4`}>
         <Link className="flex flex-row mt-1" href="/">
           <svg
-            className="ml-[8px] mr-2 mt-[2px] h-[51px] w-[51px] cursor-pointer rounded-full p-[10px]  text-neutral-300 transition-all  duration-100 ease-linear  hover:bg-neutral-900 md:ml-[4px] md:mr-0"
+            className="ml-[8px] mr-2 mt-[2px] h-[51px] w-[51px] cursor-pointer rounded-none p-[10px]  text-neutral-300 transition-all  duration-100 ease-linear  hover:bg-neutral-900 md:ml-[4px] md:mr-0"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"

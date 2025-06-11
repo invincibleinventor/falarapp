@@ -92,7 +92,7 @@ export default function Menu(props: any) {
     <div className="ml-auto">
       <div
         style={{ zIndex: 1000000 }}
-        className={`${props.type == "comment" ? "fixed" : "absolute"} py-4 px-2 flex flex-col content-center top-[50%] bottom-[50%] left-0 right-0 w-64 h-28 mx-auto my-auto ${AppConfig.customtheme ? "bg-neutral-900 border border-neutral-800" : "bg-black/20"}  will-change-transform transform-gpu backdrop-blur-lg rounded-xl animate-in  shadow-md  md:w-84 lg:w-96 ${deleteDialog ? "" : "hidden"}`}
+        className={`${props.type == "comment" ? "fixed" : "absolute"} py-4 px-2 flex flex-col content-center top-[50%] bottom-[50%] left-0 right-0 w-64 h-28 mx-auto my-auto ${AppConfig.customtheme ? "bg-neutral-900 border border-neutral-800" : "bg-black/20"}  will-change-transform transform-gpu backdrop-blur-lg rounded-none animate-in  shadow-md  md:w-84 lg:w-96 ${deleteDialog ? "" : "hidden"}`}
       >
         <h1 className="mx-4 mb-4 text-lg font-medium text-white">
           Delete this {props.type == "comment" ? "comment" : "quickie"}?
@@ -106,7 +106,7 @@ export default function Menu(props: any) {
           </button>
           <button
             onClick={() => (props.type == "quickie" || props.type == "qreply" ? del() : deleteComment())}
-            className="px-6 py-2 mt-auto mr-4 mb-1 ml-auto text-xs font-medium text-white rounded-lg bg-primary-700"
+            className="px-6 py-2 mt-auto mr-4 mb-1 ml-auto text-xs font-medium text-black rounded-none bg-primary-300"
           >
             Delete It
           </button>
@@ -132,9 +132,9 @@ export default function Menu(props: any) {
         </svg>
 
         <div
-          className={`absolute w-40 ${AppConfig.customtheme ? "bg-neutral-900 border border-neutral-800" : "bg-black/20"}  backdrop-blur-lg will-change-transform transform-gpu shadow-md rounded-xl -left-[calc(34*4px)] top-8 flex flex-col ${dialogopened ? "" : "hidden"}`}
+          className={`absolute w-40 ${AppConfig.customtheme ? "bg-neutral-900 border border-neutral-800" : "bg-black/20"}  backdrop-blur-lg will-change-transform transform-gpu shadow-md rounded-none -left-[calc(34*4px)] top-8 flex flex-col ${dialogopened ? "" : "hidden"}`}
         >
-          <div className="flex flex-row content-center items-center px-4 py-3 space-x-3 rounded-lg cursor-pointer text-neutral-300">
+          <div className="flex flex-row content-center items-center px-4 py-3 space-x-3 rounded-none cursor-pointer text-neutral-300">
             <svg xmlns="http://www.w3.org/2000/svg" width="1.1em" height="1.1em" viewBox="0 0 24 24">
               <path
                 fill="currentColor"

@@ -20,7 +20,7 @@ export default function Logout(props: any) {
     <button
       disabled={disabled}
       onClick={() => deactivate()}
-      className="px-6 py-3 w-max text-xs font-medium text-white rounded-full bg-primary-700"
+      className="px-6 py-3 w-max text-xs font-medium text-black rounded-none bg-primary-300"
     >
       Logout
     </button>

@@ -98,7 +98,7 @@ export default function Create() {
           </label>
           <input
             onChange={(e) => setTitle(e.target.value)}
-            className="px-4 py-2 mr-3 mb-6 w-full text-sm text-white rounded-md border bg-black/20 border-neutral-900"
+            className="px-4 py-2 mr-3 mb-6 w-full text-sm text-white rounded-none border bg-black/20 border-neutral-900"
             name="content"
             placeholder="Please Type Out Your Title"
             required
@@ -110,7 +110,7 @@ export default function Create() {
           </label>
           <textarea
             onChange={(e) => setExcerpt(e.target.value)}
-            className="px-4 py-2 mr-3 mb-6 w-full text-sm text-white rounded-md border bg-black/20 border-neutral-900"
+            className="px-4 py-2 mr-3 mb-6 w-full text-sm text-white rounded-none border bg-black/20 border-neutral-900"
             name="content"
             placeholder="Please Type Out Your Excerpt"
             required
@@ -126,11 +126,11 @@ export default function Create() {
           <label className="mb-1 text-base text-neutral-300" htmlFor="content">
             Cover Image
           </label>
-          <div className="relative px-4 py-2 mb-6 rounded-md border aspect-video shrink-0">
-            <img src={cover} className="object-cover absolute inset-0 rounded-md aspect-video shrink-0" alt="cover" />
+          <div className="relative px-4 py-2 mb-6 rounded-none border aspect-video shrink-0">
+            <img src={cover} className="object-cover absolute inset-0 rounded-none aspect-video shrink-0" alt="cover" />
             <button
               onClick={(e: any) => (setChanged(true), handleClick(e))}
-              className="absolute inset-0 px-6 py-3 m-auto w-max text-xs text-white rounded-md backdrop-blur-sm h-max bg-black/60"
+              className="absolute inset-0 px-6 py-3 m-auto w-max text-xs text-white rounded-none backdrop-blur-sm h-max bg-black/60"
             >
               Change Cover
             </button>
@@ -152,7 +152,7 @@ export default function Create() {
 
           <button
             disabled={disabled}
-            className="px-8 py-4 mb-2 w-max text-xs font-semibold text-white rounded-full bg-primary-700"
+            className="px-8 py-4 mb-2 w-max text-sm font-medium text-black rounded-none bg-primary-300"
           >
             Publish This Post
           </button>

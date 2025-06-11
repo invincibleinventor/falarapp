@@ -79,7 +79,7 @@ export default function Index(props: any) {
             <div className="grid grid-cols-3 gap-2 px-5 py-5 md:gap-4">
               {images.map((post) => (
                 <img
-                  className="object-cover col-span-1 rounded-xl border shadow-lg cursor-pointer border-neutral-900 aspect-square"
+                  className="object-cover col-span-1 rounded-none border shadow-lg cursor-pointer border-neutral-900 aspect-square"
                   src={post.image}
                   onClick={() => redirect("/quickie/" + post.url)}
                 />

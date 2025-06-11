@@ -407,12 +407,12 @@ export default function QuickieMakerComponent(props: any) {
     setImgsSrc(arr);
   }
   return (
-    <div className="lg:flex-row flex flex-col lg:min-h-[80px] bg-white/10 min-w-[300px] animate-in min-h-[400px] xl:mr-[400px] shadow-lg border border-neutral-900 rounded-2xl mx-auto ">
+    <div className="lg:flex-row flex flex-col lg:min-h-[80px] bg-white/10 min-w-[300px] animate-in min-h-[400px] xl:mr-[400px] shadow-lg border border-neutral-900 rounded-none mx-auto ">
       <div
-        className={`flex relative flex-col content-center items-start rounded-t-2xl rounded-b-none lg:rounded-2xl lg:rounded-r-none lg:w-[544px] lg:min-h-[80px] min-h-[400px] ${AppConfig.customtheme ? AppConfig.custombg : "bg-primary-950/80"} ${gif ? "rounded-r-none" : "rounded-r-lg"}`}
+        className={`flex relative flex-col content-center items-start rounded-none rounded-b-none lg:rounded-none lg:rounded-r-none lg:w-[544px] lg:min-h-[80px] min-h-[400px] ${AppConfig.customtheme ? AppConfig.custombg : "bg-primary-950/80"} ${gif ? "rounded-r-none" : "rounded-r-lg"}`}
       >
         <div
-          className={`flex flex-row w-full bg-opacity-20  rounded-tl-2xl h-[70px] ${gif ? "rounded-tr-2xl md:rounded-r-none md:rounded-tr-none" : "rounded-t-2xl"}`}
+          className={`flex flex-row w-full bg-opacity-20  rounded-tl-2xl h-[70px] ${gif ? "rounded-tr-2xl md:rounded-r-none md:rounded-tr-none" : "rounded-none"}`}
         >
           <h1 className="px-2 mx-4 my-auto h-[70px] flex items-center content-center text-lg font-semibold text-neutral-300">
             New Quickie
@@ -453,11 +453,11 @@ export default function QuickieMakerComponent(props: any) {
             >
               <button
                 onClick={() => setarr(link)}
-                className="flex absolute top-0 right-2 content-center items-center w-4 h-4 font-medium text-white bg-red-700 rounded-full shadow-md"
+                className="flex absolute top-0 right-2 content-center items-center w-4 h-4 font-medium text-white bg-red-700 rounded-none shadow-md"
               >
                 <h1 className="mx-auto">-</h1>
               </button>
-              <img className=" aspect-[16/10] rounded-lg w-20 object-cover" key={index} src={link} />
+              <img className=" aspect-[16/10] rounded-none w-20 object-cover" key={index} src={link} />
             </div>
           ))}
         </div>
@@ -477,7 +477,7 @@ export default function QuickieMakerComponent(props: any) {
           <button
             disabled={disabled}
             onClick={() => publish()}
-            className="px-6 py-3 ml-auto text-sm font-medium text-white rounded-full font-pops bg-primary-700 md:mr-6 lg:mr-2"
+            className="px-6 py-3 ml-auto text-sm font-medium text-black rounded-none font-pops bg-primary-300 md:mr-6 lg:mr-2"
           >
             Publish
           </button>
@@ -486,7 +486,7 @@ export default function QuickieMakerComponent(props: any) {
       <div
         className={
           gif
-            ? `resize-y block rounded-t-none rounded-b-2xl lg:rounded-tr-2xl lg:rounded-l-none border-b border-b-neutral-900 ${AppConfig.customtheme ? AppConfig.custombg : "bg-primary-950/80"}`
+            ? `resize-y block rounded-t-none rounded-none lg:rounded-tr-2xl lg:rounded-l-none border-b border-b-neutral-900 ${AppConfig.customtheme ? AppConfig.custombg : "bg-primary-950/80"}`
             : "hidden"
         }
       >

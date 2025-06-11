@@ -102,7 +102,7 @@ export default function Whouser(props: any) {
           {...props}
           onfollow={onfollow}
           id={hisid}
-          imgclass="flex-shrink-0 w-6 h-6 rounded-md shrink-0"
+          imgclass="flex-shrink-0 w-6 h-6 rounded-none shrink-0"
           image={props.profile}
         />
         <h1 className="text-sm font-medium text-white">{modify(props.name)}</h1>
@@ -111,8 +111,8 @@ export default function Whouser(props: any) {
         onClick={() => onfollow(props.handle)}
         className={
           !imfollowing
-            ? "px-4 font-medium text-white rounded-full py-[2px] font-pops text-[12px] bg-primary-700"
-            : "px-4 font-medium text-black bg-white rounded-full py-[2px] font-poppins text-[12px]"
+            ? "px-4 font-medium text-black rounded-none py-[2px] font-pops text-[12px] bg-primary-300"
+            : "px-4 font-medium text-black bg-white rounded-none py-[2px] font-poppins text-[12px]"
         }
       >
         {imfollowing ? "Unfollow" : "Follow"}

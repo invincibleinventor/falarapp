@@ -110,7 +110,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
                   <Link
                     href="/all"
                     className={`mx-auto mt-5 w-max px-8  py-3 text-xs font-medium  ${
-                      1 == 1 ? "bg-primary-700 rounded-full  text-white" : "border-2 bg-white"
+                      1 == 1 ? "bg-primary-300 rounded-none  text-black" : "border-2 bg-white"
                     }`}
                   >
                     Explore Posts

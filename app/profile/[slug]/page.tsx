@@ -287,7 +287,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
           <h1 className="text-sm font-semibold text-white">Sign up to Falar to view more such interesting people</h1>
           <Link
             href={"/login"}
-            className="px-6 py-2 w-max text-xs font-semibold text-blue-600 bg-white rounded-full transition-all duration-200 ease-linear hover:bg-neutral-200 hover:shadow-lg"
+            className="px-6 py-2 w-max text-xs font-semibold text-blue-600 bg-white rounded-none transition-all duration-200 ease-linear hover:bg-neutral-200 hover:shadow-lg"
           >
             Sign Up To Falar
           </Link>
@@ -312,7 +312,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
             width={90}
             height={90}
             unoptimized={true}
-            className="absolute bottom-5 left-7 w-24 h-24 rounded-xl md:left-12"
+            className="absolute bottom-5 left-7 w-24 h-24 rounded-none md:left-12"
             loader={() => (found ? image : "/usernotfound.png")}
             src={`${found ? image : "/usernotfound.png"}`}
             alt="userimage"
@@ -320,8 +320,8 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
           {found && loggedin && !blocked && !imblockedby && (
             <button
               onClick={() => onfollow()}
-              className={`absolute rounded-full bottom-10 right-7 px-8 py-3 text-xs font-semibold md:right-12  ${
-                !(imfollowing || myself) ? "border-[1px] bg-primary-700 text-white" : "border-[1px] bg-white text-black"
+              className={`absolute rounded-none shadow-xl bottom-10 right-7 px-8 py-3 text-sm font-medium md:right-12  ${
+                !(imfollowing || myself) ? "bg-primary-300 text-black" : " bg-white text-black"
               }`}
             >
               {myself ? "Edit Profile" : imfollowing ? "Unfollow" : "Follow"}
@@ -341,14 +341,14 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
                   {!imblockedby && (
                     <button
                       onClick={() => determine()}
-                      className="px-4 py-1 text-xs font-medium text-red-400 rounded-full border-2 border-red-900/40"
+                      className="px-4 py-1 text-xs font-medium text-red-400 rounded-none border-2 border-red-900/40"
                     >
                       {blocked ? "Unblock" : "Block"}
                     </button>
                   )}
                   <Link
                     href={"/report/user/" + slug}
-                    className="px-4 py-1 mr-8 text-[10px] font-medium text-white border-2 border-neutral-900 rounded-full md:mr-14"
+                    className="px-4 py-1 mr-8 text-[10px] font-medium text-white border-2 border-neutral-900 rounded-none md:mr-14"
                   >
                     {"Report"}
                   </Link>
@@ -372,7 +372,7 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
         </div>
         {found && !blocked && !imblockedby && (
           <>
-            <div className="flex flex-row gap-6 content-center items-center p-4 mx-8 my-4 mb-1 rounded-md bg-neutral-800/30 md:mx-14">
+            <div className="flex flex-row gap-6 content-center items-center p-4 mx-8 my-4 mb-1 rounded-none bg-neutral-800/30 md:mx-14">
               <div className="flex flex-row w-full md:mx-auto">
                 <div className="flex flex-col gap-1 content-center items-center mx-auto w-max">
                   <h1 className="text-sm font-semibold text-neutral-300">Followers</h1>
@@ -389,19 +389,19 @@ export default function Page({ params }: { params: Promise<{ slug: string }> }) 
               <div className="flex sticky flex-row flex-grow mx-4 mt-4 w-auto text-sm font-medium text-white md:text-base font-pops">
                 <div
                   onClick={() => setOpened("posts")}
-                  className={`w-1/3 py-2 m-2 cursor-pointer rounded-lg text-center ${opened == "posts" ? "bg-neutral-700/30" : ""}`}
+                  className={`w-1/3 py-2 m-2 cursor-pointer rounded-none text-center ${opened == "posts" ? "bg-neutral-700/30" : ""}`}
                 >
                   Posts
                 </div>
                 <div
                   onClick={() => setOpened("media")}
-                  className={`w-1/3 py-2 m-2 cursor-pointer rounded-lg text-center ${opened == "media" ? "bg-neutral-700/30" : ""}`}
+                  className={`w-1/3 py-2 m-2 cursor-pointer rounded-none text-center ${opened == "media" ? "bg-neutral-700/30" : ""}`}
                 >
                   Media
                 </div>
                 <div
                   onClick={() => setOpened("quickies")}
-                  className={`w-1/3 py-2 m-2 cursor-pointer rounded-lg text-center ${opened == "quickies" ? "bg-neutral-700/30" : ""}`}
+                  className={`w-1/3 py-2 m-2 cursor-pointer rounded-none text-center ${opened == "quickies" ? "bg-neutral-700/30" : ""}`}
                 >
                   Quickies
                 </div>

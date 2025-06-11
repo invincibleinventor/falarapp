@@ -39,7 +39,7 @@ export default function Post(props: any) {
         const hashtag = token.slice(1);
         return (
           <Link legacyBehavior href={`/hashtag/${hashtag}`} key={idx}>
-            <a className="text-primary-600 hover:text-primary-700">{token}</a>
+            <a className="text-primary-300 hover:text-primary-300">{token}</a>
           </Link>
         );
       }
@@ -48,7 +48,7 @@ export default function Post(props: any) {
         const username = token.slice(1);
         return (
           <Link legacyBehavior href={`/profile/${username}`} key={idx}>
-            <a className="text-primary-600 hover:text-primary-700">{token}</a>
+            <a className="text-primary-300 hover:text-primary-300">{token}</a>
           </Link>
         );
       }
@@ -58,7 +58,7 @@ export default function Post(props: any) {
           <a
             target="_blank"
             href={token}
-            className="text-primary-600 hover:text-primary-700"
+            className="text-primary-300 hover:text-primary-300"
             key={idx}
             rel="noreferrer"
           >
@@ -77,7 +77,7 @@ export default function Post(props: any) {
           {props.parentid > 0 && (
             <Link
               href={`/quickie/${props.parentid}`}
-              className="flex flex-row content-center items-center px-4 mt-4 space-x-4 text-sm text-primary-600"
+              className="flex flex-row content-center items-center px-4 mt-4 space-x-4 text-sm text-primary-300"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
                 <path
@@ -90,14 +90,14 @@ export default function Post(props: any) {
               <span className="block font-medium text-primary-500">Replying to @{props.parentname}</span>
             </Link>
           )}
-          <div className="flex content-center items-center bg-black rounded-md"></div>
+          <div className="flex content-center items-center bg-black rounded-none"></div>
           <div className="flex h-max flex-col gap-[8px] md:p-6 p-4 pr-4">
             <div className="flex gap-2 mt-0">
               <Link href={"/profile/" + props.handle} className="flex  gap-[10px] mt-0">
                 <UserInformation
                   image={imgdp}
                   id={props.userid}
-                  imgclass="rounded-md object-cover min-w-[28px] max-w-[28px] h-7"
+                  imgclass="rounded-none object-cover min-w-[28px] max-w-[28px] h-7"
                 />
                 <div className="flex content-center items-center">
                   <h1>
@@ -142,7 +142,7 @@ export default function Post(props: any) {
                   <div
                     className={
                       photocount == 1
-                        ? "w-full border ml-0 rounded-md mt-4 aspect-video h-full mb-4"
+                        ? "w-full border ml-0 rounded-none mt-4 aspect-video h-full mb-4"
                         : photocount == 3
                           ? "mt-4 mb-4 md:gap-2 gap-1 grid thrip"
                           : "mt-4 mb-4 md:gap-2 gap-1 grid-cols-2 grid"
@@ -151,7 +151,7 @@ export default function Post(props: any) {
                     {props.image.map((image: string) => (
                       <img
                         key={image}
-                        className={`object-cover w-full border border-neutral-800 rounded-xl h-max ${props.image.length == 2 ? "aspect-[8/10]" : props.image.length == 4 ? "aspect-video" : "aspect-video"}`}
+                        className={`object-cover w-full border border-neutral-800 rounded-none h-max ${props.image.length == 2 ? "aspect-[8/10]" : props.image.length == 4 ? "aspect-video" : "aspect-video"}`}
                         src={image}
                       ></img>
                     ))}
@@ -161,7 +161,7 @@ export default function Post(props: any) {
               {props.quote && (
                 <div
                   onClick={() => redirect("/quickie/" + props.quoteid)}
-                  className="flex h-max border pb-4 mb-6 cursor-pointer  border-neutral-800  bg-neutral-950/10 rounded-xl mx-0  flex-col gap-[8px] pt-4 mt-4 "
+                  className="flex h-max border pb-4 mb-6 cursor-pointer  border-neutral-800  bg-neutral-950/10 rounded-none mx-0  flex-col gap-[8px] pt-4 mt-4 "
                 >
                   <div className="flex flex-row gap-2 content-center items-center h-max shrink-0">
                     <div className="flex gap-[10px] px-4 mt-0">
@@ -170,7 +170,7 @@ export default function Post(props: any) {
                         height={20}
                         src={props.quotedisplay}
                         alt="user profile"
-                        className="rounded-md object-cover min-w-[24px] max-w-[24px] h-6 max-h-6"
+                        className="rounded-none object-cover min-w-[24px] max-w-[24px] h-6 max-h-6"
                       />
                       <div className="flex content-center items-center">
                         <h1>
@@ -199,7 +199,7 @@ export default function Post(props: any) {
                       <div
                         className={
                           props.quotephotocount == 1
-                            ? "w-full px-4 border ml-0 rounded-md mt-4 aspect-video h-full"
+                            ? "w-full px-4 border ml-0 rounded-none mt-4 aspect-video h-full"
                             : props.quotephotocount == 3
                               ? "mt-4 px-4  md:gap-2 gap-1 grid thrip"
                               : "mt-4 px-4 md:gap-2 gap-1 grid-cols-2 grid"

@@ -68,7 +68,7 @@ export default function Login() {
   return (
     <div className="w-screen bg-[url('/gradientbg.png')]  bg-no-repeat bg-cover p-4 h-screen lg:grid lg:grid-cols-2">
 
-    <div className="flex flex-col flex-grow py-16 h-full rounded-3xl border-[0.1] shadow-lg filter backdrop-blur-lg border-neutral-400 bg-black/20 lg:px-32">
+    <div className="flex flex-col flex-grow py-16 h-full  border-[0.1] shadow-lg filter backdrop-blur-lg border-neutral-400 bg-black/20 lg:px-32">
       <h1 className="pt-2 mx-auto text-3xl font-semibold text-center text-white lg:text-left lg:mx-0 lg:text-5xl font-pops w-3xl">
         Hola!<br></br>Welcome Back!{" "}
       </h1>
@@ -84,7 +84,7 @@ export default function Login() {
               setEmail(e.target.value);
             }}
             type="email"
-            className="px-5 py-3 mt-1 w-full text-sm text-white rounded-full outline-none bg-black/20 placeholder:text-neutral-300"
+            className="px-5 py-3 mt-1 w-full text-sm text-white rounded-none outline-none bg-black/20 placeholder:text-neutral-300"
             placeholder="Your Email Address"
           ></input>
           <h1 className="pl-[1px] mt-4 text-sm font-medium text-white">Password</h1>
@@ -93,23 +93,23 @@ export default function Login() {
               setPassword(e.target.value);
             }}
             type="password"
-            className="px-5 py-3 mt-1 w-full text-sm text-white rounded-full outline-none bg-black/20 placeholder:text-neutral-300"
+            className="px-5 py-3 mt-1 w-full text-sm text-white rounded-none outline-none bg-black/20 placeholder:text-neutral-300"
             placeholder="Your Password"
           ></input>
           <button
             onClick={(e) => (e.preventDefault(), login())}
-            className="px-5 py-3 mt-4 mb-2 text-sm font-medium text-white bg-gradient-to-b rounded-full from-primary-700 to-primary-900"
+            className="px-5 py-3 mt-4 mb-2 text-sm font-medium text-black bg-gradient-to-t rounded-none from-primary-300 to-primary-500"
           >
             Sign In To Your Account
           </button>
           <button
             onClick={(e) => (e.preventDefault(), register())}
-            className="px-5 py-3 text-sm font-medium text-white rounded-full bg-white/10"
+            className="px-5 py-3 text-sm font-medium text-white rounded-none bg-white/10"
           >
             Register Your Account
           </button>
           <button
-            className="flex gap-4 justify-center px-5 py-3 mt-6 text-sm font-medium text-white rounded-full border-[0.5px] border-neutral-900 bg-black/60"
+            className="flex gap-4 justify-center px-5 py-3 mt-6 text-sm font-medium text-white rounded-none border-[0.5px] border-neutral-900 bg-black/60"
             onClick={() => signWithGoogle()}
           >
             <svg width="16" height="16" viewBox="0 0 775 794" fill="none" xmlns="http://www.w3.org/2000/svg">
