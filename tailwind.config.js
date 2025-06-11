@@ -12,6 +12,9 @@ module.exports = withMT({
   safelist: ["bg-gradient-to-b", "from-indigo-950", "to-red-950", "bg-indigo-950"],
   theme: {
     extend: {
+      fontFamily: {
+        pops: ['GeneralSans', 'sans-serif'],
+      },
       colors: {
         primary: {
           DEFAULT: "var(--color-primary)",

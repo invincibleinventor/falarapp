@@ -2,7 +2,7 @@ export const AppConfig = {
   title: "Falar",
   customtheme: true,
   customcolor: "neutral-900",
-  customprimary: "green",
+  customprimary: "olive",
   custombg: "bg-neutral-900",
 
   subtitle: "A Modern Social Network",

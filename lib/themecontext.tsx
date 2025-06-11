@@ -45,6 +45,21 @@ export const colorPalettes: Record<string, Record<string, string>> = {
     900: "#312e81",
     950: "#130c41",
   },
+  olive: {
+    DEFAULT: "#DFFF0A",
+    50: "#FFFFFF",
+    100: "#FAFFD6",
+    200: "#F3FFA3",
+    300: "#ECFF70",
+    400: "#E5FF3D",
+    500: "#DFFF0A",
+    600: "#BAD600",
+    700: "#8EA300",
+    800: "#617000",
+    900: "#353D00",
+    950: "#1B1F00", // very dark olive green
+  },
+  
   green: {
     DEFAULT: "#22c55e",
     50: "#f0fdf4",

@@ -21,8 +21,8 @@ export default async function CreatePage() {
 
   return (
     <div className="flex flex-col justify-center items-center mx-auto w-screen h-screen">
-           <div   className="flex overflow-hidden relative flex-col gap-2 justify-center mx-5 my-auto w-full max-w-lg">
-           <div className="absolute right-[20%] -top-[20%] w-[400px] h-[400px] rounded-full bg-gradient-to-br  shadow-neutral-700 from-neutral-800 to-neutral-600 shadow-xl"></div>
+          <div   className="flex overflow-hidden relative flex-col gap-2 justify-center mx-5 my-auto w-full max-w-lg">
+           {/* <div className="absolute right-[20%] -top-[20%] w-[400px] h-[400px] rounded-full bg-gradient-to-br  shadow-neutral-700 from-neutral-800 to-neutral-600 shadow-xl"></div>
 
            <div className="absolute left-[50%] bottom-[30%] w-96 h-96 rounded-full bg-gradient-to-br from-neutral-900 to-neutral-800  shadow-xl"></div>
            <div className="absolute left-[25%] bottom-[0%] w-96 h-96 rounded-full bg-gradient-to-b from-neutral-600 to-neutral-400  shadow-xl"></div>
@@ -30,8 +30,9 @@ export default async function CreatePage() {
       
       
       <div className="absolute right-[40%] top-[5%] w-[400px] h-[400px] rounded-full bg-gradient-to-br from-neutral-800 to-neutral-700 shadow-xl"></div>
+      */}
       <form
-        className="flex flex-col gap-2 justify-center px-10 py-16  my-auto w-full max-w-lg rounded-3xl filter border-[0.1px] shadow-xl backdrop-blur-2xl border-neutral-800 bg-black/10 animate-in text-foreground"
+        className="flex flex-col gap-2 justify-center px-10 py-16  my-auto w-full max-w-lg rounded-3xl filter border-[0.1px] shadow-xl  border-neutral-800 bg-black/10 animate-in text-foreground"
         action={createUser}
       >
         <input type="hidden" name="email" value={email} />
@@ -46,7 +47,7 @@ export default async function CreatePage() {
           Name
         </label>
         <input
-          className="px-4 py-2 mb-6 text-sm rounded-md outline-none bg-black/20 text-neutral-300 focus:outline-primary-800"
+          className="px-4 py-2 mb-6 text-sm rounded-xl outline-none bg-black/20 text-neutral-300 focus:outline-primary-800"
           name="name"
           placeholder="Please Type Out Your Name"
           required
@@ -58,7 +59,7 @@ export default async function CreatePage() {
           Username - You cannot change this later
         </label>
         <input
-          className="px-4 py-2 mb-6 text-sm rounded-md outline-none bg-black/20 text-neutral-300 focus:outline-primary-800"
+          className="px-4 py-2 mb-6 text-sm rounded-xl outline-none bg-black/20 text-neutral-300 focus:outline-primary-800"
           name="handle"
           placeholder="Please Type Out Your Username"
           required
@@ -70,7 +71,7 @@ export default async function CreatePage() {
           About
         </label>
         <textarea
-          className="px-4 py-2 mb-6 text-sm rounded-md outline-none bg-black/20 text-neutral-300 focus:outline-primary-800"
+          className="px-4 py-2 mb-6 text-sm rounded-xl outline-none bg-black/20 text-neutral-300 focus:outline-primary-800"
           name="about"
           placeholder="Please Type About Yourself"
           required
