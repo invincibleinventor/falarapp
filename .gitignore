@@ -16,6 +16,10 @@
 # production
 /build
 
+/.prettierrc
+/posts_migration.sql
+/.VSCodeCounter/
+
 # misc
 .DS_Store
 *.pem
