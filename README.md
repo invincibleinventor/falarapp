@@ -1,45 +1,66 @@
-# FALAR
+# Falar
 
-[https://falarapp.vercel.app](https://falarapp.vercel.app)
+A social media platform with posts, stories, messaging, and content discovery.
 
-![alt text](https://github.com/invincibleinventor/falarapp/blob/main/mockup.png?raw=true)
+## What it does
 
-Falar is an open source social networking platform that has (almost) all the features in a modern social network. Inspired by X (formerly Twitter). Very Work-In-Progress. Uses NextJS and TailwindCSS for the frontend and Supabase as a serverless backend.
+Falar is a full-featured social network where users can:
+- Create and share posts with media
+- Follow other users and build a feed
+- Send direct messages
+- Browse and discover content through explore
+- Create quickies (short-form content)
+- Save bookmarks
+- Block/report users
 
-### Features
+## Tech Stack
 
-- Persistent Sign In Through Google OAuth
-- CRUD operations - Create, Read, Update and Delete posts.
-- Like, reply and bookmark posts and like and reply to other replies
-- Full markdown support for creating posts
-- Block and report users.
-- Delete and Deactivate account.
-- User Profiles
-- Follow and Unfollow users
-- Feed based on following and random content
-- Hashtags and mention other users (@ mentions)
-- Trending tab that shows the top hashtags for the past 3 hours
-- Quickies - Short form posts much like tweets
-- Clicks - Photos that delete after 24 hours (like Instagram stories)
-- Notification System
-- and much more...
+- Next.js with React 18
+- Supabase for auth, database, and storage
+- Ably for real-time messaging
+- Framer Motion and GSAP for animations
+- MDX Editor for rich text
+- TailwindCSS
+- Capacitor for mobile builds
 
-### Tech Stack
+## Setup
 
-- NextJS + TailwindCSS for frontend
-- React-Markdown to render Markdown
-- MDXEditor for Markdown Editor component
-- Supabase as a serverless backend
-- Google OAuth for Google Sign In
+1. Clone the repo
+2. Install dependencies:
+   ```
+   npm install
+   ```
+3. Copy `.env.example` to `.env.local` and fill in:
+   - Supabase URL and anon key
+   - Ably API key (for real-time features)
+4. Run the development server:
+   ```
+   npm run dev
+   ```
 
-### Note (NextJS 13+)
+## Project Structure
 
-- The project utilizes NextJS 13+ (Server Actions)
-- Client and Server components are seperated in proper bounds. Intensive tasks are loaded through the server and interactivity is done through client components
-- This project therefore demands a good knowledge on NextJS 13 Server Actions & Client Components
+```
+falarapp/
+  app/
+    (home)/         - Main feed
+    auth/           - Login/signup
+    bookmarks/      - Saved posts
+    create/         - New post
+    explore/        - Content discovery
+    messages/       - Direct messages
+    notifications/  - Activity feed
+    post/           - Post detail
+    profile/        - User profiles
+    quickies/       - Short content
+    search/         - User search
+  components/       - Shared UI components
+  lib/              - Supabase client
+  utils/            - Helper functions
+```
 
-### Future Updates
+---
 
-- Extend the notification system
-- Ability to direct message other users
-- Content recommendation through OpenAI
+Short description for GitHub:
+
+A social media platform with posts, stories, real-time messaging, and content discovery. Built with Next.js and Supabase.
