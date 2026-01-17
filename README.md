@@ -61,6 +61,3 @@ falarapp/
 
 ---
 
-Short description for GitHub:
-
-A social media platform with posts, stories, real-time messaging, and content discovery. Built with Next.js and Supabase.
